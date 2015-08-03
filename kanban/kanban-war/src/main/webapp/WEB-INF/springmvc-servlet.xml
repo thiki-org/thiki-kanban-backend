@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+     http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<context:component-scan base-package="net.thiki" >
+	</context:component-scan>
+	<aop:aspectj-autoproxy/> 
+	<mvc:annotation-driven />
+
+<!-- 	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+    	<property name="prefix" value="/"/>
+    	<property name="suffix" value=".jsp"/>
+	</bean> -->
+    
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />  
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
+   			 <property name="messageConverters">  
+        		<util:list id="beanList">  
+        			<ref bean="stringHttpMessageConverter"/>
+            		<ref bean="mappingJacksonHttpMessageConverter"/>  
+       			 </util:list>  
+    		</property>  
+	</bean>
+	
+	<!-- extention -->
+	<bean id="handlerMapping" class="net.thiki.core.endpoint.PriorityRequestMappingHandlerMapping"/>
+	
+	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter" >
+		<property name="supportedMediaTypes">
+            <list>
+                <bean class="org.springframework.http.MediaType">
+                    <constructor-arg value="text" />
+                    <constructor-arg value="plain" />
+                    <constructor-arg value="UTF-8" />
+                </bean>
+            </list>
+        </property>
+	</bean>
+	
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+	    <property name="supportedMediaTypes">  
+	        <list>  
+	            <value>text/html;charset=UTF-8</value>  
+	        </list>  
+	    </property>
+	</bean>
+</beans>
