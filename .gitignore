@@ -6,3 +6,8 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
+*.project
+kanban/kanban-war/.settings/
+*.classpath
+kanban/kanban-jar/.settings/
+kanban/.settings/
