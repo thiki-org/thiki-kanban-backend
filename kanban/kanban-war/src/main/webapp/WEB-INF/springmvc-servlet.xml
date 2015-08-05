@@ -10,6 +10,7 @@
      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
 	<context:component-scan base-package="net.thiki" >
+		<context:exclude-filter type="regex" expression="net\.thiki\.core\.endpoint\..*"/>
 	</context:component-scan>
 	<aop:aspectj-autoproxy/> 
 	<mvc:annotation-driven />
