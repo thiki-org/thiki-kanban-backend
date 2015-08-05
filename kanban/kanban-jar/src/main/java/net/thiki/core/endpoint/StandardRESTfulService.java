@@ -25,10 +25,10 @@ public interface StandardRESTfulService<T> {
 
 	/**
 	 * 创建新对象
-	 * @param requestHolder 传入的请求参数的容器
+	 * @param request 传入的请求参数的容器
 	 * @return
 	 */
-	RESTfulResponse create(RESTfulRequest requestHolder);
+	RESTfulResponse create(RESTfulRequest request);
 
 	/**
 	 * 修改对象
@@ -44,4 +44,37 @@ public interface StandardRESTfulService<T> {
 	 */
 	RESTfulResponse delete(RESTfulRequest request);
 
+	/**
+	 * 通过resourceName和id，关联查询
+	 * @param resourceName 关联的资源
+	 * @param id 关联资源的id
+	 * @param request 可能包含其他查询条件
+	 * @return
+	 */
+	RESTfulResponse findBy(String resourceName, String id, RESTfulRequest request);
+
+	/**
+	 * 创建与指定资源相关联的另外一类资源实例
+	 * @param resourceName
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	RESTfulResponse create(String resourceName, String id, RESTfulRequest request);
+
+	/**
+	 * 
+	 * @param resource1Name
+	 * @param id1
+	 * @param resource2Name
+	 * @param id2
+	 * @param request
+	 * @return
+	 */
+	RESTfulResponse add(String resource1Name, String id1, String resource2Name, String id2, RESTfulRequest request);
+
+	RESTfulResponse remove(String resource1Name, String id1, String resource2Name, String id2, RESTfulRequest request);
+
+	
+	
 }
