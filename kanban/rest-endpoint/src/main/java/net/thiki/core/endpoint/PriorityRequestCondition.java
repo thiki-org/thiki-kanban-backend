@@ -65,10 +65,10 @@ final class PriorityRequestCondition implements RequestCondition<PriorityRequest
 			throw new RuntimeException("ooops, it can't be here.");
 		}
 		if (other.target == Target.Method && this.target == Target.Type){
-			logger.debug("combine {} and {}, and get {}", this, other, other);
+			logger.debug("combine {} and {}, and get {}", new Object[]{this, other, other});
 			return other;
 		}else{
-			logger.debug("combine {} and {}, and get {}", this, other, this);
+			logger.debug("combine {} and {}, and get {}", new Object[]{this, other, this});
 			return this;
 		}
 
@@ -87,7 +87,7 @@ final class PriorityRequestCondition implements RequestCondition<PriorityRequest
 		int r = -1;
 		if (this.priority > other.priority) r = 1;
 		if (this.priority == other.priority) r = 0;
-		logger.debug("compare:  {} and {} {}", this, other, r);
+		logger.debug("compare:  {} and {} , result=={}", new Object[]{this, other, r});
 		return r;
 	}
 
