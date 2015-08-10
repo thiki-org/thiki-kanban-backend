@@ -9,14 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>kanban-jar</artifactId>
+    <artifactId>rest-endpoint</artifactId>
     <packaging>jar</packaging>
     <dependencies>
- 		<dependency>
-            <groupId>net.thiki</groupId>
-            <artifactId>rest-endpoint</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>    
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>

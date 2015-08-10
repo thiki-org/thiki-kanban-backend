@@ -63,7 +63,7 @@ public interface StandardRESTfulService<T> {
 	RESTfulResponse create(String resourceName, String id, RESTfulRequest request);
 
 	/**
-	 * 
+	 * 增加已有两个资源的关联
 	 * @param resource1Name
 	 * @param id1
 	 * @param resource2Name
@@ -73,8 +73,15 @@ public interface StandardRESTfulService<T> {
 	 */
 	RESTfulResponse add(String resource1Name, String id1, String resource2Name, String id2, RESTfulRequest request);
 
+	/**
+	 * 移除一个关联
+	 * @param resource1Name
+	 * @param id1
+	 * @param resource2Name
+	 * @param id2
+	 * @param request
+	 * @return
+	 */
 	RESTfulResponse remove(String resource1Name, String id1, String resource2Name, String id2, RESTfulRequest request);
 
-	
-	
 }

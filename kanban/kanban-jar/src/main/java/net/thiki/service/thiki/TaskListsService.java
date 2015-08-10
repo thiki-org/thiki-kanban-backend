@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.thiki.core.endpoint.AbstractRESTfulService;
 import net.thiki.core.endpoint.RESTfulRequest;
-import net.thiki.core.endpoint.RESTfulResponse;
 import net.thiki.core.endpoint.StandardRESTfulService;
 import net.thiki.domain.tasklist.TaskList;
 

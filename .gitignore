@@ -11,3 +11,4 @@ kanban/kanban-war/.settings/
 *.classpath
 kanban/kanban-jar/.settings/
 kanban/.settings/
+kanban/rest-endpoint/.settings/

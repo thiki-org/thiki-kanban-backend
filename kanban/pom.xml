@@ -9,6 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+    	<module>rest-endpoint</module>
         <module>kanban-jar</module>
         <module>kanban-war</module>
     </modules>
