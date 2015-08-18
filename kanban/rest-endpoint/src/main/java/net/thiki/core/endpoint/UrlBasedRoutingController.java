@@ -1,6 +1,5 @@
 package net.thiki.core.endpoint;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 public abstract class UrlBasedRoutingController implements ApplicationContextAware {
 
-	private ApplicationContext ctx;
+	protected ApplicationContext ctx;
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
 		this.ctx = applicationContext;
@@ -56,7 +55,7 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
     @RequestMapping(value = "/{resource}/{id}", method = RequestMethod.GET)
     public Object get(
     		@PathVariable("resource")String resource, 
-    		@PathVariable("id") Integer id,
+    		@PathVariable("id") String id,
     		@RequestBody(required=false) Map<String, String> resourceBody, 
     		@RequestHeader Map<String, String> header
     		) {

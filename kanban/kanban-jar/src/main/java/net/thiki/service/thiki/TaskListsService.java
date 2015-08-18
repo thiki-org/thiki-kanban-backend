@@ -26,7 +26,7 @@ public class TaskListsService extends AbstractRESTfulService<TaskList> implement
 	}
 
 	@Override
-	public TaskList find(Integer id, RESTfulRequest request) {
+	public TaskList find(String id, RESTfulRequest request) {
 		TaskList taskList = new TaskList();
 		taskList.setContent("跑15公里");
 		taskList.setTitle("锻炼");

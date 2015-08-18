@@ -1,13 +1,25 @@
 package net.thiki.core.endpoint;
 
+import java.util.Map;
+
 /**
  * 作为HttpResponse返回值的传递容器，包括Http state code、返回对象等
  * @author joeaniu
  *
  */
 public class RESTfulResponse {
-	private int stateCode;
+    
+	public static final int STATE_CODE_OK = 200;
+	
+	/** http state code */
+    private int stateCode;
+    /** json response as an object */
 	private Object responseBody;
+	
+	
+	public RESTfulResponse() {
+	    this.stateCode = STATE_CODE_OK;
+    }
 	
 	public int getStateCode() {
 		return stateCode;

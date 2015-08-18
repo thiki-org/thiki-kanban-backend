@@ -21,7 +21,7 @@ public interface StandardRESTfulService<T> {
 	 * @param request 
 	 * @return
 	 */
-	T find(Integer id, RESTfulRequest request);
+	T find(String id, RESTfulRequest request);
 
 	/**
 	 * 创建新对象

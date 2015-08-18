@@ -10,12 +10,18 @@ import java.util.Map;
 public class RESTfulRequest {
 
 	private Map<String, String> header;
-	private Map<String, String> requestBody;
+	private RequestBody requestBody;
 
-	public RESTfulRequest(Map<String, String> requestBody, Map<String, String> header) {
+	public RESTfulRequest(RequestBody requestBody, Map<String, String> header) {
 		this.requestBody = requestBody;
 		this.header = header;
 	}
+	
+	public RESTfulRequest(Map<String, String> requestBodyMap, Map<String, String> header) {
+        this.requestBody = new RequestBody(requestBodyMap);
+        this.header = header;
+    }
+
 
 	public Map<String, String> getHeader() {
 		return header;
@@ -25,11 +31,11 @@ public class RESTfulRequest {
 		this.header = header;
 	}
 
-	public Map<String, String> getRequestBody() {
-		return requestBody;
-	}
+	public RequestBody getRequestBody() {
+        return requestBody;
+    }
 
-	public void setRequestBody(Map<String, String> requestBody) {
+    public void setRequestBody(RequestBody requestBody) {
 		this.requestBody = requestBody;
 	}
 
