@@ -12,7 +12,7 @@ public class AbstractRESTfulService<T> implements StandardRESTfulService<T> {
 	}
 
 	@Override
-	public T find(Integer id, RESTfulRequest request) {
+	public T find(String id, RESTfulRequest request) {
 		throw new NotSupportedOperationException();
 	}
 
