@@ -18,7 +18,11 @@ public class RESTfulRequest {
 	}
 	
 	public RESTfulRequest(Map<String, String> requestBodyMap, Map<String, String> header) {
-        this.requestBody = new RequestBody(requestBodyMap);
+	    if (requestBodyMap != null){
+	        this.requestBody = new RequestBody(requestBodyMap);
+	    }else{
+	        this.requestBody = new RequestBody();
+	    }
         this.header = header;
     }
 
