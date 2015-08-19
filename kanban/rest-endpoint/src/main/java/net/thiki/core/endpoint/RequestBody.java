@@ -15,7 +15,7 @@ public class RequestBody extends HashMap<String, String> {
     }
     
     public int getInt(String intStr) {
-        return Integer.parseInt(intStr);
+        return Integer.parseInt(this.get(intStr));
     }
     
     
