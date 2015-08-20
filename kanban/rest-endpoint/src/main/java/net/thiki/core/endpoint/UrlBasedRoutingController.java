@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * 
@@ -40,10 +41,10 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
 	 */
     @RequestMapping(value = "/{resource}", method = RequestMethod.GET)
     public List<?> list(@PathVariable("resource")String resource,
-    		@RequestBody(required=false) Map<String, String> resourceBody, 
+    		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header) {
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resource + "Service");
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
         return service.findAll(request);
     }
     
@@ -56,11 +57,11 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
     public Object get(
     		@PathVariable("resource")String resource, 
     		@PathVariable("id") String id,
-    		@RequestBody(required=false) Map<String, String> resourceBody, 
+    		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header
     		) {
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resource + "Service");
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
         return service.find(id, request);
     }
     
@@ -71,41 +72,42 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
      * @return
      */
     @RequestMapping(value = "/{resource}", method = RequestMethod.POST)
-    public RESTfulResponse create(@PathVariable("resource")String resourceName, 
-    		@RequestBody Map<String, String> resourceBody, 
-    		@RequestHeader Map<String, String> header) {
+    public RESTfulResponse create(
+            @PathVariable("resource")String resourceName, 
+    		@RequestBody(required=false) String requestBody, 
+    		@RequestHeader Map<String, String> header
+    		) {
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resourceName + "Service");
-    	
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
         return service.create(request);
     }
     
     /**
      * 修改指定资源的一份实例
      * @param resourceName
-     * @param resourceBody
+     * @param requestBody
      * @param header
      * @return
      */
     @RequestMapping(value = "/{resource}", method = RequestMethod.PUT)
     public RESTfulResponse modify(
     		@PathVariable("resource")String resourceName, 
-    		@RequestBody(required=false) Map<String, String> resourceBody, 
+    		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header) {
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resourceName + "Service");
     	
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
         return service.modify(request);
     }
     
     @RequestMapping(value = "/{resource}", method = RequestMethod.DELETE)
     public RESTfulResponse delete(
     		@PathVariable("resource")String resourceName, 
-    		@RequestBody(required=false) Map<String, String> resourceBody, 
+    		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header) {
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resourceName + "Service");
     	
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
         return service.delete(request);
     }
     
@@ -115,12 +117,12 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
     		@PathVariable("resource1")String resource1Name,
     		@PathVariable("id1")String id1,
     		@PathVariable("resource2")String resource2Name,
-    		@RequestBody(required=false) Map<String, String> resourceBody, 
+    		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header) {
     	
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resource2Name + "Service");
     	
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
         return service.findBy(resource1Name, id1, request);
     }
     
@@ -129,7 +131,7 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
      * @param resource1Name
      * @param id1
      * @param resource2Name
-     * @param resourceBody
+     * @param requestBody
      * @param header
      * @return
      */
@@ -138,12 +140,12 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
     		@PathVariable("resource1")String resource1Name,
     		@PathVariable("id1")String id1,
     		@PathVariable("resource2")String resource2Name,
-    		@RequestBody(required=false) Map<String, String> resourceBody, 
+    		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header) {
     	
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resource2Name + "Service");
     	
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
         return service.create(resource1Name, id1, request);
     }
     /**
@@ -152,7 +154,7 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
      * @param id1
      * @param resource2Name
      * @param id2
-     * @param resourceBody
+     * @param requestBody
      * @param header
      * @return
      */
@@ -162,12 +164,12 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
     		@PathVariable("id1")String id1,
     		@PathVariable("resource2")String resource2Name,
     		@PathVariable("id2")String id2,
-    		@RequestBody(required=false) Map<String, String> resourceBody, 
+    		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header) {
     	
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resource2Name + "Service");
     	
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
         return service.add(resource1Name, id1, resource2Name, id2, request);
     }
     
@@ -177,7 +179,7 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
      * @param id1
      * @param resource2Name
      * @param id2
-     * @param resourceBody
+     * @param requestBody
      * @param header
      * @return
      */
@@ -187,12 +189,12 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
     		@PathVariable("id1")String id1,
     		@PathVariable("resource2")String resource2Name,
     		@PathVariable("id2")String id2,
-    		@RequestBody(required=false) Map<String, String> resourceBody, 
+    		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header) {
     	
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resource2Name + "Service");
     	
-    	RESTfulRequest request = new RESTfulRequest(resourceBody, header);
+    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
     	return service.remove(resource1Name, id1, resource2Name, id2, request);
     }
     
