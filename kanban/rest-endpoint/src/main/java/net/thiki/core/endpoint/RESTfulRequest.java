@@ -1,6 +1,9 @@
 package net.thiki.core.endpoint;
 
+import java.util.HashMap;
 import java.util.Map;
+
+import com.alibaba.fastjson.JSON;
 
 
 /**
@@ -52,6 +55,15 @@ public class RESTfulRequest {
     public String getHeaderParam(Object key){
         return this.header.get(key);
     }
+
+    @SuppressWarnings("unchecked")
+    public Map<String, String> getRequestBodyAsMap() {
+        if (this.requestBody != null){
+            return JSON.parseObject(this.requestBody, HashMap.class);
+        }
+        return null;
+    }
 	
+    
 
 }

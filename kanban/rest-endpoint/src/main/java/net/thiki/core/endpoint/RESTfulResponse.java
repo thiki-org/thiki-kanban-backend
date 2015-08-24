@@ -21,6 +21,10 @@ public class RESTfulResponse {
 	    this.stateCode = STATE_CODE_OK;
     }
 	
+	public RESTfulResponse(int stateCode){
+	    this.stateCode = stateCode;
+	}
+	
 	public int getStateCode() {
 		return stateCode;
 	}
