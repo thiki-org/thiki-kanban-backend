@@ -3,6 +3,8 @@ package net.thiki.core.endpoint;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -39,11 +41,12 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
 	 * @return
 	 */
     @RequestMapping(value = "/{resource}", method = RequestMethod.GET)
-    public List<?> list(@PathVariable("resource")String resource,
+    public List<?> list(HttpServletRequest httpServletRequest,
+            @PathVariable("resource")String resource,
     		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header) {
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resource + "Service");
-    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
+    	RESTfulRequest request = new RESTfulRequest(httpServletRequest.getParameterMap(), requestBody, header);
         return service.findAll(request);
     }
     
@@ -53,14 +56,14 @@ public abstract class UrlBasedRoutingController implements ApplicationContextAwa
 	 * @return
 	 */
     @RequestMapping(value = "/{resource}/{id}", method = RequestMethod.GET)
-    public Object get(
+    public Object get(HttpServletRequest httpServletRequest,
     		@PathVariable("resource")String resource, 
     		@PathVariable("id") String id,
     		@RequestBody(required=false) String requestBody, 
     		@RequestHeader Map<String, String> header
     		) {
     	StandardRESTfulService<?> service = (StandardRESTfulService<?>) ctx.getBean(resource + "Service");
-    	RESTfulRequest request = new RESTfulRequest(requestBody, header);
+    	RESTfulRequest request = new RESTfulRequest(httpServletRequest.getParameterMap(), requestBody, header);
         return service.find(id, request);
     }
     

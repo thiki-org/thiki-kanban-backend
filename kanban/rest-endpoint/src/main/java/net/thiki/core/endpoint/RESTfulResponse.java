@@ -10,7 +10,10 @@ import java.util.Map;
 public class RESTfulResponse {
     
 	public static final int STATE_CODE_OK = 200;
-	
+
+	/** http签名错误*/
+	public static final int STATE_CODE_SIGN_ERROR = 201;
+
 	/** http state code */
     private int stateCode;
     /** json response as an object */
