@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry location="D:\airlink\docs\code\SourceTree\restful-archetype\mbg\src\mbg\lib\mysql-connector-java-5.1.13.jar" />
+	<context id="user" targetRuntime="MyBatis3">
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/thiki?characterEncoding=utf-8" userId="thiki" password="thiki">
+		</jdbcConnection>
+					    
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="net.thiki.domain.tasklist"
+			targetProject="D:\airlink\docs\code\SourceTree\restful-archetype\mbg\generated\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="net.thiki.repo.mybatis.mappers"
+			targetProject="D:\airlink\docs\code\SourceTree\restful-archetype\mbg\generated\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="net.thiki.repo.mybatis.mappers" 
+			targetProject="D:\airlink\docs\code\SourceTree\restful-archetype\mbg\generated\resources">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+		<table tableName="th_task_list" domainObjectName="TaskList">
+			<generatedKey column="id" sqlStatement="mysql" identity="true" />
+		</table>
+	</context>
+	
+<!-- 		<table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="ID" sqlStatement="DB2" identity="true" />
+			<columnOverride column="DATE_FIELD" property="startDate" />
+			<ignoreColumn column="FRED" />
+			<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />
+		</table> -->
+</generatorConfiguration>
