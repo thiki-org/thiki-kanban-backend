@@ -33,7 +33,6 @@
 	</bean>
 	
 	<!-- extention -->
-	<bean id="handlerMapping" class="net.thiki.core.endpoint.PriorityRequestMappingHandlerMapping"/>
 	
 	<bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter" >
 		<property name="supportedMediaTypes">

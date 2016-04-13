@@ -14,7 +14,7 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="net.thiki.domain.tasklist"
+		<javaModelGenerator targetPackage="net.thiki.kanban.domain.entry"
 			targetProject="D:\airlink\docs\code\SourceTree\restful-archetype\mbg\generated\java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
@@ -31,7 +31,10 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
-		<table tableName="th_task_list" domainObjectName="TaskList">
+		<table tableName="th_entry" domainObjectName="Entry">
+			<generatedKey column="id" sqlStatement="mysql" identity="true" />
+		</table>
+		<table tableName="th_task" domainObjectName="Task">
 			<generatedKey column="id" sqlStatement="mysql" identity="true" />
 		</table>
 	</context>

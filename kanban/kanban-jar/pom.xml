@@ -12,11 +12,6 @@
     <artifactId>kanban-jar</artifactId>
     <packaging>jar</packaging>
     <dependencies>
- 		<dependency>
-            <groupId>net.thiki</groupId>
-            <artifactId>rest-endpoint</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>    
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
@@ -126,8 +121,12 @@
             <artifactId>mockito-all</artifactId>
             <scope>test</scope>
         </dependency>
+		<dependency>
+			<groupId>org.springframework.hateoas</groupId>
+			<artifactId>spring-hateoas</artifactId>
+			<version>0.19.0.RELEASE</version>
+		</dependency>        
     </dependencies>
-
     <build>
         <resources>
             <resource>
