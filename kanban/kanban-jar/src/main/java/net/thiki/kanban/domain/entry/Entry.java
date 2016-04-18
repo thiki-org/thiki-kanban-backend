@@ -6,7 +6,9 @@ public class Entry {
 
     private String title;
 
-    private String content;
+    public Entry(String title) {
+        this.title = title;
+    }
 
     public Integer getId() {
         return id;
@@ -24,13 +26,4 @@ public class Entry {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-    
-    
 }

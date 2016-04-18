@@ -28,7 +28,8 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <includes>
-                    <include>**</include>
+                    <include>profile/${prop.dir.name}/*</include>
+                    <include>*</include>
                 </includes>
             </resource>
             <resource>
@@ -47,65 +48,22 @@
                 <directory>src/test/resources</directory>
             </testResource>
         </testResources>
-        <plugins>
-            <plugin>
-                <groupId>com.carbonfive.db-support</groupId>
-                <artifactId>db-migration-maven-plugin</artifactId>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>test-sources</id>
-                        <phase>generate-test-sources</phase>
-                        <goals>
-                            <goal>add-test-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/it/java</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-        <pluginManagement>
-            <plugins>
-<!--                 <plugin>
-                    <groupId>com.carbonfive.db-support</groupId>
-                    <artifactId>db-migration-maven-plugin</artifactId>
-                    <configuration>
-                        <url>${jdbc.url}</url>
-                        <username>${jdbc.user}</username>
-                        <password>${jdbc.password}</password>
-                        <migrationsPath>../db/migrations</migrationsPath>
-                    </configuration>
-                </plugin> -->
-            </plugins>
-        </pluginManagement>
     </build>
     <profiles>
-        <!-- <profile>
-            <id>bootstrap</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>com.carbonfive.db-support</groupId>
-                        <artifactId>db-migration-maven-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>initialize</phase>
-                                <goals>
-                                    <goal>reset</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile> -->
+        <profile>
+            <id>local_zz</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <prop.dir.name>localzz</prop.dir.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>online</id>
+            <properties>
+                <prop.dir.name>online</prop.dir.name>
+            </properties>
+        </profile>
     </profiles>
 </project>

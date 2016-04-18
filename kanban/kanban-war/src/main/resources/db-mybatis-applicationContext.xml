@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context" xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+    xsi:schemaLocation="
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+     http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd"
+     >
+    
+    <mybatis:scan base-package="net.thiki.repo.mybatis.mappers.**" />
+    <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource">
+        <constructor-arg index="0" ref="dbProperties" />
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager" /> 
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="typeAliasesPackage" value="net.thiki.kanban.domain" />
+        <property name="mapperLocations" value="classpath*:net/thiki/kanban/repo/mybatis/mappers/*.xml" />
+        <property name="configLocation" value="classpath:sqlmap-config.xml" />
+    </bean>
+    
+    <bean id="dbProperties" class="org.apache.tomcat.jdbc.pool.PoolProperties">
+        <property name="initialSize">
+            <value>${jdbc.minPoolSize}</value>
+        </property>
+        <property name="maxActive">
+            <value>${jdbc.maxPoolSize}</value>
+        </property>
+        <property name="driverClassName">
+            <value>${jdbc.driverClassName}</value>
+        </property>
+        <property name="url">
+            <value>${jdbc.url}</value>
+        </property>
+        <property name="username">
+            <value>${jdbc.username}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.password}</value>
+        </property>
+        <property name="jmxEnabled">
+            <value>true</value>
+        </property>
+        <property name="validationQuery">
+            <value>select 1;</value>
+        </property>
+        <property name="testWhileIdle">
+            <value>true</value>
+        </property>
+        <property name="testOnBorrow">
+            <value>true</value>
+        </property>
+        <property name="testOnReturn">
+            <value>false</value>
+        </property>
+        <property name="validationInterval">
+            <value>30000</value>
+        </property>
+        <property name="timeBetweenEvictionRunsMillis">
+            <value>30000</value>
+        </property>
+        <property name="minIdle">
+            <value>${jdbc.minIdle}</value>
+        </property>
+        <property name="maxIdle">
+            <value>${jdbc.maxIdle}</value>
+        </property>
+        <property name="maxWait">
+            <value>10000</value>
+        </property>
+        <property name="removeAbandonedTimeout">
+            <value>60</value>
+        </property>
+        <property name="minEvictableIdleTimeMillis">
+            <value>30000</value>
+        </property>
+        <property name="logAbandoned">
+            <value>true</value>
+        </property>
+        <property name="jdbcInterceptors">
+            <value>ConnectionState;StatementFinalizer;StatementCache(max=50)</value>
+        </property>
+        <property name="removeAbandoned">
+            <value>false</value>
+        </property>
+    </bean>    
+    
+</beans>
