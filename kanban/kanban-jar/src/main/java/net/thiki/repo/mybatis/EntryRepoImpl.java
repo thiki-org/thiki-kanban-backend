@@ -16,7 +16,7 @@ public class EntryRepoImpl implements EntryRepo {
 
     @Override
     public void saveEntry(Entry entry) {
-        if (entry.getId() != 0){
+        if (entry.getId() == null){
             entryMapper.insert(entry); 
         }else{
             EntryExample example = new EntryExample();
