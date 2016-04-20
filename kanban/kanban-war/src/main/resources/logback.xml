@@ -10,7 +10,7 @@
   <logger name="com.hoolai" level="DEBUG"/>
   <logger name="net.thiki" level="DEBUG"/>  
  
-  <root level="INFO">
+  <root level="debug">
     <appender-ref ref="STDOUT" />
   </root>
 </configuration>
