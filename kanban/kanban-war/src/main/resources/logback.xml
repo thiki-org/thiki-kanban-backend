@@ -7,7 +7,6 @@
     </layout>
   </appender>
    
-  <logger name="com.hoolai" level="DEBUG"/>
   <logger name="net.thiki" level="DEBUG"/>  
  
   <root level="debug">

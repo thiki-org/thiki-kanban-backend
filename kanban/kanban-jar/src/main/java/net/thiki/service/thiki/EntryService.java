@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import net.thiki.kanban.domain.entry.Entry;
 import net.thiki.kanban.domain.entry.EntryRepo;
+import net.thiki.kanban.domain.entry.Task;
 
 @Service
 public class EntryService {
@@ -33,6 +34,10 @@ public class EntryService {
 
     public void addEntry(Entry newEntry) {
         entryRepo.saveEntry(newEntry);
+    }
+
+    public void addTask(Task newTask) {
+        entryRepo.saveTask(newTask);
     }
 
 }

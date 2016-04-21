@@ -10,6 +10,15 @@ public class Task {
 
     private Integer assigneeUserId;
 
+    public Task() {
+    }
+    
+    public Task(Task other) {
+        this.summary = other.summary;
+        this.detail = other.detail;
+        this.assigneeUserId = other.assigneeUserId;
+    }
+
     public Integer getId() {
         return id;
     }

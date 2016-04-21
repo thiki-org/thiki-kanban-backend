@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import net.thiki.core.endpoint.RestfulBaseService;
 import net.thiki.kanban.domain.entry.Entry;
+import net.thiki.kanban.domain.entry.Task;
 import net.thiki.service.thiki.EntryService;
 
 /**
@@ -47,5 +48,12 @@ public class EntryController extends RestfulBaseService{
         entryService.addEntry(newEntry);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
+    
+    @RequestMapping(value="task", method = RequestMethod.POST)
+    public ResponseEntity<?> addTask(@RequestBody Task input, 
+             @RequestHeader Map<String, String> header){
+        Task newTask = new Task(input);
+        entryService.addTask(newTask);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
