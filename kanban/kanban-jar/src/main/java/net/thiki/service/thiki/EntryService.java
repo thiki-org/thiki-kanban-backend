@@ -18,19 +18,21 @@ public class EntryService {
 	public List<Entry> findAll() {
 		
 		List<Entry> list = new ArrayList<>();
-		Entry Entry = new Entry("锻炼");
-		list.add(Entry);
+		Entry entry = new Entry();
+		entry.setTitle("锻炼");
+		list.add(entry);
 		
 		return list;
 	}
 
 	public Entry find(String id) {
-		Entry Entry = new Entry("锻炼");
-		return Entry;
+		Entry entry = new Entry();
+		entry.setTitle("锻炼");
+		return entry;
 	}
 
     public void addEntry(Entry newEntry) {
-       entryRepo.saveEntry(newEntry);
+        entryRepo.saveEntry(newEntry);
     }
 
 }

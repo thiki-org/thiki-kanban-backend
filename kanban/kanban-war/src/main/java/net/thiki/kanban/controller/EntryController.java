@@ -1,4 +1,4 @@
-package net.thiki.controller;
+package net.thiki.kanban.controller;
 
 import java.util.List;
 import java.util.Map;
@@ -43,7 +43,7 @@ public class EntryController extends RestfulBaseService{
     @RequestMapping(value="entry", method = RequestMethod.POST)
     public ResponseEntity<?> add(@RequestBody Entry input, 
              @RequestHeader Map<String, String> header){
-        Entry newEntry = new Entry(input.getTitle());
+        Entry newEntry = new Entry(input);
         entryService.addEntry(newEntry);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
