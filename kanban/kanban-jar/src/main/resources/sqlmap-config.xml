@@ -11,7 +11,7 @@
 	<!-- 设置于数据库对应的bean类 -->
 	<typeAliases>
 		<typeAlias alias="entry" type="net.thiki.kanban.domain.entry.Entry" />
-
+        <typeAlias alias="task" type="net.thiki.kanban.domain.entry.Task" />
 	</typeAliases>
 
 	<!-- 设置数据库sql语句xml文件 -->

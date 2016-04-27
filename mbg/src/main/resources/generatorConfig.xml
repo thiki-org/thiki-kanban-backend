@@ -6,6 +6,9 @@
 <generatorConfiguration>
 	<classPathEntry location="D:\airlink\docs\code\SourceTree\restful-archetype\mbg\src\mbg\lib\mysql-connector-java-5.1.13.jar" />
 	<context id="user" targetRuntime="MyBatis3">
+		<commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/thiki?characterEncoding=utf-8" userId="thiki" password="thiki">
 		</jdbcConnection>

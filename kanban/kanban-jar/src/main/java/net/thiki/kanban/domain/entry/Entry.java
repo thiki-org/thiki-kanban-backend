@@ -6,6 +6,8 @@ public class Entry {
 
     private String title;
     
+    private Integer defaultAssignee;
+    
     /**
      * default constructor for java bean (jackson need it)
      */
@@ -36,4 +38,13 @@ public class Entry {
         this.title = title;
     }
 
+    public Integer getDefaultAssignee() {
+        return defaultAssignee;
+    }
+
+    public void setDefaultAssignee(Integer defaultAssignee) {
+        this.defaultAssignee = defaultAssignee;
+    }
+
+    
 }
