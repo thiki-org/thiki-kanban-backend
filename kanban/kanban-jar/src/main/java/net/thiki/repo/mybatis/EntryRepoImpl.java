@@ -10,6 +10,7 @@ import net.thiki.kanban.domain.entry.Task;
 import net.thiki.kanban.domain.entry.TaskExample;
 import net.thiki.repo.mybatis.mappers.EntryMapper;
 import net.thiki.repo.mybatis.mappers.TaskMapper;
+import net.thiki.repo.mybatis.mappers.TaskMapperExt;
 
 @Repository
 public class EntryRepoImpl implements EntryRepo {
@@ -19,11 +20,15 @@ public class EntryRepoImpl implements EntryRepo {
     
     @Autowired
     private TaskMapper taskMapper;
+    
+    @Autowired
+    private TaskMapperExt taskMapperExt;
 
     @Override
     public void saveEntry(Entry entry) {
         if (entry.getId() == null){
             entryMapper.insert(entry); 
+//            taskMapperExt.insertEntry(entry);
         }else{
             EntryExample example = new EntryExample();
             example.createCriteria().andIdEqualTo(entry.getId());
@@ -35,7 +40,7 @@ public class EntryRepoImpl implements EntryRepo {
     @Override
     public void saveTask(Task task) {
         if (task.getId() == null){
-            taskMapper.insert(task);
+            taskMapperExt.insert(task);
         }else{
             TaskExample example = new TaskExample();
             example.createCriteria().andIdEqualTo(task.getId());
