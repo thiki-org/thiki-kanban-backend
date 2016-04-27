@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.persistence.entry.EntriesPersistence">
+
+    <insert id="create" parameterType="org.thiki.kanban.domain.entry.Entry">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT @@IDENTITY
+        </selectKey>
+        INSERT INTO
+        kb_entry(title) VALUES (#{title})
+    </insert>
+
+    <update id="update" parameterType="org.thiki.kanban.domain.entry.Entry" flushCache="true">
+        UPDATE kb_entry SET
+        title=#{title}
+        WHERE id=#{id}
+    </update>
+
+    <select id="loadAll" parameterType="java.lang.Integer" resultType="org.thiki.kanban.domain.entry.Entry">
+        SELECT * FROM kb_entry WHERE deleteStatus=0
+    </select>
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="org.thiki.kanban.domain.entry.Entry">
+        SELECT * FROM kb_entry WHERE deleteStatus=0 and id= #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer" flushCache="true">
+        UPDATE kb_entry SET deleteStatus=1 WHERE id=#{id}
+    </delete>
+</mapper>
