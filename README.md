@@ -1,45 +1,31 @@
-# restful-archetype
+基础技术涉及spring-hateoas\spring-boot,数据层面采用Mybatis+mysql.
 
-===============
 
-RESTful架构原型 & 看板案例
+##安装方法 
+1、下载[dolphin](https://github.com/xubitao/dolphin).
 
-#架构说明
+   本项目中的众多公共依赖都在dolphin中，所以请务必先下载dolphin，并install到本地；
 
-由于url template的api模式被认为是一个反模式， 这个版本弃用了基于url template的rest-endpoint.jar，回归最原始的spring mvc controller 为每一个api进行路由。
+2、配置pirate.properities中的jdbc信息,默认的数据库配置可直接使用,但请勿破坏表结构；如果使用自己的MySQL数据库，`/src/main/resources/init_db.sql`中有创建表所需的SQL语句；
 
-#配置说明
+3、可以在IDE中从Application类的main方法中直接启动，也可以通过`mvn package`打成jar包后运行；
 
-## 准备数据库
+4、契约平台完整使用时，需要配备相应的客户端，客户端程序暂不提供，目前仅供服务端的学习和研究。
+## API入口
+```
+http://localhost:8080/entrance
+```
+```json
+{
+  "description": "Welcome!",
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/entrance"
+    },
+    "entries": {
+      "href": "http://localhost:8080/entries"
+    }
+  }
+}
 
-数据库DDL放在这里（以后更新数据库schema，必须同步这个sql）：
-restful-archetype\mbg\src\mbg\scripts\CreateDB.sql
-
-安装mysql，创建一个数据库thiki，相应的参数定义在restful-archetype\kanban\kanban-war\src\main\resources\profile\localzz\jdbc.properties
-
-jdbc.driverClassName=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://localhost:3306/thiki?characterEncoding=utf-8
-jdbc.username=thiki
-jdbc.password=thiki
-
-如果保持完全一致， 就可以直接不必改配置。 如果有不同的地方，就要新建一个maven profile，避免多个协作者之间相互影响。见 maven profile配置一节
-
-## 运行
-
-运行web容器（tomcat、jetty等）就不再赘述了，我们假定web-root名字是kanban，那么一个典型的api就是：
-
-http://localhost:8080/kanban/api/v1/entries GET
-
-注意不要忘写api和v1
-
-## spring mvc controller和路由
-
-TODO
-
-## mybatis generator（MBG）的使用
-
-TODO
-
-## maven profile与运行环境配置隔离
-
-TODO
+```
