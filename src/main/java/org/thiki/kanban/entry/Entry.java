@@ -1,4 +1,4 @@
-package org.thiki.kanban.domain.entry;
+package org.thiki.kanban.entry;
 
 
 /**

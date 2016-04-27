@@ -1,7 +1,6 @@
-package org.thiki.kanban.domain.entry;
+package org.thiki.kanban.entry;
 
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.persistence.entry.EntriesPersistence;
 
 import javax.annotation.Resource;
 import java.sql.SQLException;

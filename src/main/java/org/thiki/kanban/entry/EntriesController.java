@@ -1,4 +1,4 @@
-package org.thiki.kanban.controller;
+package org.thiki.kanban.entry;
 
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import cn.xubitao.dolphin.foundation.response.Response;
@@ -7,8 +7,6 @@ import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.thiki.kanban.assmbler.entry.EntriesResourceAssembler;
-import org.thiki.kanban.assmbler.entry.EntryResourceAssembler;
 import org.thiki.kanban.domain.entry.Entries;
 import org.thiki.kanban.domain.entry.Entry;
 

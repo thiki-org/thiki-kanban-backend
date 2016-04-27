@@ -1,4 +1,4 @@
-package org.thiki.kanban.persistence.entry;
+package org.thiki.kanban.entry;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

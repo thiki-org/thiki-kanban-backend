@@ -1,4 +1,4 @@
-package org.thiki.kanban.assmbler.entry;
+package org.thiki.kanban.entry;
 
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;

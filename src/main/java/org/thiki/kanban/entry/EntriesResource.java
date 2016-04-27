@@ -1,4 +1,4 @@
-package org.thiki.kanban.resource.entry;
+package org.thiki.kanban.entry;
 
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import org.springframework.hateoas.ResourceSupport;

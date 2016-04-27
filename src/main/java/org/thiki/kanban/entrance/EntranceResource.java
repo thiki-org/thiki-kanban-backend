@@ -1,4 +1,4 @@
-package org.thiki.kanban.resource;
+package org.thiki.kanban.entrance;
 
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 
