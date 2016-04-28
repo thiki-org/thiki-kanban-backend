@@ -1,12 +1,11 @@
 package org.thiki.kanban.entrance;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-
-import org.springframework.hateoas.Link;
-import org.thiki.kanban.entry.EntriesController;
-
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
+import org.thiki.kanban.entry.EntriesController;
+import org.springframework.hateoas.Link;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -15,7 +14,7 @@ public class EntranceResourceAssembler extends DolphinAssembler {
     public static final int MISSED = 0;
 
     public EntranceResourceAssembler() {
-        super(null, null);
+        super(EntranceController.class, RestResource.class);
     }
 
     @Override

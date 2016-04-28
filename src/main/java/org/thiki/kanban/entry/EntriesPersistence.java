@@ -1,9 +1,9 @@
 package org.thiki.kanban.entry;
 
-import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * Created by xubitao on 04/26/16.
