@@ -5,6 +5,8 @@
 0、requirement:  
 * java 1.8;  
 * maven 3.2.x or higher version; 
+
+
 1、下载[dolphin](https://github.com/xubitao/dolphin).
 
    本项目中的众多公共依赖都在dolphin中，所以请务必先下载dolphin，并install到本地；
@@ -13,7 +15,7 @@
 
 3、可以在IDE中从Application类的main方法中直接启动，也可以通过`mvn package`打成jar包后运行;
 
-4、spring-hateoas学习资料：［http://projects.spring.io/spring-hateoas/］(http://projects.spring.io/spring-hateoas/)
+4、spring-hateoas学习资料：[http://projects.spring.io/spring-hateoas/](http://projects.spring.io/spring-hateoas/)
 ## API入口
 ```
 http://localhost:8080/entrance
