@@ -2,9 +2,6 @@ package org.thiki.kanban.entry;
 
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
-import org.thiki.kanban.controller.EntriesController;
-import org.thiki.kanban.domain.entry.Entries;
-import org.thiki.kanban.resource.entry.EntriesResource;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 

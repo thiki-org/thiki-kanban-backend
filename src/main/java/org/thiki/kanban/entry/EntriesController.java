@@ -7,8 +7,6 @@ import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.thiki.kanban.domain.entry.Entries;
-import org.thiki.kanban.domain.entry.Entry;
 
 import javax.annotation.Resource;
 

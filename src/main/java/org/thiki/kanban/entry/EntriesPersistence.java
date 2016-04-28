@@ -2,7 +2,6 @@ package org.thiki.kanban.entry;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.thiki.kanban.domain.entry.Entry;
 
 import java.util.List;
 
