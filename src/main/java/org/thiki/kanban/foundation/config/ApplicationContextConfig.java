@@ -1,5 +1,7 @@
 package org.thiki.kanban.foundation.config;
 
+import java.util.concurrent.TimeUnit;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext;
@@ -11,8 +13,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by xubitao on 04/26/16.

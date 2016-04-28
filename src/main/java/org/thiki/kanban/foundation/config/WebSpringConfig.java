@@ -1,6 +1,8 @@
 package org.thiki.kanban.foundation.config;
 
-import org.thiki.kanban.foundation.exception.KanbanExceptionResolver;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -9,9 +11,6 @@ import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thiki.kanban.foundation.exception.KanbanExceptionResolver;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by xubitao on 04/26/16.

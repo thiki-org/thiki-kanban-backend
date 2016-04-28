@@ -1,10 +1,11 @@
 package org.thiki.kanban.entry;
 
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.stereotype.Service;
 
 /**
  * Created by xubitao on 04/26/16.

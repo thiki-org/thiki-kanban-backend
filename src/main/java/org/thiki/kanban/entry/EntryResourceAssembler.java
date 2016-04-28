@@ -1,14 +1,11 @@
 package org.thiki.kanban.entry;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+
+import org.springframework.hateoas.Link;
+
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
-import org.springframework.hateoas.Link;
-import org.thiki.kanban.controller.EntriesController;
-import org.thiki.kanban.domain.entry.Entry;
-import org.thiki.kanban.resource.entry.EntryResource;
-
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by xubitao on 04/26/16.

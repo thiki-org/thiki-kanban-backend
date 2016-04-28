@@ -1,9 +1,10 @@
 package org.thiki.kanban.entry;
 
-import cn.xubitao.dolphin.foundation.resource.RestResource;
+import java.util.List;
+
 import org.springframework.hateoas.ResourceSupport;
 
-import java.util.List;
+import cn.xubitao.dolphin.foundation.resource.RestResource;
 
 /**
  * Created by xubitao on 04/26/16.

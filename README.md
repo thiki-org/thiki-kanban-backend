@@ -2,6 +2,9 @@
 
 
 ##安装方法 
+0、requirement:  
+* java 1.8;  
+* maven 3.2.x or higher version; 
 1、下载[dolphin](https://github.com/xubitao/dolphin).
 
    本项目中的众多公共依赖都在dolphin中，所以请务必先下载dolphin，并install到本地；
