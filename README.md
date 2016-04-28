@@ -11,7 +11,9 @@
 
 2、配置kanban.properities中的jdbc信息,默认的数据库配置可直接使用,但请勿破坏表结构；如果使用自己的MySQL数据库，`/src/main/resources/init_db.sql`中有创建表所需的SQL语句；
 
-3、可以在IDE中从Application类的main方法中直接启动，也可以通过`mvn package`打成jar包后运行。
+3、可以在IDE中从Application类的main方法中直接启动，也可以通过`mvn package`打成jar包后运行;
+
+4、spring-hateoas学习资料：［http://projects.spring.io/spring-hateoas/］(http://projects.spring.io/spring-hateoas/)
 ## API入口
 ```
 http://localhost:8080/entrance
