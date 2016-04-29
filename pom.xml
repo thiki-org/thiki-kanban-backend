@@ -95,6 +95,9 @@
     <build>
         <resources>
             <resource>
+                <directory>src/profiles/${prop.dir.name}</directory>
+            </resource>
+            <resource>
                 <directory>src/main/resources</directory>
             </resource>
         </resources>
@@ -130,4 +133,21 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>local_zz</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <prop.dir.name>local_zz</prop.dir.name>
+            </properties>
+        </profile>
+        <profile>
+            <id>local_tao</id>
+            <properties>
+                <prop.dir.name>local_tao</prop.dir.name>
+            </properties>
+        </profile>
+    </profiles>     
 </project>
