@@ -21,7 +21,7 @@ public class EntriesResourceAssembler extends DolphinAssembler {
     @Override
     public RestResource toRestResource(Object domain, Object... pathVariables) throws Exception {
         this.pathVariables = pathVariables;
-        Entries entries = (Entries) domain;
+        EntryService entries = (EntryService) domain;
         EntriesResource entriesResource = new EntriesResource();
 
         Link entriesLink = linkTo(methodOn(EntriesController.class).loadAll()).withRel("entries");

@@ -20,11 +20,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RequestMapping(value = "/entries")
 public class EntriesController {
     @Resource
-    private Entries entries;
+    private EntryService entries;
 
     @RequestMapping(method = RequestMethod.GET)
     public HttpEntity<ResourceSupport> loadAll() throws Exception {
-        Entries entryList = entries.loadAll();
+        EntryService entryList = entries.loadAll();
         return Response.build(entryList, new EntriesResourceAssembler());
     }
 

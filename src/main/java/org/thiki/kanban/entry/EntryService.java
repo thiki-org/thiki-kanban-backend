@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  * Created by xubitao on 04/26/16.
  */
 @Service
-public class Entries {
+public class EntryService {
     @Resource
     private EntriesPersistence entriesPersistence;
     private List<Entry> entries;
@@ -33,10 +33,9 @@ public class Entries {
         return entriesPersistence.findById(id);
     }
 
-    public Entries loadAll() throws SQLException {
-        Entries entries = new Entries();
+    public EntryService loadAll() throws SQLException {
+        EntryService entries = new EntryService();
         entries.setEntries(entriesPersistence.loadAll());
-
         return entries;
     }
 
