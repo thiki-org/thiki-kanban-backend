@@ -1,6 +1,5 @@
 package org.thiki.kanban.entry;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,27 +23,28 @@ public class EntryService {
         this.entries = entries;
     }
 
-    public Entry create(final Entry entry) throws Exception {
+    public Entry create(Integer reporterUserId, final Entry entry) {
+        entry.setReporter(reporterUserId);
         entriesPersistence.create(entry);
-        return entriesPersistence.findById(entry.getId());
+        return entry;
     }
 
-    public Entry findById(Integer id) throws SQLException {
+    public Entry findById(Integer id) {
         return entriesPersistence.findById(id);
     }
 
-    public EntryService loadAll() throws SQLException {
+    public EntryService loadAll() {
         EntryService entries = new EntryService();
         entries.setEntries(entriesPersistence.loadAll());
         return entries;
     }
 
-    public Entry update(Entry entry) throws Exception {
+    public Entry update(Entry entry) {
         entriesPersistence.update(entry);
         return entriesPersistence.findById(entry.getId());
     }
 
-    public int deleteById(Integer id) throws SQLException {
+    public int deleteById(Integer id) {
         return entriesPersistence.deleteById(id);
     }
 }

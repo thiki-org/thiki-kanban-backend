@@ -20,17 +20,19 @@ public class EntriesResourceAssembler extends DolphinAssembler {
 
     @Override
     public RestResource toRestResource(Object domain, Object... pathVariables) throws Exception {
-        this.pathVariables = pathVariables;
-        EntryService entries = (EntryService) domain;
-        EntriesResource entriesResource = new EntriesResource();
-
-        Link entriesLink = linkTo(methodOn(EntriesController.class).loadAll()).withRel("entries");
-        if (entries == null) {
-            return RestResource.link(entriesLink);
-        }
-        List<ResourceSupport> contractResources = buildResources(entries.getEntries(), new EntryResourceAssembler(), pathVariables);
-        entriesResource.setEntries(contractResources);
-        entriesResource.add(linkTo(methodOn(EntriesController.class).loadAll()).withSelfRel());
-        return entriesResource;
+//        this.pathVariables = pathVariables;
+//        EntryService entries = (EntryService) domain;
+//        EntriesResource entriesResource = new EntriesResource();
+//
+//        Link entriesLink = linkTo(methodOn(EntriesController.class).loadAll()).withRel("entries");
+//        if (entries == null) {
+//            return RestResource.link(entriesLink);
+//        }
+//        List<ResourceSupport> contractResources = buildResources(entries.getEntries(), new EntryResourceAssembler(), pathVariables);
+//        entriesResource.setEntries(contractResources);
+//        entriesResource.add(linkTo(methodOn(EntriesController.class).loadAll()).withSelfRel());
+//        return entriesResource;
+        //FIXME: to refactoring
+        return null;
     }
 }

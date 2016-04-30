@@ -3,34 +3,46 @@ package org.thiki.kanban.entry;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import org.springframework.hateoas.Link;
-
-import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
-import cn.xubitao.dolphin.foundation.resource.RestResource;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 /**
  * Created by xubitao on 04/26/16.
  */
-public class EntryResourceAssembler extends DolphinAssembler {
+public class EntryResourceAssembler extends ResourceAssemblerSupport<Entry, EntryResource> {
+
+    protected Object[] pathVariables;
 
     public EntryResourceAssembler() {
-        super(EntriesController.class, RestResource.class);
+        super(EntriesController.class, EntryResource.class);
     }
-
-    @Override
-    public RestResource toRestResource(Object domain, Object... pathVariables) throws Exception {
+    
+    
+    public EntryResourceAssembler(Object... pathVariables){
+        this();
         this.pathVariables = pathVariables;
-        Entry entry = (Entry) domain;
-        EntryResource entryResource = new EntryResource();
-        Link entriesLink = linkTo(methodOn(EntriesController.class).loadAll()).withRel("entries");
-        if (domain == null) {
-            return RestResource.link(entriesLink);
+    }
+    
+    public EntryResource emptyResource(){
+        return buildResource(null);
+    }
+    
+    private EntryResource buildResource(Entry entry){
+        EntryResource resource = new EntryResource(entry);
+        resource.add(linkTo(methodOn(EntriesController.class).loadAll()).withRel("all"));
+        return resource;
+    }
+    
+    @Override
+    public EntryResource toResource(Entry entry) {
+        EntryResource entryResource = buildResource(entry);
+        if (entry != null) {
+            Link selfLink = linkTo(methodOn(EntriesController.class).findById(entry.getId())).withSelfRel();
+            entryResource.add(selfLink);
+            
+            Link delLink = linkTo(methodOn(EntriesController.class).deleteById(entry.getId())).withRel("del");
+            entryResource.add(delLink);
         }
-        Link selfLink = linkTo(methodOn(EntriesController.class).findById(entry.getId())).withSelfRel();
-
-        entryResource.setTitle(entry.getTitle());
-
-        entryResource.add(entriesLink);
-        entryResource.add(selfLink);
         return entryResource;
     }
+    
 }

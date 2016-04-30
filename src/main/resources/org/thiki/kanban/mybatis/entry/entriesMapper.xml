@@ -9,7 +9,7 @@
             SELECT @@IDENTITY
         </selectKey>
         INSERT INTO
-        kb_entry(title) VALUES (#{title})
+        kb_entry(title, reporter) VALUES (#{title}, #{reporter})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.entry.Entry" flushCache="true">

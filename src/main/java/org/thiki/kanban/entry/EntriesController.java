@@ -5,6 +5,7 @@ import cn.xubitao.dolphin.foundation.response.Response;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,42 +18,50 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubitao on 04/26/16.
  */
 @RestController
-@RequestMapping(value = "/entries")
+@RequestMapping(value = "")
 public class EntriesController {
     @Resource
-    private EntryService entries;
+    private EntryService entryService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public HttpEntity<ResourceSupport> loadAll() throws Exception {
-        EntryService entryList = entries.loadAll();
+    @RequestMapping(value = "/entries", method = RequestMethod.GET)
+    public HttpEntity<ResourceSupport> loadAll() {
+        EntryService entryList = entryService.loadAll();
         return Response.build(entryList, new EntriesResourceAssembler());
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public HttpEntity<ResourceSupport> findById(@PathVariable Integer id) throws Exception {
-        Entry entry = entries.findById(id);
-        return Response.build(entry, new EntryResourceAssembler());
+    @RequestMapping(value = "/entries/{id}", method = RequestMethod.GET)
+    public HttpEntity<EntryResource> findById(@PathVariable Integer id) {
+        Entry entry = entryService.findById(id);
+        return new ResponseEntity<EntryResource>(
+                new EntryResourceAssembler().toResource(entry), 
+                HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public HttpEntity<ResourceSupport> update(@RequestBody Entry entry, @PathVariable Integer id) throws Exception {
+    @RequestMapping(value = "/entries/{id}", method = RequestMethod.PUT)
+    public HttpEntity<EntryResource> update(@RequestBody Entry entry, @PathVariable Integer id) {
         entry.setId(id);
-        Entry updatedEntry = entries.update(entry);
-        return Response.build(updatedEntry, new EntryResourceAssembler());
+        Entry updatedEntry = entryService.update(entry);
+        
+        return new ResponseEntity<EntryResource>(
+                new EntryResourceAssembler().toResource(updatedEntry), 
+                HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity deleteById(@PathVariable Integer id) throws Exception {
-        entries.deleteById(id);
-        Link link = linkTo(methodOn(EntriesController.class).loadAll()).withRel("entries");
-        return Response.ok(RestResource.link(link));
+    @RequestMapping(value = "/entries/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<EntryResource> deleteById(@PathVariable Integer id) {
+        entryService.deleteById(id);
+        return new ResponseEntity<EntryResource>(
+                new EntryResourceAssembler().emptyResource(),
+                HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity create(@RequestBody Entry entry) throws Exception {
-        Entry savedEntry = entries.create(entry);
-        EntryResourceAssembler entryResourceAssembler = new EntryResourceAssembler();
-        RestResource entryResource = entryResourceAssembler.toRestResource(savedEntry);
-        return Response.created(entryResource);
+    @RequestMapping(value = "{userId}/entries", method = RequestMethod.POST)
+    public ResponseEntity<EntryResource> create(@RequestBody Entry entry, @PathVariable Integer userId) {
+        
+        Entry savedEntry = entryService.create(userId, entry);
+        
+        return new ResponseEntity<EntryResource>(
+                new EntryResourceAssembler().toResource(savedEntry), 
+                HttpStatus.CREATED);
     }
 }
