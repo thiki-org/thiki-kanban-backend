@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * Created by xubitao on 04/26/16.
  */
 @Service
-public class EntryService {
+public class EntriesService {
     @Resource
     private EntriesPersistence entriesPersistence;
     private List<Entry> entries;
@@ -33,8 +33,8 @@ public class EntryService {
         return entriesPersistence.findById(id);
     }
 
-    public EntryService loadAll() {
-        EntryService entries = new EntryService();
+    public EntriesService loadAll() {
+        EntriesService entries = new EntriesService();
         entries.setEntries(entriesPersistence.loadAll());
         return entries;
     }
