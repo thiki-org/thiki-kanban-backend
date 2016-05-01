@@ -1,14 +1,14 @@
 package org.thiki.kanban.entry;
 
-import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
-import cn.xubitao.dolphin.foundation.resource.RestResource;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.ResourceSupport;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import java.util.List;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.ResourceSupport;
+
+import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
+import cn.xubitao.dolphin.foundation.resource.RestResource;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -21,7 +21,7 @@ public class EntriesResourceAssembler extends DolphinAssembler {
     @Override
     public RestResource toRestResource(Object domain, Object... pathVariables) throws Exception {
 //        this.pathVariables = pathVariables;
-//        EntryService entries = (EntryService) domain;
+//        EntriesService entries = (EntriesService) domain;
 //        EntriesResource entriesResource = new EntriesResource();
 //
 //        Link entriesLink = linkTo(methodOn(EntriesController.class).loadAll()).withRel("entries");
@@ -32,7 +32,7 @@ public class EntriesResourceAssembler extends DolphinAssembler {
 //        entriesResource.setEntries(contractResources);
 //        entriesResource.add(linkTo(methodOn(EntriesController.class).loadAll()).withSelfRel());
 //        return entriesResource;
-        //FIXME: to refactoring
+////        FIXME: to refactoring
         return null;
     }
 }

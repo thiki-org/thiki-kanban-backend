@@ -4,19 +4,18 @@ import java.util.List;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import cn.xubitao.dolphin.foundation.resource.RestResource;
-
 /**
  * Created by xubitao on 04/26/16.
  */
-public class EntriesResource extends RestResource {
-    private List<ResourceSupport> entries;
+public class EntriesResource extends ResourceSupport {
+    private List<EntryResource> entries;
 
-    public List<ResourceSupport> getEntries() {
+    public List<EntryResource> getEntries() {
         return entries;
     }
 
-    public void setEntries(List<ResourceSupport> entries) {
+    public void setEntries(List<EntryResource> entries) {
         this.entries = entries;
     }
+
 }

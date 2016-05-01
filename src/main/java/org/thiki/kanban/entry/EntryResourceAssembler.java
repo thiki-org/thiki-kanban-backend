@@ -45,4 +45,7 @@ public class EntryResourceAssembler extends ResourceAssemblerSupport<Entry, Entr
         return entryResource;
     }
     
+   
+    
+    
 }

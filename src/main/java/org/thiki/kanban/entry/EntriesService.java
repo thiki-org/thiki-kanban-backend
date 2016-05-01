@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class EntriesService {
+    
     @Resource
     private EntriesPersistence entriesPersistence;
+    
     private List<Entry> entries;
 
     public List<Entry> getEntries() {
@@ -33,10 +35,8 @@ public class EntriesService {
         return entriesPersistence.findById(id);
     }
 
-    public EntriesService loadAll() {
-        EntriesService entries = new EntriesService();
-        entries.setEntries(entriesPersistence.loadAll());
-        return entries;
+    public List<Entry> loadAll() {
+        return entriesPersistence.loadAll();
     }
 
     public Entry update(Entry entry) {

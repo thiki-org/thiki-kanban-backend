@@ -14,6 +14,8 @@ import javax.annotation.Resource;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
+import java.util.List;
+
 /**
  * Created by xubitao on 04/26/16.
  */
@@ -24,9 +26,15 @@ public class EntriesController {
     private EntriesService entryService;
 
     @RequestMapping(value = "/entries", method = RequestMethod.GET)
-    public HttpEntity<ResourceSupport> loadAll() {
-        EntriesService entryList = entryService.loadAll();
-        return Response.build(entryList, new EntriesResourceAssembler());
+    public HttpEntity<EntriesResource> loadAll() {
+        List<Entry> entryList = entryService.loadAll();
+        List<EntryResource> resources = new EntryResourceAssembler().toResources(entryList);
+        EntriesResource entriesRes = new EntriesResource();
+        entriesRes.setEntries(resources);
+       
+        return new ResponseEntity<EntriesResource>(
+                entriesRes, 
+                entryList == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
     @RequestMapping(value = "/entries/{id}", method = RequestMethod.GET)
@@ -60,8 +68,9 @@ public class EntriesController {
         
         Entry savedEntry = entryService.create(userId, entry);
         
-        return new ResponseEntity<EntryResource>(
+        ResponseEntity<EntryResource> responseEntity = new ResponseEntity<EntryResource>(
                 new EntryResourceAssembler().toResource(savedEntry), 
                 HttpStatus.CREATED);
+        return responseEntity;
     }
 }
