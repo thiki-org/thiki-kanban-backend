@@ -1,8 +1,5 @@
 package org.thiki.kanban.entry;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
-
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 
 /**

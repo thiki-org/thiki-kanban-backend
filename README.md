@@ -34,3 +34,8 @@ http://localhost:8080/entrance
 }
 
 ```
+
+# 有争议（疑问）的地方
+
+* Resource作为DTO， 结构与对应的Business Object基本就是一致的， 是不是有代码重复之嫌？
+* UUID vs 整数递增id
