@@ -1,5 +1,7 @@
 package org.thiki.kanban.task;
 
+import org.thiki.kanban.entry.Entry;
+
 /**
  * 任务：任何有指定负责人的有特定目标的事项，可以是用户故事，技术任务，一次会议等等
  * 
@@ -17,6 +19,16 @@ public class Task {
     private Integer reporter;
     /** 负责人 */
     private Integer assignee;
+    /** 任务列表Id @see {@link Entry#getId()}*/
+    private Integer entryId;
+
+    public Integer getEntryId() {
+        return entryId;
+    }
+
+    public void setEntryId(Integer entryId) {
+        this.entryId = entryId;
+    }
 
     public Integer getReporter() {
         return reporter;

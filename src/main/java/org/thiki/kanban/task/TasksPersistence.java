@@ -7,4 +7,8 @@ public interface TasksPersistence {
 
     void create(Task task);
 
+    Task findById(Integer taskId);
+
+    void update(Task task);
+
 }

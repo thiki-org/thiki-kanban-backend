@@ -6,7 +6,7 @@ CREATE TABLE `kb_entry` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` text,
   `reporter` int(11) NOT NULL,
-  `deleteStatus` int(11) DEFAULT '0',
+  `delete_status` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -16,6 +16,8 @@ public class TaskResource extends ResourceSupport{
     private Integer assignee;
     /** 创建者 */
     private Integer reporter;
+    /** 任务组Id */
+    private Integer entryId;
 
     public Integer getReporter() {
         return reporter;
@@ -28,6 +30,13 @@ public class TaskResource extends ResourceSupport{
         this.content = task.getContent();
         this.assignee = task.getAssignee();
         this.reporter = task.getReporter();
+        this.entryId = task.getEntryId();
+    }
+    public Integer getEntryId() {
+        return entryId;
+    }
+    public void setEntryId(Integer entryId) {
+        this.entryId = entryId;
     }
     public String getSummary() {
         return summary;

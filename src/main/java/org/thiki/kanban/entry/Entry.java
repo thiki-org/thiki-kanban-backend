@@ -1,5 +1,6 @@
 package org.thiki.kanban.entry;
 
+import org.thiki.kanban.task.Task;
 
 /**
  * 任务列表
@@ -35,6 +36,16 @@ public class Entry {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    /**
+     * 在entry内添加一个task
+     * @param task
+     * @return
+     */
+    public Task addTask(Task task) {
+        task.setEntryId(this.id);
+        return task;
     }
     
 }
