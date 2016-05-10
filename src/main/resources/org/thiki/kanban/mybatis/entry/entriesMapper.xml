@@ -19,14 +19,14 @@
     </update>
 
     <select id="loadAll" parameterType="java.lang.Integer" resultType="org.thiki.kanban.entry.Entry">
-        SELECT * FROM kb_entry WHERE deleteStatus=0
+        SELECT * FROM kb_entry WHERE delete_status=0
     </select>
 
     <select id="findById" parameterType="java.lang.Integer" resultType="org.thiki.kanban.entry.Entry">
-        SELECT * FROM kb_entry WHERE deleteStatus=0 and id= #{id}
+        SELECT * FROM kb_entry WHERE delete_status=0 and id= #{id}
     </select>
 
     <delete id="deleteById" parameterType="java.lang.Integer" flushCache="true">
-        UPDATE kb_entry SET deleteStatus=1 WHERE id=#{id}
+        UPDATE kb_entry SET delete_status=1 WHERE id=#{id}
     </delete>
 </mapper>

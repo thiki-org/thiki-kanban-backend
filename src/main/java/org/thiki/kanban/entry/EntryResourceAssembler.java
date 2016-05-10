@@ -4,6 +4,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+import org.thiki.kanban.task.Task;
+import org.thiki.kanban.task.TasksController;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -41,6 +43,12 @@ public class EntryResourceAssembler extends ResourceAssemblerSupport<Entry, Entr
             
             Link delLink = linkTo(methodOn(EntriesController.class).deleteById(entry.getId())).withRel("del");
             entryResource.add(delLink);
+            
+            Task task = null;
+            Integer userId = null;
+            Link addTaskLink = linkTo(methodOn(TasksController.class).create(task, userId, entry.getId())).withRel("create");
+            // FIXME: ex would be thrown.
+//            entryResource.add(addTaskLink);
         }
         return entryResource;
     }

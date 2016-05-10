@@ -37,8 +37,14 @@ public class TaskResourceAssembler extends ResourceAssemblerSupport<Task, TaskRe
             Link selfLink = linkTo(methodOn(TasksController.class).findById(task.getId())).withSelfRel();
             taskResource.add(selfLink);
             
-            Link delLink = linkTo(methodOn(TasksController.class).deleteById(task.getId())).withRel("del");
-            taskResource.add(delLink);
+//            Link delLink = linkTo(methodOn(TasksController.class).deleteById(task.getId())).withRel("del");
+//            taskResource.add(delLink);
+            
+            Link updateLink = linkTo(methodOn(TasksController.class).update(task, task.getId())).withRel("update");
+            taskResource.add(updateLink);
+            
+            Link assignLink = linkTo(methodOn(TasksController.class).assign(task.getAssignee(), task.getId())).withRel("assign");
+            taskResource.add(assignLink);
         }
         return taskResource;
     }
