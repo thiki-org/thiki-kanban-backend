@@ -2,6 +2,9 @@ package org.thiki.kanban.task;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
@@ -39,8 +42,7 @@ public class TaskResourceAssembler extends ResourceAssemblerSupport<Task, TaskRe
             
 //            Link delLink = linkTo(methodOn(TasksController.class).deleteById(task.getId())).withRel("del");
 //            taskResource.add(delLink);
-            
-            Link updateLink = linkTo(methodOn(TasksController.class).update(task, task.getId())).withRel("update");
+            Link updateLink = linkTo(methodOn(TasksController.class).update(null, task.getId())).withRel("update");
             taskResource.add(updateLink);
             
             Link assignLink = linkTo(methodOn(TasksController.class).assign(task.getAssignee(), task.getId())).withRel("assign");

@@ -1,6 +1,7 @@
 package org.thiki.kanban.task;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -53,8 +54,8 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/tasks/{taskId}", method = RequestMethod.PUT)
-    public HttpEntity<TaskResource> update(@RequestBody Task task, @PathVariable Integer taskId) {
-        task = tasksService.updateContent(taskId, task);
+    public HttpEntity<TaskResource> update(@RequestBody Map<String, String> change, @PathVariable Integer taskId) {
+        Task task = tasksService.updateContent(taskId, change.get("summary"), change.get("content"));
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
                 new TaskResourceAssembler().toResource(task), 
                 HttpStatus.OK);

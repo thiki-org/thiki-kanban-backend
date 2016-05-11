@@ -29,10 +29,10 @@ public class TasksService {
         return task;
     }
 
-    public Task updateContent(Integer taskId, Task changedTask) {
+    public Task updateContent(Integer taskId, String summary, String content) {
         Task task = tasksPersistence.findById(taskId);
-        task.setContent(changedTask.getContent());
-        task.setSummary(changedTask.getSummary());
+        task.setContent(content);
+        task.setSummary(summary);
         tasksPersistence.update(task);
         return task;
     }
