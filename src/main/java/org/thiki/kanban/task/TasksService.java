@@ -45,8 +45,11 @@ public class TasksService {
     }
 
     public List<Task> findByEntryId(Integer entryId) {
-        // TODO Auto-generated method stub
-        return null;
+        Entry entry = entriesPersistence.findById(entryId);
+        if (entry == null){
+            throw new BusinessException(ExceptionCode.notFound.code(), "entry[" + entryId + "] is not found.");
+        }
+        return tasksPersistence.findByEntryId(entryId);
     }
 
 }
