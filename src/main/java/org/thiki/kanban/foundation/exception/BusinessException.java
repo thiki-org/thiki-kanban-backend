@@ -1,9 +1,16 @@
-package org.thiki.kanban.exception;
+package org.thiki.kanban.foundation.exception;
 
+import org.springframework.http.HttpStatus;
+
+/**
+ * 
+ * @author joeaniu
+ *
+ */
 public class BusinessException extends RuntimeException{
 
     private static final long serialVersionUID = 1L;
-    
+    /** 错误代码， 比httpstatus更详细 */ 
     private int code;
 
     public BusinessException(String message) {
@@ -17,5 +24,14 @@ public class BusinessException extends RuntimeException{
     
     public int getCode(){
         return code;
+    }
+    
+    /**
+     * http status in response.
+     * should be overriden by sub class. default is 500.
+     * @return
+     */
+    public HttpStatus getStatus() {
+        return HttpStatus.INTERNAL_SERVER_ERROR;
     }
 }

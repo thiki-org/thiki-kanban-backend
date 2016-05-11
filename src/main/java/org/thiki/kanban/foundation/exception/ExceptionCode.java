@@ -1,9 +1,9 @@
-package org.thiki.kanban.exception;
+package org.thiki.kanban.foundation.exception;
 
 public enum ExceptionCode {
 
     UNKONWN_EX (-99), 
-    notFound (1),
+    resourceNotFound(1),
     ;
     
     

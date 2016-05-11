@@ -7,8 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.entry.EntriesPersistence;
 import org.thiki.kanban.entry.Entry;
-import org.thiki.kanban.exception.BusinessException;
-import org.thiki.kanban.exception.ExceptionCode;
+import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 @Service
 public class TasksService {
@@ -22,7 +21,7 @@ public class TasksService {
         task.setReporter(reporterUserId);
         Entry entry = entriesPersistence.findById(entryId);
         if (entry == null){
-            throw new BusinessException(ExceptionCode.notFound.code(), "entry[" + entryId + "] is not found, task creation failed.");
+            throw new ResourceNotFoundException("entry[" + entryId + "] is not found, task creation failed.");
         }
         Task newTask = entry.addTask(task);
         tasksPersistence.create(newTask);
@@ -47,7 +46,7 @@ public class TasksService {
     public List<Task> findByEntryId(Integer entryId) {
         Entry entry = entriesPersistence.findById(entryId);
         if (entry == null){
-            throw new BusinessException(ExceptionCode.notFound.code(), "entry[" + entryId + "] is not found.");
+            throw new ResourceNotFoundException("entry[" + entryId + "] is not found.");
         }
         return tasksPersistence.findByEntryId(entryId);
     }
