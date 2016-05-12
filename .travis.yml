@@ -2,3 +2,6 @@ language: java
 script: mvn clean test
 notifications:
   email: true
+
+jdk:
+  - oraclejdk8
