@@ -1,0 +1,11 @@
+language: java
+script: mvn clean test
+notifications:
+  slack:
+    on_success: always
+  email:
+    - airlink@gmail.com
+    - btao.cn@gmail.com
+
+jdk:
+  - oraclejdk8

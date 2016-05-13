@@ -1,7 +1,10 @@
 package org.thiki.kanban.task;
 
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Map;
+=======
+>>>>>>> bbf4b38edb7dfd02c43511e5a437f5405b4a2811
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
