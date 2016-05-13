@@ -35,6 +35,7 @@ public class TasksControllerTest {
     public void setUp() {
         RestAssured.port = port;
         jdbcTemplate = new JdbcTemplate(db);
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter) VALUES (1,'this is the first entry.',1)");
     }
 
     @Test
@@ -43,7 +44,7 @@ public class TasksControllerTest {
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/entries/2/tasks")
+                .post("/entries/1/tasks")
                 .then().statusCode(201);
 
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
