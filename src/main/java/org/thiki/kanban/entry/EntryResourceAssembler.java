@@ -46,8 +46,8 @@ public class EntryResourceAssembler extends ResourceAssemblerSupport<Entry, Entr
             
             Task task = null;
             Integer userId = null;
-            Link addTaskLink = linkTo(methodOn(TasksController.class).create(task, userId, entry.getId())).withRel("create");
             // FIXME: ex would be thrown.
+//            Link addTaskLink = linkTo(methodOn(TasksController.class).create(task, userId, entry.getId())).withRel("create");
 //            entryResource.add(addTaskLink);
         }
         return entryResource;
