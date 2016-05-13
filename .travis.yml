@@ -1,7 +1,9 @@
 language: java
 script: mvn clean test
 notifications:
-  email: true
+  email:
+    - airlink@gmail.com
+    - btao.cn@gmail.com
 
 jdk:
   - oraclejdk8
