@@ -3,6 +3,7 @@ script: mvn clean test
 notifications:
   slack:
     on_success: always
+    on_failure: always
   email:
     - airlink@gmail.com
     - btao.cn@gmail.com
