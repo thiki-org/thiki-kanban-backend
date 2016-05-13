@@ -40,10 +40,11 @@ public class TasksControllerTest {
     @Test
     public void shouldReturn201WhenCreateTaskSuccessfully() throws Exception {
         given().body("{\"summary\":\"summary\",\"content\":\"323111\",\"assignee\":2,\"entryId\":2,\"reporter\":2,\"id\":1}")
-                .contentType(ContentType.JSON).
-                when().
-                post("/1/entry/2/tasks").
-                then().statusCode(201);
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/entries/2/tasks")
+                .then().statusCode(201);
 
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
     }
