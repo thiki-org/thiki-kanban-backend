@@ -2,6 +2,7 @@ package org.thiki.kanban.task;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.http.ContentType;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +43,7 @@ public class TasksControllerTest {
 
     @Test
     public void shouldReturn201WhenCreateTaskSuccessfully() throws Exception {
+        assertEquals(0, jdbcTemplate.queryForList("select * from kb_task").size());
         given().body("{\"summary\":\"summary\",\"content\":\"foo\",\"assignee\":2,\"reporter\":2,\"entryId\":1,\"id\":1}")
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
@@ -57,5 +59,28 @@ public class TasksControllerTest {
                 .body("_links.update.href", equalTo("http://localhost:8007/tasks/1"))
                 .body("_links.assign.href", equalTo("http://localhost:8007/tasks/1/assignment/?assignee=2"));
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
+    }
+
+    @Test
+    public void shouldReturnTasksWhenFindTasksByEntryIdSuccessfully() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,1)");
+        given().header("userId", "11222")
+                .when()
+                .get("/entries/1/tasks")
+                .then()
+                .statusCode(200)
+                .body("tasks[0].summary", equalTo("this is the task summary."))
+                .body("tasks[0].content", equalTo("play badminton"))
+                .body("tasks[0].assignee", equalTo(1))
+                .body("tasks[0].reporter", equalTo(1))
+                .body("tasks[0]._links.self.href", equalTo("http://localhost:8007/tasks/1"))
+                .body("tasks[0]._links.update.href", equalTo("http://localhost:8007/tasks/1"))
+                .body("tasks[0]._links.assign.href", equalTo("http://localhost:8007/tasks/1/assignment/?assignee=1"));
+    }
+
+    @After
+    public void resetDB() {
+        jdbcTemplate.execute("TRUNCATE TABLE kb_entry");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_task");
     }
 }
