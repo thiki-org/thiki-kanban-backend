@@ -16,7 +16,9 @@ import org.thiki.kanban.TestContextConfiguration;
 import javax.sql.DataSource;
 
 import static com.jayway.restassured.RestAssured.given;
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
+
 
 /**
  * Created by xubt on 5/11/16.
@@ -40,13 +42,20 @@ public class TasksControllerTest {
 
     @Test
     public void shouldReturn201WhenCreateTaskSuccessfully() throws Exception {
-        given().body("{\"summary\":\"summary\",\"content\":\"323111\",\"assignee\":2,\"entryId\":2,\"reporter\":2,\"id\":1}")
+        given().body("{\"summary\":\"summary\",\"content\":\"foo\",\"assignee\":2,\"reporter\":2,\"entryId\":1,\"id\":1}")
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/entries/1/tasks")
-                .then().statusCode(201);
-
+                .then()
+                .statusCode(201)
+                .body("summary", equalTo("summary"))
+                .body("content", equalTo("foo"))
+                .body("assignee", equalTo(2))
+                .body("reporter", equalTo(11222))
+                .body("_links.self.href", equalTo("http://localhost:8007/tasks/1"))
+                .body("_links.update.href", equalTo("http://localhost:8007/tasks/1"))
+                .body("_links.assign.href", equalTo("http://localhost:8007/tasks/1/assignment/?assignee=2"));
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
     }
 }
