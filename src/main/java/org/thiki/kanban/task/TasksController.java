@@ -1,19 +1,13 @@
 package org.thiki.kanban.task;
 
-import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -22,42 +16,40 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "")
 public class TasksController {
 
-    @Autowired 
+    @Autowired
     private TasksService tasksService;
-    
-    
 
     @RequestMapping(value = "/entries/{entryId}/tasks", method = RequestMethod.GET)
-    public HttpEntity<TasksResource> findByEntryId(@PathVariable Integer entryId) {
+    public HttpEntity<TasksResource> findByEntryId(@PathVariable String entryId) {
         List<Task> taskList = tasksService.findByEntryId(entryId);
         List<TaskResource> resources = new TaskResourceAssembler().toResources(taskList);
         TasksResource tasksRes = new TasksResource();
         tasksRes.setTasks(resources);
-       
+
         return new ResponseEntity<TasksResource>(
-                tasksRes, 
-                taskList == null ? HttpStatus.NOT_FOUND : HttpStatus.OK); 
+                tasksRes,
+                taskList == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
-    
+
     @RequestMapping(value = "/tasks/{id}", method = RequestMethod.GET)
-    public HttpEntity<TaskResource> findById(@PathVariable Integer id) {
+    public HttpEntity<TaskResource> findById(@PathVariable String id) {
         return null;
     }
 
     @RequestMapping(value = "/tasks/{taskId}/assignment/", method = RequestMethod.PUT)
-    public HttpEntity<TaskResource> assign(@RequestParam Integer assignee, @PathVariable Integer taskId) {
+    public HttpEntity<TaskResource> assign(@RequestParam Integer assignee, @PathVariable String taskId) {
         Task task = tasksService.assign(taskId, assignee);
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
-                new TaskResourceAssembler().toResource(task), 
+                new TaskResourceAssembler().toResource(task),
                 HttpStatus.OK);
         return responseEntity;
     }
 
     @RequestMapping(value = "/tasks/{taskId}", method = RequestMethod.PUT)
-    public HttpEntity<TaskResource> update(@RequestBody Map<String, String> change, @PathVariable Integer taskId) {
+    public HttpEntity<TaskResource> update(@RequestBody Map<String, String> change, @PathVariable String taskId) {
         Task task = tasksService.updateContent(taskId, change.get("summary"), change.get("content"));
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
-                new TaskResourceAssembler().toResource(task), 
+                new TaskResourceAssembler().toResource(task),
                 HttpStatus.OK);
         return responseEntity;
     }
@@ -68,13 +60,12 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/entries/{entryId}/tasks", method = RequestMethod.POST)
-    public ResponseEntity<TaskResource> create(@RequestBody Task task, @RequestHeader Integer userId, @PathVariable Integer entryId) {
+    public ResponseEntity<TaskResource> create(@RequestBody Task task, @RequestHeader Integer userId, @PathVariable String entryId) {
         Task savedTask = tasksService.create(userId, entryId, task);
-        
+
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
-                new TaskResourceAssembler().toResource(savedTask), 
+                new TaskResourceAssembler().toResource(savedTask),
                 HttpStatus.CREATED);
         return responseEntity;
     }
-    
 }

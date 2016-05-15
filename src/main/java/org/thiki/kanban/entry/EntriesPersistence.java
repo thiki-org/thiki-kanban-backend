@@ -13,13 +13,13 @@ import java.util.List;
 public interface EntriesPersistence {
     Integer create(Entry entry);
 
-    Entry findById(@Param("id") Integer id);
+    Entry findById(@Param("id") String id);
 
     List<Entry> loadAll();
 
     Integer update(Entry entry);
 
-    Integer deleteById(@Param("id") Integer id);
+    Integer deleteById(@Param("id") String id);
 
     Boolean checkRedundancy(Entry entry);
 }

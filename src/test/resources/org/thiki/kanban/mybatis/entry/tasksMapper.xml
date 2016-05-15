@@ -6,7 +6,7 @@
 
     <insert id="create" parameterType="org.thiki.kanban.task.Task">
         INSERT INTO
-        kb_task(summary, content, assignee, reporter, entry_id) VALUES (#{summary}, #{content}, #{assignee}, #{reporter}, #{entryId})
+        kb_task(id,summary, content, assignee, reporter, entry_id) VALUES (#{id},#{summary}, #{content}, #{assignee}, #{reporter}, #{entryId})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.task.Task" flushCache="true">
@@ -22,8 +22,7 @@
     <select id="findById" parameterType="java.lang.Integer" resultType="org.thiki.kanban.task.Task">
         SELECT * FROM kb_task WHERE id= #{id}
     </select>
-<!--
-    <delete id="deleteById" parameterType="java.lang.Integer" flushCache="true">
-        UPDATE kb_entry SET deleteStatus=1 WHERE id=#{id}
-    </delete> -->
+    <select id="findByEntryId" parameterType="java.lang.Integer" resultType="org.thiki.kanban.task.Task">
+        SELECT * FROM kb_task WHERE entry_id= #{entry_id}
+    </select>
 </mapper>

@@ -4,22 +4,33 @@ import org.thiki.kanban.entry.Entry;
 
 /**
  * 任务：任何有指定负责人的有特定目标的事项，可以是用户故事，技术任务，一次会议等等
- * 
- * @author joeaniu
  *
+ * @author joeaniu
  */
 public class Task {
-    /** id */
-    private Integer id;
-    /** 简述， 出现在卡片上 */
+    /**
+     * id
+     */
+    private String id;
+    /**
+     * 简述， 出现在卡片上
+     */
     private String summary;
-    /** 任务内容 */
+    /**
+     * 任务内容
+     */
     private String content;
-    /** 创建者 */
+    /**
+     * 创建者
+     */
     private Integer reporter;
-    /** 负责人 */
+    /**
+     * 负责人
+     */
     private Integer assignee;
-    /** 任务列表Id @see {@link Entry#getId()}*/
+    /**
+     * 任务列表Id @see {@link Entry#getId()}
+     */
     private Integer entryId;
 
     public Integer getEntryId() {
@@ -38,11 +49,11 @@ public class Task {
         this.reporter = reporter;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
-    
-    public void setId(Integer id) {
+
+    public void setId(String id) {
         this.id = id;
     }
 

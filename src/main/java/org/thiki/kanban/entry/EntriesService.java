@@ -5,16 +5,17 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.common.Sequence;
 
 /**
  * Created by xubitao on 04/26/16.
  */
 @Service
 public class EntriesService {
-    
+
     @Resource
     private EntriesPersistence entriesPersistence;
-    
+
     private List<Entry> entries;
 
     public List<Entry> getEntries() {
@@ -26,12 +27,13 @@ public class EntriesService {
     }
 
     public Entry create(Integer reporterUserId, final Entry entry) {
+        entry.setId(Sequence.generate());
         entry.setReporter(reporterUserId);
         entriesPersistence.create(entry);
         return entry;
     }
 
-    public Entry findById(Integer id) {
+    public Entry findById(String id) {
         return entriesPersistence.findById(id);
     }
 
@@ -44,7 +46,7 @@ public class EntriesService {
         return entriesPersistence.findById(entry.getId());
     }
 
-    public int deleteById(Integer id) {
+    public int deleteById(String id) {
         return entriesPersistence.deleteById(id);
     }
 }

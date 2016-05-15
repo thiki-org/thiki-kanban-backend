@@ -1,13 +1,13 @@
 package org.thiki.kanban.task;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.entry.EntriesPersistence;
 import org.thiki.kanban.entry.Entry;
+import org.thiki.kanban.foundation.common.Sequence;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class TasksService {
@@ -16,11 +16,12 @@ public class TasksService {
     private TasksPersistence tasksPersistence;
     @Resource
     private EntriesPersistence entriesPersistence;
-    
-    public Task create(Integer reporterUserId, Integer entryId, Task task) {
+
+    public Task create(Integer reporterUserId, String entryId, Task task) {
+        task.setId(Sequence.generate());
         task.setReporter(reporterUserId);
         Entry entry = entriesPersistence.findById(entryId);
-        if (entry == null){
+        if (entry == null) {
             throw new ResourceNotFoundException("entry[" + entryId + "] is not found, task creation failed.");
         }
         Task newTask = entry.addTask(task);
@@ -28,7 +29,7 @@ public class TasksService {
         return task;
     }
 
-    public Task updateContent(Integer taskId, String summary, String content) {
+    public Task updateContent(String taskId, String summary, String content) {
         Task task = tasksPersistence.findById(taskId);
         task.setContent(content);
         task.setSummary(summary);
@@ -36,19 +37,18 @@ public class TasksService {
         return task;
     }
 
-    public Task assign(Integer taskId, Integer assignee) {
+    public Task assign(String taskId, Integer assignee) {
         Task task = tasksPersistence.findById(taskId);
         task.setAssignee(assignee);
         tasksPersistence.update(task);
         return task;
     }
 
-    public List<Task> findByEntryId(Integer entryId) {
+    public List<Task> findByEntryId(String entryId) {
         Entry entry = entriesPersistence.findById(entryId);
-        if (entry == null){
+        if (entry == null) {
             throw new ResourceNotFoundException("entry[" + entryId + "] is not found.");
         }
         return tasksPersistence.findByEntryId(entryId);
     }
-
 }
