@@ -40,3 +40,8 @@ http://localhost:8080/entrance
 * Resource作为DTO， 结构与对应的Business Object基本就是一致的， 是不是有代码重复之嫌？
 * UUID vs 整数递增id
 * uri path中包含userId 利弊如何？
+
+
+# 测试覆盖率
+
+[![Coverage Status](https://coveralls.io/repos/github/thiki-org/thiki-kanban-backend/badge.svg?branch=go)](https://coveralls.io/github/thiki-org/thiki-kanban-backend?branch=go)
