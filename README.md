@@ -44,4 +44,4 @@ http://localhost:8080/entrance
 
 # 测试覆盖率
 
-[![Coverage Status](https://coveralls.io/repos/github/thiki-org/thiki-kanban-backend/badge.svg?branch=go)](https://coveralls.io/github/thiki-org/thiki-kanban-backend?branch=go)
+[![Coverage Status](https://coveralls.io/repos/github/thiki-org/thiki-kanban-backend/badge.png?branch=go)](https://coveralls.io/github/thiki-org/thiki-kanban-backend?branch=go)
