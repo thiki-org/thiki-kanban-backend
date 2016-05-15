@@ -1,8 +1,8 @@
 package org.thiki.kanban.task;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface TasksPersistence {
