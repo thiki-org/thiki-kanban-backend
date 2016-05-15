@@ -1,3 +1,7 @@
+
+[![Build Status](http://img.shields.io/travis/thiki-org/thiki-kanban-backend/go.svg?style=flat-square)](https://travis-ci.org/thiki-org/thiki-kanban-backend)
+[![Coverage Status](http://img.shields.io/coveralls/thiki-org/thiki-kanban-backend/badge.png?branch=go?style=flat-square)](https://coveralls.io/r/thiki-org/thiki-kanban-backend?branch=go)
+
 基础技术涉及spring-hateoas\spring-boot,数据层面采用Mybatis+mysql.
 
 
@@ -41,7 +45,3 @@ http://localhost:8080/entrance
 * UUID vs 整数递增id
 * uri path中包含userId 利弊如何？
 
-
-# 测试覆盖率
-
-[![Coverage Status](https://coveralls.io/repos/github/thiki-org/thiki-kanban-backend/badge.png?branch=go)](https://coveralls.io/github/thiki-org/thiki-kanban-backend?branch=go)
