@@ -34,6 +34,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("title", equalTo("this is the entry title."))
                 .body("reporter", equalTo(11222))
                 .body("_links.all.href", equalTo("http://localhost:8007/entries"))
+                .body("_links.tasks.href", notNullValue())
                 .body("_links.self.href", notNullValue())
                 .body("_links.del.href", notNullValue());
     }
