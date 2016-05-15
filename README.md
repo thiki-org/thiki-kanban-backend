@@ -1,6 +1,6 @@
 
 [![Build Status](http://img.shields.io/travis/thiki-org/thiki-kanban-backend/go.svg?style=flat-square)](https://travis-ci.org/thiki-org/thiki-kanban-backend)
-[![Coverage Status](http://img.shields.io/coveralls/thiki-org/thiki-kanban-backend/badge.png?branch=go?style=flat-square)](https://coveralls.io/r/thiki-org/thiki-kanban-backend?branch=go)
+[![Coverage Status](http://img.shields.io/coveralls/thiki-org/thiki-kanban-backend/go.svg?style=flat-square)](https://coveralls.io/r/thiki-org/thiki-kanban-backend?branch=go)
 
 基础技术涉及spring-hateoas\spring-boot,数据层面采用Mybatis+mysql.
 
