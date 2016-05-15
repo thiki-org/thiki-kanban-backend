@@ -13,8 +13,4 @@ public class Sequence {
         UUID uuid = gen.generate();
         return uuid.toString();
     }
-
-    public static void main(String[] args) {
-        System.out.println(Sequence.generate());
-    }
 }
