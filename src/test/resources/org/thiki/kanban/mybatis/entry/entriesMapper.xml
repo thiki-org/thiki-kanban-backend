@@ -5,11 +5,8 @@
 <mapper namespace="org.thiki.kanban.entry.EntriesPersistence">
 
     <insert id="create" parameterType="org.thiki.kanban.entry.Entry">
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT @@IDENTITY
-        </selectKey>
         INSERT INTO
-        kb_entry(title, reporter) VALUES (#{title}, #{reporter})
+        kb_entry(id,title, reporter) VALUES (#{id},#{title}, #{reporter})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.entry.Entry" flushCache="true">

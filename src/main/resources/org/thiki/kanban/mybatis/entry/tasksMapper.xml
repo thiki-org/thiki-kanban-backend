@@ -2,35 +2,28 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.thiki.kanban.task.TasksPersistence">
+<mapper namespace="org.thiki.kanban.entry.EntriesPersistence">
 
-    <insert id="create" parameterType="org.thiki.kanban.task.Task">
-        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
-            SELECT @@IDENTITY
-        </selectKey>
+    <insert id="create" parameterType="org.thiki.kanban.entry.Entry">
         INSERT INTO
-        kb_task(summary, content, assignee, reporter, entry_id) VALUES (#{summary}, #{content}, #{assignee}, #{reporter}, #{entryId})
+        kb_entry(title, reporter) VALUES (#{title}, #{reporter})
     </insert>
 
-    <update id="update" parameterType="org.thiki.kanban.task.Task" flushCache="true">
-        UPDATE kb_task SET
-        summary = #{summary},
-        content = #{content},
-        assignee = #{assignee},
-        reporter = #{reporter},
-        entry_id = #{entryId}
+    <update id="update" parameterType="org.thiki.kanban.entry.Entry" flushCache="true">
+        UPDATE kb_entry SET
+        title=#{title}
         WHERE id=#{id}
     </update>
 
-    <select id="findById" parameterType="java.lang.Integer" resultType="org.thiki.kanban.task.Task">
-        SELECT * FROM kb_task WHERE id= #{id}
+    <select id="loadAll" parameterType="java.lang.Integer" resultType="org.thiki.kanban.entry.Entry">
+        SELECT * FROM kb_entry WHERE delete_status=0
     </select>
-    
-    <select id="findByEntryId" parameterType="java.lang.Integer" resultType="org.thiki.kanban.task.Task">
-        SELECT * FROM kb_task WHERE entry_id = #{id}
+
+    <select id="findById" parameterType="java.lang.Integer" resultType="org.thiki.kanban.entry.Entry">
+        SELECT * FROM kb_entry WHERE delete_status=0 and id= #{id}
     </select>
-<!-- 
+
     <delete id="deleteById" parameterType="java.lang.Integer" flushCache="true">
-        UPDATE kb_entry SET deleteStatus=1 WHERE id=#{id}
-    </delete> -->
+        UPDATE kb_entry SET delete_status=1 WHERE id=#{id}
+    </delete>
 </mapper>

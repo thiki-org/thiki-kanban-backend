@@ -20,7 +20,7 @@ public class TasksController {
     private TasksService tasksService;
 
     @RequestMapping(value = "/entries/{entryId}/tasks", method = RequestMethod.GET)
-    public HttpEntity<TasksResource> findByEntryId(@PathVariable Integer entryId) {
+    public HttpEntity<TasksResource> findByEntryId(@PathVariable String entryId) {
         List<Task> taskList = tasksService.findByEntryId(entryId);
         List<TaskResource> resources = new TaskResourceAssembler().toResources(taskList);
         TasksResource tasksRes = new TasksResource();
@@ -32,12 +32,12 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/tasks/{id}", method = RequestMethod.GET)
-    public HttpEntity<TaskResource> findById(@PathVariable Integer id) {
+    public HttpEntity<TaskResource> findById(@PathVariable String id) {
         return null;
     }
 
     @RequestMapping(value = "/tasks/{taskId}/assignment/", method = RequestMethod.PUT)
-    public HttpEntity<TaskResource> assign(@RequestParam Integer assignee, @PathVariable Integer taskId) {
+    public HttpEntity<TaskResource> assign(@RequestParam Integer assignee, @PathVariable String taskId) {
         Task task = tasksService.assign(taskId, assignee);
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
                 new TaskResourceAssembler().toResource(task),
@@ -46,7 +46,7 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/tasks/{taskId}", method = RequestMethod.PUT)
-    public HttpEntity<TaskResource> update(@RequestBody Map<String, String> change, @PathVariable Integer taskId) {
+    public HttpEntity<TaskResource> update(@RequestBody Map<String, String> change, @PathVariable String taskId) {
         Task task = tasksService.updateContent(taskId, change.get("summary"), change.get("content"));
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
                 new TaskResourceAssembler().toResource(task),
@@ -60,7 +60,7 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/entries/{entryId}/tasks", method = RequestMethod.POST)
-    public ResponseEntity<TaskResource> create(@RequestBody Task task, @RequestHeader Integer userId, @PathVariable Integer entryId) {
+    public ResponseEntity<TaskResource> create(@RequestBody Task task, @RequestHeader Integer userId, @PathVariable String entryId) {
         Task savedTask = tasksService.create(userId, entryId, task);
 
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(

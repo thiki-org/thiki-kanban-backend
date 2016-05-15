@@ -11,7 +11,7 @@ public class Task {
     /**
      * id
      */
-    private Integer id;
+    private String id;
     /**
      * 简述， 出现在卡片上
      */
@@ -49,11 +49,11 @@ public class Task {
         this.reporter = reporter;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

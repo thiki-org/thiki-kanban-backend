@@ -8,7 +8,7 @@ import org.thiki.kanban.task.Task;
  */
 public class Entry {
 
-    private Integer id;
+    private String id;
     /** 列表标题 */
     private String title;
     /** 创建者用户Id */
@@ -22,11 +22,11 @@ public class Entry {
         this.reporter = reporter;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -44,8 +44,8 @@ public class Entry {
      * @return
      */
     public Task addTask(Task task) {
-        task.setEntryId(this.id);
+       // task.setEntryId(this.id);
         return task;
     }
-    
+
 }

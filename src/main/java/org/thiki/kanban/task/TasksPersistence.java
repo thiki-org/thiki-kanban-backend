@@ -9,10 +9,10 @@ public interface TasksPersistence {
 
     void create(Task task);
 
-    Task findById(Integer taskId);
+    Task findById(String taskId);
 
     void update(Task task);
 
-    List<Task> findByEntryId(Integer entryId);
+    List<Task> findByEntryId(String entryId);
 
 }

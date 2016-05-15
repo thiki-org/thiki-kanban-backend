@@ -17,6 +17,4 @@ public class TasksResource extends ResourceSupport {
     public void setTasks(List<TaskResource> tasks) {
         this.tasks = tasks;
     }
-
-
 }
