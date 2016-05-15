@@ -28,7 +28,7 @@ public class TasksControllerTest extends TestBase {
     @Test
     public void shouldReturn201WhenCreateTaskSuccessfully() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("select * from kb_task").size());
-        given().body("{\"summary\":\"summary\",\"content\":\"foo\",\"assignee\":2,\"reporter\":2,\"entryId\":1,\"id\":1}")
+        given().body("{\"summary\":\"summary\"}")
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
@@ -36,12 +36,10 @@ public class TasksControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
-                .body("content", equalTo("foo"))
-                .body("assignee", equalTo(2))
                 .body("reporter", equalTo(11222))
                 .body("_links.self.href", notNullValue())
                 .body("_links.update.href", notNullValue())
-                .body("_links.assign.href", notNullValue());
+                .body("_links.assign.href", notNullValue()) ;
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
     }
 

@@ -20,6 +20,7 @@ public class TasksService {
     public Task create(Integer reporterUserId, String entryId, Task task) {
         task.setId(Sequence.generate());
         task.setReporter(reporterUserId);
+        task.setEntryId(entryId);
         Entry entry = entriesPersistence.findById(entryId);
         if (entry == null) {
             throw new ResourceNotFoundException("entry[" + entryId + "] is not found, task creation failed.");
@@ -37,9 +38,8 @@ public class TasksService {
         return task;
     }
 
-    public Task assign(String taskId, Integer assignee) {
+    public Task assign(String taskId) {
         Task task = tasksPersistence.findById(taskId);
-        task.setAssignee(assignee);
         tasksPersistence.update(task);
         return task;
     }

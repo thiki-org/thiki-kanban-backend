@@ -37,8 +37,8 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/tasks/{taskId}/assignment/", method = RequestMethod.PUT)
-    public HttpEntity<TaskResource> assign(@RequestParam Integer assignee, @PathVariable String taskId) {
-        Task task = tasksService.assign(taskId, assignee);
+    public HttpEntity<TaskResource> assign(@PathVariable String taskId) {
+        Task task = tasksService.assign(taskId);
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
                 new TaskResourceAssembler().toResource(task),
                 HttpStatus.OK);
