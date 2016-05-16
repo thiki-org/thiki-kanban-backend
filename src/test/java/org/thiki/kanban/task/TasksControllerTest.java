@@ -76,4 +76,16 @@ public class TasksControllerTest extends TestBase {
                 .body("_links.assign.href", notNullValue());
         assertEquals("newSummary", jdbcTemplate.queryForObject("select summary from kb_task where id='fooId'", String.class));
     }
+
+    @Test
+    public void shouldThrowResourceNotFoundExceptionWhenTaskToUpdateIsNotExist() throws Exception {
+        given().body("{\"summary\":\"newSummary\"}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/tasks/fooId")
+                .then()
+                .statusCode(404)
+                .body("message", equalTo("entry[fooId] is not found, task update failed."));
+    }
 }

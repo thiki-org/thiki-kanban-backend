@@ -31,7 +31,10 @@ public class TasksService {
     }
 
     public Task updateContent(String taskId, Task task) {
-        //Task updatedTask = tasksPersistence.findById(taskId);
+        Task taskToUpdate = tasksPersistence.findById(taskId);
+        if (taskToUpdate == null) {
+            throw new ResourceNotFoundException("entry[" + taskId + "] is not found, task update failed.");
+        }
         task.setId(taskId);
         tasksPersistence.update(task);
         return task;
