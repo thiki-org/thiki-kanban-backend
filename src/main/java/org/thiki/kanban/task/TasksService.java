@@ -30,10 +30,9 @@ public class TasksService {
         return task;
     }
 
-    public Task updateContent(String taskId, String summary, String content) {
-        Task task = tasksPersistence.findById(taskId);
-        task.setContent(content);
-        task.setSummary(summary);
+    public Task updateContent(String taskId, Task task) {
+        //Task updatedTask = tasksPersistence.findById(taskId);
+        task.setId(taskId);
         tasksPersistence.update(task);
         return task;
     }

@@ -39,7 +39,7 @@ public class TasksControllerTest extends TestBase {
                 .body("reporter", equalTo(11222))
                 .body("_links.self.href", notNullValue())
                 .body("_links.update.href", notNullValue())
-                .body("_links.assign.href", notNullValue()) ;
+                .body("_links.assign.href", notNullValue());
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
     }
 
@@ -58,5 +58,22 @@ public class TasksControllerTest extends TestBase {
                 .body("tasks[0]._links.self.href", notNullValue())
                 .body("tasks[0]._links.update.href", notNullValue())
                 .body("tasks[0]._links.assign.href", notNullValue());
+    }
+
+    @Test
+    public void shouldReturn200WhenUpdateTaskSuccessfully() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1,1)");
+        given().body("{\"summary\":\"newSummary\"}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/tasks/fooId")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("newSummary"))
+                .body("_links.self.href", notNullValue())
+                .body("_links.update.href", notNullValue())
+                .body("_links.assign.href", notNullValue());
+        assertEquals("newSummary", jdbcTemplate.queryForObject("select summary from kb_task where id='fooId'", String.class));
     }
 }
