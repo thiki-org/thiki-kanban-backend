@@ -127,7 +127,9 @@
                 <directory>src/test/resources</directory>
             </testResource>
         </testResources>
-
+        <directory>${project.basedir}/target</directory>
+        <outputDirectory>${project.build.directory}/classes</outputDirectory>
+        <testOutputDirectory>${project.build.directory}/classes</testOutputDirectory>
         <finalName>${project.artifactId}-${project.version}-${timestamp}</finalName>
         <plugins>
             <plugin>
