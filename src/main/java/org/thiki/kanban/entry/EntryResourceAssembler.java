@@ -42,7 +42,7 @@ public class EntryResourceAssembler extends ResourceAssemblerSupport<Entry, Entr
             entryResource.add(selfLink);
 
             Link delLink = linkTo(methodOn(EntriesController.class).deleteById(entry.getId())).withRel("del");
-            Link tasksLink = linkTo(methodOn(TasksController.class).create(null, null, entry.getId())).withRel("tasks");
+            Link tasksLink = linkTo(methodOn(TasksController.class).create(null, entry.getId(), null)).withRel("tasks");
             entryResource.add(delLink);
             entryResource.add(tasksLink);
         }

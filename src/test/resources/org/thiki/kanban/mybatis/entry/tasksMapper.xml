@@ -22,7 +22,12 @@
     <select id="findById" parameterType="java.lang.Integer" resultType="org.thiki.kanban.task.Task">
         SELECT * FROM kb_task WHERE id= #{id}
     </select>
+
     <select id="findByEntryId" parameterType="java.lang.Integer" resultType="org.thiki.kanban.task.Task">
         SELECT * FROM kb_task WHERE entry_id= #{entry_id}
     </select>
+
+    <delete id="deleteById" parameterType="java.lang.Integer" flushCache="true">
+        UPDATE kb_task SET delete_status=1 WHERE id=#{id}
+    </delete>
 </mapper>

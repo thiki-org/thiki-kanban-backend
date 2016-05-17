@@ -30,6 +30,9 @@ public class TaskResource extends ResourceSupport {
     private String entryId;
 
     public TaskResource(Task task) {
+        if (task == null) {
+            return;
+        }
         this.summary = task.getSummary();
         this.content = task.getContent();
         this.assignee = task.getAssignee();

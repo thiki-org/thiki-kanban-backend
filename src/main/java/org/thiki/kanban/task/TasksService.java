@@ -40,10 +40,12 @@ public class TasksService {
         return task;
     }
 
-    public Task assign(String taskId) {
-        Task task = tasksPersistence.findById(taskId);
-        tasksPersistence.update(task);
-        return task;
+    public int deleteById(String id) {
+        Task taskToDelete = tasksPersistence.findById(id);
+        if (taskToDelete == null) {
+            throw new ResourceNotFoundException("task[" + id + "] is not found.");
+        }
+        return tasksPersistence.deleteById(id);
     }
 
     public List<Task> findByEntryId(String entryId) {

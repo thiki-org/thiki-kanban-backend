@@ -20,5 +20,6 @@ CREATE TABLE kb_task (
   content VARCHAR(50),
   assignee int DEFAULT NULL,
   reporter int DEFAULT NULL,
-  entry_id int DEFAULT NULL
+  entry_id int DEFAULT NULL,
+  delete_status int DEFAULT 0
   ) ;

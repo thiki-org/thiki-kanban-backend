@@ -1,5 +1,6 @@
 package org.thiki.kanban.task;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface TasksPersistence {
 
     List<Task> findByEntryId(String entryId);
 
+    Integer deleteById(@Param("id") String id);
 }

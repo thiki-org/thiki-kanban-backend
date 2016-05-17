@@ -37,9 +37,7 @@ public class TasksControllerTest extends TestBase {
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
                 .body("reporter", equalTo(11222))
-                .body("_links.self.href", notNullValue())
-                .body("_links.update.href", notNullValue())
-                .body("_links.assign.href", notNullValue());
+                .body("_links.tasks.href", notNullValue());
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
     }
 
@@ -56,8 +54,7 @@ public class TasksControllerTest extends TestBase {
                 .body("tasks[0].assignee", equalTo(1))
                 .body("tasks[0].reporter", equalTo(1))
                 .body("tasks[0]._links.self.href", notNullValue())
-                .body("tasks[0]._links.update.href", notNullValue())
-                .body("tasks[0]._links.assign.href", notNullValue());
+                .body("tasks[0]._links.tasks.href", notNullValue());
     }
 
     @Test
@@ -67,13 +64,12 @@ public class TasksControllerTest extends TestBase {
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/tasks/fooId")
+                .put("/entries/1/tasks/fooId")
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("_links.self.href", notNullValue())
-                .body("_links.update.href", notNullValue())
-                .body("_links.assign.href", notNullValue());
+                .body("_links.tasks.href", notNullValue());
         assertEquals("newSummary", jdbcTemplate.queryForObject("select summary from kb_task where id='fooId'", String.class));
     }
 
@@ -83,9 +79,20 @@ public class TasksControllerTest extends TestBase {
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/tasks/fooId")
+                .put("/entries/1/tasks/fooId")
                 .then()
                 .statusCode(404)
                 .body("message", equalTo("entry[fooId] is not found, task update failed."));
+    }
+
+    @Test
+    public void shouldDeleteSuccessfullyWhenTheEntryIsExist() {
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1,1)");
+        given().header("userId", "11222")
+                .when()
+                .delete("/entries/feeId/tasks/fooId")
+                .then()
+                .statusCode(200);
+        assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_task WHERE  delete_status=1").size());
     }
 }
