@@ -27,7 +27,7 @@ public class TaskResource extends ResourceSupport {
     /**
      * 任务组Id
      */
-    private Integer entryId;
+    private String entryId;
 
     public TaskResource(Task task) {
         this.summary = task.getSummary();
@@ -45,11 +45,11 @@ public class TaskResource extends ResourceSupport {
         this.reporter = reporter;
     }
 
-    public Integer getEntryId() {
+    public String getEntryId() {
         return entryId;
     }
 
-    public void setEntryId(Integer entryId) {
+    public void setEntryId(String entryId) {
         this.entryId = entryId;
     }
 

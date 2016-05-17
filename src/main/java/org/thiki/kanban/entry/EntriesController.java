@@ -12,7 +12,6 @@ import java.util.List;
  * Created by xubitao on 04/26/16.
  */
 @RestController
-@RequestMapping(value = "")
 public class EntriesController {
     @Resource
     private EntriesService entryService;

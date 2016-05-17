@@ -22,6 +22,7 @@ CREATE TABLE `kb_task` (
   `content`  TEXT,
   `assignee` INT(11) DEFAULT NULL,
   `reporter` INT(11) DEFAULT NULL,
+  `entry_id` VARCHAR(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
 )
   ENGINE = InnoDB

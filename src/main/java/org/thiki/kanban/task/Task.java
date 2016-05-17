@@ -31,13 +31,13 @@ public class Task {
     /**
      * 任务列表Id @see {@link Entry#getId()}
      */
-    private Integer entryId;
+    private String entryId;
 
-    public Integer getEntryId() {
+    public String getEntryId() {
         return entryId;
     }
 
-    public void setEntryId(Integer entryId) {
+    public void setEntryId(String entryId) {
         this.entryId = entryId;
     }
 

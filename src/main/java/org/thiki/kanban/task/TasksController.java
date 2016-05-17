@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -37,8 +36,8 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/tasks/{taskId}/assignment/", method = RequestMethod.PUT)
-    public HttpEntity<TaskResource> assign(@RequestParam Integer assignee, @PathVariable String taskId) {
-        Task task = tasksService.assign(taskId, assignee);
+    public HttpEntity<TaskResource> assign(@PathVariable String taskId) {
+        Task task = tasksService.assign(taskId);
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
                 new TaskResourceAssembler().toResource(task),
                 HttpStatus.OK);
@@ -46,8 +45,8 @@ public class TasksController {
     }
 
     @RequestMapping(value = "/tasks/{taskId}", method = RequestMethod.PUT)
-    public HttpEntity<TaskResource> update(@RequestBody Map<String, String> change, @PathVariable String taskId) {
-        Task task = tasksService.updateContent(taskId, change.get("summary"), change.get("content"));
+    public HttpEntity<TaskResource> update(@RequestBody Task task, @PathVariable String taskId) {
+        Task updatedTask = tasksService.updateContent(taskId, task);
         ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
                 new TaskResourceAssembler().toResource(task),
                 HttpStatus.OK);
