@@ -12,5 +12,5 @@ jdk:
   - oraclejdk8
 
 after_success:
-  - mvn  cobertura:cobertura coveralls:report
-  - mvn  jacoco:report coveralls:report
+  - mvn  cobertura:cobertura coveralls:report -Dmaven.test.skip=true
+  - mvn  jacoco:report coveralls:report -Dmaven.test.skip=true
