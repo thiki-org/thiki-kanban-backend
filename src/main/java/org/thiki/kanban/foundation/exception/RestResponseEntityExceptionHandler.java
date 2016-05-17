@@ -26,4 +26,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return handleExceptionInternal(ex, body, 
                 new HttpHeaders(), httpStatus, request);
     }
+
+    @ExceptionHandler(value = {RuntimeException.class})
+    protected ResponseEntity<?> handleOtherException(RuntimeException ex, WebRequest request){
+        ex.printStackTrace();
+        Map<String, Object> body = new HashMap<>();
+        body.put("message", ex.getMessage());
+        body.put("code", ExceptionCode.UNKONWN_EX);
+        return handleExceptionInternal(ex, body, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
+    }
 }
