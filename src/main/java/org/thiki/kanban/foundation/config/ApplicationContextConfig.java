@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  * Created by xubitao on 04/26/16.
  */
 @Configuration
-@PropertySources(value = {@PropertySource("kanban.properties"), @PropertySource("log4j.properties")})
+@PropertySources(value = {@PropertySource("kanban.properties")})
 public class ApplicationContextConfig implements ApplicationContextAware {
     @Value("${http.port}")
     private int port;

@@ -3,7 +3,7 @@ package org.thiki.kanban.foundation.exception;
 public enum ExceptionCode {
 
     UNKONWN_EX (-99), 
-    resourceNotFound(1),
+    resourceNotFound(404),
     ;
     
     

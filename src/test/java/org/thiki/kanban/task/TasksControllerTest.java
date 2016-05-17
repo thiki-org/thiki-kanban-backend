@@ -58,6 +58,17 @@ public class TasksControllerTest extends TestBase {
     }
 
     @Test
+    public void findTasksByEntryId_shouldReturn404WhenEntryIsNotFound() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,1)");
+        given().header("userId", "11222")
+                .when()
+                .get("/entries/2/tasks")
+                .then()
+                .statusCode(404)
+                .body("message", equalTo("entry[2] is not found."))
+                .body("code", equalTo(404));
+    }
+    @Test
     public void shouldReturn200WhenUpdateTaskSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1,1)");
         given().body("{\"summary\":\"newSummary\"}")
