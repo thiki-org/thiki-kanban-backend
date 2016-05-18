@@ -172,6 +172,7 @@
                     <basedir>
                         ${project.build.outputDirectory}
                     </basedir>
+                    <scanForSources>true</scanForSources>
                 </configuration>
             </plugin>
             <plugin>
