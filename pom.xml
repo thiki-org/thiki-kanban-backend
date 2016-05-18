@@ -168,6 +168,11 @@
                 <groupId>org.eluder.coveralls</groupId>
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.1.0</version>
+                <configuration>
+                    <basedir>
+                        ${project.build.outputDirectory}
+                    </basedir>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
