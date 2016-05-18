@@ -185,6 +185,14 @@
                     <!-- aggregated reports for multi-module projects -->
                     <aggregate>true</aggregate>
                     <check/>
+                    <instrumentation>
+                        <excludes>
+                            <exclude>**/*Application.*</exclude>
+                            <exclude>**/*Test.*</exclude>
+                            <exclude>**/Test*.*</exclude>
+                            <exclude>**/foundation/**/*.class</exclude>
+                        </excludes>
+                    </instrumentation>
                 </configuration>
             </plugin>
             <plugin>
@@ -196,6 +204,7 @@
                         <exclude>**/*Application.*</exclude>
                         <exclude>**/*Test.*</exclude>
                         <exclude>**/Test*.*</exclude>
+                        <exclude>**/foundation/**/*.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>

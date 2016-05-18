@@ -57,6 +57,22 @@ public class TasksControllerTest extends TestBase {
     }
 
     @Test
+    public void findById_shouldReturnTaskSuccessfully() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,1)");
+        given().header("userId", "11222")
+                .when()
+                .get("/entries/1/tasks/1")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("this is the task summary."))
+                .body("content", equalTo("play badminton"))
+                .body("assignee", equalTo(1))
+                .body("reporter", equalTo(1))
+                .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/1"))
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+    }
+
+    @Test
     public void findTasksByEntryId_shouldReturn404WhenEntryIsNotFound() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,1)");
         given().header("userId", "11222")

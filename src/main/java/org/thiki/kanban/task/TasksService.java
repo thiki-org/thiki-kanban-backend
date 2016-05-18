@@ -3,7 +3,6 @@ package org.thiki.kanban.task;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.entry.EntriesPersistence;
 import org.thiki.kanban.entry.Entry;
-import org.thiki.kanban.foundation.common.Sequence;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
@@ -53,5 +52,10 @@ public class TasksService {
             throw new ResourceNotFoundException("entry[" + entryId + "] is not found.");
         }
         return tasksPersistence.findByEntryId(entryId);
+    }
+
+    public Task findById(String id) {
+        Task taskToUpdate = tasksPersistence.findById(id);
+        return taskToUpdate;
     }
 }

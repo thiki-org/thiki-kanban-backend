@@ -32,7 +32,12 @@ public class TasksController {
 
     @RequestMapping(value = "/entries/{entryId}/tasks/{id}", method = RequestMethod.GET)
     public HttpEntity<TaskResource> findById(@PathVariable String entryId, @PathVariable String id) {
-        return null;
+        Task foundTask = tasksService.findById(id);
+
+        ResponseEntity<TaskResource> responseEntity = new ResponseEntity<TaskResource>(
+                new TaskResourceAssembler(entryId).toResource(foundTask),
+                foundTask == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
+        return responseEntity;
     }
 
     @RequestMapping(value = "/entries/{entryId}/tasks/{taskId}", method = RequestMethod.PUT)
