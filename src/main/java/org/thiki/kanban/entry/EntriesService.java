@@ -27,7 +27,6 @@ public class EntriesService {
     }
 
     public Entry create(Integer reporterUserId, final Entry entry) {
-        entry.setId(Sequence.generate());
         entry.setReporter(reporterUserId);
         entriesPersistence.create(entry);
         return entry;

@@ -1,7 +1,6 @@
 package org.thiki.kanban.foundation.config;
 
-import javax.sql.DataSource;
-
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
@@ -13,6 +12,9 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan
@@ -27,6 +29,9 @@ public class DatabaseConfig {
     private String userName;
     @Value("${jdbc.password}")
     private String password;
+
+    @Resource
+    private DBInterceptor dbInterceptor;
 
     @Bean
     public DataSource dataSource() {
@@ -44,7 +49,9 @@ public class DatabaseConfig {
         sqlSessionFactoryBean.setDataSource(dataSource());
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-
+        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        Interceptor[] interceptors = {dbInterceptor};
+        sqlSessionFactoryBean.setPlugins(interceptors);
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:org/thiki/kanban/mybatis/**/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
@@ -53,5 +60,4 @@ public class DatabaseConfig {
     public PlatformTransactionManager transactionManager() {
         return new DataSourceTransactionManager(dataSource());
     }
-
 }

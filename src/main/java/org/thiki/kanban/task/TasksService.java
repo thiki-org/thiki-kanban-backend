@@ -18,7 +18,6 @@ public class TasksService {
     private EntriesPersistence entriesPersistence;
 
     public Task create(Integer reporterUserId, String entryId, Task task) {
-        task.setId(Sequence.generate());
         task.setReporter(reporterUserId);
         task.setEntryId(entryId);
         Entry entry = entriesPersistence.findById(entryId);

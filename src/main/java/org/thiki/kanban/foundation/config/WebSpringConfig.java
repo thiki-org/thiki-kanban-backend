@@ -34,9 +34,4 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
         });
         converters.add(converter);
     }
-
-//    @Override
-//    public void configureHandlerExceptionResolvers(List<HandlerExceptionResolver> exceptionResolvers) {
-//        exceptionResolvers.add(new KanbanExceptionResolver());
-//    }
 }
