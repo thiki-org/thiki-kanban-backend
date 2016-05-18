@@ -195,6 +195,7 @@
                     <excludes>
                         <exclude>**/*Application.*</exclude>
                         <exclude>**/*Test.*</exclude>
+                        <exclude>**/Test*.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>
