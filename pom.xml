@@ -170,7 +170,7 @@
                 <version>4.1.0</version>
                 <configuration>
                     <basedir>
-                        ${project.build.outputDirectory}
+                        ${project.basedir}
                     </basedir>
                     <scanForSources>true</scanForSources>
                 </configuration>
