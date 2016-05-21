@@ -15,7 +15,6 @@ import javax.sql.DataSource;
 /**
  * Created by xubt on 5/11/16.
  */
-@Configuration
 public class TestContextConfiguration {
     @Bean
     public DataSource dataSource() {
