@@ -1,7 +1,6 @@
 package org.thiki.kanban.entry;
 
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.foundation.common.Sequence;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
@@ -29,7 +28,7 @@ public class EntriesService {
     public Entry create(Integer reporterUserId, final Entry entry) {
         entry.setReporter(reporterUserId);
         entriesPersistence.create(entry);
-        return entry;
+        return entriesPersistence.findById(entry.getId());
     }
 
     public Entry findById(String id) {

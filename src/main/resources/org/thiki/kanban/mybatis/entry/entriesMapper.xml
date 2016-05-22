@@ -15,15 +15,15 @@
         WHERE id=#{id}
     </update>
 
-    <select id="loadAll" parameterType="java.lang.Integer" resultType="org.thiki.kanban.entry.Entry">
+    <select id="loadAll" parameterType="java.lang.String" resultType="org.thiki.kanban.entry.Entry">
         SELECT * FROM kb_entry WHERE delete_status=0
     </select>
 
-    <select id="findById" parameterType="java.lang.Integer" resultType="org.thiki.kanban.entry.Entry">
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.entry.Entry">
         SELECT * FROM kb_entry WHERE delete_status=0 and id= #{id}
     </select>
 
-    <delete id="deleteById" parameterType="java.lang.Integer" flushCache="true">
+    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_entry SET delete_status=1 WHERE id=#{id}
     </delete>
 </mapper>

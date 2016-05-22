@@ -25,7 +25,7 @@ public class TasksService {
         }
         Task newTask = entry.addTask(task);
         tasksPersistence.create(newTask);
-        return task;
+        return tasksPersistence.findById(newTask.getId());
     }
 
     public Task updateContent(String taskId, Task task) {

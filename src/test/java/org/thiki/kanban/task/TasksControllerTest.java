@@ -21,7 +21,7 @@ public class TasksControllerTest extends TestBase {
     @Before
     public void setUp() {
         super.setUp();
-        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter) VALUES (1,'this is the first entry.',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter) VALUES ('fooId','this is the first entry.',1)");
     }
 
     @Test
@@ -31,29 +31,29 @@ public class TasksControllerTest extends TestBase {
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/entries/1/tasks")
+                .post("/entries/fooId/tasks")
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
                 .body("reporter", equalTo(11222))
-                .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId"));
+                .body("_links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/fooId"));
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
     }
 
     @Test
     public void shouldReturnTasksWhenFindTasksByEntryIdSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,'fooId')");
         given().header("userId", "11222")
                 .when()
-                .get("/entries/1/tasks")
+                .get("/entries/fooId/tasks")
                 .then()
                 .statusCode(200)
                 .body("tasks[0].summary", equalTo("this is the task summary."))
                 .body("tasks[0].content", equalTo("play badminton"))
-                .body("tasks[0].assignee", equalTo(1))
                 .body("tasks[0].reporter", equalTo(1))
-                .body("tasks[0]._links.self.href", equalTo("http://localhost:8007/entries/1/tasks/1"))
-                .body("tasks[0]._links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+                .body("tasks[0].entryId", equalTo("fooId"))
+                .body("tasks[0]._links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/1"))
+                .body("tasks[0]._links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"));
     }
 
     @Test
@@ -66,7 +66,6 @@ public class TasksControllerTest extends TestBase {
                 .statusCode(200)
                 .body("summary", equalTo("this is the task summary."))
                 .body("content", equalTo("play badminton"))
-                .body("assignee", equalTo(1))
                 .body("reporter", equalTo(1))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/1"))
                 .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));

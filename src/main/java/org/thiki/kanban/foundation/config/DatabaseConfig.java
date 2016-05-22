@@ -1,7 +1,11 @@
 package org.thiki.kanban.foundation.config;
 
+import org.apache.ibatis.mapping.Environment;
 import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.ibatis.transaction.TransactionFactory;
+import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,6 +19,8 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
+import java.io.InputStream;
+import java.util.Properties;
 
 @Configuration
 @ComponentScan
@@ -48,11 +54,17 @@ public class DatabaseConfig {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource());
 
-        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
-        Interceptor[] interceptors = {dbInterceptor};
-        sqlSessionFactoryBean.setPlugins(interceptors);
+        configuration.setMapUnderscoreToCamelCase(true);
+        configuration.addInterceptor(dbInterceptor);
+        PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+
+        SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
+        sqlSessionFactoryBuilder.build(configuration);
+
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:org/thiki/kanban/mybatis/**/*.xml"));
+        sqlSessionFactoryBean.setSqlSessionFactoryBuilder(sqlSessionFactoryBuilder);
+        sqlSessionFactoryBean.setConfiguration(configuration);
         return sqlSessionFactoryBean.getObject();
     }
 

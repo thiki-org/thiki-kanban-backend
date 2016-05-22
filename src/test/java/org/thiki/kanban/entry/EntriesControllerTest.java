@@ -8,6 +8,7 @@ import org.thiki.kanban.TestBase;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -27,6 +28,7 @@ public class EntriesControllerTest extends TestBase {
                 .statusCode(201)
                 .body("title", equalTo("this is the entry title."))
                 .body("reporter", equalTo(11222))
+                .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/entries"))
                 .body("_links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/fooId"))
@@ -98,6 +100,7 @@ public class EntriesControllerTest extends TestBase {
                 .statusCode(200)
                 .body("entries[0].title", equalTo("this is the first entry."))
                 .body("entries[0].reporter", equalTo(1))
+                .body("entries[0].creationTime", notNullValue())
                 .body("entries[0]._links.all.href", equalTo("http://localhost:8007/entries"))
                 .body("entries[0]._links.self.href", equalTo("http://localhost:8007/entries/fooId"))
                 .body("entries[0]._links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"));

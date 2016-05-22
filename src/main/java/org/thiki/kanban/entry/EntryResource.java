@@ -6,14 +6,35 @@ import org.springframework.hateoas.ResourceSupport;
  * Created by xubitao on 04/26/16.
  */
 public class EntryResource extends ResourceSupport {
-    
+
     private String title;
     private Integer reporter;
-    
+    private String creationTime;
+    private String modificationTime;
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public String getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(String modificationTime) {
+        this.modificationTime = modificationTime;
+    }
+
+
     public EntryResource(Entry entry) {
         if (entry == null) return;
         this.title = entry.getTitle();
         this.reporter = entry.getReporter();
+        this.creationTime = entry.getCreationTime();
+        this.modificationTime = entry.getModificationTime();
     }
 
     public String getTitle() {
@@ -31,5 +52,5 @@ public class EntryResource extends ResourceSupport {
     public void setReporter(Integer reporter) {
         this.reporter = reporter;
     }
-    
+
 }

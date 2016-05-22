@@ -9,10 +9,33 @@ import org.thiki.kanban.task.Task;
 public class Entry {
 
     private String id;
-    /** 列表标题 */
+    /**
+     * 列表标题
+     */
     private String title;
-    /** 创建者用户Id */
+    /**
+     * 创建者用户Id
+     */
     private Integer reporter;
+
+    private String creationTime;
+    private String modificationTime;
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public String getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(String modificationTime) {
+        this.modificationTime = modificationTime;
+    }
 
     public Integer getReporter() {
         return reporter;
@@ -40,11 +63,12 @@ public class Entry {
 
     /**
      * 在entry内添加一个task
+     *
      * @param task
      * @return
      */
     public Task addTask(Task task) {
-       // task.setEntryId(this.id);
+        // task.setEntryId(this.id);
         return task;
     }
 

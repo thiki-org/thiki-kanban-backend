@@ -28,6 +28,26 @@ public class Task {
      * 负责人
      */
     private Integer assignee;
+    private String creationTime;
+    private String modificationTime;
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public String getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(String modificationTime) {
+        this.modificationTime = modificationTime;
+    }
+
+
     /**
      * 任务列表Id @see {@link Entry#getId()}
      */

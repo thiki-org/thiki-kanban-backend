@@ -6,6 +6,8 @@ CREATE TABLE kb_entry (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   title VARCHAR(50) ,
   reporter int NOT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
   ) ;
 
@@ -20,6 +22,8 @@ CREATE TABLE kb_task (
   content VARCHAR(50),
   assignee int DEFAULT NULL,
   reporter int DEFAULT NULL,
-  entry_id int DEFAULT NULL,
+  entry_id VARCHAR(40)  DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
   ) ;
