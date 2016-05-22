@@ -1,12 +1,14 @@
 package org.thiki.kanban.entry;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.ResourceSupport;
 
 /**
  * Created by xubitao on 04/26/16.
  */
 public class EntryResource extends ResourceSupport {
-
+    @JsonProperty
+    private String id;
     private String title;
     private Integer reporter;
     private String creationTime;
@@ -31,6 +33,7 @@ public class EntryResource extends ResourceSupport {
 
     public EntryResource(Entry entry) {
         if (entry == null) return;
+        this.id = entry.getId();
         this.title = entry.getTitle();
         this.reporter = entry.getReporter();
         this.creationTime = entry.getCreationTime();

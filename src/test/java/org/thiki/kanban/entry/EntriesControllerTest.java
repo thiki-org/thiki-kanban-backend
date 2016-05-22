@@ -43,6 +43,7 @@ public class EntriesControllerTest extends TestBase {
                 .get("/entries/fee")
                 .then()
                 .statusCode(200)
+                .body("id", equalTo("fee"))
                 .body("title", equalTo("this is the first entry."))
                 .body("reporter", equalTo(1))
                 .body("_links.all.href", equalTo("http://localhost:8007/entries"))
