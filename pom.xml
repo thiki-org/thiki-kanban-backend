@@ -126,7 +126,8 @@
     <build>
         <resources>
             <resource>
-                <directory>src/profiles/${prop.dir.name}</directory>
+                <directory>src/main/resources/profiles/${prop.dir.name}</directory>
+                <filtering>true</filtering>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
@@ -216,14 +217,31 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>org.thiki.kanban.Application</mainClass>
+                            <arguments>
+                                <argument>arg0</argument>
+                                <argument>arg1</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <profiles>
         <profile>
             <id>local_zz</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <properties>
                 <prop.dir.name>local_zz</prop.dir.name>
             </properties>
@@ -233,30 +251,6 @@
             <properties>
                 <prop.dir.name>local_tao</prop.dir.name>
             </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.4.0</version>
-                        <executions>
-                            <execution>
-                                <phase>install</phase>
-                                <goals>
-                                    <goal>java</goal>
-                                </goals>
-                                <configuration>
-                                    <mainClass>org.thiki.kanban.Application</mainClass>
-                                    <arguments>
-                                        <argument>arg0</argument>
-                                        <argument>arg1</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
         </profile>
     </profiles>
 </project>
