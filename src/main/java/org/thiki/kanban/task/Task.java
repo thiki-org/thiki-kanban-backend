@@ -25,9 +25,9 @@ public class Task {
      */
     private Integer reporter;
     /**
-     * 负责人
+     * 排序号
      */
-    private Integer assignee;
+    private Integer orderNumber;
     private String creationTime;
     private String modificationTime;
 
@@ -93,12 +93,12 @@ public class Task {
         this.content = content;
     }
 
-    public Integer getAssignee() {
-        return assignee;
+    public Integer getOrderNumber() {
+        return orderNumber;
     }
 
-    public void setAssignee(Integer assignee) {
-        this.assignee = assignee;
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 
 }

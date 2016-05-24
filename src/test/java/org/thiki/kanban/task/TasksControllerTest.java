@@ -8,8 +8,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
 
 import static com.jayway.restassured.RestAssured.given;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -26,7 +26,7 @@ public class TasksControllerTest extends TestBase {
 
     @Test
     public void shouldReturn201WhenCreateTaskSuccessfully() throws Exception {
-        assertEquals(0, jdbcTemplate.queryForList("select * from kb_task").size());
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
         given().body("{\"summary\":\"summary\"}")
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
@@ -37,12 +37,12 @@ public class TasksControllerTest extends TestBase {
                 .body("summary", equalTo("summary"))
                 .body("reporter", equalTo(11222))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/fooId"));
-        assertEquals(1, jdbcTemplate.queryForList("select * from kb_task").size());
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
     }
 
     @Test
     public void shouldReturnTasksWhenFindTasksByEntryIdSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,'fooId')");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,'fooId')");
         given().header("userId", "11222")
                 .when()
                 .get("/entries/fooId/tasks")
@@ -58,7 +58,7 @@ public class TasksControllerTest extends TestBase {
 
     @Test
     public void findById_shouldReturnTaskSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1)");
         given().header("userId", "11222")
                 .when()
                 .get("/entries/1/tasks/1")
@@ -73,7 +73,7 @@ public class TasksControllerTest extends TestBase {
 
     @Test
     public void findTasksByEntryId_shouldReturn404WhenEntryIsNotFound() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1)");
         given().header("userId", "11222")
                 .when()
                 .get("/entries/2/tasks")
@@ -84,9 +84,9 @@ public class TasksControllerTest extends TestBase {
     }
 
     @Test
-    public void shouldReturn200WhenUpdateTaskSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1,1)");
-        given().body("{\"summary\":\"newSummary\"}")
+    public void update_shouldReturn200WhenUpdateTaskSuccessfully() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1)");
+        given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"entryId\":1}")
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
@@ -94,13 +94,89 @@ public class TasksControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
+                .body("orderNumber", equalTo(3))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId"))
                 .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
-        assertEquals("newSummary", jdbcTemplate.queryForObject("select summary from kb_task where id='fooId'", String.class));
+        assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_task WHERE id='fooId'", String.class));
     }
 
     @Test
-    public void shouldThrowResourceNotFoundExceptionWhenTaskToUpdateIsNotExist() throws Exception {
+    public void update_shouldResortSuccessfullyWhenCurrentOrderNumberLessThanOriginNumber() throws Exception {
+        prepareDataForResort();
+        given().body("{\"summary\":\"newSummary\",\"orderNumber\":1,\"entryId\":1}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/entries/1/tasks/fooId4")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("newSummary"))
+                .body("orderNumber", equalTo(1))
+                .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId4"))
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+
+        assertEquals(0, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId1'"));
+        assertEquals(2, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId2'"));
+        assertEquals(3, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId3'"));
+        assertEquals(1, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId4'"));
+        assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
+    }
+
+    private void prepareDataForResort() {
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id,order_number) VALUES ('fooId1','this is the task summary.','play badminton',1,1,0)");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id,order_number) VALUES ('fooId2','this is the task summary.','play badminton',1,1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id,order_number) VALUES ('fooId3','this is the task summary.','play badminton',1,1,2)");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id,order_number) VALUES ('fooId4','this is the task summary.','play badminton',1,1,3)");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id,order_number) VALUES ('fooId5','this is the task summary.','play badminton',1,1,4)");
+    }
+
+    @Test
+    public void update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumber() throws Exception {
+        prepareDataForResort();
+        given().body("{\"summary\":\"newSummary\",\"orderNumber\":4,\"entryId\":1}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/entries/1/tasks/fooId4")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("newSummary"))
+                .body("orderNumber", equalTo(4))
+                .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId4"))
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+
+        assertEquals(0, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId1'"));
+        assertEquals(1, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId2'"));
+        assertEquals(2, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId3'"));
+        assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId4'"));
+        assertEquals(3, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
+    }
+
+
+    @Test
+    public void update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumberButNotTheBiggest() throws Exception {
+        prepareDataForResort();
+        given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"entryId\":1}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/entries/1/tasks/fooId1")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("newSummary"))
+                .body("orderNumber", equalTo(3))
+                .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId1"))
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+
+        assertEquals(3, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId1'"));
+        assertEquals(0, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId2'"));
+        assertEquals(1, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId3'"));
+        assertEquals(2, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId4'"));
+        assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
+    }
+
+    @Test
+    public void update_shouldThrowResourceNotFoundExceptionWhenTaskToUpdateIsNotExist() throws Exception {
         given().body("{\"summary\":\"newSummary\"}")
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
@@ -113,12 +189,12 @@ public class TasksControllerTest extends TestBase {
 
     @Test
     public void shouldDeleteSuccessfullyWhenTheEntryIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,assignee,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1)");
         given().header("userId", "11222")
                 .when()
                 .delete("/entries/feeId/tasks/fooId")
                 .then()
                 .statusCode(200);
-        assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_task WHERE  delete_status=1").size());
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_task WHERE  delete_status=1").size());
     }
 }

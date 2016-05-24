@@ -20,7 +20,7 @@ CREATE TABLE kb_task (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   summary VARCHAR(50) NOT NULL,
   content VARCHAR(50),
-  assignee int DEFAULT NULL,
+  order_number int DEFAULT 0,
   reporter int DEFAULT NULL,
   entry_id VARCHAR(40)  DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,

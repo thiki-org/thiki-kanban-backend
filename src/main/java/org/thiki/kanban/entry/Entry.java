@@ -18,6 +18,8 @@ public class Entry {
      */
     private Integer reporter;
 
+    private Integer orderNumber;
+
     private String creationTime;
     private String modificationTime;
 
@@ -72,4 +74,11 @@ public class Entry {
         return task;
     }
 
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 }

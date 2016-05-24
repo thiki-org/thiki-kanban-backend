@@ -6,17 +6,36 @@
 
     <insert id="create" parameterType="org.thiki.kanban.task.Task">
         INSERT INTO
-        kb_task(id,summary, content, assignee, reporter, entry_id) VALUES (#{id},#{summary}, #{content}, #{assignee}, #{reporter}, #{entryId})
+        kb_task(id,summary, content, order_number, reporter, entry_id) VALUES (#{id},#{summary}, #{content}, (SELECT max_order_number from (SELECT  CASE WHEN  max(order_number)  IS NULL THEN 0 ELSE max(order_number)+1 end as max_order_number  FROM kb_task WHERE entry_id=#{entryId} ) as t ), #{reporter}, #{entryId})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.task.Task" flushCache="true">
         UPDATE kb_task SET
         summary = #{summary},
         content = #{content},
-        assignee = #{assignee},
+        order_number = #{orderNumber},
         reporter = #{reporter},
         entry_id = #{entryId}
         WHERE id=#{id}
+    </update>
+
+    <update id="resortOrder" parameterType="java.util.Map" flushCache="true">
+
+        UPDATE kb_task SET order_number = order_number+ #{increment}
+
+        WHERE entry_id=#{entryId}
+        <if test="increment == -1">
+            <![CDATA[
+            AND order_number > #{originOrderNumber} AND order_number<=#{currentOrderNumber}
+            ]]>
+        </if>
+
+        <if test="increment == 1">
+            <![CDATA[
+          AND  order_number<#{originOrderNumber} AND order_number>=#{currentOrderNumber}
+             ]]>
+        </if>
+
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.task.Task">
@@ -24,7 +43,7 @@
     </select>
 
     <select id="findByEntryId" parameterType="java.lang.String" resultType="org.thiki.kanban.task.Task">
-        SELECT id,summary,content,reporter,entry_id,creation_time FROM kb_task WHERE entry_id= #{entry_id}
+        SELECT * FROM kb_task WHERE entry_id= #{entry_id} AND delete_status=0 ORDER BY order_number
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">

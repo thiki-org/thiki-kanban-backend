@@ -29,15 +29,40 @@ public class TaskResource extends ResourceSupport {
      */
     private String entryId;
 
+    private Integer orderNumber;
+
+    private String creationTime;
+    private String modificationTime;
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public String getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(String modificationTime) {
+        this.modificationTime = modificationTime;
+    }
+
+
     public TaskResource(Task task) {
         if (task == null) {
             return;
         }
         this.summary = task.getSummary();
         this.content = task.getContent();
-        this.assignee = task.getAssignee();
+        this.assignee = task.getOrderNumber();
         this.reporter = task.getReporter();
         this.entryId = task.getEntryId();
+        this.orderNumber = task.getOrderNumber();
+        this.creationTime = task.getCreationTime();
+        this.modificationTime = task.getModificationTime();
     }
 
     public Integer getReporter() {
@@ -78,5 +103,13 @@ public class TaskResource extends ResourceSupport {
 
     public void setAssignee(Integer assignee) {
         this.assignee = assignee;
+    }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 }

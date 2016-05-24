@@ -1,5 +1,6 @@
 package org.thiki.kanban.task;
 
+import com.google.common.collect.ImmutableMap;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.entry.EntriesPersistence;
 import org.thiki.kanban.entry.Entry;
@@ -7,6 +8,7 @@ import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class TasksService {
@@ -32,6 +34,16 @@ public class TasksService {
         Task taskToUpdate = tasksPersistence.findById(taskId);
         if (taskToUpdate == null) {
             throw new ResourceNotFoundException("entry[" + taskId + "] is not found, task update failed.");
+        }
+        if (task.getOrderNumber() != taskToUpdate.getOrderNumber()) {
+            int increment = task.getOrderNumber() > taskToUpdate.getOrderNumber() ? -1 : 1;
+            Map<String, Object> resort = ImmutableMap.<String, Object>builder()
+                    .put("entryId", task.getEntryId())
+                    .put("originOrderNumber", taskToUpdate.getOrderNumber())
+                    .put("currentOrderNumber", task.getOrderNumber())
+                    .put("increment", increment)
+                    .build();
+            tasksPersistence.resortOrder(resort);
         }
         task.setId(taskId);
         tasksPersistence.update(task);
