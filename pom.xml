@@ -127,7 +127,6 @@
         <resources>
             <resource>
                 <directory>src/main/resources/profiles/${prop.dir.name}</directory>
-                <filtering>true</filtering>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
@@ -242,6 +241,9 @@
     <profiles>
         <profile>
             <id>local_zz</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <prop.dir.name>local_zz</prop.dir.name>
             </properties>
