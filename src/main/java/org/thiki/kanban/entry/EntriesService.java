@@ -15,16 +15,6 @@ public class EntriesService {
     @Resource
     private EntriesPersistence entriesPersistence;
 
-    private List<Entry> entries;
-
-    public List<Entry> getEntries() {
-        return entries;
-    }
-
-    public void setEntries(List<Entry> entries) {
-        this.entries = entries;
-    }
-
     public Entry create(Integer reporterUserId, final Entry entry) {
         entry.setReporter(reporterUserId);
         entriesPersistence.create(entry);

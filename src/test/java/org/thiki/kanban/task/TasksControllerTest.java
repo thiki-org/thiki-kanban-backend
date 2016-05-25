@@ -25,7 +25,7 @@ public class TasksControllerTest extends TestBase {
     }
 
     @Test
-    public void shouldReturn201WhenCreateTaskSuccessfully() throws Exception {
+    public void create_shouldReturn201WhenCreateTaskSuccessfully() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
         given().body("{\"summary\":\"summary\"}")
                 .header("userId", "11222")
@@ -38,6 +38,21 @@ public class TasksControllerTest extends TestBase {
                 .body("reporter", equalTo(11222))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/fooId"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
+    }
+
+    @Test
+    public void create_shouldCreateFailedWhenEntryIsNotFound() throws Exception {
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
+        given().body("{\"summary\":\"summary\"}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/entries/non-exists-entryId/tasks")
+                .then()
+                .statusCode(404)
+                .body("code", equalTo(404))
+                .body("message", equalTo("entry[non-exists-entryId] is not found."));
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
     }
 
     @Test
@@ -188,7 +203,7 @@ public class TasksControllerTest extends TestBase {
     }
 
     @Test
-    public void shouldDeleteSuccessfullyWhenTheEntryIsExist() {
+    public void delete_shouldDeleteSuccessfullyWhenTheTaskIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1)");
         given().header("userId", "11222")
                 .when()
@@ -196,5 +211,16 @@ public class TasksControllerTest extends TestBase {
                 .then()
                 .statusCode(200);
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_task WHERE  delete_status=1").size());
+    }
+
+    @Test
+    public void delete_shouldDeleteFailedWhenTheTaskIsNotExist() {
+        given().header("userId", "11222")
+                .when()
+                .delete("/entries/feeId/tasks/non-exists-taskId")
+                .then()
+                .statusCode(404)
+                .body("code", equalTo(404))
+                .body("message", equalTo("task[non-exists-taskId] is not found."));
     }
 }

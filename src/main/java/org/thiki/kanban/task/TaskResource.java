@@ -38,16 +38,8 @@ public class TaskResource extends ResourceSupport {
         return creationTime;
     }
 
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
-
     public String getModificationTime() {
         return modificationTime;
-    }
-
-    public void setModificationTime(String modificationTime) {
-        this.modificationTime = modificationTime;
     }
 
 
@@ -69,47 +61,24 @@ public class TaskResource extends ResourceSupport {
         return reporter;
     }
 
-    public void setReporter(Integer reporter) {
-        this.reporter = reporter;
-    }
-
     public String getEntryId() {
         return entryId;
-    }
-
-    public void setEntryId(String entryId) {
-        this.entryId = entryId;
     }
 
     public String getSummary() {
         return summary;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
-
     public String getContent() {
         return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public Integer getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(Integer assignee) {
-        this.assignee = assignee;
-    }
-
     public Integer getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
-    }
 }

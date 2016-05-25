@@ -73,12 +73,4 @@ public class Entry {
         // task.setEntryId(this.id);
         return task;
     }
-
-    public Integer getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
-    }
 }

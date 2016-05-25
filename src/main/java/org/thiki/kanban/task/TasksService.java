@@ -23,7 +23,7 @@ public class TasksService {
         task.setEntryId(entryId);
         Entry entry = entriesPersistence.findById(entryId);
         if (entry == null) {
-            throw new ResourceNotFoundException("entry[" + entryId + "] is not found, task creation failed.");
+            throw new ResourceNotFoundException("entry[" + entryId + "] is not found.");
         }
         Task newTask = entry.addTask(task);
         tasksPersistence.create(newTask);

@@ -18,18 +18,9 @@ public class EntryResource extends ResourceSupport {
         return creationTime;
     }
 
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
-
     public String getModificationTime() {
         return modificationTime;
     }
-
-    public void setModificationTime(String modificationTime) {
-        this.modificationTime = modificationTime;
-    }
-
 
     public EntryResource(Entry entry) {
         if (entry == null) return;
@@ -44,16 +35,8 @@ public class EntryResource extends ResourceSupport {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public Integer getReporter() {
         return reporter;
-    }
-
-    public void setReporter(Integer reporter) {
-        this.reporter = reporter;
     }
 
 }

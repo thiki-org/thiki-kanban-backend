@@ -12,16 +12,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class EntryResourceAssembler extends ResourceAssemblerSupport<Entry, EntryResource> {
 
-    protected Object[] pathVariables;
-
     public EntryResourceAssembler() {
         super(EntriesController.class, EntryResource.class);
-    }
-
-
-    public EntryResourceAssembler(Object... pathVariables) {
-        this();
-        this.pathVariables = pathVariables;
     }
 
     public EntryResource emptyResource() {
