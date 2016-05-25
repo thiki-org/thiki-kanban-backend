@@ -222,19 +222,18 @@
                 <version>1.4.0</version>
                 <executions>
                     <execution>
-                        <phase>install</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
-                        <configuration>
-                            <mainClass>org.thiki.kanban.Application</mainClass>
-                            <arguments>
-                                <argument>arg0</argument>
-                                <argument>arg1</argument>
-                            </arguments>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <mainClass>org.thiki.kanban.Application</mainClass>
+                    <arguments>
+                        <argument>arg0</argument>
+                        <argument>arg1</argument>
+                    </arguments>
+                </configuration>
             </plugin>
         </plugins>
     </build>
