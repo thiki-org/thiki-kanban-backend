@@ -1,26 +1,24 @@
-package org.thiki.kanban.entry;
+package org.thiki.kanban.board;
 
 import org.thiki.kanban.task.Task;
 
 /**
  * 任务列表
- * Created by xubitao on 04/26/16.
+ * Created by xubitao on 05/26/16.
  */
-public class Entry {
+public class Board {
 
     private String id;
     /**
      * 列表标题
      */
-    private String title;
+    private String name;
     /**
      * 创建者用户Id
      */
     private Integer reporter;
 
     private Integer orderNumber;
-
-    private String boardId;
 
     private String creationTime;
     private String modificationTime;
@@ -57,12 +55,12 @@ public class Entry {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -74,13 +72,5 @@ public class Entry {
     public Task addTask(Task task) {
         // task.setEntryId(this.id);
         return task;
-    }
-
-    public String getBoardId() {
-        return boardId;
-    }
-
-    public void setBoardId(String boardId) {
-        this.boardId = boardId;
     }
 }

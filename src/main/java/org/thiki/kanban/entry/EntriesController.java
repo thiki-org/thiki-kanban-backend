@@ -1,9 +1,8 @@
 package org.thiki.kanban.entry;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,53 +13,41 @@ import java.util.List;
 @RestController
 public class EntriesController {
     @Resource
-    private EntriesService entryService;
+    private EntriesService entriesService;
 
-    @RequestMapping(value = "/entries", method = RequestMethod.GET)
-    public HttpEntity<EntriesResource> loadAll() {
-        List<Entry> entryList = entryService.loadAll();
-        List<EntryResource> resources = new EntryResourceAssembler().toResources(entryList);
-        EntriesResource entriesRes = new EntriesResource();
-        entriesRes.setEntries(resources);
+    @RequestMapping(value = "/boards/{boardId}/entries", method = RequestMethod.GET)
+    public HttpEntity loadAll(@PathVariable String boardId) {
+        List<Entry> entryList = entriesService.loadAll();
+        return Response.build(new EntriesResource(entryList, boardId));
 
-        return new ResponseEntity<EntriesResource>(
-                entriesRes,
-                entryList == null ? HttpStatus.NOT_FOUND : HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/entries/{id}", method = RequestMethod.GET)
-    public HttpEntity<EntryResource> findById(@PathVariable String id) {
-        Entry entry = entryService.findById(id);
-        return new ResponseEntity<EntryResource>(
-                new EntryResourceAssembler().toResource(entry),
-                HttpStatus.OK);
+    @RequestMapping(value = "/boards/{boardId}/entries/{id}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String id, @PathVariable String boardId) {
+        Entry entry = entriesService.findById(id);
+        return Response.build(new EntryResource(entry, boardId));
+
     }
 
-    @RequestMapping(value = "/entries/{id}", method = RequestMethod.PUT)
-    public HttpEntity<EntryResource> update(@RequestBody Entry entry, @PathVariable String id) {
+    @RequestMapping(value = "/boards/{boardId}/entries/{id}", method = RequestMethod.PUT)
+    public HttpEntity<EntryResource> update(@RequestBody Entry entry, @PathVariable String id, @PathVariable String boardId) {
         entry.setId(id);
-        Entry updatedEntry = entryService.update(entry);
+        Entry updatedEntry = entriesService.update(entry);
 
-        return new ResponseEntity<EntryResource>(
-                new EntryResourceAssembler().toResource(updatedEntry),
-                HttpStatus.OK);
+        return Response.build(new EntryResource(entry, boardId));
     }
 
-    @RequestMapping(value = "/entries/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<EntryResource> deleteById(@PathVariable String id) {
-        entryService.deleteById(id);
-        return new ResponseEntity<EntryResource>(
-                new EntryResourceAssembler().emptyResource(),
-                HttpStatus.OK);
+    @RequestMapping(value = "/boards/{boardId}/entries/{id}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String id, @PathVariable String boardId) {
+        entriesService.deleteById(id);
+        return Response.build(new EntryResource(boardId));
+
     }
 
-    @RequestMapping(value = "/entries", method = RequestMethod.POST)
-    public ResponseEntity<EntryResource> create(@RequestBody Entry entry, @RequestHeader Integer userId) {
-        Entry savedEntry = entryService.create(userId, entry);
+    @RequestMapping(value = "/boards/{boardId}/entries", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Entry entry, @RequestHeader Integer userId, @PathVariable String boardId) {
+        Entry savedEntry = entriesService.create(userId, entry);
 
-        ResponseEntity<EntryResource> responseEntity = new ResponseEntity<EntryResource>(
-                new EntryResourceAssembler().toResource(savedEntry),
-                HttpStatus.CREATED);
-        return responseEntity;
+        return Response.post(new EntryResource(savedEntry, boardId));
     }
 }

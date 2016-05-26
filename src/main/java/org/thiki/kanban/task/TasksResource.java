@@ -1,20 +1,23 @@
 package org.thiki.kanban.task;
 
-import org.springframework.hateoas.ResourceSupport;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.thiki.kanban.foundation.common.RestResource;
 
 import java.util.List;
 
 /**
  *
  */
-public class TasksResource extends ResourceSupport {
-    private List<TaskResource> tasks;
-
-    public List<TaskResource> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<TaskResource> tasks) {
-        this.tasks = tasks;
+public class TasksResource extends RestResource {
+    public TasksResource(List<Task> taskList, String entryId) {
+        this.domainObject = taskList;
+        JSONArray tasksJSONArray = new JSONArray();
+        for (Task task : taskList) {
+            TaskResource taskResource = new TaskResource(task, entryId);
+            JSONObject taskJSON = taskResource.getResource();
+            tasksJSONArray.add(taskJSON);
+        }
+        this.resourcesJSON = tasksJSONArray;
     }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.board.BoardsPersistence">
+
+    <insert id="create" parameterType="org.thiki.kanban.board.Board">
+        INSERT INTO
+        kb_board(id,name, reporter) VALUES (#{id},#{name}, #{reporter})
+    </insert>
+
+    <update id="update" parameterType="org.thiki.kanban.board.Board" flushCache="true">
+        UPDATE kb_board SET
+        name=#{name}
+        WHERE id=#{id}
+    </update>
+
+    <select id="loadAll" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0 and id= #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_board SET delete_status=1 WHERE id=#{id}
+    </delete>
+</mapper>

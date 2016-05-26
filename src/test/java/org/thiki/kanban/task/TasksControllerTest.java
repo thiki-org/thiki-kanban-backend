@@ -63,12 +63,12 @@ public class TasksControllerTest extends TestBase {
                 .get("/entries/fooId/tasks")
                 .then()
                 .statusCode(200)
-                .body("tasks[0].summary", equalTo("this is the task summary."))
-                .body("tasks[0].content", equalTo("play badminton"))
-                .body("tasks[0].reporter", equalTo(1))
-                .body("tasks[0].entryId", equalTo("fooId"))
-                .body("tasks[0]._links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/1"))
-                .body("tasks[0]._links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"));
+                .body("[0].summary", equalTo("this is the task summary."))
+                .body("[0].content", equalTo("play badminton"))
+                .body("[0].reporter", equalTo(1))
+                .body("[0].entryId", equalTo("fooId"))
+                .body("[0]._links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/1"))
+                .body("[0]._links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"));
     }
 
     @Test

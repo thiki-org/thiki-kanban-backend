@@ -3,7 +3,7 @@ package org.thiki.kanban.entrance;
 import cn.xubitao.dolphin.foundation.assmbler.DolphinAssembler;
 import cn.xubitao.dolphin.foundation.resource.RestResource;
 import org.springframework.hateoas.Link;
-import org.thiki.kanban.entry.EntriesController;
+import org.thiki.kanban.board.BoardsController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -23,10 +23,10 @@ public class EntranceResourceAssembler extends DolphinAssembler {
         EntranceResource entranceResource = new EntranceResource();
         entranceResource.setDescription("Welcome!");
         Link selfLink = linkTo(EntranceController.class).withSelfRel();
-        Link entriesLink = linkTo(methodOn(EntriesController.class).loadAll()).withRel("entries");
+        Link boardsLink = linkTo(methodOn(BoardsController.class).loadAll()).withRel("boards");
 
         entranceResource.add(selfLink);
-        entranceResource.add(entriesLink);
+        entranceResource.add(boardsLink);
         return entranceResource;
     }
 }

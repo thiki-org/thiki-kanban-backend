@@ -1,21 +1,24 @@
 package org.thiki.kanban.entry;
 
-import org.springframework.hateoas.ResourceSupport;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.thiki.kanban.foundation.common.RestResource;
 
 import java.util.List;
 
 /**
  * Created by xubitao on 04/26/16.
  */
-public class EntriesResource extends ResourceSupport {
-    private List<EntryResource> entries;
+public class EntriesResource extends RestResource {
 
-    public List<EntryResource> getEntries() {
-        return entries;
+    public EntriesResource(List<Entry> entryList, String boardId) {
+        this.domainObject = entryList;
+        JSONArray entriesJSONArray = new JSONArray();
+        for (Entry entry : entryList) {
+            EntryResource entryResource = new EntryResource(entry, boardId);
+            JSONObject entryJSON = entryResource.getResource();
+            entriesJSONArray.add(entryJSON);
+        }
+        this.resourcesJSON = entriesJSONArray;
     }
-
-    public void setEntries(List<EntryResource> entries) {
-        this.entries = entries;
-    }
-
 }

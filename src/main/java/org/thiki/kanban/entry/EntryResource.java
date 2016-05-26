@@ -1,42 +1,29 @@
 package org.thiki.kanban.entry;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.hateoas.ResourceSupport;
+import org.springframework.hateoas.Link;
+import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.task.TasksController;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by xubitao on 04/26/16.
  */
-public class EntryResource extends ResourceSupport {
-    @JsonProperty
-    private String id;
-    private String title;
-    private Integer reporter;
-    private String creationTime;
-    private String modificationTime;
+public class EntryResource extends RestResource {
+    public EntryResource(Entry entry, String boardId) {
+        this.domainObject = entry;
+        if (entry != null) {
+            Link selfLink = linkTo(methodOn(EntriesController.class).findById(entry.getId(), boardId)).withSelfRel();
+            this.add(selfLink);
 
-    public EntryResource(Entry entry) {
-        if (entry == null) return;
-        this.id = entry.getId();
-        this.title = entry.getTitle();
-        this.reporter = entry.getReporter();
-        this.creationTime = entry.getCreationTime();
-        this.modificationTime = entry.getModificationTime();
+            Link tasksLink = linkTo(methodOn(TasksController.class).create(null, entry.getId(), null)).withRel("tasks");
+            this.add(tasksLink);
+        }
+        this.add(linkTo(methodOn(EntriesController.class).loadAll(boardId)).withRel("all"));
     }
 
-    public String getCreationTime() {
-        return creationTime;
+    public EntryResource(String boardId) {
+        this.add(linkTo(methodOn(EntriesController.class).loadAll(boardId)).withRel("all"));
     }
-
-    public String getModificationTime() {
-        return modificationTime;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public Integer getReporter() {
-        return reporter;
-    }
-
 }
