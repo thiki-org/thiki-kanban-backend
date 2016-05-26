@@ -1,8 +1,8 @@
 package org.thiki.kanban.entry;
 
-import java.util.List;
-
 import org.springframework.hateoas.ResourceSupport;
+
+import java.util.List;
 
 /**
  * Created by xubitao on 04/26/16.

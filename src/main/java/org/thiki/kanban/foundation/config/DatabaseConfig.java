@@ -1,11 +1,7 @@
 package org.thiki.kanban.foundation.config;
 
-import org.apache.ibatis.mapping.Environment;
-import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,8 +15,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.annotation.Resource;
 import javax.sql.DataSource;
-import java.io.InputStream;
-import java.util.Properties;
 
 @Configuration
 @ComponentScan

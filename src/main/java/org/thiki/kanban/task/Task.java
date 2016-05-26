@@ -30,6 +30,10 @@ public class Task {
     private Integer orderNumber;
     private String creationTime;
     private String modificationTime;
+    /**
+     * 任务列表Id @see {@link Entry#getId()}
+     */
+    private String entryId;
 
     public String getCreationTime() {
         return creationTime;
@@ -46,12 +50,6 @@ public class Task {
     public void setModificationTime(String modificationTime) {
         this.modificationTime = modificationTime;
     }
-
-
-    /**
-     * 任务列表Id @see {@link Entry#getId()}
-     */
-    private String entryId;
 
     public String getEntryId() {
         return entryId;

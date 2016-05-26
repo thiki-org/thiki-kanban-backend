@@ -32,16 +32,16 @@ public class TestBase {
     private DBInterceptor dbInterceptor;
     private Sequence sequence = Mockito.mock(Sequence.class);
 
+    @BeforeClass
+    public static void globalInit() {
+        RestAssured.port = port;
+    }
+
     @Before
     public void setUp() {
         when(sequence.generate()).thenReturn("fooId");
         ReflectionTestUtils.setField(dbInterceptor, "sequence", sequence);
         jdbcTemplate = new JdbcTemplate(db);
-    }
-
-    @BeforeClass
-    public static void globalInit() {
-        RestAssured.port = port;
     }
 
     @After

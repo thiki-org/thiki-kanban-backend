@@ -34,15 +34,6 @@ public class TaskResource extends ResourceSupport {
     private String creationTime;
     private String modificationTime;
 
-    public String getCreationTime() {
-        return creationTime;
-    }
-
-    public String getModificationTime() {
-        return modificationTime;
-    }
-
-
     public TaskResource(Task task) {
         if (task == null) {
             return;
@@ -55,6 +46,14 @@ public class TaskResource extends ResourceSupport {
         this.orderNumber = task.getOrderNumber();
         this.creationTime = task.getCreationTime();
         this.modificationTime = task.getModificationTime();
+    }
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public String getModificationTime() {
+        return modificationTime;
     }
 
     public Integer getReporter() {

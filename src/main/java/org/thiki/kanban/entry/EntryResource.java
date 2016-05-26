@@ -14,14 +14,6 @@ public class EntryResource extends ResourceSupport {
     private String creationTime;
     private String modificationTime;
 
-    public String getCreationTime() {
-        return creationTime;
-    }
-
-    public String getModificationTime() {
-        return modificationTime;
-    }
-
     public EntryResource(Entry entry) {
         if (entry == null) return;
         this.id = entry.getId();
@@ -29,6 +21,14 @@ public class EntryResource extends ResourceSupport {
         this.reporter = entry.getReporter();
         this.creationTime = entry.getCreationTime();
         this.modificationTime = entry.getModificationTime();
+    }
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public String getModificationTime() {
+        return modificationTime;
     }
 
     public String getTitle() {

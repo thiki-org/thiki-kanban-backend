@@ -1,7 +1,6 @@
 package org.thiki.kanban.entrance;
 
 import cn.xubitao.dolphin.foundation.response.Response;
-
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
