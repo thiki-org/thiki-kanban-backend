@@ -1,23 +1,18 @@
 package org.thiki.kanban.board;
 
 /**
- * 任务列表
  * Created by xubitao on 05/26/16.
  */
 public class Board {
 
     private String id;
-    /**
-     * 列表标题
-     */
+
     private String name;
-    /**
-     * 创建者用户Id
-     */
+
     private Integer reporter;
 
-
     private String creationTime;
+
     private String modificationTime;
 
     public String getCreationTime() {
