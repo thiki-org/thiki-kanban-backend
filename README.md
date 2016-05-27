@@ -41,16 +41,16 @@ hsql是内存数据库,仅在集成测试中使用。所以,test目录下的测�
 
 ```
  <profiles>
-        <profile>
-            <id>local_zz</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <prop.dir.name>local_zz</prop.dir.name>
-            </properties>
-        </profile>
-    </profiles>
+     <profile>
+         <id>local_zz</id>
+         <activation>
+              <activeByDefault>true</activeByDefault>
+          </activation>
+          <properties>
+              <prop.dir.name>local_zz</prop.dir.name>
+          </properties>
+     </profile>
+ </profiles>
 ```
 
 ### 2、启动系统
