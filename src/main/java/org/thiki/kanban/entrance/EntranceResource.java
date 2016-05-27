@@ -1,18 +1,26 @@
 package org.thiki.kanban.entrance;
 
-import cn.xubitao.dolphin.foundation.resource.RestResource;
+import com.alibaba.fastjson.JSONObject;
+import org.springframework.hateoas.Link;
+import org.thiki.kanban.board.BoardsController;
+import org.thiki.kanban.foundation.common.RestResource;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by xubitao on 04/26/16.
  */
 public class EntranceResource extends RestResource {
-    private String description;
+    public EntranceResource() {
+        this.domainObject = new JSONObject() {{
+            put("description", "Welcome!");
+        }};
 
-    public String getDescription() {
-        return description;
-    }
+        Link selfLink = linkTo(EntranceController.class).withSelfRel();
+        Link boardsLink = linkTo(methodOn(BoardsController.class).loadAll()).withRel("boards");
 
-    public void setDescription(String description) {
-        this.description = description;
+        this.add(selfLink);
+        this.add(boardsLink);
     }
 }
