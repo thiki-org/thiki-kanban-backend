@@ -16,7 +16,6 @@ public class Board {
      */
     private Integer reporter;
 
-    private Integer orderNumber;
 
     private String creationTime;
     private String modificationTime;
@@ -59,13 +58,5 @@ public class Board {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
     }
 }

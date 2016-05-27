@@ -18,8 +18,6 @@ public class Entry {
      */
     private Integer reporter;
 
-    private Integer orderNumber;
-
     private String boardId;
 
     private String creationTime;
@@ -84,11 +82,4 @@ public class Entry {
         this.boardId = boardId;
     }
 
-    public Integer getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
-    }
 }
