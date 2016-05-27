@@ -83,4 +83,12 @@ public class Entry {
     public void setBoardId(String boardId) {
         this.boardId = boardId;
     }
+
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 }

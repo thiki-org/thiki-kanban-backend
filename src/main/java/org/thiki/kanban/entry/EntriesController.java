@@ -34,7 +34,7 @@ public class EntriesController {
         entry.setId(id);
         Entry updatedEntry = entriesService.update(entry);
 
-        return Response.build(new EntryResource(entry, boardId));
+        return Response.build(new EntryResource(updatedEntry, boardId));
     }
 
     @RequestMapping(value = "/boards/{boardId}/entries/{id}", method = RequestMethod.DELETE)
