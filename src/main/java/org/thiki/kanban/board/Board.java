@@ -1,7 +1,5 @@
 package org.thiki.kanban.board;
 
-import org.thiki.kanban.task.Task;
-
 /**
  * 任务列表
  * Created by xubitao on 05/26/16.
@@ -63,14 +61,11 @@ public class Board {
         this.name = name;
     }
 
-    /**
-     * 在entry内添加一个task
-     *
-     * @param task
-     * @return
-     */
-    public Task addTask(Task task) {
-        // task.setEntryId(this.id);
-        return task;
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
     }
 }
