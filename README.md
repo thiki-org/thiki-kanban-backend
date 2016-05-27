@@ -65,7 +65,6 @@ hsql是内存数据库,仅在集成测试中使用。所以,test目录下的测�
 
 ```
  mvn clean install exec:java -P local_tao
-
 ```
 注意:运行时请把 `local_tao`修改成的`profile` id.
 
