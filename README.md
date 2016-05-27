@@ -72,8 +72,7 @@ hsql是内存数据库,仅在集成测试中使用。所以,test目录下的测�
 
 ```
 http://localhost:8080/entrance
-```
-```json
+ 
 {
   "description": "Welcome!",
   "_links": {
