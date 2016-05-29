@@ -26,7 +26,7 @@ public class TestBase {
     protected static int port = 8007;
 
     @Autowired
-    protected DataSource db;
+    protected DataSource dataSource;
     protected JdbcTemplate jdbcTemplate;
     @Autowired
     private DBInterceptor dbInterceptor;
@@ -41,7 +41,7 @@ public class TestBase {
     public void setUp() {
         when(sequence.generate()).thenReturn("fooId");
         ReflectionTestUtils.setField(dbInterceptor, "sequence", sequence);
-        jdbcTemplate = new JdbcTemplate(db);
+        jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @After
