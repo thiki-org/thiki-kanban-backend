@@ -1,8 +1,8 @@
 -- ----------------------------
 -- Table structure for kb_board
 -- ----------------------------
-DROP TABLE IF EXISTS `kb_entry`;
-CREATE TABLE `kb_entry` (
+DROP TABLE IF EXISTS `kb_board`;
+CREATE TABLE `kb_board` (
   `id`              VARCHAR(40) NOT NULL,
   `name`            TEXT,
   `reporter`        INT(11)     NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE `kb_entry` (
 DROP TABLE IF EXISTS `kb_entry`;
 CREATE TABLE `kb_entry` (
   `id`              VARCHAR(40) NOT NULL,
-  `name`            TEXT,
+  `title`           TEXT,
   `reporter`        INT(11)     NOT NULL,
   `delete_status`   INT(11)              DEFAULT '0',
   order_number      INT(11)     NOT NULL DEFAULT '0',
