@@ -7,6 +7,8 @@ notifications:
   email:
     - airlink@gmail.com
     - btao.cn@gmail.com
+    - 411172392@qq.com
+    - 103831536@qq.com
 
 jdk:
   - oraclejdk8
