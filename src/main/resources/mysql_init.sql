@@ -1,4 +1,20 @@
 -- ----------------------------
+-- Table structure for kb_user
+-- ----------------------------
+DROP TABLE IF EXISTS `kb_user`;
+CREATE TABLE kb_user
+(
+  id varchar(64) NOT NULL COMMENT '编号',
+  login_name varchar(100) NOT NULL COMMENT '登录名',
+  password varchar(100) NOT NULL COMMENT '密码',
+  name varchar(100) NOT NULL COMMENT '姓名',
+  email varchar(200) COMMENT '邮箱',
+  del_flag char(1) DEFAULT '0' NOT NULL COMMENT '删除标记',
+  PRIMARY KEY (id)
+) COMMENT = '用户表';
+
+
+-- ----------------------------
 -- Table structure for kb_board
 -- ----------------------------
 DROP TABLE IF EXISTS `kb_board`;
