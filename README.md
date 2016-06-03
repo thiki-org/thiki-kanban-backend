@@ -24,7 +24,7 @@ thiki-kanban是一个精益看板系统,以看板方法为核心,内嵌精益思
 
 在安装前,请检查你的机器是否已经具备以下环境:  
 * java 1.8;  
-* maven 3.2.x or higher version; 
+* maven 3.2.x or higher version.
 
 
 ### 1、配置数据库
