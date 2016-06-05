@@ -14,7 +14,11 @@ public class User implements Serializable{
 
     private String email;
 
-    private String delFlag;
+    private Integer deleteStatus;
+
+    private String creationTime;
+
+    private String modificationTime;
 
     public User() {
         super();
@@ -60,17 +64,33 @@ public class User implements Serializable{
         this.email = email == null ? null : email.trim();
     }
 
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag == null ? null : delFlag.trim();
-    }
 
     @Override
     public String toString() {
         return "User [id=" + id + ", name=" + name + ", email=" + email + "]";
     }
 
+    public Integer getDeleteStatus() {
+        return deleteStatus;
+    }
+
+    public void setDeleteStatus(Integer deleteStatus) {
+        this.deleteStatus = deleteStatus;
+    }
+
+    public String getCreationTime() {
+        return creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public String getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(String modificationTime) {
+        this.modificationTime = modificationTime;
+    }
 }

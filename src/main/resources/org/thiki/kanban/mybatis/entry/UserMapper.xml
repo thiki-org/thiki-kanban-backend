@@ -1,114 +1,137 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.thiki.kanban.system.user.UsersPersistence">
-	<resultMap id="BaseResultMap" type="org.thiki.kanban.system.user.User">
-		<id column="ID" property="id" jdbcType="INTEGER" />
-		<result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
-		<result column="NAME" property="name" jdbcType="VARCHAR" />
-		<result column="PASSWORD" property="password" jdbcType="VARCHAR" />
-		<result column="EMAIL" property="email" jdbcType="VARCHAR" />
-		<result column="DEL_FLAG" property="delFlag" jdbcType="VARCHAR" />
-	</resultMap>
-	<sql id="Base_Column_List">
-		ID, LOGIN_NAME, NAME, PASSWORD,  EMAIL,  DEL_FLAG
+    <resultMap id="BaseResultMap" type="org.thiki.kanban.system.user.User">
+        <id column="ID" property="id" jdbcType="INTEGER"/>
+        <result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR"/>
+        <result column="NAME" property="name" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+        <result column="EMAIL" property="email" jdbcType="VARCHAR"/>
+        <result column="DELETE_STATUS" property="deleteStatus" jdbcType="INTEGER"/>
+        <result column="CREATION_TIME" property="creationTime" jdbcType="DATE"/>
+        <result column="MODIFICATION_TIME" property="modificationTime" jdbcType="DATE"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		ID, LOGIN_NAME, NAME, PASSWORD,  EMAIL,  DELETE_STATUS,CREATION_TIME,MODIFICATION_TIME
 	</sql>
-	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from kb_user
-		where ID = #{id,jdbcType=INTEGER}
-	</select>
-	<select id="loadAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-		select
-		<include refid="Base_Column_List" />
-		from kb_user
-	</select>
-	<select id="findByLoginName" resultMap="BaseResultMap" parameterType="java.lang.String">
-		select
-		<include refid="Base_Column_List" />
-		from kb_user
-		where LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
-	</select>
-	<delete id="deleteById" parameterType="java.lang.Integer">
+    <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from kb_user
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="loadAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from kb_user
+    </select>
+    <select id="findByLoginName" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from kb_user
+        where LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.Integer">
 		delete from user
 		where ID = #{id,jdbcType=INTEGER}
 	</delete>
-	<insert id="create" parameterType="org.thiki.kanban.system.user.User">
+    <insert id="create" parameterType="org.thiki.kanban.system.user.User">
 		insert into kb_user (ID, LOGIN_NAME, NAME,	PASSWORD, EMAIL, DEL_FLAG)
 		values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-		#{password,jdbcType=VARCHAR},  #{email,jdbcType=VARCHAR},#{delFlag,jdbcType=VARCHAR})
+		#{password,jdbcType=VARCHAR},  #{email,jdbcType=VARCHAR},#{deleteStatus,jdbcType=INTEGER}
+		,#{creationTime,jdbcType=DATE},#{modificationTime,jdbcType=DATE})
 	</insert>
-	<insert id="insertSelective" parameterType="org.thiki.kanban.system.user.User">
-		insert into kb_user
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				ID,
-			</if>
-			<if test="loginName != null">
-				LOGIN_NAME,
-			</if>
-			<if test="name != null">
-				NAME,
-			</if>
-			<if test="password != null">
-				PASSWORD,
-			</if>
-			<if test="email != null">
-				EMAIL,
-			</if>
-			<if test="delFlag != null">
-				DEL_FLAG,
-			</if>
-		</trim>
-		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="id != null">
-				#{id,jdbcType=INTEGER},
-			</if>
-			<if test="loginName != null">
-				#{loginName,jdbcType=VARCHAR},
-			</if>
-			<if test="name != null">
-				#{name,jdbcType=VARCHAR},
-			</if>
-			<if test="password != null">
-				#{password,jdbcType=VARCHAR},
-			</if>
-			<if test="email != null">
-				#{email,jdbcType=VARCHAR},
-			</if>
-			<if test="delFlag != null">
-				#{delFlag,jdbcType=VARCHAR},
-			</if>
-		</trim>
-	</insert>
-	<update id="updateByPrimaryKeySelective" parameterType="org.thiki.kanban.system.user.User">
-		update kb_user
-		<set>
-			<if test="loginName != null">
-				LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
-			</if>
-			<if test="name != null">
-				NAME = #{name,jdbcType=VARCHAR},
-			</if>
-			<if test="password != null">
-				PASSWORD = #{password,jdbcType=VARCHAR},
-			</if>
-			<if test="email != null">
-				EMAIL = #{email,jdbcType=VARCHAR},
-			</if>
-			<if test="delFlag != null">
-				DEL_FLAG = #{delFlag,jdbcType=VARCHAR},
-			</if>
-		</set>
-		where ID = #{id,jdbcType=INTEGER}
-	</update>
-	<update id="updateByPrimaryKey" parameterType="org.thiki.kanban.system.user.User">
+    <insert id="insertSelective" parameterType="org.thiki.kanban.system.user.User">
+        insert into kb_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="loginName != null">
+                LOGIN_NAME,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="password != null">
+                PASSWORD,
+            </if>
+            <if test="email != null">
+                EMAIL,
+            </if>
+            <if test="deleteStatus != null">
+                DELETE_STATUS,
+            </if>
+            <if test="creationTime != null">
+                CREATION_TIME,
+            </if>
+            <if test="modificationTime != null">
+                MODIFICATION_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteStatus != null">
+                #{deleteStatus,jdbcType=INTEGER},
+            </if>
+            <if test="creationTime != null">
+                #{creationTime,jdbcType=DATE},
+            </if>
+            <if test="modificationTime != null">
+                #{modificationTime,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="org.thiki.kanban.system.user.User">
+        update kb_user
+        <set>
+            <if test="loginName != null">
+                LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                PASSWORD = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                EMAIL = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="deleteStatus != null">
+                DELETE_STATUS=#{deleteStatus,jdbcType=INTEGER},
+            </if>
+            <if test="creationTime != null">
+                CREATION_TIME=#{creationTime,jdbcType=DATE},
+            </if>
+            <if test="modificationTime != null">
+                MODIFICATION_TIME=#{modificationTime,jdbcType=DATE},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="org.thiki.kanban.system.user.User">
 		update kb_user
 		set LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
 		NAME = #{name,jdbcType=VARCHAR},
 		PASSWORD = #{password,jdbcType=VARCHAR},
 		EMAIL = #{email,jdbcType=VARCHAR},
-		DEL_FLAG = #{delFlag,jdbcType=VARCHAR}
+		DELETE_STATUS=#{deleteStatus,jdbcType=INTEGER},
+		CREATION_TIME=#{creationTime,jdbcType=DATE},
+		MODIFICATION_TIME=#{modificationTime,jdbcType=DATE}
 		where ID = #{id,jdbcType=INTEGER}
 	</update>
 </mapper>

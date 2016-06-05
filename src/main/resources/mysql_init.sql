@@ -9,7 +9,7 @@ CREATE TABLE kb_user
   password varchar(100) NOT NULL COMMENT '密码',
   name varchar(100) NOT NULL COMMENT '姓名',
   email varchar(200) COMMENT '邮箱',
-  del_flag char(1) DEFAULT '0' NOT NULL COMMENT '删除标记',
+  delete_status INT(1) DEFAULT '0' NOT NULL COMMENT '删除标记',
   creation_time     DATETIME             DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
