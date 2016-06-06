@@ -41,4 +41,8 @@ public class BoardsService {
         }
         return boardsPersistence.deleteById(id);
     }
+
+    public List<Board> findByUserId(String userId) {
+        return boardsPersistence.findByUserId(userId);
+    }
 }

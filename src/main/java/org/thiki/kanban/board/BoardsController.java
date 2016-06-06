@@ -46,4 +46,10 @@ public class BoardsController {
         Board savedBoard = boardsService.create(userId, board);
         return Response.post(new BoardResource(savedBoard));
     }
+
+    @RequestMapping(value = "/users/{userId}/boards", method = RequestMethod.GET)
+    public HttpEntity<BoardsResource> findByUserId(@PathVariable String userId) {
+        List<Board> boards = boardsService.findByUserId(userId);
+        return Response.build(new BoardsResource(boards));
+    }
 }

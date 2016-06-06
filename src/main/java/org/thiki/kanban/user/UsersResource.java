@@ -1,4 +1,4 @@
-package org.thiki.kanban.system.user;
+package org.thiki.kanban.user;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

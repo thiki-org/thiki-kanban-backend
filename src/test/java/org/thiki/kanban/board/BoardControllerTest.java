@@ -35,7 +35,7 @@ public class BoardControllerTest extends TestBase {
     }
 
     @Test
-    public void shouldReturnBoardWhenBoardIsExists() {
+    public void shouldReturnBoardWhenBoardIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
         given().header("userId", "11222")
                 .when()
@@ -91,11 +91,27 @@ public class BoardControllerTest extends TestBase {
     }
 
     @Test
-    public void shouldReturnAllEntriesSuccessfully() {
+    public void loadAll_shouldReturnAllBoardsSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
         given().header("userId", "11222")
                 .when()
                 .get("/boards")
+                .then()
+                .statusCode(200)
+                .body("[0].name", equalTo("board-name"))
+                .body("[0].reporter", equalTo(1))
+                .body("[0].creationTime", notNullValue())
+                .body("[0]._links.all.href", equalTo("http://localhost:8007/boards"))
+                .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/fooId"))
+                .body("[0]._links.entries.href", equalTo("http://localhost:8007/boards/fooId/entries"));
+    }
+
+    @Test
+    public void findByUserId_shouldReturnAllBoardsSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
+        given().header("userId", "11222")
+                .when()
+                .get("/users/1/boards")
                 .then()
                 .statusCode(200)
                 .body("[0].name", equalTo("board-name"))

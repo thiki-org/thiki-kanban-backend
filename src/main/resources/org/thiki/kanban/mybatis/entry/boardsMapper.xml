@@ -26,4 +26,9 @@
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_board SET delete_status=1 WHERE id=#{id}
     </delete>
+
+    <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0 AND reporter=#{userId}
+    </select>
+
 </mapper>

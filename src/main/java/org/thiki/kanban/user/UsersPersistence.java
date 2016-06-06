@@ -1,4 +1,4 @@
-package org.thiki.kanban.system.user;
+package org.thiki.kanban.user;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -10,12 +10,11 @@ import java.util.List;
 public interface UsersPersistence {
     Integer create(User user);
 
-    User findById(@Param("id") int id);
+    User findById(@Param("id") String id);
 
     List<User> loadAll();
 
     Integer update(User user);
 
-    Integer deleteById(@Param("id") int id);
-
+    Integer deleteById(@Param("id") String id);
 }

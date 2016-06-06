@@ -1,4 +1,4 @@
-package org.thiki.kanban.system.user;
+package org.thiki.kanban.user;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
@@ -12,13 +12,13 @@ public class UsersService {
     @Resource
     private UsersPersistence usersPersistence;
 
-    public User create(Integer reporterUserId, final User user) {
+    public User create(String reporterUserId, final User user) {
         user.setId(reporterUserId);
         usersPersistence.create(user);
         return usersPersistence.findById(user.getId());
     }
 
-    public User findById(int id) {
+    public User findById(String id) {
         return usersPersistence.findById(id);
     }
 
@@ -31,7 +31,7 @@ public class UsersService {
         return usersPersistence.findById(user.getId());
     }
 
-    public int deleteById(int id) {
+    public Integer deleteById(String id) {
         User userToDelete = usersPersistence.findById(id);
         if (userToDelete == null) {
             throw new ResourceNotFoundException("user[" + id + "] is not found.");

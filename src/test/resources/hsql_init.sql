@@ -41,3 +41,16 @@ CREATE TABLE kb_task (
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
   ) ;
+
+  -- ----------------------------
+-- Table structure for kb_user
+-- ----------------------------
+DROP TABLE IF EXISTS kb_user;
+CREATE TABLE kb_user
+(
+  id VARCHAR(40) NOT NULL PRIMARY KEY,
+  email             VARCHAR(200) NOT NULL,
+  delete_status int DEFAULT 0,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP
+  );

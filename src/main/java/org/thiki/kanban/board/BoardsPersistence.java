@@ -22,4 +22,6 @@ public interface BoardsPersistence {
     Integer deleteById(@Param("id") String id);
 
     Boolean checkRedundancy(Board board);
+
+    List<Board> findByUserId(String userId);
 }
