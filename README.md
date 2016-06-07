@@ -66,7 +66,13 @@ hsql是内存数据库,仅在集成测试中使用。所以,test目录下的测�
 ```
  mvn clean install exec:java -P local_tao
 ```
-注意:运行时请把 `local_tao`修改成的`profile` id.
+注意:运行时请把 `local_tao`修改成你的`profile` id.
+
+如果需要在启动过程中跳过测试,运行一下maven命令:
+
+ ```
+  mvn clean install -Dmaven.test.skip=true exec:java -P local_tao
+ ```
 
 ### 3、访问Web APIs
 
