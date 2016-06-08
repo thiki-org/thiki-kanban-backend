@@ -9,7 +9,9 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thiki.kanban.foundation.common.security.AccessTokenVerifyInterceptor;
 import org.thiki.kanban.foundation.exception.KanbanExceptionResolver;
 
 /**
@@ -33,5 +35,13 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
             }
         });
         converters.add(converter);
+    }
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        // 多个拦截器组成一个拦截器链
+        // addPathPatterns 用于添加拦截规则
+        // excludePathPatterns 用户排除拦截
+        registry.addInterceptor(new AccessTokenVerifyInterceptor()).addPathPatterns("/**");
+        super.addInterceptors(registry);
     }
 }

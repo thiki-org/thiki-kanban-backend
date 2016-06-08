@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.auth.UserPersistence">
+
+    <insert id="create" parameterType="org.thiki.kanban.auth.User">
+        INSERT INTO
+        kb_user(id,username, password, salt) VALUES (#{id},#{username}, #{password}, #{salt})
+    </insert>
+
+    <update id="update" parameterType="org.thiki.kanban.auth.User" flushCache="true">
+        UPDATE kb_client SET
+        username = #{username},
+        password = #{password},
+        salt = #{salt}
+        WHERE id=#{id}
+    </update>
+
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.auth.User">
+        SELECT * FROM kb_user WHERE id= #{id}
+    </select>
+
+    <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.auth.User">
+        SELECT *  FROM kb_user WHERE id= #{id}
+    </select>
+    <select id="findByIdandsalt" parameterType="java.lang.String" resultType="org.thiki.kanban.auth.User">
+        SELECT *  FROM kb_user WHERE id= #{id} and salt = #{salt}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_user SET delete_status=1 WHERE id=#{id}
+    </delete>
+</mapper>
