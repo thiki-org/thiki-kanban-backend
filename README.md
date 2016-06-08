@@ -19,6 +19,9 @@ thiki-kanban是一个精益看板系统,以看板方法为核心,内嵌精益思
 * HSQL
 * RestAssured
 
+```
+NOTE:thiki-kanban-backend仅提供了RESTful服务端,客户端我们提供了[thiki-kanban-web](https://github.com/thiki-org/thiki-kanban-web),你需要两边配合使用。当然,你也可以自行开发适合自己的客户端。
+```
 
 ##安装方法 
 
