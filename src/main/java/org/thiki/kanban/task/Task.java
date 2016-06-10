@@ -2,12 +2,14 @@ package org.thiki.kanban.task;
 
 import org.thiki.kanban.entry.Entry;
 
+import java.io.Serializable;
+
 /**
  * 任务：任何有指定负责人的有特定目标的事项，可以是用户故事，技术任务，一次会议等等
  *
  * @author joeaniu
  */
-public class Task {
+public class Task implements Serializable {
     /**
      * id
      */

@@ -2,11 +2,13 @@ package org.thiki.kanban.entry;
 
 import org.thiki.kanban.task.Task;
 
+import java.io.Serializable;
+
 /**
  * 任务列表
  * Created by xubitao on 04/26/16.
  */
-public class Entry {
+public class Entry implements Serializable {
 
     private String id;
     /**

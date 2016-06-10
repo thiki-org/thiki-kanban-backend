@@ -1,6 +1,8 @@
 package org.thiki.kanban.user;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String id;
 
