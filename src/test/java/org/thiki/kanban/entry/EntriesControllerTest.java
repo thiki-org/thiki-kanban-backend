@@ -88,6 +88,7 @@ public class EntriesControllerTest extends TestBase {
     @Test
     public void shouldReturnAllEntriesSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('fooId','this is the first entry.',1,'feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('randomId','this is the first entry.',1,'feeId2')");
         given().header("userId", "11222")
                 .when()
                 .get("/boards/feeId/entries")

@@ -25,8 +25,8 @@ public class EntriesService {
         return entriesPersistence.findById(id);
     }
 
-    public List<Entry> loadAll() {
-        return entriesPersistence.loadAll();
+    public List<Entry> loadByBoardId(String boardId) {
+        return entriesPersistence.loadByBoardId(boardId);
     }
 
     public Entry update(Entry entry) {

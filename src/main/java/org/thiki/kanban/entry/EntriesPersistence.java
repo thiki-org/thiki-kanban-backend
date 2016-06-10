@@ -15,7 +15,7 @@ public interface EntriesPersistence {
 
     Entry findById(@Param("id") String id);
 
-    List<Entry> loadAll();
+    List<Entry> loadByBoardId(String boardId);
 
     Integer update(Entry entry);
 

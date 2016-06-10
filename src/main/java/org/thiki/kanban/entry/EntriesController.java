@@ -17,7 +17,7 @@ public class EntriesController {
 
     @RequestMapping(value = "/boards/{boardId}/entries", method = RequestMethod.GET)
     public HttpEntity loadAll(@PathVariable String boardId) {
-        List<Entry> entryList = entriesService.loadAll();
+        List<Entry> entryList = entriesService.loadByBoardId(boardId);
         return Response.build(new EntriesResource(entryList, boardId));
 
     }
