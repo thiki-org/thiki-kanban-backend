@@ -1,6 +1,9 @@
 package org.thiki.kanban.entry;
 
+import org.hibernate.validator.constraints.Length;
 import org.thiki.kanban.task.Task;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 任务列表
@@ -12,6 +15,8 @@ public class Entry {
     /**
      * 列表标题
      */
+    @NotNull(message = "Entry title should be not null.")
+    @Length(min = 1, max = 50, message = "Entry title's length is between 1 to 20.")
     private String title;
     /**
      * 创建者用户Id
