@@ -1,9 +1,11 @@
 package org.thiki.kanban.board;
 
+import java.io.Serializable;
+
 /**
  * Created by xubitao on 05/26/16.
  */
-public class Board {
+public class Board implements Serializable {
 
     private String id;
 

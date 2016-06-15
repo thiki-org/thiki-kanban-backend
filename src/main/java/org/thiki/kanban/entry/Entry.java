@@ -1,9 +1,6 @@
 package org.thiki.kanban.entry;
 
-import org.hibernate.validator.constraints.Length;
 import org.thiki.kanban.task.Task;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * 任务列表

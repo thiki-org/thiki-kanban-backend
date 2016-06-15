@@ -35,6 +35,19 @@ public class EntriesControllerTest extends TestBase {
     }
 
     @Test
+    public void shouldReturnBadRequestWhenEntryTitleIsNull() {
+        given().header("userId", "11222")
+                .body("{\"boardId\":\"feeId\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/feeId/entries")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("Entry title should be not null."));
+    }
+
+    @Test
     public void shouldReturnEntryWhenFindEntryById() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('fooId','this is the first entry.',1,'feeId')");
         given().header("userId", "11222")
