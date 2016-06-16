@@ -44,7 +44,7 @@ public class EntriesControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("任务标题不能为空."));
+                .body("message", equalTo("Entry title can not be null."));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class EntriesControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("任务标题的长度不能超过50个字符."));
+                .body("message", equalTo("Entry title's length is between 1 to 50."));
     }
 
     @Test
