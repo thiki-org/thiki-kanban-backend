@@ -16,4 +16,6 @@ public interface AssignmentPersistence {
     Assignment findById(@Param("id") String id);
 
     List<Assignment> findByTaskId(String taskId);
+
+    int deleteById(String id);
 }

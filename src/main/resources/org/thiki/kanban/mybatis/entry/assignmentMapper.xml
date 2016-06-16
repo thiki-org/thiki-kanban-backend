@@ -16,4 +16,8 @@
     <select id="findByTaskId" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
         SELECT * FROM kb_task_assignment WHERE task_id= #{taskId} AND delete_status=0
     </select>
+
+    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_task_assignment SET delete_status=1 WHERE id=#{id}
+    </delete>
 </mapper>

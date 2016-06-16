@@ -26,4 +26,12 @@ public class AssignmentResource extends RestResource {
         }
         this.add(linkTo(methodOn(EntriesController.class).loadAll(entryId)).withRel("all"));
     }
+
+    public AssignmentResource(String entryId, String taskId) {
+        Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByTaskId(entryId, taskId)).withRel("assignments");
+        this.add(assignmentsLink);
+
+        Link taskLink = linkTo(methodOn(TasksController.class).findById(entryId, taskId)).withRel("task");
+        this.add(taskLink);
+    }
 }

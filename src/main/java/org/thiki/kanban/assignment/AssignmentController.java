@@ -34,4 +34,10 @@ public class AssignmentController {
         List<Assignment> assignmentList = assignmentService.findByTaskId(taskId);
         return Response.build(new AssignmentsResource(assignmentList, entryId, taskId));
     }
+
+    @RequestMapping(value = "/entries/{entryId}/tasks/{taskId}/assignments/{id}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String entryId, @PathVariable String taskId, @PathVariable String id) {
+        assignmentService.deleteById(id);
+        return Response.build(new AssignmentResource(entryId, taskId));
+    }
 }

@@ -39,8 +39,6 @@ public class AssignmentControllerTest extends TestBase {
     public void findById_shouldReturnAssignmentSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_task_assignment (id,task_id,assignee,assigner,reporter) VALUES ('fooId','taskId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
         given().header("userId", "reporterId-foo")
-                .body("{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}")
-                .contentType(ContentType.JSON)
                 .when()
                 .get("/entries/1/tasks/fooId/assignments/fooId")
                 .then()
@@ -74,5 +72,42 @@ public class AssignmentControllerTest extends TestBase {
                 .body("[0]._links.task.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo"))
                 .body("[0]._links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo/assignments"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo/assignments/fooId"));
+    }
+
+    @Test
+    public void findByTaskId_shouldReturnErrorWhenTaskIsNotExist() {
+        jdbcTemplate.execute("INSERT INTO  kb_task_assignment (id,task_id,assignee,assigner,reporter) VALUES ('fooId','taskId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
+        given().header("userId", "reporterId-foo")
+                .body("{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/entries/1/tasks/taskId-foo/assignments")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("task[taskId-foo] is not found."));
+    }
+
+    @Test
+    public void delete_shouldReturnSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_task_assignment (id,task_id,assignee,assigner,reporter) VALUES ('fooId','taskId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
+        given().header("userId", "reporterId-foo")
+                .when()
+                .delete("/entries/1/tasks/fooId/assignments/fooId")
+                .then()
+                .statusCode(200)
+                .body("_links.task.href", equalTo("http://localhost:8007/entries/1/tasks/fooId"))
+                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId/assignments"));
+    }
+
+    @Test
+    public void delete_shouldReturnErrorWhenAssignmentIsNotExist() {
+        given().header("userId", "reporterId-foo")
+                .when()
+                .delete("/entries/1/tasks/fooId/assignments/fooId")
+                .then()
+                .statusCode(404)
+                .body("code", equalTo(404))
+                .body("message", equalTo("assignment[fooId] is not found."));
     }
 }

@@ -6,6 +6,7 @@ import org.thiki.kanban.task.Task;
 import org.thiki.kanban.task.TasksPersistence;
 
 import javax.annotation.Resource;
+import java.security.InvalidParameterException;
 import java.util.List;
 
 /**
@@ -33,8 +34,16 @@ public class AssignmentService {
     public List<Assignment> findByTaskId(String taskId) {
         Task task = tasksPersistence.findById(taskId);
         if (task == null) {
-            throw new ResourceNotFoundException("task[" + taskId + "] is not found.");
+            throw new InvalidParameterException("task[" + taskId + "] is not found.");
         }
         return assignmentPersistence.findByTaskId(taskId);
+    }
+
+    public int deleteById(String id) {
+        Assignment assignmentToDelete = assignmentPersistence.findById(id);
+        if (assignmentToDelete == null) {
+            throw new ResourceNotFoundException("assignment[" + id + "] is not found.");
+        }
+        return assignmentPersistence.deleteById(id);
     }
 }
