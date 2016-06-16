@@ -18,7 +18,6 @@ public class AssignmentResource extends RestResource {
             Link selfLink = linkTo(methodOn(AssignmentController.class).findById(entryId, taskId, assignment.getId())).withSelfRel();
             this.add(selfLink);
 
-
             Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByTaskId(entryId, taskId)).withRel("assignments");
             this.add(assignmentsLink);
 
