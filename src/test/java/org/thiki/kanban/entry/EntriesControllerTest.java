@@ -44,7 +44,26 @@ public class EntriesControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("Entry title should be not null."));
+                .body("message", equalTo("任务标题不能为空."));
+    }
+
+    @Test
+    public void shouldReturnBadRequestWhenEntryTitleIsTooLong() {
+        given().header("userId", "11222")
+                .body("{\"boardId\":\"feeId\"}")
+                .body("{\"title\":\"111111111111111111111111" +
+                        "111111111111111111111111111111111111" +
+                        "111111111111111111111111111111111111" +
+                        "111111111111111111111111111111111111" +
+                        "1111111111111111111111111" +
+                        "11111111111111111111111111\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/feeId/entries")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("任务标题的长度不能超过50个字符."));
     }
 
     @Test
