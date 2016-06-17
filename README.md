@@ -10,15 +10,6 @@ thiki(思奇)是一个充满活力、具有技术追求并热爱创造的团队�
 
 thiki-kanban是一个精益看板系统,以看板方法为核心,内嵌精益思想,研发过程中覆盖了丰富的技术实践。
 
-系统模块
-1.看板管理
-
-2.任务管理
-
-3.用户管理
-
-4.权限管理
-
 系统在设计上使用RESTful的架构风格,服务端与客户端独立演进。
 
 基础技术点:
@@ -29,9 +20,8 @@ thiki-kanban是一个精益看板系统,以看板方法为核心,内嵌精益思
 * RestAssured
 * java validate
 
-```
+
 NOTE:thiki-kanban-backend仅提供了RESTful服务端,客户端我们提供了[thiki-kanban-web](https://github.com/thiki-org/thiki-kanban-web),你需要两边配合使用。当然,你也可以自行开发适合自己的客户端。
-```
 
 ##安装方法 
 
