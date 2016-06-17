@@ -4,12 +4,13 @@
 
     <insert id="create" parameterType="org.thiki.kanban.user.User">
 		INSERT INTO
-		kb_user(id, email) VALUES (#{id}, #{email})
+        kb_user(id, email,name) VALUES (#{id}, #{email}, #{name})
 	</insert>
 
     <update id="update" parameterType="org.thiki.kanban.user.User" flushCache="true">
 		UPDATE kb_user SET
-		email=#{email}
+        email=#{email},
+        name=#{name}
 		WHERE id=#{id}
 	</update>
 

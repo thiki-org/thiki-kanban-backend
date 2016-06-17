@@ -7,6 +7,7 @@ CREATE TABLE kb_user
   id                VARCHAR(40) NOT NULL
   COMMENT '编号',
   email             VARCHAR(200) COMMENT '邮箱',
+  name              VARCHAR(40),
   delete_status     INT(2)   DEFAULT 0,
   creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,

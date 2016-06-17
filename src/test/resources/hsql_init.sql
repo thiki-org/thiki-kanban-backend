@@ -50,6 +50,7 @@ CREATE TABLE kb_user
 (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   email             VARCHAR(200) NOT NULL,
+  name             VARCHAR(40) NOT NULL,
   delete_status int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP

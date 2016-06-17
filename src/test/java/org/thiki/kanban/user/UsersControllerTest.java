@@ -20,7 +20,7 @@ public class UsersControllerTest extends TestBase {
     @Test
     public void create_shouldReturn201WhenCreateUserSuccessfully() {
         given().header("userId", "11222")
-                .body("{\"email\":\"someone@email.com\"}")
+                .body("{\"email\":\"someone@email.com\",\"name\":\"someone\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/users")
@@ -28,6 +28,7 @@ public class UsersControllerTest extends TestBase {
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
                 .body("email", equalTo("someone@email.com"))
+                .body("name", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("_links.users.href", equalTo("http://localhost:8007/users"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/fooId"));
@@ -35,7 +36,7 @@ public class UsersControllerTest extends TestBase {
 
     @Test
     public void findById_shouldReturnUserWhenUserIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_user (id,email) VALUES ('fooId','someone@email.com')");
+        jdbcTemplate.execute("INSERT INTO  kb_user (id,email,name) VALUES ('fooId','someone@email.com','someone')");
         given().header("userId", "11222")
                 .when()
                 .get("/users/fooId")
@@ -43,6 +44,7 @@ public class UsersControllerTest extends TestBase {
                 .statusCode(200)
                 .body("id", equalTo("fooId"))
                 .body("email", equalTo("someone@email.com"))
+                .body("name", equalTo("someone"))
                 .body("_links.users.href", equalTo("http://localhost:8007/users"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/users/fooId/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/fooId"));
@@ -51,15 +53,16 @@ public class UsersControllerTest extends TestBase {
 
     @Test
     public void update_shouldUpdateSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_user (id,email) VALUES ('fooId','someone@email.com')");
+        jdbcTemplate.execute("INSERT INTO  kb_user (id,email,name) VALUES ('fooId','someone@email.com','someone')");
         given().header("userId", "11222")
                 .contentType(ContentType.JSON)
-                .body("{\"email\":\"others@email.com\"}")
+                .body("{\"email\":\"others@email.com\",\"name\":\"others\"}")
                 .when()
                 .put("/users/fooId")
                 .then()
                 .statusCode(200)
                 .body("email", equalTo("others@email.com"))
+                .body("name", equalTo("others"))
                 .body("_links.users.href", equalTo("http://localhost:8007/users"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/users/fooId/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/fooId"));
@@ -68,7 +71,7 @@ public class UsersControllerTest extends TestBase {
 
     @Test
     public void delete_shouldDeleteSuccessfullyWhenTheUserIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_user (id,email) VALUES ('fooId','someone@email.com')");
+        jdbcTemplate.execute("INSERT INTO  kb_user (id,email,name) VALUES ('fooId','someone@email.com','someone')");
         given().header("userId", "11222")
                 .when()
                 .delete("/users/fooId")
@@ -90,13 +93,14 @@ public class UsersControllerTest extends TestBase {
 
     @Test
     public void loadAll_shouldReturnAllUsersSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_user (id,email) VALUES ('fooId','someone@email.com')");
+        jdbcTemplate.execute("INSERT INTO  kb_user (id,email,name) VALUES ('fooId','someone@email.com','someone')");
         given().header("userId", "11222")
                 .when()
                 .get("/users")
                 .then()
                 .statusCode(200)
                 .body("[0].email", equalTo("someone@email.com"))
+                .body("[0].name", equalTo("someone"))
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.users.href", equalTo("http://localhost:8007/users"))
                 .body("[0]._links.boards.href", equalTo("http://localhost:8007/users/fooId/boards"))
