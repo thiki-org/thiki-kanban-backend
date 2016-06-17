@@ -36,7 +36,9 @@ public class TasksControllerTest extends TestBase {
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
                 .body("reporter", equalTo(11222))
-                .body("_links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/fooId"));
+                .body("_links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/fooId"))
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"))
+                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/fooId/tasks/fooId/assignments"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
     }
 
@@ -68,7 +70,8 @@ public class TasksControllerTest extends TestBase {
                 .body("[0].reporter", equalTo(1))
                 .body("[0].entryId", equalTo("fooId"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/entries/fooId/tasks/1"))
-                .body("[0]._links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"));
+                .body("[0]._links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"))
+                .body("[0]._links.assignments.href", equalTo("http://localhost:8007/entries/fooId/tasks/1/assignments"));
     }
 
     @Test
@@ -83,7 +86,8 @@ public class TasksControllerTest extends TestBase {
                 .body("content", equalTo("play badminton"))
                 .body("reporter", equalTo(1))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/1"))
-                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"))
+                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/1/assignments"));
     }
 
     @Test
@@ -111,7 +115,8 @@ public class TasksControllerTest extends TestBase {
                 .body("summary", equalTo("newSummary"))
                 .body("orderNumber", equalTo(3))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId"))
-                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"))
+                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId/assignments"));
         assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_task WHERE id='fooId'", String.class));
     }
 
@@ -158,7 +163,8 @@ public class TasksControllerTest extends TestBase {
                 .body("summary", equalTo("newSummary"))
                 .body("orderNumber", equalTo(4))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId4"))
-                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"))
+                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId4/assignments"));
 
         assertEquals(0, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId1'"));
         assertEquals(1, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId2'"));
@@ -181,7 +187,8 @@ public class TasksControllerTest extends TestBase {
                 .body("summary", equalTo("newSummary"))
                 .body("orderNumber", equalTo(3))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId1"))
-                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"));
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"))
+                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId1/assignments"));
 
         assertEquals(3, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId1'"));
         assertEquals(0, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId2'"));
