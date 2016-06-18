@@ -7,6 +7,7 @@ CREATE TABLE kb_user
   id                VARCHAR(40) NOT NULL
   COMMENT '编号',
   email             VARCHAR(200) COMMENT '邮箱',
+  name              VARCHAR(40),
   delete_status     INT(2)   DEFAULT 0,
   creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
@@ -64,6 +65,25 @@ CREATE TABLE kb_task (
   creation_time     DATETIME                DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
   delete_status     INT(2)                  DEFAULT 0,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+-- ----------------------------
+-- Table structure for kb_task_assignment
+-- ----------------------------
+DROP TABLE IF EXISTS kb_task_assignment;
+
+CREATE TABLE kb_task_assignment (
+  id                VARCHAR(40) NOT NULL,
+  task_id           VARCHAR(40) NOT NULL,
+  assigner          VARCHAR(40) NOT NULL,
+  assignee          VARCHAR(40) NOT NULL,
+  reporter          VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  delete_status     INT(2)      DEFAULT 0,
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB

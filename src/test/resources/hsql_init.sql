@@ -50,7 +50,23 @@ CREATE TABLE kb_user
 (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   email             VARCHAR(200) NOT NULL,
+  name             VARCHAR(40) NOT NULL,
   delete_status int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP
   );
+-- ----------------------------
+-- Table structure for kb_task_assignment
+-- ----------------------------
+drop table if exists kb_task_assignment;
+
+CREATE TABLE kb_task_assignment (
+  id VARCHAR(40) NOT NULL PRIMARY KEY,
+  task_id VARCHAR(40) NOT NULL,
+  assigner VARCHAR(40) NOT NULL,
+  assignee VARCHAR(40) NOT NULL,
+  reporter VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  delete_status int DEFAULT 0
+  ) ;

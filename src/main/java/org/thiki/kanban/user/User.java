@@ -8,6 +8,8 @@ public class User implements Serializable {
 
     private String email;
 
+    private String name;
+
     private String creationTime;
     private String modificationTime;
 
@@ -41,5 +43,13 @@ public class User implements Serializable {
 
     public void setModificationTime(String modificationTime) {
         this.modificationTime = modificationTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

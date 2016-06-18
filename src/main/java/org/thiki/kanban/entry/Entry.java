@@ -15,8 +15,8 @@ public class Entry {
     /**
      * 列表标题
      */
-    @NotNull(message = "Entry title should be not null.")
-    @Length(min = 1, max = 50, message = "Entry title's length is between 1 to 20.")
+    @NotNull(message = "{NotNull.entry.title}")
+    @Length(min = 1, max = 50, message = "{Length.entry.title}")
     private String title;
     /**
      * 创建者用户Id
