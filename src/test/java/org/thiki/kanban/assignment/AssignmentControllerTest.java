@@ -8,7 +8,6 @@ import org.thiki.kanban.TestBase;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
 
 /**
  * Created by xubt on 6/16/16.
@@ -55,6 +54,7 @@ public class AssignmentControllerTest extends TestBase {
 
     @Test
     public void findByTaskId_shouldReturnAssignmentsSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_user (id,name,email) VALUES ('assigneeId-foo','徐濤','766191920@qq.com')");
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES ('taskId-foo','this is the task summary.','play badminton',1,'fooId')");
         jdbcTemplate.execute("INSERT INTO  kb_task_assignment (id,task_id,assignee,assigner,reporter) VALUES ('fooId','taskId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
         given().header("userId", "reporterId-foo")
@@ -67,6 +67,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("[0].id", equalTo("fooId"))
                 .body("[0].assignee", equalTo("assigneeId-foo"))
                 .body("[0].assigner", equalTo("assignerId-foo"))
+                .body("[0].name", equalTo("徐濤"))
                 .body("[0].reporter", equalTo("reporterId-foo"))
                 .body("[0]._links.task.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo"))
                 .body("[0]._links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo/assignments"))
