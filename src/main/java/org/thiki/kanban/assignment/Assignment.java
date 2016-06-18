@@ -12,6 +12,8 @@ public class Assignment {
 
     private String assigner;
 
+    private String name;
+
     private String reporter;
 
     private String creationTime;
@@ -72,5 +74,13 @@ public class Assignment {
 
     public void setModificationTime(String modificationTime) {
         this.modificationTime = modificationTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

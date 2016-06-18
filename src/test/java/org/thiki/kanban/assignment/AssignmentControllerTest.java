@@ -29,7 +29,6 @@ public class AssignmentControllerTest extends TestBase {
                 .body("assignee", equalTo("assigneeId"))
                 .body("assigner", equalTo("assignerId"))
                 .body("reporter", equalTo("11222"))
-                .body("creationTime", notNullValue())
                 .body("_links.task.href", equalTo("http://localhost:8007/entries/1/tasks/fooId"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId/assignments"))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId/assignments/fooId"));
@@ -37,6 +36,7 @@ public class AssignmentControllerTest extends TestBase {
 
     @Test
     public void findById_shouldReturnAssignmentSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_user (id,name,email) VALUES ('assigneeId-foo','徐濤','766191920@qq.com')");
         jdbcTemplate.execute("INSERT INTO  kb_task_assignment (id,task_id,assignee,assigner,reporter) VALUES ('fooId','taskId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
         given().header("userId", "reporterId-foo")
                 .when()
@@ -46,8 +46,8 @@ public class AssignmentControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("assignee", equalTo("assigneeId-foo"))
                 .body("assigner", equalTo("assignerId-foo"))
+                .body("name", equalTo("徐濤"))
                 .body("reporter", equalTo("reporterId-foo"))
-                .body("creationTime", notNullValue())
                 .body("_links.task.href", equalTo("http://localhost:8007/entries/1/tasks/fooId"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId/assignments"))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId/assignments/fooId"));
@@ -68,7 +68,6 @@ public class AssignmentControllerTest extends TestBase {
                 .body("[0].assignee", equalTo("assigneeId-foo"))
                 .body("[0].assigner", equalTo("assignerId-foo"))
                 .body("[0].reporter", equalTo("reporterId-foo"))
-                .body("[0].creationTime", notNullValue())
                 .body("[0]._links.task.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo"))
                 .body("[0]._links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo/assignments"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo/assignments/fooId"));
