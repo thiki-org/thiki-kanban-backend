@@ -113,6 +113,48 @@ http://localhost:8080/entrance
 
  -> Persistences (read)
 
+```
+  entry1 = pers.readEntry(1);
+  entry2 = pers.readEntry(2);
+
+  // 0 acdemy model,  ask style, wrong!
+  toMove = entry1.findTask(22323);
+  List<Task> taskList = entry1.getTasks();
+  taskList.remove(toMove);
+  List<Task> taskList2 = entry2.getTasks();
+  taskList2.add(toMove);
+
+
+  // 1 more ask sytle: entry -X-> entry, it depends.
+  toMove = entry1.findTask(22323);
+  entry1.moveOut(toMove);
+  entry2.moveIn(toMove);
+
+  // 2 more tell sytle: entry -> entry, it depends.
+  entry1.moveTaskTo(entry2, 22323);
+
+  // 3 domain layer do some infrastructure jobs.代码复用程度高,副作用也大
+  entry1 = pers.readEntry(1);
+  entry2Id = 2;
+  taskId = 22323;
+  entry1.moveTaskTo(entry2Id, taskId);
+     //entry1 implemntation
+     entry2 = pers.readEntry(entryId);
+     task = pers.readTask(taskId);
+     ....
+
+
+
+
+```
+PoEAA 企业应用架构
+
+挑选主动对象, entry
+
+Domain Model  vs  microservice
+
+Transaction Script vs Domain Model
+30 - 50,    5% - 50%
  -> call bo1.doA(), result1
 
  -> call bo2.doB(result1),
@@ -130,8 +172,10 @@ http://localhost:8080/entrance
 * domain logic layer (domain layer)
 
    - bo - entity
-   - bo - non-entity (more important)
-   - bo as DTOs
+   - bo - non-entity (more important) vo, prototype
+   - bo as DTOs , web, persistence,  java bean: getter setter
+
+   non-entity , entity(DTOs),
 
 * infrastructure layer
 
