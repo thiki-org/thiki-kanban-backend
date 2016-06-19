@@ -94,6 +94,104 @@ http://localhost:8080/entrance
   }
 }
 ```
+## 应用架构分层
+
+* servlet
+* spring container
+
+对应spring配置bean, 其中设置了scan 范围
+
+* spring mvc controller
+
+    - 路由
+    - http参数处理
+    - http response , transfer bo to rest resources, hateoas representation.
+
+* service (天龙八部, 所有对状态有影响的调用最好都能在service上看到)
+
+ -> verify the parameters (if needed)
+
+ -> Persistences (read)
+
+```
+  entry1 = pers.readEntry(1);
+  entry2 = pers.readEntry(2);
+
+  // 0 acdemy model,  ask style, wrong!
+  toMove = entry1.findTask(22323);
+  List<Task> taskList = entry1.getTasks();
+  taskList.remove(toMove);
+  List<Task> taskList2 = entry2.getTasks();
+  taskList2.add(toMove);
+
+
+  // 1 more ask sytle: entry -X-> entry, it depends.
+  toMove = entry1.findTask(22323);
+  entry1.moveOut(toMove);
+  entry2.moveIn(toMove);
+
+  // 2 more tell sytle: entry -> entry, it depends.
+  entry1.moveTaskTo(entry2, 22323);
+
+  // 3 domain layer do some infrastructure jobs.代码复用程度高,副作用也大
+  entry1 = pers.readEntry(1);
+  entry2Id = 2;
+  taskId = 22323;
+  entry1.moveTaskTo(entry2Id, taskId);
+     //entry1 implemntation
+     entry2 = pers.readEntry(entryId);
+     task = pers.readTask(taskId);
+     ....
+
+
+
+
+```
+PoEAA 企业应用架构
+
+挑选主动对象, entry
+
+Domain Model  vs  microservice
+
+Transaction Script vs Domain Model
+30 - 50,    5% - 50%
+ -> call bo1.doA(), result1
+
+ -> call bo2.doB(result1),
+
+ ...
+
+ -> Persistence (write)
+
+ -> send message to other remote service (if needed)
+
+ -> audit log (if needed)
+
+ -> assemble the return object
+
+* domain logic layer (domain layer)
+
+   - bo - entity
+   - bo - non-entity (more important) vo, prototype
+   - bo as DTOs , web, persistence,  java bean: getter setter
+
+   non-entity , entity(DTOs),
+
+* infrastructure layer
+
+   - Persistence
+   - Message Queue
+
+
+## 单应用架构 vs 微服务架构 (TODO)
+
+上一节所说的应用架构分层,主要是针对单应用架构
+
+## 贫血 vs 富领域对象
+
+MF没说过"充血",更没说过"胀血"
+所谓胀血,是指 bo内部引用了infrastructure layer的接口的实例, 导致状态变更被遮盖,难以管理。
+
 
 ## 学习资料
 
