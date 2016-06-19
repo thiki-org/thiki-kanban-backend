@@ -22,7 +22,11 @@
 		SELECT * FROM kb_user WHERE delete_status=0 and id= #{id}
 	</select>
 
-    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
+	<select id="findByEmail" parameterType="java.lang.String" resultType="org.thiki.kanban.user.User">
+		SELECT * FROM kb_user WHERE delete_status=0 and email= #{email}
+	</select>
+
+	<delete id="deleteById" parameterType="java.lang.String" flushCache="true">
 		UPDATE kb_user SET delete_status=1 WHERE id=#{id}
 	</delete>
 </mapper>

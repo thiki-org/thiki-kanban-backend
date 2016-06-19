@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
+import java.security.InvalidParameterException;
 import java.util.List;
 
 @Service
@@ -13,6 +14,10 @@ public class UsersService {
     private UsersPersistence usersPersistence;
 
     public User create(String reporterUserId, final User user) {
+        User foundUser = usersPersistence.findByEmail(user.getEmail());
+        if (foundUser != null) {
+            throw new InvalidParameterException("email[" + user.getEmail() + "] is already exists.");
+        }
         user.setId(reporterUserId);
         usersPersistence.create(user);
         return usersPersistence.findById(user.getId());

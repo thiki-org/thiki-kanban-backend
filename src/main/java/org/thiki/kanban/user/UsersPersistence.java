@@ -17,4 +17,6 @@ public interface UsersPersistence {
     Integer update(User user);
 
     Integer deleteById(@Param("id") String id);
+
+    User findByEmail(String email);
 }

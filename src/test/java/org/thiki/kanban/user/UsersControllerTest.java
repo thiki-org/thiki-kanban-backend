@@ -35,6 +35,19 @@ public class UsersControllerTest extends TestBase {
     }
 
     @Test
+    public void create_shouldFailedWhenEmailIsAlreadyExists() {
+        jdbcTemplate.execute("INSERT INTO  kb_user (id,email,name) VALUES ('fooId2','someone@email.com','someone')");
+        given().header("userId", "11222")
+                .body("{\"email\":\"someone@email.com\",\"name\":\"someone\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/users")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo("email[someone@email.com] is already exists."));
+    }
+
+    @Test
     public void findById_shouldReturnUserWhenUserIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_user (id,email,name) VALUES ('fooId','someone@email.com','someone')");
         given().header("userId", "11222")
