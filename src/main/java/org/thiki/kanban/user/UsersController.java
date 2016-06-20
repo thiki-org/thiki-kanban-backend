@@ -38,7 +38,7 @@ public class UsersController {
         return Response.build(new UserResource());
     }
 
-    @RequestMapping(value = {"/users", "/register"}, method = RequestMethod.POST)
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody User user, @RequestHeader String userId) {
         User savedUser = usersService.create(userId, user);
         return Response.post(new UserResource(savedUser));

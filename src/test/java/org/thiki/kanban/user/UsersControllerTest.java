@@ -35,23 +35,6 @@ public class UsersControllerTest extends TestBase {
     }
 
     @Test
-    public void create_shouldReturn201WhenUsingRegisterRoute() {
-        given().header("userId", "11222")
-                .body("{\"email\":\"someone@email.com\",\"name\":\"someone\"}")
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/register")
-                .then()
-                .statusCode(201)
-                .body("id", equalTo("fooId"))
-                .body("email", equalTo("someone@email.com"))
-                .body("name", equalTo("someone"))
-                .body("creationTime", notNullValue())
-                .body("_links.users.href", equalTo("http://localhost:8007/users"))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/fooId"));
-    }
-
-    @Test
     public void create_shouldFailedWhenEmailIsAlreadyExists() {
         jdbcTemplate.execute("INSERT INTO  kb_user (id,email,name) VALUES ('fooId2','someone@email.com','someone')");
         given().header("userId", "11222")
