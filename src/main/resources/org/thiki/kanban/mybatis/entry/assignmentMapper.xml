@@ -10,7 +10,8 @@
     </insert>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
-        SELECT assignment.id,assignment.task_id,assignment.assignee,assignment.assigner,assignment.reporter,assignment.creation_time,user.name
+        SELECT
+        assignment.id,assignment.task_id,assignment.assignee,assignment.assigner,assignment.reporter,assignment.creation_time,assignment.modification_time,user.name
         FROM kb_task_assignment assignment LEFT JOIN kb_user user ON assignment.assignee=user.id WHERE assignment.id= #{id}
     </select>
 
