@@ -35,7 +35,7 @@ public class EntriesControllerTest extends TestBase {
     }
 
     @Test
-    public void shouldReturnBadRequestWhenEntryTitleIsNull() {
+    public void shouldFailedIfEntryTitleIsEmpty() {
         given().header("userId", "11222")
                 .body("{\"boardId\":\"feeId\"}")
                 .contentType(ContentType.JSON)
@@ -44,26 +44,34 @@ public class EntriesControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("Entry title can not be null."));
+                .body("message", equalTo("列表名称不能为空"));
+    }
+
+    @Test
+    public void shouldFailedIfEntryBoardIdIsEmpty() {
+        given().header("userId", "11222")
+                .body("{\"title\":\"this is the entry title.\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/feeId/entries")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("boardId不能为空"));
     }
 
     @Test
     public void shouldReturnBadRequestWhenEntryTitleIsTooLong() {
         given().header("userId", "11222")
-                .body("{\"boardId\":\"feeId\"}")
-                .body("{\"title\":\"111111111111111111111111" +
-                        "111111111111111111111111111111111111" +
-                        "111111111111111111111111111111111111" +
-                        "111111111111111111111111111111111111" +
-                        "1111111111111111111111111" +
-                        "11111111111111111111111111\"}")
+                .body("{\"boardId\":\"feeId\"}}")
+                .body("{\"title\":\"\",\"boardId\":\"feeId\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/entries")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("Entry title's length is between 1 to 50."));
+                .body("message", equalTo("列表名称长度非法,有效长度为1~50个字符。"));
     }
 
     @Test
@@ -85,7 +93,7 @@ public class EntriesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('fooId','this is the first entry.',1,'feeId')");
         given().header("userId", "11222")
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\"}")
+                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\"}}")
                 .when()
                 .put("/boards/feeId/entries/fooId")
                 .then()
