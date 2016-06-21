@@ -15,14 +15,15 @@ public class Entry {
     /**
      * 列表标题
      */
-    @NotNull(message = "{NotNull.entry.title}")
-    @Length(min = 1, max = 50, message = "{Length.entry.title}")
+    @NotNull(message = "列表名称不能为空")
+    @Length(min = 1, max = 50, message = "列表名称长度非法,有效长度为1~50个字符。")
     private String title;
     /**
      * 创建者用户Id
      */
     private Integer reporter;
 
+    @NotNull(message = "boardId不能为空")
     private String boardId;
 
     private String creationTime;

@@ -17,7 +17,7 @@ CREATE TABLE kb_board (
 drop table if exists kb_entry;
 CREATE TABLE kb_entry (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
-  title VARCHAR(50) ,
+  title  VARCHAR(50) NOT NULL,
   reporter int NOT NULL,
   board_id VARCHAR(40)  DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,

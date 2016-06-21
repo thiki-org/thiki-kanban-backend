@@ -39,7 +39,7 @@ CREATE TABLE kb_board (
 DROP TABLE IF EXISTS kb_entry;
 CREATE TABLE kb_entry (
   id                VARCHAR(40) NOT NULL,
-  title             TEXT,
+  title             VARCHAR(50) NOT NULL,
   reporter          VARCHAR(40) NOT NULL,
   delete_status     INT                  DEFAULT 0,
   order_number      INT(2)      NOT NULL DEFAULT 0,

@@ -1,7 +1,9 @@
 package org.thiki.kanban.task;
 
+import org.hibernate.validator.constraints.Length;
 import org.thiki.kanban.entry.Entry;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -17,6 +19,8 @@ public class Task implements Serializable {
     /**
      * 简述， 出现在卡片上
      */
+    @NotNull(message = "任务描述不能为空。")
+    @Length(min = 1, max = 100, message = "任务概述字符长度错误,有效长度为1~100个字符。")
     private String summary;
     /**
      * 任务内容
