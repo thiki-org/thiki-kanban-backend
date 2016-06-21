@@ -13,32 +13,32 @@ public class UsersService {
     @Resource
     private UsersPersistence usersPersistence;
 
-    public User create(String reporterUserId, final User user) {
-        User foundUser = usersPersistence.findByEmail(user.getEmail());
-        if (foundUser != null) {
-            throw new InvalidParameterException("email[" + user.getEmail() + "] is already exists.");
+    public UserProfile create(String reporterUserId, final UserProfile userProfile) {
+        UserProfile foundUserProfile = usersPersistence.findByEmail(userProfile.getEmail());
+        if (foundUserProfile != null) {
+            throw new InvalidParameterException("email[" + userProfile.getEmail() + "] is already exists.");
         }
-        user.setId(reporterUserId);
-        usersPersistence.create(user);
-        return usersPersistence.findById(user.getId());
+        userProfile.setId(reporterUserId);
+        usersPersistence.create(userProfile);
+        return usersPersistence.findById(userProfile.getId());
     }
 
-    public User findById(String id) {
+    public UserProfile findById(String id) {
         return usersPersistence.findById(id);
     }
 
-    public List<User> loadAll() {
+    public List<UserProfile> loadAll() {
         return usersPersistence.loadAll();
     }
 
-    public User update(User user) {
-        usersPersistence.update(user);
-        return usersPersistence.findById(user.getId());
+    public UserProfile update(UserProfile userProfile) {
+        usersPersistence.update(userProfile);
+        return usersPersistence.findById(userProfile.getId());
     }
 
     public Integer deleteById(String id) {
-        User userToDelete = usersPersistence.findById(id);
-        if (userToDelete == null) {
+        UserProfile userProfileToDelete = usersPersistence.findById(id);
+        if (userProfileToDelete == null) {
             throw new ResourceNotFoundException("user[" + id + "] is not found.");
         }
         return usersPersistence.deleteById(id);

@@ -14,21 +14,21 @@ public class UsersController {
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public HttpEntity<UsersResource> loadAll() {
-        List<User> users = usersService.loadAll();
-        return Response.build(new UsersResource(users));
+        List<UserProfile> userProfiles = usersService.loadAll();
+        return Response.build(new UsersResource(userProfiles));
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.GET)
     public HttpEntity findById(@PathVariable String id) {
-        User user = usersService.findById(id);
-        return Response.build(new UserResource(user));
+        UserProfile userProfile = usersService.findById(id);
+        return Response.build(new UserResource(userProfile));
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody User user, @PathVariable String id) {
-        user.setId(id);
-        User updatedUser = usersService.update(user);
-        return Response.build(new UserResource(updatedUser));
+    public HttpEntity update(@RequestBody UserProfile userProfile, @PathVariable String id) {
+        userProfile.setId(id);
+        UserProfile updatedUserProfile = usersService.update(userProfile);
+        return Response.build(new UserResource(updatedUserProfile));
 
     }
 
@@ -39,8 +39,8 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody User user, @RequestHeader String userId) {
-        User savedUser = usersService.create(userId, user);
-        return Response.post(new UserResource(savedUser));
+    public HttpEntity create(@RequestBody UserProfile userProfile, @RequestHeader String userId) {
+        UserProfile savedUserProfile = usersService.create(userId, userProfile);
+        return Response.post(new UserResource(savedUserProfile));
     }
 }

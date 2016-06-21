@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="org.thiki.kanban.user.UsersPersistence">
+<mapper namespace="org.thiki.kanban.userProfile.UsersPersistence">
 
-    <insert id="create" parameterType="org.thiki.kanban.user.User">
+    <insert id="create" parameterType="org.thiki.kanban.user.UserProfile">
 		INSERT INTO
-        kb_user(id, email,name) VALUES (#{id}, #{email}, #{name})
+        kb_user_profile(id, email,name) VALUES (#{id}, #{email}, #{name})
 	</insert>
 
-    <update id="update" parameterType="org.thiki.kanban.user.User" flushCache="true">
-		UPDATE kb_user SET
+    <update id="update" parameterType="org.thiki.kanban.user.UserProfile" flushCache="true">
+		UPDATE kb_user_profile SET
         email=#{email},
         name=#{name}
 		WHERE id=#{id}
 	</update>
 
-    <select id="loadAll" parameterType="java.lang.String" resultType="org.thiki.kanban.user.User">
-		SELECT * FROM kb_user WHERE delete_status=0
+    <select id="loadAll" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
+		SELECT * FROM kb_user_profile WHERE delete_status=0
 	</select>
 
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.user.User">
-		SELECT * FROM kb_user WHERE delete_status=0 and id= #{id}
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
+		SELECT * FROM kb_user_profile WHERE delete_status=0 and id= #{id}
 	</select>
 
-	<select id="findByEmail" parameterType="java.lang.String" resultType="org.thiki.kanban.user.User">
-		SELECT * FROM kb_user WHERE delete_status=0 and email= #{email}
+	<select id="findByEmail" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
+		SELECT * FROM kb_user_profile WHERE delete_status=0 and email= #{email}
 	</select>
 
 	<delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-		UPDATE kb_user SET delete_status=1 WHERE id=#{id}
+		UPDATE kb_user_profile SET delete_status=1 WHERE id=#{id}
 	</delete>
 </mapper>

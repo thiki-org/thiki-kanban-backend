@@ -9,11 +9,11 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 public class UserResource extends RestResource {
 
-    public UserResource(User user) {
-        this.domainObject = user;
-        if (user != null) {
-            Link selfLink = linkTo(methodOn(UsersController.class).findById(user.getId())).withSelfRel();
-            Link boardsLink = linkTo(methodOn(BoardsController.class).findByUserId(user.getId())).withRel("boards");
+    public UserResource(UserProfile userProfile) {
+        this.domainObject = userProfile;
+        if (userProfile != null) {
+            Link selfLink = linkTo(methodOn(UsersController.class).findById(userProfile.getId())).withSelfRel();
+            Link boardsLink = linkTo(methodOn(BoardsController.class).findByUserId(userProfile.getId())).withRel("boards");
             this.add(boardsLink);
             this.add(selfLink);
         }

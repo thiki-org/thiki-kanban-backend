@@ -114,8 +114,8 @@ http://localhost:8080/entrance
  -> Persistences (read)
 
 ```
-  entry1 = pers.readEntry(1);
-  entry2 = pers.readEntry(2);
+  Entry entry1 = pers.readEntry(1);
+  Entry entry2 = pers.readEntry(2);
 
   // 0 acdemy model,  ask style, wrong!
   toMove = entry1.findTask(22323);

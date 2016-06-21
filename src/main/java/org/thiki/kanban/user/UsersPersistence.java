@@ -8,15 +8,15 @@ import java.util.List;
 
 @Repository
 public interface UsersPersistence {
-    Integer create(User user);
+    Integer create(UserProfile userProfile);
 
-    User findById(@Param("id") String id);
+    UserProfile findById(@Param("id") String id);
 
-    List<User> loadAll();
+    List<UserProfile> loadAll();
 
-    Integer update(User user);
+    Integer update(UserProfile userProfile);
 
     Integer deleteById(@Param("id") String id);
 
-    User findByEmail(String email);
+    UserProfile findByEmail(String email);
 }
