@@ -42,6 +42,22 @@ public class TasksControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
     }
 
+
+    @Test
+    public void create_shouldFailedIfSummaryIsNull() throws Exception {
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
+        given().body("{}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/entries/fooId/tasks")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("任务描述不能为空。"));
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
+    }
+
     @Test
     public void create_shouldCreateFailedWhenEntryIsNotFound() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
