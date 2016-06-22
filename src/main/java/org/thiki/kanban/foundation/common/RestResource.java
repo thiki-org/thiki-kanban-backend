@@ -10,12 +10,12 @@ import org.springframework.hateoas.ResourceSupport;
  */
 public class RestResource extends ResourceSupport {
     protected Object domainObject;
-    public JSONArray resourcesJSON;
+    protected JSONArray resourcesJSON;
 
     public JSONObject getResource() {
         JSONObject resourceJSON = new JSONObject();
         JSONObject links = new JSONObject();
-        for (Link link : this.getLinks()) {
+        for (Link link : super.getLinks()) {
             JSONObject linkJSON = new JSONObject();
             linkJSON.put("href", link.getHref());
             links.put(link.getRel(), linkJSON);

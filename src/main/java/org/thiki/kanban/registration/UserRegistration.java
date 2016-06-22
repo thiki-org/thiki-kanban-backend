@@ -1,5 +1,7 @@
 package org.thiki.kanban.registration;
 
+import org.thiki.kanban.user.UserProfile;
+
 /**
  * Created by joeaniu on 6/21/16.
  */
@@ -9,30 +11,47 @@ public class UserRegistration {
     private String userId;
     private String password;
     private String recoveryEmail;
+    private String recoveryPhone;
     private int status;
     private long creationTime;
     private long modificationTime;
 
+    /** 正常可使用 */
+    public static final int STATUS_NORMAL = 0;
+    /** 已停用 */
+    public static final int STATUS_INVALID = -1;
+
     public UserRegistration() {
     }
 
+    public UserRegistration(UserProfile userProfile, String password){
+        this.userId = userProfile.getId();
+        this.password = password;
+        this.recoveryEmail = userProfile.getEmail();
+        this.recoveryPhone = userProfile.getPhone();
+        this.status = STATUS_NORMAL;
+    }
+
+
     /**
-     *
-     * @param userId 用户Id
-     * @param password 密码
-     * @param recoveryEmail 邮件
-     * @param status 状态
-     * @param creationTime 创建时间
+     * @param userId           用户Id
+     * @param password         密码
+     * @param recoveryEmail    邮件
+     * @param recoveryPhone    恢复手机
+     * @param status           状态
+     * @param creationTime     创建时间
      * @param modificationTime 最后修改时间
      */
-    public UserRegistration(String userId, String password, String recoveryEmail, int status, long creationTime, long modificationTime) {
+    public UserRegistration(String userId, String password, String recoveryEmail, String recoveryPhone, int status, long creationTime, long modificationTime) {
         this.userId = userId;
         this.password = password;
         this.recoveryEmail = recoveryEmail;
+        this.recoveryPhone = recoveryPhone;
         this.status = status;
         this.creationTime = creationTime;
         this.modificationTime = modificationTime;
     }
+
 
     public String getId() {
         return id;
@@ -90,5 +109,11 @@ public class UserRegistration {
         this.modificationTime = modificationTime;
     }
 
+    public String getRecoveryPhone() {
+        return recoveryPhone;
+    }
 
+    public void setRecoveryPhone(String recoveryPhone) {
+        this.recoveryPhone = recoveryPhone;
+    }
 }

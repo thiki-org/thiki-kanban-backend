@@ -2,13 +2,13 @@ package org.thiki.kanban.registration;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-import org.thiki.kanban.entry.Entry;
+import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 
-import static org.hsqldb.lib.tar.TarHeaderField.name;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by joeaniu on 6/21/16.
@@ -19,18 +19,18 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public HttpEntity registerNewUser(@RequestBody Map<String, String> registrationForm) {
-
-        UserRegistration userRegistration = registrationService.registerNewUser(
+    public HttpEntity registerNewUser(@RequestBody Map<String, String> registrationForm, @RequestHeader String token) {
+        Map<String, Object> result = registrationService.registerNewUser(
                 registrationForm.get("name"),
-                registrationForm.get("mail"),
-                registrationForm.get("mobile"),
-                registrationForm.get("passwd"),
+                registrationForm.get("email"),
+                registrationForm.get("phone"),
+                registrationForm.get("password"),
                 registrationForm.get("captcha")
         );
+        RegistrationResource res = new RegistrationResource(result);
+        res.add(linkTo(methodOn(RegistrationController.class).registerNewUser(registrationForm, token)).withSelfRel());
 
-        return null;
-//        return Response.build(new EntriesResource(entryList, boardId));
+        return Response.post(res);
 
     }
 

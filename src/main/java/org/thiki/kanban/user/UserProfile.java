@@ -11,6 +11,7 @@ public class UserProfile implements Serializable {
     private String name;
 
     private String nick;
+    private String phone;
 
     private String creationTime;
     private String modificationTime;
@@ -21,14 +22,16 @@ public class UserProfile implements Serializable {
      * @param email
      * @param name 唯一的标示名字
      * @param nick 用户昵称,可以重复
+     * @param phone
      * @param creationTime
      * @param modificationTime
      */
-    public UserProfile(String id, String email, String name, String nick, String creationTime, String modificationTime) {
+    public UserProfile(String id, String email, String name, String nick, String phone, String creationTime, String modificationTime) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.nick = nick;
+        this.phone = phone;
         this.creationTime = creationTime;
         this.modificationTime = modificationTime;
     }
@@ -84,4 +87,11 @@ public class UserProfile implements Serializable {
         this.nick = nick;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }

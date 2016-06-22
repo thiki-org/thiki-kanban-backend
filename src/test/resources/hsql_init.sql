@@ -52,6 +52,7 @@ CREATE TABLE kb_user_profile
   email             VARCHAR(200) NOT NULL,
   name             VARCHAR(40) NOT NULL,
   nick             VARCHAR(40) ,
+  phone            VARCHAR(40) ,
   delete_status int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP

@@ -1,14 +1,15 @@
 -- ----------------------------
--- Table structure for kb_user
+-- Table structure for kb_user_profile
 -- ----------------------------
-DROP TABLE IF EXISTS kb_user;
-CREATE TABLE kb_user
+DROP TABLE IF EXISTS kb_user_profile;
+CREATE TABLE kb_user_profile
 (
   id                VARCHAR(40) NOT NULL
   COMMENT '编号',
   email             VARCHAR(200) COMMENT '邮箱',
   name              VARCHAR(40),
   nick              VARCHAR(40),
+  phone            VARCHAR(40),
   delete_status     INT(2)   DEFAULT 0,
   creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
