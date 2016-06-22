@@ -8,9 +8,27 @@ CREATE TABLE kb_user
   COMMENT '编号',
   email             VARCHAR(200) COMMENT '邮箱',
   name              VARCHAR(40),
+  nick              VARCHAR(40),
   delete_status     INT(2)   DEFAULT 0,
   creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+DROP TABLE IF EXISTS kb_user_registration;
+CREATE TABLE kb_user_registration
+(
+  id VARCHAR(40) NOT NULL,
+  user_id VARCHAR(40) NOT NULL UNIQUE COMMENT "foreign key kb_user_profile.id",
+  password varchar(63) NOT NULL,
+  recovery_email varchar(127) NOT NULL,
+  recovery_phone varchar(63) NOT NULL,
+  status int default 0,
+  delete_status int DEFAULT 0,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB

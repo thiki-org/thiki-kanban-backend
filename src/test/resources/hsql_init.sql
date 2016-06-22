@@ -43,14 +43,15 @@ CREATE TABLE kb_task (
   ) ;
 
   -- ----------------------------
--- Table structure for kb_user
+-- Table structure for kb_user_profile
 -- ----------------------------
 DROP TABLE IF EXISTS kb_user_profile;
 CREATE TABLE kb_user_profile
 (
-  id VARCHAR(40) NOT NULL PRIMARY KEY,
+  id VARCHAR(40) NOT NULL PRIMARY KEY , -- as userId
   email             VARCHAR(200) NOT NULL,
   name             VARCHAR(40) NOT NULL,
+  nick             VARCHAR(40) ,
   delete_status int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -61,7 +62,7 @@ DROP TABLE IF EXISTS kb_user_registration;
 CREATE TABLE kb_user_registration
 (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
-  user_id VARCHAR(40) NOT NULL ,
+  user_id VARCHAR(40) NOT NULL UNIQUE , --foreign key kb_user_profile.id
   password varchar(63) NOT NULL,
   recovery_email varchar(127) NOT NULL,
   recovery_phone varchar(63) NOT NULL,
