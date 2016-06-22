@@ -18,7 +18,6 @@ import java.util.Set;
 @Aspect
 @Component
 public class ValidateAspect {
-//    private static Validator validator;
     @Resource
     LocalValidatorFactoryBean validatorFactoryBean;
     @Resource
@@ -30,10 +29,6 @@ public class ValidateAspect {
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
             if (!(arg instanceof String) && !(arg instanceof Integer)) {
-//                ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-//                validatorFactoryBean = new LocalValidatorFactoryBean();
-//                validatorFactoryBean.setValidationMessageSource(messageSource);
-//                validator = factory.getValidator();
                 Set<ConstraintViolation<Object>> constraintViolations = validatorFactoryBean.validate(arg);
                 if (constraintViolations.size() > 0) {
                     throw new InvalidParameterException(constraintViolations.iterator().next().getMessage());
@@ -41,6 +36,4 @@ public class ValidateAspect {
             }
         }
     }
-
-
 }
