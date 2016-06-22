@@ -32,7 +32,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         ex.printStackTrace();
         Map<String, Object> body = new HashMap<>();
         body.put("message", ex.getMessage());
-        body.put("code", ExceptionCode.UNKONWN_EX);
+        body.put("code", ExceptionCode.UNKNOWN_EX);
         return handleExceptionInternal(ex, body, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 }

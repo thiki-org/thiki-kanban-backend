@@ -2,7 +2,7 @@ package org.thiki.kanban.foundation.exception;
 
 public enum ExceptionCode {
 
-    UNKONWN_EX(-99),
+    UNKNOWN_EX(-99),
     INVALID_PARAMS(400),
     resourceNotFound(404),;
 
