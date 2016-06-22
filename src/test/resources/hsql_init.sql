@@ -48,7 +48,7 @@ CREATE TABLE kb_task (
 DROP TABLE IF EXISTS kb_user_profile;
 CREATE TABLE kb_user_profile
 (
-  id VARCHAR(40) NOT NULL PRIMARY KEY COMMENT "as userId",
+  id VARCHAR(40) NOT NULL PRIMARY KEY,
   email             VARCHAR(200) NOT NULL,
   name             VARCHAR(40) NOT NULL,
   delete_status int DEFAULT 0,
@@ -61,7 +61,7 @@ DROP TABLE IF EXISTS kb_user_registration;
 CREATE TABLE kb_user_registration
 (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
-  user_id VARCHAR(40) NOT NULL UNIQUE COMMENT "foreign key kb_user_profile.id",
+  user_id VARCHAR(40) NOT NULL ,
   password varchar(63) NOT NULL,
   recovery_email varchar(127) NOT NULL,
   recovery_phone varchar(63) NOT NULL,
