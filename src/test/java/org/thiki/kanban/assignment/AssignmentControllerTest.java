@@ -35,7 +35,7 @@ public class AssignmentControllerTest extends TestBase {
 
     @Test
     public void findById_shouldReturnAssignmentSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_user (id,name,email) VALUES ('assigneeId-foo','徐濤','766191920@qq.com')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,name,email) VALUES ('assigneeId-foo','徐濤','766191920@qq.com')");
         jdbcTemplate.execute("INSERT INTO  kb_task_assignment (id,task_id,assignee,assigner,reporter) VALUES ('fooId','taskId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
         given().header("userId", "reporterId-foo")
                 .when()
@@ -54,7 +54,7 @@ public class AssignmentControllerTest extends TestBase {
 
     @Test
     public void findByTaskId_shouldReturnAssignmentsSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_user (id,name,email) VALUES ('assigneeId-foo','徐濤','766191920@qq.com')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,name,email) VALUES ('assigneeId-foo','徐濤','766191920@qq.com')");
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES ('taskId-foo','this is the task summary.','play badminton',1,'fooId')");
         jdbcTemplate.execute("INSERT INTO  kb_task_assignment (id,task_id,assignee,assigner,reporter) VALUES ('fooId','taskId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
         given().header("userId", "reporterId-foo")
