@@ -32,10 +32,7 @@ public class EntriesService {
     }
 
     public Entry update(Entry entry) {
-        Entry foundEntry = entriesPersistence.findById(entry.getId());
-        if (foundEntry == null) {
-            throw new ResourceNotFoundException("entry[" + entry.getId() + "] is not found.");
-        }
+        Entry foundEntry = checkingWhetherEntryIsExists(entry.getId());
         entriesPersistence.update(entry);
         if (foundEntry.getOrderNumber() != entry.getOrderNumber()) {
             int increment = entry.getOrderNumber() > foundEntry.getOrderNumber() ? 1 : 0;
@@ -51,11 +48,16 @@ public class EntriesService {
         return entriesPersistence.findById(entry.getId());
     }
 
-    public int deleteById(String id) {
-        Entry entryToDelete = entriesPersistence.findById(id);
-        if (entryToDelete == null) {
+    private Entry checkingWhetherEntryIsExists(String id) {
+        Entry foundEntry = entriesPersistence.findById(id);
+        if (foundEntry == null) {
             throw new ResourceNotFoundException("entry[" + id + "] is not found.");
         }
+        return foundEntry;
+    }
+
+    public int deleteById(String id) {
+        checkingWhetherEntryIsExists(id);
         return entriesPersistence.deleteById(id);
     }
 }
