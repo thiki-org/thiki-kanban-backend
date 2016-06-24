@@ -33,6 +33,9 @@ public class EntriesService {
 
     public Entry update(Entry entry) {
         Entry foundEntry = entriesPersistence.findById(entry.getId());
+        if (foundEntry == null) {
+            throw new ResourceNotFoundException("entry[" + entry.getId() + "] is not found.");
+        }
         entriesPersistence.update(entry);
         if (foundEntry.getOrderNumber() != entry.getOrderNumber()) {
             int increment = entry.getOrderNumber() > foundEntry.getOrderNumber() ? 1 : 0;

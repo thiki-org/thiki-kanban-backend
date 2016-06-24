@@ -105,6 +105,18 @@ public class EntriesControllerTest extends TestBase {
     }
 
     @Test
+    public void shouldFailedWhenTheEntryToUpdateIsNotExists() {
+        given().header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}")
+                .when()
+                .put("/boards/feeId/entries/fooId")
+                .then()
+                .statusCode(404)
+                .body("message", equalTo("entry[fooId] is not found."));
+    }
+
+    @Test
     public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsLessThanOriginNumber() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first entry.',1,'feeId',0)");
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId2','this is the first entry.',1,'feeId',1)");
