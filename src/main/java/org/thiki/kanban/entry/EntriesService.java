@@ -1,10 +1,12 @@
 package org.thiki.kanban.entry;
 
+import com.google.common.collect.ImmutableMap;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -30,7 +32,19 @@ public class EntriesService {
     }
 
     public Entry update(Entry entry) {
+        Entry foundEntry = entriesPersistence.findById(entry.getId());
         entriesPersistence.update(entry);
+        if (foundEntry.getOrderNumber() != entry.getOrderNumber()) {
+            int increment = entry.getOrderNumber() > foundEntry.getOrderNumber() ? 1 : 0;
+            Map<String, Object> resort = ImmutableMap.<String, Object>builder()
+                    .put("boardId", entry.getBoardId())
+                    .put("originOrderNumber", foundEntry.getOrderNumber())
+                    .put("currentOrderNumber", entry.getOrderNumber())
+                    .put("increment", increment)
+                    .put("id", entry.getId())
+                    .build();
+            entriesPersistence.resort(resort);
+        }
         return entriesPersistence.findById(entry.getId());
     }
 

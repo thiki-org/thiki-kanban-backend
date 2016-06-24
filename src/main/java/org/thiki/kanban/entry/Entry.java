@@ -26,6 +26,8 @@ public class Entry {
     @NotNull(message = "boardId不能为空")
     private String boardId;
 
+    private Integer orderNumber;
+
     private String creationTime;
     private String modificationTime;
 
@@ -88,4 +90,11 @@ public class Entry {
         this.boardId = boardId;
     }
 
+    public Integer getOrderNumber() {
+        return orderNumber;
+    }
+
+    public void setOrderNumber(Integer orderNumber) {
+        this.orderNumber = orderNumber;
+    }
 }

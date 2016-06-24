@@ -4,6 +4,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -22,4 +23,6 @@ public interface EntriesPersistence {
     Integer deleteById(@Param("id") String id);
 
     Boolean checkRedundancy(Entry entry);
+
+    void resort(Map<String, Object> entry);
 }

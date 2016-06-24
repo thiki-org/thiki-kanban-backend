@@ -20,6 +20,7 @@ CREATE TABLE kb_entry (
   title  VARCHAR(50) NOT NULL,
   reporter int NOT NULL,
   board_id VARCHAR(40)  DEFAULT NULL,
+  order_number int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0

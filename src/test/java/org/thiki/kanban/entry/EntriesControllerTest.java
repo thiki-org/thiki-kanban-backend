@@ -93,7 +93,7 @@ public class EntriesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('fooId','this is the first entry.',1,'feeId')");
         given().header("userId", "11222")
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\"}}")
+                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}")
                 .when()
                 .put("/boards/feeId/entries/fooId")
                 .then()
@@ -102,6 +102,44 @@ public class EntriesControllerTest extends TestBase {
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/entries"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"));
         assertEquals("newTitle", jdbcTemplate.queryForObject("select title from kb_entry where id='fooId'", String.class));
+    }
+
+    @Test
+    public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsLessThanOriginNumber() {
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first entry.',1,'feeId',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId2','this is the first entry.',1,'feeId',1)");
+        given().header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}}")
+                .when()
+                .put("/boards/feeId/entries/fooId2")
+                .then()
+                .statusCode(200)
+                .body("title", equalTo("newTitle"))
+                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/entries"))
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId2"));
+        assertEquals("1", jdbcTemplate.queryForObject("select order_number from kb_entry where id='fooId1'", String.class));
+        assertEquals("0", jdbcTemplate.queryForObject("select order_number from kb_entry where id='fooId2'", String.class));
+    }
+
+    @Test
+    public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsMoreThanOriginNumber() {
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first entry.',1,'feeId',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId2','this is the first entry.',1,'feeId',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId3','this is the first entry.',1,'feeId',2)");
+        given().header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"2\"}}")
+                .when()
+                .put("/boards/feeId/entries/fooId1")
+                .then()
+                .statusCode(200)
+                .body("title", equalTo("newTitle"))
+                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/entries"))
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId1"));
+        assertEquals("2", jdbcTemplate.queryForObject("select order_number from kb_entry where id='fooId1'", String.class));
+        assertEquals("0", jdbcTemplate.queryForObject("select order_number from kb_entry where id='fooId2'", String.class));
+        assertEquals("1", jdbcTemplate.queryForObject("select order_number from kb_entry where id='fooId3'", String.class));
     }
 
     @Test
