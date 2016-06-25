@@ -20,22 +20,36 @@
     </update>
 
     <update id="resortOrder" parameterType="java.util.Map" flushCache="true">
-
-        UPDATE kb_task SET order_number = order_number+ #{increment}
-
-        WHERE entry_id=#{entryId}
-        <if test="increment == -1">
+        <if test="increment == 0">
+            UPDATE kb_task SET order_number = order_number+1
             <![CDATA[
-            AND order_number > #{originOrderNumber} AND order_number<=#{currentOrderNumber}
+            WHERE order_number >= #{currentOrderNumber} AND order_number<=#{originOrderNumber}
             ]]>
         </if>
 
         <if test="increment == 1">
+            UPDATE kb_task SET order_number = order_number-1
             <![CDATA[
-          AND  order_number<#{originOrderNumber} AND order_number>=#{currentOrderNumber}
+            WHERE  order_number <= #{currentOrderNumber} AND order_number>=#{originOrderNumber}
              ]]>
         </if>
+        AND entry_id=#{entryId} AND delete_status=0 AND id !=#{id}
+    </update>
 
+    <update id="resortTargetEntry" parameterType="java.util.Map" flushCache="true">
+            UPDATE kb_task SET order_number = order_number+1
+            <![CDATA[
+            WHERE order_number >= #{movedTaskOrderNumber}
+            ]]>
+        AND entry_id=#{currentEntryId} AND delete_status=0 AND id !=#{id}
+    </update>
+
+    <update id="resortOriginEntry" parameterType="java.util.Map" flushCache="true">
+        UPDATE kb_task SET order_number = order_number-1
+        <![CDATA[
+            WHERE order_number >= #{originOrderNumber}
+            ]]>
+        AND entry_id=#{originEntryId} AND delete_status=0 AND id !=#{id}
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.task.Task">

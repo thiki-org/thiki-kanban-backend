@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.foundation.annotations.Scene;
 
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
@@ -166,29 +167,29 @@ public class TasksControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id,order_number) VALUES ('fooId5','this is the task summary.','play badminton',1,1,4)");
     }
 
+    @Scene("移动后的顺序大于初始顺序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumber() throws Exception {
         prepareDataForResort();
-        given().body("{\"summary\":\"newSummary\",\"orderNumber\":4,\"entryId\":1}")
+        given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"entryId\":1}")
                 .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/entries/1/tasks/fooId4")
+                .put("/entries/1/tasks/fooId2")
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
-                .body("orderNumber", equalTo(4))
-                .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId4"))
+                .body("orderNumber", equalTo(3))
+                .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId2"))
                 .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"))
-                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId4/assignments"));
+                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId2/assignments"));
 
         assertEquals(0, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId1'"));
-        assertEquals(1, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId2'"));
-        assertEquals(2, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId3'"));
-        assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId4'"));
-        assertEquals(3, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
+        assertEquals(3, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId2'"));
+        assertEquals(1, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId3'"));
+        assertEquals(2, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId4'"));
+        assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
     }
-
 
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumberButNotTheBiggest() throws Exception {
@@ -211,6 +212,31 @@ public class TasksControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId3'"));
         assertEquals(2, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId4'"));
         assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
+    }
+
+    @Test
+    public void update_shouldResortSuccessfullyWhenTaskIsFromAntherEntry() throws Exception {
+        prepareDataForResort();
+        jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id,order_number) VALUES ('fooId6','this is the task summary.','play badminton',1,2,3)");
+        given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"entryId\":1}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/entries/1/tasks/fooId6")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("newSummary"))
+                .body("orderNumber", equalTo(3))
+                .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId6"))
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/1/tasks"))
+                .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId6/assignments"));
+
+        assertEquals(0, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId1'"));
+        assertEquals(1, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId2'"));
+        assertEquals(2, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId3'"));
+        assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId4'"));
+        assertEquals(5, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
+        assertEquals(3, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId6'"));
     }
 
     @Test

@@ -35,19 +35,33 @@ public class TasksService {
         if (taskToUpdate == null) {
             throw new ResourceNotFoundException("entry[" + taskId + "] is not found, task update failed.");
         }
-        if (task.getOrderNumber() != taskToUpdate.getOrderNumber()) {
-            int increment = task.getOrderNumber() > taskToUpdate.getOrderNumber() ? -1 : 1;
+        task.setId(taskId);
+        tasksPersistence.update(task);
+
+        if (!task.getEntryId().equals(taskToUpdate.getEntryId())) {
+            Map<String, Object> resort = ImmutableMap.<String, Object>builder()
+                    .put("currentEntryId", task.getEntryId())
+                    .put("originEntryId", taskToUpdate.getEntryId())
+                    .put("entryId", task.getEntryId())
+                    .put("originOrderNumber", taskToUpdate.getOrderNumber())
+                    .put("movedTaskOrderNumber", task.getOrderNumber())
+                    .put("id", taskToUpdate.getId())
+                    .build();
+            tasksPersistence.resortTargetEntry(resort);
+            tasksPersistence.resortOriginEntry(resort);
+        }
+        if ((task.getEntryId().equals(taskToUpdate.getEntryId())) && (!task.getOrderNumber().equals(taskToUpdate.getOrderNumber()))) {
+            int increment = task.getOrderNumber() > taskToUpdate.getOrderNumber() ? 1 : 0;
             Map<String, Object> resort = ImmutableMap.<String, Object>builder()
                     .put("entryId", task.getEntryId())
                     .put("originOrderNumber", taskToUpdate.getOrderNumber())
                     .put("currentOrderNumber", task.getOrderNumber())
                     .put("increment", increment)
+                    .put("id", taskToUpdate.getId())
                     .build();
             tasksPersistence.resortOrder(resort);
         }
-        task.setId(taskId);
-        tasksPersistence.update(task);
-        return task;
+        return tasksPersistence.findById(taskId);
     }
 
     public int deleteById(String id) {

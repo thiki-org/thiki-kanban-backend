@@ -20,4 +20,8 @@ public interface TasksPersistence {
     Integer deleteById(@Param("id") String id);
 
     Integer resortOrder(Map<String, Object> resort);
+
+    Integer resortTargetEntry(Map<String, Object> resort);
+
+    Integer resortOriginEntry(Map<String, Object> resort);
 }
