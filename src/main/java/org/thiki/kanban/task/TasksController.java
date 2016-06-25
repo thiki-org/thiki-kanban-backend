@@ -32,7 +32,7 @@ public class TasksController {
 
     @RequestMapping(value = "/entries/{entryId}/tasks/{taskId}", method = RequestMethod.PUT)
     public HttpEntity update(@RequestBody Task task, @PathVariable String entryId, @PathVariable String taskId) {
-        Task updatedTask = tasksService.updateContent(taskId, task);
+        Task updatedTask = tasksService.update(taskId, task);
         return Response.build(new TaskResource(updatedTask, entryId));
     }
 

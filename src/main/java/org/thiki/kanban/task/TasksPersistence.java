@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public interface TasksPersistence {
@@ -13,15 +12,15 @@ public interface TasksPersistence {
 
     Task findById(String taskId);
 
-    void update(Task task);
+    void update(@Param("id") String taskId, @Param("task") Task task);
 
     List<Task> findByEntryId(String entryId);
 
     Integer deleteById(@Param("id") String id);
 
-    Integer resortOrder(Map<String, Object> resort);
+    Integer resortTargetEntry(@Param("taskId") String taskId, @Param("currentEntryId") String currentEntryId, @Param("currentOrderNumber") Integer currentOrderNumber);
 
-    Integer resortTargetEntry(Map<String, Object> resort);
+    Integer resortOriginEntry(@Param("taskId") String taskId, @Param("originEntryId") String originEntryId, @Param("originOrderNumber") Integer originOrderNumber);
 
-    Integer resortOriginEntry(Map<String, Object> resort);
+    Integer resortOrder(@Param("taskId") String taskId, @Param("entryId") String entryId, @Param("originOrderNumber") Integer originOrderNumber, @Param("currentOrderNumber") Integer currentOrderNumber, @Param("increment") int increment);
 }
