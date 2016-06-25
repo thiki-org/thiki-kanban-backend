@@ -3,6 +3,7 @@ package org.thiki.kanban.registration;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
+import org.thiki.kanban.foundation.exception.ResourceExistException;
 import org.thiki.kanban.user.UserProfile;
 import org.thiki.kanban.user.UsersPersistence;
 
@@ -42,7 +43,7 @@ public class RegistrationService {
                         usersPersistence.findByName(userName) != null ?
                             MessageFormat.format("用户名{0}已存在", userName) :
                                 MessageFormat.format("邮箱{0}已存在", email);
-            throw new BusinessException(ExceptionCode.USER_EXISTS.code(), existMesasge);
+            throw new ResourceExistException(ExceptionCode.USER_EXISTS.code(), existMesasge);
         }
 
         UserProfile up = new UserProfile();

@@ -16,12 +16,14 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(value = {BusinessException.class})
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
         BusinessException be = (BusinessException) ex;
-        body.put("message", be.getMessage());
-        body.put("code", be.getCode());
 
         HttpStatus httpStatus = be.getStatus();
+
+        Map<String, Object> body = new HashMap<String, Object>(){{
+            put("message", be.getMessage());
+            put("code", be.getCode());
+        }};
 
         return handleExceptionInternal(ex, body,
                 new HttpHeaders(), httpStatus, request);
