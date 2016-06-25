@@ -1,14 +1,13 @@
 package org.thiki.kanban.task;
 
-import com.google.common.collect.ImmutableMap;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.entry.EntriesPersistence;
 import org.thiki.kanban.entry.Entry;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
+import java.text.MessageFormat;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class TasksService {
@@ -30,44 +29,37 @@ public class TasksService {
         return tasksPersistence.findById(newTask.getId());
     }
 
-    public Task updateContent(String taskId, Task task) {
-        Task taskToUpdate = tasksPersistence.findById(taskId);
-        if (taskToUpdate == null) {
-            throw new ResourceNotFoundException("entry[" + taskId + "] is not found, task update failed.");
+    public Task update(String taskId, Task currentTask) {
+        Task originTask = tasksPersistence.findById(taskId);
+        if (originTask == null) {
+            throw new ResourceNotFoundException(MessageFormat.format("entry[{0}] is not found, task update failed.", taskId));
         }
-        task.setId(taskId);
-        tasksPersistence.update(task);
 
-        if (!task.getEntryId().equals(taskToUpdate.getEntryId())) {
-            Map<String, Object> resort = ImmutableMap.<String, Object>builder()
-                    .put("currentEntryId", task.getEntryId())
-                    .put("originEntryId", taskToUpdate.getEntryId())
-                    .put("entryId", task.getEntryId())
-                    .put("originOrderNumber", taskToUpdate.getOrderNumber())
-                    .put("movedTaskOrderNumber", task.getOrderNumber())
-                    .put("id", taskToUpdate.getId())
-                    .build();
-            tasksPersistence.resortTargetEntry(resort);
-            tasksPersistence.resortOriginEntry(resort);
+        tasksPersistence.update(taskId, currentTask);
+
+        if (isTaskMovedAcrossEntry(currentTask, originTask)) {
+            tasksPersistence.resortTargetEntry(originTask.getId(), currentTask.getEntryId(), currentTask.getOrderNumber());
+            tasksPersistence.resortOriginEntry(originTask.getId(), originTask.getEntryId(), originTask.getOrderNumber());
         }
-        if ((task.getEntryId().equals(taskToUpdate.getEntryId())) && (!task.getOrderNumber().equals(taskToUpdate.getOrderNumber()))) {
-            int increment = task.getOrderNumber() > taskToUpdate.getOrderNumber() ? 1 : 0;
-            Map<String, Object> resort = ImmutableMap.<String, Object>builder()
-                    .put("entryId", task.getEntryId())
-                    .put("originOrderNumber", taskToUpdate.getOrderNumber())
-                    .put("currentOrderNumber", task.getOrderNumber())
-                    .put("increment", increment)
-                    .put("id", taskToUpdate.getId())
-                    .build();
-            tasksPersistence.resortOrder(resort);
+        if (isTaskMovedWithinOriginEntry(currentTask, originTask)) {
+            int increment = currentTask.getOrderNumber() > originTask.getOrderNumber() ? 1 : 0;
+            tasksPersistence.resortOrder(originTask.getId(), originTask.getEntryId(), originTask.getOrderNumber(), currentTask.getOrderNumber(), increment);
         }
         return tasksPersistence.findById(taskId);
+    }
+
+    private boolean isTaskMovedWithinOriginEntry(Task currentTask, Task originTask) {
+        return (currentTask.getEntryId().equals(originTask.getEntryId())) && (!currentTask.getOrderNumber().equals(originTask.getOrderNumber()));
+    }
+
+    private boolean isTaskMovedAcrossEntry(Task currentTask, Task originTask) {
+        return !currentTask.getEntryId().equals(originTask.getEntryId());
     }
 
     public int deleteById(String id) {
         Task taskToDelete = tasksPersistence.findById(id);
         if (taskToDelete == null) {
-            throw new ResourceNotFoundException("task[" + id + "] is not found.");
+            throw new ResourceNotFoundException(MessageFormat.format("task[{0}] is not found.", id));
         }
         return tasksPersistence.deleteById(id);
     }
@@ -75,7 +67,7 @@ public class TasksService {
     public List<Task> findByEntryId(String entryId) {
         Entry entry = entriesPersistence.findById(entryId);
         if (entry == null) {
-            throw new ResourceNotFoundException("entry[" + entryId + "] is not found.");
+            throw new ResourceNotFoundException(MessageFormat.format("entry[{0}] is not found.", entryId));
         }
         return tasksPersistence.findByEntryId(entryId);
     }
