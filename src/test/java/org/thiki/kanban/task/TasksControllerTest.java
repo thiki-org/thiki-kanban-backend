@@ -111,6 +111,19 @@ public class TasksControllerTest extends TestBase {
                 .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/1/assignments"));
     }
 
+    @Scene("根据ID查找一个任务时,如果任务不存在,则抛出404的错误")
+    @Test
+    public void update_shouldFailedWhenTaskIsNotExist() throws Exception {
+        given().header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/entries/fooId/tasks/feeId")
+                .then()
+                .statusCode(404)
+                .body("message", equalTo("task[feeId] is not found."))
+                .body("code", equalTo(404));
+    }
+
     @Scene("当根据entryID查找任务时,如果entry不存在,则抛出404异常")
     @Test
     public void findTasksByEntryId_shouldReturn404WhenEntryIsNotFound() throws Exception {
@@ -258,7 +271,7 @@ public class TasksControllerTest extends TestBase {
                 .put("/entries/1/tasks/fooId")
                 .then()
                 .statusCode(404)
-                .body("message", equalTo("entry[fooId] is not found, task update failed."));
+                .body("message", equalTo("task[fooId] is not found."));
     }
 
     @Scene("当删除一个任务时,如果任务存在,则删除成功")

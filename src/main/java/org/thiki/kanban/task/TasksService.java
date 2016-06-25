@@ -14,6 +14,7 @@ public class TasksService {
 
     @Resource
     private TasksPersistence tasksPersistence;
+
     @Resource
     private EntriesPersistence entriesPersistence;
 
@@ -30,10 +31,7 @@ public class TasksService {
     }
 
     public Task update(String taskId, Task currentTask) {
-        Task originTask = tasksPersistence.findById(taskId);
-        if (originTask == null) {
-            throw new ResourceNotFoundException(MessageFormat.format("entry[{0}] is not found, task update failed.", taskId));
-        }
+        Task originTask = findById(taskId);
 
         tasksPersistence.update(taskId, currentTask);
 
@@ -56,12 +54,9 @@ public class TasksService {
         return !currentTask.getEntryId().equals(originTask.getEntryId());
     }
 
-    public int deleteById(String id) {
-        Task taskToDelete = tasksPersistence.findById(id);
-        if (taskToDelete == null) {
-            throw new ResourceNotFoundException(MessageFormat.format("task[{0}] is not found.", id));
-        }
-        return tasksPersistence.deleteById(id);
+    public int deleteById(String taskId) {
+        loadAndValidateTask(taskId);
+        return tasksPersistence.deleteById(taskId);
     }
 
     public List<Task> findByEntryId(String entryId) {
@@ -72,8 +67,15 @@ public class TasksService {
         return tasksPersistence.findByEntryId(entryId);
     }
 
-    public Task findById(String id) {
-        Task taskToUpdate = tasksPersistence.findById(id);
-        return taskToUpdate;
+    public Task findById(String taskId) {
+        return loadAndValidateTask(taskId);
+    }
+
+    private Task loadAndValidateTask(String taskId) {
+        Task foundTask = tasksPersistence.findById(taskId);
+        if (foundTask == null) {
+            throw new ResourceNotFoundException(MessageFormat.format("task[{0}] is not found.", taskId));
+        }
+        return foundTask;
     }
 }
