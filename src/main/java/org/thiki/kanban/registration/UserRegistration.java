@@ -24,32 +24,17 @@ public class UserRegistration {
     public UserRegistration() {
     }
 
+    /**
+     *
+     * @param userProfile 用户信息
+     * @param password 密码
+     */
     public UserRegistration(UserProfile userProfile, String password){
         this.userId = userProfile.getId();
         this.password = password;
         this.recoveryEmail = userProfile.getEmail();
         this.recoveryPhone = userProfile.getPhone();
         this.status = STATUS_NORMAL;
-    }
-
-
-    /**
-     * @param userId           用户Id
-     * @param password         密码
-     * @param recoveryEmail    邮件
-     * @param recoveryPhone    恢复手机
-     * @param status           状态
-     * @param creationTime     创建时间
-     * @param modificationTime 最后修改时间
-     */
-    public UserRegistration(String userId, String password, String recoveryEmail, String recoveryPhone, int status, long creationTime, long modificationTime) {
-        this.userId = userId;
-        this.password = password;
-        this.recoveryEmail = recoveryEmail;
-        this.recoveryPhone = recoveryPhone;
-        this.status = status;
-        this.creationTime = creationTime;
-        this.modificationTime = modificationTime;
     }
 
 

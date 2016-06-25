@@ -25,7 +25,6 @@ public interface UsersPersistence {
 
     UserProfile findByName(String userName);
 
-//    boolean existsUser(String userName, String phone, String mail);
-    boolean existsUser(Map<String, String> filter);
+    boolean existsUser(@Param("name") String userName, @Param("phone") String phone, @Param("email") String mail);
 
 }

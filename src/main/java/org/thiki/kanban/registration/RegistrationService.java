@@ -30,11 +30,7 @@ public class RegistrationService {
             throw new BusinessException(ExceptionCode.INVALID_PARAMS.code(), "captcha is invalid!");
         }
 
-        boolean existsUser = usersPersistence.existsUser(new HashMap<String, String>() {{
-            put("name", userName);
-            put("email", email);
-            put("phone", phone);
-        }});
+        boolean existsUser = usersPersistence.existsUser(userName, email, phone);
 
         if (existsUser){
             String existMesasge =
