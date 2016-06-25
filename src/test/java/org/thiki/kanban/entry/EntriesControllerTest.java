@@ -35,6 +35,26 @@ public class EntriesControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"));
     }
 
+    @Scene("创建一个新的entry,如果它并不是指定boardId下第一个entry,则其排序号应根据当前entry数量自动增加")
+    @Test
+    public void create_orderNumberShouldAutoIncrease() {
+        jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('existedFooId','this is the first entry.',1,'feeId')");
+        given().header("userId", "11222")
+                .body("{\"title\":\"this is the entry title.\",\"boardId\":\"feeId\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/feeId/entries")
+                .then()
+                .statusCode(201)
+                .body("title", equalTo("this is the entry title."))
+                .body("reporter", equalTo(11222))
+                .body("creationTime", notNullValue())
+                .body("orderNumber", equalTo(1))
+                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/entries"))
+                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"))
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"));
+    }
+
     @Scene("创建新的entry时,如果名称为空,则不允许创建并返回客户端400错误")
     @Test
     public void shouldFailedIfEntryTitleIsEmpty() {

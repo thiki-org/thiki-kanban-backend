@@ -6,7 +6,7 @@
 
     <insert id="create" parameterType="org.thiki.kanban.entry.Entry">
         INSERT INTO
-        kb_entry(id,title, reporter,board_id) VALUES (#{id},#{title}, #{reporter},#{boardId})
+        kb_entry(id,title, reporter,board_id,order_number) VALUES (#{id},#{title}, #{reporter},#{boardId},(SELECT max_order_number from (SELECT  CASE WHEN  max(order_number)  IS NULL THEN 0 ELSE max(order_number)+1 end as max_order_number  FROM kb_entry WHERE board_id=#{boardId} ) as t ))
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.entry.Entry" flushCache="true">
