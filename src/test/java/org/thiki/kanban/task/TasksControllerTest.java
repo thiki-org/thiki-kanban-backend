@@ -25,6 +25,7 @@ public class TasksControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter) VALUES ('fooId','this is the first entry.',1)");
     }
 
+    @Scene("创建一个新的任务")
     @Test
     public void create_shouldReturn201WhenCreateTaskSuccessfully() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
@@ -43,7 +44,7 @@ public class TasksControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
     }
 
-
+    @Scene("当创建一个任务时,如果任务概述为空,则创建失败")
     @Test
     public void create_shouldFailedIfSummaryIsNull() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
@@ -59,6 +60,7 @@ public class TasksControllerTest extends TestBase {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
     }
 
+    @Scene("当创建一个任务时,如果任务所属的entry并不存在,则创建失败")
     @Test
     public void create_shouldCreateFailedWhenEntryIsNotFound() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
@@ -74,6 +76,7 @@ public class TasksControllerTest extends TestBase {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_task").size());
     }
 
+    @Scene("当根据entryId查找其下属的任务时,可以返回其所有任务")
     @Test
     public void shouldReturnTasksWhenFindTasksByEntryIdSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,'fooId')");
@@ -91,6 +94,7 @@ public class TasksControllerTest extends TestBase {
                 .body("[0]._links.assignments.href", equalTo("http://localhost:8007/entries/fooId/tasks/1/assignments"));
     }
 
+    @Scene("根据ID查找一个任务时,如果任务存在,则返回该任务")
     @Test
     public void findById_shouldReturnTaskSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1)");
@@ -107,6 +111,7 @@ public class TasksControllerTest extends TestBase {
                 .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/1/assignments"));
     }
 
+    @Scene("当根据entryID查找任务时,如果entry不存在,则抛出404异常")
     @Test
     public void findTasksByEntryId_shouldReturn404WhenEntryIsNotFound() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES (1,'this is the task summary.','play badminton',1,1)");
@@ -119,6 +124,7 @@ public class TasksControllerTest extends TestBase {
                 .body("code", equalTo(404));
     }
 
+    @Scene("更新任务成功")
     @Test
     public void update_shouldReturn200WhenUpdateTaskSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1)");
@@ -137,6 +143,7 @@ public class TasksControllerTest extends TestBase {
         assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_task WHERE id='fooId'", String.class));
     }
 
+    @Scene("当移动一个任务时,移动后的顺序小于其前置顺序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentOrderNumberLessThanOriginNumber() throws Exception {
         prepareDataForResort();
@@ -167,7 +174,7 @@ public class TasksControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id,order_number) VALUES ('fooId5','this is the task summary.','play badminton',1,1,4)");
     }
 
-    @Scene("移动后的顺序大于初始顺序")
+    @Scene("当移动一个任务时,移动后的顺序大于初始顺序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumber() throws Exception {
         prepareDataForResort();
@@ -191,6 +198,7 @@ public class TasksControllerTest extends TestBase {
         assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
     }
 
+    @Scene("当移动一个任务时,任务移动后的序号大于其前置序号,但在entry中它移动后的序号并不是最大的。")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumberButNotTheBiggest() throws Exception {
         prepareDataForResort();
@@ -214,6 +222,7 @@ public class TasksControllerTest extends TestBase {
         assertEquals(4, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId5'"));
     }
 
+    @Scene("当一个任务从某个entry移动到另一个entry时,不仅需要重新排序目标entry,也要对原始entry排序")
     @Test
     public void update_shouldResortSuccessfullyWhenTaskIsFromAntherEntry() throws Exception {
         prepareDataForResort();
@@ -239,6 +248,7 @@ public class TasksControllerTest extends TestBase {
         assertEquals(3, jdbcTemplate.queryForInt("SELECT order_number FROM kb_task WHERE id='fooId6'"));
     }
 
+    @Scene("当更新一个任务时,如果待更新的任务不存在,则抛出资源不存在的错误")
     @Test
     public void update_shouldThrowResourceNotFoundExceptionWhenTaskToUpdateIsNotExist() throws Exception {
         given().body("{\"summary\":\"newSummary\"}")
@@ -251,6 +261,7 @@ public class TasksControllerTest extends TestBase {
                 .body("message", equalTo("entry[fooId] is not found, task update failed."));
     }
 
+    @Scene("当删除一个任务时,如果任务存在,则删除成功")
     @Test
     public void delete_shouldDeleteSuccessfullyWhenTheTaskIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_task (id,summary,content,reporter,entry_id) VALUES ('fooId','this is the task summary.','play badminton',1,1)");
@@ -262,6 +273,7 @@ public class TasksControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_task WHERE  delete_status=1").size());
     }
 
+    @Scene("当删除一个任务时,如果待删除的任务不存在,则抛出404错误")
     @Test
     public void delete_shouldDeleteFailedWhenTheTaskIsNotExist() {
         given().header("userId", "11222")
