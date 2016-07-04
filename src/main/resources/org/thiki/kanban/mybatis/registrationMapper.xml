@@ -8,5 +8,8 @@
         VALUES (#{id}, #{userId}, #{password}, #{recoveryEmail}, #{recoveryPhone}, #{status})
     </insert>
 
+    <select id="findByName" parameterType="java.lang.String" resultType="org.thiki.kanban.registration.UserRegistration">
+        SELECT * FROM kb_user_registration WHERE delete_status=0 and name= #{name}
+    </select>
 
 </mapper>

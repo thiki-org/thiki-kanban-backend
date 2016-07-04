@@ -107,3 +107,7 @@ CREATE TABLE kb_task_assignment (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+  
+ALTER TABLE kb_user_registration
+  ADD COLUMN name VARCHAR(40) DEFAULT NULL AFTER modification_time,
+  ADD COLUMN salt VARCHAR(255) DEFAULT NULL COMMENT '加密密码的盐' AFTER name;  

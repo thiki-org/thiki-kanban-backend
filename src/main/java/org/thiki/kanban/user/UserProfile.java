@@ -9,7 +9,6 @@ public class UserProfile implements Serializable {
     private String email;
 
     private String name;
-
     private String nick;
     private String phone;
 
@@ -94,4 +93,6 @@ public class UserProfile implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+
 }

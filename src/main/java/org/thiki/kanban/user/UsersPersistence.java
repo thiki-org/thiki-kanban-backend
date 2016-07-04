@@ -27,4 +27,5 @@ public interface UsersPersistence {
 
     boolean existsUser(@Param("name") String userName, @Param("phone") String phone, @Param("email") String mail);
 
+
 }

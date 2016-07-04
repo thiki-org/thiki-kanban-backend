@@ -5,11 +5,14 @@ import org.thiki.kanban.user.UserProfile;
 /**
  * Created by joeaniu on 6/21/16.
  */
+
 public class UserRegistration {
 
     private String id;
     private String userId;
+    private String name;
     private String password;
+    private String salt;//加密密码的盐
     private String recoveryEmail;
     private String recoveryPhone;
     private int status;
@@ -100,5 +103,20 @@ public class UserRegistration {
 
     public void setRecoveryPhone(String recoveryPhone) {
         this.recoveryPhone = recoveryPhone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    /**
+     * 密码盐.
+     * @return
+     */
+    public String getCredentialsSalt(){
+        return this.name+this.salt;
     }
 }

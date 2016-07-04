@@ -64,4 +64,12 @@ public class RegistrationService {
     private boolean isCaptchaValid(String captcha) {
         return !"invalid".equals(captcha);
     }
+
+    /**
+     * 根据用户名查找用户嘻嘻
+     * @param userName
+     */
+   public  UserRegistration findByName(String userName){
+        return  registrationPersistence.findByName(userName);
+    }
 }
