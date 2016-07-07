@@ -207,11 +207,14 @@ MF没说过"充血",更没说过"胀血"
     [理解本真的REST架构风格](http://www.infoq.com/cn/articles/understanding-restful-style)
 
 * [spring-hateoas](http://projects.spring.io/spring-hateoas/)
+
 * [spring-boot](http://projects.spring.io/spring-boot/)
 
 * [hsql](http://hsqldb.org)
 
 * [rest-assured](https://github.com/rest-assured/rest-assured)
+
+* [shiro](http://shiro.apache.org)
 
     
 
