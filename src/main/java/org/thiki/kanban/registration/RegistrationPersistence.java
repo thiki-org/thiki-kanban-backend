@@ -19,12 +19,19 @@ public interface RegistrationPersistence {
 
     /**
      * 增加注册信息
+     *
      * @param userRegistration
      */
-    void create(UserRegistration userRegistration);
+    void create(Registration userRegistration);
+
     /**
      * 根据用户名查找用户嘻嘻
+     *
      * @param userName
      */
-    UserRegistration findByName(String userName);
+    Registration findByName(String userName);
+
+    boolean existsUser(Registration registration);
+
+    Registration findByEmail(String email);
 }

@@ -18,25 +18,8 @@ import static org.junit.Assert.assertEquals;
 public class UsersControllerTest extends TestBase {
 
     @Test
-    public void create_shouldReturn201WhenCreateUserSuccessfully() {
-        given().header("userId", "11222")
-                .body("{\"email\":\"someone@email.com\",\"name\":\"someone\"}")
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/users")
-                .then()
-                .statusCode(201)
-                .body("id", equalTo("fooId"))
-                .body("email", equalTo("someone@email.com"))
-                .body("name", equalTo("someone"))
-                .body("creationTime", notNullValue())
-                .body("_links.users.href", equalTo("http://localhost:8007/users"))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/fooId"));
-    }
-
-    @Test
     public void create_shouldFailedWhenEmailIsAlreadyExists() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,email,name) VALUES ('fooId2','someone@email.com','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) VALUES ('fooId2','someone@email.com','someone','password')");
         given().header("userId", "11222")
                 .body("{\"email\":\"someone@email.com\",\"name\":\"someone\"}")
                 .contentType(ContentType.JSON)
@@ -49,7 +32,7 @@ public class UsersControllerTest extends TestBase {
 
     @Test
     public void findById_shouldReturnUserWhenUserIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,email,name) VALUES ('fooId','someone@email.com','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) VALUES ('fooId','someone@email.com','someone','password')");
         given().header("userId", "11222")
                 .when()
                 .get("/users/fooId")
@@ -66,7 +49,7 @@ public class UsersControllerTest extends TestBase {
 
     @Test
     public void update_shouldUpdateSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,email,name) VALUES ('fooId','someone@email.com','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) VALUES ('fooId','someone@email.com','someone','password')");
         given().header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .body("{\"email\":\"others@email.com\",\"name\":\"others\"}")
@@ -79,19 +62,7 @@ public class UsersControllerTest extends TestBase {
                 .body("_links.users.href", equalTo("http://localhost:8007/users"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/users/fooId/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/fooId"));
-        assertEquals("others@email.com", jdbcTemplate.queryForObject("select email from kb_user_profile where id='fooId'", String.class));
-    }
-
-    @Test
-    public void delete_shouldDeleteSuccessfullyWhenTheUserIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,email,name) VALUES ('fooId','someone@email.com','someone')");
-        given().header("userId", "11222")
-                .when()
-                .delete("/users/fooId")
-                .then()
-                .statusCode(200)
-                .body("_links.users.href", equalTo("http://localhost:8007/users"));
-        assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_user_profile WHERE  delete_status=1").size());
+        assertEquals("others@email.com", jdbcTemplate.queryForObject("select email from kb_user_registration where id='fooId'", String.class));
     }
 
     @Test
@@ -106,7 +77,7 @@ public class UsersControllerTest extends TestBase {
 
     @Test
     public void loadAll_shouldReturnAllUsersSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,email,name) VALUES ('fooId','someone@email.com','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) VALUES ('fooId','someone@email.com','someone','password')");
         given().header("userId", "11222")
                 .when()
                 .get("/users")

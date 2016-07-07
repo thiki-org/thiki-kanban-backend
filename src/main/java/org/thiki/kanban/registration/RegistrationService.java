@@ -1,16 +1,16 @@
 package org.thiki.kanban.registration;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
-import org.thiki.kanban.foundation.exception.ResourceExistException;
-import org.thiki.kanban.user.UserProfile;
+import org.thiki.kanban.foundation.exception.ResourceConflictException;
+import org.thiki.kanban.foundation.security.md5.MD5Service;
+import org.thiki.kanban.foundation.security.rsa.RSAUtils;
 import org.thiki.kanban.user.UsersPersistence;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by joeaniu on 6/21/16.
@@ -24,52 +24,32 @@ public class RegistrationService {
     @Resource
     UsersPersistence usersPersistence;
 
-    public Map<String, Object> registerNewUser(String userName, String email, String phone, String passwd, String captcha) {
-
-        if (!isCaptchaValid(captcha)){
-            throw new BusinessException(ExceptionCode.INVALID_PARAMS.code(), "captcha is invalid!");
-        }
-
-        boolean existsUser = usersPersistence.existsUser(userName, email, phone);
-
-        if (existsUser){
-            String existMesasge =
-                    usersPersistence.findByPhone(phone) != null ?
-                        MessageFormat.format("手机号{0}已存在", phone) :
-                        usersPersistence.findByName(userName) != null ?
-                            MessageFormat.format("用户名{0}已存在", userName) :
-                                MessageFormat.format("邮箱{0}已存在", email);
-            throw new ResourceExistException(ExceptionCode.USER_EXISTS.code(), existMesasge);
-        }
-
-        UserProfile up = new UserProfile();
-        up.setEmail(email);
-        up.setName(userName);
-        up.setPhone(phone);
-        usersPersistence.create(up);
-
-        UserRegistration ur = new UserRegistration(up, passwd);
-        registrationPersistence.create(ur);
-        return new HashMap<String, Object>(){{
-            put("userRegistration", ur);
-            put("userProfile", up);
-        }};
-    }
-
-    /**
-     * TODO 需要拿用户的token
-     * @param captcha
-     * @return
-     */
-    private boolean isCaptchaValid(String captcha) {
-        return !"invalid".equals(captcha);
-    }
-
     /**
      * 根据用户名查找用户嘻嘻
+     *
      * @param userName
      */
-   public  UserRegistration findByName(String userName){
-        return  registrationPersistence.findByName(userName);
+    public Registration findByName(String userName) {
+        return registrationPersistence.findByName(userName);
+    }
+
+    public Registration register(Registration registration) {
+        Registration conflictNameUser = registrationPersistence.findByName(registration.getName());
+        if (conflictNameUser != null) {
+            throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("用户名[{0}]已经存在.", registration.getName()));
+        }
+
+        Registration conflictEmailUser = registrationPersistence.findByEmail(registration.getEmail());
+        if (conflictEmailUser != null) {
+            throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("邮箱[{0}]已经存在.", registration.getEmail()));
+        }
+
+        String password = RSAUtils.decrypt(registration.getPassword());
+        password = MD5Service.encrypt(password + registration.getName());
+        if (password != null) {
+            registration.setPassword(password);
+        }
+        registrationPersistence.create(registration);
+        return findByName(registration.getName());
     }
 }

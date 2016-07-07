@@ -2,14 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="org.thiki.kanban.registration.RegistrationPersistence">
 
-    <insert id="create" parameterType="org.thiki.kanban.registration.UserRegistration">
+    <insert id="create" parameterType="org.thiki.kanban.registration.Registration">
         INSERT INTO
-        kb_user_registration(id, user_id, password, recovery_email, recovery_phone, status)
-        VALUES (#{id}, #{userId}, #{password}, #{recoveryEmail}, #{recoveryPhone}, #{status})
+        kb_user_registration(id, password,name,email)
+        VALUES (#{id}, #{password},#{name}, #{email})
     </insert>
 
-    <select id="findByName" parameterType="java.lang.String" resultType="org.thiki.kanban.registration.UserRegistration">
-        SELECT * FROM kb_user_registration WHERE delete_status=0 and name= #{name}
+    <select id="findByName" parameterType="java.lang.String" resultType="org.thiki.kanban.registration.Registration">
+        SELECT id,email,NAME FROM kb_user_registration WHERE delete_status=0 and name= #{name}
     </select>
 
+    <select id="findByEmail" parameterType="java.lang.String" resultType="org.thiki.kanban.registration.Registration">
+        SELECT id,email,NAME FROM kb_user_registration WHERE delete_status=0 and email= #{email}
+    </select>
+
+    <select id="existsUser"  parameterType="org.thiki.kanban.registration.Registration" resultType="boolean">
+        SELECT count(*) FROM kb_user_registration WHERE email=#{email} or name=#{name}
+    </select>
 </mapper>

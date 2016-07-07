@@ -4,41 +4,41 @@
 
     <insert id="create" parameterType="org.thiki.kanban.user.UserProfile">
         INSERT INTO
-        kb_user_profile(id, email,name) VALUES (#{id}, #{email}, #{name})
+        kb_user_registration(id, email,name) VALUES (#{id}, #{email}, #{name})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.user.UserProfile" flushCache="true">
-        UPDATE kb_user_profile SET
+        UPDATE kb_user_registration SET
         email=#{email},
         name=#{name}
         WHERE id=#{id}
     </update>
 
     <select id="loadAll" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
-        SELECT * FROM kb_user_profile WHERE delete_status=0
+        SELECT * FROM kb_user_registration WHERE delete_status=0
     </select>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
-        SELECT * FROM kb_user_profile WHERE delete_status=0 and id= #{id}
+        SELECT * FROM kb_user_registration WHERE delete_status=0 and id= #{id}
     </select>
 
     <select id="findByEmail" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
-        SELECT * FROM kb_user_profile WHERE delete_status=0 and email= #{email}
+        SELECT * FROM kb_user_registration WHERE delete_status=0 and email= #{email}
     </select>
 
     <select id="findByPhone" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
-        SELECT * FROM kb_user_profile WHERE delete_status=0 and phone= #{phone}
+        SELECT * FROM kb_user_registration WHERE delete_status=0 and phone= #{phone}
     </select>
 
     <select id="findByName" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
-        SELECT * FROM kb_user_profile WHERE delete_status=0 and name= #{name}
+        SELECT * FROM kb_user_registration WHERE delete_status=0 and name= #{name}
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_user_profile SET delete_status=1 WHERE id=#{id}
+        UPDATE kb_user_registration SET delete_status=1 WHERE id=#{id}
     </delete>
 
     <select id="existsUser" parameterType="map" resultType="boolean">
-        SELECT count(*) FROM kb_user_profile WHERE email=#{email} or name=#{name} or phone=#{phone}
+        SELECT count(*) FROM kb_user_ WHERE email=#{email} or name=#{name}
     </select>
 </mapper>

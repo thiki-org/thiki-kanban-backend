@@ -2,9 +2,9 @@ package org.thiki.kanban.user;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.thiki.kanban.registration.Registration;
 
 import java.util.List;
-import java.util.Map;
 
 
 @Repository
@@ -20,12 +20,8 @@ public interface UsersPersistence {
     Integer deleteById(@Param("id") String id);
 
     UserProfile findByEmail(String email);
-    
-    UserProfile findByPhone(String phone);
 
     UserProfile findByName(String userName);
 
-    boolean existsUser(@Param("name") String userName, @Param("phone") String phone, @Param("email") String mail);
-
-
+    boolean existsUser(Registration registration);
 }

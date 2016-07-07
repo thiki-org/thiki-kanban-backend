@@ -11,13 +11,13 @@
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
         SELECT
-        assignment.id,assignment.task_id,assignment.assignee,assignment.assigner,assignment.reporter,assignment.creation_time,assignment.modification_time,userProfile.name
-        FROM kb_task_assignment assignment LEFT JOIN kb_user_profile userProfile ON assignment.assignee=userProfile.id WHERE assignment.id= #{id}
+        assignment.id,assignment.task_id,assignment.assignee,assignment.assigner,assignment.reporter,assignment.creation_time,assignment.modification_time,userRegistration.name
+        FROM kb_task_assignment assignment LEFT JOIN kb_user_registration userRegistration ON assignment.assignee=userRegistration.id WHERE assignment.id= #{id}
     </select>
 
     <select id="findByTaskId" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
-       SELECT assignment.id,assignment.task_id,assignment.assignee,assignment.assigner,assignment.reporter,userProfile.name
-        FROM kb_task_assignment assignment LEFT JOIN kb_user_profile userProfile ON assignment.assignee=userProfile.id
+       SELECT assignment.id,assignment.task_id,assignment.assignee,assignment.assigner,assignment.reporter,userRegistration.name
+        FROM kb_task_assignment assignment LEFT JOIN kb_user_registration userRegistration ON assignment.assignee=userRegistration.id
         WHERE assignment.task_id= #{taskId} AND assignment.delete_status=0
     </select>
 

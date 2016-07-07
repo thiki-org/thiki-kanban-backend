@@ -14,7 +14,7 @@ public class TestContextConfiguration {
     public DataSource dataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.HSQL)
-                .addScript("classpath:hsql_init.sql")
+                .addScript("classpath:hsql.sql")
                 .build();
     }
 }

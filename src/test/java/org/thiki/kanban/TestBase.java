@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 @WebIntegrationTest("server.port:8007")
 public class TestBase {
     protected static int port = 8007;
+    protected String publicKeyFilePath = "src/main/resources/rsakey.pub";
 
     @Autowired
     protected DataSource dataSource;
@@ -50,6 +51,7 @@ public class TestBase {
         jdbcTemplate.execute("TRUNCATE TABLE kb_entry");
         jdbcTemplate.execute("TRUNCATE TABLE kb_task");
         jdbcTemplate.execute("TRUNCATE TABLE kb_user_profile");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_user_registration");
         jdbcTemplate.execute("TRUNCATE TABLE kb_task_assignment");
     }
 }

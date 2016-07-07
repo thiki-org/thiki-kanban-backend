@@ -13,6 +13,8 @@ public class BusinessException extends RuntimeException {
      */
     private int code;
 
+    private HttpStatus httpStatus;
+
     public BusinessException(String message) {
         this(ExceptionCode.UNKNOWN_EX.code(), message);
     }
@@ -20,6 +22,12 @@ public class BusinessException extends RuntimeException {
     public BusinessException(int code, String message) {
         super(message);
         this.code = code;
+    }
+
+    public BusinessException(int code, String message, HttpStatus httpStatus) {
+        super(message);
+        this.code = code;
+        this.httpStatus = httpStatus;
     }
 
     public int getCode() {
@@ -33,6 +41,9 @@ public class BusinessException extends RuntimeException {
      * @return
      */
     public HttpStatus getStatus() {
+        if (httpStatus != null) {
+            return httpStatus;
+        }
         return HttpStatus.INTERNAL_SERVER_ERROR;
     }
 }
