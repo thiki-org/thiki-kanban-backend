@@ -8,7 +8,6 @@ import org.thiki.kanban.foundation.common.FileUtil;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by xubt on 7/5/16.
