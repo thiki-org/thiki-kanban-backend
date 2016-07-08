@@ -1,7 +1,6 @@
 package org.thiki.kanban.registration;
 
 import org.hibernate.validator.constraints.Email;
-import org.thiki.kanban.foundation.common.Sequence;
 
 import javax.validation.constraints.NotNull;
 

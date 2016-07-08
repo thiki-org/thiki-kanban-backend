@@ -6,7 +6,7 @@ import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.springframework.stereotype.Service;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.thiki.kanban.foundation.common.Sequence;
+import org.thiki.kanban.foundation.common.SequenceNumber;
 
 import javax.annotation.Resource;
 import java.util.Properties;
@@ -22,7 +22,7 @@ import java.util.Properties;
 public class DBInterceptor implements Interceptor {
 
     @Resource
-    private Sequence sequence;
+    private SequenceNumber sequenceNumber;
 
     public Object intercept(Invocation invocation) throws Throwable {
         MappedStatement stmt = (MappedStatement) invocation.getArgs()[0];
@@ -31,7 +31,7 @@ public class DBInterceptor implements Interceptor {
             return invocation.proceed();
         }
         if (stmt.getSqlCommandType().equals(SqlCommandType.INSERT)) {
-            ReflectionTestUtils.setField(entityToSave, "id", sequence.generate());
+            ReflectionTestUtils.setField(entityToSave, "id", sequenceNumber.generate());
         }
         return invocation.proceed();
     }

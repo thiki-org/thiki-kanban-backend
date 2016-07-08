@@ -10,7 +10,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.thiki.kanban.foundation.common.Sequence;
+import org.thiki.kanban.foundation.common.SequenceNumber;
 import org.thiki.kanban.foundation.config.DBInterceptor;
 
 import javax.sql.DataSource;
@@ -31,7 +31,7 @@ public class TestBase {
     protected JdbcTemplate jdbcTemplate;
     @Autowired
     private DBInterceptor dbInterceptor;
-    protected Sequence sequence = Mockito.mock(Sequence.class);
+    protected SequenceNumber sequenceNumber = Mockito.mock(SequenceNumber.class);
 
     @BeforeClass
     public static void globalInit() {
@@ -40,8 +40,8 @@ public class TestBase {
 
     @Before
     public void setUp() {
-        when(sequence.generate()).thenReturn("fooId");
-        ReflectionTestUtils.setField(dbInterceptor, "sequence", sequence);
+        when(sequenceNumber.generate()).thenReturn("fooId");
+        ReflectionTestUtils.setField(dbInterceptor, "sequenceNumber", sequenceNumber);
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 

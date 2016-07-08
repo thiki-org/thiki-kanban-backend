@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-@Service("sequence")
-public class Sequence {
+@Service("sequenceNumber")
+public class SequenceNumber {
     public String generate() {
         TimeBasedGenerator gen = Generators.timeBasedGenerator(EthernetAddress.fromInterface());
         UUID uuid = gen.generate();
