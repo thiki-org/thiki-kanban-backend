@@ -1,6 +1,7 @@
 package org.thiki.kanban.registration;
 
 import org.hibernate.validator.constraints.Email;
+import org.thiki.kanban.foundation.common.Sequence;
 
 import javax.validation.constraints.NotNull;
 
@@ -17,6 +18,7 @@ public class Registration {
     @NotNull(message = "密码不可以为空")
     private String password;
 
+    private String salt;
     private String creationTime;
     private String modificationTime;
 
@@ -66,5 +68,13 @@ public class Registration {
 
     public void setModificationTime(String modificationTime) {
         this.modificationTime = modificationTime;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }

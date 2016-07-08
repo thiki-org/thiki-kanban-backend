@@ -31,7 +31,7 @@ public class TestBase {
     protected JdbcTemplate jdbcTemplate;
     @Autowired
     private DBInterceptor dbInterceptor;
-    private Sequence sequence = Mockito.mock(Sequence.class);
+    protected Sequence sequence = Mockito.mock(Sequence.class);
 
     @BeforeClass
     public static void globalInit() {

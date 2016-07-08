@@ -1,8 +1,7 @@
 package org.thiki.kanban.registration;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.foundation.exception.BusinessException;
+import org.thiki.kanban.foundation.common.Sequence;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
 import org.thiki.kanban.foundation.exception.ResourceConflictException;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
@@ -24,6 +23,9 @@ public class RegistrationService {
     @Resource
     UsersPersistence usersPersistence;
 
+    @Resource
+    private Sequence sequence;
+
     /**
      * 根据用户名查找用户嘻嘻
      *
@@ -44,8 +46,10 @@ public class RegistrationService {
             throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("邮箱[{0}]已经存在.", registration.getEmail()));
         }
 
+        registration.setSalt(sequence.generate());
+
         String password = RSAUtils.decrypt(registration.getPassword());
-        password = MD5Service.encrypt(password + registration.getName());
+        password = MD5Service.encrypt(password + registration.getSalt());
         if (password != null) {
             registration.setPassword(password);
         }

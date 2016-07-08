@@ -4,8 +4,8 @@
 
     <insert id="create" parameterType="org.thiki.kanban.registration.Registration">
         INSERT INTO
-        kb_user_registration(id, password,name,email)
-        VALUES (#{id}, #{password},#{name}, #{email})
+        kb_user_registration(id, password,name,email,salt)
+        VALUES (#{id}, #{password},#{name}, #{email},#{salt})
     </insert>
 
     <select id="findByName" parameterType="java.lang.String" resultType="org.thiki.kanban.registration.Registration">
@@ -16,7 +16,7 @@
         SELECT id,email,NAME FROM kb_user_registration WHERE delete_status=0 and email= #{email}
     </select>
 
-    <select id="existsUser"  parameterType="org.thiki.kanban.registration.Registration" resultType="boolean">
+    <select id="existsUser" parameterType="org.thiki.kanban.registration.Registration" resultType="boolean">
         SELECT count(*) FROM kb_user_registration WHERE email=#{email} or name=#{name}
     </select>
 </mapper>

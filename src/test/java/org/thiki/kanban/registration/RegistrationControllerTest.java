@@ -2,14 +2,18 @@ package org.thiki.kanban.registration;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jayway.restassured.http.ContentType;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scene;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
 import org.thiki.kanban.foundation.security.rsa.RSAUtils;
+
+import javax.annotation.Resource;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -20,14 +24,22 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RegistrationControllerTest extends TestBase {
+    @Resource
+    private RegistrationService registrationService;
 
+    @Before
+    public void setUp() {
+        super.setUp();
+        ReflectionTestUtils.setField(registrationService, "sequence", sequence);
+
+    }
     @Scene("用户注册时,根据服务端提供的公钥对密码进行加密,服务端拿到加密的密码后,首选用私钥解密,再通过MD5算法加盐加密")
     @Test
     public void registerNewUser_shouldReturn201WhenRegisterSuccessfully() throws Exception {
         String publicKey = RSAUtils.loadKey(publicKeyFilePath);
         String password = "foo";
         String rsaPassword = RSAUtils.encrypt(publicKey, password);
-        String expectedMd5Password = "a6c7721b9644a67a2236a7df27ce0be1";
+        String expectedMd5Password = "148412d9df986f739038ad22c77459f2";
 
         JSONObject body = new JSONObject();
         body.put("name", "someone");

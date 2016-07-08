@@ -68,6 +68,7 @@ CREATE TABLE kb_user_registration
   password VARCHAR(500) NOT NULL,
   name       VARCHAR(40) NOT NULL,
   email VARCHAR(127) NOT NULL,
+  salt VARCHAR(40) DEFAULT '',
   delete_status int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -84,21 +85,6 @@ CREATE TABLE kb_task_assignment (
   assigner VARCHAR(40) NOT NULL,
   assignee VARCHAR(40) NOT NULL,
   reporter VARCHAR(40) DEFAULT NULL,
-  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
-  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-  delete_status int DEFAULT 0
-  ) ;
-
-  -- ----------------------------
--- Table structure for kb_identification
--- ----------------------------
-drop table if exists kb_identification;
-
-CREATE TABLE kb_identification (
-  id VARCHAR(40) NOT NULL PRIMARY KEY,
-  user_name VARCHAR(40) NOT NULL,
-  public_key VARCHAR(40) NOT NULL,
-  private_key VARCHAR(40) NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
