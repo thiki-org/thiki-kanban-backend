@@ -15,7 +15,7 @@ public class StatelessToken implements AuthenticationToken {
     private Map<String, ?> params;
     private String clientDigest;
 
-    public StatelessToken(String username,  Map<String, ?> params, String clientDigest) {
+    public StatelessToken(String username, Map<String, ?> params, String clientDigest) {
         this.username = username;
         this.params = params;
         this.clientDigest = clientDigest;
@@ -29,11 +29,11 @@ public class StatelessToken implements AuthenticationToken {
         this.username = username;
     }
 
-    public  Map<String, ?> getParams() {
+    public Map<String, ?> getParams() {
         return params;
     }
 
-    public void setParams( Map<String, ?> params) {
+    public void setParams(Map<String, ?> params) {
         this.params = params;
     }
 
@@ -46,7 +46,7 @@ public class StatelessToken implements AuthenticationToken {
     }
 
     public Object getPrincipal() {
-       return username;
+        return username;
     }
 
     public Object getCredentials() {

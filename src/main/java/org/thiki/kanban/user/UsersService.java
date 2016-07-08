@@ -43,7 +43,8 @@ public class UsersService {
         }
         return usersPersistence.deleteById(id);
     }
-    public  UserProfile findByName(String userName){
-        return  usersPersistence.findByName(userName);
+
+    public UserProfile findByName(String userName) {
+        return usersPersistence.findByName(userName);
     }
 }

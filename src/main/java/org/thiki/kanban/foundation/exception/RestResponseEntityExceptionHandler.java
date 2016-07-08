@@ -20,7 +20,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
         HttpStatus httpStatus = be.getStatus();
 
-        Map<String, Object> body = new HashMap<String, Object>(){{
+        Map<String, Object> body = new HashMap<String, Object>() {{
             put("message", be.getMessage());
             put("code", be.getCode());
         }};

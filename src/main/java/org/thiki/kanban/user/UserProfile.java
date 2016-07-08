@@ -16,11 +16,10 @@ public class UserProfile implements Serializable {
     private String modificationTime;
 
     /**
-     *
-     * @param id userId
+     * @param id               userId
      * @param email
-     * @param name 唯一的标示名字
-     * @param nick 用户昵称,可以重复
+     * @param name             唯一的标示名字
+     * @param nick             用户昵称,可以重复
      * @param phone
      * @param creationTime
      * @param modificationTime
@@ -46,12 +45,12 @@ public class UserProfile implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getCreationTime() {

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.thiki.kanban.foundation.common.RestResource;
 
 import java.util.List;
+
 public class UsersResource extends RestResource {
     public UsersResource(List<UserProfile> userProfiles) {
         this.domainObject = userProfiles;

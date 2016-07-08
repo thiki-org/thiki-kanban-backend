@@ -19,6 +19,7 @@ public class UserResource extends RestResource {
         }
         this.add(linkTo(methodOn(UsersController.class).loadAll()).withRel("users"));
     }
+
     public UserResource() {
         this.add(linkTo(methodOn(UsersController.class).loadAll()).withRel("users"));
     }

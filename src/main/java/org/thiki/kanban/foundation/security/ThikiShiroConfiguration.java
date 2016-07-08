@@ -3,7 +3,6 @@ package org.thiki.kanban.foundation.security;
 import org.apache.shiro.session.mgt.DefaultSessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.filter.authc.AnonymousFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -78,7 +77,7 @@ public class ThikiShiroConfiguration {
 /*
         filterChainDefinitionMapping.put("*/
 /**", "statelessAuthc");
-*/
+ */
         filterChainDefinitionMapping.put("/identification", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMapping);
         return shiroFilterFactoryBean;

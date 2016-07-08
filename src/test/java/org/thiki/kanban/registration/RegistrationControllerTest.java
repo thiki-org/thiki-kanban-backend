@@ -33,6 +33,7 @@ public class RegistrationControllerTest extends TestBase {
         ReflectionTestUtils.setField(registrationService, "sequenceNumber", sequenceNumber);
 
     }
+
     @Scene("用户注册时,根据服务端提供的公钥对密码进行加密,服务端拿到加密的密码后,首选用私钥解密,再通过MD5算法加盐加密")
     @Test
     public void registerNewUser_shouldReturn201WhenRegisterSuccessfully() throws Exception {

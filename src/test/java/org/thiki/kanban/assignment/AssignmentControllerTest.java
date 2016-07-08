@@ -54,6 +54,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("_links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/fooId/assignments"))
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/tasks/fooId/assignments/fooId"));
     }
+
     @Scene("当用户根据taskID获取分配记录时,如果指定的任务存在,则返回分配记录集合")
     @Test
     public void findByTaskId_shouldReturnAssignmentsSuccessfully() {
@@ -76,6 +77,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("[0]._links.assignments.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo/assignments"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/entries/1/tasks/taskId-foo/assignments/fooId"));
     }
+
     @Scene("当用户根据taskID获取分配记录时,如果指定的任务并不存在,则返回404客户端错误")
     @Test
     public void findByTaskId_shouldReturnErrorWhenTaskIsNotExist() {
@@ -90,6 +92,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("code", equalTo(400))
                 .body("message", equalTo("task[taskId-foo] is not found."));
     }
+
     @Scene("当用户想取消某个分配时,如果指定的分配记录存在,则成功将其取消")
     @Test
     public void delete_shouldReturnSuccessfully() {

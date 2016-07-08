@@ -4,8 +4,6 @@ import org.apache.shiro.web.filter.AccessControlFilter;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * <p>User: Zhang Kaitao

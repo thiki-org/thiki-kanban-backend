@@ -34,13 +34,13 @@ public class HmacSHA256Utils {
 
     public static String digest(String key, Map<String, ?> map) {
         StringBuilder s = new StringBuilder();
-        for(Object values : map.values()) {
-            if(values instanceof String[]) {
-                for(String value : (String[])values) {
+        for (Object values : map.values()) {
+            if (values instanceof String[]) {
+                for (String value : (String[]) values) {
                     s.append(value);
                 }
-            } else if(values instanceof List) {
-                for(String value : (List<String>)values) {
+            } else if (values instanceof List) {
+                for (String value : (List<String>) values) {
                     s.append(value);
                 }
             } else {

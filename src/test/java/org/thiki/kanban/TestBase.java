@@ -29,9 +29,9 @@ public class TestBase {
     @Autowired
     protected DataSource dataSource;
     protected JdbcTemplate jdbcTemplate;
+    protected SequenceNumber sequenceNumber = Mockito.mock(SequenceNumber.class);
     @Autowired
     private DBInterceptor dbInterceptor;
-    protected SequenceNumber sequenceNumber = Mockito.mock(SequenceNumber.class);
 
     @BeforeClass
     public static void globalInit() {

@@ -16,7 +16,7 @@ public class ResourceConflictException extends BusinessException {
     }
 
     @Override
-    public HttpStatus getStatus(){
+    public HttpStatus getStatus() {
         return HttpStatus.CONFLICT;
     }
 }

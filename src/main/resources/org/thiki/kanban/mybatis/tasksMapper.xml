@@ -6,7 +6,9 @@
 
     <insert id="create" parameterType="org.thiki.kanban.task.Task">
         INSERT INTO
-        kb_task(id,summary, content, order_number, reporter, entry_id) VALUES (#{id},#{summary}, #{content}, (SELECT max_order_number from (SELECT  CASE WHEN  max(order_number)  IS NULL THEN 0 ELSE max(order_number)+1 end as max_order_number  FROM kb_task WHERE entry_id=#{entryId} ) as t ), #{reporter}, #{entryId})
+        kb_task(id,summary, content, order_number, reporter, entry_id) VALUES (#{id},#{summary}, #{content}, (SELECT
+        max_order_number from (SELECT CASE WHEN max(order_number) IS NULL THEN 0 ELSE max(order_number)+1 end as
+        max_order_number FROM kb_task WHERE entry_id=#{entryId} ) as t ), #{reporter}, #{entryId})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.task.Task" flushCache="true">
@@ -37,8 +39,8 @@
     </update>
 
     <update id="resortTargetEntry" parameterType="java.util.Map" flushCache="true">
-            UPDATE kb_task SET order_number = order_number+1
-            <![CDATA[
+        UPDATE kb_task SET order_number = order_number+1
+        <![CDATA[
             WHERE order_number >= #{currentOrderNumber}
             ]]>
         AND entry_id=#{currentEntryId} AND delete_status=0 AND id !=#{taskId}

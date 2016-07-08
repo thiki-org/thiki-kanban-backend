@@ -50,17 +50,18 @@ public class ApplicationContextConfig implements ApplicationContextAware {
             }
         };
     }
+
     @Bean
     public MessageSource messageSource() {
-        ReloadableResourceBundleMessageSource messageSource=new ReloadableResourceBundleMessageSource();
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:i18N/message");
         messageSource.setDefaultEncoding("utf-8");
         return messageSource;
     }
 
     @Bean
-    public LocalValidatorFactoryBean validator(){
-        LocalValidatorFactoryBean validatorFactory=new LocalValidatorFactoryBean();
+    public LocalValidatorFactoryBean validator() {
+        LocalValidatorFactoryBean validatorFactory = new LocalValidatorFactoryBean();
         validatorFactory.setValidationMessageSource(messageSource());
         return validatorFactory;
     }
