@@ -12,6 +12,7 @@ import org.bouncycastle.asn1.DERInteger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
 import org.thiki.kanban.foundation.security.Constants;
 import sun.misc.BASE64Decoder;
@@ -32,8 +33,9 @@ import java.util.Enumeration;
 /**
  * Created by xubt on 7/6/16.
  */
-public class RSAUtils {
-    private static final Logger LOGGER = LoggerFactory.getLogger(RSAUtils.class);
+@Service
+public class RSAService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RSAService.class);
 
     /**
      * 算法名称
@@ -61,6 +63,7 @@ public class RSAUtils {
 
     private static File rsaPairFile = null;
     private static String privateKeyPath = "src/main/resources/rsakey.pem";
+    private static String publicKeyPath = "src/main/resources/rsakey.pub";
 
     static {
         try {
@@ -72,7 +75,7 @@ public class RSAUtils {
         rsaPairFile = new File(getRSAPairFilePath());
     }
 
-    private RSAUtils() {
+    private RSAService() {
     }
 
     /**
@@ -87,7 +90,7 @@ public class RSAUtils {
         } catch (InvalidParameterException ex) {
             LOGGER.error("KeyPairGenerator does not support a key length of " + KEY_SIZE + ".", ex);
         } catch (NullPointerException ex) {
-            LOGGER.error("RSAUtils#KEY_PAIR_GEN is null, can not generate KeyPairGenerator instance.",
+            LOGGER.error("RSAService#KEY_PAIR_GEN is null, can not generate KeyPairGenerator instance.",
                     ex);
         }
         return null;
@@ -97,7 +100,7 @@ public class RSAUtils {
      * 返回生成/读取的密钥对文件的路径。
      */
     private static String getRSAPairFilePath() {
-        String urlPath = RSAUtils.class.getResource("/").getPath();
+        String urlPath = RSAService.class.getResource("/").getPath();
         return (new File(urlPath).getParent() + RSA_PAIR_FILENAME);
     }
 
@@ -181,7 +184,7 @@ public class RSAUtils {
         } catch (InvalidKeySpecException ex) {
             LOGGER.error("RSAPublicKeySpec is unavailable.", ex);
         } catch (NullPointerException ex) {
-            LOGGER.error("RSAUtils#KEY_FACTORY is null, can not generate KeyFactory instance.", ex);
+            LOGGER.error("RSAService#KEY_FACTORY is null, can not generate KeyFactory instance.", ex);
         }
         return null;
     }
@@ -201,7 +204,7 @@ public class RSAUtils {
         } catch (InvalidKeySpecException ex) {
             LOGGER.error("RSAPrivateKeySpec is unavailable.", ex);
         } catch (NullPointerException ex) {
-            LOGGER.error("RSAUtils#KEY_FACTORY is null, can not generate KeyFactory instance.", ex);
+            LOGGER.error("RSAService#KEY_FACTORY is null, can not generate KeyFactory instance.", ex);
         }
         return null;
     }
@@ -403,30 +406,6 @@ public class RSAUtils {
         return null;
     }
 
-    /**
-     * 使用默认的私钥解密由JS加密（使用此类提供的公钥加密）的字符串。
-     *
-     * @param encrypttext 密文。
-     * @return {@code encrypttext} 的原文字符串。
-     */
-    public static String decryptStringByJs(String encrypttext) {
-        String text = decryptString(encrypttext);
-        if (text == null) {
-            return null;
-        }
-        return StringUtils.reverse(text);
-    }
-
-    /**
-     * 返回已初始化的默认的公钥。
-     */
-    public static RSAPublicKey getDefaultPublicKey() {
-        KeyPair keyPair = getKeyPair();
-        if (keyPair != null) {
-            return (RSAPublicKey) keyPair.getPublic();
-        }
-        return null;
-    }
 
     /**
      * 返回已初始化的默认的私钥。
@@ -489,7 +468,7 @@ public class RSAUtils {
         return keyFactory.generatePublic(spec);
     }
 
-    public static PublicKey getPublicKey(String keyContent) throws Exception {
+    public PublicKey getPublicKey(String keyContent) throws Exception {
         if (keyContent.equals("")) {
             throw new InvalidKeySpecException("public key is empty.");
         }
@@ -504,12 +483,19 @@ public class RSAUtils {
         return keyFactory.generatePublic(spec);
     }
 
-    public static String encrypt(String publicKey, String plaintext) throws Exception {
+    public String encrypt(String publicKey, String plaintext) throws Exception {
         PublicKey key = getPublicKey(publicKey);
-        return RSAUtils.encryptString(key, plaintext);
+        return RSAService.encryptString(key, plaintext);
     }
 
-    public static String loadKey(String keyPath) {
+    public String loadKey(String keyPath) {
         return FileUtil.readFile(keyPath);
+    }
+
+    public String encryptWithDefaultKey(String plaintext) throws Exception {
+        PublicKey publicKey = getPemPublicKey(publicKeyPath);
+
+        encryptString(publicKey, plaintext);
+        return encryptString(publicKey, plaintext);
     }
 }
