@@ -5,7 +5,7 @@ import org.thiki.kanban.foundation.common.SequenceNumber;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
 import org.thiki.kanban.foundation.exception.ResourceConflictException;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
-import org.thiki.kanban.foundation.security.rsa.RSAUtils;
+import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.user.UsersPersistence;
 
 import javax.annotation.Resource;
@@ -48,7 +48,7 @@ public class RegistrationService {
 
         registration.setSalt(sequenceNumber.generate());
 
-        String password = RSAUtils.decrypt(registration.getPassword());
+        String password = RSAService.decrypt(registration.getPassword());
         password = MD5Service.encrypt(password + registration.getSalt());
         if (password != null) {
             registration.setPassword(password);
