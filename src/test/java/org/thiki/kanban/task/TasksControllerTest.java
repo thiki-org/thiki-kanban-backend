@@ -20,7 +20,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class TasksControllerTest extends TestBase {
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         super.setUp();
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter) VALUES ('fooId','this is the first entry.',1)");
     }
