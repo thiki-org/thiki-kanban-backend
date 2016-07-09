@@ -14,11 +14,6 @@ public class LoginController {
     @Resource
     public LoginService loginService;
 
-    @RequestMapping("/hello")
-    public String hello1(String[] param1, String param2) {
-        return "hello" + param1[0] + param1[1] + param2;
-    }
-
     @RequestMapping(value = "/identification", method = RequestMethod.GET)
     public HttpEntity identify(@RequestHeader String name) throws Exception {
         PublicKey publicPublicKey = loginService.generatePubicKey(name);
