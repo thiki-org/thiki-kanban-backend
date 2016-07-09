@@ -11,7 +11,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scene;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
-import org.thiki.kanban.foundation.security.rsa.RSAUtils;
+import org.thiki.kanban.foundation.security.rsa.RSAService;
 
 import javax.annotation.Resource;
 
@@ -27,8 +27,11 @@ public class RegistrationControllerTest extends TestBase {
     @Resource
     private RegistrationService registrationService;
 
+    @Resource
+    private RSAService rsaService;
+
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         super.setUp();
         ReflectionTestUtils.setField(registrationService, "sequenceNumber", sequenceNumber);
 
@@ -37,9 +40,9 @@ public class RegistrationControllerTest extends TestBase {
     @Scene("用户注册时,根据服务端提供的公钥对密码进行加密,服务端拿到加密的密码后,首选用私钥解密,再通过MD5算法加盐加密")
     @Test
     public void registerNewUser_shouldReturn201WhenRegisterSuccessfully() throws Exception {
-        String publicKey = RSAUtils.loadKey(publicKeyFilePath);
+        String publicKey = rsaService.loadKey(publicKeyFilePath);
         String password = "foo";
-        String rsaPassword = RSAUtils.encrypt(publicKey, password);
+        String rsaPassword = rsaService.encrypt(publicKey, password);
         String expectedMd5Password = "148412d9df986f739038ad22c77459f2";
 
         JSONObject body = new JSONObject();
