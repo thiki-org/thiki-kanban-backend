@@ -39,7 +39,7 @@ public class TestBase {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         when(sequenceNumber.generate()).thenReturn("fooId");
         ReflectionTestUtils.setField(dbInterceptor, "sequenceNumber", sequenceNumber);
         jdbcTemplate = new JdbcTemplate(dataSource);
