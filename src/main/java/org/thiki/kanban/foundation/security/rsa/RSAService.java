@@ -1,6 +1,5 @@
 package org.thiki.kanban.foundation.security.rsa;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
@@ -13,6 +12,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.common.Base64;
 import org.thiki.kanban.foundation.common.FileUtil;
 import org.thiki.kanban.foundation.security.Constants;
 import sun.misc.BASE64Decoder;
