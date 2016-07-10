@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.foundation.security.token.TokenService;
 import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationPersistence;
 

@@ -1,4 +1,4 @@
-package org.thiki.kanban.login;
+package org.thiki.kanban.foundation.security.token;
 
 import com.alibaba.fastjson.JSONObject;
 

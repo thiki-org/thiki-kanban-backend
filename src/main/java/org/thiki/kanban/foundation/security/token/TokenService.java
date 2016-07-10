@@ -1,4 +1,4 @@
-package org.thiki.kanban.login;
+package org.thiki.kanban.foundation.security.token;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
