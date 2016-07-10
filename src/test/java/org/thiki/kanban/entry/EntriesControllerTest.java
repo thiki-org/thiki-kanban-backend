@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
-import org.thiki.kanban.foundation.annotations.Scene;
+import org.thiki.kanban.foundation.annotations.Scenario;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class EntriesControllerTest extends TestBase {
-    @Scene("创建一个新的entry后,返回自身及links信息")
+    @Scenario("创建一个新的entry后,返回自身及links信息")
     @Test
     public void shouldReturn201WhenCreateEntrySuccessfully() {
         given().header("userId", "11222")
@@ -35,7 +35,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"));
     }
 
-    @Scene("创建一个新的entry,如果它并不是指定boardId下第一个entry,则其排序号应根据当前entry数量自动增加")
+    @Scenario("创建一个新的entry,如果它并不是指定boardId下第一个entry,则其排序号应根据当前entry数量自动增加")
     @Test
     public void create_orderNumberShouldAutoIncrease() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('existedFooId','this is the first entry.',1,'feeId')");
@@ -55,7 +55,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"));
     }
 
-    @Scene("创建新的entry时,如果名称为空,则不允许创建并返回客户端400错误")
+    @Scenario("创建新的entry时,如果名称为空,则不允许创建并返回客户端400错误")
     @Test
     public void shouldFailedIfEntryTitleIsEmpty() {
         given().header("userId", "11222")
@@ -69,7 +69,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("message", equalTo("列表名称不能为空"));
     }
 
-    @Scene("创建新的entry时,如果boardID为空,则不允许创建并返回客户端400错误")
+    @Scenario("创建新的entry时,如果boardID为空,则不允许创建并返回客户端400错误")
     @Test
     public void shouldFailedIfEntryBoardIdIsEmpty() {
         given().header("userId", "11222")
@@ -83,7 +83,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("message", equalTo("boardId不能为空"));
     }
 
-    @Scene("创建新的entry时,如果名称长度不在合法的范围,则不允许创建并返回客户端400错误")
+    @Scenario("创建新的entry时,如果名称长度不在合法的范围,则不允许创建并返回客户端400错误")
     @Test
     public void shouldReturnBadRequestWhenEntryTitleIsTooLong() {
         given().header("userId", "11222")
@@ -98,7 +98,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("message", equalTo("列表名称长度非法,有效长度为1~50个字符。"));
     }
 
-    @Scene("当根据entryId查找entry时,如果entry存在,则将其返回")
+    @Scenario("当根据entryId查找entry时,如果entry存在,则将其返回")
     @Test
     public void shouldReturnEntryWhenFindEntryById() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('fooId','this is the first entry.',1,'feeId')");
@@ -113,7 +113,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"));
     }
 
-    @Scene("更新entry时,如果参数合法且待更新的entry存在,则更新成功")
+    @Scenario("更新entry时,如果参数合法且待更新的entry存在,则更新成功")
     @Test
     public void shouldUpdateSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('fooId','this is the first entry.',1,'feeId')");
@@ -130,7 +130,7 @@ public class EntriesControllerTest extends TestBase {
         assertEquals("newTitle", jdbcTemplate.queryForObject("select title from kb_entry where id='fooId'", String.class));
     }
 
-    @Scene("更新entry时,如果参数合法但待更新的entry不存在,则更新失败")
+    @Scenario("更新entry时,如果参数合法但待更新的entry不存在,则更新失败")
     @Test
     public void update_shouldFailedWhenTheEntryToUpdateIsNotExists() {
         given().header("userId", "11222")
@@ -143,7 +143,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("message", equalTo("entry[fooId] is not found."));
     }
 
-    @Scene("当移动一个entry时,移动后的排序小于其原先的排序")
+    @Scenario("当移动一个entry时,移动后的排序小于其原先的排序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsLessThanOriginNumber() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first entry.',1,'feeId',0)");
@@ -162,7 +162,7 @@ public class EntriesControllerTest extends TestBase {
         assertEquals("0", jdbcTemplate.queryForObject("select order_number from kb_entry where id='fooId2'", String.class));
     }
 
-    @Scene("当移动一个entry时,移动后的排序大于其原先的排序")
+    @Scenario("当移动一个entry时,移动后的排序大于其原先的排序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsMoreThanOriginNumber() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first entry.',1,'feeId',0)");
@@ -183,7 +183,7 @@ public class EntriesControllerTest extends TestBase {
         assertEquals("1", jdbcTemplate.queryForObject("select order_number from kb_entry where id='fooId3'", String.class));
     }
 
-    @Scene("当删除一个entry时,如果待删除的entry存在,则删除成功")
+    @Scenario("当删除一个entry时,如果待删除的entry存在,则删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheEntryIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('fooId','this is the first entry.',1,'feeId')");
@@ -195,7 +195,7 @@ public class EntriesControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_entry WHERE  delete_status=1").size());
     }
 
-    @Scene("当删除一个entry时,如果待删除的entry不存在,则删除成功并返回客户端错误")
+    @Scenario("当删除一个entry时,如果待删除的entry不存在,则删除成功并返回客户端错误")
     @Test
     public void shouldThrowResourceNotFoundExceptionWhenEntryToDeleteIsNotExist() throws Exception {
         given().header("userId", "11222")
@@ -206,7 +206,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("message", equalTo("entry[fooId] is not found."));
     }
 
-    @Scene("通过boardId获取所有的entry")
+    @Scenario("通过boardId获取所有的entry")
     @Test
     public void shouldReturnAllEntriesSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_entry (id,title,reporter,board_id) VALUES ('fooId','this is the first entry.',1,'feeId')");

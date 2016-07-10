@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.TestBase;
-import org.thiki.kanban.foundation.annotations.Scene;
+import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 
@@ -37,7 +37,7 @@ public class RegistrationControllerTest extends TestBase {
 
     }
 
-    @Scene("用户注册时,根据服务端提供的公钥对密码进行加密,服务端拿到加密的密码后,首选用私钥解密,再通过MD5算法加盐加密")
+    @Scenario("用户注册时,根据服务端提供的公钥对密码进行加密,服务端拿到加密的密码后,首选用私钥解密,再通过MD5算法加盐加密")
     @Test
     public void registerNewUser_shouldReturn201WhenRegisterSuccessfully() throws Exception {
         String publicKey = rsaService.loadKey(publicKeyFilePath);
@@ -63,7 +63,7 @@ public class RegistrationControllerTest extends TestBase {
         assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration", String.class));
     }
 
-    @Scene("用户注册时,如果用户名已经存在,则不允许注册")
+    @Scenario("用户注册时,如果用户名已经存在,则不允许注册")
     @Test
     public void registerNewUser_shouldRejectWithConflictWhenUserNameExists() {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
@@ -80,7 +80,7 @@ public class RegistrationControllerTest extends TestBase {
                 .body("message", equalTo("用户名[someone]已经存在."));
     }
 
-    @Scene("用户注册时,如果邮箱已经存在,则不允许注册")
+    @Scenario("用户注册时,如果邮箱已经存在,则不允许注册")
     @Test
     public void registerNewUser_shouldRejectWithConflictWhenUserEmailExists() {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
@@ -97,7 +97,7 @@ public class RegistrationControllerTest extends TestBase {
                 .body("message", equalTo("邮箱[someone@gmail.com]已经存在."));
     }
 
-    @Scene("用户注册时,用户名和邮箱在系统中都不存在,但是密码未通过公钥加密,则不允许注册")
+    @Scenario("用户注册时,用户名和邮箱在系统中都不存在,但是密码未通过公钥加密,则不允许注册")
     @Test
     public void registerNewUser_shouldFailIfPasswordIsNotEncryptedWithPublicKey() throws Exception {
         String password = "foo";

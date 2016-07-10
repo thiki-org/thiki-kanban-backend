@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
-import org.thiki.kanban.foundation.annotations.Scene;
+import org.thiki.kanban.foundation.annotations.Scenario;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BoardControllerTest extends TestBase {
 
-    @Scene("当创建一个board时,如果参数合法,则创建成功并返回创建后的board")
+    @Scenario("当创建一个board时,如果参数合法,则创建成功并返回创建后的board")
     @Test
     public void shouldReturn201WhenCreateBoardSuccessfully() {
         given().header("userId", "11222")
@@ -36,7 +36,7 @@ public class BoardControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
     }
 
-    @Scene("用户根据ID获取board时,如果该board存在,则返回其信息")
+    @Scenario("用户根据ID获取board时,如果该board存在,则返回其信息")
     @Test
     public void shouldReturnBoardWhenBoardIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
@@ -53,7 +53,7 @@ public class BoardControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
     }
 
-    @Scene("成功更新一个board信息")
+    @Scenario("成功更新一个board信息")
     @Test
     public void shouldUpdateSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
@@ -71,7 +71,7 @@ public class BoardControllerTest extends TestBase {
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
     }
 
-    @Scene("当用户删除一个指定的board时,如果该board存在,则删除成功")
+    @Scenario("当用户删除一个指定的board时,如果该board存在,则删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheBoardIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
@@ -84,7 +84,7 @@ public class BoardControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_board WHERE  delete_status=1").size());
     }
 
-    @Scene("当用户删除一个指定的board时,如果该board不存在,则返回客户端404错误")
+    @Scenario("当用户删除一个指定的board时,如果该board不存在,则返回客户端404错误")
     @Test
     public void shouldThrowResourceNotFoundExceptionWhenEntryToDeleteIsNotExist() throws Exception {
         given().header("userId", "11222")
@@ -95,7 +95,7 @@ public class BoardControllerTest extends TestBase {
                 .body("message", equalTo("board[fooId] is not found."));
     }
 
-    @Scene("获取所有的boards(这个接口考虑废弃)")
+    @Scenario("获取所有的boards(这个接口考虑废弃)")
     @Test
     public void loadAll_shouldReturnAllBoardsSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
@@ -112,7 +112,7 @@ public class BoardControllerTest extends TestBase {
                 .body("[0]._links.entries.href", equalTo("http://localhost:8007/boards/fooId/entries"));
     }
 
-    @Scene("获取指定用户所拥有的boards")
+    @Scenario("获取指定用户所拥有的boards")
     @Test
     public void findByUserId_shouldReturnAllBoardsSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
