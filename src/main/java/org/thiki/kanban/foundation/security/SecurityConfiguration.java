@@ -15,9 +15,9 @@ public class SecurityConfiguration {
     public FilterRegistrationBean securityFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new SecurityFilter());
-        registration.addUrlPatterns("/resource");
+        registration.addUrlPatterns("/*");
         registration.setName("securityFilter");
-        registration.setOrder(1);
+        registration.setOrder(2);
         return registration;
     }
 
@@ -25,7 +25,7 @@ public class SecurityConfiguration {
     public FilterRegistrationBean securityFreeFilterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new SecurityFreeFilter());
-        registration.addUrlPatterns("/*");
+        registration.addUrlPatterns("/entrance", "/identification", "/registration", "/login");
         registration.setName("securityFreeFilter");
         registration.setOrder(1);
         return registration;
