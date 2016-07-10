@@ -1,5 +1,7 @@
 package org.thiki.kanban.foundation.config;
 
+import org.springframework.boot.context.embedded.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -31,5 +33,20 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
             }
         });
         converters.add(converter);
+    }
+
+    @Bean
+    public FilterRegistrationBean someFilterRegistration() {
+        FilterRegistrationBean registration = new FilterRegistrationBean();
+        registration.setFilter(securityFilter());
+        registration.addUrlPatterns("/*");
+        registration.setName("securityFilter");
+        registration.setOrder(1);
+        return registration;
+    }
+
+    @Bean(name = "securityFilter")
+    public SecurityFilter securityFilter() {
+        return new SecurityFilter();
     }
 }
