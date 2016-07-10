@@ -40,9 +40,11 @@ public class LoginControllerTest extends TestBase {
 
     @Scenario("当用户请求登录时,首先需要向系统发送一次认证请求,系统确认该用户合法时,将公钥发送至客户端")
     @Test
-    public void askForAuthenticationWhenUserIsExists() {
+    public void identification_askForAuthenticationWhenUserIsExists() {
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password,salt) " +
+                "VALUES ('fooUserId','someone@gmail.com','someone','148412d9df986f739038ad22c77459f2','fooId')");
         String publicKey = FileUtil.readFile(publicKeyFilePath);
-        given().header("name", "foo")
+        given().header("name", "someone")
                 .when()
                 .get("/identification")
                 .then()
@@ -50,9 +52,21 @@ public class LoginControllerTest extends TestBase {
                 .body("publicKey", equalTo(publicKey));
     }
 
+    @Scenario("当用户请求登录时,首先需要向系统发送一次认证请求,如果待认证的用户不存在,告知客户端参数错误")
+    @Test
+    public void identification_shouldThrowInvalidParamsExceptionWhenUserIsNotExists() {
+        given().header("name", "foo")
+                .when()
+                .get("/identification")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("user[foo] is not found."));
+    }
+
     @Scenario("用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配")
     @Test
-    public void loginSuccessfully() throws Exception {
+    public void login_loginSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password,salt) " +
                 "VALUES ('fooUserId','someone@gmail.com','someone','148412d9df986f739038ad22c77459f2','fooId')");
         String publicKey = rsaService.loadKey(publicKeyFilePath);

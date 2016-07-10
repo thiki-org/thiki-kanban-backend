@@ -8,7 +8,9 @@ import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationPersistence;
 
 import javax.annotation.Resource;
+import java.security.InvalidParameterException;
 import java.security.KeyPairGenerator;
+import java.text.MessageFormat;
 
 /**
  * Created by xubt on 7/5/16.
@@ -21,6 +23,10 @@ public class LoginService {
     TokenService tokenService;
 
     public PublicKey generatePubicKey(String userName) throws Exception {
+        Registration registeredUser = registrationPersistence.findByName(userName);
+        if (registeredUser == null) {
+            throw new InvalidParameterException(MessageFormat.format("user[{0}] is not found.", userName));
+        }
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
 
         PublicKey publicPublicKey = new PublicKey();
