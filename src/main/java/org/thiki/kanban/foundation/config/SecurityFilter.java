@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.connector.RequestFacade;
 import org.springframework.http.HttpStatus;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
-import org.thiki.kanban.foundation.exception.UnauthorizedException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +21,7 @@ public class SecurityFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException, UnauthorizedException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String token = ((RequestFacade) servletRequest).getHeader("token");
         if (token == null || token.equals("")) {
             JSONObject responseBody = new JSONObject();

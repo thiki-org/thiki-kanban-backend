@@ -1,8 +1,9 @@
 package org.thiki.kanban.foundation.security.filter;
 
+import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.web.filter.AccessControlFilter;
+import org.apache.shiro.web.servlet.ShiroHttpServletRequest;
 import org.thiki.kanban.foundation.security.Constants;
-import org.thiki.kanban.foundation.security.realm.StatelessToken;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -24,7 +25,11 @@ public class StatelessAuthcFilter extends AccessControlFilter {
     }
 
     @Override
-    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) throws Exception {
+    protected boolean onAccessDenied(ServletRequest request, ServletResponse response) {
+        String token = ((ShiroHttpServletRequest) request).getHeader("token");
+        if (token == null || token.equals("")) {
+            throw new UnauthorizedException("");
+        }
         //1、客户端生成的消息摘要
         String clientDigest = request.getParameter(Constants.PARAM_DIGEST);
         //2、客户端传入的用户身份
@@ -33,7 +38,7 @@ public class StatelessAuthcFilter extends AccessControlFilter {
         Map<String, String[]> params = new HashMap<String, String[]>(request.getParameterMap());
         params.remove(Constants.PARAM_DIGEST);
 
-        //4、生成无状态Token
+        /*//4、生成无状态Token
         StatelessToken token = new StatelessToken(username, params, clientDigest);
 
         try {
@@ -43,7 +48,7 @@ public class StatelessAuthcFilter extends AccessControlFilter {
             e.printStackTrace();
             onLoginFail(response); //6、登录失败
             return false;
-        }
+        }*/
         return true;
     }
 

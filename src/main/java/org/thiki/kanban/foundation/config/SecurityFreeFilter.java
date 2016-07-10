@@ -1,6 +1,5 @@
 package org.thiki.kanban.foundation.config;
 
-import org.thiki.kanban.foundation.exception.UnauthorizedException;
 
 import javax.servlet.*;
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class SecurityFreeFilter implements Filter {
     }
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException, UnauthorizedException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

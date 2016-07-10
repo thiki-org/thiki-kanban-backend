@@ -74,10 +74,8 @@ public class ThikiShiroConfiguration {
             }
         });
         Map<String, String> filterChainDefinitionMapping = new HashMap<String, String>();
-/*
-        filterChainDefinitionMapping.put("*/
-/**", "statelessAuthc");
- */
+
+
         filterChainDefinitionMapping.put("/identification", "anon");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMapping);
         return shiroFilterFactoryBean;
