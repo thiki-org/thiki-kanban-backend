@@ -41,10 +41,14 @@ public class LoginService {
         String rsaDecryptedPassword = RSAService.decrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
 
-        Registration user = registrationPersistence.findByIdentity(identity, md5Password);
+        Registration matchedUser = registrationPersistence.findByIdentity(identity, md5Password);
+
+        if (matchedUser == null) {
+            throw new InvalidParameterException("Your username or password is incorrect.");
+        }
 
         Identification identification = new Identification();
-        String token = tokenService.buildToken(user.getName());
+        String token = tokenService.buildToken(matchedUser.getName());
         identification.setToken(token);
 
         return identification;

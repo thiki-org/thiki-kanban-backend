@@ -16,8 +16,10 @@
         SELECT id,email,NAME FROM kb_user_registration WHERE delete_status=0 and email= #{email}
     </select>
 
-    <select id="findByIdentity" parameterType="java.lang.String" resultType="org.thiki.kanban.registration.Registration">
-        SELECT id,email,NAME FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or name=#{identity}) AND kb_user_registration.password=#{password}
+    <select id="findByIdentity" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.registration.Registration">
+        SELECT id,email,NAME FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or name=#{identity})
+        AND kb_user_registration.password=#{password}
     </select>
 
     <select id="existsUser" parameterType="org.thiki.kanban.registration.Registration" resultType="boolean">
