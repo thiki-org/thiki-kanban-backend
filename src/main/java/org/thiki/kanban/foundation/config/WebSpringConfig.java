@@ -36,24 +36,4 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
         });
         converters.add(converter);
     }
-
-    @Bean
-    public FilterRegistrationBean securityFilterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new SecurityFilter());
-        registration.addUrlPatterns("/resource");
-        registration.setName("securityFilter");
-        registration.setOrder(1);
-        return registration;
-    }
-
-    @Bean
-    public FilterRegistrationBean securityFreeFilterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new SecurityFreeFilter());
-        registration.addUrlPatterns("/*");
-        registration.setName("securityFreeFilter");
-        registration.setOrder(1);
-        return registration;
-    }
 }
