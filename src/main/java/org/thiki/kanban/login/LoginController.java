@@ -16,7 +16,7 @@ public class LoginController {
 
     @RequestMapping(value = "/identification", method = RequestMethod.GET)
     public HttpEntity identify(@RequestHeader String name) throws Exception {
-        PublicKey publicPublicKey = loginService.generatePubicKey(name);
+        PublicKey publicPublicKey = loginService.authenticate(name);
 
         return Response.build(new PublicKeyResource(publicPublicKey));
     }

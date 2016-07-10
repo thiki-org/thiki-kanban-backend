@@ -23,7 +23,7 @@ public class LoginService {
     @Resource
     TokenService tokenService;
 
-    public PublicKey generatePubicKey(String userName) throws Exception {
+    public PublicKey authenticate(String userName) throws Exception {
         Registration registeredUser = registrationPersistence.findByName(userName);
         if (registeredUser == null) {
             throw new InvalidParameterException(MessageFormat.format("user[{0}] is not found.", userName));
