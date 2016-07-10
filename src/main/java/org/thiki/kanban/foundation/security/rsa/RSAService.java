@@ -1,12 +1,12 @@
 package org.thiki.kanban.foundation.security.rsa;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.shiro.codec.Base64;
 import org.bouncycastle.asn1.ASN1Sequence;
 import org.bouncycastle.asn1.DERInteger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
