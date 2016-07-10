@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.thiki.kanban.AuthenticationTestBase;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
 
@@ -17,13 +18,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  * Created by xubt on 7/10/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class StatelessAuthcFilterTest extends TestBase {
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-        RequestSpecification requestSpecification = new RequestSpecBuilder().addHeader("authentication", "yes").build();
-        RestAssured.requestSpecification = requestSpecification;
-    }
+public class StatelessAuthcFilterTest extends AuthenticationTestBase {
 
     @Scenario("当请求需要认证时,如果没有携带token,则告知客户端需要授权")
     @Test
