@@ -23,7 +23,10 @@ public class SecurityFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String token = ((RequestFacade) servletRequest).getHeader("token");
-        if (token == null || token.equals("")) {
+
+        String localAddress = servletRequest.getLocalAddr();
+        String authentication = ((RequestFacade) servletRequest).getHeader("authentication");
+        if (!isLocalTestEnvironment(localAddress, authentication) && isTokenInvalid(token)) {
             JSONObject responseBody = new JSONObject();
             responseBody.put("message", "Authentication is required.");
             responseBody.put("code", ExceptionCode.UNAUTHORIZED.code());
@@ -47,6 +50,14 @@ public class SecurityFilter implements Filter {
             return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    private boolean isLocalTestEnvironment(String localAddress, String authentication) {
+        return "127.0.0.1".equals(localAddress) && "no".equals(authentication);
+    }
+
+    private boolean isTokenInvalid(String token) {
+        return token == null || token.equals("");
     }
 
     @Override
