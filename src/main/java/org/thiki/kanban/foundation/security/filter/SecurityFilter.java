@@ -28,14 +28,14 @@ public class SecurityFilter implements Filter {
         String authentication = ((RequestFacade) servletRequest).getHeader("authentication");
         if (!isLocalTestEnvironment(localAddress, authentication) && isTokenInvalid(token)) {
             JSONObject responseBody = new JSONObject();
-            responseBody.put("message", "Authentication is required.");
+            responseBody.put("message", "Token is required,please authenticate first.");
             responseBody.put("code", ExceptionCode.UNAUTHORIZED.code());
             responseBody.put("_links", new HashMap<String, Object>() {
                 {
-                    put("registration", new HashMap<String, String>() {
+                    put("identification", new HashMap<String, String>() {
                         {
                             {
-                                put("href", "/registration");
+                                put("href", "/identification");
                             }
                         }
                     });

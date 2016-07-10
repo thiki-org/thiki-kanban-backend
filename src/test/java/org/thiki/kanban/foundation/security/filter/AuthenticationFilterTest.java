@@ -23,7 +23,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(401))
-                .body("message", equalTo("Authentication is required."))
-                .body("_links.registration.href", equalTo("/registration"));
+                .body("message", equalTo("Token is required,please authenticate first."))
+                .body("_links.identification.href", equalTo("/identification"));
     }
 }
