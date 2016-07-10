@@ -1,5 +1,9 @@
 package org.thiki.kanban.foundation.security.filter;
 
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.builder.RequestSpecBuilder;
+import com.jayway.restassured.specification.RequestSpecification;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -14,6 +18,13 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class StatelessAuthcFilterTest extends TestBase {
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+        RequestSpecification requestSpecification = new RequestSpecBuilder().addHeader("authentication", "yes").build();
+        RestAssured.requestSpecification = requestSpecification;
+    }
+
     @Scenario("当请求需要认证时,如果没有携带token,则告知客户端需要授权")
     @Test
     public void shouldReturn401WhenAuthIsRequired() throws Exception {
