@@ -1,7 +1,6 @@
 package org.thiki.kanban.login;
 
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.foundation.common.FileUtil;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.TokenService;
@@ -10,7 +9,6 @@ import org.thiki.kanban.registration.RegistrationPersistence;
 
 import javax.annotation.Resource;
 import java.security.InvalidParameterException;
-import java.security.KeyPairGenerator;
 import java.text.MessageFormat;
 
 /**
@@ -19,19 +17,19 @@ import java.text.MessageFormat;
 @Service
 public class LoginService {
     @Resource
-    RegistrationPersistence registrationPersistence;
+    private RegistrationPersistence registrationPersistence;
     @Resource
-    TokenService tokenService;
+    private TokenService tokenService;
+    @Resource
+    private RSAService rsaService;
 
     public PublicKey authenticate(String userName) throws Exception {
         Registration registeredUser = registrationPersistence.findByName(userName);
         if (registeredUser == null) {
             throw new InvalidParameterException(MessageFormat.format("user[{0}] is not found.", userName));
         }
-        KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-
         PublicKey publicPublicKey = new PublicKey();
-        String publicKeyContent = FileUtil.readFile("src/main/resources/rsakey.pub");
+        String publicKeyContent = rsaService.loadDefaultPublicKey();
         publicPublicKey.setPublicKey(publicKeyContent);
         return publicPublicKey;
     }
@@ -42,7 +40,6 @@ public class LoginService {
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
 
         Registration matchedUser = registrationPersistence.findByIdentity(identity, md5Password);
-
         if (matchedUser == null) {
             throw new InvalidParameterException("Your username or password is incorrect.");
         }
