@@ -62,7 +62,7 @@ public class LoginControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("user[foo] is not found."));
+                .body("message", equalTo("No user named foo is found."));
     }
 
     @Scenario("用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配,如果匹配通过则颁发token")

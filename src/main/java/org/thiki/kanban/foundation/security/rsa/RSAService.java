@@ -498,4 +498,8 @@ public class RSAService {
         encryptString(publicKey, plaintext);
         return encryptString(publicKey, plaintext);
     }
+
+    public String loadDefaultPublicKey() throws Exception {
+        return loadKey(publicKeyPath);
+    }
 }

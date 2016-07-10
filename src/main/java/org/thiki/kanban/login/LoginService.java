@@ -26,7 +26,7 @@ public class LoginService {
     public PublicKey authenticate(String userName) throws Exception {
         Registration registeredUser = registrationPersistence.findByName(userName);
         if (registeredUser == null) {
-            throw new InvalidParameterException(MessageFormat.format("user[{0}] is not found.", userName));
+            throw new InvalidParameterException(MessageFormat.format("No user named {0} is found.", userName));
         }
         PublicKey publicPublicKey = new PublicKey();
         String publicKeyContent = rsaService.loadDefaultPublicKey();
