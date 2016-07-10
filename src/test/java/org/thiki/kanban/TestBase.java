@@ -1,6 +1,8 @@
 package org.thiki.kanban;
 
 import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.builder.RequestSpecBuilder;
+import com.jayway.restassured.specification.RequestSpecification;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -36,6 +38,8 @@ public class TestBase {
     @BeforeClass
     public static void globalInit() {
         RestAssured.port = port;
+        RequestSpecification requestSpecification = new RequestSpecBuilder().addHeader("authentication", "no").build();
+        RestAssured.requestSpecification = requestSpecification;
     }
 
     @Before
