@@ -214,8 +214,6 @@ MF没说过"充血",更没说过"胀血"
 
 * [rest-assured](https://github.com/rest-assured/rest-assured)
 
-* [shiro](http://shiro.apache.org)
-
     
 
 
