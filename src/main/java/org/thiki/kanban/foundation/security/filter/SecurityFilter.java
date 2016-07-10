@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.config;
+package org.thiki.kanban.foundation.security.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.connector.RequestFacade;
