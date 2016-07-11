@@ -2,6 +2,7 @@ package org.thiki.kanban.foundation.security.token;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.common.date.DateUtil;
 import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
@@ -18,6 +19,9 @@ import java.util.Date;
 public class TokenService {
     @Resource
     public RSAService rsaService;
+
+    @Resource
+    private DateUtil dateUtil;
 
     public String buildToken(String userName) throws Exception {
         AuthenticationToken authenticationToken = new AuthenticationToken();
@@ -40,7 +44,7 @@ public class TokenService {
         String decryptedToken = rsaService.dencryptWithDefaultKey(token);
         AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
 
-        Date expiredTime = DateUtil.StringToDate(authenticationToken.getExpirationTime(), "yyyyMMddHHmmss");
+        Date expiredTime = dateUtil.StringToDate(authenticationToken.getExpirationTime(), DateStyle.YYYY_MM_DD_HH_MM_SS);
         return expiredTime.before(new Date());
     }
 
@@ -74,5 +78,22 @@ public class TokenService {
 
     private boolean isTokenEmpty(String token) {
         return token == null || token.equals("");
+    }
+
+    public String updateToken(String token) throws Exception {
+        String decryptedToken = rsaService.dencryptWithDefaultKey(token);
+        AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
+
+        authenticationToken.setExpirationTime(generate());
+        String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
+
+        return encryptedToken;
+    }
+
+    public String generate() {
+        Date expirationTime = dateUtil.addMinute(new Date(), 5);
+        String expirationTimeStr = dateUtil.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
+
+        return expirationTimeStr;
     }
 }
