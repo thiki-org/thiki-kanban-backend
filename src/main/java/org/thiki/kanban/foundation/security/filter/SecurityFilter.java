@@ -32,6 +32,16 @@ public class SecurityFilter implements Filter {
         if (!isPassedSecurityVerify(servletRequest, servletResponse)) {
             return;
         }
+        String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
+
+        String updatedToken = null;
+        try {
+            updatedToken = tokenService.updateToken(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        response.setHeader(Constants.HEADER_PARAMS_TOKEN, updatedToken);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
