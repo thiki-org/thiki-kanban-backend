@@ -66,11 +66,6 @@ public class SecurityFilter implements Filter {
                 writeResponse(servletResponse, "Your authenticationToken has expired,please authenticate again.", HttpStatus.UNAUTHORIZED.value());
                 return false;
             }
-        } catch (Exception e) {
-            writeResponse(servletResponse, " Error occurred when parsing the token:" + e.getMessage(), HttpStatus.UNAUTHORIZED.value());
-            return false;
-        }
-        try {
             if (tokenService.isTampered(token, userName)) {
                 writeResponse(servletResponse, "Your userName is not consistent with that in token.", HttpStatus.UNAUTHORIZED.value());
                 return false;
