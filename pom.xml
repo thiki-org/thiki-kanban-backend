@@ -304,6 +304,12 @@
             </properties>
         </profile>
         <profile>
+            <id>local_hucz</id>
+            <properties>
+                <prop.dir.name>local_hucz</prop.dir.name>
+            </properties>
+        </profile>
+        <profile>
             <id>local_ming</id>
             <properties>
                 <prop.dir.name>local_ming</prop.dir.name>
