@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 /**
  * Created by xubt on 7/8/16.
  */
-public class Token {
+public class AuthenticationToken {
     private String userName;
     private String expirationTime;
 
