@@ -71,7 +71,7 @@ public class SecurityFilter implements Filter {
                 return false;
             }
         } catch (Exception e) {
-            writeResponse(servletResponse, " Error occurred when parsing the token:" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+            writeResponse(servletResponse, "Error occurred when parsing the token:" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
             return false;
         }
         return true;
