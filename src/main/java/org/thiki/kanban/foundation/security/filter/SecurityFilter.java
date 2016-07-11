@@ -54,27 +54,16 @@ public class SecurityFilter implements Filter {
         String localAddress = servletRequest.getLocalAddr();
         String authentication = ((RequestFacade) servletRequest).getHeader("authentication");
         try {
-            if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
+            String identityResult = tokenService.isPassedSecurityVerify(token, userName, authentication, localAddress);
+            if (identityResult.equals("passed")) {
                 return true;
             }
-
-            if (isTokenEmpty(token)) {
-                writeResponse(servletResponse, "AuthenticationToken is required,please authenticate first.", HttpStatus.UNAUTHORIZED.value());
-                return false;
-            }
-            if (tokenService.isExpired(token)) {
-                writeResponse(servletResponse, "Your authenticationToken has expired,please authenticate again.", HttpStatus.UNAUTHORIZED.value());
-                return false;
-            }
-            if (tokenService.isTampered(token, userName)) {
-                writeResponse(servletResponse, "Your userName is not consistent with that in token.", HttpStatus.UNAUTHORIZED.value());
-                return false;
-            }
+            writeResponse(servletResponse, identityResult, HttpStatus.UNAUTHORIZED.value());
+            return false;
         } catch (Exception e) {
             writeResponse(servletResponse, "Error occurred when parsing the token:" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
             return false;
         }
-        return true;
     }
 
     private void writeResponse(ServletResponse servletResponse, String message, int code) throws IOException {

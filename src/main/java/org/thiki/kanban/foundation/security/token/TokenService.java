@@ -49,4 +49,29 @@ public class TokenService {
 
         return !authenticationToken.getUserName().equals(userName);
     }
+
+    public String isPassedSecurityVerify(String token, String userName, String authentication, String localAddress) throws Exception {
+        if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
+            return "passed";
+        }
+
+        if (isTokenEmpty(token)) {
+            return "AuthenticationToken is required,please authenticate first.";
+        }
+        if (isExpired(token)) {
+            return "Your authenticationToken has expired,please authenticate again.";
+        }
+        if (isTampered(token, userName)) {
+            return "Your userName is not consistent with that in token.";
+        }
+        return "passed";
+    }
+
+    private boolean isLocalTestEnvironmentAndFreeAuthentication(String localAddress, String authentication) {
+        return "127.0.0.1".equals(localAddress) && "no".equals(authentication);
+    }
+
+    private boolean isTokenEmpty(String token) {
+        return token == null || token.equals("");
+    }
 }
