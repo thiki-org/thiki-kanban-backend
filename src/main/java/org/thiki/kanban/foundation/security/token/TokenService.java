@@ -8,8 +8,6 @@ import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -26,18 +24,11 @@ public class TokenService {
     public String buildToken(String userName) throws Exception {
         AuthenticationToken authenticationToken = new AuthenticationToken();
         authenticationToken.setUserName(userName);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        Date now = new Date();
-        Calendar rightNow = Calendar.getInstance();
-        rightNow.setTime(now);
-        rightNow.add(Calendar.MINUTE, 5);
+        Date expirationTime = dateService.addMinute(new Date(), 5);
+        String expirationTimeStr = dateService.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
 
-        Date expirationTime = rightNow.getTime();
-        String expirationTimeStr = sdf.format(expirationTime);
         authenticationToken.setExpirationTime(expirationTimeStr);
-        String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
-
-        return encryptedToken;
+        return rsaService.encryptWithDefaultKey(authenticationToken.toString());
     }
 
     public boolean isExpired(String token) throws Exception {
@@ -84,12 +75,6 @@ public class TokenService {
         String decryptedToken = rsaService.dencryptWithDefaultKey(token);
         AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
 
-        Date expirationTime = dateService.addMinute(new Date(), 5);
-        String expirationTimeStr = dateService.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
-
-        authenticationToken.setExpirationTime(expirationTimeStr);
-        String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
-
-        return encryptedToken;
+        return buildToken(authenticationToken.getUserName());
     }
 }
