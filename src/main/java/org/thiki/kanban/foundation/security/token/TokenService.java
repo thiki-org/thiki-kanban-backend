@@ -1,6 +1,8 @@
 package org.thiki.kanban.foundation.security.token;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.common.date.DateUtil;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 
 import javax.annotation.Resource;
@@ -17,8 +19,8 @@ public class TokenService {
     public RSAService rsaService;
 
     public String buildToken(String userName) throws Exception {
-        Token token = new Token();
-        token.setUserName(userName);
+        AuthenticationToken authenticationToken = new AuthenticationToken();
+        authenticationToken.setUserName(userName);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Date now = new Date();
         Calendar rightNow = Calendar.getInstance();
@@ -27,9 +29,24 @@ public class TokenService {
 
         Date expirationTime = rightNow.getTime();
         String expirationTimeStr = sdf.format(expirationTime);
-        token.setExpirationTime(expirationTimeStr);
-        String encryptedToken = rsaService.encryptWithDefaultKey(token.toString());
+        authenticationToken.setExpirationTime(expirationTimeStr);
+        String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
 
         return encryptedToken;
+    }
+
+    public boolean isExpired(String token) throws Exception {
+        String decryptedToken = rsaService.dencryptWithDefaultKey(token);
+        AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
+
+        Date expiredTime = DateUtil.StringToDate(authenticationToken.getExpirationTime(), "yyyyMMddHHmmss");
+        return expiredTime.before(new Date());
+    }
+
+    public boolean isTampered(String token, String userName) throws Exception {
+        String decryptedToken = rsaService.dencryptWithDefaultKey(token);
+        AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
+
+        return !authenticationToken.getUserName().equals(userName);
     }
 }
