@@ -7,8 +7,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.AuthenticationTestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
-import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.common.date.DateService;
+import org.thiki.kanban.foundation.common.date.DateStyle;
+import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.AuthenticationToken;
 import org.thiki.kanban.foundation.security.token.TokenService;
@@ -68,12 +69,12 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
     @Test
     public void shouldUpdateTokenExpiredTime() throws Exception {
         String userName = "foo";
-        Date newExpiredTime = dateService.addMinute(new Date(), 5);
+        Date newExpiredTime = dateService.addMinute(new Date(), Constants.TOKEN_EXPIRED_TIME);
         String currentToken = buildToken(userName, new Date(), 2);
-        String expectedUpdatedToken = buildToken(userName, new Date(), 5);
+        String expectedUpdatedToken = buildToken(userName, new Date(), Constants.TOKEN_EXPIRED_TIME);
 
         dateService = spy(dateService);
-        when(dateService.addMinute(any(Date.class), eq(5))).thenReturn(newExpiredTime);
+        when(dateService.addMinute(any(Date.class), eq(Constants.TOKEN_EXPIRED_TIME))).thenReturn(newExpiredTime);
         ReflectionTestUtils.setField(tokenService, "dateService", dateService);
 
         given().header("userName", userName)
