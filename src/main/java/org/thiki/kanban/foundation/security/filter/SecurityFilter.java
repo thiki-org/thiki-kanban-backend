@@ -34,7 +34,7 @@ public class SecurityFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    private boolean isLocalTestEnvironment(String localAddress, String authentication) {
+    private boolean isLocalTestEnvironmentAndFreeAuthentication(String localAddress, String authentication) {
         return "127.0.0.1".equals(localAddress) && "no".equals(authentication);
     }
 
@@ -53,7 +53,7 @@ public class SecurityFilter implements Filter {
 
         String localAddress = servletRequest.getLocalAddr();
         String authentication = ((RequestFacade) servletRequest).getHeader("authentication");
-        if (isLocalTestEnvironment(localAddress, authentication)) {
+        if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
             return true;
         }
 
