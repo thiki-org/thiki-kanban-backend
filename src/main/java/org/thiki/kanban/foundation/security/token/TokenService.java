@@ -16,9 +16,9 @@ public class TokenService {
     @Resource
     public RSAService rsaService;
 
-    public String buildToken(String name) throws Exception {
+    public String buildToken(String userName) throws Exception {
         Token token = new Token();
-        token.setUserName(name);
+        token.setUserName(userName);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         Date now = new Date();
         Calendar rightNow = Calendar.getInstance();
