@@ -495,11 +495,15 @@ public class RSAService {
     public String encryptWithDefaultKey(String plaintext) throws Exception {
         PublicKey publicKey = getPemPublicKey(publicKeyPath);
 
-        encryptString(publicKey, plaintext);
         return encryptString(publicKey, plaintext);
     }
 
     public String loadDefaultPublicKey() throws Exception {
         return loadKey(publicKeyPath);
+    }
+
+    public String dencryptWithDefaultKey(String plaintext) throws Exception {
+        PrivateKey privateKey = getPemPrivateKey(privateKeyPath);
+        return decryptString(privateKey, plaintext);
     }
 }
