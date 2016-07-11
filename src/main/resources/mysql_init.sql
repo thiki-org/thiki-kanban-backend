@@ -108,3 +108,17 @@ CREATE TABLE kb_task_assignment (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+  -- ----------------------------
+  -- Table structure for kb_team
+  -- ----------------------------
+  DROP TABLE IF EXISTS kb_team;
+  CREATE TABLE kb_team (
+    id                VARCHAR(40)   NOT NULL,
+    name              VARCHAR(50)   NOT NULL,
+    reporter          VARCHAR(40)   DEFAULT NULL,
+    delete_status     INT(2)        DEFAULT 0,
+
+    PRIMARY KEY (id)
+  )
+    ENGINE = InnoDB
+    DEFAULT CHARSET = utf8;
