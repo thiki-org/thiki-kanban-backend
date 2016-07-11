@@ -28,7 +28,7 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        if (!isPassSecurityVerify(servletRequest, servletResponse)) {
+        if (!isPassedSecurityVerify(servletRequest, servletResponse)) {
             return;
         }
         filterChain.doFilter(servletRequest, servletResponse);
@@ -47,21 +47,21 @@ public class SecurityFilter implements Filter {
 
     }
 
-    private boolean isPassSecurityVerify(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
+    private boolean isPassedSecurityVerify(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
         String token = ((RequestFacade) servletRequest).getHeader("token");
         String userName = ((RequestFacade) servletRequest).getHeader("userName");
 
         String localAddress = servletRequest.getLocalAddr();
         String authentication = ((RequestFacade) servletRequest).getHeader("authentication");
-        if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
-            return true;
-        }
-
-        if (isTokenEmpty(token)) {
-            writeResponse(servletResponse, "AuthenticationToken is required,please authenticate first.", HttpStatus.UNAUTHORIZED.value());
-            return false;
-        }
         try {
+            if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
+                return true;
+            }
+
+            if (isTokenEmpty(token)) {
+                writeResponse(servletResponse, "AuthenticationToken is required,please authenticate first.", HttpStatus.UNAUTHORIZED.value());
+                return false;
+            }
             if (tokenService.isExpired(token)) {
                 writeResponse(servletResponse, "Your authenticationToken has expired,please authenticate again.", HttpStatus.UNAUTHORIZED.value());
                 return false;
