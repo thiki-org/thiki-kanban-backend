@@ -16,4 +16,5 @@ public class Constants {
     public static final String HEADER_PARAMS_TOKEN = "token";
     public static final String HEADER_PARAMS_USER_NAME = "userName";
     public static final String HEADER_PARAMS_AUTHENTICATION = "authentication";
+    public static final int TOKEN_EXPIRED_TIME = 5;
 }
