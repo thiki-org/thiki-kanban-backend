@@ -11,7 +11,7 @@ import java.util.*;
  */
 
 @Service
-public class DateUtil {
+public class DateService {
     private  final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<SimpleDateFormat>();
 
     private  final Object object = new Object();

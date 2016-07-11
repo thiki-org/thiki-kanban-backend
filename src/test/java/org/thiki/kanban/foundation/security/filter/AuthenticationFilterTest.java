@@ -8,7 +8,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.AuthenticationTestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.common.date.DateStyle;
-import org.thiki.kanban.foundation.common.date.DateUtil;
+import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.AuthenticationToken;
 import org.thiki.kanban.foundation.security.token.TokenService;
@@ -31,7 +31,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
     @Resource
     private RSAService rsaService;
     @Resource
-    private DateUtil dateUtil;
+    private DateService dateService;
     @Resource
     private TokenService tokenService;
 
@@ -68,13 +68,13 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
     @Test
     public void shouldUpdateTokenExpiredTime() throws Exception {
         String userName = "foo";
-        Date newExpiredTime = dateUtil.addMinute(new Date(), 5);
+        Date newExpiredTime = dateService.addMinute(new Date(), 5);
         String currentToken = buildToken(userName, new Date(), 2);
         String expectedUpdatedToken = buildToken(userName, new Date(), 5);
 
-        dateUtil = spy(dateUtil);
-        when(dateUtil.addMinute(any(Date.class), eq(5))).thenReturn(newExpiredTime);
-        ReflectionTestUtils.setField(tokenService, "dateUtil", dateUtil);
+        dateService = spy(dateService);
+        when(dateService.addMinute(any(Date.class), eq(5))).thenReturn(newExpiredTime);
+        ReflectionTestUtils.setField(tokenService, "dateUtil", dateService);
 
         given().header("userName", userName)
                 .header("token", currentToken)
@@ -108,8 +108,8 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
         authenticationToken.setUserName(userName);
 
 
-        Date expirationTime = dateUtil.addMinute(date, minute);
-        String expirationTimeStr = dateUtil.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
+        Date expirationTime = dateService.addMinute(date, minute);
+        String expirationTimeStr = dateService.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
         authenticationToken.setExpirationTime(expirationTimeStr);
         String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
 
