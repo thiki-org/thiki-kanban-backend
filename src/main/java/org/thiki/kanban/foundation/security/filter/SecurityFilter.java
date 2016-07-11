@@ -35,14 +35,6 @@ public class SecurityFilter implements Filter {
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    private boolean isLocalTestEnvironmentAndFreeAuthentication(String localAddress, String authentication) {
-        return "127.0.0.1".equals(localAddress) && "no".equals(authentication);
-    }
-
-    private boolean isTokenEmpty(String token) {
-        return token == null || token.equals("");
-    }
-
     @Override
     public void destroy() {
 
