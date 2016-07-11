@@ -50,7 +50,7 @@ public class TokenService {
         return !authenticationToken.getUserName().equals(userName);
     }
 
-    public String isPassedSecurityVerify(String token, String userName, String authentication, String localAddress) throws Exception {
+    public String identify(String token, String userName, String authentication, String localAddress) throws Exception {
         if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
             return "passed";
         }

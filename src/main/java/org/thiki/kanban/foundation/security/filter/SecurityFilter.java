@@ -54,7 +54,7 @@ public class SecurityFilter implements Filter {
         String localAddress = servletRequest.getLocalAddr();
         String authentication = ((RequestFacade) servletRequest).getHeader("authentication");
         try {
-            String identityResult = tokenService.isPassedSecurityVerify(token, userName, authentication, localAddress);
+            String identityResult = tokenService.identify(token, userName, authentication, localAddress);
             if (identityResult.equals("passed")) {
                 return true;
             }
