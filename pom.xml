@@ -252,6 +252,7 @@
                 <configuration>
                     <excludes>
                         <exclude>**/*Application.*</exclude>
+                        <exclude>**/AuthenticationTestBase.*</exclude>
                         <exclude>**/*Test.*</exclude>
                         <exclude>**/Test*.*</exclude>
                         <exclude>**/foundation/**/*.class</exclude>
