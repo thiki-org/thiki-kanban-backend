@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.connector.RequestFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.token.TokenService;
 
 import javax.annotation.Resource;
@@ -48,14 +49,14 @@ public class SecurityFilter implements Filter {
     }
 
     private boolean isPassedSecurityVerify(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
-        String token = ((RequestFacade) servletRequest).getHeader("token");
-        String userName = ((RequestFacade) servletRequest).getHeader("userName");
+        String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
+        String userName = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_USER_NAME);
 
         String localAddress = servletRequest.getLocalAddr();
-        String authentication = ((RequestFacade) servletRequest).getHeader("authentication");
+        String authentication = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_AUTHENTICATION);
         try {
             String identityResult = tokenService.identify(token, userName, authentication, localAddress);
-            if (identityResult.equals("passed")) {
+            if (identityResult.equals(Constants.SECURITY_IDENTIFY_PASSED)) {
                 return true;
             }
             writeResponse(servletResponse, identityResult, HttpStatus.UNAUTHORIZED.value());

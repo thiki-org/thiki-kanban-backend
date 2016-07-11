@@ -3,6 +3,7 @@ package org.thiki.kanban.foundation.security.token;
 import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.date.DateUtil;
+import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 
 import javax.annotation.Resource;
@@ -52,23 +53,23 @@ public class TokenService {
 
     public String identify(String token, String userName, String authentication, String localAddress) throws Exception {
         if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
-            return "passed";
+            return Constants.SECURITY_IDENTIFY_PASSED;
         }
 
         if (isTokenEmpty(token)) {
-            return "AuthenticationToken is required,please authenticate first.";
+            return Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN;
         }
         if (isExpired(token)) {
-            return "Your authenticationToken has expired,please authenticate again.";
+            return Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE;
         }
         if (isTampered(token, userName)) {
-            return "Your userName is not consistent with that in token.";
+            return Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT;
         }
-        return "passed";
+        return Constants.SECURITY_IDENTIFY_PASSED;
     }
 
     private boolean isLocalTestEnvironmentAndFreeAuthentication(String localAddress, String authentication) {
-        return "127.0.0.1".equals(localAddress) && "no".equals(authentication);
+        return Constants.LOCAL_ADDRESS.equals(localAddress) && Constants.FREE_AUTHENTICATION.equals(authentication);
     }
 
     private boolean isTokenEmpty(String token) {
