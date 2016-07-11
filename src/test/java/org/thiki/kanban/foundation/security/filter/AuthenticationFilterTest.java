@@ -74,7 +74,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
 
         dateService = spy(dateService);
         when(dateService.addMinute(any(Date.class), eq(5))).thenReturn(newExpiredTime);
-        ReflectionTestUtils.setField(tokenService, "dateUtil", dateService);
+        ReflectionTestUtils.setField(tokenService, "dateService", dateService);
 
         given().header("userName", userName)
                 .header("token", currentToken)

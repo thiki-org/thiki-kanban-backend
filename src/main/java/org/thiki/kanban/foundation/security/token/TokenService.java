@@ -2,8 +2,8 @@ package org.thiki.kanban.foundation.security.token;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.common.date.DateService;
+import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 
@@ -84,16 +84,12 @@ public class TokenService {
         String decryptedToken = rsaService.dencryptWithDefaultKey(token);
         AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
 
-        authenticationToken.setExpirationTime(generate());
-        String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
-
-        return encryptedToken;
-    }
-
-    public String generate() {
         Date expirationTime = dateService.addMinute(new Date(), 5);
         String expirationTimeStr = dateService.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
 
-        return expirationTimeStr;
+        authenticationToken.setExpirationTime(expirationTimeStr);
+        String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
+
+        return encryptedToken;
     }
 }
