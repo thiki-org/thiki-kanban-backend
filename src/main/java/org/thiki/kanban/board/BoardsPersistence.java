@@ -24,4 +24,6 @@ public interface BoardsPersistence {
     Boolean checkRedundancy(Board board);
 
     List<Board> findByUserId(String userId);
+    List<Board> findByTeamId(String TeamId);
+
 }

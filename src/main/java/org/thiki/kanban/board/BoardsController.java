@@ -52,4 +52,9 @@ public class BoardsController {
         List<Board> boards = boardsService.findByUserId(userId);
         return Response.build(new BoardsResource(boards));
     }
+    @RequestMapping(value = "/teams/{teamId}/boards", method = RequestMethod.GET)
+    public HttpEntity<BoardsResource> findByTeamId(@PathVariable String teamId) {
+        List<Board> boards = boardsService.findByTeamId(teamId);
+        return Response.build(new BoardsResource(boards));
+    }
 }
