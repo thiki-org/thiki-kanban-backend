@@ -1,5 +1,7 @@
 package org.thiki.kanban.foundation.common.date;
 
+import org.springframework.stereotype.Service;
+
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -7,10 +9,12 @@ import java.util.*;
 /**
  * Created by 濤 on 2016/1/12.
  */
-public class DateUtil {
-    private static final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<SimpleDateFormat>();
 
-    private static final Object object = new Object();
+@Service
+public class DateUtil {
+    private  final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<SimpleDateFormat>();
+
+    private  final Object object = new Object();
 
     /**
      * 获取SimpleDateFormat
@@ -19,7 +23,7 @@ public class DateUtil {
      * @return SimpleDateFormat对象
      * @throws RuntimeException 异常：非法日期格式
      */
-    private static SimpleDateFormat getDateFormat(String pattern) throws RuntimeException {
+    private  SimpleDateFormat getDateFormat(String pattern) throws RuntimeException {
         SimpleDateFormat dateFormat = threadLocal.get();
         if (dateFormat == null) {
             synchronized (object) {
@@ -41,7 +45,7 @@ public class DateUtil {
      * @param dateType 日期格式
      * @return 数值
      */
-    private static int getInteger(Date date, int dateType) {
+    private  int getInteger(Date date, int dateType) {
         int num = 0;
         Calendar calendar = Calendar.getInstance();
         if (date != null) {
@@ -59,7 +63,7 @@ public class DateUtil {
      * @param amount   数值
      * @return 计算后日期字符串
      */
-    private static String addInteger(String date, int dateType, int amount) {
+    private  String addInteger(String date, int dateType, int amount) {
         String dateString = null;
         DateStyle dateStyle = getDateStyle(date);
         if (dateStyle != null) {
@@ -78,7 +82,7 @@ public class DateUtil {
      * @param amount   数值
      * @return 计算后日期
      */
-    private static Date addInteger(Date date, int dateType, int amount) {
+    private  Date addInteger(Date date, int dateType, int amount) {
         Date myDate = null;
         if (date != null) {
             Calendar calendar = Calendar.getInstance();
@@ -95,7 +99,7 @@ public class DateUtil {
      * @param timestamps 时间long集合
      * @return 日期
      */
-    private static Date getAccurateDate(List<Long> timestamps) {
+    private  Date getAccurateDate(List<Long> timestamps) {
         Date date = null;
         long timestamp = 0;
         Map<Long, long[]> map = new HashMap<Long, long[]>();
@@ -150,7 +154,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return true or false
      */
-    public static boolean isDate(String date) {
+    public  boolean isDate(String date) {
         boolean isDate = false;
         if (date != null) {
             if (getDateStyle(date) != null) {
@@ -166,7 +170,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 日期风格
      */
-    public static DateStyle getDateStyle(String date) {
+    public  DateStyle getDateStyle(String date) {
         DateStyle dateStyle = null;
         Map<Long, DateStyle> map = new HashMap<Long, DateStyle>();
         List<Long> timestamps = new ArrayList<Long>();
@@ -203,7 +207,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 日期
      */
-    public static Date StringToDate(String date) {
+    public  Date StringToDate(String date) {
         DateStyle dateStyle = getDateStyle(date);
         return StringToDate(date, dateStyle);
     }
@@ -215,7 +219,7 @@ public class DateUtil {
      * @param pattern 日期格式
      * @return 日期
      */
-    public static Date StringToDate(String date, String pattern) {
+    public  Date StringToDate(String date, String pattern) {
         Date myDate = null;
         if (date != null) {
             try {
@@ -233,7 +237,7 @@ public class DateUtil {
      * @param dateStyle 日期风格
      * @return 日期
      */
-    public static Date StringToDate(String date, DateStyle dateStyle) {
+    public  Date StringToDate(String date, DateStyle dateStyle) {
         Date myDate = null;
         if (dateStyle != null) {
             myDate = StringToDate(date, dateStyle.getValue());
@@ -248,7 +252,7 @@ public class DateUtil {
      * @param pattern 日期格式
      * @return 日期字符串
      */
-    public static String DateToString(Date date, String pattern) {
+    public  String DateToString(Date date, String pattern) {
         String dateString = null;
         if (date != null) {
             try {
@@ -266,7 +270,7 @@ public class DateUtil {
      * @param dateStyle 日期风格
      * @return 日期字符串
      */
-    public static String DateToString(Date date, DateStyle dateStyle) {
+    public  String DateToString(Date date, DateStyle dateStyle) {
         String dateString = null;
         if (dateStyle != null) {
             dateString = DateToString(date, dateStyle.getValue());
@@ -281,7 +285,7 @@ public class DateUtil {
      * @param newPattern 新日期格式
      * @return 新日期字符串
      */
-    public static String StringToString(String date, String newPattern) {
+    public  String StringToString(String date, String newPattern) {
         DateStyle oldDateStyle = getDateStyle(date);
         return StringToString(date, oldDateStyle, newPattern);
     }
@@ -293,7 +297,7 @@ public class DateUtil {
      * @param newDateStyle 新日期风格
      * @return 新日期字符串
      */
-    public static String StringToString(String date, DateStyle newDateStyle) {
+    public  String StringToString(String date, DateStyle newDateStyle) {
         DateStyle oldDateStyle = getDateStyle(date);
         return StringToString(date, oldDateStyle, newDateStyle);
     }
@@ -306,7 +310,7 @@ public class DateUtil {
      * @param newPattern  新日期格式
      * @return 新日期字符串
      */
-    public static String StringToString(String date, String olddPattern, String newPattern) {
+    public  String StringToString(String date, String olddPattern, String newPattern) {
         return DateToString(StringToDate(date, olddPattern), newPattern);
     }
 
@@ -318,7 +322,7 @@ public class DateUtil {
      * @param newParttern  新日期格式
      * @return 新日期字符串
      */
-    public static String StringToString(String date, DateStyle olddDteStyle, String newParttern) {
+    public  String StringToString(String date, DateStyle olddDteStyle, String newParttern) {
         String dateString = null;
         if (olddDteStyle != null) {
             dateString = StringToString(date, olddDteStyle.getValue(), newParttern);
@@ -334,7 +338,7 @@ public class DateUtil {
      * @param newDateStyle 新日期风格
      * @return 新日期字符串
      */
-    public static String StringToString(String date, String olddPattern, DateStyle newDateStyle) {
+    public  String StringToString(String date, String olddPattern, DateStyle newDateStyle) {
         String dateString = null;
         if (newDateStyle != null) {
             dateString = StringToString(date, olddPattern, newDateStyle.getValue());
@@ -350,7 +354,7 @@ public class DateUtil {
      * @param newDateStyle 新日期风格
      * @return 新日期字符串
      */
-    public static String StringToString(String date, DateStyle olddDteStyle, DateStyle newDateStyle) {
+    public  String StringToString(String date, DateStyle olddDteStyle, DateStyle newDateStyle) {
         String dateString = null;
         if (olddDteStyle != null && newDateStyle != null) {
             dateString = StringToString(date, olddDteStyle.getValue(), newDateStyle.getValue());
@@ -365,7 +369,7 @@ public class DateUtil {
      * @param yearAmount 增加数量。可为负数
      * @return 增加年份后的日期字符串
      */
-    public static String addYear(String date, int yearAmount) {
+    public  String addYear(String date, int yearAmount) {
         return addInteger(date, Calendar.YEAR, yearAmount);
     }
 
@@ -376,7 +380,7 @@ public class DateUtil {
      * @param yearAmount 增加数量。可为负数
      * @return 增加年份后的日期
      */
-    public static Date addYear(Date date, int yearAmount) {
+    public  Date addYear(Date date, int yearAmount) {
         return addInteger(date, Calendar.YEAR, yearAmount);
     }
 
@@ -387,7 +391,7 @@ public class DateUtil {
      * @param monthAmount 增加数量。可为负数
      * @return 增加月份后的日期字符串
      */
-    public static String addMonth(String date, int monthAmount) {
+    public  String addMonth(String date, int monthAmount) {
         return addInteger(date, Calendar.MONTH, monthAmount);
     }
 
@@ -398,7 +402,7 @@ public class DateUtil {
      * @param monthAmount 增加数量。可为负数
      * @return 增加月份后的日期
      */
-    public static Date addMonth(Date date, int monthAmount) {
+    public  Date addMonth(Date date, int monthAmount) {
         return addInteger(date, Calendar.MONTH, monthAmount);
     }
 
@@ -409,7 +413,7 @@ public class DateUtil {
      * @param dayAmount 增加数量。可为负数
      * @return 增加天数后的日期字符串
      */
-    public static String addDay(String date, int dayAmount) {
+    public  String addDay(String date, int dayAmount) {
         return addInteger(date, Calendar.DATE, dayAmount);
     }
 
@@ -420,7 +424,7 @@ public class DateUtil {
      * @param dayAmount 增加数量。可为负数
      * @return 增加天数后的日期
      */
-    public static Date addDay(Date date, int dayAmount) {
+    public  Date addDay(Date date, int dayAmount) {
         return addInteger(date, Calendar.DATE, dayAmount);
     }
 
@@ -431,7 +435,7 @@ public class DateUtil {
      * @param hourAmount 增加数量。可为负数
      * @return 增加小时后的日期字符串
      */
-    public static String addHour(String date, int hourAmount) {
+    public  String addHour(String date, int hourAmount) {
         return addInteger(date, Calendar.HOUR_OF_DAY, hourAmount);
     }
 
@@ -442,7 +446,7 @@ public class DateUtil {
      * @param hourAmount 增加数量。可为负数
      * @return 增加小时后的日期
      */
-    public static Date addHour(Date date, int hourAmount) {
+    public  Date addHour(Date date, int hourAmount) {
         return addInteger(date, Calendar.HOUR_OF_DAY, hourAmount);
     }
 
@@ -453,7 +457,7 @@ public class DateUtil {
      * @param minuteAmount 增加数量。可为负数
      * @return 增加分钟后的日期字符串
      */
-    public static String addMinute(String date, int minuteAmount) {
+    public  String addMinute(String date, int minuteAmount) {
         return addInteger(date, Calendar.MINUTE, minuteAmount);
     }
 
@@ -461,10 +465,10 @@ public class DateUtil {
      * 增加日期的分钟。失败返回null。
      *
      * @param date      日期
-     * @param dayAmount 增加数量。可为负数
+     * @param minuteAmount 增加数量。可为负数
      * @return 增加分钟后的日期
      */
-    public static Date addMinute(Date date, int minuteAmount) {
+    public  Date addMinute(Date date, int minuteAmount) {
         return addInteger(date, Calendar.MINUTE, minuteAmount);
     }
 
@@ -472,10 +476,10 @@ public class DateUtil {
      * 增加日期的秒钟。失败返回null。
      *
      * @param date      日期字符串
-     * @param dayAmount 增加数量。可为负数
+     * @param secondAmount 增加数量。可为负数
      * @return 增加秒钟后的日期字符串
      */
-    public static String addSecond(String date, int secondAmount) {
+    public  String addSecond(String date, int secondAmount) {
         return addInteger(date, Calendar.SECOND, secondAmount);
     }
 
@@ -483,10 +487,10 @@ public class DateUtil {
      * 增加日期的秒钟。失败返回null。
      *
      * @param date      日期
-     * @param dayAmount 增加数量。可为负数
+     * @param secondAmount 增加数量。可为负数
      * @return 增加秒钟后的日期
      */
-    public static Date addSecond(Date date, int secondAmount) {
+    public  Date addSecond(Date date, int secondAmount) {
         return addInteger(date, Calendar.SECOND, secondAmount);
     }
 
@@ -496,7 +500,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 年份
      */
-    public static int getYear(String date) {
+    public  int getYear(String date) {
         return getYear(StringToDate(date));
     }
 
@@ -506,7 +510,7 @@ public class DateUtil {
      * @param date 日期
      * @return 年份
      */
-    public static int getYear(Date date) {
+    public  int getYear(Date date) {
         return getInteger(date, Calendar.YEAR);
     }
 
@@ -516,7 +520,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 月份
      */
-    public static int getMonth(String date) {
+    public  int getMonth(String date) {
         return getMonth(StringToDate(date));
     }
 
@@ -526,7 +530,7 @@ public class DateUtil {
      * @param date 日期
      * @return 月份
      */
-    public static int getMonth(Date date) {
+    public  int getMonth(Date date) {
         return getInteger(date, Calendar.MONTH) + 1;
     }
 
@@ -536,7 +540,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 天
      */
-    public static int getDay(String date) {
+    public  int getDay(String date) {
         return getDay(StringToDate(date));
     }
 
@@ -546,7 +550,7 @@ public class DateUtil {
      * @param date 日期
      * @return 天
      */
-    public static int getDay(Date date) {
+    public  int getDay(Date date) {
         return getInteger(date, Calendar.DATE);
     }
 
@@ -556,7 +560,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 小时
      */
-    public static int getHour(String date) {
+    public  int getHour(String date) {
         return getHour(StringToDate(date));
     }
 
@@ -566,7 +570,7 @@ public class DateUtil {
      * @param date 日期
      * @return 小时
      */
-    public static int getHour(Date date) {
+    public  int getHour(Date date) {
         return getInteger(date, Calendar.HOUR_OF_DAY);
     }
 
@@ -576,7 +580,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 分钟
      */
-    public static int getMinute(String date) {
+    public  int getMinute(String date) {
         return getMinute(StringToDate(date));
     }
 
@@ -586,7 +590,7 @@ public class DateUtil {
      * @param date 日期
      * @return 分钟
      */
-    public static int getMinute(Date date) {
+    public  int getMinute(Date date) {
         return getInteger(date, Calendar.MINUTE);
     }
 
@@ -596,7 +600,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 秒钟
      */
-    public static int getSecond(String date) {
+    public  int getSecond(String date) {
         return getSecond(StringToDate(date));
     }
 
@@ -606,7 +610,7 @@ public class DateUtil {
      * @param date 日期
      * @return 秒钟
      */
-    public static int getSecond(Date date) {
+    public  int getSecond(Date date) {
         return getInteger(date, Calendar.SECOND);
     }
 
@@ -616,7 +620,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 日期
      */
-    public static String getDate(String date) {
+    public  String getDate(String date) {
         return StringToString(date, DateStyle.YYYY_MM_DD);
     }
 
@@ -626,7 +630,7 @@ public class DateUtil {
      * @param date 日期
      * @return 日期
      */
-    public static String getDate(Date date) {
+    public  String getDate(Date date) {
         return DateToString(date, DateStyle.YYYY_MM_DD);
     }
 
@@ -636,7 +640,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 时间
      */
-    public static String getTime(String date) {
+    public  String getTime(String date) {
         return StringToString(date, DateStyle.HH_MM_SS);
     }
 
@@ -646,11 +650,11 @@ public class DateUtil {
      * @param date 日期
      * @return 时间
      */
-    public static String getTime(Date date) {
+    public  String getTime(Date date) {
         return DateToString(date, DateStyle.HH_MM_SS);
     }
 
-    public static String getNow() {
+    public  String getNow() {
         return DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS_CN);
     }
 
@@ -660,7 +664,7 @@ public class DateUtil {
      * @param date 日期字符串
      * @return 星期
      */
-    public static Week getWeek(String date) {
+    public  Week getWeek(String date) {
         Week week = null;
         DateStyle dateStyle = getDateStyle(date);
         if (dateStyle != null) {
@@ -676,7 +680,7 @@ public class DateUtil {
      * @param date 日期
      * @return 星期
      */
-    public static Week getWeek(Date date) {
+    public  Week getWeek(Date date) {
         Week week = null;
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -714,7 +718,7 @@ public class DateUtil {
      * @param otherDate 另一个日期字符串
      * @return 相差天数。如果失败则返回-1
      */
-    public static int getIntervalDays(String date, String otherDate) {
+    public  int getIntervalDays(String date, String otherDate) {
         return getIntervalDays(StringToDate(date), StringToDate(otherDate));
     }
 
@@ -723,10 +727,10 @@ public class DateUtil {
      * @param otherDate 另一个日期
      * @return 相差天数。如果失败则返回-1
      */
-    public static int getIntervalDays(Date date, Date otherDate) {
+    public  int getIntervalDays(Date date, Date otherDate) {
         int num = -1;
-        Date dateTmp = DateUtil.StringToDate(DateUtil.getDate(date), DateStyle.YYYY_MM_DD);
-        Date otherDateTmp = DateUtil.StringToDate(DateUtil.getDate(otherDate), DateStyle.YYYY_MM_DD);
+        Date dateTmp = StringToDate(getDate(date), DateStyle.YYYY_MM_DD);
+        Date otherDateTmp = StringToDate(getDate(otherDate), DateStyle.YYYY_MM_DD);
         if (dateTmp != null && otherDateTmp != null) {
             long time = Math.abs(dateTmp.getTime() - otherDateTmp.getTime());
             num = (int) (time / (24 * 60 * 60 * 1000));
