@@ -64,13 +64,12 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .body("_links.identification.href", equalTo("/identification"));
     }
 
-
     @Scenario("当token不为空且未失效时,请求到达后更新token的有效期")
     @Test
     public void shouldUpdateTokenExpiredTime() throws Exception {
         String userName = "foo";
-        Date newExpiredTime = dateService.addMinute(new Date(), Constants.TOKEN_EXPIRED_TIME);
         String currentToken = buildToken(userName, new Date(), 2);
+        Date newExpiredTime = dateService.addMinute(new Date(), Constants.TOKEN_EXPIRED_TIME);
         String expectedUpdatedToken = buildToken(userName, new Date(), Constants.TOKEN_EXPIRED_TIME);
 
         dateService = spy(dateService);
