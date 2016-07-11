@@ -1,20 +1,27 @@
 package org.thiki.kanban.foundation.security.filter;
 
+import com.jayway.restassured.http.ContentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.AuthenticationTestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
+import org.thiki.kanban.foundation.common.date.DateStyle;
+import org.thiki.kanban.foundation.common.date.DateUtil;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.AuthenticationToken;
+import org.thiki.kanban.foundation.security.token.TokenService;
 
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.when;
 
 /**
  * Created by xubt on 7/10/16.
@@ -22,7 +29,12 @@ import static org.hamcrest.CoreMatchers.equalTo;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AuthenticationFilterTest extends AuthenticationTestBase {
     @Resource
-    public RSAService rsaService;
+    private RSAService rsaService;
+    @Resource
+    private DateUtil dateUtil;
+    @Resource
+    private TokenService tokenService;
+
 
     @Scenario("当请求需要认证时,如果没有携带token,则告知客户端需要授权")
     @Test
@@ -40,7 +52,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
     @Test
     public void shouldReturnTimeOut() throws Exception {
         String userName = "foo";
-        String expiredToken = buildExpiredToken(userName, new Date(), -5);
+        String expiredToken = buildToken(userName, new Date(), -5);
         given().header("token", expiredToken)
                 .when()
                 .get("/resource")
@@ -54,8 +66,24 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
 
     @Scenario("当token不为空且未失效时,请求到达后更新token的有效期")
     @Test
-    public void shouldUpdateTokenExpiredTime() {
+    public void shouldUpdateTokenExpiredTime() throws Exception {
+        String userName = "foo";
+        Date newExpiredTime = dateUtil.addMinute(new Date(), 5);
+        String currentToken = buildToken(userName, new Date(), 2);
+        String expectedUpdatedToken = buildToken(userName, new Date(), 5);
 
+        dateUtil = spy(dateUtil);
+        when(dateUtil.addMinute(any(Date.class), eq(5))).thenReturn(newExpiredTime);
+        ReflectionTestUtils.setField(tokenService, "dateUtil", dateUtil);
+
+        given().header("userName", userName)
+                .header("token", currentToken)
+                .body("{\"summary\":\"newSummary\"}")
+                .header("userId", "11222")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/entries/1/tasks/fooId")
+                .then().header("token", equalTo(expectedUpdatedToken));
     }
 
     @Scenario("当token中的用户名与header中携带的用户名不一致时,告知客户端认证未通过")
@@ -63,7 +91,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
     public void shouldAuthenticatedFailedWhenUserNameIsNotConsistent() throws Exception {
         String userName = "foo";
         String tamperedUserName = "fee";
-        String expiredToken = buildExpiredToken(userName, new Date(), 2);
+        String expiredToken = buildToken(userName, new Date(), 2);
         given().header("userName", tamperedUserName)
                 .header("token", expiredToken)
                 .when()
@@ -75,16 +103,13 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .body("_links.identification.href", equalTo("/identification"));
     }
 
-    private String buildExpiredToken(String userName, Date date, int minute) throws Exception {
+    private String buildToken(String userName, Date date, int minute) throws Exception {
         AuthenticationToken authenticationToken = new AuthenticationToken();
         authenticationToken.setUserName(userName);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-        Calendar rightNow = Calendar.getInstance();
-        rightNow.setTime(date);
-        rightNow.add(Calendar.MINUTE, minute);
 
-        Date expirationTime = rightNow.getTime();
-        String expirationTimeStr = sdf.format(expirationTime);
+
+        Date expirationTime = dateUtil.addMinute(date, minute);
+        String expirationTimeStr = dateUtil.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
         authenticationToken.setExpirationTime(expirationTimeStr);
         String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
 
