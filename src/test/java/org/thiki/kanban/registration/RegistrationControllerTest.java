@@ -57,7 +57,8 @@ public class RegistrationControllerTest extends TestBase {
                 .statusCode(201)
                 .body("name", equalTo("someone"))
                 .body("id", equalTo("fooId"))
-                .body("email", equalTo("someone@gmail.com"));
+                .body("email", equalTo("someone@gmail.com"))
+                .body("_links.login.href", equalTo("http://localhost:8007/login?identity=someone&password=yourPassWord"));
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_user_registration").size());
         assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration", String.class));

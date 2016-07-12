@@ -18,7 +18,7 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public HttpEntity registerNewUser(@RequestBody Registration registration) {
+    public HttpEntity registerNewUser(@RequestBody Registration registration) throws Exception {
         Registration result = registrationService.register(registration);
         return Response.post(new RegistrationResource(result));
     }
