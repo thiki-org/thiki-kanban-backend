@@ -12,7 +12,9 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by xubt on 7/10/16.
@@ -22,6 +24,24 @@ public class SecurityFilter implements Filter {
     @Resource
     private TokenService tokenService;
 
+    private List<String> freeSecurityUrls = new ArrayList<String>() {
+        {
+            add("/entrance");
+            add("/identification");
+            add("/registration");
+            add("/login");
+        }
+    };
+
+    private boolean isFreeSecurity(String uri) {
+        for (String freeSecurityUrl : freeSecurityUrls) {
+            if (freeSecurityUrl.equals(uri) || freeSecurityUrl.indexOf(uri + "/") > -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -29,6 +49,11 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        String uri = ((RequestFacade) servletRequest).getRequestURI();
+        if (isFreeSecurity(uri)) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
         if (!isPassedSecurityVerify(servletRequest, servletResponse)) {
             return;
         }
