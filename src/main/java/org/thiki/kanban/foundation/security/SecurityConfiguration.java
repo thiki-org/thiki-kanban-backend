@@ -4,7 +4,6 @@ import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thiki.kanban.foundation.security.filter.SecurityFilter;
-import org.thiki.kanban.foundation.security.filter.SecurityFreeFilter;
 
 import javax.annotation.Resource;
 
