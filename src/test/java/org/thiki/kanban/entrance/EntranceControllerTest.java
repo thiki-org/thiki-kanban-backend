@@ -21,6 +21,6 @@ public class EntranceControllerTest extends TestBase {
                 .statusCode(200)
                 .body("description", equalTo("Welcome!"))
                 .body("_links.self.href", equalTo("http://localhost:8007/entrance"))
-                .body("_links.boards.href", equalTo("http://localhost:8007/boards"));
+                .body("_links.identification.href", equalTo("http://localhost:8007/identification"));
     }
 }
