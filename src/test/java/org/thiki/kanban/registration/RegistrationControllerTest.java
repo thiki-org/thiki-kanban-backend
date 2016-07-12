@@ -78,7 +78,7 @@ public class RegistrationControllerTest extends TestBase {
                 .then()
                 .statusCode(HttpStatus.CONFLICT.value())
                 .body("code", equalTo(ExceptionCode.USER_EXISTS.code()))
-                .body("message", equalTo("用户名[someone]已经存在."));
+                .body("message", equalTo("User named someone is already exists."));
     }
 
     @Scenario("用户注册时,如果邮箱已经存在,则不允许注册")
@@ -95,7 +95,7 @@ public class RegistrationControllerTest extends TestBase {
                 .then()
                 .statusCode(HttpStatus.CONFLICT.value())
                 .body("code", equalTo(ExceptionCode.USER_EXISTS.code()))
-                .body("message", equalTo("邮箱[someone@gmail.com]已经存在."));
+                .body("message", equalTo("Email someone@gmail.com is already exists."));
     }
 
     @Scenario("用户注册时,用户名和邮箱在系统中都不存在,但是密码未通过公钥加密,则不允许注册")
