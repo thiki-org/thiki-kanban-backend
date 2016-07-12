@@ -18,22 +18,12 @@ public class SecurityConfiguration {
 
     @Bean
     public FilterRegistrationBean securityFilterRegistration() throws Exception {
-
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(securityFilter);
         registration.addUrlPatterns("/*");
         registration.setName("securityFilter");
         registration.setOrder(2);
-        return registration;
-    }
-
-    @Bean
-    public FilterRegistrationBean securityFreeFilterRegistration() {
-        FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new SecurityFreeFilter());
-        registration.addUrlPatterns("/entrance", "/identification", "/registration", "/login");
-        registration.setName("securityFreeFilter");
-        registration.setOrder(1);
+        registration.setMatchAfter(false);
         return registration;
     }
 }
