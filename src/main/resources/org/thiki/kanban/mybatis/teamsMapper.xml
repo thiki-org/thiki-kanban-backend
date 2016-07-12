@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.team.TeamsPersistence">
+    <insert id="create"  parameterType="org.thiki.kanban.team.Team" >
+        INSERT INTO
+        kb_team(id,name,reporter) VALUES (#{id},#{name},#{reporter})
+    </insert>
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
+        SELECT * FROM kb_team WHERE id= #{id}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_team SET delete_status=1 WHERE id=#{id}
+    </delete>
+    <update id="update" parameterType="org.thiki.kanban.team.Team" flushCache="true">
+        UPDATE kb_team SET name=#{name} WHERE id=#{id}
+    </update>
+    <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
+        SELECT * FROM kb_team WHERE delete_status=0 AND reporter=#{userId}
+    </select>
+</mapper>
