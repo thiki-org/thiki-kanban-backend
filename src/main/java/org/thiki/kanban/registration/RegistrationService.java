@@ -38,12 +38,12 @@ public class RegistrationService {
     public Registration register(Registration registration) {
         Registration conflictNameUser = registrationPersistence.findByName(registration.getName());
         if (conflictNameUser != null) {
-            throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("用户名[{0}]已经存在.", registration.getName()));
+            throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("User named {0} is already exists.", registration.getName()));
         }
 
         Registration conflictEmailUser = registrationPersistence.findByEmail(registration.getEmail());
         if (conflictEmailUser != null) {
-            throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("邮箱[{0}]已经存在.", registration.getEmail()));
+            throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("Email {0} is already exists.", registration.getEmail()));
         }
 
         registration.setSalt(sequenceNumber.generate());
