@@ -1,9 +1,7 @@
 package org.thiki.kanban.foundation.security;
 
 /**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-2-26
- * <p>Version: 1.0
+ * Created by xubt on 7/10/16.
  */
 public class Constants {
     public static final String ALGORITHM_RSA = "RSA";
