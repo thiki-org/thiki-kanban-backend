@@ -50,7 +50,10 @@ public class LoginControllerTest extends TestBase {
                 .get("/identification")
                 .then()
                 .statusCode(200)
-                .body("publicKey", equalTo(publicKey));
+                .body("publicKey", equalTo(publicKey))
+                .body("_links.login.href", equalTo("http://localhost:8007/login?identity=someone&password=yourPassWord"))
+                .body("_links.registration.href", equalTo("http://localhost:8007/registration"));
+
     }
 
     @Scenario("当用户请求登录时,首先需要向系统发送一次认证请求,如果待认证的用户不存在,告知客户端参数错误")

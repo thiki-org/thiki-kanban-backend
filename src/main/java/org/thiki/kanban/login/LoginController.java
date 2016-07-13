@@ -18,7 +18,7 @@ public class LoginController {
     public HttpEntity identify(@RequestHeader String name) throws Exception {
         PublicKey publicPublicKey = loginService.authenticate(name);
 
-        return Response.build(new PublicKeyResource(publicPublicKey));
+        return Response.build(new PublicKeyResource(name, publicPublicKey));
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
