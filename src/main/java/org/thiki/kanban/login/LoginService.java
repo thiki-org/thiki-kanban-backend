@@ -10,15 +10,7 @@ import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationPersistence;
 
 import javax.annotation.Resource;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidatorFactory;
-import javax.validation.executable.ExecutableValidator;
-import java.lang.reflect.Method;
 import java.security.InvalidParameterException;
-import java.util.Set;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * Created by xubt on 7/5/16.
@@ -31,7 +23,7 @@ public class LoginService {
     private TokenService tokenService;
 
     @ValidateParams
-    public Identification login(@NotEmpty(message = "Identity is required.") String identity, String password) throws Exception {
+    public Identification login(@NotEmpty(message = "Identity is required.") String identity, @NotEmpty(message = "Password is required.") String password) throws Exception {
         Registration registeredUser = registrationPersistence.findByName(identity);
         String rsaDecryptedPassword = RSAService.decrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
