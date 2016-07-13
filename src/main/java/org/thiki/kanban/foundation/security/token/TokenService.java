@@ -47,10 +47,6 @@ public class TokenService {
     }
 
     public String identify(String token, String userName, String authentication, String localAddress) throws Exception {
-        if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
-            return Constants.SECURITY_IDENTIFY_PASSED;
-        }
-
         if (isTokenEmpty(token)) {
             return Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN;
         }
@@ -63,9 +59,6 @@ public class TokenService {
         return Constants.SECURITY_IDENTIFY_PASSED;
     }
 
-    private boolean isLocalTestEnvironmentAndFreeAuthentication(String localAddress, String authentication) {
-        return Constants.LOCAL_ADDRESS.equals(localAddress) && Constants.FREE_AUTHENTICATION.equals(authentication);
-    }
 
     private boolean isTokenEmpty(String token) {
         return token == null || token.equals("");
