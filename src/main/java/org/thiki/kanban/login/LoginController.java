@@ -1,7 +1,10 @@
 package org.thiki.kanban.login;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
@@ -13,13 +16,6 @@ import javax.annotation.Resource;
 public class LoginController {
     @Resource
     public LoginService loginService;
-
-    @RequestMapping(value = "/identification", method = RequestMethod.GET)
-    public HttpEntity identify(@RequestHeader String name) throws Exception {
-        PublicKey publicPublicKey = loginService.authenticate(name);
-
-        return Response.build(new PublicKeyResource(name, publicPublicKey));
-    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public HttpEntity login(@RequestParam String identity, @RequestParam String password) throws Exception {
