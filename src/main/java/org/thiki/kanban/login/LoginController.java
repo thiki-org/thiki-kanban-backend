@@ -18,7 +18,7 @@ public class LoginController {
     public LoginService loginService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public HttpEntity login(@RequestParam String identity, @RequestParam String password) throws Exception {
+    public HttpEntity login(@RequestParam(required = false) String identity, @RequestParam(required = false) String password) throws Exception {
         Identification identification = loginService.login(identity, password);
 
         return Response.build(new IdentificationResource(identification));

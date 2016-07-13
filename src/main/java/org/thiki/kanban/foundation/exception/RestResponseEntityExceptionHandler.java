@@ -16,7 +16,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler(value = {BusinessException.class})
     protected ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-        BusinessException be = (BusinessException) ex;
+        final BusinessException be = (BusinessException) ex;
 
         HttpStatus httpStatus = be.getStatus();
 
@@ -32,7 +32,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     @ExceptionHandler(value = {RuntimeException.class})
     protected ResponseEntity<?> handleOtherException(RuntimeException ex, WebRequest request) {
         ex.printStackTrace();
-        Map<String, Object> body = new HashMap<>();
+        Map<String, Object> body = new HashMap<String, Object>();
         body.put("message", ex.getMessage());
         body.put("code", ExceptionCode.UNKNOWN_EX);
         return handleExceptionInternal(ex, body, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);

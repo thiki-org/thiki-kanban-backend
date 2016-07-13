@@ -16,7 +16,7 @@ public class BusinessExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {BusinessException.class})
     protected ResponseEntity<Object> handle(BusinessException ex, WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
+        Map<String, Object> body = new HashMap<String,Object>();
         BusinessException be = ex;
         body.put("message", be.getMessage());
         body.put("code", ex.getCode());

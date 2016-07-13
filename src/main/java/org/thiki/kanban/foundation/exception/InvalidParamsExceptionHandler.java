@@ -17,7 +17,7 @@ public class InvalidParamsExceptionHandler extends ResponseEntityExceptionHandle
 
     @ExceptionHandler(value = {InvalidParameterException.class})
     protected ResponseEntity<Object> handle(InvalidParameterException ex, WebRequest request) {
-        Map<String, Object> body = new HashMap<>();
+        Map<String, Object> body = new HashMap<String,Object>();
         InvalidParameterException be = ex;
         body.put("message", be.getMessage());
         body.put("code", ExceptionCode.INVALID_PARAMS.code());
