@@ -1,4 +1,4 @@
-package org.thiki.kanban.login;
+package org.thiki.kanban.publickey;
 
 /**
  * Created by xubt on 7/5/16.

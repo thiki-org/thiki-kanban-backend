@@ -1,7 +1,9 @@
-package org.thiki.kanban.login;
+package org.thiki.kanban.publickey;
 
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.login.LoginController;
 import org.thiki.kanban.registration.RegistrationController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -13,11 +15,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class PublicKeyResource extends RestResource {
     public PublicKeyResource(String name, PublicKey publicPublicKey) throws Exception {
         this.domainObject = publicPublicKey;
-        Link loginLink = linkTo(methodOn(LoginController.class).login(name, "yourPassWord")).withRel("login");
+        Link loginLink = ControllerLinkBuilder.linkTo(methodOn(LoginController.class).login(name, "yourPassWord")).withRel("login");
         this.add(loginLink);
 
         Link registrationLink = linkTo(methodOn(RegistrationController.class).registerNewUser(null)).withRel("registration");
         this.add(registrationLink);
-
     }
 }
