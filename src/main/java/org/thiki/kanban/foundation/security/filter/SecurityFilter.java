@@ -59,11 +59,12 @@ public class SecurityFilter implements Filter {
         }
         String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
 
-        String updatedToken = null;
+        String updatedToken;
         try {
             updatedToken = tokenService.updateToken(token);
         } catch (Exception e) {
-            e.printStackTrace();
+            writeResponse(servletResponse, "Update token failed:" + e.getMessage(), HttpStatus.UNAUTHORIZED.value());
+            return;
         }
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader(Constants.HEADER_PARAMS_TOKEN, updatedToken);
