@@ -47,20 +47,4 @@ public class LoginService {
 
         return identification;
     }
-
-    public static void main(String[] args) throws NoSuchMethodException {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        ExecutableValidator executableValidator = factory.getValidator().forExecutables();
-        Object object = LoginService.class;
-        Method method = LoginService.class.getMethod("login", String.class, String.class);
-        Object[] parameterValues = {null, null};
-        Set<ConstraintViolation<Object>> violations = executableValidator.validateParameters(
-                new LoginService(),
-                method,
-                parameterValues
-        );
-
-        assertEquals(1, violations.size());
-    }
-
 }
