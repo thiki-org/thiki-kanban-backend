@@ -3,7 +3,7 @@ package org.thiki.kanban.entrance;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
-import org.thiki.kanban.login.LoginController;
+import org.thiki.kanban.publickey.PublicKeyController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -19,8 +19,8 @@ public class EntranceResource extends RestResource {
 
         Link selfLink = linkTo(EntranceController.class).withSelfRel();
 
-        Link identificationLink = linkTo(methodOn(LoginController.class).identify("yourUserName")).withRel("identification");
-        this.add(identificationLink);
+        Link publicKeyLink = linkTo(methodOn(PublicKeyController.class).identify("yourUserName")).withRel("public-key");
+        this.add(publicKeyLink);
         this.add(selfLink);
     }
 }
