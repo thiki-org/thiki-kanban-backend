@@ -50,7 +50,14 @@ public class SecurityFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         String uri = ((RequestFacade) servletRequest).getRequestURI();
+        String localAddress = servletRequest.getLocalAddr();
+        String authentication = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_AUTHENTICATION);
+
         if (isFreeSecurity(uri)) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
+        if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
@@ -69,6 +76,10 @@ public class SecurityFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader(Constants.HEADER_PARAMS_TOKEN, updatedToken);
         filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    private boolean isLocalTestEnvironmentAndFreeAuthentication(String localAddress, String authentication) {
+        return Constants.LOCAL_ADDRESS.equals(localAddress) && Constants.FREE_AUTHENTICATION.equals(authentication);
     }
 
     @Override
