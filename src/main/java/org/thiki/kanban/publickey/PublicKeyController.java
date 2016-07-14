@@ -17,7 +17,7 @@ public class PublicKeyController {
     @Resource
     public PublicKeyService publicKeyService;
 
-    @RequestMapping(value = "/public-key", method = RequestMethod.GET)
+    @RequestMapping(value = "/publicKey", method = RequestMethod.GET)
     public HttpEntity identify(@RequestHeader String name) throws Exception {
         PublicKey publicPublicKey = publicKeyService.authenticate(name);
 
