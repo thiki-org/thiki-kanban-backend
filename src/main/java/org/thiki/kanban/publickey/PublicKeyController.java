@@ -1,7 +1,6 @@
 package org.thiki.kanban.publickey;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +17,9 @@ public class PublicKeyController {
     public PublicKeyService publicKeyService;
 
     @RequestMapping(value = "/publicKey", method = RequestMethod.GET)
-    public HttpEntity identify(@RequestHeader String name) throws Exception {
-        PublicKey publicPublicKey = publicKeyService.authenticate(name);
+    public HttpEntity identify() throws Exception {
+        PublicKey publicPublicKey = publicKeyService.authenticate();
 
-        return Response.build(new PublicKeyResource(name, publicPublicKey));
+        return Response.build(new PublicKeyResource(publicPublicKey));
     }
 }

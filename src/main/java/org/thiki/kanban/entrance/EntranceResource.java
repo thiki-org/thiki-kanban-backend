@@ -19,7 +19,7 @@ public class EntranceResource extends RestResource {
 
         Link selfLink = linkTo(EntranceController.class).withSelfRel();
 
-        Link publicKeyLink = linkTo(methodOn(PublicKeyController.class).identify("yourUserName")).withRel("publicKey");
+        Link publicKeyLink = linkTo(methodOn(PublicKeyController.class).identify()).withRel("publicKey");
         this.add(publicKeyLink);
         this.add(selfLink);
     }

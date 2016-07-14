@@ -27,7 +27,7 @@ public class SecurityFilter implements Filter {
     private List<String> freeSecurityUrls = new ArrayList<String>() {
         {
             add("/entrance");
-            add("/identification");
+            add("/publicKey");
             add("/registration");
             add("/login");
         }

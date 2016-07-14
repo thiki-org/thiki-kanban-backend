@@ -15,15 +15,9 @@ import java.text.MessageFormat;
 @Service
 public class PublicKeyService {
     @Resource
-    private RegistrationPersistence registrationPersistence;
-    @Resource
     private RSAService rsaService;
 
-    public PublicKey authenticate(String userName) throws Exception {
-        Registration registeredUser = registrationPersistence.findByName(userName);
-        if (registeredUser == null) {
-            throw new InvalidParameterException(MessageFormat.format("No user named {0} is found.", userName));
-        }
+    public PublicKey authenticate() throws Exception {
         PublicKey publicPublicKey = new PublicKey();
         String publicKeyContent = rsaService.loadDefaultPublicKey();
         publicPublicKey.setPublicKey(publicKeyContent);

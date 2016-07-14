@@ -15,32 +15,16 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PublicKeyControllerTest extends TestBase {
-    @Scenario("当用户请求登录时,首先需要向系统发送一次认证请求,系统确认该用户合法时,将公钥发送至客户端")
+    @Scenario("当用户请求登录或注册时,首先需要向系统发送一次认证请求,将公钥发送至客户端")
     @Test
     public void identification_askForAuthenticationWhenUserIsExists() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password,salt) " +
-                "VALUES ('fooUserId','someone@gmail.com','someone','148412d9df986f739038ad22c77459f2','fooId')");
         String publicKey = FileUtil.readFile(publicKeyFilePath);
-        given().header("name", "someone")
-                .when()
+        given().when()
                 .get("/publicKey")
                 .then()
                 .statusCode(200)
                 .body("publicKey", equalTo(publicKey))
-                .body("_links.login.href", equalTo("http://localhost:8007/login?identity=someone&password=yourPassWord"))
+                .body("_links.login.href", equalTo("http://localhost:8007/login?identity=yourIdentity&password=yourPassWord"))
                 .body("_links.registration.href", equalTo("http://localhost:8007/registration"));
-
-    }
-
-    @Scenario("当用户请求登录时,首先需要向系统发送一次认证请求,如果待认证的用户不存在,告知客户端参数错误")
-    @Test
-    public void identification_shouldThrowInvalidParamsExceptionWhenUserIsNotExists() {
-        given().header("name", "foo")
-                .when()
-                .get("/publicKey")
-                .then()
-                .statusCode(400)
-                .body("code", equalTo(400))
-                .body("message", equalTo("No user named foo is found."));
     }
 }
