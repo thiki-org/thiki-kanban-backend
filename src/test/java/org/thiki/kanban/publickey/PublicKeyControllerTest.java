@@ -23,7 +23,7 @@ public class PublicKeyControllerTest extends TestBase {
         String publicKey = FileUtil.readFile(publicKeyFilePath);
         given().header("name", "someone")
                 .when()
-                .get("/public-key")
+                .get("/publicKey")
                 .then()
                 .statusCode(200)
                 .body("publicKey", equalTo(publicKey))
@@ -37,7 +37,7 @@ public class PublicKeyControllerTest extends TestBase {
     public void identification_shouldThrowInvalidParamsExceptionWhenUserIsNotExists() {
         given().header("name", "foo")
                 .when()
-                .get("/public-key")
+                .get("/publicKey")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
