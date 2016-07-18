@@ -75,10 +75,10 @@ public class LoginControllerTest extends TestBase {
                 .body("message", equalTo("Your username or password is incorrect."));
     }
 
-    @Scenario("用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配,如果匹配通过则颁发token")
+    @Scenario("用户登录系统时,如果身份信息为空,则不允许登录并告知客户端错误信息")
     @Test
     public void login_loginFailed() throws Exception {
-        given().param("password", "")
+        given().param("password", "foo")
                 .when()
                 .get("/login")
                 .then()
