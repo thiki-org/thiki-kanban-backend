@@ -27,15 +27,13 @@ import java.security.spec.*;
 import java.util.Date;
 import java.util.Enumeration;
 
-import static org.thiki.kanban.foundation.security.rsa.RSAUtil.RSA_ECB_PKCS1_PADDING;
-
 /**
  * Created by xubt on 7/6/16.
  */
 @Service
 public class RSAService {
+    public static final String RSA_ECB_PKCS1_PADDING = "RSA/ECB/PKCS1Padding";
     private static final Logger LOGGER = LoggerFactory.getLogger(RSAService.class);
-
     /**
      * 算法名称
      */
