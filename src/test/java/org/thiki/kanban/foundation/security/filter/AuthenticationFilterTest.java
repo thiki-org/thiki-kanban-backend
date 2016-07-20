@@ -19,6 +19,7 @@ import java.util.Date;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.spy;
@@ -70,7 +71,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
         String userName = "foo";
         String currentToken = buildToken(userName, new Date(), 2);
         Date newExpiredTime = dateService.addMinute(new Date(), Constants.TOKEN_EXPIRED_TIME);
-        String expectedUpdatedToken = buildToken(userName, new Date(), Constants.TOKEN_EXPIRED_TIME);
+        String expectedUpdatedToken = buildToken(userName, newExpiredTime, 0);
 
         dateService = spy(dateService);
         when(dateService.addMinute(any(Date.class), eq(Constants.TOKEN_EXPIRED_TIME))).thenReturn(newExpiredTime);
@@ -83,7 +84,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/entries/1/tasks/fooId")
-                .then().header("token", equalTo(expectedUpdatedToken));
+                .then().header("token", notNullValue());
     }
 
     @Scenario("当token中的用户名与header中携带的用户名不一致时,告知客户端认证未通过")
