@@ -15,10 +15,10 @@ import java.util.Map;
 @ControllerAdvice
 public class InvalidParamsExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {InvalidParameterException.class})
-    protected ResponseEntity<Object> handle(InvalidParameterException ex, WebRequest request) {
-        Map<String, Object> body = new HashMap<String,Object>();
-        InvalidParameterException be = ex;
+    @ExceptionHandler(value = {IllegalArgumentException.class})
+    protected ResponseEntity<Object> handle(IllegalArgumentException ex, WebRequest request) {
+        Map<String, Object> body = new HashMap<String, Object>();
+        IllegalArgumentException be = ex;
         body.put("message", be.getMessage());
         body.put("code", ExceptionCode.INVALID_PARAMS.code());
 

@@ -23,12 +23,11 @@ import java.math.BigInteger;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.security.spec.InvalidKeySpecException;
-import java.security.spec.RSAPrivateKeySpec;
-import java.security.spec.RSAPublicKeySpec;
-import java.security.spec.X509EncodedKeySpec;
+import java.security.spec.*;
 import java.util.Date;
 import java.util.Enumeration;
+
+import static org.thiki.kanban.foundation.security.rsa.RSAUtil.RSA_ECB_PKCS1_PADDING;
 
 /**
  * Created by xubt on 7/6/16.
@@ -73,9 +72,6 @@ public class RSAService {
             LOGGER.error(ex.getMessage());
         }
         rsaPairFile = new File(getRSAPairFilePath());
-    }
-
-    private RSAService() {
     }
 
     /**
@@ -278,18 +274,6 @@ public class RSAService {
         return ci.doFinal(data);
     }
 
-    /**
-     * 使用指定的私钥解密数据。
-     *
-     * @param privateKey 给定的私钥。
-     * @param data       要解密的数据。
-     * @return 原数据。
-     */
-    public static byte[] decrypt(PrivateKey privateKey, byte[] data) throws Exception {
-        Cipher ci = Cipher.getInstance(ALGORITHOM, DEFAULT_PROVIDER);
-        ci.init(Cipher.DECRYPT_MODE, privateKey);
-        return ci.doFinal(data);
-    }
 
     /**
      * 使用给定的公钥加密给定的字符串。
@@ -340,70 +324,28 @@ public class RSAService {
         return null;
     }
 
-    /**
-     * 使用给定的私钥解密给定的字符串。
-     * <p/>
-     * 若私钥为 {@code null}，或者 {@code encrypttext} 为 {@code null}或空字符串则返回 {@code null}。
-     * 私钥不匹配时，返回 {@code null}。
-     *
-     * @param privateKey  给定的私钥。
-     * @param encrypttext 密文。
-     * @return 原文字符串。
-     */
-    public static String decryptString(PrivateKey privateKey, String encrypttext) {
-        if (privateKey == null || StringUtils.isBlank(encrypttext)) {
-            return null;
-        }
-        try {
-            byte[] en_data = Hex.decodeHex(encrypttext.toCharArray());
-            byte[] data = decrypt(privateKey, en_data);
-            return new String(data);
-        } catch (Exception ex) {
-            LOGGER.error(String.format("\"%s\" Decryption failed. Cause: %s", encrypttext, ex.getCause().getMessage()));
-        }
-        return null;
+
+    public static byte[] decryptByPrivateKey(byte[] data) throws Exception {
+        //对私钥解密
+
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        Key privateKey = getPemPrivateKey(privateKeyPath);
+        //对数据解密
+        Cipher cipher = Cipher.getInstance(keyFactory.getAlgorithm());
+        cipher.init(Cipher.DECRYPT_MODE, privateKey);
+
+        return cipher.doFinal(data);
     }
 
-    public static String decrypt(String encryptText) {
-        PrivateKey privateKey;
-        try {
-            privateKey = getPemPrivateKey(privateKeyPath);
-            if (privateKey == null || StringUtils.isBlank(encryptText)) {
-                return null;
-            }
-            byte[] en_data = Hex.decodeHex(encryptText.toCharArray());
-            byte[] data = decrypt(privateKey, en_data);
-            return new String(data);
-        } catch (Exception ex) {
-            throw new InvalidParameterException("通过私钥解密失败,请确保数据已经通过公钥加密。");
-        }
-    }
-
-
     /**
-     * 使用默认的私钥解密给定的字符串。
-     * <p/>
-     * 若{@code encrypttext} 为 {@code null}或空字符串则返回 {@code null}。
-     * 私钥不匹配时，返回 {@code null}。
+     * BASE64解密
      *
-     * @param encrypttext 密文。
-     * @return 原文字符串。
+     * @param key
+     * @return
+     * @throws Exception
      */
-    public static String decryptString(String encrypttext) {
-        if (StringUtils.isBlank(encrypttext)) {
-            return null;
-        }
-        KeyPair keyPair = getKeyPair();
-        try {
-            byte[] en_data = Hex.decodeHex(encrypttext.toCharArray());
-            byte[] data = decrypt((RSAPrivateKey) keyPair.getPrivate(), en_data);
-            return new String(data);
-        } catch (NullPointerException ex) {
-            LOGGER.error("keyPair cannot be null.");
-        } catch (Exception ex) {
-            LOGGER.error(String.format("\"%s\" Decryption failed. Cause: %s", encrypttext, ex.getMessage()));
-        }
-        return null;
+    public static byte[] decryptBASE64(String key) throws Exception {
+        return (new BASE64Decoder()).decodeBuffer(key);
     }
 
 
@@ -468,24 +410,8 @@ public class RSAService {
         return keyFactory.generatePublic(spec);
     }
 
-    public PublicKey getPublicKey(String keyContent) throws Exception {
-        if (keyContent.equals("")) {
-            throw new InvalidKeySpecException("public key is empty.");
-        }
-        String publicKeyPEM = keyContent.replace("-----BEGIN PUBLIC KEY-----", "");
-        publicKeyPEM = publicKeyPEM.replace("-----END PUBLIC KEY-----", "");
-
-        BASE64Decoder b64 = new BASE64Decoder();
-        byte[] decoded = b64.decodeBuffer(publicKeyPEM);
-
-        X509EncodedKeySpec spec = new X509EncodedKeySpec(decoded);
-        KeyFactory keyFactory = KeyFactory.getInstance(Constants.ALGORITHM_RSA);
-        return keyFactory.generatePublic(spec);
-    }
-
     public String encrypt(String publicKey, String plaintext) throws Exception {
-        PublicKey key = getPublicKey(publicKey);
-        return RSAService.encryptString(key, plaintext);
+        return org.apache.commons.codec.binary.Base64.encodeBase64String(encryptAsByteArray(plaintext, getPublicKey(publicKey)));
     }
 
     public String loadKey(String keyPath) {
@@ -493,9 +419,47 @@ public class RSAService {
     }
 
     public String encryptWithDefaultKey(String plaintext) throws Exception {
-        PublicKey publicKey = getPemPublicKey(publicKeyPath);
+        if (plaintext == null) {
+            return "";
+        }
+        String publicKey = FileUtil.readFile(publicKeyPath);
+        PublicKey publicKey1 = getPublicKey(publicKey);
+        return org.apache.commons.codec.binary.Base64.encodeBase64String(encryptAsByteArray(plaintext, publicKey1));
+    }
 
-        return encryptString(publicKey, plaintext);
+    public byte[] encryptAsByteArray(String data, PublicKey publicKey) {
+        try {
+            if (data == null) {
+                return null;
+            }
+            Cipher cipher = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
+            cipher.init(Cipher.ENCRYPT_MODE, publicKey);
+            return cipher.doFinal(data.getBytes());
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Encrypt failed!", e);
+        }
+    }
+
+    public PublicKey getPublicKey(String base64PublicKey) {
+        try {
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(org.apache.commons.codec.binary.Base64.decodeBase64(base64PublicKey));
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PublicKey publicKey = keyFactory.generatePublic(keySpec);
+            return publicKey;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to get public key!", e);
+        }
+    }
+
+    public PrivateKey getPrivateKey(String base64PrivateKey) {
+        try {
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(org.apache.commons.codec.binary.Base64.decodeBase64(base64PrivateKey));
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+            PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
+            return privateKey;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Failed to get private key!", e);
+        }
     }
 
     public String loadDefaultPublicKey() throws Exception {
@@ -503,7 +467,20 @@ public class RSAService {
     }
 
     public String dencryptWithDefaultKey(String plaintext) throws Exception {
-        PrivateKey privateKey = getPemPrivateKey(privateKeyPath);
-        return decryptString(privateKey, plaintext);
+        String privateKeyContent = FileUtil.readFile(privateKeyPath);
+        return decrypt(org.apache.commons.codec.binary.Base64.decodeBase64(plaintext), getPrivateKey(privateKeyContent));
+    }
+
+    public String decrypt(byte[] data, PrivateKey privateKey) {
+        try {
+            if (data == null) {
+                return "";
+            }
+            Cipher cipher = Cipher.getInstance(RSA_ECB_PKCS1_PADDING);
+            cipher.init(Cipher.DECRYPT_MODE, privateKey);
+            return new String(cipher.doFinal(data));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("通过私钥解密失败,请确保数据已经通过公钥加密。", e);
+        }
     }
 }

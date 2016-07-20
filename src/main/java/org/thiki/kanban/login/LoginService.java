@@ -21,11 +21,13 @@ public class LoginService {
     private RegistrationPersistence registrationPersistence;
     @Resource
     private TokenService tokenService;
+    @Resource
+    private RSAService rsaService;
 
     @ValidateParams
     public Identification login(@NotEmpty(message = "Identity is required.") String identity, @NotEmpty(message = "Password is required.") String password) throws Exception {
         Registration registeredUser = registrationPersistence.findByName(identity);
-        String rsaDecryptedPassword = RSAService.decrypt(password);
+        String rsaDecryptedPassword = rsaService.dencryptWithDefaultKey(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
 
         Registration matchedUser = registrationPersistence.findByIdentity(identity, md5Password);
