@@ -26,6 +26,9 @@ public class RegistrationService {
     @Resource
     private SequenceNumber sequenceNumber;
 
+    @Resource
+    private RSAService rsaService;
+
     /**
      * 根据用户名查找用户嘻嘻
      *
@@ -35,7 +38,7 @@ public class RegistrationService {
         return registrationPersistence.findByName(userName);
     }
 
-    public Registration register(Registration registration) {
+    public Registration register(Registration registration) throws Exception {
         Registration conflictNameUser = registrationPersistence.findByName(registration.getName());
         if (conflictNameUser != null) {
             throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("User named {0} is already exists.", registration.getName()));
@@ -48,7 +51,7 @@ public class RegistrationService {
 
         registration.setSalt(sequenceNumber.generate());
 
-        String password = RSAService.decrypt(registration.getPassword());
+        String password = rsaService.dencryptWithDefaultKey(registration.getPassword());
         password = MD5Service.encrypt(password + registration.getSalt());
         if (password != null) {
             registration.setPassword(password);
