@@ -31,13 +31,13 @@ public class RSAService {
         return FileUtil.readFile(keyPath);
     }
 
-    public String encryptWithDefaultKey(String plaintext) throws Exception {
+    public String encrypt(String plaintext) throws Exception {
         if (plaintext == null) {
             return "";
         }
-        String publicKey = FileUtil.readFile(publicKeyPath);
-        PublicKey publicKey1 = getPublicKey(publicKey);
-        return Base64.encodeBase64String(encryptAsByteArray(plaintext, publicKey1));
+        String publicKeyContent = FileUtil.readFile(publicKeyPath);
+        PublicKey publicKey = getPublicKey(publicKeyContent);
+        return Base64.encodeBase64String(encryptAsByteArray(plaintext, publicKey));
     }
 
     public byte[] encryptAsByteArray(String data, PublicKey publicKey) {
@@ -79,7 +79,7 @@ public class RSAService {
         return loadKey(publicKeyPath);
     }
 
-    public String dencryptWithDefaultKey(String plaintext) throws Exception {
+    public String dencrypt(String plaintext) throws Exception {
         String privateKeyContent = FileUtil.readFile(privateKeyPath);
         return decrypt(Base64.decodeBase64(plaintext), getPrivateKey(privateKeyContent));
     }

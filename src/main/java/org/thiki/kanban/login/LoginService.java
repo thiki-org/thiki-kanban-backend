@@ -27,7 +27,7 @@ public class LoginService {
     @ValidateParams
     public Identification login(@NotEmpty(message = "Identity is required.") String identity, @NotEmpty(message = "Password is required.") String password) throws Exception {
         Registration registeredUser = registrationPersistence.findByName(identity);
-        String rsaDecryptedPassword = rsaService.dencryptWithDefaultKey(password);
+        String rsaDecryptedPassword = rsaService.dencrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
 
         Registration matchedUser = registrationPersistence.findByIdentity(identity, md5Password);

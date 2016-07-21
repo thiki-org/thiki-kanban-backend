@@ -112,7 +112,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
         Date expirationTime = dateService.addMinute(date, minute);
         String expirationTimeStr = dateService.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
         authenticationToken.setExpirationTime(expirationTimeStr);
-        String encryptedToken = rsaService.encryptWithDefaultKey(authenticationToken.toString());
+        String encryptedToken = rsaService.encrypt(authenticationToken.toString());
 
         return encryptedToken;
     }

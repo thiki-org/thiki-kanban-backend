@@ -28,11 +28,11 @@ public class TokenService {
         String expirationTimeStr = dateService.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
 
         authenticationToken.setExpirationTime(expirationTimeStr);
-        return rsaService.encryptWithDefaultKey(authenticationToken.toString());
+        return rsaService.encrypt(authenticationToken.toString());
     }
 
     public boolean isExpired(String token) throws Exception {
-        String decryptedToken = rsaService.dencryptWithDefaultKey(token);
+        String decryptedToken = rsaService.dencrypt(token);
         AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
 
         Date expiredTime = dateService.StringToDate(authenticationToken.getExpirationTime(), DateStyle.YYYY_MM_DD_HH_MM_SS);
@@ -40,7 +40,7 @@ public class TokenService {
     }
 
     public boolean isTampered(String token, String userName) throws Exception {
-        String decryptedToken = rsaService.dencryptWithDefaultKey(token);
+        String decryptedToken = rsaService.dencrypt(token);
         AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
 
         return !authenticationToken.getUserName().equals(userName);
@@ -65,7 +65,7 @@ public class TokenService {
     }
 
     public String updateToken(String token) throws Exception {
-        String decryptedToken = rsaService.dencryptWithDefaultKey(token);
+        String decryptedToken = rsaService.dencrypt(token);
         AuthenticationToken authenticationToken = JSON.parseObject(decryptedToken, AuthenticationToken.class);
 
         return buildToken(authenticationToken.getUserName());

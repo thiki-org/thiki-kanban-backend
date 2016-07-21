@@ -51,7 +51,7 @@ public class RegistrationService {
 
         registration.setSalt(sequenceNumber.generate());
 
-        String password = rsaService.dencryptWithDefaultKey(registration.getPassword());
+        String password = rsaService.dencrypt(registration.getPassword());
         password = MD5Service.encrypt(password + registration.getSalt());
         if (password != null) {
             registration.setPassword(password);
