@@ -1,5 +1,6 @@
 package org.thiki.kanban.foundation.security.rsa;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
 
@@ -36,7 +37,7 @@ public class RSAService {
         }
         String publicKey = FileUtil.readFile(publicKeyPath);
         PublicKey publicKey1 = getPublicKey(publicKey);
-        return org.apache.commons.codec.binary.Base64.encodeBase64String(encryptAsByteArray(plaintext, publicKey1));
+        return Base64.encodeBase64String(encryptAsByteArray(plaintext, publicKey1));
     }
 
     public byte[] encryptAsByteArray(String data, PublicKey publicKey) {
