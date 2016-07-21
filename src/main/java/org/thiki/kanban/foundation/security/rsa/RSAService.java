@@ -16,9 +16,7 @@ import java.security.spec.X509EncodedKeySpec;
 @Service
 public class RSAService {
     public static final String RSA_ECB_PKCS1_PADDING = "RSA/ECB/PKCS1Padding";
-    /**
-     * 算法名称
-     */
+
     private static final String ALGORITHM = "RSA";
 
     private static String privateKeyPath = "src/main/resources/rsakey.pem";
