@@ -24,7 +24,7 @@ public class RSAService {
     private static String publicKeyPath = "src/main/resources/rsakey.pub";
 
     public String encrypt(String publicKey, String plaintext) throws Exception {
-        return org.apache.commons.codec.binary.Base64.encodeBase64String(encryptAsByteArray(plaintext, getPublicKey(publicKey)));
+        return Base64.encodeBase64String(encryptAsByteArray(plaintext, getPublicKey(publicKey)));
     }
 
     public String loadKey(String keyPath) {
@@ -55,7 +55,7 @@ public class RSAService {
 
     public PublicKey getPublicKey(String base64PublicKey) {
         try {
-            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(org.apache.commons.codec.binary.Base64.decodeBase64(base64PublicKey));
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(Base64.decodeBase64(base64PublicKey));
             KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
             PublicKey publicKey = keyFactory.generatePublic(keySpec);
             return publicKey;
@@ -66,7 +66,7 @@ public class RSAService {
 
     public PrivateKey getPrivateKey(String base64PrivateKey) {
         try {
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(org.apache.commons.codec.binary.Base64.decodeBase64(base64PrivateKey));
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(Base64.decodeBase64(base64PrivateKey));
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
             PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
             return privateKey;
@@ -81,7 +81,7 @@ public class RSAService {
 
     public String dencryptWithDefaultKey(String plaintext) throws Exception {
         String privateKeyContent = FileUtil.readFile(privateKeyPath);
-        return decrypt(org.apache.commons.codec.binary.Base64.decodeBase64(plaintext), getPrivateKey(privateKeyContent));
+        return decrypt(Base64.decodeBase64(plaintext), getPrivateKey(privateKeyContent));
     }
 
     public String decrypt(byte[] data, PrivateKey privateKey) {
