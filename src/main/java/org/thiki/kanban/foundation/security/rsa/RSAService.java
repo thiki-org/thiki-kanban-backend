@@ -19,7 +19,7 @@ public class RSAService {
     /**
      * 算法名称
      */
-    private static final String ALGORITHOM = "RSA";
+    private static final String ALGORITHM = "RSA";
 
     private static String privateKeyPath = "src/main/resources/rsakey.pem";
     private static String publicKeyPath = "src/main/resources/rsakey.pub";
@@ -57,7 +57,7 @@ public class RSAService {
     public PublicKey getPublicKey(String base64PublicKey) {
         try {
             X509EncodedKeySpec keySpec = new X509EncodedKeySpec(org.apache.commons.codec.binary.Base64.decodeBase64(base64PublicKey));
-            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHOM);
+            KeyFactory keyFactory = KeyFactory.getInstance(ALGORITHM);
             PublicKey publicKey = keyFactory.generatePublic(keySpec);
             return publicKey;
         } catch (Exception e) {
