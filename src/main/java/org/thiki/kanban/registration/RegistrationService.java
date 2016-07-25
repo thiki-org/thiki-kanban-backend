@@ -29,11 +29,6 @@ public class RegistrationService {
     @Resource
     private RSAService rsaService;
 
-    /**
-     * 根据用户名查找用户嘻嘻
-     *
-     * @param userName
-     */
     public Registration findByName(String userName) {
         return registrationPersistence.findByName(userName);
     }
