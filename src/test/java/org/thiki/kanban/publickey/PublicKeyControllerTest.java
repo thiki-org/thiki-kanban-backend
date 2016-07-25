@@ -24,7 +24,7 @@ public class PublicKeyControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("publicKey", equalTo(publicKey))
-                .body("_links.login.href", equalTo("http://localhost:8007/login?identity=yourIdentity&password=yourPassWord"))
+                .body("_links.login.href", equalTo("http://localhost:8007/login"))
                 .body("_links.registration.href", equalTo("http://localhost:8007/registration"));
     }
 }

@@ -14,7 +14,7 @@ public class RegistrationResource extends RestResource {
     public RegistrationResource(Registration registration) throws Exception {
         super.domainObject = registration;
         if (registration != null) {
-            Link loginLink = linkTo(methodOn(LoginController.class).login(registration.getName(), "yourPassWord")).withRel("login");
+            Link loginLink = linkTo(methodOn(LoginController.class).login(null, null)).withRel("login");
             this.add(loginLink);
         }
     }

@@ -15,7 +15,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class PublicKeyResource extends RestResource {
     public PublicKeyResource(PublicKey publicPublicKey) throws Exception {
         this.domainObject = publicPublicKey;
-        Link loginLink = ControllerLinkBuilder.linkTo(methodOn(LoginController.class).login("yourIdentity", "yourPassWord")).withRel("login");
+        Link loginLink = ControllerLinkBuilder.linkTo(methodOn(LoginController.class).login(null, null)).withRel("login");
         this.add(loginLink);
 
         Link registrationLink = linkTo(methodOn(RegistrationController.class).registerNewUser(null)).withRel("registration");
