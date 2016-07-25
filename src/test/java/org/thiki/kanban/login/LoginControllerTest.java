@@ -56,6 +56,7 @@ public class LoginControllerTest extends TestBase {
                 .get("/login")
                 .then()
                 .statusCode(200)
+                .body("_links.boards.href", equalTo("http://localhost:8007/users/someone/boards"))
                 .body("token", equalTo("4988ca54a84321490e03fd906b5d2425afba80914c282271fd83ad1438ec8b55976cf77197a77b08c750bfb5e6173790f9f95f4e07a4f273d6fad3645e8377ed8ea865770a8aa4ff05168a98dc2417a4254405fb1639871cfc63f0dd5871a4805dc3778c106d37010b2c20adedd0117a2a8e63632744fa4e33151d880eed022e"));
     }
 
