@@ -20,8 +20,8 @@ public class TeamsController {
         return Response.build(new TeamsResource(teams));
     }
     @RequestMapping(value="/teams",method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Team team, @RequestHeader Integer userId){
-        Team savedTeam=teamsService.create(userId,team);
+    public HttpEntity create(@RequestBody Team team, @RequestHeader String userName){
+        Team savedTeam=teamsService.create(userName,team);
         return Response.post(new TeamResource(savedTeam));
     }
     @RequestMapping(value = "/teams/{id}", method = RequestMethod.GET)
