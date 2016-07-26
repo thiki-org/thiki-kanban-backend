@@ -25,8 +25,8 @@ public class BoardsService {
         return boardsPersistence.findById(id);
     }
 
-    public List<Board> loadAll() {
-        return boardsPersistence.loadAll();
+    public List<Board> loadByUserName(String userName) {
+        return boardsPersistence.loadByUserName(userName);
     }
 
     public Board update(Board board) {
@@ -45,6 +45,7 @@ public class BoardsService {
     public List<Board> findByUserId(String userId) {
         return boardsPersistence.findByUserId(userId);
     }
+
     public List<Board> findByTeamId(String teamId) {
         return boardsPersistence.findByTeamId(teamId);
     }

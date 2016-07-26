@@ -42,7 +42,7 @@ public class UsersControllerTest extends TestBase {
                 .body("email", equalTo("someone@email.com"))
                 .body("name", equalTo("someone"))
                 .body("_links.users.href", equalTo("http://localhost:8007/users"))
-                .body("_links.boards.href", equalTo("http://localhost:8007/users/fooId/boards"))
+                .body("_links.boards.href", equalTo("http://localhost:8007/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/fooId"));
     }
 
@@ -60,7 +60,7 @@ public class UsersControllerTest extends TestBase {
                 .body("email", equalTo("others@email.com"))
                 .body("name", equalTo("others"))
                 .body("_links.users.href", equalTo("http://localhost:8007/users"))
-                .body("_links.boards.href", equalTo("http://localhost:8007/users/fooId/boards"))
+                .body("_links.boards.href", equalTo("http://localhost:8007/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/fooId"));
         assertEquals("others@email.com", jdbcTemplate.queryForObject("select email from kb_user_registration where id='fooId'", String.class));
     }
@@ -87,7 +87,7 @@ public class UsersControllerTest extends TestBase {
                 .body("[0].name", equalTo("someone"))
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.users.href", equalTo("http://localhost:8007/users"))
-                .body("[0]._links.boards.href", equalTo("http://localhost:8007/users/fooId/boards"))
+                .body("[0]._links.boards.href", equalTo("http://localhost:8007/boards"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/users/fooId"));
     }
 }

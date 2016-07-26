@@ -15,8 +15,8 @@
         WHERE id=#{id}
     </update>
 
-    <select id="loadAll" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
-        SELECT * FROM kb_board WHERE delete_status=0
+    <select id="loadByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0 AND reporter=#{userName}
     </select>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">

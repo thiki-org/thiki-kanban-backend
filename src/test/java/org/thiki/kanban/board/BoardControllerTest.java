@@ -40,7 +40,7 @@ public class BoardControllerTest extends TestBase {
     @Test
     public void shouldReturnBoardWhenBoardIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .when()
                 .get("/boards/fooId")
                 .then()
@@ -57,7 +57,7 @@ public class BoardControllerTest extends TestBase {
     @Test
     public void shouldUpdateSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .contentType(ContentType.JSON)
                 .body("{\"name\":\"new-name\"}")
                 .when()
@@ -75,7 +75,7 @@ public class BoardControllerTest extends TestBase {
     @Test
     public void shouldDeleteSuccessfullyWhenTheBoardIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .when()
                 .delete("/boards/fooId")
                 .then()
@@ -87,7 +87,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("当用户删除一个指定的board时,如果该board不存在,则返回客户端404错误")
     @Test
     public void shouldThrowResourceNotFoundExceptionWhenEntryToDeleteIsNotExist() throws Exception {
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .when()
                 .delete("/boards/fooId")
                 .then()
@@ -99,7 +99,7 @@ public class BoardControllerTest extends TestBase {
     @Test
     public void loadAll_shouldReturnAllBoardsSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .when()
                 .get("/boards")
                 .then()
@@ -114,11 +114,11 @@ public class BoardControllerTest extends TestBase {
 
     @Scenario("获取指定用户所拥有的boards")
     @Test
-    public void findByUserId_shouldReturnAllBoardsSuccessfully() {
+    public void findByuserName_shouldReturnAllBoardsSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .when()
-                .get("/users/someone/boards")
+                .get("/boards")
                 .then()
                 .statusCode(200)
                 .body("[0].name", equalTo("board-name"))

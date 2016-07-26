@@ -12,19 +12,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class BoardResource extends RestResource {
 
-    public BoardResource(Board board) {
+    public BoardResource(Board board, String userName) {
         this.domainObject = board;
         if (board != null) {
-            Link selfLink = linkTo(methodOn(BoardsController.class).findById(board.getId())).withSelfRel();
+            Link selfLink = linkTo(methodOn(BoardsController.class).findById(board.getId(), userName)).withSelfRel();
             this.add(selfLink);
 
             Link entriesLink = linkTo(methodOn(EntriesController.class).loadAll(board.getId())).withRel("entries");
             this.add(entriesLink);
         }
-        this.add(linkTo(methodOn(BoardsController.class).loadAll()).withRel("all"));
+        this.add(linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all"));
     }
 
-    public BoardResource() {
-        this.add(linkTo(methodOn(BoardsController.class).loadAll()).withRel("all"));
+    public BoardResource(String userName) {
+        this.add(linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all"));
     }
 }

@@ -13,7 +13,7 @@ public class UserResource extends RestResource {
         this.domainObject = userProfile;
         if (userProfile != null) {
             Link selfLink = linkTo(methodOn(UsersController.class).findById(userProfile.getId())).withSelfRel();
-            Link boardsLink = linkTo(methodOn(BoardsController.class).findByUserId(userProfile.getId())).withRel("boards");
+            Link boardsLink = linkTo(methodOn(BoardsController.class).loadByUserName(userProfile.getId())).withRel("boards");
             this.add(boardsLink);
             this.add(selfLink);
         }

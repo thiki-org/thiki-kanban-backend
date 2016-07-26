@@ -15,7 +15,7 @@ public interface BoardsPersistence {
 
     Board findById(@Param("id") String id);
 
-    List<Board> loadAll();
+    List<Board> loadByUserName(String userName);
 
     Integer update(Board board);
 

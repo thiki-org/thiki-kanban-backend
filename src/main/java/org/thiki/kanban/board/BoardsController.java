@@ -15,45 +15,40 @@ public class BoardsController {
     @Resource
     private BoardsService boardsService;
 
-    @RequestMapping(value = "/boards", method = RequestMethod.GET)
-    public HttpEntity<BoardsResource> loadAll() {
-        List<Board> boards = boardsService.loadAll();
-        return Response.build(new BoardsResource(boards));
-    }
-
     @RequestMapping(value = "/boards/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String id) {
+    public HttpEntity findById(@PathVariable String id, @RequestHeader String userName) {
         Board board = boardsService.findById(id);
-        return Response.build(new BoardResource(board));
+        return Response.build(new BoardResource(board, userName));
     }
 
     @RequestMapping(value = "/boards/{id}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Board board, @PathVariable String id) {
+    public HttpEntity update(@RequestBody Board board, @PathVariable String id, @RequestHeader String userName) {
         board.setId(id);
         Board updatedBoard = boardsService.update(board);
-        return Response.build(new BoardResource(updatedBoard));
+        return Response.build(new BoardResource(updatedBoard, userName));
 
     }
 
     @RequestMapping(value = "/boards/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String id) {
+    public HttpEntity deleteById(@PathVariable String id, @RequestHeader String userName) {
         boardsService.deleteById(id);
-        return Response.build(new BoardResource());
+        return Response.build(new BoardResource(userName));
     }
 
     @RequestMapping(value = "/boards", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Board board, @RequestHeader String userName) {
         Board savedBoard = boardsService.create(userName, board);
-        return Response.post(new BoardResource(savedBoard));
+        return Response.post(new BoardResource(savedBoard, userName));
     }
 
-    @RequestMapping(value = "/users/{userName}/boards", method = RequestMethod.GET)
-    public HttpEntity<BoardsResource> findByUserId(@PathVariable String userName) {
+    @RequestMapping(value = "/boards", method = RequestMethod.GET)
+    public HttpEntity loadByUserName(@RequestHeader String userName) {
         List<Board> boards = boardsService.findByUserId(userName);
         return Response.build(new BoardsResource(boards));
     }
+
     @RequestMapping(value = "/teams/{teamId}/boards", method = RequestMethod.GET)
-    public HttpEntity<BoardsResource> findByTeamId(@PathVariable String teamId) {
+    public HttpEntity findByTeamId(@PathVariable String teamId) {
         List<Board> boards = boardsService.findByTeamId(teamId);
         return Response.build(new BoardsResource(boards));
     }
