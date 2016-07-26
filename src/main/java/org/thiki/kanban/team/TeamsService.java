@@ -18,8 +18,8 @@ public class TeamsService {
         return teamsPersistence.loadAll();
     }
 
-    public Team create(Integer reporterUserId,final Team team){
-        team.setReporter(reporterUserId);
+    public Team create(String reporter,final Team team){
+        team.setReporter(reporter);
         teamsPersistence.create(team);
         return teamsPersistence.findById(team.getId());
     }
@@ -41,5 +41,4 @@ public class TeamsService {
     public List<Team> findByUserId(String userId) {
         return teamsPersistence.findByUserId(userId);
     }
-
 }
