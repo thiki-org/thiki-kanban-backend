@@ -68,16 +68,15 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
     @Scenario("当token不为空且未失效时,请求到达后更新token的有效期")
     @Test
     public void shouldUpdateTokenExpiredTime() throws Exception {
-        String userName = "foo";
-        String currentToken = buildToken(userName, new Date(), 2);
+        String name = "foo";
+        String currentToken = buildToken(name, new Date(), 2);
         Date newExpiredTime = dateService.addMinute(new Date(), Constants.TOKEN_EXPIRED_TIME);
-        String expectedUpdatedToken = buildToken(userName, newExpiredTime, 0);
 
         dateService = spy(dateService);
         when(dateService.addMinute(any(Date.class), eq(Constants.TOKEN_EXPIRED_TIME))).thenReturn(newExpiredTime);
         ReflectionTestUtils.setField(tokenService, "dateService", dateService);
 
-        given().header("userName", userName)
+        given().header("name", name)
                 .header("token", currentToken)
                 .body("{\"summary\":\"newSummary\"}")
                 .header("userId", "11222")
