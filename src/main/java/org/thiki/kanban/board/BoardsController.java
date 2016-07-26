@@ -47,9 +47,9 @@ public class BoardsController {
         return Response.post(new BoardResource(savedBoard));
     }
 
-    @RequestMapping(value = "/users/{userId}/boards", method = RequestMethod.GET)
-    public HttpEntity<BoardsResource> findByUserId(@PathVariable String userId) {
-        List<Board> boards = boardsService.findByUserId(userId);
+    @RequestMapping(value = "/users/{userName}/boards", method = RequestMethod.GET)
+    public HttpEntity<BoardsResource> findByUserId(@PathVariable String userName) {
+        List<Board> boards = boardsService.findByUserId(userName);
         return Response.build(new BoardsResource(boards));
     }
     @RequestMapping(value = "/teams/{teamId}/boards", method = RequestMethod.GET)
