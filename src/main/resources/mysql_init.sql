@@ -30,8 +30,7 @@ CREATE TABLE kb_user_registration
   salt              VARCHAR(40) DEFAULT NULL,
   delete_status     INT         DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
-  modification_time DATETIME    DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (id)
+  modification_time DATETIME    DEFAULT CURRENT_TIMESTAMP
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
