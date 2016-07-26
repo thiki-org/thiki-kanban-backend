@@ -7,7 +7,7 @@ package org.thiki.kanban.team;
 public class Team {
     private String id;
     private String name;
-    private Integer reporter;
+    private String reporter;
     private String creationTime;
     private String modificationTime;
 
@@ -27,11 +27,11 @@ public class Team {
         this.name = name;
     }
 
-    public Integer getReporter() {
+    public String getReporter() {
         return reporter;
     }
 
-    public void setReporter(Integer reporter) {
+    public void setReporter(String reporter) {
         this.reporter = reporter;
     }
 
