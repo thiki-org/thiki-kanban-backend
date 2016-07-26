@@ -14,11 +14,7 @@ import java.util.List;
 public class TeamsController {
     @Autowired
     private TeamsService teamsService;
-    @RequestMapping(value = "/teams", method = RequestMethod.GET)
-    public HttpEntity<TeamsResource> loadAll() {
-        List<Team> teams = teamsService.loadAll();
-        return Response.build(new TeamsResource(teams));
-    }
+
     @RequestMapping(value="/teams",method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Team team, @RequestHeader String userName){
         Team savedTeam=teamsService.create(userName,team);
@@ -29,11 +25,6 @@ public class TeamsController {
         Team team = teamsService.findById(id);
         return Response.build(new TeamResource(team));
     }
-    @RequestMapping(value = "/teams/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String id) {
-        teamsService.deleteById(id);
-        return Response.build(new TeamResource());
-    }
     @RequestMapping(value = "/teams/{id}", method = RequestMethod.PUT)
     public HttpEntity update(@RequestBody Team team, @PathVariable String id) {
         team.setId(id);
@@ -41,10 +32,4 @@ public class TeamsController {
         return Response.build(new TeamResource(updatedTeam));
 
     }
-    @RequestMapping(value = "/users/{userId}/teams", method = RequestMethod.GET)
-    public HttpEntity<TeamsResource> findByUserId(@PathVariable String userId) {
-        List<Team> boards = teamsService.findByUserId(userId);
-        return Response.build(new TeamsResource(boards));
-    }
-
 }

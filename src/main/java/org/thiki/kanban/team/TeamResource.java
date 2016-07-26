@@ -22,8 +22,4 @@ public class TeamResource extends RestResource {
 
         }
     }
-    public TeamResource() {
-        this.add(linkTo(methodOn(TeamsController.class).loadAll()).withRel("all"));
-    }
-
 }

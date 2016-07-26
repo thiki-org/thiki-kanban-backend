@@ -50,30 +50,6 @@ public class TeamsControllerTest extends TestBase {
                 .body("_links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
     }
 
-    @Scenario("当删除一个指定的team时,如果待删除的team存在,则返回删除成功")
-    @Test
-    public void shouldDeleteSuccessfullyWhenTheTeamIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name','someone')");
-        given().header("userName", "someone")
-                .when()
-                .delete("/teams/fooId")
-                .then()
-                .statusCode(200);
-        assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_team WHERE delete_status=1").size());
-    }
-
-    @Scenario("当用户删除一个指定的team时,如果该team不存在,则返回客户端404错误")
-    @Test
-    public void shouldThrowResourceNotFoundExceptionWhenEntryToDeleteIsNotExist() throws Exception {
-        given().header("userId", "11222")
-                .when()
-                .delete("/teams/fooId")
-                .then()
-                .statusCode(404)
-                .body("message", equalTo("team[fooId] is not found."));
-
-    }
-
     @Scenario("更新一个team信息")
     @Test
     public void shouldUpdateSuccessfully() {
