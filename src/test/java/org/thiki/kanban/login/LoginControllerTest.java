@@ -90,4 +90,17 @@ public class LoginControllerTest extends TestBase {
                 .body("code", equalTo(400))
                 .body("message", equalTo("Identity is required."));
     }
+
+    @Scenario("用户登录系统时,如果用户不存在,则不允许登录并告知客户端错误信息")
+    @Test
+    public void login_loginFailedIfRegUserIsNotExists() throws Exception {
+        given().param("identity", "foo")
+                .param("password", "foo")
+                .when()
+                .get("/login")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("Identity foo is not exists."));
+    }
 }
