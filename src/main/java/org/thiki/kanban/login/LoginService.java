@@ -27,14 +27,14 @@ public class LoginService {
 
     @ValidateParams
     public Identification login(@NotEmpty(message = "Identity is required.") String identity, @NotEmpty(message = "Password is required.") String password) throws Exception {
-        Registration registeredUser = registrationPersistence.findByName(identity);
+        Registration registeredUser = registrationPersistence.findByIdentity(identity);
         if (registeredUser == null) {
             throw new InvalidParameterException(MessageFormat.format("Identity {0} is not exists,please retry or register first.", identity));
         }
         String rsaDecryptedPassword = rsaService.dencrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
 
-        Registration matchedUser = registrationPersistence.findByIdentity(identity, md5Password);
+        Registration matchedUser = registrationPersistence.findByCredential(identity, md5Password);
         if (matchedUser == null) {
             throw new InvalidParameterException("Your username or password is incorrect.");
         }

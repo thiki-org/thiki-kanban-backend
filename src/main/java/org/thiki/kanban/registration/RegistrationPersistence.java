@@ -18,5 +18,7 @@ public interface RegistrationPersistence {
 
     Registration findByEmail(String email);
 
-    Registration findByIdentity(@Param("identity") String identity, @Param("password") String password);
+    Registration findByIdentity(@Param("identity") String identity);
+
+    Registration findByCredential(@Param("identity") String identity, @Param("password") String password);
 }
