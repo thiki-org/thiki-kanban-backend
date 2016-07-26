@@ -101,6 +101,6 @@ public class LoginControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("Identity foo is not exists."));
+                .body("message", equalTo("Identity foo is not exists,please retry or register first."));
     }
 }

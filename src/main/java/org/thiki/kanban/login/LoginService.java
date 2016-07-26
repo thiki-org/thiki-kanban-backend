@@ -29,7 +29,7 @@ public class LoginService {
     public Identification login(@NotEmpty(message = "Identity is required.") String identity, @NotEmpty(message = "Password is required.") String password) throws Exception {
         Registration registeredUser = registrationPersistence.findByName(identity);
         if (registeredUser == null) {
-            throw new InvalidParameterException(MessageFormat.format("Identity {0} is not exists.", identity));
+            throw new InvalidParameterException(MessageFormat.format("Identity {0} is not exists,please retry or register first.", identity));
         }
         String rsaDecryptedPassword = rsaService.dencrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
