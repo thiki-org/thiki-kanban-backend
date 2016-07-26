@@ -13,7 +13,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class IdentificationResource extends RestResource {
     public IdentificationResource(Identification identification) {
         super.domainObject = identification;
-        Link loginLink = ControllerLinkBuilder.linkTo(methodOn(BoardsController.class).findByUserId(identification.getName())).withRel("boards");
+        Link loginLink = ControllerLinkBuilder.linkTo(methodOn(BoardsController.class).findByUserId(identification.getUserName())).withRel("boards");
         this.add(loginLink);
     }
 }

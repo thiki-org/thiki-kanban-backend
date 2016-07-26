@@ -38,7 +38,7 @@ public class LoginService {
         Identification identification = new Identification();
         String token = tokenService.buildToken(matchedUser.getName());
         identification.setToken(token);
-        identification.setName(matchedUser.getName());
+        identification.setUserName(matchedUser.getName());
         return identification;
     }
 }
