@@ -29,7 +29,6 @@ public class UsersController {
         userProfile.setId(id);
         UserProfile updatedUserProfile = usersService.update(userProfile);
         return Response.build(new UserResource(updatedUserProfile));
-
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
