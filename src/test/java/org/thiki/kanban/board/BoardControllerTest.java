@@ -21,7 +21,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("当创建一个board时,如果参数合法,则创建成功并返回创建后的board")
     @Test
     public void shouldReturn201WhenCreateBoardSuccessfully() {
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .body("{\"name\":\"board-name\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -30,7 +30,7 @@ public class BoardControllerTest extends TestBase {
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
-                .body("reporter", equalTo(11222))
+                .body("reporter", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
@@ -39,7 +39,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("用户根据ID获取board时,如果该board存在,则返回其信息")
     @Test
     public void shouldReturnBoardWhenBoardIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userId", "11222")
                 .when()
                 .get("/boards/fooId")
@@ -47,7 +47,7 @@ public class BoardControllerTest extends TestBase {
                 .statusCode(200)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
-                .body("reporter", equalTo(1))
+                .body("reporter", equalTo("someone"))
                 .body("_links.all.href", equalTo("http://localhost:8007/boards"))
                 .body("_links.entries.href", equalTo("http://localhost:8007/boards/fooId/entries"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
@@ -56,7 +56,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("成功更新一个board信息")
     @Test
     public void shouldUpdateSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .body("{\"name\":\"new-name\"}")
@@ -65,7 +65,7 @@ public class BoardControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("new-name"))
-                .body("reporter", equalTo(1))
+                .body("reporter", equalTo("someone"))
                 .body("_links.all.href", equalTo("http://localhost:8007/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
@@ -74,7 +74,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("当用户删除一个指定的board时,如果该board存在,则删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheBoardIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userId", "11222")
                 .when()
                 .delete("/boards/fooId")
@@ -98,14 +98,14 @@ public class BoardControllerTest extends TestBase {
     @Scenario("获取所有的boards(这个接口考虑废弃)")
     @Test
     public void loadAll_shouldReturnAllBoardsSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userId", "11222")
                 .when()
                 .get("/boards")
                 .then()
                 .statusCode(200)
                 .body("[0].name", equalTo("board-name"))
-                .body("[0].reporter", equalTo(1))
+                .body("[0].reporter", equalTo("someone"))
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.all.href", equalTo("http://localhost:8007/boards"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/fooId"))
@@ -115,14 +115,14 @@ public class BoardControllerTest extends TestBase {
     @Scenario("获取指定用户所拥有的boards")
     @Test
     public void findByUserId_shouldReturnAllBoardsSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userId", "11222")
                 .when()
-                .get("/users/1/boards")
+                .get("/users/someone/boards")
                 .then()
                 .statusCode(200)
                 .body("[0].name", equalTo("board-name"))
-                .body("[0].reporter", equalTo(1))
+                .body("[0].reporter", equalTo("someone"))
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.all.href", equalTo("http://localhost:8007/boards"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/fooId"))

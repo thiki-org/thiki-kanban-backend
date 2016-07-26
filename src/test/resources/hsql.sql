@@ -5,7 +5,7 @@ drop table if exists kb_board;
 CREATE TABLE kb_board (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   name VARCHAR(50) ,
-  reporter int NOT NULL,
+  reporter VARCHAR(40) NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
@@ -18,7 +18,7 @@ drop table if exists kb_entry;
 CREATE TABLE kb_entry (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   title  VARCHAR(50) NOT NULL,
-  reporter int NOT NULL,
+  reporter VARCHAR(40) NOT NULL,
   board_id VARCHAR(40)  DEFAULT NULL,
   order_number int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
@@ -36,7 +36,7 @@ CREATE TABLE kb_task (
   summary VARCHAR(50) NOT NULL,
   content VARCHAR(50),
   order_number int DEFAULT 0,
-  reporter int DEFAULT NULL,
+  reporter VARCHAR(40) DEFAULT NULL,
   entry_id VARCHAR(40)  DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,

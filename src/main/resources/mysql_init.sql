@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS kb_board;
 CREATE TABLE kb_board (
   id                VARCHAR(40) NOT NULL,
   name              TEXT,
-  reporter          INT(2)      NOT NULL,
+  reporter          VARCHAR(40)      NOT NULL,
   delete_status     INT(2)               DEFAULT 0,
   order_number      INT(2)      NOT NULL DEFAULT 0,
   creation_time     DATETIME             DEFAULT CURRENT_TIMESTAMP,

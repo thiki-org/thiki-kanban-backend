@@ -11,7 +11,7 @@ public class Board implements Serializable {
 
     private String name;
 
-    private Integer reporter;
+    private String reporter;
 
     private String creationTime;
 
@@ -33,12 +33,12 @@ public class Board implements Serializable {
         this.modificationTime = modificationTime;
     }
 
-    public Integer getReporter() {
+    public String getReporter() {
         return reporter;
     }
 
-    public void setReporter(Integer reporter) {
-        this.reporter = reporter;
+    public void setReporter(String userName) {
+        this.reporter = userName;
     }
 
     public String getId() {

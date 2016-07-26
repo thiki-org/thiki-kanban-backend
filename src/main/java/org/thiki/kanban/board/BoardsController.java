@@ -42,8 +42,8 @@ public class BoardsController {
     }
 
     @RequestMapping(value = "/boards", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Board board, @RequestHeader Integer userId) {
-        Board savedBoard = boardsService.create(userId, board);
+    public HttpEntity create(@RequestBody Board board, @RequestHeader String userName) {
+        Board savedBoard = boardsService.create(userName, board);
         return Response.post(new BoardResource(savedBoard));
     }
 

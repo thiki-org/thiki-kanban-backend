@@ -15,8 +15,8 @@ public class BoardsService {
     @Resource
     private BoardsPersistence boardsPersistence;
 
-    public Board create(Integer reporterUserId, final Board board) {
-        board.setReporter(reporterUserId);
+    public Board create(String userName, final Board board) {
+        board.setReporter(userName);
         boardsPersistence.create(board);
         return boardsPersistence.findById(board.getId());
     }
