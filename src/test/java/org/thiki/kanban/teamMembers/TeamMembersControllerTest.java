@@ -17,7 +17,8 @@ import static org.hamcrest.CoreMatchers.equalTo;
 public class TeamMembersControllerTest extends TestBase {
     @Scenario("加入一个团队")
     @Test
-    public void join_shouldReturn201WhenJoinTeamSuccessfully() throws Exception {
+    public void joinTeam_shouldReturn201WhenJoinTeamSuccessfully() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('foo-teamId','team-name','someone')");
         given().header("userName", "someone")
                 .body("{\"member\":\"someone\"}")
                 .contentType(ContentType.JSON)
@@ -29,5 +30,19 @@ public class TeamMembersControllerTest extends TestBase {
                 .body("member", equalTo("someone"))
                 .body("id", equalTo("fooId"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/teamMembers"));
+    }
+
+    @Scenario("加入团队时,如果该团队并不存在,则不允许加入")
+    @Test
+    public void joinTeam_shouldReturnFailedIfTeamIsNotExist() throws Exception {
+        given().header("userName", "someone")
+                .body("{\"member\":\"someone\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/teams/foo-teamId/teamMembers")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("Team foo-teamId is not found."));
     }
 }
