@@ -4,7 +4,7 @@
 drop table if exists kb_board;
 CREATE TABLE kb_board (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
-  member VARCHAR(50) ,
+  name VARCHAR(50) ,
   reporter VARCHAR(40) NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,
@@ -66,7 +66,7 @@ CREATE TABLE kb_user_registration
 (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   password VARCHAR(500) NOT NULL,
-  member       VARCHAR(40) NOT NULL,
+  name       VARCHAR(40) NOT NULL,
   email VARCHAR(127) NOT NULL,
   salt VARCHAR(40) DEFAULT '',
   delete_status int DEFAULT 0,
@@ -96,7 +96,7 @@ drop table if exists kb_team;
 
 CREATE TABLE kb_team(
   id VARCHAR(40)NOT NULL PRIMARY KEY,
-  member VARCHAR(50)NOT NULL,
+  name VARCHAR(50)NOT NULL,
   reporter VARCHAR(40) DEFAULT NULL,
   delete_status int DEFAULT 0
 );
