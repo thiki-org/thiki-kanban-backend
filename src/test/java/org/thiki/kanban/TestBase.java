@@ -58,5 +58,6 @@ public class TestBase {
         jdbcTemplate.execute("TRUNCATE TABLE kb_user_profile");
         jdbcTemplate.execute("TRUNCATE TABLE kb_user_registration");
         jdbcTemplate.execute("TRUNCATE TABLE kb_task_assignment");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_team_members");
     }
 }

@@ -45,4 +45,20 @@ public class TeamMembersControllerTest extends TestBase {
                 .body("code", equalTo(400))
                 .body("message", equalTo("Team foo-teamId is not found."));
     }
+
+    @Scenario("加入团队时,如果待加入的成员已经在团队中,则不允许加入")
+    @Test
+    public void joinTeam_shouldReturnFailedIfMemberIsAreadyIn() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('foo-teamId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,reporter) VALUES ('foo-team-member-id','foo-teamId','someone','someone')");
+        given().header("userName", "someone")
+                .body("{\"member\":\"someone\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/teams/foo-teamId/teamMembers")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo("Member named someone is already in the team."));
+    }
 }

@@ -10,4 +10,8 @@
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.teamMembers.TeamMember">
         SELECT * FROM kb_team_members WHERE id= #{id} AND delete_status=0
     </select>
+    <select id="findMemberByTeamId" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.teamMembers.TeamMember">
+        SELECT * FROM kb_team_members WHERE team_id= #{teamId} AND member=#{member} AND delete_status=0
+    </select>
 </mapper>
