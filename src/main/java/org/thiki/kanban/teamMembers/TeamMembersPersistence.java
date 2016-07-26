@@ -15,4 +15,6 @@ public interface TeamMembersPersistence {
     void joinTeam(TeamMember teamMember);
 
     TeamMember findById(@Param("id") String id);
+
+    TeamMember findMemberByTeamId(@Param("member") String member, @Param("teamId") String teamId);
 }
