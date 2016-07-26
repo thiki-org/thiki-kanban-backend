@@ -98,6 +98,8 @@ CREATE TABLE kb_team(
   id VARCHAR(40)NOT NULL PRIMARY KEY,
   name VARCHAR(50)NOT NULL,
   reporter VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
 );
 
@@ -111,5 +113,7 @@ CREATE TABLE kb_team_members(
   team_id VARCHAR(50)NOT NULL,
   member VARCHAR(50)NOT NULL,
   reporter VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
 );
