@@ -42,7 +42,7 @@ DROP TABLE IF EXISTS kb_board;
 CREATE TABLE kb_board (
   id                VARCHAR(40) NOT NULL,
   name              TEXT,
-  reporter          VARCHAR(40)      NOT NULL,
+  reporter          VARCHAR(40) NOT NULL,
   delete_status     INT(2)               DEFAULT 0,
   order_number      INT(2)      NOT NULL DEFAULT 0,
   creation_time     DATETIME             DEFAULT CURRENT_TIMESTAMP,
@@ -107,17 +107,33 @@ CREATE TABLE kb_task_assignment (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
-  -- ----------------------------
-  -- Table structure for kb_team
-  -- ----------------------------
-  DROP TABLE IF EXISTS kb_team;
-  CREATE TABLE kb_team (
-    id                VARCHAR(40)   NOT NULL,
-    name              VARCHAR(50)   NOT NULL,
-    reporter          VARCHAR(40)   DEFAULT NULL,
-    delete_status     INT(2)        DEFAULT 0,
+-- ----------------------------
+-- Table structure for kb_team
+-- ----------------------------
+DROP TABLE IF EXISTS kb_team;
+CREATE TABLE kb_team (
+  id                VARCHAR(40) NOT NULL,
+  name              VARCHAR(50) NOT NULL,
+  reporter          VARCHAR(40) DEFAULT NULL,
+  delete_status     INT(2)      DEFAULT 0,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+-- ----------------------------
+-- Table structure for kb_team_members
+-- ----------------------------
+DROP TABLE IF EXISTS kb_team_members;
 
-    PRIMARY KEY (id)
-  )
-    ENGINE = InnoDB
-    DEFAULT CHARSET = utf8;
+CREATE TABLE kb_team_members (
+  id                VARCHAR(40) NOT NULL,
+  team_id           VARCHAR(50) NOT NULL,
+  member            VARCHAR(50) NOT NULL,
+  reporter          VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  delete_status     INT(2)      DEFAULT 0,
+  PRIMARY KEY (id)
+)
