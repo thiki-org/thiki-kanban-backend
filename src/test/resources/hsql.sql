@@ -4,7 +4,7 @@
 drop table if exists kb_board;
 CREATE TABLE kb_board (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
-  name VARCHAR(50) ,
+  member VARCHAR(50) ,
   reporter VARCHAR(40) NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,
@@ -66,7 +66,7 @@ CREATE TABLE kb_user_registration
 (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   password VARCHAR(500) NOT NULL,
-  name       VARCHAR(40) NOT NULL,
+  member       VARCHAR(40) NOT NULL,
   email VARCHAR(127) NOT NULL,
   salt VARCHAR(40) DEFAULT '',
   delete_status int DEFAULT 0,
@@ -89,9 +89,27 @@ CREATE TABLE kb_task_assignment (
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
   ) ;
+-- ----------------------------
+-- Table structure for kb_team
+-- ----------------------------
+drop table if exists kb_team;
+
 CREATE TABLE kb_team(
-id VARCHAR(40)NOT NULL PRIMARY KEY,
-name VARCHAR(50)NOT NULL,
-reporter VARCHAR(40) DEFAULT NULL,
-delete_status int DEFAULT 0
+  id VARCHAR(40)NOT NULL PRIMARY KEY,
+  member VARCHAR(50)NOT NULL,
+  reporter VARCHAR(40) DEFAULT NULL,
+  delete_status int DEFAULT 0
+);
+
+-- ----------------------------
+-- Table structure for kb_team_members
+-- ----------------------------
+drop table if exists kb_team_members;
+
+CREATE TABLE kb_team_members(
+  id VARCHAR(40)NOT NULL PRIMARY KEY,
+  team_id VARCHAR(50)NOT NULL,
+  member VARCHAR(50)NOT NULL,
+  reporter VARCHAR(40) DEFAULT NULL,
+  delete_status int DEFAULT 0
 );
