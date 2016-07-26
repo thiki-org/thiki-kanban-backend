@@ -12,7 +12,7 @@ public class Constants {
     public static final String LOCAL_ADDRESS = "127.0.0.1";
     public static final String FREE_AUTHENTICATION = "no";
     public static final String HEADER_PARAMS_TOKEN = "token";
-    public static final String HEADER_PARAMS_USER_NAME = "name";
+    public static final String HEADER_PARAMS_USER_NAME = "userName";
     public static final String HEADER_PARAMS_AUTHENTICATION = "authentication";
     public static final int TOKEN_EXPIRED_TIME = 5;
 }

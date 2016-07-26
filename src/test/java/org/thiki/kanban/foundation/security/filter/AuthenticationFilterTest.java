@@ -76,10 +76,9 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
         when(dateService.addMinute(any(Date.class), eq(Constants.TOKEN_EXPIRED_TIME))).thenReturn(newExpiredTime);
         ReflectionTestUtils.setField(tokenService, "dateService", dateService);
 
-        given().header("name", name)
+        given().header("userName", name)
                 .header("token", currentToken)
                 .body("{\"summary\":\"newSummary\"}")
-                .header("userId", "11222")
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/entries/1/tasks/fooId")

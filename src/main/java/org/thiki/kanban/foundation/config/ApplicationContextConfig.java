@@ -48,8 +48,8 @@ public class ApplicationContextConfig implements ApplicationContextAware {
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("http://localhost:8008")
-                        .allowedHeaders("token", "name", "X-token")
-                        .exposedHeaders("token", "name", "X-token")
+                        .allowedHeaders("token", "userName", "X-token")
+                        .exposedHeaders("token", "userName", "X-token")
                         .allowedMethods("POST", "GET", "PUT", "DELETE", "OPTIONS")
                         .allowCredentials(false).maxAge(3600);
             }
