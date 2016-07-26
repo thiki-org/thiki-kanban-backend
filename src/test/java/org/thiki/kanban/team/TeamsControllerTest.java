@@ -19,7 +19,7 @@ public class TeamsControllerTest extends TestBase {
     @Scenario("创建一个团队")
     @Test
     public void create_shouldReturn201WhenCreateTeamSuccessfully() throws Exception {
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .body("{\"name\":\"思奇团队讨论组\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -37,15 +37,15 @@ public class TeamsControllerTest extends TestBase {
     @Scenario("用户根据ID获取team时,如果该team存在,则返回其信息")
     @Test
     public void shouldReturnBoardWhenTeamIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name',1)");
-        given().header("userId", "11222")
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name','someone')");
+        given().header("userName", "someone")
                 .when()
                 .get("/teams/fooId")
                 .then()
                 .statusCode(200)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("team-name"))
-                .body("reporter", equalTo(1))
+                .body("reporter", equalTo("someone"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
     }
@@ -53,8 +53,8 @@ public class TeamsControllerTest extends TestBase {
     @Scenario("当删除一个指定的team时,如果待删除的team存在,则返回删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheTeamIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name',1)");
-        given().header("userId", "11222")
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name','someone')");
+        given().header("userName", "someone")
                 .when()
                 .delete("/teams/fooId")
                 .then()
@@ -77,8 +77,8 @@ public class TeamsControllerTest extends TestBase {
     @Scenario("更新一个team信息")
     @Test
     public void shouldUpdateSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name',1)");
-        given().header("userId", "11222")
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name','someone')");
+        given().header("userName", "someone")
                 .contentType(ContentType.JSON)
                 .body("{\"name\":\"new-name\"}")
                 .when()
@@ -86,7 +86,7 @@ public class TeamsControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("new-name"))
-                .body("reporter", equalTo(1))
+                .body("reporter", equalTo("someone"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_team where id='fooId'", String.class));
     }
