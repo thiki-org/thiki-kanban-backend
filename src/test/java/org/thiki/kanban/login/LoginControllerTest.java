@@ -45,7 +45,7 @@ public class LoginControllerTest extends TestBase {
     @Test
     public void login_loginSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password,salt) " +
-                "VALUES ('fooUserId','someone@gmail.com','someone','148412d9df986f739038ad22c77459f2','fooId')");
+                "VALUES ('fooUserId','someone@gmail.com','someone','979e14ce78f745bbd78bc4e7533d600e','fooId')");
         String publicKey = rsaService.loadKey(publicKeyFilePath);
         String password = "foo";
         String rsaPassword = rsaService.encrypt(publicKey, password);
