@@ -71,10 +71,10 @@ CREATE TABLE kb_entry (
   DEFAULT CHARSET = utf8;
 
 -- ----------------------------
--- Table structure for kb_task
+-- Table structure for kb_card
 -- ----------------------------
-DROP TABLE IF EXISTS kb_task;
-CREATE TABLE kb_task (
+DROP TABLE IF EXISTS kb_card;
+CREATE TABLE kb_card (
   id                VARCHAR(40)   NOT NULL,
   summary           VARCHAR(1023) NOT NULL,
   content           TEXT,
@@ -90,13 +90,13 @@ CREATE TABLE kb_task (
   DEFAULT CHARSET = utf8;
 
 -- ----------------------------
--- Table structure for kb_task_assignment
+-- Table structure for kb_card_assignment
 -- ----------------------------
-DROP TABLE IF EXISTS kb_task_assignment;
+DROP TABLE IF EXISTS kb_card_assignment;
 
-CREATE TABLE kb_task_assignment (
+CREATE TABLE kb_card_assignment (
   id                VARCHAR(40) NOT NULL,
-  task_id           VARCHAR(40) NOT NULL,
+  card_id           VARCHAR(40) NOT NULL,
   assigner          VARCHAR(40) NOT NULL,
   assignee          VARCHAR(40) NOT NULL,
   reporter          VARCHAR(40) DEFAULT NULL,

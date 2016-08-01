@@ -2,7 +2,7 @@ package org.thiki.kanban.entry;
 
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
-import org.thiki.kanban.task.TasksController;
+import org.thiki.kanban.card.CardsController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -17,8 +17,8 @@ public class EntryResource extends RestResource {
             Link selfLink = linkTo(methodOn(EntriesController.class).findById(entry.getId(), boardId)).withSelfRel();
             this.add(selfLink);
 
-            Link tasksLink = linkTo(methodOn(TasksController.class).create(null, entry.getId(), null)).withRel("tasks");
-            this.add(tasksLink);
+            Link cardsLink = linkTo(methodOn(CardsController.class).create(null, entry.getId(), null)).withRel("cards");
+            this.add(cardsLink);
         }
         this.add(linkTo(methodOn(EntriesController.class).loadAll(boardId)).withRel("all"));
     }

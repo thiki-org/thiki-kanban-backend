@@ -2,67 +2,67 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.thiki.kanban.task.TasksPersistence">
+<mapper namespace="org.thiki.kanban.card.CardsPersistence">
 
-    <insert id="create" parameterType="org.thiki.kanban.task.Task">
+    <insert id="create" parameterType="org.thiki.kanban.card.Card">
         INSERT INTO
-        kb_task(id,summary, content, order_number, reporter, entry_id) VALUES (#{id},#{summary}, #{content}, (SELECT
+        kb_card(id,summary, content, order_number, reporter, entry_id) VALUES (#{id},#{summary}, #{content}, (SELECT
         max_order_number from (SELECT CASE WHEN max(order_number) IS NULL THEN 0 ELSE max(order_number)+1 end as
-        max_order_number FROM kb_task WHERE entry_id=#{entryId} ) as t ), #{reporter}, #{entryId})
+        max_order_number FROM kb_card WHERE entry_id=#{entryId} ) as t ), #{reporter}, #{entryId})
     </insert>
 
-    <update id="update" parameterType="org.thiki.kanban.task.Task" flushCache="true">
-        UPDATE kb_task SET
-        summary = #{task.summary},
-        content = #{task.content},
-        order_number = #{task.orderNumber},
-        reporter = #{task.reporter},
-        entry_id = #{task.entryId}
+    <update id="update" parameterType="org.thiki.kanban.card.Card" flushCache="true">
+        UPDATE kb_card SET
+        summary = #{card.summary},
+        content = #{card.content},
+        order_number = #{card.orderNumber},
+        reporter = #{card.reporter},
+        entry_id = #{card.entryId}
         WHERE id=#{id}
     </update>
 
     <update id="resortOrder" parameterType="java.util.Map" flushCache="true">
         <if test="increment == 0">
-            UPDATE kb_task SET order_number = order_number+1
+            UPDATE kb_card SET order_number = order_number+1
             <![CDATA[
             WHERE order_number >= #{currentOrderNumber} AND order_number<=#{originOrderNumber}
             ]]>
         </if>
 
         <if test="increment == 1">
-            UPDATE kb_task SET order_number = order_number-1
+            UPDATE kb_card SET order_number = order_number-1
             <![CDATA[
             WHERE  order_number <= #{currentOrderNumber} AND order_number>=#{originOrderNumber}
              ]]>
         </if>
-        AND entry_id=#{entryId} AND delete_status=0 AND id !=#{taskId}
+        AND entry_id=#{entryId} AND delete_status=0 AND id !=#{cardId}
     </update>
 
     <update id="resortTargetEntry" parameterType="java.util.Map" flushCache="true">
-        UPDATE kb_task SET order_number = order_number+1
+        UPDATE kb_card SET order_number = order_number+1
         <![CDATA[
             WHERE order_number >= #{currentOrderNumber}
             ]]>
-        AND entry_id=#{currentEntryId} AND delete_status=0 AND id !=#{taskId}
+        AND entry_id=#{currentEntryId} AND delete_status=0 AND id !=#{cardId}
     </update>
 
     <update id="resortOriginEntry" parameterType="java.util.Map" flushCache="true">
-        UPDATE kb_task SET order_number = order_number-1
+        UPDATE kb_card SET order_number = order_number-1
         <![CDATA[
             WHERE order_number >= #{originOrderNumber}
             ]]>
-        AND entry_id=#{originEntryId} AND delete_status=0 AND id !=#{taskId}
+        AND entry_id=#{originEntryId} AND delete_status=0 AND id !=#{cardId}
     </update>
 
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.task.Task">
-        SELECT * FROM kb_task WHERE id= #{id}
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
+        SELECT * FROM kb_card WHERE id= #{id}
     </select>
 
-    <select id="findByEntryId" parameterType="java.lang.String" resultType="org.thiki.kanban.task.Task">
-        SELECT * FROM kb_task WHERE entry_id= #{entry_id} AND delete_status=0 ORDER BY order_number
+    <select id="findByEntryId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
+        SELECT * FROM kb_card WHERE entry_id= #{entry_id} AND delete_status=0 ORDER BY order_number
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_task SET delete_status=1 WHERE id=#{id}
+        UPDATE kb_card SET delete_status=1 WHERE id=#{id}
     </delete>
 </mapper>

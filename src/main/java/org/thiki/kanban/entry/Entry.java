@@ -1,7 +1,7 @@
 package org.thiki.kanban.entry;
 
 import org.hibernate.validator.constraints.Length;
-import org.thiki.kanban.task.Task;
+import org.thiki.kanban.card.Card;
 
 import javax.validation.constraints.NotNull;
 
@@ -72,14 +72,14 @@ public class Entry {
     }
 
     /**
-     * 在entry内添加一个task
+     * 在entry内添加一个card
      *
-     * @param task
+     * @param card
      * @return
      */
-    public Task addTask(Task task) {
-        // task.setEntryId(this.id);
-        return task;
+    public Card addCard(Card card) {
+        // card.setEntryId(this.id);
+        return card;
     }
 
     public String getBoardId() {

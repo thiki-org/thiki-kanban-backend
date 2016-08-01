@@ -10,11 +10,11 @@ import java.util.List;
  * Created by xubitao on 6/16/16.
  */
 public class AssignmentsResource extends RestResource {
-    public AssignmentsResource(List<Assignment> assignmentList, String entryId, String taskId) {
+    public AssignmentsResource(List<Assignment> assignmentList, String entryId, String cardId) {
         this.domainObject = assignmentList;
         JSONArray assignmentsJSONArray = new JSONArray();
         for (Assignment assignment : assignmentList) {
-            AssignmentResource assignmentResource = new AssignmentResource(assignment, entryId, taskId);
+            AssignmentResource assignmentResource = new AssignmentResource(assignment, entryId, cardId);
             JSONObject assignmentJSON = assignmentResource.getResource();
             assignmentsJSONArray.add(assignmentJSON);
         }

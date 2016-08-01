@@ -6,7 +6,7 @@ package org.thiki.kanban.assignment;
 public class Assignment {
     public String id;
 
-    private String taskId;
+    private String cardId;
 
     private String assignee;
 
@@ -28,12 +28,12 @@ public class Assignment {
         this.id = id;
     }
 
-    public String getTaskId() {
-        return taskId;
+    public String getCardId() {
+        return cardId;
     }
 
-    public void setTaskId(String taskId) {
-        this.taskId = taskId;
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
     }
 
     public String getAssignee() {

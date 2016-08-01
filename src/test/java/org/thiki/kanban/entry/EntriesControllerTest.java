@@ -31,7 +31,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("reporter", equalTo(11222))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/entries"))
-                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"))
+                .body("_links.cards.href", equalTo("http://localhost:8007/entries/fooId/cards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"));
     }
 
@@ -51,7 +51,7 @@ public class EntriesControllerTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("orderNumber", equalTo(1))
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/entries"))
-                .body("_links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"))
+                .body("_links.cards.href", equalTo("http://localhost:8007/entries/fooId/cards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"));
     }
 
@@ -221,6 +221,6 @@ public class EntriesControllerTest extends TestBase {
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.all.href", equalTo("http://localhost:8007/boards/feeId/entries"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/feeId/entries/fooId"))
-                .body("[0]._links.tasks.href", equalTo("http://localhost:8007/entries/fooId/tasks"));
+                .body("[0]._links.cards.href", equalTo("http://localhost:8007/entries/fooId/cards"));
     }
 }

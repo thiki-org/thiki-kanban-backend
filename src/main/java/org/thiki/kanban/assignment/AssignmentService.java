@@ -2,8 +2,8 @@ package org.thiki.kanban.assignment;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
-import org.thiki.kanban.task.Task;
-import org.thiki.kanban.task.TasksPersistence;
+import org.thiki.kanban.card.Card;
+import org.thiki.kanban.card.CardsPersistence;
 
 import javax.annotation.Resource;
 import java.security.InvalidParameterException;
@@ -18,10 +18,10 @@ public class AssignmentService {
     @Resource
     private AssignmentPersistence assignmentPersistence;
     @Resource
-    private TasksPersistence tasksPersistence;
+    private CardsPersistence cardsPersistence;
 
-    public Assignment create(final Assignment assignment, String taskId, String reporterUserId) {
-        assignment.setTaskId(taskId);
+    public Assignment create(final Assignment assignment, String cardId, String reporterUserId) {
+        assignment.setCardId(cardId);
         assignment.setReporter(reporterUserId);
         assignmentPersistence.create(assignment);
         return assignmentPersistence.findById(assignment.getId());
@@ -31,12 +31,12 @@ public class AssignmentService {
         return assignmentPersistence.findById(id);
     }
 
-    public List<Assignment> findByTaskId(String taskId) {
-        Task task = tasksPersistence.findById(taskId);
-        if (task == null) {
-            throw new InvalidParameterException("task[" + taskId + "] is not found.");
+    public List<Assignment> findByCardId(String cardId) {
+        Card card = cardsPersistence.findById(cardId);
+        if (card == null) {
+            throw new InvalidParameterException("card[" + cardId + "] is not found.");
         }
-        return assignmentPersistence.findByTaskId(taskId);
+        return assignmentPersistence.findByCardId(cardId);
     }
 
     public int deleteById(String id) {

@@ -1,4 +1,4 @@
-package org.thiki.kanban.task;
+package org.thiki.kanban.card;
 
 import org.hibernate.validator.constraints.Length;
 import org.thiki.kanban.entry.Entry;
@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author joeaniu
  */
-public class Task implements Serializable {
+public class Card implements Serializable {
     /**
      * id
      */

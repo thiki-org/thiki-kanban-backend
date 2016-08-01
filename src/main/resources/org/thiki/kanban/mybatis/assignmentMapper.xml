@@ -5,26 +5,26 @@
 <mapper namespace="org.thiki.kanban.assignment.AssignmentPersistence">
 
     <insert id="create" parameterType="org.thiki.kanban.assignment.Assignment">
-        INSERT INTO kb_task_assignment(id,task_id, assignee, assigner, reporter) VALUES (#{id},#{taskId}, #{assignee},
+        INSERT INTO kb_card_assignment(id,card_id, assignee, assigner, reporter) VALUES (#{id},#{cardId}, #{assignee},
         #{assigner}, #{reporter})
     </insert>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
         SELECT
-        assignment.id,assignment.task_id,assignment.assignee,assignment.assigner,assignment.reporter,assignment.creation_time,assignment.modification_time,userRegistration.name
-        FROM kb_task_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
+        assignment.id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.reporter,assignment.creation_time,assignment.modification_time,userRegistration.name
+        FROM kb_card_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
         assignment.assignee=userRegistration.id WHERE assignment.id= #{id}
     </select>
 
-    <select id="findByTaskId" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
+    <select id="findByCardId" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
         SELECT
-        assignment.id,assignment.task_id,assignment.assignee,assignment.assigner,assignment.reporter,userRegistration.name
-        FROM kb_task_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
+        assignment.id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.reporter,userRegistration.name
+        FROM kb_card_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
         assignment.assignee=userRegistration.id
-        WHERE assignment.task_id= #{taskId} AND assignment.delete_status=0
+        WHERE assignment.card_id= #{cardId} AND assignment.delete_status=0
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_task_assignment SET delete_status=1 WHERE id=#{id}
+        UPDATE kb_card_assignment SET delete_status=1 WHERE id=#{id}
     </delete>
 </mapper>

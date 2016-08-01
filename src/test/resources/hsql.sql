@@ -27,11 +27,11 @@ CREATE TABLE kb_entry (
   ) ;
 
 -- ----------------------------
--- Table structure for kb_task
+-- Table structure for kb_card
 -- ----------------------------
-drop table if exists kb_task;
+drop table if exists kb_card;
 
-CREATE TABLE kb_task (
+CREATE TABLE kb_card (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   summary VARCHAR(50) NOT NULL,
   content VARCHAR(50),
@@ -75,13 +75,13 @@ CREATE TABLE kb_user_registration
   );
 
 -- ----------------------------
--- Table structure for kb_task_assignment
+-- Table structure for kb_card_assignment
 -- ----------------------------
-drop table if exists kb_task_assignment;
+drop table if exists kb_card_assignment;
 
-CREATE TABLE kb_task_assignment (
+CREATE TABLE kb_card_assignment (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
-  task_id VARCHAR(40) NOT NULL,
+  card_id VARCHAR(40) NOT NULL,
   assigner VARCHAR(40) NOT NULL,
   assignee VARCHAR(40) NOT NULL,
   reporter VARCHAR(40) DEFAULT NULL,

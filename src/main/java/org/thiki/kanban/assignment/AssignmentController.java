@@ -16,28 +16,28 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @RequestMapping(value = "/entries/{entryId}/tasks/{taskId}/assignments", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String entryId, @PathVariable String taskId, @RequestHeader String userId) {
-        Assignment savedAssignment = assignmentService.create(assignment, taskId, userId);
-        return Response.post(new AssignmentResource(savedAssignment, entryId, taskId));
+    @RequestMapping(value = "/entries/{entryId}/cards/{cardId}/assignments", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String entryId, @PathVariable String cardId, @RequestHeader String userId) {
+        Assignment savedAssignment = assignmentService.create(assignment, cardId, userId);
+        return Response.post(new AssignmentResource(savedAssignment, entryId, cardId));
     }
 
-    @RequestMapping(value = "/entries/{entryId}/tasks/{taskId}/assignments/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String entryId, @PathVariable String taskId, @PathVariable String id) {
+    @RequestMapping(value = "/entries/{entryId}/cards/{cardId}/assignments/{id}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String entryId, @PathVariable String cardId, @PathVariable String id) {
         Assignment foundAssignment = assignmentService.findById(id);
 
-        return Response.build(new AssignmentResource(foundAssignment, entryId, taskId));
+        return Response.build(new AssignmentResource(foundAssignment, entryId, cardId));
     }
 
-    @RequestMapping(value = "/entries/{entryId}/tasks/{taskId}/assignments", method = RequestMethod.GET)
-    public HttpEntity findByTaskId(@PathVariable String entryId, @PathVariable String taskId) {
-        List<Assignment> assignmentList = assignmentService.findByTaskId(taskId);
-        return Response.build(new AssignmentsResource(assignmentList, entryId, taskId));
+    @RequestMapping(value = "/entries/{entryId}/cards/{cardId}/assignments", method = RequestMethod.GET)
+    public HttpEntity findByCardId(@PathVariable String entryId, @PathVariable String cardId) {
+        List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
+        return Response.build(new AssignmentsResource(assignmentList, entryId, cardId));
     }
 
-    @RequestMapping(value = "/entries/{entryId}/tasks/{taskId}/assignments/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String entryId, @PathVariable String taskId, @PathVariable String id) {
+    @RequestMapping(value = "/entries/{entryId}/cards/{cardId}/assignments/{id}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String entryId, @PathVariable String cardId, @PathVariable String id) {
         assignmentService.deleteById(id);
-        return Response.build(new AssignmentResource(entryId, taskId));
+        return Response.build(new AssignmentResource(entryId, cardId));
     }
 }
