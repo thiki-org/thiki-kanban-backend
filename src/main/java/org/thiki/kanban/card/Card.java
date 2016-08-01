@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- * 任务：任何有指定负责人的有特定目标的事项，可以是用户故事，技术任务，一次会议等等
+ * 卡片：任何有指定负责人的有特定目标的事项，可以是用户故事，技术卡片，一次会议等等
  *
  * @author joeaniu
  */
@@ -19,11 +19,11 @@ public class Card implements Serializable {
     /**
      * 简述， 出现在卡片上
      */
-    @NotNull(message = "任务描述不能为空。")
-    @Length(min = 1, max = 100, message = "任务概述字符长度错误,有效长度为1~100个字符。")
+    @NotNull(message = "卡片描述不能为空。")
+    @Length(min = 1, max = 100, message = "卡片概述字符长度错误,有效长度为1~100个字符。")
     private String summary;
     /**
-     * 任务内容
+     * 卡片内容
      */
     private String content;
     /**
@@ -37,7 +37,7 @@ public class Card implements Serializable {
     private String creationTime;
     private String modificationTime;
     /**
-     * 任务列表Id @see {@link Entry#getId()}
+     * 卡片列表Id @see {@link Entry#getId()}
      */
     private String entryId;
 

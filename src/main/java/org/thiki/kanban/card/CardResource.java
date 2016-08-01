@@ -8,7 +8,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
- * 任务的资源DTO
+ * 卡片的资源DTO
  *
  * @author joeaniu
  */

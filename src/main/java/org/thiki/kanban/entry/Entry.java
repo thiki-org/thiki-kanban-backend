@@ -6,7 +6,7 @@ import org.thiki.kanban.card.Card;
 import javax.validation.constraints.NotNull;
 
 /**
- * 任务列表
+ * 卡片列表
  * Created by xubitao on 04/26/16.
  */
 public class Entry {

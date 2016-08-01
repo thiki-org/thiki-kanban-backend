@@ -55,7 +55,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/entries/1/cards/fooId/assignments/fooId"));
     }
 
-    @Scenario("当用户根据cardID获取分配记录时,如果指定的任务存在,则返回分配记录集合")
+    @Scenario("当用户根据cardID获取分配记录时,如果指定的卡片存在,则返回分配记录集合")
     @Test
     public void findByCardId_shouldReturnAssignmentsSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,name,email,password) VALUES ('assigneeId-foo','徐濤','766191920@qq.com','password')");
@@ -78,7 +78,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/entries/1/cards/cardId-foo/assignments/fooId"));
     }
 
-    @Scenario("当用户根据cardID获取分配记录时,如果指定的任务并不存在,则返回404客户端错误")
+    @Scenario("当用户根据cardID获取分配记录时,如果指定的卡片并不存在,则返回404客户端错误")
     @Test
     public void findByCardId_shouldReturnErrorWhenCardIsNotExist() {
         jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,reporter) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
