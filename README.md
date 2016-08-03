@@ -89,8 +89,8 @@ http://localhost:8080/entrance
     "self": {
       "href": "http://localhost:8080/entrance"
     },
-    "entries": {
-      "href": "http://localhost:8080/entries"
+    "procedures": {
+      "href": "http://localhost:8080/procedures"
     }
   }
 }

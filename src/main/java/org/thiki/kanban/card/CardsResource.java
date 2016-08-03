@@ -10,11 +10,11 @@ import java.util.List;
  *
  */
 public class CardsResource extends RestResource {
-    public CardsResource(List<Card> cardList, String entryId) {
+    public CardsResource(List<Card> cardList, String procedureId) {
         this.domainObject = cardList;
         JSONArray cardsJSONArray = new JSONArray();
         for (Card card : cardList) {
-            CardResource cardResource = new CardResource(card, entryId);
+            CardResource cardResource = new CardResource(card, procedureId);
             JSONObject cardJSON = cardResource.getResource();
             cardsJSONArray.add(cardJSON);
         }

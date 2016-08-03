@@ -1,8 +1,8 @@
 package org.thiki.kanban.card;
 
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.entry.EntriesPersistence;
-import org.thiki.kanban.entry.Entry;
+import org.thiki.kanban.procedure.ProceduresPersistence;
+import org.thiki.kanban.procedure.Procedure;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
@@ -16,16 +16,16 @@ public class CardsService {
     private CardsPersistence cardsPersistence;
 
     @Resource
-    private EntriesPersistence entriesPersistence;
+    private ProceduresPersistence proceduresPersistence;
 
-    public Card create(Integer reporterUserId, String entryId, Card card) {
+    public Card create(Integer reporterUserId, String procedureId, Card card) {
         card.setReporter(reporterUserId);
-        card.setEntryId(entryId);
-        Entry entry = entriesPersistence.findById(entryId);
-        if (entry == null) {
-            throw new ResourceNotFoundException("entry[" + entryId + "] is not found.");
+        card.setProcedureId(procedureId);
+        Procedure procedure = proceduresPersistence.findById(procedureId);
+        if (procedure == null) {
+            throw new ResourceNotFoundException("procedure[" + procedureId + "] is not found.");
         }
-        Card newCard = entry.addCard(card);
+        Card newCard = procedure.addCard(card);
         cardsPersistence.create(newCard);
         return cardsPersistence.findById(newCard.getId());
     }
@@ -35,23 +35,23 @@ public class CardsService {
 
         cardsPersistence.update(cardId, currentCard);
 
-        if (isCardMovedAcrossEntry(currentCard, originCard)) {
-            cardsPersistence.resortTargetEntry(originCard.getId(), currentCard.getEntryId(), currentCard.getOrderNumber());
-            cardsPersistence.resortOriginEntry(originCard.getId(), originCard.getEntryId(), originCard.getOrderNumber());
+        if (isCardMovedAcrossProcedure(currentCard, originCard)) {
+            cardsPersistence.resortTargetProcedure(originCard.getId(), currentCard.getProcedureId(), currentCard.getOrderNumber());
+            cardsPersistence.resortOriginProcedure(originCard.getId(), originCard.getProcedureId(), originCard.getOrderNumber());
         }
-        if (isCardMovedWithinOriginEntry(currentCard, originCard)) {
+        if (isCardMovedWithinOriginProcedure(currentCard, originCard)) {
             int increment = currentCard.getOrderNumber() > originCard.getOrderNumber() ? 1 : 0;
-            cardsPersistence.resortOrder(originCard.getId(), originCard.getEntryId(), originCard.getOrderNumber(), currentCard.getOrderNumber(), increment);
+            cardsPersistence.resortOrder(originCard.getId(), originCard.getProcedureId(), originCard.getOrderNumber(), currentCard.getOrderNumber(), increment);
         }
         return cardsPersistence.findById(cardId);
     }
 
-    private boolean isCardMovedWithinOriginEntry(Card currentCard, Card originCard) {
-        return (currentCard.getEntryId().equals(originCard.getEntryId())) && (!currentCard.getOrderNumber().equals(originCard.getOrderNumber()));
+    private boolean isCardMovedWithinOriginProcedure(Card currentCard, Card originCard) {
+        return (currentCard.getProcedureId().equals(originCard.getProcedureId())) && (!currentCard.getOrderNumber().equals(originCard.getOrderNumber()));
     }
 
-    private boolean isCardMovedAcrossEntry(Card currentCard, Card originCard) {
-        return !currentCard.getEntryId().equals(originCard.getEntryId());
+    private boolean isCardMovedAcrossProcedure(Card currentCard, Card originCard) {
+        return !currentCard.getProcedureId().equals(originCard.getProcedureId());
     }
 
     public int deleteById(String cardId) {
@@ -59,12 +59,12 @@ public class CardsService {
         return cardsPersistence.deleteById(cardId);
     }
 
-    public List<Card> findByEntryId(String entryId) {
-        Entry entry = entriesPersistence.findById(entryId);
-        if (entry == null) {
-            throw new ResourceNotFoundException(MessageFormat.format("entry[{0}] is not found.", entryId));
+    public List<Card> findByProcedureId(String procedureId) {
+        Procedure procedure = proceduresPersistence.findById(procedureId);
+        if (procedure == null) {
+            throw new ResourceNotFoundException(MessageFormat.format("procedure[{0}] is not found.", procedureId));
         }
-        return cardsPersistence.findByEntryId(entryId);
+        return cardsPersistence.findByProcedureId(procedureId);
     }
 
     public Card findById(String cardId) {

@@ -17,35 +17,35 @@ public class CardsController {
     @Autowired
     private CardsService cardsService;
 
-    @RequestMapping(value = "/entries/{entryId}/cards", method = RequestMethod.GET)
-    public HttpEntity findByEntryId(@PathVariable String entryId) {
-        List<Card> cardList = cardsService.findByEntryId(entryId);
-        return Response.build(new CardsResource(cardList, entryId));
+    @RequestMapping(value = "/procedures/{procedureId}/cards", method = RequestMethod.GET)
+    public HttpEntity findByProcedureId(@PathVariable String procedureId) {
+        List<Card> cardList = cardsService.findByProcedureId(procedureId);
+        return Response.build(new CardsResource(cardList, procedureId));
     }
 
-    @RequestMapping(value = "/entries/{entryId}/cards/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String entryId, @PathVariable String id) {
+    @RequestMapping(value = "/procedures/{procedureId}/cards/{id}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String procedureId, @PathVariable String id) {
         Card foundCard = cardsService.findById(id);
 
-        return Response.build(new CardResource(foundCard, entryId));
+        return Response.build(new CardResource(foundCard, procedureId));
     }
 
-    @RequestMapping(value = "/entries/{entryId}/cards/{cardId}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Card card, @PathVariable String entryId, @PathVariable String cardId) {
+    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.PUT)
+    public HttpEntity update(@RequestBody Card card, @PathVariable String procedureId, @PathVariable String cardId) {
         Card updatedCard = cardsService.update(cardId, card);
-        return Response.build(new CardResource(updatedCard, entryId));
+        return Response.build(new CardResource(updatedCard, procedureId));
     }
 
-    @RequestMapping(value = "/entries/{entryId}/cards/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String entryId, @PathVariable String id) {
+    @RequestMapping(value = "/procedures/{procedureId}/cards/{id}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String procedureId, @PathVariable String id) {
         cardsService.deleteById(id);
-        return Response.build(new CardResource(entryId));
+        return Response.build(new CardResource(procedureId));
     }
 
-    @RequestMapping(value = "/entries/{entryId}/cards", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Card card, @PathVariable String entryId, @RequestHeader Integer userId) {
-        Card savedCard = cardsService.create(userId, entryId, card);
+    @RequestMapping(value = "/procedures/{procedureId}/cards", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Card card, @PathVariable String procedureId, @RequestHeader Integer userId) {
+        Card savedCard = cardsService.create(userId, procedureId, card);
 
-        return Response.post(new CardResource(savedCard, entryId));
+        return Response.post(new CardResource(savedCard, procedureId));
     }
 }

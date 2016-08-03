@@ -81,7 +81,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .body("{\"summary\":\"newSummary\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/entries/1/cards/fooId")
+                .put("/procedures/1/cards/fooId")
                 .then().header("token", notNullValue());
     }
 

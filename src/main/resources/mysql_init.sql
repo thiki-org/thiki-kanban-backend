@@ -53,10 +53,10 @@ CREATE TABLE kb_board (
   DEFAULT CHARSET = utf8;
 
 -- ----------------------------
--- Table structure for kb_entry
+-- Table structure for kb_procedure
 -- ----------------------------
-DROP TABLE IF EXISTS kb_entry;
-CREATE TABLE kb_entry (
+DROP TABLE IF EXISTS kb_procedure;
+CREATE TABLE kb_procedure (
   id                VARCHAR(40) NOT NULL,
   title             VARCHAR(50) NOT NULL,
   reporter          VARCHAR(40) NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE kb_card (
   content           TEXT,
   order_number      INT(2)        NOT NULL  DEFAULT 0,
   reporter          VARCHAR(40)             DEFAULT NULL,
-  entry_id          VARCHAR(40)             DEFAULT NULL,
+  procedure_id          VARCHAR(40)             DEFAULT NULL,
   creation_time     DATETIME                DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
   delete_status     INT(2)                  DEFAULT 0,

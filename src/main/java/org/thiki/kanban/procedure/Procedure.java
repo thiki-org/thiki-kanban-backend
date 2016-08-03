@@ -1,4 +1,4 @@
-package org.thiki.kanban.entry;
+package org.thiki.kanban.procedure;
 
 import org.hibernate.validator.constraints.Length;
 import org.thiki.kanban.card.Card;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
  * 卡片列表
  * Created by xubitao on 04/26/16.
  */
-public class Entry {
+public class Procedure {
 
     private String id;
     /**
@@ -72,13 +72,13 @@ public class Entry {
     }
 
     /**
-     * 在entry内添加一个card
+     * 在procedure内添加一个card
      *
      * @param card
      * @return
      */
     public Card addCard(Card card) {
-        // card.setEntryId(this.id);
+        // card.setProcedureId(this.id);
         return card;
     }
 

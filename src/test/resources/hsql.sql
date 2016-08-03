@@ -12,10 +12,10 @@ CREATE TABLE kb_board (
   ) ;
 
 -- ----------------------------
--- Table structure for kb_entry
+-- Table structure for kb_procedure
 -- ----------------------------
-drop table if exists kb_entry;
-CREATE TABLE kb_entry (
+drop table if exists kb_procedure;
+CREATE TABLE kb_procedure (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   title  VARCHAR(50) NOT NULL,
   reporter VARCHAR(40) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE kb_card (
   content VARCHAR(50),
   order_number int DEFAULT 0,
   reporter VARCHAR(40) DEFAULT NULL,
-  entry_id VARCHAR(40)  DEFAULT NULL,
+  procedure_id VARCHAR(40)  DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0

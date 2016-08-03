@@ -13,21 +13,21 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author joeaniu
  */
 public class CardResource extends RestResource {
-    public CardResource(Card card, String entryId) {
+    public CardResource(Card card, String procedureId) {
         this.domainObject = card;
         if (card != null) {
-            Link selfLink = linkTo(methodOn(CardsController.class).findById(entryId, card.getId())).withSelfRel();
+            Link selfLink = linkTo(methodOn(CardsController.class).findById(procedureId, card.getId())).withSelfRel();
             this.add(selfLink);
 
-            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(entryId, card.getId())).withRel("assignments");
+            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(procedureId, card.getId())).withRel("assignments");
             this.add(assignmentsLink);
         }
 
-        this.add(linkTo(methodOn(CardsController.class).findByEntryId(entryId)).withRel("cards"));
+        this.add(linkTo(methodOn(CardsController.class).findByProcedureId(procedureId)).withRel("cards"));
 
     }
 
-    public CardResource(String entryId) {
-        this.add(linkTo(methodOn(CardsController.class).findByEntryId(entryId)).withRel("cards"));
+    public CardResource(String procedureId) {
+        this.add(linkTo(methodOn(CardsController.class).findByProcedureId(procedureId)).withRel("cards"));
     }
 }

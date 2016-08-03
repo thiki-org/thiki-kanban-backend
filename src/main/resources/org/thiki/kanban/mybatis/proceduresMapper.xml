@@ -2,17 +2,17 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.thiki.kanban.entry.EntriesPersistence">
+<mapper namespace="org.thiki.kanban.procedure.ProceduresPersistence">
 
-    <insert id="create" parameterType="org.thiki.kanban.entry.Entry">
+    <insert id="create" parameterType="org.thiki.kanban.procedure.Procedure">
         INSERT INTO
-        kb_entry(id,title, reporter,board_id,order_number) VALUES (#{id},#{title}, #{reporter},#{boardId},(SELECT
+        kb_procedure(id,title, reporter,board_id,order_number) VALUES (#{id},#{title}, #{reporter},#{boardId},(SELECT
         max_order_number from (SELECT CASE WHEN max(order_number) IS NULL THEN 0 ELSE max(order_number)+1 end as
-        max_order_number FROM kb_entry WHERE board_id=#{boardId} ) as t ))
+        max_order_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ))
     </insert>
 
-    <update id="update" parameterType="org.thiki.kanban.entry.Entry" flushCache="true">
-        UPDATE kb_entry SET
+    <update id="update" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
+        UPDATE kb_procedure SET
         title=#{title},
         order_number=#{orderNumber}
         WHERE id=#{id} AND delete_status=0
@@ -20,14 +20,14 @@
 
     <update id="resort" parameterType="java.util.Map" flushCache="true">
         <if test="increment == 0">
-            UPDATE kb_entry SET order_number = order_number+1
+            UPDATE kb_procedure SET order_number = order_number+1
             <![CDATA[
             WHERE order_number >= #{currentOrderNumber} AND order_number<=#{originOrderNumber}
             ]]>
         </if>
 
         <if test="increment == 1">
-            UPDATE kb_entry SET order_number = order_number-1
+            UPDATE kb_procedure SET order_number = order_number-1
             <![CDATA[
             WHERE order_number <= #{currentOrderNumber} AND order_number>=#{originOrderNumber}
             ]]>
@@ -35,15 +35,15 @@
 
         AND board_id=#{boardId} AND delete_status=0 AND id != #{id}
     </update>
-    <select id="loadByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.entry.Entry">
-        SELECT * FROM kb_entry WHERE delete_status=0 AND board_id=#{boardId} ORDER BY order_number
+    <select id="loadByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">
+        SELECT * FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} ORDER BY order_number
     </select>
 
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.entry.Entry">
-        SELECT * FROM kb_entry WHERE delete_status=0 and id= #{id}
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">
+        SELECT * FROM kb_procedure WHERE delete_status=0 and id= #{id}
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_entry SET delete_status=1 WHERE id=#{id}
+        UPDATE kb_procedure SET delete_status=1 WHERE id=#{id}
     </delete>
 </mapper>

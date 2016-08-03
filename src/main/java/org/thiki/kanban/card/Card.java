@@ -1,7 +1,7 @@
 package org.thiki.kanban.card;
 
 import org.hibernate.validator.constraints.Length;
-import org.thiki.kanban.entry.Entry;
+import org.thiki.kanban.procedure.Procedure;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -37,9 +37,9 @@ public class Card implements Serializable {
     private String creationTime;
     private String modificationTime;
     /**
-     * 卡片列表Id @see {@link Entry#getId()}
+     * 卡片列表Id @see {@link Procedure#getId()}
      */
-    private String entryId;
+    private String procedureId;
 
     public String getCreationTime() {
         return creationTime;
@@ -57,12 +57,12 @@ public class Card implements Serializable {
         this.modificationTime = modificationTime;
     }
 
-    public String getEntryId() {
-        return entryId;
+    public String getProcedureId() {
+        return procedureId;
     }
 
-    public void setEntryId(String entryId) {
-        this.entryId = entryId;
+    public void setProcedureId(String procedureId) {
+        this.procedureId = procedureId;
     }
 
     public Integer getReporter() {

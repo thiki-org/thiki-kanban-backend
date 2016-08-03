@@ -1,7 +1,7 @@
 package org.thiki.kanban.board;
 
 import org.springframework.hateoas.Link;
-import org.thiki.kanban.entry.EntriesController;
+import org.thiki.kanban.procedure.ProceduresController;
 import org.thiki.kanban.foundation.common.RestResource;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -18,8 +18,8 @@ public class BoardResource extends RestResource {
             Link selfLink = linkTo(methodOn(BoardsController.class).findById(board.getId(), userName)).withSelfRel();
             this.add(selfLink);
 
-            Link entriesLink = linkTo(methodOn(EntriesController.class).loadAll(board.getId())).withRel("entries");
-            this.add(entriesLink);
+            Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId())).withRel("procedures");
+            this.add(proceduresLink);
         }
         this.add(linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all"));
     }

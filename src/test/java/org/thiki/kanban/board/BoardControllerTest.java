@@ -49,7 +49,7 @@ public class BoardControllerTest extends TestBase {
                 .body("name", equalTo("board-name"))
                 .body("reporter", equalTo("someone"))
                 .body("_links.all.href", equalTo("http://localhost:8007/boards"))
-                .body("_links.entries.href", equalTo("http://localhost:8007/boards/fooId/entries"))
+                .body("_links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
     }
 
@@ -86,7 +86,7 @@ public class BoardControllerTest extends TestBase {
 
     @Scenario("当用户删除一个指定的board时,如果该board不存在,则返回客户端404错误")
     @Test
-    public void shouldThrowResourceNotFoundExceptionWhenEntryToDeleteIsNotExist() throws Exception {
+    public void shouldThrowResourceNotFoundExceptionWhenProcedureToDeleteIsNotExist() throws Exception {
         given().header("userName", "someone")
                 .when()
                 .delete("/boards/fooId")
@@ -109,7 +109,7 @@ public class BoardControllerTest extends TestBase {
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.all.href", equalTo("http://localhost:8007/boards"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/fooId"))
-                .body("[0]._links.entries.href", equalTo("http://localhost:8007/boards/fooId/entries"));
+                .body("[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"));
     }
 
     @Scenario("获取指定用户所拥有的boards")
@@ -126,6 +126,6 @@ public class BoardControllerTest extends TestBase {
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.all.href", equalTo("http://localhost:8007/boards"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/fooId"))
-                .body("[0]._links.entries.href", equalTo("http://localhost:8007/boards/fooId/entries"));
+                .body("[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"));
     }
 }

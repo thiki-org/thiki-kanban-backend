@@ -6,9 +6,9 @@
 
     <insert id="create" parameterType="org.thiki.kanban.card.Card">
         INSERT INTO
-        kb_card(id,summary, content, order_number, reporter, entry_id) VALUES (#{id},#{summary}, #{content}, (SELECT
+        kb_card(id,summary, content, order_number, reporter, procedure_id) VALUES (#{id},#{summary}, #{content}, (SELECT
         max_order_number from (SELECT CASE WHEN max(order_number) IS NULL THEN 0 ELSE max(order_number)+1 end as
-        max_order_number FROM kb_card WHERE entry_id=#{entryId} ) as t ), #{reporter}, #{entryId})
+        max_order_number FROM kb_card WHERE procedure_id=#{procedureId} ) as t ), #{reporter}, #{procedureId})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.card.Card" flushCache="true">
@@ -17,7 +17,7 @@
         content = #{card.content},
         order_number = #{card.orderNumber},
         reporter = #{card.reporter},
-        entry_id = #{card.entryId}
+        procedure_id = #{card.procedureId}
         WHERE id=#{id}
     </update>
 
@@ -35,31 +35,31 @@
             WHERE  order_number <= #{currentOrderNumber} AND order_number>=#{originOrderNumber}
              ]]>
         </if>
-        AND entry_id=#{entryId} AND delete_status=0 AND id !=#{cardId}
+        AND procedure_id=#{procedureId} AND delete_status=0 AND id !=#{cardId}
     </update>
 
-    <update id="resortTargetEntry" parameterType="java.util.Map" flushCache="true">
+    <update id="resortTargetProcedure" parameterType="java.util.Map" flushCache="true">
         UPDATE kb_card SET order_number = order_number+1
         <![CDATA[
             WHERE order_number >= #{currentOrderNumber}
             ]]>
-        AND entry_id=#{currentEntryId} AND delete_status=0 AND id !=#{cardId}
+        AND procedure_id=#{currentProcedureId} AND delete_status=0 AND id !=#{cardId}
     </update>
 
-    <update id="resortOriginEntry" parameterType="java.util.Map" flushCache="true">
+    <update id="resortOriginProcedure" parameterType="java.util.Map" flushCache="true">
         UPDATE kb_card SET order_number = order_number-1
         <![CDATA[
             WHERE order_number >= #{originOrderNumber}
             ]]>
-        AND entry_id=#{originEntryId} AND delete_status=0 AND id !=#{cardId}
+        AND procedure_id=#{originProcedureId} AND delete_status=0 AND id !=#{cardId}
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
         SELECT * FROM kb_card WHERE id= #{id}
     </select>
 
-    <select id="findByEntryId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card WHERE entry_id= #{entry_id} AND delete_status=0 ORDER BY order_number
+    <select id="findByProcedureId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
+        SELECT * FROM kb_card WHERE procedure_id= #{procedure_id} AND delete_status=0 ORDER BY order_number
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">

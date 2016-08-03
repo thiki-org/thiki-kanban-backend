@@ -14,13 +14,13 @@ public interface CardsPersistence {
 
     void update(@Param("id") String cardId, @Param("card") Card card);
 
-    List<Card> findByEntryId(String entryId);
+    List<Card> findByProcedureId(String procedureId);
 
     Integer deleteById(@Param("id") String id);
 
-    Integer resortTargetEntry(@Param("cardId") String cardId, @Param("currentEntryId") String currentEntryId, @Param("currentOrderNumber") Integer currentOrderNumber);
+    Integer resortTargetProcedure(@Param("cardId") String cardId, @Param("currentProcedureId") String currentProcedureId, @Param("currentOrderNumber") Integer currentOrderNumber);
 
-    Integer resortOriginEntry(@Param("cardId") String cardId, @Param("originEntryId") String originEntryId, @Param("originOrderNumber") Integer originOrderNumber);
+    Integer resortOriginProcedure(@Param("cardId") String cardId, @Param("originProcedureId") String originProcedureId, @Param("originOrderNumber") Integer originOrderNumber);
 
-    Integer resortOrder(@Param("cardId") String cardId, @Param("entryId") String entryId, @Param("originOrderNumber") Integer originOrderNumber, @Param("currentOrderNumber") Integer currentOrderNumber, @Param("increment") int increment);
+    Integer resortOrder(@Param("cardId") String cardId, @Param("procedureId") String procedureId, @Param("originOrderNumber") Integer originOrderNumber, @Param("currentOrderNumber") Integer currentOrderNumber, @Param("increment") int increment);
 }
