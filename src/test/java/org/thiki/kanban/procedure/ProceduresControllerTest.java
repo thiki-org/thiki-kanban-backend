@@ -66,7 +66,7 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("列表名称不能为空"));
+                .body("message", equalTo("工序名称不能为空"));
     }
 
     @Scenario("创建新的procedure时,如果boardID为空,则不允许创建并返回客户端400错误")
@@ -95,7 +95,7 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("列表名称长度非法,有效长度为1~50个字符。"));
+                .body("message", equalTo("工序名称长度非法,有效长度为1~50个字符。"));
     }
 
     @Scenario("当根据procedureId查找procedure时,如果procedure存在,则将其返回")

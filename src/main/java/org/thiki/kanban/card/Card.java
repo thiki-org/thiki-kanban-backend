@@ -37,7 +37,7 @@ public class Card implements Serializable {
     private String creationTime;
     private String modificationTime;
     /**
-     * 卡片列表Id @see {@link Procedure#getId()}
+     * 工序Id @see {@link Procedure#getId()}
      */
     private String procedureId;
 

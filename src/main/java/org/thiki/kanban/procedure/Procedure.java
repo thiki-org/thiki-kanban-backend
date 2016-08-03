@@ -6,17 +6,17 @@ import org.thiki.kanban.card.Card;
 import javax.validation.constraints.NotNull;
 
 /**
- * 卡片列表
+ * 卡片工序
  * Created by xubitao on 04/26/16.
  */
 public class Procedure {
 
     private String id;
     /**
-     * 列表标题
+     * 工序标题
      */
-    @NotNull(message = "列表名称不能为空")
-    @Length(min = 1, max = 50, message = "列表名称长度非法,有效长度为1~50个字符。")
+    @NotNull(message = "工序名称不能为空")
+    @Length(min = 1, max = 50, message = "工序名称长度非法,有效长度为1~50个字符。")
     private String title;
     /**
      * 创建者用户Id
