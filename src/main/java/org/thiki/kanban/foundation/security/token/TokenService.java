@@ -46,7 +46,7 @@ public class TokenService {
         return !authenticationToken.getUserName().equals(userName);
     }
 
-    public String identify(String token, String userName, String authentication, String localAddress) throws Exception {
+    public String identify(String token, String userName) throws Exception {
         if (isTokenEmpty(token)) {
             return Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN;
         }
