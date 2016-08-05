@@ -46,17 +46,17 @@ public class TokenService {
         return !authenticationToken.getUserName().equals(userName);
     }
 
-    public String identify(String token, String userName) throws Exception {
+    public IdentityResult identify(String token, String userName) throws Exception {
         if (isTokenEmpty(token)) {
-            return Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN;
+            return IdentityResult.result(Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN_CODE, Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN);
         }
         if (isExpired(token)) {
-            return Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE;
+            return IdentityResult.result(Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE_CODE, Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE);
         }
         if (isTampered(token, userName)) {
-            return Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT;
+            return IdentityResult.result(Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT_CODE, Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT);
         }
-        return Constants.SECURITY_IDENTIFY_PASSED;
+        return IdentityResult.result(Constants.SECURITY_IDENTIFY_PASSED_CODE, Constants.SECURITY_IDENTIFY_PASSED);
     }
 
 

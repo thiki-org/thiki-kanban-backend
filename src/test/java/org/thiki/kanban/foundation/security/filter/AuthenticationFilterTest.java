@@ -45,7 +45,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .get("/resource")
                 .then()
                 .statusCode(401)
-                .body("code", equalTo(401))
+                .body("code", equalTo(Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN_CODE))
                 .body("message", equalTo("AuthenticationToken is required,please authenticate first."))
                 .body("_links.identification.href", equalTo("/identification"));
     }
@@ -60,7 +60,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .get("/resource")
                 .then()
                 .statusCode(401)
-                .body("code", equalTo(401))
+                .body("code", equalTo(Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE_CODE))
                 .body("message", equalTo("Your authenticationToken has expired,please authenticate again."))
                 .body("_links.identification.href", equalTo("/identification"));
     }
@@ -97,7 +97,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .get("/resource")
                 .then()
                 .statusCode(401)
-                .body("code", equalTo(401))
+                .body("code", equalTo(Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT_CODE))
                 .body("message", equalTo("Your userName is not consistent with that in token."))
                 .body("_links.identification.href", equalTo("/identification"));
     }

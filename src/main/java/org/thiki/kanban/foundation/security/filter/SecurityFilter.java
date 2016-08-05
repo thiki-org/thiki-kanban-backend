@@ -5,6 +5,7 @@ import org.apache.catalina.connector.RequestFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.security.Constants;
+import org.thiki.kanban.foundation.security.token.IdentityResult;
 import org.thiki.kanban.foundation.security.token.TokenService;
 
 import javax.annotation.Resource;
@@ -70,7 +71,7 @@ public class SecurityFilter implements Filter {
         try {
             updatedToken = tokenService.updateToken(token);
         } catch (Exception e) {
-            writeResponse(servletResponse, "Update token failed:" + e.getMessage(), HttpStatus.UNAUTHORIZED.value());
+            writeResponse(servletResponse, "Update token failed:" + e.getMessage(), Constants.SECURITY_IDENTIFY_UN_KNOW, HttpStatus.UNAUTHORIZED.value());
             return;
         }
         HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -91,22 +92,20 @@ public class SecurityFilter implements Filter {
         String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
         String userName = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_USER_NAME);
 
-        String localAddress = servletRequest.getLocalAddr();
-        String authentication = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_AUTHENTICATION);
         try {
-            String identityResult = tokenService.identify(token, userName, authentication, localAddress);
-            if (identityResult.equals(Constants.SECURITY_IDENTIFY_PASSED)) {
+            IdentityResult identityResult = tokenService.identify(token, userName);
+            if (identityResult.getErrorCode().equals(Constants.SECURITY_IDENTIFY_PASSED_CODE)) {
                 return true;
             }
-            writeResponse(servletResponse, identityResult, HttpStatus.UNAUTHORIZED.value());
+            writeResponse(servletResponse, identityResult.getErrorMessage(), identityResult.getErrorCode(), HttpStatus.UNAUTHORIZED.value());
             return false;
         } catch (Exception e) {
-            writeResponse(servletResponse, "Error occurred when parsing the token:" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
+            writeResponse(servletResponse, "Error occurred when parsing the token:" + e.getMessage(), Constants.SECURITY_IDENTIFY_UN_KNOW, HttpStatus.INTERNAL_SERVER_ERROR.value());
             return false;
         }
     }
 
-    private void writeResponse(ServletResponse servletResponse, String message, int code) throws IOException {
+    private void writeResponse(ServletResponse servletResponse, String message, String code, int httpCode) throws IOException {
         JSONObject responseBody = new JSONObject();
         responseBody.put("message", message);
         responseBody.put("code", code);
@@ -123,7 +122,7 @@ public class SecurityFilter implements Filter {
         });
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setContentType("application/json");
-        response.setStatus(code);
+        response.setStatus(httpCode);
         PrintWriter out = response.getWriter();
         out.print(responseBody.toJSONString());
         out.flush();

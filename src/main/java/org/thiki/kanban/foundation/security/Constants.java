@@ -18,4 +18,5 @@ public class Constants {
     public static final String SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE_CODE = "1102";
     public static final String SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT_CODE = "1103";
     public static final String SECURITY_IDENTIFY_PASSED_CODE = "1100";
+    public static final String SECURITY_IDENTIFY_UN_KNOW = "9999";
 }
