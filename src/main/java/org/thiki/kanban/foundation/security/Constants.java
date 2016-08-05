@@ -4,7 +4,6 @@ package org.thiki.kanban.foundation.security;
  * Created by xubt on 7/10/16.
  */
 public class Constants {
-    public static final String ALGORITHM_RSA = "RSA";
     public static final String SECURITY_IDENTIFY_PASSED = "passed";
     public static final String SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN = "AuthenticationToken is required,please authenticate first.";
     public static final String SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE = "Your authenticationToken has expired,please authenticate again.";
@@ -15,4 +14,8 @@ public class Constants {
     public static final String HEADER_PARAMS_USER_NAME = "userName";
     public static final String HEADER_PARAMS_AUTHENTICATION = "authentication";
     public static final int TOKEN_EXPIRED_TIME = 5;
+    public static final String SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN_CODE = "1101";
+    public static final String SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE_CODE = "1102";
+    public static final String SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT_CODE = "1103";
+    public static final String SECURITY_IDENTIFY_PASSED_CODE = "1100";
 }
