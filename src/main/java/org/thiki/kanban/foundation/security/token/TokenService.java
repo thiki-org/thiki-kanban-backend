@@ -61,7 +61,7 @@ public class TokenService {
 
 
     private boolean isTokenEmpty(String token) {
-        return token == null || token.equals("");
+        return token == null || token.equals("") || token.equals("null");
     }
 
     public String updateToken(String token) throws Exception {
