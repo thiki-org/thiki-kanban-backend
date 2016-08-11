@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.config;
+package org.thiki.kanban.foundation.configuration;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;

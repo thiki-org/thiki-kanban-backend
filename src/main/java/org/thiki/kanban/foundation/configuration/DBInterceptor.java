@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.config;
+package org.thiki.kanban.foundation.configuration;
 
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;

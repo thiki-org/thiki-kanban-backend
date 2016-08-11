@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.config;
+package org.thiki.kanban.foundation.configuration;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -36,7 +36,7 @@ public class ValidateAspect {
         }
     }
 
-    @Before("@annotation(org.thiki.kanban.foundation.config.ValidateParams)")
+    @Before("@annotation(org.thiki.kanban.foundation.configuration.ValidateParams)")
     public void validateQueryParams(JoinPoint joinPoint) throws Throwable {
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
         Object[] parameterValues = joinPoint.getArgs();
