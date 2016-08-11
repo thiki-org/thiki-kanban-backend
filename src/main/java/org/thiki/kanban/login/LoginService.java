@@ -2,7 +2,7 @@ package org.thiki.kanban.login;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.foundation.config.ValidateParams;
+import org.thiki.kanban.foundation.aspect.ValidateParams;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.TokenService;

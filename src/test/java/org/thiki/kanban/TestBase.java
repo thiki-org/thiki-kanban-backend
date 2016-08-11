@@ -12,8 +12,8 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.thiki.kanban.foundation.aspect.DBInterceptor;
 import org.thiki.kanban.foundation.common.SequenceNumber;
-import org.thiki.kanban.foundation.config.DBInterceptor;
 
 import javax.sql.DataSource;
 
