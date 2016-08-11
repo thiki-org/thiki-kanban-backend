@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.config;
+package org.thiki.kanban.foundation.filter;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
