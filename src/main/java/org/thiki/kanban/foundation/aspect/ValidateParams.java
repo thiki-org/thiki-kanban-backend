@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.configuration;
+package org.thiki.kanban.foundation.aspect;
 
 import org.springframework.stereotype.Component;
 
