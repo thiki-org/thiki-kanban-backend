@@ -3,8 +3,6 @@ package org.thiki.kanban.foundation.mail;
 import freemarker.template.TemplateException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
 
@@ -18,8 +16,6 @@ import java.util.Map;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MailUtilTest extends TestBase {
-    private static Logger log = LoggerFactory.getLogger(MailUtilTest.class);
-
     @Test
     public void testMailTemplate() throws TemplateException, IOException, MessagingException {
         String templateName = "template_demo.ftl";
