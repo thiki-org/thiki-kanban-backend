@@ -21,6 +21,8 @@ public class MailUtilTest extends TestBase {
         String templateName = "template_demo.ftl";
         Map<String, String> dataMap = new HashMap<String, String>();
         dataMap.put("userName", "王大锤");
+        MailUtil.sendMailByTemplate("766191920@qq.com", "王大锤-邮箱注册认证", dataMap,
+                templateName);
         MailUtil.sendMailByTemplate("thiki2016@163.com", "王大锤-邮箱注册认证", dataMap,
                 templateName);
 
