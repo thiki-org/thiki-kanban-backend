@@ -1,24 +1,14 @@
 package org.thiki.kanban.foundation.mail;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Properties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import javax.mail.internet.MimeUtility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.mail.*;
+import javax.mail.internet.*;
+import java.io.UnsupportedEncodingException;
+import java.util.Properties;
 
 /**
  * Created by xubt on 8/7/16.
@@ -46,14 +36,15 @@ public class MailSender {
     /**
      * 设置邮件发送的SMTP主机
      *
-     * @param hostName
-     *            SMTP 发送主机
+     * @param hostName SMTP 发送主机
      * @return void
      */
     public void setSmtpHost(String hostName) {
         if (props == null)
             props = System.getProperties();
         props.put("mail.smtp.host", hostName);
+        props.put("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
         log.debug("set system properties success ：mail.smtp.host= " + hostName);
 
     }
@@ -61,9 +52,8 @@ public class MailSender {
     /**
      * 创建邮件对象
      *
-     * @return
-     * @Description:
      * @return boolean
+     * @Description:
      */
     public void createMimeMessage() {
         // 获得邮件会话对象
@@ -77,8 +67,7 @@ public class MailSender {
     /**
      * 设置权限鉴定配置
      *
-     * @param need
-     *            是否需要权限
+     * @param need 是否需要权限
      * @return void
      */
     public void setNeedAuth(boolean need) {
@@ -96,11 +85,10 @@ public class MailSender {
     /**
      * 设置发送邮件的主题
      *
-     * @param subject
-     *            邮件的主题
+     * @param subject 邮件的主题
+     * @return void
      * @throws UnsupportedEncodingException
      * @throws MessagingException
-     * @return void
      */
     public void setSubject(String subject) throws UnsupportedEncodingException,
             MessagingException {
@@ -110,11 +98,9 @@ public class MailSender {
     }
 
     /**
-     *
-     * @param mailBody
-     *            邮件的正文内容
-     * @throws MessagingException
+     * @param mailBody 邮件的正文内容
      * @return void
+     * @throws MessagingException
      */
     public void setBody(String mailBody) throws MessagingException {
         BodyPart bp = new MimeBodyPart();
@@ -126,11 +112,10 @@ public class MailSender {
     /**
      * 添加邮件附件
      *
-     * @param filePath
-     *            文件绝对路径
+     * @param filePath 文件绝对路径
+     * @return void
      * @throws MessagingException
      * @Description:
-     * @return void
      */
     public void addFileAffix(String filePath) throws MessagingException {
         BodyPart bp = new MimeBodyPart();
@@ -144,12 +129,11 @@ public class MailSender {
     /**
      * 设置发件人邮箱地址
      *
-     * @param sender
-     *            发件人邮箱地址
+     * @param sender 发件人邮箱地址
+     * @return void
      * @throws UnsupportedEncodingException
      * @throws AddressException
      * @throws MessagingException
-     * @return void
      */
     public void setSender(String sender) throws UnsupportedEncodingException,
             AddressException, MessagingException {
@@ -162,11 +146,10 @@ public class MailSender {
     /**
      * 设置收件人邮箱地址
      *
-     * @param receiver
-     *            收件人邮箱地址
+     * @param receiver 收件人邮箱地址
+     * @return void
      * @throws AddressException
      * @throws MessagingException
-     * @return void
      */
     public void setReceiver(String receiver) throws AddressException,
             MessagingException {
@@ -178,11 +161,10 @@ public class MailSender {
     /**
      * 设置抄送人的邮箱地址
      *
-     * @param copyto
-     *            抄送人邮箱地址
+     * @param copyto 抄送人邮箱地址
+     * @return void
      * @throws AddressException
      * @throws MessagingException
-     * @return void
      */
     public void setCopyTo(String copyto) throws AddressException,
             MessagingException {
@@ -193,14 +175,16 @@ public class MailSender {
 
     /**
      * 设置发件人用户名密码进行发送邮件操作
-     * @throws MessagingException
+     *
      * @return void
+     * @throws MessagingException
      */
     public void sendout() throws MessagingException {
         mimeMsg.setContent(mp);
         mimeMsg.saveChanges();
         Session mailSession = Session.getInstance(props, null);
         Transport transport = mailSession.getTransport("smtp");
+
         transport.connect((String) props.get("mail.smtp.host"), username,
                 password);
         transport.sendMessage(mimeMsg,
@@ -212,12 +196,9 @@ public class MailSender {
     /**
      * 注入发件人用户名 ，密码 ，昵称
      *
-     * @param username
-     *            发件人邮箱登录用户名
-     * @param password
-     *            发件人邮箱密码
-     * @param nickname
-     *            发件人显示的昵称
+     * @param username 发件人邮箱登录用户名
+     * @param password 发件人邮箱密码
+     * @param nickname 发件人显示的昵称
      * @return void
      */
     public void setNamePass(String username, String password, String nickname) {
