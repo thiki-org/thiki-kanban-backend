@@ -19,7 +19,7 @@ public class PasswordRetrievalController {
     @Resource
     private PasswordRetrievalService passwordRetrievalService;
 
-    @RequestMapping(value = "/passwordRetrieval", method = RequestMethod.POST)
+    @RequestMapping(value = "/passwordRetrievalApply", method = RequestMethod.POST)
     public HttpEntity passwordRetrieval(@RequestBody RegisterEmail registerEmail) throws Exception {
         Team savedTeam = passwordRetrievalService.createRetrievalRecord(registerEmail);
         return Response.post(new TeamResource(savedTeam));
