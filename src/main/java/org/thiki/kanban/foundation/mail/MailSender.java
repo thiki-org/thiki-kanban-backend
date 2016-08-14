@@ -15,7 +15,6 @@ import java.util.Properties;
  */
 public class MailSender {
     private MimeMessage mimeMsg; // MIME邮件对象
-    private Session session; // 邮件会话对象
     private Properties props; // 系统属性
     private Multipart mp; // Multipart对象,邮件内容,标题,附件等内容均添加到其中后再生成
     private String username;// 发件人的用户名
@@ -57,7 +56,7 @@ public class MailSender {
      */
     public void createMimeMessage() {
         // 获得邮件会话对象
-        session = Session.getDefaultInstance(props, null);
+        Session session = Session.getDefaultInstance(props, null);
         // 创建MIME邮件对象
         mimeMsg = new MimeMessage(session);
         mp = new MimeMultipart();
