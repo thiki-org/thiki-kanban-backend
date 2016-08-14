@@ -19,9 +19,9 @@ public class MD5Service {
                 result += Integer.toHexString((0x000000ff & s[i]) | 0xffffff00).substring(6);
             }
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("NoSuchAlgorithmException:" + e.getMessage());
+            throw new RuntimeException(e);
         } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException("UnsupportedEncodingException:" + e.getMessage());
+            throw new RuntimeException(e);
         }
         return result;
     }
