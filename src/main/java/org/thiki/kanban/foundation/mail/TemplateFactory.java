@@ -14,12 +14,12 @@ import java.util.Map;
  * Created by xubt on 8/7/16.
  */
 public class TemplateFactory {
+    // 模板文件内容编码
+    private static final String ENCODING = "utf-8";
     // 日志记录对象
     private static Logger log = LoggerFactory.getLogger(TemplateFactory.class);
     // 模板文件路径
     private static String templatePath = "/mail/template";
-    // 模板文件内容编码
-    private static final String ENCODING = "utf-8";
     // 模板生成配置
     private static Configuration conf = new Configuration();
     // 邮件模板缓存池

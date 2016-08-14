@@ -80,7 +80,7 @@ CREATE TABLE kb_card (
   content           TEXT,
   order_number      INT(2)        NOT NULL  DEFAULT 0,
   reporter          VARCHAR(40)             DEFAULT NULL,
-  procedure_id          VARCHAR(40)             DEFAULT NULL,
+  procedure_id      VARCHAR(40)             DEFAULT NULL,
   creation_time     DATETIME                DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
   delete_status     INT(2)                  DEFAULT 0,

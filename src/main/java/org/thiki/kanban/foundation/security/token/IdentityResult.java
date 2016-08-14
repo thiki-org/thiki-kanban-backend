@@ -7,6 +7,13 @@ public class IdentityResult {
     private String errorCode;
     private String errorMessage;
 
+    public static IdentityResult result(String errorCode, String errorMessage) {
+        IdentityResult identityResult = new IdentityResult();
+        identityResult.setErrorCode(errorCode);
+        identityResult.setErrorMessage(errorMessage);
+        return identityResult;
+    }
+
     public String getErrorCode() {
         return errorCode;
     }
@@ -21,12 +28,5 @@ public class IdentityResult {
 
     public void setErrorMessage(String errorMessage) {
         this.errorMessage = errorMessage;
-    }
-
-    public static IdentityResult result(String errorCode, String errorMessage) {
-        IdentityResult identityResult = new IdentityResult();
-        identityResult.setErrorCode(errorCode);
-        identityResult.setErrorMessage(errorMessage);
-        return identityResult;
     }
 }

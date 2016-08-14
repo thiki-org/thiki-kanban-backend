@@ -13,16 +13,18 @@ public class TeamsController {
     @Autowired
     private TeamsService teamsService;
 
-    @RequestMapping(value="/teams",method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Team team, @RequestHeader String userName){
-        Team savedTeam=teamsService.create(userName,team);
+    @RequestMapping(value = "/teams", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Team team, @RequestHeader String userName) {
+        Team savedTeam = teamsService.create(userName, team);
         return Response.post(new TeamResource(savedTeam));
     }
+
     @RequestMapping(value = "/teams/{id}", method = RequestMethod.GET)
     public HttpEntity findById(@PathVariable String id) {
         Team team = teamsService.findById(id);
         return Response.build(new TeamResource(team));
     }
+
     @RequestMapping(value = "/teams/{id}", method = RequestMethod.PUT)
     public HttpEntity update(@RequestBody Team team, @PathVariable String id) {
         team.setId(id);

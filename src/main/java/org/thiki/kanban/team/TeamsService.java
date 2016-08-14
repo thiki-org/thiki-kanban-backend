@@ -13,11 +13,12 @@ public class TeamsService {
     @Resource
     private TeamsPersistence teamsPersistence;
 
-    public Team create(String reporter,final Team team){
+    public Team create(String reporter, final Team team) {
         team.setReporter(reporter);
         teamsPersistence.create(team);
         return teamsPersistence.findById(team.getId());
     }
+
     public Team findById(String id) {
         return teamsPersistence.findById(id);
     }
@@ -29,6 +30,7 @@ public class TeamsService {
         }
         return teamsPersistence.deleteById(id);
     }
+
     public Team update(Team team) {
         teamsPersistence.update(team);
         return teamsPersistence.findById(team.getId());

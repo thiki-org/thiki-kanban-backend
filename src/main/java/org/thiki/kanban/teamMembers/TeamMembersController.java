@@ -16,6 +16,6 @@ public class TeamMembersController {
     @RequestMapping(value = "/teams/{teamId}/teamMembers", method = RequestMethod.POST)
     public HttpEntity joinTeam(@RequestBody TeamMember teamMember, @PathVariable String teamId, @RequestHeader String userName) {
         TeamMember savedTeamMember = teamMembersService.joinTeam(teamId, teamMember, userName);
-        return Response.post(new TeamMembersResource(teamId,savedTeamMember));
+        return Response.post(new TeamMembersResource(teamId, savedTeamMember));
     }
 }

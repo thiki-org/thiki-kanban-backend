@@ -11,8 +11,12 @@ import java.util.List;
 @Repository
 public interface TeamsPersistence {
     List<Team> loadAll();
+
     void create(Team team);
+
     Team findById(@Param("id") String id);
+
     Integer deleteById(@Param("id") String id);
+
     Integer update(Team team);
 }

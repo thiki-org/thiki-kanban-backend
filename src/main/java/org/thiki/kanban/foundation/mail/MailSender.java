@@ -14,13 +14,13 @@ import java.util.Properties;
  * Created by xubt on 8/7/16.
  */
 public class MailSender {
+    private static Logger log = LoggerFactory.getLogger(MailSender.class);
     private MimeMessage mimeMsg; // MIME邮件对象
     private Properties props; // 系统属性
     private Multipart mp; // Multipart对象,邮件内容,标题,附件等内容均添加到其中后再生成
     private String username;// 发件人的用户名
     private String password;// 发件人的密码
     private String nickname;// 发件人的昵称
-    private static Logger log = LoggerFactory.getLogger(MailSender.class);
 
     /**
      * 有参构造器
