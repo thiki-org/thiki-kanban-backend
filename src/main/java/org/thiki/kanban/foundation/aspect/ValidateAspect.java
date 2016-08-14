@@ -21,7 +21,7 @@ import java.util.Set;
 @Component
 public class ValidateAspect {
     @Resource
-    LocalValidatorFactoryBean validatorFactoryBean;
+    private LocalValidatorFactoryBean validatorFactoryBean;
 
     @Before("execution(* *(@org.springframework.web.bind.annotation.RequestBody (*),..))")
     public void validate(JoinPoint joinPoint) throws Throwable {
@@ -53,6 +53,7 @@ public class ValidateAspect {
         ExecutableValidator executableValidator = factory.getValidator().forExecutables();
         return executableValidator;
     }
+
     private Validator getValidator() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         return factory.getValidator();
