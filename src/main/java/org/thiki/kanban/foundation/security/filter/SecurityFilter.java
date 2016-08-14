@@ -31,6 +31,8 @@ public class SecurityFilter implements Filter {
             add("/publicKey");
             add("/registration");
             add("/login");
+            add("/passwordRetrievalApply");
+            add("/passwordRetrieval");
         }
     };
 
