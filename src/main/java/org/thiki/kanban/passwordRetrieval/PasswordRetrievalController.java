@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
-import org.thiki.kanban.team.Team;
-import org.thiki.kanban.team.TeamResource;
 
 import javax.annotation.Resource;
 
@@ -20,8 +18,13 @@ public class PasswordRetrievalController {
     private PasswordRetrievalService passwordRetrievalService;
 
     @RequestMapping(value = "/passwordRetrievalApply", method = RequestMethod.POST)
-    public HttpEntity passwordRetrieval(@RequestBody RegisterEmail registerEmail) throws Exception {
-        Team savedTeam = passwordRetrievalService.createRetrievalRecord(registerEmail);
-        return Response.post(new TeamResource(savedTeam));
+    public HttpEntity passwordRetrievalApply(@RequestBody RegisterEmail registerEmail) throws Exception {
+        passwordRetrievalService.createRetrievalRecord(registerEmail);
+        return Response.post(new PasswordRetrievalResource());
+    }
+
+    @RequestMapping(value = "/passwordRetrieval", method = RequestMethod.POST)
+    public HttpEntity passwordRetrieval(@RequestBody PasswordRetrieval passwordRetrieval) throws Exception {
+        return null;
     }
 }
