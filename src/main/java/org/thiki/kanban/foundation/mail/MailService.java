@@ -3,9 +3,13 @@ package org.thiki.kanban.foundation.mail;
 import com.alibaba.fastjson.JSON;
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.common.date.DateService;
+import org.thiki.kanban.foundation.common.date.DateStyle;
 
+import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -14,6 +18,10 @@ import java.util.Map;
 
 @Service
 public class MailService {
+
+    @Resource
+    private DateService dateService;
+
     /**
      * 根据模板名称查找模板，加载模板内容后发送邮件
      *
@@ -160,4 +168,11 @@ public class MailService {
         mail.sendout();
     }
 
+    public void sendMailByTemplate(MailEntity mailEntity, String templateName) throws TemplateException, IOException, MessagingException {
+        String receiver = mailEntity.getReceiver();
+        String subject = mailEntity.getSubject();
+        String dateline = dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD_CN);
+        mailEntity.setDateline(dateline);
+        sendMailByTemplate(receiver, subject, mailEntity, templateName);
+    }
 }
