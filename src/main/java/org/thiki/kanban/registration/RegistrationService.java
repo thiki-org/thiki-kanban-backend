@@ -6,7 +6,6 @@ import org.thiki.kanban.foundation.exception.ExceptionCode;
 import org.thiki.kanban.foundation.exception.ResourceConflictException;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
-import org.thiki.kanban.user.UsersPersistence;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
@@ -19,9 +18,6 @@ public class RegistrationService {
 
     @Resource
     private RegistrationPersistence registrationPersistence;
-
-    @Resource
-    private UsersPersistence usersPersistence;
 
     @Resource
     private SequenceNumber sequenceNumber;
