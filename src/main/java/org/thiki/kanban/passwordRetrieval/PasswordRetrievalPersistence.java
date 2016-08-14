@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PasswordRetrievalPersistence {
-    Boolean existsEmail(String email);
+    Integer createRecord(PasswordRetrieval passwordRetrieval);
 }
