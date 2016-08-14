@@ -10,6 +10,7 @@ import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
 
 import static com.jayway.restassured.RestAssured.given;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
@@ -24,7 +25,7 @@ public class PasswordRetrievalControllerTest extends TestBase {
         given().body("{\"noEmail\":\"noEmail\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/passwordRetrieval")
+                .post("/passwordRetrievalApply")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("code", equalTo(ExceptionCode.INVALID_PARAMS.code()))
@@ -37,7 +38,7 @@ public class PasswordRetrievalControllerTest extends TestBase {
         given().body("{\"email\":\"email\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/passwordRetrieval")
+                .post("/passwordRetrievalApply")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("code", equalTo(ExceptionCode.INVALID_PARAMS.code()))
@@ -50,10 +51,25 @@ public class PasswordRetrievalControllerTest extends TestBase {
         given().body("{\"email\":\"email@email.com\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/passwordRetrieval")
+                .post("/passwordRetrievalApply")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("code", equalTo(PasswordRetrievalCodes.EmailIsNotExists.code()))
                 .body("message", equalTo(PasswordRetrievalCodes.EmailIsNotExists.message()));
+    }
+
+    @Scenario("邮箱通过格式校验且存在后，发送找回密码的验证码到邮箱")
+    @Test
+    public void sendVerificationCode() {
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','徐涛','password')");
+        given().body("{\"email\":\"766191920@qq.com\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/passwordRetrievalApply")
+                .then()
+                .statusCode(HttpStatus.CREATED.value())
+                .body("_links.passwordRetrieval.href", equalTo("http://localhost:8007/passwordRetrieval"));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com'").size());
     }
 }
