@@ -8,7 +8,7 @@ public enum PasswordRetrievalCodes {
     private int code;
     private String message;
 
-    private PasswordRetrievalCodes(int code, String message) {
+    PasswordRetrievalCodes(int code, String message) {
         this.code = code;
         this.message = message;
     }
