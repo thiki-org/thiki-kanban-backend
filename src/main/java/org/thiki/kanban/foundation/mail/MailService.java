@@ -1,6 +1,7 @@
 package org.thiki.kanban.foundation.mail;
 
 import freemarker.template.TemplateException;
+import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -9,7 +10,9 @@ import java.util.Map;
 /**
  * Created by xubt on 8/7/16.
  */
-public class MailUtil {
+
+@Service
+public class MailService {
     /**
      * 根据模板名称查找模板，加载模板内容后发送邮件
      *
@@ -22,7 +25,7 @@ public class MailUtil {
      * @throws TemplateException
      * @throws MessagingException
      */
-    public static void sendMailByTemplate(String receiver, String subject,
+    public  void sendMailByTemplate(String receiver, String subject,
                                           Map<String, String> map, String templateName) throws IOException,
             TemplateException, MessagingException {
         String maiBody = "";
