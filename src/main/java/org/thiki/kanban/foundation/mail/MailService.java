@@ -1,5 +1,6 @@
 package org.thiki.kanban.foundation.mail;
 
+import com.alibaba.fastjson.JSON;
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,32 @@ public class MailService {
      * @throws TemplateException
      * @throws MessagingException
      */
-    public  void sendMailByTemplate(String receiver, String subject,
-                                          Map<String, String> map, String templateName) throws IOException,
+    public void sendMailByTemplate(String receiver, String subject,
+                                   Map<String, String> map, String templateName) throws IOException,
             TemplateException, MessagingException {
+        sendMail(receiver, subject, templateName, map);
+    }
+
+    /**
+     * 根据模板名称查找模板，加载模板内容后发送邮件
+     *
+     * @param receiver     收件人地址
+     * @param subject      邮件主题
+     * @param entity       邮件内容与模板内容转换对象
+     * @param templateName 模板文件名称
+     * @return void
+     * @throws IOException
+     * @throws TemplateException
+     * @throws MessagingException
+     */
+    public void sendMailByTemplate(String receiver, String subject,
+                                   Object entity, String templateName) throws IOException,
+            TemplateException, MessagingException {
+        Map dataMap = JSON.parseObject(JSON.toJSONString(entity));
+        sendMail(receiver, subject, templateName, dataMap);
+    }
+
+    private void sendMail(String receiver, String subject, String templateName, Map dataMap) throws IOException, TemplateException, MessagingException {
         String maiBody = "";
         String server = ConfigLoader.getServer();
         String sender = ConfigLoader.getSender();
@@ -37,7 +61,7 @@ public class MailService {
         MailSender mail = new MailSender(server);
         mail.setNeedAuth(true);
         mail.setNamePass(username, password, nickname);
-        maiBody = TemplateFactory.generateHtmlFromFtl(templateName, map);
+        maiBody = TemplateFactory.generateHtmlFromFtl(templateName, dataMap);
         mail.setSubject(subject);
         mail.setBody(maiBody);
         mail.setReceiver(receiver);
