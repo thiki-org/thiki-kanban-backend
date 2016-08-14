@@ -14,9 +14,9 @@ public class PasswordRetrievalService {
     @Resource
     private PasswordRetrievalPersistence passwordRetrievalPersistence;
 
-    public Team createRetrievalRecord(PasswordRetrieval passwordRetrieval) {
+    public Team createRetrievalRecord(RegisterEmail registerEmail) {
 
-        boolean isFoundEmail = passwordRetrievalPersistence.existsEmail(passwordRetrieval.getEmail());
+        boolean isFoundEmail = passwordRetrievalPersistence.existsEmail(registerEmail.getEmail());
         if (!isFoundEmail) {
             throw new BusinessException(PasswordRetrievalCodes.EmailIsNotExists.code(), PasswordRetrievalCodes.EmailIsNotExists.message());
         }
