@@ -1,14 +1,18 @@
 package org.thiki.kanban.foundation.common;
 
+import org.springframework.stereotype.Service;
+
 import java.util.Random;
 
 /**
  * Created by xubt on 8/14/16.
  */
-public class VerificationCode {
+
+@Service
+public class VerificationCodeService {
     private static int codeLength = 6;
 
-    public static String generate() {
+    public String generate() {
         String charValue = "";
         for (int i = 0; i < codeLength; i++) {
             char c = (char) (randomInt(0, 10) + '0');
@@ -17,7 +21,7 @@ public class VerificationCode {
         return charValue;
     }
 
-    public static int randomInt(int from, int to) {
+    public int randomInt(int from, int to) {
         Random random = new Random();
         return from + random.nextInt(to - from);
     }
