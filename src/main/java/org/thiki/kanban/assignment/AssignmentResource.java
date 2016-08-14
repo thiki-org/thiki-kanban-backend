@@ -1,9 +1,9 @@
 package org.thiki.kanban.assignment;
 
 import org.springframework.hateoas.Link;
-import org.thiki.kanban.procedure.ProceduresController;
-import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.card.CardsController;
+import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.procedure.ProceduresController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;

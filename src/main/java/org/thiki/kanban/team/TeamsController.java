@@ -5,8 +5,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 
-import java.util.List;
-
 /**
  * Created by bogehu on 7/11/16.
  */

@@ -4,7 +4,6 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by bogehu on 7/11/16.

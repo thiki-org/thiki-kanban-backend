@@ -1,9 +1,9 @@
 package org.thiki.kanban.assignment;
 
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsPersistence;
+import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 import java.security.InvalidParameterException;
