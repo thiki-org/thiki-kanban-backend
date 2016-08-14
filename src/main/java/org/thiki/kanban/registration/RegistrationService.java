@@ -18,10 +18,10 @@ import java.text.MessageFormat;
 public class RegistrationService {
 
     @Resource
-    RegistrationPersistence registrationPersistence;
+    private RegistrationPersistence registrationPersistence;
 
     @Resource
-    UsersPersistence usersPersistence;
+    private UsersPersistence usersPersistence;
 
     @Resource
     private SequenceNumber sequenceNumber;
