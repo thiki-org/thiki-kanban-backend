@@ -18,8 +18,6 @@ public class Registration {
     private String password;
 
     private String salt;
-    private String creationTime;
-    private String modificationTime;
 
     public String getId() {
         return id;
@@ -51,22 +49,6 @@ public class Registration {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getCreationTime() {
-        return creationTime;
-    }
-
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public String getModificationTime() {
-        return modificationTime;
-    }
-
-    public void setModificationTime(String modificationTime) {
-        this.modificationTime = modificationTime;
     }
 
     public String getSalt() {
