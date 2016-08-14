@@ -5,9 +5,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -20,9 +18,6 @@ import java.util.Set;
 @Aspect
 @Component
 public class ValidateAspect {
-    @Resource
-    private LocalValidatorFactoryBean validatorFactoryBean;
-
     @Before("execution(* *(@org.springframework.web.bind.annotation.RequestBody (*),..))")
     public void validate(JoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
@@ -50,8 +45,7 @@ public class ValidateAspect {
 
     private ExecutableValidator getMethodValidator() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        ExecutableValidator executableValidator = factory.getValidator().forExecutables();
-        return executableValidator;
+        return factory.getValidator().forExecutables();
     }
 
     private Validator getValidator() {
