@@ -17,14 +17,21 @@ public class PasswordRetrievalController {
     @Resource
     private PasswordRetrievalService passwordRetrievalService;
 
-    @RequestMapping(value = "/passwordRetrievalApply", method = RequestMethod.POST)
+    @RequestMapping(value = "/passwordRetrievalApplication", method = RequestMethod.POST)
     public HttpEntity passwordRetrievalApply(@RequestBody RegisterEmail registerEmail) throws Exception {
         passwordRetrievalService.createRetrievalRecord(registerEmail);
         return Response.post(new PasswordRetrievalResource());
     }
 
-    @RequestMapping(value = "/passwordRetrieval", method = RequestMethod.POST)
-    public HttpEntity passwordRetrieval(@RequestBody PasswordRetrieval passwordRetrieval) throws Exception {
-        return null;
+    @RequestMapping(value = "/passwordResetApplication", method = RequestMethod.POST)
+    public HttpEntity passwordRetrieval(@RequestBody PasswordResetApplication passwordResetApplication) throws Exception {
+        passwordRetrievalService.createPasswordResetRecord(passwordResetApplication);
+        return Response.post(new PasswordResetResource());
+    }
+
+    @RequestMapping(value = "/password", method = RequestMethod.PUT)
+    public HttpEntity password(@RequestBody PasswordResetApplication passwordResetApplication) throws Exception {
+        passwordRetrievalService.createPasswordResetRecord(passwordResetApplication);
+        return Response.post(new PasswordResetResource());
     }
 }
