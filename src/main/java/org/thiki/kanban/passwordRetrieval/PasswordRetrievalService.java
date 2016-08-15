@@ -32,7 +32,7 @@ public class PasswordRetrievalService {
     public void createRetrievalRecord(RegisterEmail registerEmail) throws TemplateException, IOException, MessagingException {
         Registration registeredUser = registrationPersistence.findByEmail(registerEmail.getEmail());
         if (registeredUser == null) {
-            throw new BusinessException(PasswordRetrievalCodes.EmailIsNotExists.code(), PasswordRetrievalCodes.EmailIsNotExists.message());
+            throw new BusinessException(PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.code(), PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.message());
         }
 
         String verificationCode = verificationCodeService.generate();
@@ -47,5 +47,11 @@ public class PasswordRetrievalService {
         passwordEmail.setUserName(registeredUser.getName());
         passwordEmail.setVerificationCode(verificationCode);
         mailService.sendMailByTemplate(passwordEmail, passwordRetrievalEmailTemplate);
+    }
+
+    public void createPasswordResetRecord(PasswordResetApplication passwordResetApplication) {
+        PasswordRetrieval passwordRetrieval = passwordRetrievalPersistence.verify(passwordResetApplication);
+
+        passwordRetrievalPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 }
