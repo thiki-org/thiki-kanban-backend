@@ -4,7 +4,7 @@ package org.thiki.kanban.passwordRetrieval;
  * Created by xubt on 8/8/16.
  */
 public enum PasswordRetrievalCodes {
-    EmailIsNotExists(20011, "邮箱不存在。");
+    EMAIL_IS_NOT_EXISTS(20011, "邮箱不存在。");
     private int code;
     private String message;
 
