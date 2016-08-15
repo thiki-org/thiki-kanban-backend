@@ -3,7 +3,7 @@ package org.thiki.kanban.passwordRetrieval;
 /**
  * Created by xubt on 8/15/16.
  */
-public class Password {
+public class PasswordReset {
     private String email;
     private String password;
 

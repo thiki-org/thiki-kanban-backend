@@ -30,8 +30,8 @@ public class PasswordRetrievalController {
     }
 
     @RequestMapping(value = "/password", method = RequestMethod.PUT)
-    public HttpEntity password(@RequestBody Password password) throws Exception {
-        passwordRetrievalService.resetPassword(password);
+    public HttpEntity password(@RequestBody PasswordReset passwordReset) throws Exception {
+        passwordRetrievalService.resetPassword(passwordReset);
         return Response.post(new PasswordResource());
     }
 }

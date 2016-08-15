@@ -59,15 +59,15 @@ public class PasswordRetrievalService {
         passwordRetrievalPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 
-    public void resetPassword(Password password) throws Exception {
-        Registration registeredUser = registrationPersistence.findByEmail(password.getEmail());
+    public void resetPassword(PasswordReset passwordReset) throws Exception {
+        Registration registeredUser = registrationPersistence.findByEmail(passwordReset.getEmail());
 
-        String dencryptPassword = rsaService.dencrypt(password.getPassword());
+        String dencryptPassword = rsaService.dencrypt(passwordReset.getPassword());
         dencryptPassword = MD5Service.encrypt(dencryptPassword + registeredUser.getSalt());
-        if (password != null) {
-            password.setPassword(dencryptPassword);
+        if (passwordReset != null) {
+            passwordReset.setPassword(dencryptPassword);
         }
-        passwordRetrievalPersistence.resetPassword(password);
-        passwordRetrievalPersistence.cleanResetPasswordRecord(password);
+        passwordRetrievalPersistence.resetPassword(passwordReset);
+        passwordRetrievalPersistence.cleanResetPasswordRecord(passwordReset);
     }
 }
