@@ -127,7 +127,21 @@ CREATE TABLE kb_password_retrieval(
   id VARCHAR(40)NOT NULL PRIMARY KEY,
   email VARCHAR(50)NOT NULL,
   verification_code VARCHAR(50)NOT NULL,
-  is_verified int DEFAULT 0,
+  is_verify_passed int DEFAULT 0,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  delete_status int DEFAULT 0
+);
+
+-- ----------------------------
+-- Table structure for kb_password_reset
+-- ----------------------------
+drop table if exists kb_password_reset;
+
+CREATE TABLE kb_password_reset(
+  id VARCHAR(40)NOT NULL PRIMARY KEY,
+  email VARCHAR(50)NOT NULL,
+  is_reset int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
