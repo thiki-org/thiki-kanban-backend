@@ -1,7 +1,5 @@
 <section class="wx96Diy" data-source="bj.96weixin.com">
     <section class="wx96Diy" data-source="bj.96weixin.com">
-
-
         <section style="box-sizing: border-box; background-color: rgb(255, 255, 255);">
             <section class="96wxDiy" style="position: static; box-sizing: border-box;">
                 <section class=""
@@ -54,8 +52,6 @@
                 </section>
             </section>
         </section>
-
-
     </section>
 </section>
 <p>
