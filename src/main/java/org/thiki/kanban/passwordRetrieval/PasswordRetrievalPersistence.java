@@ -13,4 +13,8 @@ public interface PasswordRetrievalPersistence {
     Integer createPasswordResetApplication(PasswordResetApplication passwordResetApplication);
 
     PasswordRetrieval verify(PasswordResetApplication passwordResetApplication);
+
+    Integer resetPassword(Password password);
+
+    Integer cleanResetPasswordRecord(Password password);
 }
