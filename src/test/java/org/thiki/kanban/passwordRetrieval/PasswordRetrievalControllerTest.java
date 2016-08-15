@@ -1,5 +1,6 @@
 package org.thiki.kanban.passwordRetrieval;
 
+import com.alibaba.fastjson.JSONObject;
 import com.jayway.restassured.http.ContentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,7 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.common.VerificationCodeService;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
+import org.thiki.kanban.foundation.security.rsa.RSAService;
 
 import javax.annotation.Resource;
 
@@ -26,7 +28,8 @@ import static org.mockito.Mockito.when;
 public class PasswordRetrievalControllerTest extends TestBase {
     @Resource
     private PasswordRetrievalService passwordRetrievalService;
-
+    @Resource
+    private RSAService rsaService;
 
     @Scenario("当用户请求找回密码时,需要提供邮箱,如果未提供则告知客户端错误")
     @Test
@@ -103,5 +106,35 @@ public class PasswordRetrievalControllerTest extends TestBase {
                 .body("_links.password.href", equalTo("http://localhost:8007/password"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com'").size());
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where email='766191920@qq.com'").size());
+    }
+
+    @Scenario("用户取得验证码后，和邮箱一起发送到服务端验证，如果验证码正确且未过期，则发送密码重置的链接")
+    @Test
+    public void resetPassword() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','徐涛','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_password_reset(id,email) " +
+                "VALUES ('fooUserId','766191920@qq.com')");
+        String publicKey = rsaService.loadKey(publicKeyFilePath);
+        String password = "foo";
+        String rsaPassword = rsaService.encrypt(publicKey, password);
+        String expectedMd5Password = "979e14ce78f745bbd78bc4e7533d600e";
+
+        VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
+        when(verificationCodeService.generate()).thenReturn("000000");
+        ReflectionTestUtils.setField(passwordRetrievalService, "verificationCodeService", verificationCodeService);
+
+        JSONObject body = new JSONObject();
+        body.put("email", "766191920@qq.com");
+        body.put("password", rsaPassword);
+        given().body(body)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/password")
+                .then()
+                .statusCode(HttpStatus.CREATED.value())
+                .body("_links.login.href", equalTo("http://localhost:8007/login"));
+        assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration where email='766191920@qq.com'", String.class));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where email='766191920@qq.com' and is_reset=1").size());
     }
 }
