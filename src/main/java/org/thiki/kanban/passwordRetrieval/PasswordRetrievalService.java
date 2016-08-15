@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.VerificationCodeService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
+import org.thiki.kanban.foundation.security.md5.MD5Service;
+import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationPersistence;
 
@@ -25,6 +27,8 @@ public class PasswordRetrievalService {
     private VerificationCodeService verificationCodeService;
     @Resource
     private RegistrationPersistence registrationPersistence;
+    @Resource
+    private RSAService rsaService;
 
     @Resource
     private MailService mailService;
@@ -53,5 +57,17 @@ public class PasswordRetrievalService {
         PasswordRetrieval passwordRetrieval = passwordRetrievalPersistence.verify(passwordResetApplication);
 
         passwordRetrievalPersistence.createPasswordResetApplication(passwordResetApplication);
+    }
+
+    public void resetPassword(Password password) throws Exception {
+        Registration registeredUser = registrationPersistence.findByEmail(password.getEmail());
+
+        String dencryptPassword = rsaService.dencrypt(password.getPassword());
+        dencryptPassword = MD5Service.encrypt(dencryptPassword + registeredUser.getSalt());
+        if (password != null) {
+            password.setPassword(dencryptPassword);
+        }
+        passwordRetrievalPersistence.resetPassword(password);
+        passwordRetrievalPersistence.cleanResetPasswordRecord(password);
     }
 }
