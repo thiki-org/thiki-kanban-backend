@@ -11,7 +11,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class PasswordRetrievalResource extends RestResource {
     public PasswordRetrievalResource() throws Exception {
-        Link passwordRetrievalLink = linkTo(methodOn(PasswordRetrievalController.class).passwordRetrieval(null)).withRel("passwordRetrieval");
+        Link passwordRetrievalLink = linkTo(methodOn(PasswordRetrievalController.class).passwordRetrieval(null)).withRel("passwordResetApplication");
         this.add(passwordRetrievalLink);
     }
 }
