@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PasswordRetrievalPersistence {
     Integer createRecord(PasswordRetrieval passwordRetrieval);
+
+    Integer createPasswordResetApplication(PasswordResetApplication passwordResetApplication);
+
+    PasswordRetrieval verify(PasswordResetApplication passwordResetApplication);
 }
