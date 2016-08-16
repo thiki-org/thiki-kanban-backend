@@ -27,10 +27,6 @@ public class PasswordRetrievalApplication {
         this.email = email;
     }
 
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
-    }
-
     public String getId() {
         return id;
     }
@@ -45,5 +41,9 @@ public class PasswordRetrievalApplication {
 
     public String getVerificationCode() {
         return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 }
