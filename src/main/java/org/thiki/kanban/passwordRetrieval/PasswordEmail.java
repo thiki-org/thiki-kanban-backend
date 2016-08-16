@@ -8,12 +8,12 @@ import org.thiki.kanban.foundation.mail.MailEntity;
 public class PasswordEmail extends MailEntity {
     private String verificationCode;
 
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
-    }
-
     public String getVerificationCode() {
         return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
     }
 
     @Override

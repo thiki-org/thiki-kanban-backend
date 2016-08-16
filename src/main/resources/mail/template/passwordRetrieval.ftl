@@ -20,7 +20,9 @@
                                                     style="font-family: Helvetica; color: rgb(69, 69, 69); line-height: normal;">&nbsp;</span><br/>
                                             </p>
                                             <p style="margin-top: 20px; margin-bottom: 0px; font-size: 13px; line-height: normal; font-family:Helvetica; color: rgb(69, 69, 69); text-align: left;">
-                                                <span style="line-height: normal; font-family: Helvetica;">&nbsp; &nbsp; &nbsp; &nbsp;</span>你正在通过注册邮箱找回你丢失的密码,本次验证码是: <span style="font-weight: bolder">${verificationCode}</span> ,五分钟内有效。请妥善保管,不要泄漏给他人。<span
+                                                <span style="line-height: normal; font-family: Helvetica;">&nbsp; &nbsp; &nbsp; &nbsp;</span>你正在通过注册邮箱找回你丢失的密码,本次验证码是:
+                                                <span style="font-weight: bolder">${verificationCode}</span>
+                                                ,五分钟内有效。请妥善保管,不要泄漏给他人。<span
                                                     style="line-height: normal; font-family: Helvetica;">&nbsp;</span>
                                             </p>
                                             <p style="margin-top: 40px; margin-bottom: 0px; font-size: 13px; line-height: normal; font-family:Helvetica; color: rgb(69, 69, 69); text-align: left;">

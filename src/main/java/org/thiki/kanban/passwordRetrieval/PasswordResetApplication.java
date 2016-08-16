@@ -8,6 +8,7 @@ public class PasswordResetApplication {
 
     private String email;
     private String verificationCode;
+
     public String getEmail() {
         return email;
     }
