@@ -187,7 +187,7 @@ public class PasswordRetrievalControllerTest extends TestBase {
 
     @Scenario("用户重置密码后，若再次重置，告知客户端请求无效")
     @Test
-    public void NotAllowedIfPasswordAlreadyReset() throws Exception {
+    public void ResetPasswordIsNotAllowedIfTheApplicationHasBeenAlreadyReset() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_password_reset(id,email,is_reset) " +
                 "VALUES ('fooUserId','766191920@qq.com',1)");
         JSONObject body = new JSONObject();
