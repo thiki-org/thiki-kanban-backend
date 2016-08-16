@@ -170,4 +170,18 @@ public class PasswordRetrievalControllerTest extends TestBase {
                 .body("message", equalTo(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message()));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com'").size());
     }
+
+    @Scenario("验证码使用后若再次被使用，告示客户端验证码无效")
+    @Test
+    public void securityCodeWillBeInvalidIfAlreadyBeingUsed() throws Exception {
+        given().body("{\"email\":\"766191920@qq.com\",\"verificationCode\":\"000000\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/passwordResetApplication")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("code", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.code()))
+                .body("message", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.message()));
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where email='766191920@qq.com'").size());
+    }
 }
