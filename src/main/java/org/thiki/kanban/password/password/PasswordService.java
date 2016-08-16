@@ -64,7 +64,7 @@ public class PasswordService {
         verifyVerificationCodeIsCorrect(passwordResetApplication, passwordRetrievalApplication);
         verifyVerificationCodeIsNotExpired(passwordRetrievalApplication);
 
-        passwordPersistence.passVerification(passwordResetApplication.getEmail());
+        passwordPersistence.makeRetrievalApplicationPassed(passwordResetApplication.getEmail());
         passwordPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 
@@ -76,7 +76,7 @@ public class PasswordService {
         dencryptPassword(passwordReset);
 
         passwordPersistence.resetPassword(passwordReset);
-        passwordPersistence.cleanResetPasswordRecord(passwordReset);
+        passwordPersistence.cleanResetApplication(passwordReset);
     }
 
     private void verifyWhetherUserIsExists(Registration registeredUser) {

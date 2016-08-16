@@ -19,9 +19,9 @@ public interface PasswordPersistence {
 
     Integer resetPassword(PasswordReset passwordReset);
 
-    Integer cleanResetPasswordRecord(PasswordReset passwordReset);
+    Integer cleanResetApplication(PasswordReset passwordReset);
 
-    Integer passVerification(String email);
+    Integer makeRetrievalApplicationPassed(String email);
 
     PasswordReset loadResetApplicationByEmail(String email);
 
