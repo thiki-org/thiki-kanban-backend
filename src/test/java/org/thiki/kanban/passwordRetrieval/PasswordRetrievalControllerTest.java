@@ -91,6 +91,24 @@ public class PasswordRetrievalControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com'").size());
     }
 
+    @Scenario("邮箱通过格式校验且存在后，创建密码找回申请记前,如果存在未完成的申请,则将其废弃")
+    @Test
+    public void discardingUnfinishedPasswordRetrievalApplication() {
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','徐涛','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_password_retrieval (id,email,verification_code) " +
+                "VALUES ('fooUserId','766191920@qq.com','000000')");
+        given().body("{\"email\":\"766191920@qq.com\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/passwordRetrievalApplication")
+                .then()
+                .statusCode(HttpStatus.CREATED.value())
+                .body("_links.passwordResetApplication.href", equalTo("http://localhost:8007/passwordResetApplication"));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com' and is_verify_passed=0").size());
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com' and is_verify_passed=-1").size());
+    }
+
     @Scenario("用户取得验证码后，和邮箱一起发送到服务端验证，如果验证码正确且未过期，则发送密码重置的链接")
     @Test
     public void verifyVerificationCode() {

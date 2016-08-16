@@ -49,6 +49,7 @@ public class PasswordRetrievalService {
         PasswordRetrieval passwordRetrieval = new PasswordRetrieval();
         passwordRetrieval.setEmail(registerEmail.getEmail());
         passwordRetrieval.setVerificationCode(verificationCode);
+        passwordRetrievalPersistence.clearUnfinishedApplication(passwordRetrieval);
         passwordRetrievalPersistence.createRecord(passwordRetrieval);
 
         PasswordEmail passwordEmail = new PasswordEmail();
