@@ -15,7 +15,7 @@ import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.password.password.PasswordCodes;
-import org.thiki.kanban.password.passwordRetrieval.PasswordRetrievalService;
+import org.thiki.kanban.password.password.PasswordService;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PasswordRetrievalApplicationControllerTest extends TestBase {
     @Resource
-    private PasswordRetrievalService passwordRetrievalService;
+    private PasswordService passwordService;
     @Resource
     private RSAService rsaService;
 
@@ -121,7 +121,7 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
 
         VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
         when(verificationCodeService.generate()).thenReturn("000000");
-        ReflectionTestUtils.setField(passwordRetrievalService, "verificationCodeService", verificationCodeService);
+        ReflectionTestUtils.setField(passwordService, "verificationCodeService", verificationCodeService);
 
         given().body("{\"email\":\"766191920@qq.com\",\"verificationCode\":\"000000\"}")
                 .contentType(ContentType.JSON)
@@ -148,7 +148,7 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
 
         VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
         when(verificationCodeService.generate()).thenReturn("000000");
-        ReflectionTestUtils.setField(passwordRetrievalService, "verificationCodeService", verificationCodeService);
+        ReflectionTestUtils.setField(passwordService, "verificationCodeService", verificationCodeService);
 
         JSONObject body = new JSONObject();
         body.put("email", "766191920@qq.com");
@@ -178,7 +178,7 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
 
         VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
         when(verificationCodeService.generate()).thenReturn("000000");
-        ReflectionTestUtils.setField(passwordRetrievalService, "verificationCodeService", verificationCodeService);
+        ReflectionTestUtils.setField(passwordService, "verificationCodeService", verificationCodeService);
 
         given().body("{\"email\":\"766191920@qq.com\",\"verificationCode\":\"000000\"}")
                 .contentType(ContentType.JSON)
@@ -199,7 +199,7 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
 
         VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
         when(verificationCodeService.generate()).thenReturn("000000");
-        ReflectionTestUtils.setField(passwordRetrievalService, "verificationCodeService", verificationCodeService);
+        ReflectionTestUtils.setField(passwordService, "verificationCodeService", verificationCodeService);
 
         given().body("{\"email\":\"766191920@qq.com\",\"verificationCode\":\"000001\"}")
                 .contentType(ContentType.JSON)
