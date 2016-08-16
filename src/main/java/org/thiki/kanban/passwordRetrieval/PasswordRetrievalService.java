@@ -38,7 +38,7 @@ public class PasswordRetrievalService {
     @Resource
     private MailService mailService;
 
-    public void createRetrievalRecord(RegisterEmail registerEmail) throws TemplateException, IOException, MessagingException {
+    public void createPasswordRetrievalApplication(RegisterEmail registerEmail) throws TemplateException, IOException, MessagingException {
         Registration registeredUser = registrationPersistence.findByEmail(registerEmail.getEmail());
         if (registeredUser == null) {
             throw new BusinessException(PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.code(), PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.message());
