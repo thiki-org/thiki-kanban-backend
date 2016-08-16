@@ -114,7 +114,7 @@ public class PasswordRetrievalControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where email='766191920@qq.com'").size());
     }
 
-    @Scenario("用户取得验证码后，和邮箱一起发送到服务端验证，如果验证码正确且未过期，则发送密码重置的链接")
+    @Scenario("用户通过验证码验证,重置密码成功。")
     @Test
     public void resetPassword() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
