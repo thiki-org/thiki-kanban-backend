@@ -5,7 +5,7 @@ import org.thiki.kanban.foundation.mail.MailEntity;
 /**
  * Created by xubt on 8/14/16.
  */
-public class PasswordEmail extends MailEntity {
+public class VerificationCodeEmailData extends MailEntity {
     private String verificationCode;
 
     public String getVerificationCode() {

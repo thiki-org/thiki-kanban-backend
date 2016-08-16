@@ -50,11 +50,11 @@ public class PasswordRetrievalService {
         passwordRetrievalPersistence.clearUnfinishedApplication(passwordRetrievalApplication);
         passwordRetrievalPersistence.createPasswordRetrievalApplication(passwordRetrievalApplication);
 
-        PasswordEmail passwordEmail = new PasswordEmail();
-        passwordEmail.setReceiver(registeredUser.getEmail());
-        passwordEmail.setUserName(registeredUser.getName());
-        passwordEmail.setVerificationCode(verificationCode);
-        mailService.sendMailByTemplate(passwordEmail, passwordRetrievalEmailTemplate);
+        VerificationCodeEmailData verificationCodeEmailData = new VerificationCodeEmailData();
+        verificationCodeEmailData.setReceiver(registeredUser.getEmail());
+        verificationCodeEmailData.setUserName(registeredUser.getName());
+        verificationCodeEmailData.setVerificationCode(verificationCode);
+        mailService.sendMailByTemplate(verificationCodeEmailData, passwordRetrievalEmailTemplate);
     }
 
     public void createPasswordResetRecord(PasswordResetApplication passwordResetApplication) {
