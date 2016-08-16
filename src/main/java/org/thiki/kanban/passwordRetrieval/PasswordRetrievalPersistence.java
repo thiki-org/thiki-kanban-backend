@@ -17,4 +17,6 @@ public interface PasswordRetrievalPersistence {
     Integer resetPassword(PasswordReset passwordReset);
 
     Integer cleanResetPasswordRecord(PasswordReset passwordReset);
+
+    Integer passSecurityCodeVerification(String email);
 }
