@@ -36,4 +36,8 @@ public class PasswordRetrieval {
     public Date getModificationTime() {
         return modificationTime;
     }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
 }

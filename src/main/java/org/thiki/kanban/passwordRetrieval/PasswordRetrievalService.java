@@ -63,6 +63,9 @@ public class PasswordRetrievalService {
         if (passwordRetrieval == null) {
             throw new BusinessException(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.code(), PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.message());
         }
+        if (!passwordResetApplication.getVerificationCode().equals(passwordRetrieval.getVerificationCode())) {
+            throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.code(), PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.message());
+        }
         Date fiveMinutesAgo = dateService.addMinute(new Date(), -5);
         if (passwordRetrieval.getModificationTime().before(fiveMinutesAgo)) {
             throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.code(), PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message());
