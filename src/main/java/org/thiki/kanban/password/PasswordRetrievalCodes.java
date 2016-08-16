@@ -1,4 +1,4 @@
-package org.thiki.kanban.passwordRetrieval;
+package org.thiki.kanban.password;
 
 /**
  * Created by xubt on 8/8/16.

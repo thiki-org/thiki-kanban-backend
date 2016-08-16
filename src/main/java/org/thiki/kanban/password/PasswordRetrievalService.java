@@ -1,4 +1,4 @@
-package org.thiki.kanban.passwordRetrieval;
+package org.thiki.kanban.password;
 
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;

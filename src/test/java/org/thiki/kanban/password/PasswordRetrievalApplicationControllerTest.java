@@ -1,4 +1,4 @@
-package org.thiki.kanban.passwordRetrieval;
+package org.thiki.kanban.password;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jayway.restassured.http.ContentType;
