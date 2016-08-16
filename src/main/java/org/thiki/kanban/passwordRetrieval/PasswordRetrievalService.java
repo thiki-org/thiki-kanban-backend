@@ -67,7 +67,7 @@ public class PasswordRetrievalService {
         if (passwordRetrieval.getModificationTime().before(fiveMinutesAgo)) {
             throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.code(), PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message());
         }
-
+        passwordRetrievalPersistence.passSecurityCodeVerification(passwordResetApplication.getEmail());
         passwordRetrievalPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 
