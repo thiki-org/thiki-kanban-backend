@@ -27,6 +27,7 @@ import java.util.Date;
 public class PasswordService {
 
     private static final String passwordRetrievalEmailTemplate = "passwordRetrieval.ftl";
+    public static final int PERIOD = 5;
     @Resource
     private PasswordPersistence passwordPersistence;
     @Resource
@@ -44,44 +45,47 @@ public class PasswordService {
 
     public void createPasswordRetrievalApplication(PasswordRetrievalApplication passwordRetrievalApplication) throws TemplateException, IOException, MessagingException {
         Registration registeredUser = registrationPersistence.findByEmail(passwordRetrievalApplication.getEmail());
-        if (registeredUser == null) {
-            throw new BusinessException(PasswordCodes.EMAIL_IS_NOT_EXISTS.code(), PasswordCodes.EMAIL_IS_NOT_EXISTS.message());
-        }
+        verifyWhetherUserIsExists(registeredUser);
 
         String verificationCode = verificationCodeService.generate();
 
         passwordRetrievalApplication.setVerificationCode(verificationCode);
+
         passwordPersistence.clearUnfinishedApplication(passwordRetrievalApplication);
         passwordPersistence.createPasswordRetrievalApplication(passwordRetrievalApplication);
 
-        VerificationCodeEmailData verificationCodeEmailData = new VerificationCodeEmailData();
-        verificationCodeEmailData.setReceiver(registeredUser.getEmail());
-        verificationCodeEmailData.setUserName(registeredUser.getName());
-        verificationCodeEmailData.setVerificationCode(verificationCode);
-        mailService.sendMailByTemplate(verificationCodeEmailData, passwordRetrievalEmailTemplate);
+        sendVerificationCodeEmail(registeredUser, verificationCode);
     }
 
-    public void createPasswordResetRecord(PasswordResetApplication passwordResetApplication) {
-        PasswordRetrievalApplication passwordRetrievalApplication = passwordPersistence.verify(passwordResetApplication);
-        if (passwordRetrievalApplication == null) {
-            throw new BusinessException(PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.code(), PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.message());
-        }
-        if (!passwordResetApplication.getVerificationCode().equals(passwordRetrievalApplication.getVerificationCode())) {
-            throw new BusinessException(PasswordCodes.SECURITY_CODE_IS_NOT_CORRECT.code(), PasswordCodes.SECURITY_CODE_IS_NOT_CORRECT.message());
-        }
-        Date expiredTime = dateService.addMinute(passwordRetrievalApplication.getModificationTime(), 5);
-        if (expiredTime.before(dateService.now())) {
-            throw new BusinessException(PasswordCodes.SECURITY_CODE_TIMEOUT.code(), PasswordCodes.SECURITY_CODE_TIMEOUT.message());
-        }
+    public void createPasswordResetApplication(PasswordResetApplication passwordResetApplication) {
+        PasswordRetrievalApplication passwordRetrievalApplication = passwordPersistence.loadRetrievalApplication(passwordResetApplication);
+
+        verifyRetrievalApplicationIsNull(passwordRetrievalApplication);
+        verifyVerificationCodeIsCorrect(passwordResetApplication, passwordRetrievalApplication);
+        verifyVerificationCodeIsNotExpired(passwordRetrievalApplication);
+
         passwordPersistence.passVerification(passwordResetApplication.getEmail());
         passwordPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 
     public void resetPassword(PasswordReset passwordReset) throws Exception {
-        PasswordReset passwordResetRecord = passwordPersistence.findPasswordResetByEmail(passwordReset.getEmail());
+        PasswordReset passwordResetRecord = passwordPersistence.loadResetApplicationByEmail(passwordReset.getEmail());
         if (passwordResetRecord == null) {
             throw new BusinessException(PasswordCodes.NO_PASSWORD_RESET_RECORD.code(), PasswordCodes.NO_PASSWORD_RESET_RECORD.message());
         }
+        dencryptPassword(passwordReset);
+
+        passwordPersistence.resetPassword(passwordReset);
+        passwordPersistence.cleanResetPasswordRecord(passwordReset);
+    }
+
+    private void verifyWhetherUserIsExists(Registration registeredUser) {
+        if (registeredUser == null) {
+            throw new BusinessException(PasswordCodes.EMAIL_IS_NOT_EXISTS.code(), PasswordCodes.EMAIL_IS_NOT_EXISTS.message());
+        }
+    }
+
+    private void dencryptPassword(PasswordReset passwordReset) throws Exception {
         Registration registeredUser = registrationPersistence.findByEmail(passwordReset.getEmail());
 
         String dencryptPassword = rsaService.dencrypt(passwordReset.getPassword());
@@ -89,7 +93,32 @@ public class PasswordService {
         if (passwordReset != null) {
             passwordReset.setPassword(dencryptPassword);
         }
-        passwordPersistence.resetPassword(passwordReset);
-        passwordPersistence.cleanResetPasswordRecord(passwordReset);
+    }
+
+    private void verifyVerificationCodeIsNotExpired(PasswordRetrievalApplication passwordRetrievalApplication) {
+        Date expiredTime = dateService.addMinute(passwordRetrievalApplication.getModificationTime(), PERIOD);
+        if (expiredTime.before(dateService.now())) {
+            throw new BusinessException(PasswordCodes.SECURITY_CODE_TIMEOUT.code(), PasswordCodes.SECURITY_CODE_TIMEOUT.message());
+        }
+    }
+
+    private void verifyVerificationCodeIsCorrect(PasswordResetApplication passwordResetApplication, PasswordRetrievalApplication passwordRetrievalApplication) {
+        if (!passwordResetApplication.getVerificationCode().equals(passwordRetrievalApplication.getVerificationCode())) {
+            throw new BusinessException(PasswordCodes.SECURITY_CODE_IS_NOT_CORRECT.code(), PasswordCodes.SECURITY_CODE_IS_NOT_CORRECT.message());
+        }
+    }
+
+    private void verifyRetrievalApplicationIsNull(PasswordRetrievalApplication passwordRetrievalApplication) {
+        if (passwordRetrievalApplication == null) {
+            throw new BusinessException(PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.code(), PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.message());
+        }
+    }
+
+    private void sendVerificationCodeEmail(Registration registeredUser, String verificationCode) throws TemplateException, IOException, MessagingException {
+        VerificationCodeEmailData verificationCodeEmailData = new VerificationCodeEmailData();
+        verificationCodeEmailData.setReceiver(registeredUser.getEmail());
+        verificationCodeEmailData.setUserName(registeredUser.getName());
+        verificationCodeEmailData.setVerificationCode(verificationCode);
+        mailService.sendMailByTemplate(verificationCodeEmailData, passwordRetrievalEmailTemplate);
     }
 }

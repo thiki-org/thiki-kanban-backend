@@ -32,7 +32,7 @@ public class PasswordController {
 
     @RequestMapping(value = "/passwordResetApplication", method = RequestMethod.POST)
     public HttpEntity passwordRetrieval(@RequestBody PasswordResetApplication passwordResetApplication) throws Exception {
-        passwordService.createPasswordResetRecord(passwordResetApplication);
+        passwordService.createPasswordResetApplication(passwordResetApplication);
         return Response.post(new PasswordResetResource());
     }
 
