@@ -184,4 +184,21 @@ public class PasswordRetrievalControllerTest extends TestBase {
                 .body("message", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.message()));
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where email='766191920@qq.com'").size());
     }
+
+    @Scenario("用户重置密码后，若再次重置，告知客户端请求无效")
+    @Test
+    public void NotAllowedIfPasswordAlreadyReset() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_password_reset(id,email,is_reset) " +
+                "VALUES ('fooUserId','766191920@qq.com',1)");
+        JSONObject body = new JSONObject();
+        body.put("email", "766191920@qq.com");
+        body.put("password", "foo");
+        given().body(body)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/password")
+                .then()
+                .body("code", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RESET_RECORD.code()))
+                .body("message", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RESET_RECORD.message()));
+    }
 }

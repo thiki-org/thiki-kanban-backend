@@ -72,6 +72,10 @@ public class PasswordRetrievalService {
     }
 
     public void resetPassword(PasswordReset passwordReset) throws Exception {
+        PasswordReset passwordResetRecord = passwordRetrievalPersistence.findPasswordResetByEmail(passwordReset.getEmail());
+        if (passwordResetRecord == null) {
+            throw new BusinessException(PasswordRetrievalCodes.NO_PASSWORD_RESET_RECORD.code(), PasswordRetrievalCodes.NO_PASSWORD_RESET_RECORD.message());
+        }
         Registration registeredUser = registrationPersistence.findByEmail(passwordReset.getEmail());
 
         String dencryptPassword = rsaService.dencrypt(passwordReset.getPassword());
