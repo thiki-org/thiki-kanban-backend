@@ -658,6 +658,10 @@ public class DateService {
         return DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS_CN);
     }
 
+    public Date now() {
+        return new Date();
+    }
+
     /**
      * 获取日期的星期。失败返回null。
      *
