@@ -38,16 +38,14 @@ public class PasswordRetrievalService {
     @Resource
     private MailService mailService;
 
-    public void createPasswordRetrievalApplication(RegisterEmail registerEmail) throws TemplateException, IOException, MessagingException {
-        Registration registeredUser = registrationPersistence.findByEmail(registerEmail.getEmail());
+    public void createPasswordRetrievalApplication(PasswordRetrievalApplication passwordRetrievalApplication) throws TemplateException, IOException, MessagingException {
+        Registration registeredUser = registrationPersistence.findByEmail(passwordRetrievalApplication.getEmail());
         if (registeredUser == null) {
             throw new BusinessException(PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.code(), PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.message());
         }
 
         String verificationCode = verificationCodeService.generate();
 
-        PasswordRetrievalApplication passwordRetrievalApplication = new PasswordRetrievalApplication();
-        passwordRetrievalApplication.setEmail(registerEmail.getEmail());
         passwordRetrievalApplication.setVerificationCode(verificationCode);
         passwordRetrievalPersistence.clearUnfinishedApplication(passwordRetrievalApplication);
         passwordRetrievalPersistence.createPasswordRetrievalApplication(passwordRetrievalApplication);

@@ -18,8 +18,8 @@ public class PasswordRetrievalController {
     private PasswordRetrievalService passwordRetrievalService;
 
     @RequestMapping(value = "/passwordRetrievalApplication", method = RequestMethod.POST)
-    public HttpEntity passwordRetrievalApply(@RequestBody RegisterEmail registerEmail) throws Exception {
-        passwordRetrievalService.createPasswordRetrievalApplication(registerEmail);
+    public HttpEntity passwordRetrievalApply(@RequestBody PasswordRetrievalApplication passwordRetrievalApplication) throws Exception {
+        passwordRetrievalService.createPasswordRetrievalApplication(passwordRetrievalApplication);
         return Response.post(new PasswordRetrievalResource());
     }
 
