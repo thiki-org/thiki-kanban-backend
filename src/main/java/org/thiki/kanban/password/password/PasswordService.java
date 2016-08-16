@@ -60,7 +60,7 @@ public class PasswordService {
     public void createPasswordResetApplication(PasswordResetApplication passwordResetApplication) {
         PasswordRetrievalApplication passwordRetrievalApplication = passwordPersistence.loadRetrievalApplication(passwordResetApplication);
 
-        verifyRetrievalApplicationIsNull(passwordRetrievalApplication);
+        verifyRetrievalApplicationIsNotNull(passwordRetrievalApplication);
         verifyVerificationCodeIsCorrect(passwordResetApplication, passwordRetrievalApplication);
         verifyVerificationCodeIsNotExpired(passwordRetrievalApplication);
 
@@ -108,7 +108,7 @@ public class PasswordService {
         }
     }
 
-    private void verifyRetrievalApplicationIsNull(PasswordRetrievalApplication passwordRetrievalApplication) {
+    private void verifyRetrievalApplicationIsNotNull(PasswordRetrievalApplication passwordRetrievalApplication) {
         if (passwordRetrievalApplication == null) {
             throw new BusinessException(PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.code(), PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.message());
         }
