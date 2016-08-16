@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
  * Created by xubt on 8/8/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class PasswordRetrievalControllerTest extends TestBase {
+public class PasswordRetrievalApplicationControllerTest extends TestBase {
     @Resource
     private PasswordRetrievalService passwordRetrievalService;
     @Resource

@@ -8,11 +8,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PasswordRetrievalPersistence {
-    Integer createPasswordRetrievalApplication(PasswordRetrieval passwordRetrieval);
+    Integer createPasswordRetrievalApplication(PasswordRetrievalApplication passwordRetrievalApplication);
 
     Integer createPasswordResetApplication(PasswordResetApplication passwordResetApplication);
 
-    PasswordRetrieval verify(PasswordResetApplication passwordResetApplication);
+    PasswordRetrievalApplication verify(PasswordResetApplication passwordResetApplication);
 
     Integer resetPassword(PasswordReset passwordReset);
 
@@ -22,5 +22,5 @@ public interface PasswordRetrievalPersistence {
 
     PasswordReset findPasswordResetByEmail(String email);
 
-    Integer clearUnfinishedApplication(PasswordRetrieval passwordRetrieval);
+    Integer clearUnfinishedApplication(PasswordRetrievalApplication passwordRetrievalApplication);
 }

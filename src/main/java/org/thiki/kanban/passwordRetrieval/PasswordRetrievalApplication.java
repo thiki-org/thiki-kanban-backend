@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by xubt on 8/14/16.
  */
-public class PasswordRetrieval {
+public class PasswordRetrievalApplication {
     private String id;
 
     private String email;

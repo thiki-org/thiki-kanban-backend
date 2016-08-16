@@ -46,11 +46,11 @@ public class PasswordRetrievalService {
 
         String verificationCode = verificationCodeService.generate();
 
-        PasswordRetrieval passwordRetrieval = new PasswordRetrieval();
-        passwordRetrieval.setEmail(registerEmail.getEmail());
-        passwordRetrieval.setVerificationCode(verificationCode);
-        passwordRetrievalPersistence.clearUnfinishedApplication(passwordRetrieval);
-        passwordRetrievalPersistence.createPasswordRetrievalApplication(passwordRetrieval);
+        PasswordRetrievalApplication passwordRetrievalApplication = new PasswordRetrievalApplication();
+        passwordRetrievalApplication.setEmail(registerEmail.getEmail());
+        passwordRetrievalApplication.setVerificationCode(verificationCode);
+        passwordRetrievalPersistence.clearUnfinishedApplication(passwordRetrievalApplication);
+        passwordRetrievalPersistence.createPasswordRetrievalApplication(passwordRetrievalApplication);
 
         PasswordEmail passwordEmail = new PasswordEmail();
         passwordEmail.setReceiver(registeredUser.getEmail());
@@ -60,14 +60,14 @@ public class PasswordRetrievalService {
     }
 
     public void createPasswordResetRecord(PasswordResetApplication passwordResetApplication) {
-        PasswordRetrieval passwordRetrieval = passwordRetrievalPersistence.verify(passwordResetApplication);
-        if (passwordRetrieval == null) {
+        PasswordRetrievalApplication passwordRetrievalApplication = passwordRetrievalPersistence.verify(passwordResetApplication);
+        if (passwordRetrievalApplication == null) {
             throw new BusinessException(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.code(), PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.message());
         }
-        if (!passwordResetApplication.getVerificationCode().equals(passwordRetrieval.getVerificationCode())) {
+        if (!passwordResetApplication.getVerificationCode().equals(passwordRetrievalApplication.getVerificationCode())) {
             throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.code(), PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.message());
         }
-        Date expiredTime = dateService.addMinute(passwordRetrieval.getModificationTime(), 5);
+        Date expiredTime = dateService.addMinute(passwordRetrievalApplication.getModificationTime(), 5);
         if (expiredTime.before(dateService.now())) {
             throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.code(), PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message());
         }
