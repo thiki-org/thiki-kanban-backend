@@ -6,6 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
+import org.thiki.kanban.password.password.PasswordResource;
+import org.thiki.kanban.password.passwordReset.PasswordReset;
+import org.thiki.kanban.password.passwordReset.PasswordResetApplication;
+import org.thiki.kanban.password.passwordReset.PasswordResetResource;
+import org.thiki.kanban.password.passwordRetrieval.PasswordRetrievalApplication;
+import org.thiki.kanban.password.passwordRetrieval.PasswordRetrievalResource;
+import org.thiki.kanban.password.passwordRetrieval.PasswordRetrievalService;
 
 import javax.annotation.Resource;
 
@@ -13,7 +20,7 @@ import javax.annotation.Resource;
  * Created by xubitao on 04/26/16.
  */
 @RestController
-public class PasswordRetrievalController {
+public class PasswordController {
     @Resource
     private PasswordRetrievalService passwordRetrievalService;
 
