@@ -10,10 +10,13 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.common.VerificationCodeService;
+import org.thiki.kanban.foundation.common.date.DateService;
+import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
@@ -30,6 +33,9 @@ public class PasswordRetrievalControllerTest extends TestBase {
     private PasswordRetrievalService passwordRetrievalService;
     @Resource
     private RSAService rsaService;
+
+    @Resource
+    private DateService dateService;
 
     @Scenario("当用户请求找回密码时,需要提供邮箱,如果未提供则告知客户端错误")
     @Test
@@ -136,5 +142,32 @@ public class PasswordRetrievalControllerTest extends TestBase {
                 .body("_links.login.href", equalTo("http://localhost:8007/login"));
         assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration where email='766191920@qq.com'", String.class));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where email='766191920@qq.com' and is_reset=1").size());
+    }
+
+    @Scenario("验证码超过五分钟后,验证失败")
+    @Test
+    public void securityCodeTimeOut() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','徐涛','password')");
+
+        String nowDate = dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS);
+
+        String dateFiveMinutesAgo = dateService.DateToString(dateService.addMinute(new Date(), -6), DateStyle.YYYY_MM_DD_HH_MM_SS);
+        jdbcTemplate.execute(String.format("INSERT INTO  kb_password_retrieval (id,email,verification_code,creation_time,modification_time) " +
+                "VALUES ('fooUserId','766191920@qq.com','000000','%s','%s')", nowDate, dateFiveMinutesAgo));
+
+        VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
+        when(verificationCodeService.generate()).thenReturn("000000");
+        ReflectionTestUtils.setField(passwordRetrievalService, "verificationCodeService", verificationCodeService);
+
+        given().body("{\"email\":\"766191920@qq.com\",\"verificationCode\":\"000000\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/passwordResetApplication")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("code", equalTo(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.code()))
+                .body("message", equalTo(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message()));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com'").size());
     }
 }
