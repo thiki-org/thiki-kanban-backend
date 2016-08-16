@@ -60,6 +60,9 @@ public class PasswordRetrievalService {
 
     public void createPasswordResetRecord(PasswordResetApplication passwordResetApplication) {
         PasswordRetrieval passwordRetrieval = passwordRetrievalPersistence.verify(passwordResetApplication);
+        if (passwordRetrieval == null) {
+            throw new BusinessException(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.code(), PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.message());
+        }
         Date fiveMinutesAgo = dateService.addMinute(new Date(), -5);
         if (passwordRetrieval.getModificationTime().before(fiveMinutesAgo)) {
             throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.code(), PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message());
