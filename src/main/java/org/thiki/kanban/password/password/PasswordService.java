@@ -43,7 +43,7 @@ public class PasswordService {
     @Resource
     private MailService mailService;
 
-    public void createPasswordRetrievalApplication(PasswordRetrievalApplication passwordRetrievalApplication) throws TemplateException, IOException, MessagingException {
+    public void applyRetrieval(PasswordRetrievalApplication passwordRetrievalApplication) throws TemplateException, IOException, MessagingException {
         Registration registeredUser = registrationPersistence.findByEmail(passwordRetrievalApplication.getEmail());
         verifyWhetherUserIsExists(registeredUser);
 
@@ -57,7 +57,7 @@ public class PasswordService {
         sendVerificationCodeEmail(registeredUser, verificationCode);
     }
 
-    public void createPasswordResetApplication(PasswordResetApplication passwordResetApplication) {
+    public void applyReset(PasswordResetApplication passwordResetApplication) {
         PasswordRetrievalApplication passwordRetrievalApplication = passwordPersistence.loadRetrievalApplication(passwordResetApplication);
 
         verifyRetrievalApplicationIsNotNull(passwordRetrievalApplication);

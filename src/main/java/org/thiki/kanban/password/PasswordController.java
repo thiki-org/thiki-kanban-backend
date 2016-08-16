@@ -26,13 +26,13 @@ public class PasswordController {
 
     @RequestMapping(value = "/passwordRetrievalApplication", method = RequestMethod.POST)
     public HttpEntity passwordRetrievalApply(@RequestBody PasswordRetrievalApplication passwordRetrievalApplication) throws Exception {
-        passwordService.createPasswordRetrievalApplication(passwordRetrievalApplication);
+        passwordService.applyRetrieval(passwordRetrievalApplication);
         return Response.post(new PasswordRetrievalResource());
     }
 
     @RequestMapping(value = "/passwordResetApplication", method = RequestMethod.POST)
     public HttpEntity passwordRetrieval(@RequestBody PasswordResetApplication passwordResetApplication) throws Exception {
-        passwordService.createPasswordResetApplication(passwordResetApplication);
+        passwordService.applyReset(passwordResetApplication);
         return Response.post(new PasswordResetResource());
     }
 
