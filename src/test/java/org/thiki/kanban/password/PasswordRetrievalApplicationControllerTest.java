@@ -166,7 +166,7 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
 
     @Scenario("验证码超过五分钟后,验证失败")
     @Test
-    public void securityCodeTimeOut() throws Exception {
+    public void verificationCodeTimeOut() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','徐涛','password')");
 
@@ -213,7 +213,7 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
 
     @Scenario("验证码使用后若再次被使用，告示客户端验证码无效")
     @Test
-    public void securityCodeWillBeInvalidIfAlreadyBeingUsed() throws Exception {
+    public void verificationCodeWillBeInvalidIfAlreadyBeingUsed() throws Exception {
         given().body("{\"email\":\"766191920@qq.com\",\"verificationCode\":\"000000\"}")
                 .contentType(ContentType.JSON)
                 .when()
