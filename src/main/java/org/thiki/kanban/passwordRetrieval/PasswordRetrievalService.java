@@ -3,6 +3,7 @@ package org.thiki.kanban.passwordRetrieval;
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.VerificationCodeService;
+import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
@@ -13,6 +14,7 @@ import org.thiki.kanban.registration.RegistrationPersistence;
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by xubt on 8/8/16.
@@ -29,6 +31,9 @@ public class PasswordRetrievalService {
     private RegistrationPersistence registrationPersistence;
     @Resource
     private RSAService rsaService;
+
+    @Resource
+    private DateService dateService;
 
     @Resource
     private MailService mailService;
@@ -55,6 +60,10 @@ public class PasswordRetrievalService {
 
     public void createPasswordResetRecord(PasswordResetApplication passwordResetApplication) {
         PasswordRetrieval passwordRetrieval = passwordRetrievalPersistence.verify(passwordResetApplication);
+        Date fiveMinutesAgo = dateService.addMinute(new Date(), -5);
+        if (passwordRetrieval.getModificationTime().before(fiveMinutesAgo)) {
+            throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.code(), PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message());
+        }
 
         passwordRetrievalPersistence.createPasswordResetApplication(passwordResetApplication);
     }
