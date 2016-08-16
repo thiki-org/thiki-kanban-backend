@@ -1,9 +1,10 @@
-package org.thiki.kanban.password;
+package org.thiki.kanban.password.passwordRetrieval;
 
 import org.springframework.hateoas.Link;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.password.PasswordController;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
@@ -11,7 +12,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class PasswordRetrievalResource extends RestResource {
     public PasswordRetrievalResource() throws Exception {
-        Link passwordRetrievalLink = linkTo(methodOn(PasswordRetrievalController.class).passwordRetrieval(null)).withRel("passwordResetApplication");
+        Link passwordRetrievalLink = ControllerLinkBuilder.linkTo(methodOn(PasswordController.class).passwordRetrieval(null)).withRel("passwordResetApplication");
         this.add(passwordRetrievalLink);
     }
 }

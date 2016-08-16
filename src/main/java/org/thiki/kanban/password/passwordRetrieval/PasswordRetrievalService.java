@@ -1,4 +1,4 @@
-package org.thiki.kanban.password;
+package org.thiki.kanban.password.passwordRetrieval;
 
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,10 @@ import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.password.password.PasswordCodes;
+import org.thiki.kanban.password.password.PasswordPersistence;
+import org.thiki.kanban.password.passwordReset.PasswordReset;
+import org.thiki.kanban.password.passwordReset.PasswordResetApplication;
 import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationPersistence;
 
@@ -24,7 +28,7 @@ public class PasswordRetrievalService {
 
     private static final String passwordRetrievalEmailTemplate = "passwordRetrieval.ftl";
     @Resource
-    private PasswordRetrievalPersistence passwordRetrievalPersistence;
+    private PasswordPersistence passwordPersistence;
     @Resource
     private VerificationCodeService verificationCodeService;
     @Resource
@@ -41,14 +45,14 @@ public class PasswordRetrievalService {
     public void createPasswordRetrievalApplication(PasswordRetrievalApplication passwordRetrievalApplication) throws TemplateException, IOException, MessagingException {
         Registration registeredUser = registrationPersistence.findByEmail(passwordRetrievalApplication.getEmail());
         if (registeredUser == null) {
-            throw new BusinessException(PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.code(), PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.message());
+            throw new BusinessException(PasswordCodes.EMAIL_IS_NOT_EXISTS.code(), PasswordCodes.EMAIL_IS_NOT_EXISTS.message());
         }
 
         String verificationCode = verificationCodeService.generate();
 
         passwordRetrievalApplication.setVerificationCode(verificationCode);
-        passwordRetrievalPersistence.clearUnfinishedApplication(passwordRetrievalApplication);
-        passwordRetrievalPersistence.createPasswordRetrievalApplication(passwordRetrievalApplication);
+        passwordPersistence.clearUnfinishedApplication(passwordRetrievalApplication);
+        passwordPersistence.createPasswordRetrievalApplication(passwordRetrievalApplication);
 
         VerificationCodeEmailData verificationCodeEmailData = new VerificationCodeEmailData();
         verificationCodeEmailData.setReceiver(registeredUser.getEmail());
@@ -58,25 +62,25 @@ public class PasswordRetrievalService {
     }
 
     public void createPasswordResetRecord(PasswordResetApplication passwordResetApplication) {
-        PasswordRetrievalApplication passwordRetrievalApplication = passwordRetrievalPersistence.verify(passwordResetApplication);
+        PasswordRetrievalApplication passwordRetrievalApplication = passwordPersistence.verify(passwordResetApplication);
         if (passwordRetrievalApplication == null) {
-            throw new BusinessException(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.code(), PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.message());
+            throw new BusinessException(PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.code(), PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.message());
         }
         if (!passwordResetApplication.getVerificationCode().equals(passwordRetrievalApplication.getVerificationCode())) {
-            throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.code(), PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.message());
+            throw new BusinessException(PasswordCodes.SECURITY_CODE_IS_NOT_CORRECT.code(), PasswordCodes.SECURITY_CODE_IS_NOT_CORRECT.message());
         }
         Date expiredTime = dateService.addMinute(passwordRetrievalApplication.getModificationTime(), 5);
         if (expiredTime.before(dateService.now())) {
-            throw new BusinessException(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.code(), PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message());
+            throw new BusinessException(PasswordCodes.SECURITY_CODE_TIMEOUT.code(), PasswordCodes.SECURITY_CODE_TIMEOUT.message());
         }
-        passwordRetrievalPersistence.passSecurityCodeVerification(passwordResetApplication.getEmail());
-        passwordRetrievalPersistence.createPasswordResetApplication(passwordResetApplication);
+        passwordPersistence.passSecurityCodeVerification(passwordResetApplication.getEmail());
+        passwordPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 
     public void resetPassword(PasswordReset passwordReset) throws Exception {
-        PasswordReset passwordResetRecord = passwordRetrievalPersistence.findPasswordResetByEmail(passwordReset.getEmail());
+        PasswordReset passwordResetRecord = passwordPersistence.findPasswordResetByEmail(passwordReset.getEmail());
         if (passwordResetRecord == null) {
-            throw new BusinessException(PasswordRetrievalCodes.NO_PASSWORD_RESET_RECORD.code(), PasswordRetrievalCodes.NO_PASSWORD_RESET_RECORD.message());
+            throw new BusinessException(PasswordCodes.NO_PASSWORD_RESET_RECORD.code(), PasswordCodes.NO_PASSWORD_RESET_RECORD.message());
         }
         Registration registeredUser = registrationPersistence.findByEmail(passwordReset.getEmail());
 
@@ -85,7 +89,7 @@ public class PasswordRetrievalService {
         if (passwordReset != null) {
             passwordReset.setPassword(dencryptPassword);
         }
-        passwordRetrievalPersistence.resetPassword(passwordReset);
-        passwordRetrievalPersistence.cleanResetPasswordRecord(passwordReset);
+        passwordPersistence.resetPassword(passwordReset);
+        passwordPersistence.cleanResetPasswordRecord(passwordReset);
     }
 }

@@ -1,4 +1,4 @@
-package org.thiki.kanban.password;
+package org.thiki.kanban.password.password;
 
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;

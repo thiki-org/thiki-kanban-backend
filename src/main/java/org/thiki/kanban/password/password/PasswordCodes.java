@@ -1,9 +1,9 @@
-package org.thiki.kanban.password;
+package org.thiki.kanban.password.password;
 
 /**
  * Created by xubt on 8/8/16.
  */
-public enum PasswordRetrievalCodes {
+public enum PasswordCodes {
     EMAIL_IS_NOT_EXISTS(20011, "邮箱不存在。"),
     SECURITY_CODE_TIMEOUT(20012, "验证码已过期。"),
     NO_PASSWORD_RETRIEVAL_RECORD(20013, "未找到密码找回申请记录,请核对你的邮箱或重新发送验证码。"),
@@ -12,7 +12,7 @@ public enum PasswordRetrievalCodes {
     private int code;
     private String message;
 
-    PasswordRetrievalCodes(int code, String message) {
+    PasswordCodes(int code, String message) {
         this.code = code;
         this.message = message;
     }

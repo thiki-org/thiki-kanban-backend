@@ -14,6 +14,8 @@ import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.password.password.PasswordCodes;
+import org.thiki.kanban.password.passwordRetrieval.PasswordRetrievalService;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -72,8 +74,8 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
                 .post("/passwordRetrievalApplication")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("code", equalTo(PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.code()))
-                .body("message", equalTo(PasswordRetrievalCodes.EMAIL_IS_NOT_EXISTS.message()));
+                .body("code", equalTo(PasswordCodes.EMAIL_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(PasswordCodes.EMAIL_IS_NOT_EXISTS.message()));
     }
 
     @Scenario("邮箱通过格式校验且存在后，发送找回密码的验证码到邮箱")
@@ -184,8 +186,8 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
                 .post("/passwordResetApplication")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("code", equalTo(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.code()))
-                .body("message", equalTo(PasswordRetrievalCodes.SECURITY_CODE_TIMEOUT.message()));
+                .body("code", equalTo(PasswordCodes.SECURITY_CODE_TIMEOUT.code()))
+                .body("message", equalTo(PasswordCodes.SECURITY_CODE_TIMEOUT.message()));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com'").size());
     }
 
@@ -205,8 +207,8 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
                 .post("/passwordResetApplication")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("code", equalTo(PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.code()))
-                .body("message", equalTo(PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.message()));
+                .body("code", equalTo(PasswordCodes.SECURITY_CODE_IS_NOT_CORRECT.code()))
+                .body("message", equalTo(PasswordCodes.SECURITY_CODE_IS_NOT_CORRECT.message()));
     }
 
     @Scenario("验证码使用后若再次被使用，告示客户端验证码无效")
@@ -218,8 +220,8 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
                 .post("/passwordResetApplication")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("code", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.code()))
-                .body("message", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RETRIEVAL_RECORD.message()));
+                .body("code", equalTo(PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.code()))
+                .body("message", equalTo(PasswordCodes.NO_PASSWORD_RETRIEVAL_RECORD.message()));
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where email='766191920@qq.com'").size());
     }
 
@@ -236,7 +238,7 @@ public class PasswordRetrievalApplicationControllerTest extends TestBase {
                 .when()
                 .put("/password")
                 .then()
-                .body("code", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RESET_RECORD.code()))
-                .body("message", equalTo(PasswordRetrievalCodes.NO_PASSWORD_RESET_RECORD.message()));
+                .body("code", equalTo(PasswordCodes.NO_PASSWORD_RESET_RECORD.code()))
+                .body("message", equalTo(PasswordCodes.NO_PASSWORD_RESET_RECORD.message()));
     }
 }

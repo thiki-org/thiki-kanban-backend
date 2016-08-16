@@ -1,4 +1,4 @@
-package org.thiki.kanban.password;
+package org.thiki.kanban.password.passwordRetrieval;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
