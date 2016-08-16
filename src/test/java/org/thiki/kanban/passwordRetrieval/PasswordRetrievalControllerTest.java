@@ -171,6 +171,26 @@ public class PasswordRetrievalControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com'").size());
     }
 
+    @Scenario("验证码错误,验证失败")
+    @Test
+    public void VerificationWillBeFailedIfVerificationCodeIsNotCorrect() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_password_retrieval (id,email,verification_code) " +
+                "VALUES ('fooUserId','766191920@qq.com','000000')");
+
+        VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
+        when(verificationCodeService.generate()).thenReturn("000000");
+        ReflectionTestUtils.setField(passwordRetrievalService, "verificationCodeService", verificationCodeService);
+
+        given().body("{\"email\":\"766191920@qq.com\",\"verificationCode\":\"000001\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/passwordResetApplication")
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("code", equalTo(PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.code()))
+                .body("message", equalTo(PasswordRetrievalCodes.SECURITY_CODE_IS_NOT_CORRECT.message()));
+    }
+
     @Scenario("验证码使用后若再次被使用，告示客户端验证码无效")
     @Test
     public void securityCodeWillBeInvalidIfAlreadyBeingUsed() throws Exception {
