@@ -1,4 +1,4 @@
-package org.thiki.kanban.password.passwordRetrieval;
+package org.thiki.kanban.password.password;
 
 import freemarker.template.TemplateException;
 import org.springframework.stereotype.Service;
@@ -8,10 +8,10 @@ import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
-import org.thiki.kanban.password.password.PasswordCodes;
-import org.thiki.kanban.password.password.PasswordPersistence;
 import org.thiki.kanban.password.passwordReset.PasswordReset;
 import org.thiki.kanban.password.passwordReset.PasswordResetApplication;
+import org.thiki.kanban.password.passwordRetrieval.PasswordRetrievalApplication;
+import org.thiki.kanban.password.passwordRetrieval.VerificationCodeEmailData;
 import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationPersistence;
 
@@ -24,7 +24,7 @@ import java.util.Date;
  * Created by xubt on 8/8/16.
  */
 @Service
-public class PasswordRetrievalService {
+public class PasswordService {
 
     private static final String passwordRetrievalEmailTemplate = "passwordRetrieval.ftl";
     @Resource
