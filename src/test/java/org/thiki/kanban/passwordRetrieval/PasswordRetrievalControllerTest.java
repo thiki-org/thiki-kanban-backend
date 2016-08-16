@@ -110,7 +110,7 @@ public class PasswordRetrievalControllerTest extends TestBase {
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
                 .body("_links.password.href", equalTo("http://localhost:8007/password"));
-        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com'").size());
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where email='766191920@qq.com' and is_verify_passed=1").size());
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where email='766191920@qq.com'").size());
     }
 
