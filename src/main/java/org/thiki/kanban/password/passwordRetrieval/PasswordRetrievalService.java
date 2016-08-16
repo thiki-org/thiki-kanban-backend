@@ -73,7 +73,7 @@ public class PasswordRetrievalService {
         if (expiredTime.before(dateService.now())) {
             throw new BusinessException(PasswordCodes.SECURITY_CODE_TIMEOUT.code(), PasswordCodes.SECURITY_CODE_TIMEOUT.message());
         }
-        passwordPersistence.passSecurityCodeVerification(passwordResetApplication.getEmail());
+        passwordPersistence.passVerificationCodeVerification(passwordResetApplication.getEmail());
         passwordPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 

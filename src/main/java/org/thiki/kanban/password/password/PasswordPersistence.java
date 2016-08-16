@@ -21,7 +21,7 @@ public interface PasswordPersistence {
 
     Integer cleanResetPasswordRecord(PasswordReset passwordReset);
 
-    Integer passSecurityCodeVerification(String email);
+    Integer passVerificationCodeVerification(String email);
 
     PasswordReset findPasswordResetByEmail(String email);
 
