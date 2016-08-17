@@ -2,6 +2,7 @@ package org.thiki.kanban.password.passwordReset;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.thiki.kanban.foundation.security.md5.MD5Service;
 
 import javax.validation.constraints.NotNull;
 
@@ -25,11 +26,15 @@ public class PasswordReset {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassword() throws Exception {
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void encryptPassword(String slat, String dencryptPassword) throws Exception {
+        this.password = MD5Service.encrypt(dencryptPassword + slat);
     }
 }
