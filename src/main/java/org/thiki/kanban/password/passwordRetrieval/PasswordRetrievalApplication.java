@@ -22,7 +22,7 @@ public class PasswordRetrievalApplication {
     private String email;
 
     private String verificationCode;
-    private Date modificationTime;
+    private Date creationTime;
 
 
     public String getEmail() {
@@ -41,8 +41,8 @@ public class PasswordRetrievalApplication {
         this.id = id;
     }
 
-    public Date getModificationTime() {
-        return modificationTime;
+    public Date getCreationTime() {
+        return creationTime;
     }
 
     public String getVerificationCode() {
@@ -59,9 +59,9 @@ public class PasswordRetrievalApplication {
         }
     }
 
-    public void verifyVerificationCodeIsNotExpired(Date modificationTime) {
+    public void verifyVerificationCodeIsNotExpired(Date creationTime) {
         DateService dateService = new DateService();
-        Date expiredTime = dateService.addMinute(modificationTime, PERIOD);
+        Date expiredTime = dateService.addMinute(creationTime, PERIOD);
         if (expiredTime.before(dateService.now())) {
             throw new BusinessException(PasswordCodes.SECURITY_CODE_TIMEOUT.code(), PasswordCodes.SECURITY_CODE_TIMEOUT.message());
         }
