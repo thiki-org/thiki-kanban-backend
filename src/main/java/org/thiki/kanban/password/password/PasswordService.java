@@ -55,7 +55,7 @@ public class PasswordService {
 
         verifyRetrievalApplicationIsNotNull(passwordRetrievalApplication);
         passwordRetrievalApplication.verifyVerificationCodeIsCorrect(passwordResetApplication.getVerificationCode());
-        passwordRetrievalApplication.verifyVerificationCodeIsNotExpired(passwordRetrievalApplication.getModificationTime());
+        passwordRetrievalApplication.verifyVerificationCodeIsNotExpired(passwordRetrievalApplication.getCreationTime());
 
         passwordPersistence.makeRetrievalApplicationPassed(passwordResetApplication.getEmail());
         passwordPersistence.createPasswordResetApplication(passwordResetApplication);
