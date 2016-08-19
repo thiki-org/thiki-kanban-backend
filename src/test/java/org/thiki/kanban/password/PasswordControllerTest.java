@@ -170,11 +170,9 @@ public class PasswordControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','徐涛','password')");
 
-        String nowDate = dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS);
-
         String dateFiveMinutesAgo = dateService.DateToString(dateService.addMinute(new Date(), -6), DateStyle.YYYY_MM_DD_HH_MM_SS);
-        jdbcTemplate.execute(String.format("INSERT INTO  kb_password_retrieval (id,email,verification_code,creation_time,modification_time) " +
-                "VALUES ('fooUserId','766191920@qq.com','000000','%s','%s')", nowDate, dateFiveMinutesAgo));
+        jdbcTemplate.execute(String.format("INSERT INTO  kb_password_retrieval (id,email,verification_code,creation_time) " +
+                "VALUES ('fooUserId','766191920@qq.com','000000','%s')", dateFiveMinutesAgo));
 
         VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
         when(verificationCodeService.generate()).thenReturn("000000");
