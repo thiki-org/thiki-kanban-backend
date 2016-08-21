@@ -36,7 +36,7 @@ public class PasswordService {
     @Resource
     private MailService mailService;
 
-    public void applyRetrieval(PasswordRetrievalApplication passwordRetrievalApplication) throws TemplateException, IOException, MessagingException {
+    public String applyRetrieval(PasswordRetrievalApplication passwordRetrievalApplication) throws TemplateException, IOException, MessagingException {
         Registration registeredUser = registrationPersistence.findByEmail(passwordRetrievalApplication.getEmail());
         verifyWhetherUserIsExists(registeredUser);
 
@@ -44,36 +44,40 @@ public class PasswordService {
 
         passwordRetrievalApplication.setVerificationCode(verificationCode);
 
-        passwordPersistence.clearUnfinishedApplication(passwordRetrievalApplication);
+        passwordPersistence.clearUnfinishedApplication(registeredUser.getName());
+
+        passwordRetrievalApplication.setUserName(registeredUser.getName());
         passwordPersistence.createPasswordRetrievalApplication(passwordRetrievalApplication);
 
         sendVerificationCodeEmail(registeredUser, verificationCode);
+        return registeredUser.getName();
     }
 
-    public void applyReset(PasswordResetApplication passwordResetApplication) {
-        PasswordRetrievalApplication passwordRetrievalApplication = passwordPersistence.loadRetrievalApplication(passwordResetApplication);
+    public void applyReset(String userName, PasswordResetApplication passwordResetApplication) {
+        PasswordRetrievalApplication passwordRetrievalApplication = passwordPersistence.loadRetrievalApplication(userName);
 
         verifyRetrievalApplicationIsNotNull(passwordRetrievalApplication);
         passwordRetrievalApplication.verifyVerificationCodeIsCorrect(passwordResetApplication.getVerificationCode());
         passwordRetrievalApplication.verifyVerificationCodeIsNotExpired(passwordRetrievalApplication.getCreationTime());
 
-        passwordPersistence.makeRetrievalApplicationPassed(passwordResetApplication.getEmail());
+        passwordPersistence.makeRetrievalApplicationPassed(userName);
+        passwordResetApplication.setUserName(userName);
         passwordPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 
-    public void resetPassword(PasswordReset passwordReset) throws Exception {
-        PasswordReset passwordResetRecord = passwordPersistence.loadResetApplicationByEmail(passwordReset.getEmail());
-        if (passwordResetRecord == null) {
+    public void resetPassword(String userName, PasswordReset passwordReset) throws Exception {
+        boolean isPasswordResetApplicationExists = passwordPersistence.isPasswordResetApplicationExists(userName);
+        if (!isPasswordResetApplicationExists) {
             throw new BusinessException(PasswordCodes.NO_PASSWORD_RESET_RECORD.code(), PasswordCodes.NO_PASSWORD_RESET_RECORD.message());
         }
-
-        Registration registeredUser = registrationPersistence.findByEmail(passwordReset.getEmail());
+        Registration registeredUser = registrationPersistence.findByIdentity(userName);
         String dencryptPassword = rsaService.dencrypt(passwordReset.getPassword());
 
-        passwordReset.encryptPassword(registeredUser.getSalt(), dencryptPassword);
 
-        passwordPersistence.resetPassword(passwordReset);
-        passwordPersistence.cleanResetApplication(passwordReset);
+        String encryptedPassword = passwordReset.encryptPassword(registeredUser.getSalt(), dencryptPassword);
+
+        passwordPersistence.resetPassword(userName, encryptedPassword);
+        passwordPersistence.cleanResetApplication(userName);
     }
 
     private void verifyWhetherUserIsExists(Registration registeredUser) {
