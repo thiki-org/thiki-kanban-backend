@@ -12,7 +12,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class PasswordResetResource extends RestResource {
     public PasswordResetResource(String userName) throws Exception {
-        Link passwordRetrievalLink = ControllerLinkBuilder.linkTo(methodOn(PasswordController.class).password(null,userName)).withRel("password");
+        Link passwordRetrievalLink = ControllerLinkBuilder.linkTo(methodOn(PasswordController.class).password(null, userName)).withRel("password");
         this.add(passwordRetrievalLink);
     }
 }
