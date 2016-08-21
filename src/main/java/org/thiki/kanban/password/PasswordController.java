@@ -1,10 +1,7 @@
 package org.thiki.kanban.password;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 import org.thiki.kanban.password.password.PasswordResource;
 import org.thiki.kanban.password.password.PasswordService;
@@ -26,19 +23,19 @@ public class PasswordController {
 
     @RequestMapping(value = "/passwordRetrievalApplication", method = RequestMethod.POST)
     public HttpEntity passwordRetrievalApply(@RequestBody PasswordRetrievalApplication passwordRetrievalApplication) throws Exception {
-        passwordService.applyRetrieval(passwordRetrievalApplication);
-        return Response.post(new PasswordRetrievalResource());
+        String userName = passwordService.applyRetrieval(passwordRetrievalApplication);
+        return Response.post(new PasswordRetrievalResource(userName));
     }
 
-    @RequestMapping(value = "/passwordResetApplication", method = RequestMethod.POST)
-    public HttpEntity passwordRetrieval(@RequestBody PasswordResetApplication passwordResetApplication) throws Exception {
-        passwordService.applyReset(passwordResetApplication);
-        return Response.post(new PasswordResetResource());
+    @RequestMapping(value = "/{userName}/passwordResetApplication", method = RequestMethod.POST)
+    public HttpEntity passwordRetrieval(@RequestBody PasswordResetApplication passwordResetApplication, @PathVariable("userName") String userName) throws Exception {
+        passwordService.applyReset(userName, passwordResetApplication);
+        return Response.post(new PasswordResetResource(userName));
     }
 
-    @RequestMapping(value = "/password", method = RequestMethod.PUT)
-    public HttpEntity password(@RequestBody PasswordReset passwordReset) throws Exception {
-        passwordService.resetPassword(passwordReset);
+    @RequestMapping(value = "/{userName}/password", method = RequestMethod.PUT)
+    public HttpEntity password(@RequestBody PasswordReset passwordReset, @PathVariable("userName") String userName) throws Exception {
+        passwordService.resetPassword(userName, passwordReset);
         return Response.post(new PasswordResource());
     }
 }
