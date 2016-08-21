@@ -147,7 +147,7 @@ DROP TABLE IF EXISTS kb_password_retrieval;
 
 CREATE TABLE kb_password_retrieval (
   id                VARCHAR(40) NOT NULL,
-  email             VARCHAR(50) NOT NULL,
+  user_name         VARCHAR(50) NOT NULL,
   verification_code VARCHAR(50) NOT NULL,
   is_verify_passed  INT      DEFAULT 0,
   creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -164,7 +164,7 @@ DROP TABLE IF EXISTS kb_password_reset;
 
 CREATE TABLE kb_password_reset (
   id                VARCHAR(40) NOT NULL,
-  email             VARCHAR(50) NOT NULL,
+  user_name         VARCHAR(50) NOT NULL,
   is_reset          INT      DEFAULT 0,
   creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
