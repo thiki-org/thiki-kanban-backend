@@ -16,11 +16,13 @@ public class PasswordRetrievalApplication {
     public static final int PERIOD = 5;
 
     private String id;
+
     @NotNull(message = "用于找回密码的邮箱不能为空.")
     @Email(message = "邮箱格式错误.")
     @Length(max = 40, message = "邮箱超出长度限制。")
     private String email;
 
+    private String userName;
     private String verificationCode;
     private Date creationTime;
 
@@ -65,5 +67,13 @@ public class PasswordRetrievalApplication {
         if (expiredTime.before(dateService.now())) {
             throw new BusinessException(PasswordCodes.SECURITY_CODE_TIMEOUT.code(), PasswordCodes.SECURITY_CODE_TIMEOUT.message());
         }
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
