@@ -11,8 +11,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubt on 8/15/16.
  */
 public class PasswordResetResource extends RestResource {
-    public PasswordResetResource() throws Exception {
-        Link passwordRetrievalLink = ControllerLinkBuilder.linkTo(methodOn(PasswordController.class).password(null)).withRel("password");
+    public PasswordResetResource(String userName) throws Exception {
+        Link passwordRetrievalLink = ControllerLinkBuilder.linkTo(methodOn(PasswordController.class).password(null,userName)).withRel("password");
         this.add(passwordRetrievalLink);
     }
 }
