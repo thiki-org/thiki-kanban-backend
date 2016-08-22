@@ -1,0 +1,9 @@
+security:
+  whiteList:
+    - "/entrance"
+    - "/publicKey"
+    - "/registration"
+    - "/login"
+    - "/passwordRetrievalApplication"
+    - "/{userName}/passwordResetApplication"
+    - "/{userName}/password"
