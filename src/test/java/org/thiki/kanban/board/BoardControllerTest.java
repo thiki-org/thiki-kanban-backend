@@ -25,15 +25,15 @@ public class BoardControllerTest extends TestBase {
                 .body("{\"name\":\"board-name\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards")
+                .post("/someone/boards")
                 .then()
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
                 .body("reporter", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", equalTo("http://localhost:8007/boards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
+                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
     }
 
     @Scenario("用户根据ID获取board时,如果该board存在,则返回其信息")
@@ -42,15 +42,15 @@ public class BoardControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .when()
-                .get("/boards/fooId")
+                .get("/someone/boards/fooId")
                 .then()
                 .statusCode(200)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
                 .body("reporter", equalTo("someone"))
-                .body("_links.all.href", equalTo("http://localhost:8007/boards"))
+                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
                 .body("_links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
     }
 
     @Scenario("成功更新一个board信息")
@@ -61,13 +61,13 @@ public class BoardControllerTest extends TestBase {
                 .contentType(ContentType.JSON)
                 .body("{\"name\":\"new-name\"}")
                 .when()
-                .put("/boards/fooId")
+                .put("/someone/boards/fooId")
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("new-name"))
                 .body("reporter", equalTo("someone"))
-                .body("_links.all.href", equalTo("http://localhost:8007/boards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/fooId"));
+                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
     }
 
@@ -77,10 +77,10 @@ public class BoardControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .when()
-                .delete("/boards/fooId")
+                .delete("/someone/boards/fooId")
                 .then()
                 .statusCode(200)
-                .body("_links.all.href", equalTo("http://localhost:8007/boards"));
+                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"));
         assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_board WHERE  delete_status=1").size());
     }
 
@@ -89,7 +89,7 @@ public class BoardControllerTest extends TestBase {
     public void shouldThrowResourceNotFoundExceptionWhenProcedureToDeleteIsNotExist() throws Exception {
         given().header("userName", "someone")
                 .when()
-                .delete("/boards/fooId")
+                .delete("/someone/boards/fooId")
                 .then()
                 .statusCode(404)
                 .body("message", equalTo("board[fooId] is not found."));
@@ -101,14 +101,14 @@ public class BoardControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .when()
-                .get("/boards")
+                .get("/someone/boards")
                 .then()
                 .statusCode(200)
                 .body("[0].name", equalTo("board-name"))
                 .body("[0].reporter", equalTo("someone"))
                 .body("[0].creationTime", notNullValue())
-                .body("[0]._links.all.href", equalTo("http://localhost:8007/boards"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/fooId"))
+                .body("[0]._links.all.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
                 .body("[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"));
     }
 
@@ -118,14 +118,14 @@ public class BoardControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .when()
-                .get("/boards")
+                .get("/someone/boards")
                 .then()
                 .statusCode(200)
                 .body("[0].name", equalTo("board-name"))
                 .body("[0].reporter", equalTo("someone"))
                 .body("[0].creationTime", notNullValue())
-                .body("[0]._links.all.href", equalTo("http://localhost:8007/boards"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/fooId"))
+                .body("[0]._links.all.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
                 .body("[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"));
     }
 }

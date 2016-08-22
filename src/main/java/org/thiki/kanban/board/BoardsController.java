@@ -11,18 +11,19 @@ import java.util.List;
  * Created by xubitao on 05/26/16.
  */
 @RestController
+@RequestMapping("/{userName}")
 public class BoardsController {
     @Resource
     private BoardsService boardsService;
 
     @RequestMapping(value = "/boards/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String id, @RequestHeader String userName) {
+    public HttpEntity findById(@PathVariable String id, @PathVariable String userName) {
         Board board = boardsService.findById(id);
         return Response.build(new BoardResource(board, userName));
     }
 
     @RequestMapping(value = "/boards/{id}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Board board, @PathVariable String id, @RequestHeader String userName) {
+    public HttpEntity update(@RequestBody Board board, @PathVariable String id, @PathVariable String userName) {
         board.setId(id);
         Board updatedBoard = boardsService.update(board);
         return Response.build(new BoardResource(updatedBoard, userName));
@@ -30,19 +31,19 @@ public class BoardsController {
     }
 
     @RequestMapping(value = "/boards/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String id, @RequestHeader String userName) {
+    public HttpEntity deleteById(@PathVariable String id, @PathVariable String userName) {
         boardsService.deleteById(id);
         return Response.build(new BoardResource(userName));
     }
 
     @RequestMapping(value = "/boards", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Board board, @RequestHeader String userName) {
+    public HttpEntity create(@RequestBody Board board, @PathVariable String userName) {
         Board savedBoard = boardsService.create(userName, board);
         return Response.post(new BoardResource(savedBoard, userName));
     }
 
     @RequestMapping(value = "/boards", method = RequestMethod.GET)
-    public HttpEntity loadByUserName(@RequestHeader String userName) {
+    public HttpEntity loadByUserName(@PathVariable String userName) {
         List<Board> boards = boardsService.findByUserId(userName);
         return Response.build(new BoardsResource(boards));
     }
