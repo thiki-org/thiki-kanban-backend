@@ -77,6 +77,7 @@ public class SecurityFilter implements Filter {
         }
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader(Constants.HEADER_PARAMS_TOKEN, updatedToken);
+        response.setHeader(Constants.ACCESS_CONTROL_EXPOSE_HEADERS, Constants.HEADER_PARAMS_TOKEN);
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
