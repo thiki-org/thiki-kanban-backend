@@ -2,6 +2,7 @@ package org.thiki.kanban.foundation.security.filter;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.connector.RequestFacade;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
@@ -22,21 +23,16 @@ import java.util.List;
  * Created by xubt on 7/10/16.
  */
 @Service
+@ConfigurationProperties(prefix = "security")
 public class SecurityFilter implements Filter {
     @Resource
     private TokenService tokenService;
 
-    private List<String> whiteList = new ArrayList<String>() {
-        {
-            add("/entrance");
-            add("/publicKey");
-            add("/registration");
-            add("/login");
-            add("/passwordRetrievalApplication");
-            add("/{userName}/passwordResetApplication");
-            add("/{userName}/password");
-        }
-    };
+    private List<String> whiteList = new ArrayList<>();
+
+    public List<String> getWhiteList() {
+        return whiteList;
+    }
 
     private boolean isFreeSecurity(String uri) {
         for (String freeSecurityUrl : whiteList) {
