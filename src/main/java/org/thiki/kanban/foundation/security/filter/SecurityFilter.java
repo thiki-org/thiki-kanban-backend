@@ -26,7 +26,7 @@ public class SecurityFilter implements Filter {
     @Resource
     private TokenService tokenService;
 
-    private List<String> freeSecurityUrls = new ArrayList<String>() {
+    private List<String> whiteList = new ArrayList<String>() {
         {
             add("/entrance");
             add("/publicKey");
@@ -39,7 +39,7 @@ public class SecurityFilter implements Filter {
     };
 
     private boolean isFreeSecurity(String uri) {
-        for (String freeSecurityUrl : freeSecurityUrls) {
+        for (String freeSecurityUrl : whiteList) {
             UriTemplate uriTemplate = new UriTemplate(freeSecurityUrl);
             if (uriTemplate.matches(uri)) {
                 return true;
