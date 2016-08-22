@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.connector.RequestFacade;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriTemplate;
 import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.token.IdentityResult;
 import org.thiki.kanban.foundation.security.token.TokenService;
@@ -32,13 +33,15 @@ public class SecurityFilter implements Filter {
             add("/registration");
             add("/login");
             add("/passwordRetrievalApplication");
-            add("/passwordResetApplication");
+            add("/{userName}/passwordResetApplication");
+            add("/{userName}/password");
         }
     };
 
     private boolean isFreeSecurity(String uri) {
         for (String freeSecurityUrl : freeSecurityUrls) {
-            if (freeSecurityUrl.equals(uri) || freeSecurityUrl.indexOf(uri + "/") > -1) {
+            UriTemplate uriTemplate = new UriTemplate(freeSecurityUrl);
+            if (uriTemplate.matches(uri)) {
                 return true;
             }
         }
