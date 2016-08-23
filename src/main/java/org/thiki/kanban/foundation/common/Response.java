@@ -20,4 +20,16 @@ public class Response {
         ResponseEntity responseEntity = new ResponseEntity(resources != null ? resources : restResource.getResource(), HttpStatus.CREATED);
         return responseEntity;
     }
+
+    public static HttpEntity unauthorised(RestResource restResource) {
+        JSONArray resources = restResource.getResources();
+        ResponseEntity responseEntity = new ResponseEntity(resources != null ? resources : restResource.getResource(), HttpStatus.UNAUTHORIZED);
+        return responseEntity;
+    }
+
+    public static HttpEntity error(RestResource restResource) {
+        JSONArray resources = restResource.getResources();
+        ResponseEntity responseEntity = new ResponseEntity(resources != null ? resources : restResource.getResource(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return responseEntity;
+    }
 }
