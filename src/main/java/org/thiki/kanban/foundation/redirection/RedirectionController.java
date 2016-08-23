@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
 
 /**
- * Created by xubitao on 05/26/16.
+ * Created by xubitao on 08/22/16.
  */
 @RestController
-public class UnauthorisedController {
+public class RedirectionController {
 
     @RequestMapping(value = "/unauthorised", method = RequestMethod.GET)
     public HttpEntity unauthorised(@RequestParam("code") String code, @RequestParam("message") String message) throws Exception {
