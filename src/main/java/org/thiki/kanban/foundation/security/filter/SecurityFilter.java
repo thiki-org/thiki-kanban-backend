@@ -70,7 +70,7 @@ public class SecurityFilter implements Filter {
         try {
             updatedToken = tokenService.updateToken(token);
         } catch (Exception e) {
-            ((ResponseFacade) servletResponse).sendRedirect(String.format("/unauthorised?code=%s&message=%s", Constants.SECURITY_IDENTIFY_UN_KNOW, "Update token failed:" + e.getMessage()));
+            sendRedirect(servletResponse, "unauthorised", Constants.SECURITY_IDENTIFY_UN_KNOW, e.getMessage());
             return;
         }
         HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -98,11 +98,16 @@ public class SecurityFilter implements Filter {
                 return true;
             }
             servletResponse.setCharacterEncoding("UTF-8");
-            ((ResponseFacade) servletResponse).sendRedirect(String.format("/unauthorised?code=%s&message=%s", identityResult.getErrorCode(), URLEncoder.encode(identityResult.getErrorMessage(), "UTF-8")));
+            sendRedirect(servletResponse, "unauthorised", identityResult.getErrorCode(), identityResult.getErrorMessage());
             return false;
         } catch (Exception e) {
-            ((ResponseFacade) servletResponse).sendRedirect(String.format("/error?code=%s&message=%s", Constants.SECURITY_IDENTIFY_UN_KNOW, URLEncoder.encode(e.getMessage(), "UTF-8")));
+            sendRedirect(servletResponse, "error", Constants.SECURITY_IDENTIFY_UN_KNOW, e.getMessage());
             return false;
         }
+    }
+
+    private void sendRedirect(ServletResponse servletResponse, String errorType, String code, String message) throws IOException {
+        ResponseFacade responseFacade = (ResponseFacade) servletResponse;
+        responseFacade.sendRedirect(String.format("/%s?code=%s&message=%s", errorType, code, URLEncoder.encode(message, "UTF-8")));
     }
 }
