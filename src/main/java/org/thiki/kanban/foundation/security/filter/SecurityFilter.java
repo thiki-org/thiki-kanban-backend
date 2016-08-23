@@ -1,9 +1,8 @@
 package org.thiki.kanban.foundation.security.filter;
 
-import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.connector.RequestFacade;
+import org.apache.catalina.connector.ResponseFacade;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
 import org.thiki.kanban.foundation.security.Constants;
@@ -14,9 +13,8 @@ import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -72,7 +70,7 @@ public class SecurityFilter implements Filter {
         try {
             updatedToken = tokenService.updateToken(token);
         } catch (Exception e) {
-            writeResponse(servletResponse, "Update token failed:" + e.getMessage(), Constants.SECURITY_IDENTIFY_UN_KNOW, HttpStatus.UNAUTHORIZED.value());
+            ((ResponseFacade) servletResponse).sendRedirect(String.format("/unauthorised?code=%s&message=%s", Constants.SECURITY_IDENTIFY_UN_KNOW, "Update token failed:" + e.getMessage()));
             return;
         }
         HttpServletResponse response = (HttpServletResponse) servletResponse;
@@ -99,34 +97,12 @@ public class SecurityFilter implements Filter {
             if (identityResult.getErrorCode().equals(Constants.SECURITY_IDENTIFY_PASSED_CODE)) {
                 return true;
             }
-            writeResponse(servletResponse, identityResult.getErrorMessage(), identityResult.getErrorCode(), HttpStatus.UNAUTHORIZED.value());
+            servletResponse.setCharacterEncoding("UTF-8");
+            ((ResponseFacade) servletResponse).sendRedirect(String.format("/unauthorised?code=%s&message=%s", identityResult.getErrorCode(), URLEncoder.encode(identityResult.getErrorMessage(), "UTF-8")));
             return false;
         } catch (Exception e) {
-            writeResponse(servletResponse, "Error occurred when parsing the token:" + e.getMessage(), Constants.SECURITY_IDENTIFY_UN_KNOW, HttpStatus.INTERNAL_SERVER_ERROR.value());
+            ((ResponseFacade) servletResponse).sendRedirect(String.format("/error?code=%s&message=%s", Constants.SECURITY_IDENTIFY_UN_KNOW, URLEncoder.encode(e.getMessage(), "UTF-8")));
             return false;
         }
-    }
-
-    private void writeResponse(ServletResponse servletResponse, String message, String code, int httpCode) throws IOException {
-        JSONObject responseBody = new JSONObject();
-        responseBody.put("message", message);
-        responseBody.put("code", code);
-        responseBody.put("_links", new HashMap<String, Object>() {
-            {
-                put("identification", new HashMap<String, String>() {
-                    {
-                        {
-                            put("href", "/identification");
-                        }
-                    }
-                });
-            }
-        });
-        HttpServletResponse response = (HttpServletResponse) servletResponse;
-        response.setContentType("application/json");
-        response.setStatus(httpCode);
-        PrintWriter out = response.getWriter();
-        out.print(responseBody.toJSONString());
-        out.flush();
     }
 }
