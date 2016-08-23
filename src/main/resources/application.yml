@@ -7,3 +7,5 @@ security:
     - "/passwordRetrievalApplication"
     - "/{userName}/passwordResetApplication"
     - "/{userName}/password"
+    - "/unauthorised"
+    - "/error"
