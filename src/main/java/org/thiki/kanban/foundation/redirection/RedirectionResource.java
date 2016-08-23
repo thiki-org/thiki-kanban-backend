@@ -10,8 +10,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubitao on 05/26/16.
  */
-public class UnauthorisedResource extends RestResource {
-    public UnauthorisedResource(Error error) throws Exception {
+public class RedirectionResource extends RestResource {
+    public RedirectionResource(Error error) throws Exception {
         this.domainObject = error;
         if (error != null) {
             Link identificationLink = linkTo(methodOn(LoginController.class).login(null, null)).withRel("identification");

@@ -17,13 +17,13 @@ public class RedirectionController {
     public HttpEntity unauthorised(@RequestParam("code") String code, @RequestParam("message") String message) throws Exception {
         Error error = new Error(code, message);
 
-        return Response.unauthorised(new UnauthorisedResource(error));
+        return Response.unauthorised(new RedirectionResource(error));
     }
 
     @RequestMapping(value = "/error", method = RequestMethod.GET)
     public HttpEntity error(@RequestParam("code") String code, @RequestParam("message") String message) throws Exception {
         Error error = new Error(code, message);
 
-        return Response.error(new UnauthorisedResource(error));
+        return Response.error(new RedirectionResource(error));
     }
 }
