@@ -1,10 +1,11 @@
 package org.thiki.kanban.foundation.security.filter;
 
 import org.apache.catalina.connector.RequestFacade;
-import org.apache.catalina.connector.ResponseFacade;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
+import org.thiki.kanban.foundation.exception.BusinessException;
+import org.thiki.kanban.foundation.exception.UnauthorisedException;
 import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.token.IdentityResult;
 import org.thiki.kanban.foundation.security.token.TokenService;
@@ -13,7 +14,6 @@ import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,17 +61,17 @@ public class SecurityFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-        if (!isPassedSecurityVerify(servletRequest, servletResponse)) {
-            return;
-        }
-        String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
-
         String updatedToken;
         try {
+            if (!isPassedSecurityVerify(servletRequest, servletResponse)) {
+                return;
+            }
+            String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
             updatedToken = tokenService.updateToken(token);
-        } catch (Exception e) {
-            sendRedirect(servletResponse, "unauthorised", Constants.SECURITY_IDENTIFY_UN_KNOW, e.getMessage());
-            return;
+        } catch (BusinessException businessException) {
+            throw new UnauthorisedException(businessException.getCode(), businessException.getMessage());
+        } catch (Exception businessException) {
+            throw new UnauthorisedException(Constants.SECURITY_IDENTIFY_UN_KNOW, businessException.getMessage());
         }
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader(Constants.HEADER_PARAMS_TOKEN, updatedToken);
@@ -88,26 +88,14 @@ public class SecurityFilter implements Filter {
 
     }
 
-    private boolean isPassedSecurityVerify(ServletRequest servletRequest, ServletResponse servletResponse) throws IOException {
+    private boolean isPassedSecurityVerify(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
         String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
         String userName = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_USER_NAME);
 
-        try {
-            IdentityResult identityResult = tokenService.identify(token, userName);
-            if (identityResult.getErrorCode().equals(Constants.SECURITY_IDENTIFY_PASSED_CODE)) {
-                return true;
-            }
-            servletResponse.setCharacterEncoding("UTF-8");
-            sendRedirect(servletResponse, "unauthorised", identityResult.getErrorCode(), identityResult.getErrorMessage());
-            return false;
-        } catch (Exception e) {
-            sendRedirect(servletResponse, "error", Constants.SECURITY_IDENTIFY_UN_KNOW, e.getMessage());
-            return false;
+        IdentityResult identityResult = tokenService.identify(token, userName);
+        if (identityResult.getErrorCode() == (Constants.SECURITY_IDENTIFY_PASSED_CODE)) {
+            return true;
         }
-    }
-
-    private void sendRedirect(ServletResponse servletResponse, String errorType, String code, String message) throws IOException {
-        ResponseFacade responseFacade = (ResponseFacade) servletResponse;
-        responseFacade.sendRedirect(String.format("/%s?code=%s&message=%s", errorType, code, URLEncoder.encode(message, "UTF-8")));
+        throw new UnauthorisedException(identityResult.getErrorCode(), identityResult.getErrorMessage());
     }
 }
