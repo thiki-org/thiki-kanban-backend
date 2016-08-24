@@ -76,7 +76,7 @@ public class RegistrationControllerTest extends TestBase {
                 .when()
                 .post("/registration")
                 .then()
-                .statusCode(HttpStatus.CONFLICT.value())
+                .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("code", equalTo(ExceptionCode.USER_EXISTS.code()))
                 .body("message", equalTo("User named someone is already exists."));
     }
@@ -93,7 +93,7 @@ public class RegistrationControllerTest extends TestBase {
                 .when()
                 .post("/registration")
                 .then()
-                .statusCode(HttpStatus.CONFLICT.value())
+                .statusCode(HttpStatus.BAD_REQUEST.value())
                 .body("code", equalTo(ExceptionCode.USER_EXISTS.code()))
                 .body("message", equalTo("Email someone@gmail.com is already exists."));
     }
