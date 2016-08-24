@@ -87,7 +87,6 @@ public class LoginControllerTest extends TestBase {
                 .get("/login")
                 .then()
                 .statusCode(400)
-                .body("code", equalTo(400))
                 .body("message", equalTo("Identity is required."));
     }
 
@@ -100,7 +99,6 @@ public class LoginControllerTest extends TestBase {
                 .get("/login")
                 .then()
                 .statusCode(400)
-                .body("code", equalTo(400))
                 .body("message", equalTo("Identity foo is not exists,please retry or register first."));
     }
 }
