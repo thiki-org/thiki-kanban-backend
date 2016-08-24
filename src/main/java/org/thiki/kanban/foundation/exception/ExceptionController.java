@@ -15,10 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 /**
@@ -46,29 +44,6 @@ public class ExceptionController implements ErrorController {
         this.errorAttributes = errorAttributes;
     }
 
-
-    /**
-     * 定义404的ModelAndView
-     *
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(produces = "text/html", value = "404")
-    public ModelAndView errorHtml404(HttpServletRequest request,
-                                     HttpServletResponse response) {
-        response.setStatus(getStatus(request, isIncludeStackTrace(request, MediaType.TEXT_HTML)).value());
-        Map<String, Object> model = getErrorAttributes(request,
-                isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        return new ModelAndView("error/404", model);
-    }
-
-    /**
-     * 定义404的JSON数据
-     *
-     * @param request
-     * @return
-     */
     @RequestMapping(value = "404")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> error404(HttpServletRequest request) {
@@ -76,22 +51,6 @@ public class ExceptionController implements ErrorController {
                 isIncludeStackTrace(request, MediaType.TEXT_HTML));
         HttpStatus status = getStatus(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
         return new ResponseEntity<Map<String, Object>>(body, status);
-    }
-
-    /**
-     * 定义500的ModelAndView
-     *
-     * @param request
-     * @param response
-     * @return
-     */
-    @RequestMapping(produces = "text/html", value = "500")
-    public ModelAndView errorHtml500(HttpServletRequest request,
-                                     HttpServletResponse response) {
-        response.setStatus(getStatus(request, isIncludeStackTrace(request, MediaType.TEXT_HTML)).value());
-        Map<String, Object> model = getErrorAttributes(request,
-                isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        return new ModelAndView("error/500", model);
     }
 
     @RequestMapping(value = "businessException")
@@ -120,13 +79,6 @@ public class ExceptionController implements ErrorController {
     }
 
 
-    /**
-     * Determine if the stacktrace attribute should be included.
-     *
-     * @param request  the source request
-     * @param produces the media type produced (or {@code MediaType.ALL})
-     * @return if the stacktrace attribute should be included
-     */
     protected boolean isIncludeStackTrace(HttpServletRequest request,
                                           MediaType produces) {
         ErrorProperties.IncludeStacktrace include = this.serverProperties.getError().getIncludeStacktrace();
