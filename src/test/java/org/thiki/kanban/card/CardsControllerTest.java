@@ -55,7 +55,6 @@ public class CardsControllerTest extends TestBase {
                 .post("/procedures/fooId/cards")
                 .then()
                 .statusCode(400)
-                .body("code", equalTo(400))
                 .body("message", equalTo("卡片描述不能为空。"));
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
     }
