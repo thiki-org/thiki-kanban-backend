@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.thiki.kanban.foundation.exception.InvalidParamsException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -12,7 +13,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import javax.validation.executable.ExecutableValidator;
 import java.lang.reflect.Method;
-import java.security.InvalidParameterException;
 import java.util.Set;
 
 @Aspect
@@ -25,7 +25,7 @@ public class ValidateAspect {
             if (!(arg instanceof String) && !(arg instanceof Integer)) {
                 Set<ConstraintViolation<Object>> constraintViolations = getValidator().validate(arg);
                 if (constraintViolations.size() > 0) {
-                    throw new InvalidParameterException(constraintViolations.iterator().next().getMessage());
+                    throw new InvalidParamsException(constraintViolations.iterator().next().getMessage());
                 }
             }
         }
@@ -38,7 +38,7 @@ public class ValidateAspect {
 
         Set<ConstraintViolation<Object>> violations = getMethodValidator().validateParameters(joinPoint.getTarget(), method, parameterValues);
         if (!violations.isEmpty()) {
-            throw new InvalidParameterException(violations.iterator().next().getMessage());
+            throw new InvalidParamsException(violations.iterator().next().getMessage());
         }
     }
 
