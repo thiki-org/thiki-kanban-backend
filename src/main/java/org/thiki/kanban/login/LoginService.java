@@ -3,6 +3,7 @@ package org.thiki.kanban.login;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
+import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.TokenService;
@@ -10,7 +11,6 @@ import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationPersistence;
 
 import javax.annotation.Resource;
-import java.security.InvalidParameterException;
 import java.text.MessageFormat;
 
 /**
@@ -29,14 +29,14 @@ public class LoginService {
     public Identification login(@NotEmpty(message = "Identity is required.") String identity, @NotEmpty(message = "Password is required.") String password) throws Exception {
         Registration registeredUser = registrationPersistence.findByIdentity(identity);
         if (registeredUser == null) {
-            throw new InvalidParameterException(MessageFormat.format("Identity {0} is not exists,please retry or register first.", identity));
+            throw new InvalidParamsException(MessageFormat.format("Identity {0} is not exists,please retry or register first.", identity));
         }
         String rsaDecryptedPassword = rsaService.dencrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
 
         Registration matchedUser = registrationPersistence.findByCredential(identity, md5Password);
         if (matchedUser == null) {
-            throw new InvalidParameterException("Your username or password is incorrect.");
+            throw new InvalidParamsException("Your username or password is incorrect.");
         }
 
         Identification identification = new Identification();
