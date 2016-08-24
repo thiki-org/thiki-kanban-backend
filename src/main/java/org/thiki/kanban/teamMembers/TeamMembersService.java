@@ -1,11 +1,11 @@
 package org.thiki.kanban.teamMembers;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.team.Team;
 import org.thiki.kanban.team.TeamsService;
 
 import javax.annotation.Resource;
-import java.security.InvalidParameterException;
 import java.text.MessageFormat;
 
 /**
@@ -21,12 +21,12 @@ public class TeamMembersService {
     public TeamMember joinTeam(String teamId, final TeamMember teamMember, String userName) {
         Team targetTeam = teamsService.findById(teamId);
         if (targetTeam == null) {
-            throw new InvalidParameterException(MessageFormat.format("Team {0} is not found.", teamId));
+            throw new InvalidParamsException(MessageFormat.format("Team {0} is not found.", teamId));
         }
 
         TeamMember foundMember = teamMembersPersistence.findMemberByTeamId(teamMember.getMember(), teamId);
         if (foundMember != null) {
-            throw new InvalidParameterException(MessageFormat.format("Member named {0} is already in the team.", teamMember.getMember()));
+            throw new InvalidParamsException(MessageFormat.format("Member named {0} is already in the team.", teamMember.getMember()));
         }
 
         teamMember.setReporter(userName);
