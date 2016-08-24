@@ -3,7 +3,9 @@ package org.thiki.kanban.foundation.configuration;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -13,10 +15,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thiki.kanban.foundation.exception.UnauthorisedException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -69,5 +73,13 @@ public class ApplicationContextConfig implements ApplicationContextAware {
         LocalValidatorFactoryBean validatorFactory = new LocalValidatorFactoryBean();
         validatorFactory.setValidationMessageSource(messageSource());
         return validatorFactory;
+    }
+
+    @Bean
+    public EmbeddedServletContainerCustomizer containerCustomizer() {
+        return container -> {
+            container.addErrorPages(new ErrorPage(UnauthorisedException.class, "/error/businessException"));
+            container.addErrorPages(new ErrorPage(HttpStatus.BAD_REQUEST, "/error/invalidParamsException"));
+        };
     }
 }
