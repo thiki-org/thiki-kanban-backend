@@ -46,8 +46,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN_CODE))
-                .body("message", equalTo(Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN))
-                .body("_links.identification.href", equalTo("http://localhost:8007/login"));
+                .body("message", equalTo(Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN));
     }
 
     @Scenario("如果用户在5分钟内未发送请求,token将会失效,告知客户端需要重新授权")
@@ -61,8 +60,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE_CODE))
-                .body("message", equalTo(Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE))
-                .body("_links.identification.href", equalTo("http://localhost:8007/login"));
+                .body("message", equalTo(Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE));
     }
 
     @Scenario("当token不为空且未失效时,请求到达后更新token的有效期")
@@ -98,8 +96,7 @@ public class AuthenticationFilterTest extends AuthenticationTestBase {
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT_CODE))
-                .body("message", equalTo(Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT))
-                .body("_links.identification.href", equalTo("http://localhost:8007/login"));
+                .body("message", equalTo(Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT));
     }
 
     private String buildToken(String userName, Date date, int minute) throws Exception {
