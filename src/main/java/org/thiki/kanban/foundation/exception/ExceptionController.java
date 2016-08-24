@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
@@ -47,48 +46,39 @@ public class ExceptionController implements ErrorController {
     @RequestMapping(value = "404")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> error404(HttpServletRequest request) {
-        Map<String, Object> body = getErrorAttributes(request,
-                isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        HttpStatus status = getStatus(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        return new ResponseEntity<Map<String, Object>>(body, status);
+        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
+        HttpStatus status = getStatus(request, isIncludeStackTrace(request));
+        return new ResponseEntity<>(body, status);
     }
 
     @RequestMapping(value = "businessException")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> error401(HttpServletRequest request) {
-        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        HttpStatus status = getStatus(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        return new ResponseEntity<Map<String, Object>>(body, status);
+        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
+        HttpStatus status = getStatus(request, isIncludeStackTrace(request));
+        return new ResponseEntity<>(body, status);
     }
 
     @RequestMapping(value = "invalidParamsException")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> illegalArgumentException(HttpServletRequest request) {
-        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        return new ResponseEntity<Map<String, Object>>(body, HttpStatus.BAD_REQUEST);
+        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
 
 
     @RequestMapping(value = "500")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> error500(HttpServletRequest request) {
-        Map<String, Object> body = getErrorAttributes(request,
-                isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        HttpStatus status = getStatus(request, isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        return new ResponseEntity<Map<String, Object>>(body, status);
+        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
+        HttpStatus status = getStatus(request, isIncludeStackTrace(request));
+        return new ResponseEntity<>(body, status);
     }
 
 
-    protected boolean isIncludeStackTrace(HttpServletRequest request,
-                                          MediaType produces) {
+    private boolean isIncludeStackTrace(HttpServletRequest request) {
         ErrorProperties.IncludeStacktrace include = this.serverProperties.getError().getIncludeStacktrace();
-        if (include == ErrorProperties.IncludeStacktrace.ALWAYS) {
-            return true;
-        }
-        if (include == ErrorProperties.IncludeStacktrace.ON_TRACE_PARAM) {
-            return getTraceParameter(request);
-        }
-        return false;
+        return include == ErrorProperties.IncludeStacktrace.ALWAYS || include == ErrorProperties.IncludeStacktrace.ON_TRACE_PARAM && getTraceParameter(request);
     }
 
 
@@ -99,10 +89,9 @@ public class ExceptionController implements ErrorController {
      * @param includeStackTrace
      * @return
      */
-    private Map<String, Object> getErrorAttributes(HttpServletRequest request,
-                                                   boolean includeStackTrace) {
+    private Map<String, Object> getErrorAttributes(HttpServletRequest request, boolean includeStackTrace) {
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
-        Map errorAttributes = this.errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
+        Map<String, Object> errorAttributes = this.errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
         if (this.errorAttributes.getError(requestAttributes) instanceof BusinessException) {
             errorAttributes.put("code", ((BusinessException) this.errorAttributes.getError(requestAttributes)).getCode());
         }
@@ -117,10 +106,7 @@ public class ExceptionController implements ErrorController {
      */
     private boolean getTraceParameter(HttpServletRequest request) {
         String parameter = request.getParameter("trace");
-        if (parameter == null) {
-            return false;
-        }
-        return !"false".equals(parameter.toLowerCase());
+        return parameter != null && !"false".equals(parameter.toLowerCase());
     }
 
     /**
