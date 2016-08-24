@@ -95,26 +95,9 @@ public class BoardControllerTest extends TestBase {
                 .body("message", equalTo("board[fooId] is not found."));
     }
 
-    @Scenario("获取所有的boards(这个接口考虑废弃)")
-    @Test
-    public void loadAll_shouldReturnAllBoardsSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
-        given().header("userName", "someone")
-                .when()
-                .get("/someone/boards")
-                .then()
-                .statusCode(200)
-                .body("[0].name", equalTo("board-name"))
-                .body("[0].reporter", equalTo("someone"))
-                .body("[0].creationTime", notNullValue())
-                .body("[0]._links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
-                .body("[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"));
-    }
-
     @Scenario("获取指定用户所拥有的boards")
     @Test
-    public void findByuserName_shouldReturnAllBoardsSuccessfully() {
+    public void findByUserName_shouldReturnAllBoardsSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .when()
