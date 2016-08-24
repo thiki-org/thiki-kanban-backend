@@ -1,10 +1,10 @@
 package org.thiki.kanban.user;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
-import java.security.InvalidParameterException;
 import java.util.List;
 
 @Service
@@ -16,7 +16,7 @@ public class UsersService {
     public UserProfile create(String reporterUserId, final UserProfile userProfile) {
         UserProfile foundUserProfile = usersPersistence.findByEmail(userProfile.getEmail());
         if (foundUserProfile != null) {
-            throw new InvalidParameterException("email[" + userProfile.getEmail() + "] is already exists.");
+            throw new InvalidParamsException("email[" + userProfile.getEmail() + "] is already exists.");
         }
         userProfile.setId(reporterUserId);
         usersPersistence.create(userProfile);
