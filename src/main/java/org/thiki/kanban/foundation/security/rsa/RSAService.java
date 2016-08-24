@@ -3,6 +3,7 @@ package org.thiki.kanban.foundation.security.rsa;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
+import org.thiki.kanban.foundation.exception.InvalidParamsException;
 
 import javax.crypto.Cipher;
 import java.security.KeyFactory;
@@ -71,7 +72,7 @@ public class RSAService {
             PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
             return privateKey;
         } catch (Exception e) {
-            throw new IllegalArgumentException("Failed to get private key!", e);
+            throw new InvalidParamsException("Failed to get private key!");
         }
     }
 
@@ -93,7 +94,7 @@ public class RSAService {
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             return new String(cipher.doFinal(data));
         } catch (Exception e) {
-            throw new IllegalArgumentException("通过私钥解密失败,请确保数据已经通过公钥加密。", e);
+            throw new InvalidParamsException("通过私钥解密失败,请确保数据已经通过公钥加密。");
         }
     }
 }
