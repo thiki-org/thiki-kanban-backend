@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.card.CardsCodes;
 import org.thiki.kanban.foundation.annotations.Scenario;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -89,8 +90,8 @@ public class AssignmentControllerTest extends TestBase {
                 .get("/procedures/1/cards/cardId-foo/assignments")
                 .then()
                 .statusCode(400)
-                .body("code", equalTo(400))
-                .body("message", equalTo("card[cardId-foo] is not found."));
+                .body("code", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.message()));
     }
 
     @Scenario("当用户想取消某个分配时,如果指定的分配记录存在,则成功将其取消")
