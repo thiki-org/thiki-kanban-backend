@@ -12,6 +12,7 @@ import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.TokenService;
 
 import javax.annotation.Resource;
+import java.text.MessageFormat;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -76,7 +77,7 @@ public class LoginControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("Your username or password is incorrect."));
+                .body("message", equalTo(LoginCodes.USER_OR_PASSWORD_IS_INCORRECT.message()));
     }
 
     @Scenario("用户登录系统时,如果身份信息为空,则不允许登录并告知客户端错误信息")
@@ -87,7 +88,7 @@ public class LoginControllerTest extends TestBase {
                 .get("/login")
                 .then()
                 .statusCode(400)
-                .body("message", equalTo("Identity is required."));
+                .body("message", equalTo(LoginCodes.IdentityIsRequired));
     }
 
     @Scenario("用户登录系统时,如果用户不存在,则不允许登录并告知客户端错误信息")
@@ -99,6 +100,6 @@ public class LoginControllerTest extends TestBase {
                 .get("/login")
                 .then()
                 .statusCode(400)
-                .body("message", equalTo("Identity foo is not exists,please retry or register first."));
+                .body("message", equalTo(MessageFormat.format(LoginCodes.USER_IS_NOT_EXISTS.message(), "foo")));
     }
 }

@@ -11,6 +11,7 @@ import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationPersistence;
 
 import javax.annotation.Resource;
+import javax.validation.constraints.NotNull;
 import java.text.MessageFormat;
 
 /**
@@ -26,17 +27,17 @@ public class LoginService {
     private RSAService rsaService;
 
     @ValidateParams
-    public Identification login(@NotEmpty(message = "Identity is required.") String identity, @NotEmpty(message = "Password is required.") String password) throws Exception {
+    public Identification login(@NotNull(message = LoginCodes.IdentityIsRequired) String identity, @NotEmpty(message = LoginCodes.PasswordIsRequired) String password) throws Exception {
         Registration registeredUser = registrationPersistence.findByIdentity(identity);
         if (registeredUser == null) {
-            throw new InvalidParamsException(MessageFormat.format("Identity {0} is not exists,please retry or register first.", identity));
+            throw new InvalidParamsException(MessageFormat.format(LoginCodes.USER_IS_NOT_EXISTS.message(), identity));
         }
         String rsaDecryptedPassword = rsaService.dencrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
 
         Registration matchedUser = registrationPersistence.findByCredential(identity, md5Password);
         if (matchedUser == null) {
-            throw new InvalidParamsException("Your username or password is incorrect.");
+            throw new InvalidParamsException(LoginCodes.USER_OR_PASSWORD_IS_INCORRECT.message());
         }
 
         Identification identification = new Identification();
