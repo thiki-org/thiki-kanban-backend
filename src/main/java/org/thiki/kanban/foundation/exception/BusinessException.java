@@ -1,10 +1,12 @@
 package org.thiki.kanban.foundation.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @author joeaniu
  */
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public class BusinessException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
@@ -35,16 +37,10 @@ public class BusinessException extends RuntimeException {
         return code;
     }
 
-    /**
-     * http status in response.
-     * should be overriden by sub class. default is 500.
-     *
-     * @return
-     */
     public HttpStatus getStatus() {
         if (httpStatus != null) {
             return httpStatus;
         }
-        return HttpStatus.INTERNAL_SERVER_ERROR;
+        return HttpStatus.BAD_REQUEST;
     }
 }
