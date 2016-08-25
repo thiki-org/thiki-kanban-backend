@@ -1,5 +1,8 @@
 package org.thiki.kanban.board;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.io.Serializable;
 
 /**
@@ -8,7 +11,8 @@ import java.io.Serializable;
 public class Board implements Serializable {
 
     private String id;
-
+    @NotEmpty(message = BoardCodes.nameIsRequired)
+    @Length(max = 20, message = BoardCodes.nameIsInvalid)
     private String name;
 
     private String reporter;
