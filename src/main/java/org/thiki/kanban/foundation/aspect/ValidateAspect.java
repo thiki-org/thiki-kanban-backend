@@ -19,8 +19,20 @@ import java.util.Set;
 @Component
 public class ValidateAspect {
 
-    @Before("@annotation(org.springframework.web.bind.annotation.RequestMapping)")
+    @Before("execution(* *(@org.springframework.web.bind.annotation.RequestBody (*),..))")
     public void validateBodyParams(JoinPoint joinPoint) throws Throwable {
+        Object[] args = joinPoint.getArgs();
+        for (Object arg : args) {
+            if (arg != null && !(arg instanceof String) && !(arg instanceof Integer)) {
+                Set<ConstraintViolation<Object>> constraintViolations = getValidator().validate(arg);
+                if (constraintViolations.size() > 0) {
+                    throw new InvalidParamsException(constraintViolations.iterator().next().getMessage());
+                }
+            }
+        }
+    }
+    @Before("execution(* *(@org.springframework.web.bind.annotation.RequestBody (*),..,..))")
+    public void validateBodyParams2(JoinPoint joinPoint) throws Throwable {
         Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
             if (arg != null && !(arg instanceof String) && !(arg instanceof Integer)) {
