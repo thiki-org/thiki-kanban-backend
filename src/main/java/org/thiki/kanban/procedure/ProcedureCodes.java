@@ -8,7 +8,7 @@ public enum ProcedureCodes {
     private int code;
     private String message;
     public static final String titleIsRequired = "工序名称不能为空。";
-    public static final String titleIsInvalid = "工序名称长度?超限,请保持在10个汉字以内。";
+    public static final String titleIsInvalid = "工序名称长度超限,请保持在30个字符以内。";
 
     ProcedureCodes(int code, String message) {
         this.code = code;
