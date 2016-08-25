@@ -111,4 +111,19 @@ public class BoardControllerTest extends TestBase {
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
                 .body("[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"));
     }
+
+    @Scenario("当用户创建一个board时,如果存在同名,则不允许创建,并告知客户端错误信息")
+    @Test
+    public void NotAllowedIfBoardWithSameNameIsAlreadyExists() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
+        given().header("userName", "someone")
+                .body("{\"name\":\"board-name\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/someone/boards")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(BoardCodes.BOARD_IS_ALREADY_EXISTS.code()))
+                .body("message", equalTo(BoardCodes.BOARD_IS_ALREADY_EXISTS.message()));
+    }
 }
