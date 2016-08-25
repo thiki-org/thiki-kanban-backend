@@ -45,7 +45,7 @@ public class ProceduresController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Procedure procedure, @RequestHeader String userName, @PathVariable String boardId) {
-        Procedure savedProcedure = proceduresService.create(userName, procedure);
+        Procedure savedProcedure = proceduresService.create(userName, boardId, procedure);
 
         return Response.post(new ProcedureResource(savedProcedure, boardId));
     }
