@@ -26,7 +26,6 @@ public class ProceduresController {
     public HttpEntity findById(@PathVariable String id, @PathVariable String boardId) {
         Procedure procedure = proceduresService.findById(id);
         return Response.build(new ProcedureResource(procedure, boardId));
-
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{id}", method = RequestMethod.PUT)
@@ -45,8 +44,8 @@ public class ProceduresController {
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Procedure procedure, @RequestHeader Integer userId, @PathVariable String boardId) {
-        Procedure savedProcedure = proceduresService.create(userId, procedure);
+    public HttpEntity create(@RequestBody Procedure procedure, @RequestHeader String userName, @PathVariable String boardId) {
+        Procedure savedProcedure = proceduresService.create(userName, procedure);
 
         return Response.post(new ProcedureResource(savedProcedure, boardId));
     }
