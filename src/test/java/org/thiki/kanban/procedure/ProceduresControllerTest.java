@@ -50,7 +50,7 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("this is the procedure title."))
-                .body("reporter", equalTo(11222))
+                .body("reporter", equalTo(userName))
                 .body("creationTime", notNullValue())
                 .body("orderNumber", equalTo(1))
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
