@@ -19,7 +19,7 @@ public class Procedure {
     private String title;
 
     private String reporter;
-
+    private String boardId;
     private Integer orderNumber;
 
     private String creationTime;
@@ -83,4 +83,13 @@ public class Procedure {
     public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
     }
+
+    public String getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(String boardId) {
+        this.boardId = boardId;
+    }
+
 }

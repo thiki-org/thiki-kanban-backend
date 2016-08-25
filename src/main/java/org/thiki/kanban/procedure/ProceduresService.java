@@ -36,6 +36,7 @@ public class ProceduresService {
         if (foundProcedure.getOrderNumber() != procedure.getOrderNumber()) {
             int increment = procedure.getOrderNumber() > foundProcedure.getOrderNumber() ? 1 : 0;
             Map<String, Object> resort = ImmutableMap.<String, Object>builder()
+                    .put("boardId", foundProcedure.getBoardId())
                     .put("originOrderNumber", foundProcedure.getOrderNumber())
                     .put("currentOrderNumber", procedure.getOrderNumber())
                     .put("increment", increment)
