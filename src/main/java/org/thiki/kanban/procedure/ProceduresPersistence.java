@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Repository
 public interface ProceduresPersistence {
-    Integer create(Procedure procedure);
+    Integer create(@Param("procedure") Procedure procedure, @Param("userName") String userName, @Param("boardId") String boardId);
 
     Procedure findById(@Param("id") String id);
 
