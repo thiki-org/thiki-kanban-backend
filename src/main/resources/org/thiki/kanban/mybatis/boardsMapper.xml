@@ -14,6 +14,9 @@
         name=#{name}
         WHERE id=#{id}
     </update>
+    <select id="unique" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_board WHERE delete_status=0 AND NAME=#{name} AND reporter=#{userName}
+    </select>
 
     <select id="loadByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
         SELECT * FROM kb_board WHERE delete_status=0 AND reporter=#{userName}
