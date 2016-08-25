@@ -17,10 +17,13 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ProceduresControllerTest extends TestBase {
+
+    private String userName = "fooName";
+
     @Scenario("创建一个新的procedure后,返回自身及links信息")
     @Test
     public void shouldReturn201WhenCreateProcedureSuccessfully() {
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .body("{\"title\":\"this is the procedure title.\",\"boardId\":\"feeId\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -28,7 +31,7 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("this is the procedure title."))
-                .body("reporter", equalTo(11222))
+                .body("reporter", equalTo(userName))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
@@ -39,7 +42,7 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void create_orderNumberShouldAutoIncrease() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('existedFooId','this is the first procedure.',1,'feeId')");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .body("{\"title\":\"this is the procedure title.\",\"boardId\":\"feeId\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -58,7 +61,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("创建新的procedure时,如果名称为空,则不允许创建并返回客户端400错误")
     @Test
     public void shouldFailedIfProcedureTitleIsEmpty() {
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .body("{\"boardId\":\"feeId\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -66,13 +69,13 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("工序名称不能为空"));
+                .body("message", equalTo(ProcedureCodes.titleIsRequired));
     }
 
     @Scenario("创建新的procedure时,如果boardID为空,则不允许创建并返回客户端400错误")
     @Test
     public void shouldFailedIfProcedureBoardIdIsEmpty() {
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .body("{\"title\":\"this is the procedure title.\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -83,10 +86,10 @@ public class ProceduresControllerTest extends TestBase {
                 .body("message", equalTo("boardId不能为空"));
     }
 
-    @Scenario("创建新的procedure时,如果名称长度不在合法的范围,则不允许创建并返回客户端400错误")
+    @Scenario("创建新的procedure时,如果名称为空字符串,则不允许创建并返回客户端400错误")
     @Test
-    public void shouldReturnBadRequestWhenProcedureTitleIsTooLong() {
-        given().header("userId", "11222")
+    public void shouldReturnBadRequestWhenProcedureTitleIsEmpty() {
+        given().header("userName", userName)
                 .body("{\"boardId\":\"feeId\"}}")
                 .body("{\"title\":\"\",\"boardId\":\"feeId\"}")
                 .contentType(ContentType.JSON)
@@ -95,14 +98,30 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo("工序名称长度非法,有效长度为1~50个字符。"));
+                .body("message", equalTo(ProcedureCodes.titleIsInvalid));
     }
+
+    @Scenario("创建新的procedure时,如果名称长度超限,则不允许创建并返回客户端400错误")
+    @Test
+    public void shouldReturnBadRequestWhenProcedureTitleIsTooLong() {
+        given().header("userName", userName)
+                .body("{\"boardId\":\"feeId\"}}")
+                .body("{\"title\":\"长度超限长度超限长度超限\",\"boardId\":\"feeId\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/feeId/procedures")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo(ProcedureCodes.titleIsInvalid));
+    }
+
 
     @Scenario("当根据procedureId查找procedure时,如果procedure存在,则将其返回")
     @Test
     public void shouldReturnProcedureWhenFindProcedureById() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .when()
                 .get("/boards/feeId/procedures/fooId")
                 .then()
@@ -117,7 +136,7 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldUpdateSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}")
                 .when()
@@ -133,7 +152,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("更新procedure时,如果参数合法但待更新的procedure不存在,则更新失败")
     @Test
     public void update_shouldFailedWhenTheProcedureToUpdateIsNotExists() {
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}")
                 .when()
@@ -148,7 +167,7 @@ public class ProceduresControllerTest extends TestBase {
     public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsLessThanOriginNumber() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}}")
                 .when()
@@ -168,7 +187,7 @@ public class ProceduresControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId3','this is the first procedure.',1,'feeId',2)");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"2\"}}")
                 .when()
@@ -187,7 +206,7 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldDeleteSuccessfullyWhenTheProcedureIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .when()
                 .delete("/boards/feeId/procedures/fooId")
                 .then()
@@ -198,7 +217,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("当删除一个procedure时,如果待删除的procedure不存在,则删除成功并返回客户端错误")
     @Test
     public void shouldThrowResourceNotFoundExceptionWhenProcedureToDeleteIsNotExist() throws Exception {
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .when()
                 .delete("/boards/feeId/procedures/fooId")
                 .then()
@@ -211,7 +230,7 @@ public class ProceduresControllerTest extends TestBase {
     public void shouldReturnAllEntriesSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('randomId','this is the first procedure.',1,'feeId2')");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .when()
                 .get("/boards/feeId/procedures")
                 .then()
