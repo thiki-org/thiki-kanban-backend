@@ -12,16 +12,12 @@ import javax.validation.constraints.NotNull;
 public class Procedure {
 
     private String id;
-    /**
-     * 工序标题
-     */
-    @NotNull(message = "工序名称不能为空")
-    @Length(min = 1, max = 50, message = "工序名称长度非法,有效长度为1~50个字符。")
+
+    @NotNull(message = ProcedureCodes.titleIsRequired)
+    @Length(min = 1, max = 10, message = ProcedureCodes.titleIsInvalid)
     private String title;
-    /**
-     * 创建者用户Id
-     */
-    private Integer reporter;
+
+    private String reporter;
 
     @NotNull(message = "boardId不能为空")
     private String boardId;
@@ -47,11 +43,11 @@ public class Procedure {
         this.modificationTime = modificationTime;
     }
 
-    public Integer getReporter() {
+    public String getReporter() {
         return reporter;
     }
 
-    public void setReporter(Integer reporter) {
+    public void setReporter(String reporter) {
         this.reporter = reporter;
     }
 
