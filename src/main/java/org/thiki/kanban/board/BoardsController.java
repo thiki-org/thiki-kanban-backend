@@ -43,7 +43,7 @@ public class BoardsController {
 
     @RequestMapping(value = "/{userName}/boards", method = RequestMethod.GET)
     public HttpEntity loadByUserName(@PathVariable String userName) {
-        List<Board> boards = boardsService.findByUserId(userName);
+        List<Board> boards = boardsService.loadByUserName(userName);
         return Response.build(new BoardsResource(boards));
     }
 
