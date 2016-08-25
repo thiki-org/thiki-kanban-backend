@@ -19,9 +19,6 @@ public class Procedure {
 
     private String reporter;
 
-    @NotNull(message = "boardId不能为空")
-    private String boardId;
-
     private Integer orderNumber;
 
     private String creationTime;
@@ -76,14 +73,6 @@ public class Procedure {
     public Card addCard(Card card) {
         // card.setProcedureId(this.id);
         return card;
-    }
-
-    public String getBoardId() {
-        return boardId;
-    }
-
-    public void setBoardId(String boardId) {
-        this.boardId = boardId;
     }
 
     public Integer getOrderNumber() {
