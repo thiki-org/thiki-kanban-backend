@@ -1,6 +1,7 @@
 package org.thiki.kanban.foundation.exception;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -10,15 +11,17 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class BusinessException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
-    /**
-     * 错误代码， 比httpstatus更详细
-     */
     private int code;
 
     private HttpStatus httpStatus;
 
     public BusinessException(String message) {
         this(ExceptionCode.UNKNOWN_EX.code(), message);
+    }
+
+    public BusinessException(Object codeObject) {
+        super((String) ReflectionTestUtils.getField(codeObject, "message"));
+        this.code = (int) ReflectionTestUtils.getField(codeObject, "code");
     }
 
     public BusinessException(int code, String message) {
