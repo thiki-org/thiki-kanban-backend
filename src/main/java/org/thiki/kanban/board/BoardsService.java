@@ -1,6 +1,7 @@
 package org.thiki.kanban.board;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
@@ -16,6 +17,10 @@ public class BoardsService {
     private BoardsPersistence boardsPersistence;
 
     public Board create(String userName, final Board board) {
+        boolean isExists = boardsPersistence.unique(board.getName(), userName);
+        if (isExists) {
+            throw new BusinessException(BoardCodes.BOARD_IS_ALREADY_EXISTS);
+        }
         board.setReporter(userName);
         boardsPersistence.create(board);
         return boardsPersistence.findById(board.getId());
