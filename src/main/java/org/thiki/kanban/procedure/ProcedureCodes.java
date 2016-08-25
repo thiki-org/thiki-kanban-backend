@@ -4,7 +4,7 @@ package org.thiki.kanban.procedure;
  * Created by xubt on 8/8/16.
  */
 public enum ProcedureCodes {
-    BOARD_IS_ALREADY_EXISTS(30011, "同名看板已经存在,请使用其它名称。");
+    TITLE_IS_ALREADY_EXISTS(30011, "该名称已经被使用,请使用其它名称。");
     private int code;
     private String message;
     public static final String titleIsRequired = "工序名称不能为空。";

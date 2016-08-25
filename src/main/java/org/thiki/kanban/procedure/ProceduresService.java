@@ -2,6 +2,7 @@ package org.thiki.kanban.procedure;
 
 import com.google.common.collect.ImmutableMap;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
@@ -18,6 +19,10 @@ public class ProceduresService {
     private ProceduresPersistence proceduresPersistence;
 
     public Procedure create(String userName, String boardId, final Procedure procedure) {
+        boolean isExists = proceduresPersistence.uniqueTitle(boardId, procedure.getTitle());
+        if (isExists) {
+            throw new BusinessException(ProcedureCodes.TITLE_IS_ALREADY_EXISTS);
+        }
         proceduresPersistence.create(procedure, userName, boardId);
         return proceduresPersistence.findById(procedure.getId());
     }

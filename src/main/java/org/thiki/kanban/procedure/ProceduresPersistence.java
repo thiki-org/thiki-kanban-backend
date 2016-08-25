@@ -25,4 +25,6 @@ public interface ProceduresPersistence {
     Boolean checkRedundancy(Procedure procedure);
 
     void resort(Map<String, Object> procedure);
+
+    boolean uniqueTitle(@Param("boardId") String boardId, @Param("title") String title);
 }

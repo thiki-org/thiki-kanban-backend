@@ -91,7 +91,6 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldReturnBadRequestWhenProcedureTitleIsTooLong() {
         given().header("userName", userName)
-                .body("{\"boardId\":\"feeId\"}}")
                 .body("{\"title\":\"长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -102,6 +101,20 @@ public class ProceduresControllerTest extends TestBase {
                 .body("message", equalTo(ProcedureCodes.titleIsInvalid));
     }
 
+    @Scenario("创建新的procedure时,同一看板下已经存在同名,则不允许创建并返回客户端400错误")
+    @Test
+    public void shouldReturnBadRequestWhenProcedureTitleIsAlreadyExits() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','procedure',1,'feeId')");
+        given().header("userName", userName)
+                .body("{\"title\":\"procedure\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/feeId/procedures")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.TITLE_IS_ALREADY_EXISTS.code()))
+                .body("message", equalTo(ProcedureCodes.TITLE_IS_ALREADY_EXISTS.message()));
+    }
 
     @Scenario("当根据procedureId查找procedure时,如果procedure存在,则将其返回")
     @Test
