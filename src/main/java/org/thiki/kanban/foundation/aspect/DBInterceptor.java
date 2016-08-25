@@ -9,6 +9,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.foundation.common.SequenceNumber;
 
 import javax.annotation.Resource;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -27,11 +28,11 @@ public class DBInterceptor implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         MappedStatement stmt = (MappedStatement) invocation.getArgs()[0];
         Object entityToSave = invocation.getArgs()[1];
-        if (stmt == null) {
-            return invocation.proceed();
-        }
+        if (stmt == null) return invocation.proceed();
         if (stmt.getSqlCommandType().equals(SqlCommandType.INSERT)) {
-            ReflectionTestUtils.setField(entityToSave, "id", sequenceNumber.generate());
+            ((Map) entityToSave).values().stream().filter(param -> !isJavaClass(param.getClass())).forEach(param -> {
+                ReflectionTestUtils.setField(param, "id", sequenceNumber.generate());
+            });
         }
         return invocation.proceed();
     }
@@ -41,5 +42,9 @@ public class DBInterceptor implements Interceptor {
     }
 
     public void setProperties(Properties properties) {
+    }
+
+    public static boolean isJavaClass(Class<?> clz) {
+        return clz != null && clz.getClassLoader() == null;
     }
 }
