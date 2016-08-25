@@ -1,6 +1,7 @@
 package org.thiki.kanban.procedure;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.card.Card;
 
 import javax.validation.constraints.NotNull;
@@ -12,9 +13,9 @@ import javax.validation.constraints.NotNull;
 public class Procedure {
 
     private String id;
-
+    @NotEmpty(message = ProcedureCodes.titleIsRequired)
     @NotNull(message = ProcedureCodes.titleIsRequired)
-    @Length(min = 1, max = 10, message = ProcedureCodes.titleIsInvalid)
+    @Length(max = 30, message = ProcedureCodes.titleIsInvalid)
     private String title;
 
     private String reporter;
