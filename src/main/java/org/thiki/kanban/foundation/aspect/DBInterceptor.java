@@ -30,9 +30,13 @@ public class DBInterceptor implements Interceptor {
         Object entityToSave = invocation.getArgs()[1];
         if (stmt == null) return invocation.proceed();
         if (stmt.getSqlCommandType().equals(SqlCommandType.INSERT)) {
-            ((Map) entityToSave).values().stream().filter(param -> !isJavaClass(param.getClass())).forEach(param -> {
-                ReflectionTestUtils.setField(param, "id", sequenceNumber.generate());
-            });
+            if (entityToSave instanceof Map) {
+                ((Map) entityToSave).values().stream().filter(param -> !isJavaClass(param.getClass())).forEach(param -> {
+                    ReflectionTestUtils.setField(param, "id", sequenceNumber.generate());
+                });
+            } else {
+                ReflectionTestUtils.setField(entityToSave, "id", sequenceNumber.generate());
+            }
         }
         return invocation.proceed();
     }
