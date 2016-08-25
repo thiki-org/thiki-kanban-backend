@@ -24,7 +24,7 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldReturn201WhenCreateProcedureSuccessfully() {
         given().header("userName", userName)
-                .body("{\"title\":\"this is the procedure title.\",\"boardId\":\"feeId\"}")
+                .body("{\"title\":\"this is the procedure title.\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/procedures")
@@ -43,13 +43,13 @@ public class ProceduresControllerTest extends TestBase {
     public void create_orderNumberShouldAutoIncrease() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('existedFooId','this is the first procedure.',1,'feeId')");
         given().header("userName", userName)
-                .body("{\"title\":\"this is the procedure title.\",\"boardId\":\"feeId\"}")
+                .body("{\"title\":\"title.\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/procedures")
                 .then()
                 .statusCode(201)
-                .body("title", equalTo("this is the procedure title."))
+                .body("title", equalTo("title."))
                 .body("reporter", equalTo(userName))
                 .body("creationTime", notNullValue())
                 .body("orderNumber", equalTo(1))
@@ -62,7 +62,7 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldFailedIfProcedureTitleIsEmpty() {
         given().header("userName", userName)
-                .body("{\"boardId\":\"feeId\"}")
+                .body("{\"title\":\"\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/procedures")
@@ -72,33 +72,19 @@ public class ProceduresControllerTest extends TestBase {
                 .body("message", equalTo(ProcedureCodes.titleIsRequired));
     }
 
-    @Scenario("创建新的procedure时,如果boardID为空,则不允许创建并返回客户端400错误")
-    @Test
-    public void shouldFailedIfProcedureBoardIdIsEmpty() {
-        given().header("userName", userName)
-                .body("{\"title\":\"this is the procedure title.\"}")
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/boards/feeId/procedures")
-                .then()
-                .statusCode(400)
-                .body("code", equalTo(400))
-                .body("message", equalTo("boardId不能为空"));
-    }
-
     @Scenario("创建新的procedure时,如果名称为空字符串,则不允许创建并返回客户端400错误")
     @Test
     public void shouldReturnBadRequestWhenProcedureTitleIsEmpty() {
         given().header("userName", userName)
                 .body("{\"boardId\":\"feeId\"}}")
-                .body("{\"title\":\"\",\"boardId\":\"feeId\"}")
+                .body("{\"title\":\"\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/procedures")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
-                .body("message", equalTo(ProcedureCodes.titleIsInvalid));
+                .body("message", equalTo(ProcedureCodes.titleIsRequired));
     }
 
     @Scenario("创建新的procedure时,如果名称长度超限,则不允许创建并返回客户端400错误")
@@ -106,7 +92,7 @@ public class ProceduresControllerTest extends TestBase {
     public void shouldReturnBadRequestWhenProcedureTitleIsTooLong() {
         given().header("userName", userName)
                 .body("{\"boardId\":\"feeId\"}}")
-                .body("{\"title\":\"长度超限长度超限长度超限\",\"boardId\":\"feeId\"}")
+                .body("{\"title\":\"长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/procedures")
@@ -138,7 +124,7 @@ public class ProceduresControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}")
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\"}")
                 .when()
                 .put("/boards/feeId/procedures/fooId")
                 .then()
@@ -154,7 +140,7 @@ public class ProceduresControllerTest extends TestBase {
     public void update_shouldFailedWhenTheProcedureToUpdateIsNotExists() {
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}")
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\"}")
                 .when()
                 .put("/boards/feeId/procedures/fooId")
                 .then()
@@ -169,7 +155,7 @@ public class ProceduresControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"0\"}}")
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\"}}")
                 .when()
                 .put("/boards/feeId/procedures/fooId2")
                 .then()
@@ -189,7 +175,7 @@ public class ProceduresControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId3','this is the first procedure.',1,'feeId',2)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"boardId\":\"feeId\",\"orderNumber\":\"2\"}}")
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"2\"}}")
                 .when()
                 .put("/boards/feeId/procedures/fooId1")
                 .then()
@@ -228,15 +214,15 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("通过boardId获取所有的procedure")
     @Test
     public void shouldReturnAllEntriesSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('randomId','this is the first procedure.',1,'feeId2')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.','tao','feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('randomId','this is the first procedure.','tao','feeId2')");
         given().header("userName", userName)
                 .when()
                 .get("/boards/feeId/procedures")
                 .then()
                 .statusCode(200)
                 .body("[0].title", equalTo("this is the first procedure."))
-                .body("[0].reporter", equalTo(1))
+                .body("[0].reporter", equalTo("tao"))
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))
