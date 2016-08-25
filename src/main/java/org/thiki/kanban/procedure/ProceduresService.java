@@ -17,9 +17,8 @@ public class ProceduresService {
     @Resource
     private ProceduresPersistence proceduresPersistence;
 
-    public Procedure create(Integer reporterUserId, final Procedure procedure) {
-        procedure.setReporter(reporterUserId);
-        proceduresPersistence.create(procedure);
+    public Procedure create(String userName, String boardId, final Procedure procedure) {
+        proceduresPersistence.create(procedure, userName, boardId);
         return proceduresPersistence.findById(procedure.getId());
     }
 
@@ -37,7 +36,6 @@ public class ProceduresService {
         if (foundProcedure.getOrderNumber() != procedure.getOrderNumber()) {
             int increment = procedure.getOrderNumber() > foundProcedure.getOrderNumber() ? 1 : 0;
             Map<String, Object> resort = ImmutableMap.<String, Object>builder()
-                    .put("boardId", procedure.getBoardId())
                     .put("originOrderNumber", foundProcedure.getOrderNumber())
                     .put("currentOrderNumber", procedure.getOrderNumber())
                     .put("increment", increment)
