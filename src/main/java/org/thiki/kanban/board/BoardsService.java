@@ -42,7 +42,7 @@ public class BoardsService {
     public int deleteById(String id) {
         Board boardToDelete = boardsPersistence.findById(id);
         if (boardToDelete == null) {
-            throw new ResourceNotFoundException("board[" + id + "] is not found.");
+            throw new ResourceNotFoundException(BoardCodes.BOARD_IS_NOT_EXISTS);
         }
         return boardsPersistence.deleteById(id);
     }

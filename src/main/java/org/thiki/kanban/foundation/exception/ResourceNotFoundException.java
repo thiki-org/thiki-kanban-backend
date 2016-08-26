@@ -12,6 +12,10 @@ public class ResourceNotFoundException extends BusinessException {
         super(ExceptionCode.resourceNotFound.code(), message);
     }
 
+    public ResourceNotFoundException(Object codeObject) {
+        super(codeObject);
+    }
+
     @Override
     public HttpStatus getStatus() {
         return HttpStatus.NOT_FOUND;

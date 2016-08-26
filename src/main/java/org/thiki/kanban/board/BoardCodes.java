@@ -4,7 +4,8 @@ package org.thiki.kanban.board;
  * Created by xubt on 8/8/16.
  */
 public enum BoardCodes {
-    BOARD_IS_ALREADY_EXISTS(30011, "同名看板已经存在,请使用其它名称。");
+    BOARD_IS_ALREADY_EXISTS(30011, "同名看板已经存在,请使用其它名称。"),
+    BOARD_IS_NOT_EXISTS(30012, "看板不存在。");
     private int code;
     private String message;
     public static final String nameIsRequired = "看板名称不能为空。";

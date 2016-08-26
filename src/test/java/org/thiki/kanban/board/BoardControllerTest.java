@@ -92,7 +92,8 @@ public class BoardControllerTest extends TestBase {
                 .delete("/someone/boards/fooId")
                 .then()
                 .statusCode(404)
-                .body("message", equalTo("board[fooId] is not found."));
+                .body("code", equalTo(BoardCodes.BOARD_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(BoardCodes.BOARD_IS_NOT_EXISTS.message()));
     }
 
     @Scenario("获取指定用户所拥有的boards")
