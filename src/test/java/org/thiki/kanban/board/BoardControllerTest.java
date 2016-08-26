@@ -71,6 +71,20 @@ public class BoardControllerTest extends TestBase {
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
     }
 
+    @Scenario("成功更新一个board信息")
+    @Test
+    public void shouldUpdateFailedWhenTheBoardIsNotExist() {
+        given().header("userName", "someone")
+                .contentType(ContentType.JSON)
+                .body("{\"name\":\"new-name\"}")
+                .when()
+                .put("/someone/boards/fooId")
+                .then()
+                .statusCode(404)
+                .body("code", equalTo(BoardCodes.BOARD_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(BoardCodes.BOARD_IS_NOT_EXISTS.message()));
+    }
+
     @Scenario("当用户删除一个指定的board时,如果该board存在,则删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheBoardIsExist() {
@@ -86,7 +100,7 @@ public class BoardControllerTest extends TestBase {
 
     @Scenario("当用户删除一个指定的board时,如果该board不存在,则返回客户端404错误")
     @Test
-    public void shouldThrowResourceNotFoundExceptionWhenProcedureToDeleteIsNotExist() throws Exception {
+    public void shouldThrowResourceNotFoundExceptionWhenBoardToDeleteIsNotExist() throws Exception {
         given().header("userName", "someone")
                 .when()
                 .delete("/someone/boards/fooId")

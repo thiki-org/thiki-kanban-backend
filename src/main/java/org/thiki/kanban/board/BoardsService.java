@@ -35,6 +35,10 @@ public class BoardsService {
     }
 
     public Board update(Board board) {
+        Board boardToDelete = boardsPersistence.findById(board.getId());
+        if (boardToDelete == null) {
+            throw new ResourceNotFoundException(BoardCodes.BOARD_IS_NOT_EXISTS);
+        }
         boardsPersistence.update(board);
         return boardsPersistence.findById(board.getId());
     }
