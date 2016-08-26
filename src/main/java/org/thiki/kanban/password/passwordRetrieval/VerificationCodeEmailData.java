@@ -18,6 +18,6 @@ public class VerificationCodeEmailData extends MailEntity {
 
     @Override
     public String getSubject() {
-        return "找回思奇看板密码";
+        return "密码找回";
     }
 }
