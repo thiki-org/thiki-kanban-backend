@@ -24,7 +24,7 @@ public class BoardsController {
     @RequestMapping(value = "/{userName}/boards/{id}", method = RequestMethod.PUT)
     public HttpEntity update(@RequestBody Board board, @PathVariable String id, @PathVariable String userName) {
         board.setId(id);
-        Board updatedBoard = boardsService.update(board);
+        Board updatedBoard = boardsService.update(userName, board);
         return Response.build(new BoardResource(updatedBoard, userName));
 
     }

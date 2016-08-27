@@ -34,10 +34,14 @@ public class BoardsService {
         return boardsPersistence.loadByUserName(userName);
     }
 
-    public Board update(Board board) {
+    public Board update(String userName, Board board) {
         Board boardToDelete = boardsPersistence.findById(board.getId());
         if (boardToDelete == null) {
             throw new ResourceNotFoundException(BoardCodes.BOARD_IS_NOT_EXISTS);
+        }
+        boolean isExists = boardsPersistence.unique(board.getName(), userName);
+        if (isExists) {
+            throw new BusinessException(BoardCodes.BOARD_IS_ALREADY_EXISTS);
         }
         boardsPersistence.update(board);
         return boardsPersistence.findById(board.getId());

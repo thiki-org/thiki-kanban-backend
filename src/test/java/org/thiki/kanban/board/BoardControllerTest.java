@@ -85,6 +85,22 @@ public class BoardControllerTest extends TestBase {
                 .body("message", equalTo(BoardCodes.BOARD_IS_NOT_EXISTS.message()));
     }
 
+    @Scenario("当更新一个board时,如果存在同名,则不允许更新,并告知客户端错误信息")
+    @Test
+    public void UpdateIsNotAllowedIfBoardWithSameNameIsAlreadyExists() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId1','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId2','board-name2','someone')");
+        given().header("userName", "someone")
+                .body("{\"name\":\"board-name2\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/someone/boards/fooId1")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(BoardCodes.BOARD_IS_ALREADY_EXISTS.code()))
+                .body("message", equalTo(BoardCodes.BOARD_IS_ALREADY_EXISTS.message()));
+    }
+
     @Scenario("当用户删除一个指定的board时,如果该board存在,则删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheBoardIsExist() {
