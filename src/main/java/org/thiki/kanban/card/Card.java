@@ -1,17 +1,17 @@
 package org.thiki.kanban.card;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.procedure.Procedure;
 
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 
 /**
  * 卡片：任何有指定负责人的有特定目标的事项，可以是用户故事，技术卡片，一次会议等等
  *
  * @author joeaniu
  */
-public class Card implements Serializable {
+public class Card {
     /**
      * id
      */
@@ -19,8 +19,9 @@ public class Card implements Serializable {
     /**
      * 简述， 出现在卡片上
      */
-    @NotNull(message = "卡片描述不能为空。")
-    @Length(min = 1, max = 100, message = "卡片概述字符长度错误,有效长度为1~100个字符。")
+    @NotNull(message = CardsCodes.summaryIsRequired)
+    @NotEmpty(message = CardsCodes.summaryIsRequired)
+    @Length(max = 50, message = CardsCodes.summaryIsInvalid)
     private String summary;
     /**
      * 卡片内容
@@ -29,7 +30,7 @@ public class Card implements Serializable {
     /**
      * 创建者
      */
-    private Integer reporter;
+    private String reporter;
     /**
      * 排序号
      */
@@ -65,11 +66,11 @@ public class Card implements Serializable {
         this.procedureId = procedureId;
     }
 
-    public Integer getReporter() {
+    public String getReporter() {
         return reporter;
     }
 
-    public void setReporter(Integer reporter) {
+    public void setReporter(String reporter) {
         this.reporter = reporter;
     }
 
