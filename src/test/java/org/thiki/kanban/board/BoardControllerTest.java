@@ -71,7 +71,7 @@ public class BoardControllerTest extends TestBase {
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
     }
 
-    @Scenario("成功更新一个board信息")
+    @Scenario("当看板不存在时,则不允许更新")
     @Test
     public void shouldUpdateFailedWhenTheBoardIsNotExist() {
         given().header("userName", "someone")
