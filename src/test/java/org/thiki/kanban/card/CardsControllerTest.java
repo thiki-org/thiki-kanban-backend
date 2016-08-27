@@ -30,14 +30,14 @@ public class CardsControllerTest extends TestBase {
     public void create_shouldReturn201WhenCreateCardSuccessfully() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
         given().body("{\"summary\":\"summary\"}")
-                .header("userId", "11222")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/procedures/fooId/cards")
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
-                .body("reporter", equalTo(11222))
+                .body("reporter", equalTo(userName))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId/assignments"));
@@ -48,14 +48,14 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void create_shouldFailedIfSummaryIsNull() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
-        given().body("{}")
-                .header("userId", "11222")
+        given().body("{\"summary\":\"\"}")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/procedures/fooId/cards")
                 .then()
                 .statusCode(400)
-                .body("message", equalTo("卡片描述不能为空。"));
+                .body("message", equalTo(CardsCodes.summaryIsRequired));
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
     }
 
@@ -64,7 +64,7 @@ public class CardsControllerTest extends TestBase {
     public void create_shouldCreateFailedWhenProcedureIsNotFound() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
         given().body("{\"summary\":\"summary\"}")
-                .header("userId", "11222")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/procedures/non-exists-procedureId/cards")
@@ -78,15 +78,15 @@ public class CardsControllerTest extends TestBase {
     @Scenario("当根据procedureId查找其下属的卡片时,可以返回其所有卡片")
     @Test
     public void shouldReturnCardsWhenFindCardsByProcedureIdSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES (1,'this is the card summary.','play badminton',1,'fooId')");
-        given().header("userId", "11222")
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES (1,'this is the card summary.','play badminton','someone','fooId')");
+        given().header("userName", userName)
                 .when()
                 .get("/procedures/fooId/cards")
                 .then()
                 .statusCode(200)
                 .body("[0].summary", equalTo("this is the card summary."))
                 .body("[0].content", equalTo("play badminton"))
-                .body("[0].reporter", equalTo(1))
+                .body("[0].reporter", equalTo(userName))
                 .body("[0].procedureId", equalTo("fooId"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/1"))
                 .body("[0]._links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
@@ -96,15 +96,15 @@ public class CardsControllerTest extends TestBase {
     @Scenario("根据ID查找一个卡片时,如果卡片存在,则返回该卡片")
     @Test
     public void findById_shouldReturnCardSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES (1,'this is the card summary.','play badminton',1,1)");
-        given().header("userId", "11222")
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES (1,'this is the card summary.','play badminton','someone',1)");
+        given().header("userName", userName)
                 .when()
                 .get("/procedures/1/cards/1")
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("this is the card summary."))
                 .body("content", equalTo("play badminton"))
-                .body("reporter", equalTo(1))
+                .body("reporter", equalTo(userName))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/1/cards/1"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/1/cards"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/1/assignments"));
@@ -113,7 +113,7 @@ public class CardsControllerTest extends TestBase {
     @Scenario("根据ID查找一个卡片时,如果卡片不存在,则抛出404的错误")
     @Test
     public void update_shouldFailedWhenCardIsNotExist() throws Exception {
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .get("/procedures/fooId/cards/feeId")
@@ -127,7 +127,7 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void findCardsByProcedureId_shouldReturn404WhenProcedureIsNotFound() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES (1,'this is the card summary.','play badminton',1,1)");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .when()
                 .get("/procedures/2/cards")
                 .then()
@@ -141,7 +141,7 @@ public class CardsControllerTest extends TestBase {
     public void update_shouldReturn200WhenUpdateCardSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
         given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"procedureId\":1}")
-                .header("userId", "11222")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/procedures/1/cards/fooId")
@@ -160,7 +160,7 @@ public class CardsControllerTest extends TestBase {
     public void update_shouldResortSuccessfullyWhenCurrentOrderNumberLessThanOriginNumber() throws Exception {
         prepareDataForResort();
         given().body("{\"summary\":\"newSummary\",\"orderNumber\":1,\"procedureId\":1}")
-                .header("userId", "11222")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/procedures/1/cards/fooId4")
@@ -191,7 +191,7 @@ public class CardsControllerTest extends TestBase {
     public void update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumber() throws Exception {
         prepareDataForResort();
         given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"procedureId\":1}")
-                .header("userId", "11222")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/procedures/1/cards/fooId2")
@@ -215,7 +215,7 @@ public class CardsControllerTest extends TestBase {
     public void update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumberButNotTheBiggest() throws Exception {
         prepareDataForResort();
         given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"procedureId\":1}")
-                .header("userId", "11222")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/procedures/1/cards/fooId1")
@@ -240,7 +240,7 @@ public class CardsControllerTest extends TestBase {
         prepareDataForResort();
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id,order_number) VALUES ('fooId6','this is the card summary.','play badminton',1,2,3)");
         given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"procedureId\":1}")
-                .header("userId", "11222")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/procedures/1/cards/fooId6")
@@ -264,7 +264,7 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void update_shouldThrowResourceNotFoundExceptionWhenCardToUpdateIsNotExist() throws Exception {
         given().body("{\"summary\":\"newSummary\"}")
-                .header("userId", "11222")
+                .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/procedures/1/cards/fooId")
@@ -277,7 +277,7 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void delete_shouldDeleteSuccessfullyWhenTheCardIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .when()
                 .delete("/procedures/feeId/cards/fooId")
                 .then()
@@ -288,7 +288,7 @@ public class CardsControllerTest extends TestBase {
     @Scenario("当删除一个卡片时,如果待删除的卡片不存在,则抛出404错误")
     @Test
     public void delete_shouldDeleteFailedWhenTheCardIsNotExist() {
-        given().header("userId", "11222")
+        given().header("userName", userName)
                 .when()
                 .delete("/procedures/feeId/cards/non-exists-cardId")
                 .then()
