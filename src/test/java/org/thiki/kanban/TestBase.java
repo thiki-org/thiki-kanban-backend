@@ -28,6 +28,8 @@ public class TestBase {
     protected static int port = 8007;
     protected String publicKeyFilePath = "src/main/resources/rsakey.pub";
 
+    protected String userName = "someone";
+
     @Autowired
     protected DataSource dataSource;
     protected JdbcTemplate jdbcTemplate;
