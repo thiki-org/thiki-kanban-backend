@@ -17,7 +17,7 @@ public class ProcedureResource extends RestResource {
             Link selfLink = linkTo(methodOn(ProceduresController.class).findById(procedure.getId(), boardId)).withSelfRel();
             this.add(selfLink);
 
-            Link cardsLink = linkTo(methodOn(CardsController.class).create(null, procedure.getId(), null)).withRel("cards");
+            Link cardsLink = linkTo(methodOn(CardsController.class).create(null, procedure.getId(), procedure.getId())).withRel("cards");
             this.add(cardsLink);
         }
         this.add(linkTo(methodOn(ProceduresController.class).loadAll(boardId)).withRel("all"));
