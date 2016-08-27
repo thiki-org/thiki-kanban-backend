@@ -58,6 +58,21 @@ public class CardsControllerTest extends TestBase {
                 .body("message", equalTo(CardsCodes.summaryIsRequired));
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
     }
+    @Scenario("当创建一个卡片时,如果卡片概述长度超过50,则创建失败")
+    @Test
+    public void create_shouldFailedIfSummaryIsTooLong() throws Exception {
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
+        given().body("{\"summary\":\"长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限长度超限\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/procedures/fooId/cards")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo(CardsCodes.summaryIsInvalid));
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
+    }
+
 
     @Scenario("当创建一个卡片时,如果卡片所属的procedure并不存在,则创建失败")
     @Test
