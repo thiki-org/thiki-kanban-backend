@@ -18,15 +18,14 @@ public class CardsService {
     @Resource
     private ProceduresPersistence proceduresPersistence;
 
-    public Card create(Integer reporterUserId, String procedureId, Card card) {
-        card.setReporter(reporterUserId);
+    public Card create(String userName, String procedureId, Card card) {
         card.setProcedureId(procedureId);
         Procedure procedure = proceduresPersistence.findById(procedureId);
         if (procedure == null) {
             throw new ResourceNotFoundException("procedure[" + procedureId + "] is not found.");
         }
         Card newCard = procedure.addCard(card);
-        cardsPersistence.create(newCard);
+        cardsPersistence.create(userName, newCard);
         return cardsPersistence.findById(newCard.getId());
     }
 

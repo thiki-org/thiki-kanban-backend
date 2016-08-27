@@ -43,8 +43,8 @@ public class CardsController {
     }
 
     @RequestMapping(value = "/procedures/{procedureId}/cards", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Card card, @PathVariable String procedureId, @RequestHeader Integer userId) {
-        Card savedCard = cardsService.create(userId, procedureId, card);
+    public HttpEntity create(@RequestBody Card card, @RequestHeader String userName, @PathVariable String procedureId) {
+        Card savedCard = cardsService.create(userName, procedureId, card);
 
         return Response.post(new CardResource(savedCard, procedureId));
     }

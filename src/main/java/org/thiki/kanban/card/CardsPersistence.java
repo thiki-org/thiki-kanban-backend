@@ -8,7 +8,7 @@ import java.util.List;
 @Repository
 public interface CardsPersistence {
 
-    void create(Card card);
+    void create(@Param("userName") String userName, @Param("card") Card card);
 
     Card findById(String cardId);
 
