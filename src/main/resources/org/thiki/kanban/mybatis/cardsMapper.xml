@@ -6,7 +6,8 @@
 
     <insert id="create" parameterType="org.thiki.kanban.card.Card">
         INSERT INTO
-        kb_card(id,summary, content, order_number, reporter, procedure_id) VALUES (#{card.id},#{card.summary}, #{card.content}, (SELECT
+        kb_card(id,summary, content, order_number, reporter, procedure_id) VALUES (#{card.id},#{card.summary},
+        #{card.content}, (SELECT
         max_order_number from (SELECT CASE WHEN max(order_number) IS NULL THEN 0 ELSE max(order_number)+1 end as
         max_order_number FROM kb_card WHERE procedure_id=#{card.procedureId} ) as t ), #{userName}, #{card.procedureId})
     </insert>

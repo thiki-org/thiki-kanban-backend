@@ -25,6 +25,10 @@ public class DBInterceptor implements Interceptor {
     @Resource
     private SequenceNumber sequenceNumber;
 
+    public static boolean isJavaClass(Class<?> clz) {
+        return clz != null && clz.getClassLoader() == null;
+    }
+
     public Object intercept(Invocation invocation) throws Throwable {
         MappedStatement stmt = (MappedStatement) invocation.getArgs()[0];
         Object entityToSave = invocation.getArgs()[1];
@@ -46,9 +50,5 @@ public class DBInterceptor implements Interceptor {
     }
 
     public void setProperties(Properties properties) {
-    }
-
-    public static boolean isJavaClass(Class<?> clz) {
-        return clz != null && clz.getClassLoader() == null;
     }
 }

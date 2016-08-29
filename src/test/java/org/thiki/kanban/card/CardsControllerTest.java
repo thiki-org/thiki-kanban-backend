@@ -58,6 +58,7 @@ public class CardsControllerTest extends TestBase {
                 .body("message", equalTo(CardsCodes.summaryIsRequired));
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
     }
+
     @Scenario("当创建一个卡片时,如果卡片概述长度超过50,则创建失败")
     @Test
     public void create_shouldFailedIfSummaryIsTooLong() throws Exception {
