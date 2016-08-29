@@ -8,6 +8,7 @@ public class Constants {
     public static final String SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN = "当前用户未认证,请先登录认证。";
     public static final String SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE = "认证已经过期,请重新认证获取token.";
     public static final String SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT = "请求头部的用户名与token中的不一致,请求可能被篡改。";
+    public static final String SECURITY_USERNAME_IN_HEADER_IS_NOT_CONSISTENT_WITH_PATH = "请求头部的用户名与URL中的不一致,请求可能被篡改。";
     public static final String LOCAL_ADDRESS = "127.0.0.1";
     public static final String FREE_AUTHENTICATION = "no";
     public static final String HEADER_PARAMS_TOKEN = "token";
