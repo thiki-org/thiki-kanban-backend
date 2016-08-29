@@ -48,6 +48,19 @@ public class TeamsControllerTest extends TestBase {
                 .body("message", equalTo(TeamsCodes.nameIsRequired));
     }
 
+    @Scenario("创建团队时，如果未提供团队名称，则不允许创建")
+    @Test
+    public void creationIsNotAllowedIfTeamNameIsNull() throws Exception {
+        given().header("userName", userName)
+                .body("{}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/someone/teams")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo(TeamsCodes.nameIsRequired));
+    }
+
     @Ignore
     @Scenario("用户根据ID获取team时,如果该team存在,则返回其信息")
     @Test

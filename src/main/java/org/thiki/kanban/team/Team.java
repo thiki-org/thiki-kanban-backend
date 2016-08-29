@@ -2,6 +2,8 @@ package org.thiki.kanban.team;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by bogehu on 7/11/16.
  */
@@ -9,6 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Team {
     private String id;
     @NotEmpty(message = TeamsCodes.nameIsRequired)
+    @NotNull(message = TeamsCodes.nameIsRequired)
     private String name;
     private String reporter;
     private String creationTime;
