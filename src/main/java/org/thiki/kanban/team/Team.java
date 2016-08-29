@@ -1,11 +1,14 @@
 package org.thiki.kanban.team;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Created by bogehu on 7/11/16.
  */
 
 public class Team {
     private String id;
+    @NotEmpty(message = TeamsCodes.nameIsRequired)
     private String name;
     private String reporter;
     private String creationTime;
