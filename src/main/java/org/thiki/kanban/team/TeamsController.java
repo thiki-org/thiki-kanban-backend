@@ -13,23 +13,22 @@ public class TeamsController {
     @Autowired
     private TeamsService teamsService;
 
-    @RequestMapping(value = "/teams", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Team team, @RequestHeader String userName) {
+    @RequestMapping(value = "/{userName}/teams", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Team team, @PathVariable("userName") String userName) {
         Team savedTeam = teamsService.create(userName, team);
-        return Response.post(new TeamResource(savedTeam));
+        return Response.post(new TeamResource(userName, savedTeam));
     }
 
-    @RequestMapping(value = "/teams/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String id) {
+    @RequestMapping(value = "/{userName}/teams/{id}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String id, @PathVariable("userName") String userName) {
         Team team = teamsService.findById(id);
-        return Response.build(new TeamResource(team));
+        return Response.build(new TeamResource(userName, team));
     }
 
-    @RequestMapping(value = "/teams/{id}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Team team, @PathVariable String id) {
+    @RequestMapping(value = "/{userName}/teams/{id}", method = RequestMethod.PUT)
+    public HttpEntity update(@RequestBody Team team, @PathVariable String id, @PathVariable("userName") String userName) {
         team.setId(id);
         Team updatedTeam = teamsService.update(team);
-        return Response.build(new TeamResource(updatedTeam));
-
+        return Response.build(new TeamResource(userName, updatedTeam));
     }
 }
