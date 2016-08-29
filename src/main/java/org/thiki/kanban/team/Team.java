@@ -1,5 +1,6 @@
 package org.thiki.kanban.team;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ public class Team {
     private String id;
     @NotEmpty(message = TeamsCodes.nameIsRequired)
     @NotNull(message = TeamsCodes.nameIsRequired)
+    @Length(max = 20, message = TeamsCodes.nameIsInvalid)
     private String name;
     private String reporter;
     private String creationTime;
