@@ -74,6 +74,24 @@ public class TeamsControllerTest extends TestBase {
                 .body("message", equalTo(TeamsCodes.nameIsInvalid));
     }
 
+    @Scenario("根据用户名获取其所在团队")
+    @Test
+    public void loadTheTeamsWhichTheUserIsIn() {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,reporter) VALUES ('foo-team-member-id','fooId','someone','someone')");
+
+        given().header("userName", "someone")
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/someone/teams")
+                .then()
+                .statusCode(200)
+                .body("[0].id", equalTo("fooId"))
+                .body("[0].name", equalTo("team-name"))
+                .body("[0].reporter", equalTo("someone"))
+                .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/teams/fooId"))
+                .body("[0]._links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
+    }
 
     @Ignore
     @Scenario("用户根据ID获取team时,如果该team存在,则返回其信息")

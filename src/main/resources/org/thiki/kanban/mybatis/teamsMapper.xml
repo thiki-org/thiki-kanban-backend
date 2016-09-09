@@ -19,4 +19,7 @@
     <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
         SELECT * FROM kb_team WHERE delete_status=0 AND reporter=#{userId}
     </select>
+    <select id="findByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
+        SELECT * FROM kb_team JOIN kb_team_members ON kb_team.id=kb_team_members.team_id WHERE kb_team_members.member=#{userName} and kb_team.delete_status=0 and kb_team_members.delete_status=0
+    </select>
 </mapper>

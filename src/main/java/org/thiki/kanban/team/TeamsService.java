@@ -5,6 +5,7 @@ import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by bogehu on 7/11/16.
@@ -38,5 +39,10 @@ public class TeamsService {
     public Team update(Team team) {
         teamsPersistence.update(team);
         return teamsPersistence.findById(team.getId());
+    }
+
+    public List<Team> findByUserName(String userName) {
+
+        return teamsPersistence.findByUserName(userName);
     }
 }

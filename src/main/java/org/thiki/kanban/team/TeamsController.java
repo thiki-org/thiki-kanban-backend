@@ -5,6 +5,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 
+import java.util.List;
+
 /**
  * Created by bogehu on 7/11/16.
  */
@@ -21,7 +23,9 @@ public class TeamsController {
 
     @RequestMapping(value = "/{userName}/teams", method = RequestMethod.GET)
     public HttpEntity findByUserName(@PathVariable("userName") String userName) {
-        return null;
+
+        List<Team> teamList = teamsService.findByUserName(userName);
+        return Response.build(new TeamsResource(userName, teamList));
     }
 
     @RequestMapping(value = "/{userName}/teams/{id}", method = RequestMethod.GET)

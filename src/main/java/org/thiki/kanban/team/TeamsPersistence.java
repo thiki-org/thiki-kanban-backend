@@ -19,4 +19,6 @@ public interface TeamsPersistence {
     Integer deleteById(@Param("id") String id);
 
     Integer update(Team team);
+
+    List<Team> findByUserName(String userName);
 }
