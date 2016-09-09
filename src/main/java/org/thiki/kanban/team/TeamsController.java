@@ -19,6 +19,11 @@ public class TeamsController {
         return Response.post(new TeamResource(userName, savedTeam));
     }
 
+    @RequestMapping(value = "/{userName}/teams", method = RequestMethod.GET)
+    public HttpEntity findByUserName(@PathVariable("userName") String userName) {
+        return null;
+    }
+
     @RequestMapping(value = "/{userName}/teams/{id}", method = RequestMethod.GET)
     public HttpEntity findById(@PathVariable String id, @PathVariable("userName") String userName) {
         Team team = teamsService.findById(id);

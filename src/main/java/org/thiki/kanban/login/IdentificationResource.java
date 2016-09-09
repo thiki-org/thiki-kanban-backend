@@ -1,10 +1,11 @@
 package org.thiki.kanban.login;
 
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.team.TeamsController;
 
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
@@ -13,7 +14,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class IdentificationResource extends RestResource {
     public IdentificationResource(Identification identification) {
         super.domainObject = identification;
-        Link loginLink = ControllerLinkBuilder.linkTo(methodOn(BoardsController.class).loadByUserName(identification.getUserName())).withRel("boards");
-        this.add(loginLink);
+        Link boardsLink = linkTo(methodOn(BoardsController.class).loadByUserName(identification.getUserName())).withRel("boards");
+        this.add(boardsLink);
+
+        Link teamsLink = linkTo(methodOn(TeamsController.class).findByUserName(identification.getUserName())).withRel("teams");
+        this.add(teamsLink);
     }
 }
