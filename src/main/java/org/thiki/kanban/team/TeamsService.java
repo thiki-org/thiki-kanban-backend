@@ -2,6 +2,7 @@ package org.thiki.kanban.team;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
+import org.thiki.kanban.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;
 
@@ -12,10 +13,13 @@ import javax.annotation.Resource;
 public class TeamsService {
     @Resource
     private TeamsPersistence teamsPersistence;
+    @Resource
+    private TeamMembersService teamMembersService;
 
-    public Team create(String reporter, final Team team) {
-        team.setReporter(reporter);
-        teamsPersistence.create(team);
+    public Team create(String userName, final Team team) {
+        teamsPersistence.create(userName, team);
+
+        teamMembersService.joinTeam(userName, team.getId());
         return teamsPersistence.findById(team.getId());
     }
 

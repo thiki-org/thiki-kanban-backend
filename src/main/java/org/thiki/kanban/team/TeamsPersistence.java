@@ -12,7 +12,7 @@ import java.util.List;
 public interface TeamsPersistence {
     List<Team> loadAll();
 
-    void create(Team team);
+    void create(@Param("userName") String userName, @Param("team") Team team);
 
     Team findById(@Param("id") String id);
 

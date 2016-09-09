@@ -34,4 +34,13 @@ public class TeamMembersService {
         teamMembersPersistence.joinTeam(teamMember);
         return teamMembersPersistence.findById(teamMember.getId());
     }
+
+    public TeamMember joinTeam(String userName, String teamId) {
+        TeamMember teamMember = new TeamMember();
+        teamMember.setTeamId(teamId);
+        teamMember.setMember(userName);
+        teamMember.setReporter(userName);
+        teamMembersPersistence.joinTeam(teamMember);
+        return teamMembersPersistence.findById(teamMember.getId());
+    }
 }

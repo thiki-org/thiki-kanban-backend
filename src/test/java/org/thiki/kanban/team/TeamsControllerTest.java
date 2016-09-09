@@ -31,8 +31,7 @@ public class TeamsControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/teams/fooId"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
-
-
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_members where team_id='fooId' AND member='someone'").size());
     }
 
     @Scenario("创建团队时，如果团队名称为空，则不允许创建")

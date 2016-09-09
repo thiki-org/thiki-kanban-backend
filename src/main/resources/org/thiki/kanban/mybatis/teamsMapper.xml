@@ -5,7 +5,7 @@
 <mapper namespace="org.thiki.kanban.team.TeamsPersistence">
     <insert id="create" parameterType="org.thiki.kanban.team.Team">
         INSERT INTO
-        kb_team(id,name,reporter) VALUES (#{id},#{name},#{reporter})
+        kb_team(id,name,reporter) VALUES (#{team.id},#{team.name},#{userName})
     </insert>
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
         SELECT * FROM kb_team WHERE id= #{id}
