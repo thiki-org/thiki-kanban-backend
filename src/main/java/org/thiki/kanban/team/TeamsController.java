@@ -28,8 +28,8 @@ public class TeamsController {
         return Response.build(new TeamsResource(userName, teamList));
     }
 
-    @RequestMapping(value = "/{userName}/teams/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String id, @PathVariable("userName") String userName) {
+    @RequestMapping(value = "/teams/{id}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String id, @RequestHeader("userName") String userName) {
         Team team = teamsService.findById(id);
         return Response.build(new TeamResource(userName, team));
     }

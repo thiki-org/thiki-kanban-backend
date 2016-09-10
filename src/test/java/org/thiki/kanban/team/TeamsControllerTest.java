@@ -29,7 +29,7 @@ public class TeamsControllerTest extends TestBase {
                 .statusCode(201)
                 .body("name", equalTo("思奇团队讨论组"))
                 .body("id", equalTo("fooId"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/teams/fooId"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_members where team_id='fooId' AND member='someone'").size());
     }
@@ -89,11 +89,10 @@ public class TeamsControllerTest extends TestBase {
                 .body("[0].id", equalTo("fooId"))
                 .body("[0].name", equalTo("team-name"))
                 .body("[0].author", equalTo("someone"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/teams/fooId"))
+                .body("[0]._links.self.href", equalTo("http://localhost:8007/teams/fooId"))
                 .body("[0]._links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
     }
 
-    @Ignore
     @Scenario("用户根据ID获取team时,如果该team存在,则返回其信息")
     @Test
     public void shouldReturnBoardWhenTeamIsExist() {
@@ -107,6 +106,7 @@ public class TeamsControllerTest extends TestBase {
                 .body("name", equalTo("team-name"))
                 .body("author", equalTo("someone"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"))
+                .body("_links.members.href", equalTo("http://localhost:8007/teams/fooId/members"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
     }
 
