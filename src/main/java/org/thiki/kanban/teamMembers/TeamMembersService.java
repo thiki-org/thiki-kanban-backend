@@ -4,9 +4,11 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.team.Team;
 import org.thiki.kanban.team.TeamsService;
+import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
+import java.util.List;
 
 /**
  * Created by 濤 on 7/26/16.
@@ -17,6 +19,9 @@ public class TeamMembersService {
     private TeamMembersPersistence teamMembersPersistence;
     @Resource
     private TeamsService teamsService;
+
+    @Resource
+    private UsersService usersService;
 
     public TeamMember joinTeam(String teamId, final TeamMember teamMember, String userName) {
         Team targetTeam = teamsService.findById(teamId);
@@ -42,5 +47,11 @@ public class TeamMembersService {
         teamMember.setAuthor(userName);
         teamMembersPersistence.joinTeam(teamMember);
         return teamMembersPersistence.findById(teamMember.getId());
+    }
+
+    public List<Member> loadMembersByTeamId(String userName, String teamId) {
+        List<Member> members = teamMembersPersistence.loadMembersByTeamId(teamId);
+
+        return members;
     }
 }

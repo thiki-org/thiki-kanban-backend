@@ -61,4 +61,23 @@ public class TeamMembersControllerTest extends TestBase {
                 .body("code", equalTo(400))
                 .body("message", equalTo("Member named someone is already in the team."));
     }
+
+    @Scenario("当用户加入一个团队后，可以获取该团队的所有成员")
+    @Test
+    public void loadTeamMembersByTeamId() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-teamId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','foo-teamId','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','someone@gmail.com','someone','password')");
+
+        given().header("userName", "someone")
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/teams/foo-teamId/members")
+                .then()
+                .statusCode(200)
+                .body("[0].userName", equalTo("someone"))
+                .body("[0].email", equalTo("someone@gmail.com"))
+                .body("[0]._links.self.href", equalTo("http://localhost:8007/users/someone"));
+    }
 }
