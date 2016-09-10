@@ -12,6 +12,10 @@ public class UnauthorisedException extends BusinessException {
         super(errorCode, message, HttpStatus.UNAUTHORIZED);
     }
 
+    public UnauthorisedException(Object codeObject) {
+        super(codeObject);
+    }
+
     @Override
     public HttpStatus getStatus() {
         return HttpStatus.UNAUTHORIZED;

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class BusinessException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
-    private int code;
+    protected int code;
 
     private HttpStatus httpStatus;
 
