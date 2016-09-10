@@ -7,7 +7,6 @@ import org.thiki.kanban.foundation.exception.UnauthorisedException;
 import org.thiki.kanban.team.Team;
 import org.thiki.kanban.team.TeamsCodes;
 import org.thiki.kanban.team.TeamsService;
-import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
@@ -22,9 +21,6 @@ public class TeamMembersService {
     private TeamMembersPersistence teamMembersPersistence;
     @Resource
     private TeamsService teamsService;
-
-    @Resource
-    private UsersService usersService;
 
     public TeamMember joinTeam(String teamId, final TeamMember teamMember, String userName) {
         Team targetTeam = teamsService.findById(teamId);
