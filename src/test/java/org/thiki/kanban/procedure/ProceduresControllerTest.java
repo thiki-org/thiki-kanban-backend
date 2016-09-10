@@ -31,7 +31,7 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("this is the procedure title."))
-                .body("reporter", equalTo(userName))
+                .body("author", equalTo(userName))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
@@ -41,7 +41,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("创建一个新的procedure,如果它并不是指定boardId下第一个procedure,则其排序号应根据当前procedure数量自动增加")
     @Test
     public void create_orderNumberShouldAutoIncrease() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('existedFooId','this is the first procedure.',1,'feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('existedFooId','this is the first procedure.',1,'feeId')");
         given().header("userName", userName)
                 .body("{\"title\":\"title.\"}")
                 .contentType(ContentType.JSON)
@@ -50,7 +50,7 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("title."))
-                .body("reporter", equalTo(userName))
+                .body("author", equalTo(userName))
                 .body("creationTime", notNullValue())
                 .body("orderNumber", equalTo(1))
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
@@ -104,7 +104,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("创建新的procedure时,同一看板下已经存在同名,则不允许创建并返回客户端400错误")
     @Test
     public void shouldReturnBadRequestWhenProcedureTitleIsAlreadyExits() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','procedure',1,'feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','procedure',1,'feeId')");
         given().header("userName", userName)
                 .body("{\"title\":\"procedure\"}")
                 .contentType(ContentType.JSON)
@@ -119,7 +119,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("当根据procedureId查找procedure时,如果procedure存在,则将其返回")
     @Test
     public void shouldReturnProcedureWhenFindProcedureById() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
         given().header("userName", userName)
                 .when()
                 .get("/boards/feeId/procedures/fooId")
@@ -134,7 +134,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("更新procedure时,如果参数合法且待更新的procedure存在,则更新成功")
     @Test
     public void shouldUpdateSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\"}")
@@ -164,8 +164,8 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("当移动一个procedure时,移动后的排序小于其原先的排序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsLessThanOriginNumber() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\"}}")
@@ -183,9 +183,9 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("当移动一个procedure时,移动后的排序大于其原先的排序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsMoreThanOriginNumber() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id,order_number) VALUES ('fooId3','this is the first procedure.',1,'feeId',2)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId3','this is the first procedure.',1,'feeId',2)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"orderNumber\":\"2\"}}")
@@ -204,7 +204,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("当删除一个procedure时,如果待删除的procedure存在,则删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheProcedureIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
         given().header("userName", userName)
                 .when()
                 .delete("/boards/feeId/procedures/fooId")
@@ -227,15 +227,15 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("通过boardId获取所有的procedure")
     @Test
     public void shouldReturnAllEntriesSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('fooId','this is the first procedure.','tao','feeId')");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter,board_id) VALUES ('randomId','this is the first procedure.','tao','feeId2')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','this is the first procedure.','tao','feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('randomId','this is the first procedure.','tao','feeId2')");
         given().header("userName", userName)
                 .when()
                 .get("/boards/feeId/procedures")
                 .then()
                 .statusCode(200)
                 .body("[0].title", equalTo("this is the first procedure."))
-                .body("[0].reporter", equalTo("tao"))
+                .body("[0].author", equalTo("tao"))
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))

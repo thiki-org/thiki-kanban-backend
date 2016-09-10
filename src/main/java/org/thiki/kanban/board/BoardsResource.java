@@ -14,7 +14,7 @@ public class BoardsResource extends RestResource {
         this.domainObject = boards;
         JSONArray boardsJSONArray = new JSONArray();
         for (Board board : boards) {
-            BoardResource boardResource = new BoardResource(board, board.getReporter());
+            BoardResource boardResource = new BoardResource(board, board.getAuthor());
             JSONObject boardJSON = boardResource.getResource();
             boardsJSONArray.add(boardJSON);
         }

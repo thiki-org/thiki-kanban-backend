@@ -13,12 +13,12 @@ public class UsersService {
     @Resource
     private UsersPersistence usersPersistence;
 
-    public UserProfile create(String reporterUserId, final UserProfile userProfile) {
+    public UserProfile create(String authorUserId, final UserProfile userProfile) {
         UserProfile foundUserProfile = usersPersistence.findByEmail(userProfile.getEmail());
         if (foundUserProfile != null) {
             throw new InvalidParamsException("email[" + userProfile.getEmail() + "] is already exists.");
         }
-        userProfile.setId(reporterUserId);
+        userProfile.setId(authorUserId);
         usersPersistence.create(userProfile);
         return usersPersistence.findById(userProfile.getId());
     }

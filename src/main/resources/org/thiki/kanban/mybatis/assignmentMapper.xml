@@ -5,20 +5,20 @@
 <mapper namespace="org.thiki.kanban.assignment.AssignmentPersistence">
 
     <insert id="create" parameterType="org.thiki.kanban.assignment.Assignment">
-        INSERT INTO kb_card_assignment(id,card_id, assignee, assigner, reporter) VALUES (#{id},#{cardId}, #{assignee},
-        #{assigner}, #{reporter})
+        INSERT INTO kb_card_assignment(id,card_id, assignee, assigner, author) VALUES (#{id},#{cardId}, #{assignee},
+        #{assigner}, #{author})
     </insert>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
         SELECT
-        assignment.id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.reporter,assignment.creation_time,assignment.modification_time,userRegistration.name
+        assignment.id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.author,assignment.creation_time,assignment.modification_time,userRegistration.name
         FROM kb_card_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
         assignment.assignee=userRegistration.id WHERE assignment.id= #{id}
     </select>
 
     <select id="findByCardId" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
         SELECT
-        assignment.id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.reporter,userRegistration.name
+        assignment.id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.author,userRegistration.name
         FROM kb_card_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
         assignment.assignee=userRegistration.id
         WHERE assignment.card_id= #{cardId} AND assignment.delete_status=0

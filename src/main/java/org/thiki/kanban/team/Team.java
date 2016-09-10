@@ -15,7 +15,7 @@ public class Team {
     @NotNull(message = TeamsCodes.nameIsRequired)
     @Length(max = 20, message = TeamsCodes.nameIsInvalid)
     private String name;
-    private String reporter;
+    private String author;
     private String creationTime;
     private String modificationTime;
 
@@ -35,12 +35,12 @@ public class Team {
         this.name = name;
     }
 
-    public String getReporter() {
-        return reporter;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setReporter(String reporter) {
-        this.reporter = reporter;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getModificationTime() {

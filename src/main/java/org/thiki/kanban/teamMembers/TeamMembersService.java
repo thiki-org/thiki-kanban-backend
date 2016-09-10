@@ -29,7 +29,7 @@ public class TeamMembersService {
             throw new InvalidParamsException(MessageFormat.format("Member named {0} is already in the team.", teamMember.getMember()));
         }
 
-        teamMember.setReporter(userName);
+        teamMember.setAuthor(userName);
         teamMember.setTeamId(teamId);
         teamMembersPersistence.joinTeam(teamMember);
         return teamMembersPersistence.findById(teamMember.getId());
@@ -39,7 +39,7 @@ public class TeamMembersService {
         TeamMember teamMember = new TeamMember();
         teamMember.setTeamId(teamId);
         teamMember.setMember(userName);
-        teamMember.setReporter(userName);
+        teamMember.setAuthor(userName);
         teamMembersPersistence.joinTeam(teamMember);
         return teamMembersPersistence.findById(teamMember.getId());
     }

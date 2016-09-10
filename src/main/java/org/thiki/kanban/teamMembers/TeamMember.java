@@ -8,7 +8,7 @@ public class TeamMember {
     private String id;
     private String teamId;
     private String member;
-    private String reporter;
+    private String author;
     private String creationTime;
     private String modificationTime;
 
@@ -28,12 +28,12 @@ public class TeamMember {
         this.member = member;
     }
 
-    public String getReporter() {
-        return reporter;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setReporter(String reporter) {
-        this.reporter = reporter;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getModificationTime() {

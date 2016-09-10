@@ -30,7 +30,7 @@ public class Card {
     /**
      * 创建者
      */
-    private String reporter;
+    private String author;
     /**
      * 排序号
      */
@@ -66,12 +66,12 @@ public class Card {
         this.procedureId = procedureId;
     }
 
-    public String getReporter() {
-        return reporter;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setReporter(String reporter) {
-        this.reporter = reporter;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getId() {

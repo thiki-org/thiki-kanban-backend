@@ -15,7 +15,7 @@ public class Board implements Serializable {
     @Length(max = 20, message = BoardCodes.nameIsInvalid)
     private String name;
 
-    private String reporter;
+    private String author;
 
     private String creationTime;
 
@@ -37,12 +37,12 @@ public class Board implements Serializable {
         this.modificationTime = modificationTime;
     }
 
-    public String getReporter() {
-        return reporter;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setReporter(String userName) {
-        this.reporter = userName;
+    public void setAuthor(String userName) {
+        this.author = userName;
     }
 
     public String getId() {

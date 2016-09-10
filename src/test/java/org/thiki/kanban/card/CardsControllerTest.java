@@ -22,7 +22,7 @@ public class CardsControllerTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,reporter) VALUES ('fooId','this is the first procedure.',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author) VALUES ('fooId','this is the first procedure.',1)");
     }
 
     @Scenario("创建一个新的卡片")
@@ -37,7 +37,7 @@ public class CardsControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
-                .body("reporter", equalTo(userName))
+                .body("author", equalTo(userName))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId/assignments"));
@@ -94,7 +94,7 @@ public class CardsControllerTest extends TestBase {
     @Scenario("当根据procedureId查找其下属的卡片时,可以返回其所有卡片")
     @Test
     public void shouldReturnCardsWhenFindCardsByProcedureIdSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES (1,'this is the card summary.','play badminton','someone','fooId')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES (1,'this is the card summary.','play badminton','someone','fooId')");
         given().header("userName", userName)
                 .when()
                 .get("/procedures/fooId/cards")
@@ -102,7 +102,7 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("[0].summary", equalTo("this is the card summary."))
                 .body("[0].content", equalTo("play badminton"))
-                .body("[0].reporter", equalTo(userName))
+                .body("[0].author", equalTo(userName))
                 .body("[0].procedureId", equalTo("fooId"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/1"))
                 .body("[0]._links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
@@ -112,7 +112,7 @@ public class CardsControllerTest extends TestBase {
     @Scenario("根据ID查找一个卡片时,如果卡片存在,则返回该卡片")
     @Test
     public void findById_shouldReturnCardSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES (1,'this is the card summary.','play badminton','someone',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES (1,'this is the card summary.','play badminton','someone',1)");
         given().header("userName", userName)
                 .when()
                 .get("/procedures/1/cards/1")
@@ -120,7 +120,7 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("summary", equalTo("this is the card summary."))
                 .body("content", equalTo("play badminton"))
-                .body("reporter", equalTo(userName))
+                .body("author", equalTo(userName))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/1/cards/1"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/1/cards"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/1/assignments"));
@@ -142,7 +142,7 @@ public class CardsControllerTest extends TestBase {
     @Scenario("当根据procedureID查找卡片时,如果procedure不存在,则抛出404异常")
     @Test
     public void findCardsByProcedureId_shouldReturn404WhenProcedureIsNotFound() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES (1,'this is the card summary.','play badminton',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES (1,'this is the card summary.','play badminton',1,1)");
         given().header("userName", userName)
                 .when()
                 .get("/procedures/2/cards")
@@ -155,7 +155,7 @@ public class CardsControllerTest extends TestBase {
     @Scenario("更新卡片成功")
     @Test
     public void update_shouldReturn200WhenUpdateCardSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
         given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"procedureId\":1}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -195,11 +195,11 @@ public class CardsControllerTest extends TestBase {
     }
 
     private void prepareDataForResort() {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id,order_number) VALUES ('fooId1','this is the card summary.','play badminton',1,1,0)");
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id,order_number) VALUES ('fooId2','this is the card summary.','play badminton',1,1,1)");
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id,order_number) VALUES ('fooId3','this is the card summary.','play badminton',1,1,2)");
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id,order_number) VALUES ('fooId4','this is the card summary.','play badminton',1,1,3)");
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id,order_number) VALUES ('fooId5','this is the card summary.','play badminton',1,1,4)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,order_number) VALUES ('fooId1','this is the card summary.','play badminton',1,1,0)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,order_number) VALUES ('fooId2','this is the card summary.','play badminton',1,1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,order_number) VALUES ('fooId3','this is the card summary.','play badminton',1,1,2)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,order_number) VALUES ('fooId4','this is the card summary.','play badminton',1,1,3)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,order_number) VALUES ('fooId5','this is the card summary.','play badminton',1,1,4)");
     }
 
     @Scenario("当移动一个卡片时,移动后的顺序大于初始顺序")
@@ -254,7 +254,7 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void update_shouldResortSuccessfullyWhenCardIsFromAntherProcedure() throws Exception {
         prepareDataForResort();
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id,order_number) VALUES ('fooId6','this is the card summary.','play badminton',1,2,3)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,order_number) VALUES ('fooId6','this is the card summary.','play badminton',1,2,3)");
         given().body("{\"summary\":\"newSummary\",\"orderNumber\":3,\"procedureId\":1}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -292,7 +292,7 @@ public class CardsControllerTest extends TestBase {
     @Scenario("当删除一个卡片时,如果卡片存在,则删除成功")
     @Test
     public void delete_shouldDeleteSuccessfullyWhenTheCardIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
         given().header("userName", userName)
                 .when()
                 .delete("/procedures/feeId/cards/fooId")

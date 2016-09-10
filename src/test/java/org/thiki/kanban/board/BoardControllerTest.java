@@ -30,7 +30,7 @@ public class BoardControllerTest extends TestBase {
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
-                .body("reporter", equalTo("someone"))
+                .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
@@ -39,7 +39,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("用户根据ID获取board时,如果该board存在,则返回其信息")
     @Test
     public void shouldReturnBoardWhenBoardIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .when()
                 .get("/someone/boards/fooId")
@@ -47,7 +47,7 @@ public class BoardControllerTest extends TestBase {
                 .statusCode(200)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
-                .body("reporter", equalTo("someone"))
+                .body("author", equalTo("someone"))
                 .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
                 .body("_links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
@@ -56,7 +56,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("成功更新一个board信息")
     @Test
     public void shouldUpdateSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .contentType(ContentType.JSON)
                 .body("{\"name\":\"new-name\"}")
@@ -65,7 +65,7 @@ public class BoardControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("new-name"))
-                .body("reporter", equalTo("someone"))
+                .body("author", equalTo("someone"))
                 .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
@@ -88,8 +88,8 @@ public class BoardControllerTest extends TestBase {
     @Scenario("当更新一个board时,如果存在同名,则不允许更新,并告知客户端错误信息")
     @Test
     public void UpdateIsNotAllowedIfBoardWithSameNameIsAlreadyExists() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId1','board-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId2','board-name2','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId1','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId2','board-name2','someone')");
         given().header("userName", "someone")
                 .body("{\"name\":\"board-name2\"}")
                 .contentType(ContentType.JSON)
@@ -104,7 +104,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("当用户删除一个指定的board时,如果该board存在,则删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheBoardIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .when()
                 .delete("/someone/boards/fooId")
@@ -129,14 +129,14 @@ public class BoardControllerTest extends TestBase {
     @Scenario("获取指定用户所拥有的boards")
     @Test
     public void findByUserName_shouldReturnAllBoardsSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .when()
                 .get("/someone/boards")
                 .then()
                 .statusCode(200)
                 .body("[0].name", equalTo("board-name"))
-                .body("[0].reporter", equalTo("someone"))
+                .body("[0].author", equalTo("someone"))
                 .body("[0].creationTime", notNullValue())
                 .body("[0]._links.all.href", equalTo("http://localhost:8007/someone/boards"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
@@ -146,7 +146,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("当用户创建一个board时,如果存在同名,则不允许创建,并告知客户端错误信息")
     @Test
     public void NotAllowedIfBoardWithSameNameIsAlreadyExists() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,reporter) VALUES ('fooId','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .body("{\"name\":\"board-name\"}")
                 .contentType(ContentType.JSON)

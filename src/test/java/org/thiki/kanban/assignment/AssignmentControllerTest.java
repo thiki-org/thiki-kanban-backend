@@ -30,7 +30,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("assignee", equalTo("assigneeId"))
                 .body("assigner", equalTo("assignerId"))
-                .body("reporter", equalTo("11222"))
+                .body("author", equalTo("11222"))
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/1/cards/fooId"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/fooId/assignments"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/1/cards/fooId/assignments/fooId"));
@@ -40,8 +40,8 @@ public class AssignmentControllerTest extends TestBase {
     @Test
     public void findById_shouldReturnAssignmentSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,name,email,password) VALUES ('assigneeId-foo','徐濤','766191920@qq.com','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,reporter) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
-        given().header("userId", "reporterId-foo")
+        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
+        given().header("userId", "authorId-foo")
                 .when()
                 .get("/procedures/1/cards/fooId/assignments/fooId")
                 .then()
@@ -50,7 +50,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("assignee", equalTo("assigneeId-foo"))
                 .body("assigner", equalTo("assignerId-foo"))
                 .body("name", equalTo("徐濤"))
-                .body("reporter", equalTo("reporterId-foo"))
+                .body("author", equalTo("authorId-foo"))
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/1/cards/fooId"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/fooId/assignments"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/1/cards/fooId/assignments/fooId"));
@@ -60,9 +60,9 @@ public class AssignmentControllerTest extends TestBase {
     @Test
     public void findByCardId_shouldReturnAssignmentsSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,name,email,password) VALUES ('assigneeId-foo','徐濤','766191920@qq.com','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,reporter,procedure_id) VALUES ('cardId-foo','this is the card summary.','play badminton',1,'fooId')");
-        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,reporter) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
-        given().header("userId", "reporterId-foo")
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('cardId-foo','this is the card summary.','play badminton',1,'fooId')");
+        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
+        given().header("userId", "authorId-foo")
                 .body("{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -73,7 +73,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("[0].assignee", equalTo("assigneeId-foo"))
                 .body("[0].assigner", equalTo("assignerId-foo"))
                 .body("[0].name", equalTo("徐濤"))
-                .body("[0].reporter", equalTo("reporterId-foo"))
+                .body("[0].author", equalTo("authorId-foo"))
                 .body("[0]._links.card.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo"))
                 .body("[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments/fooId"));
@@ -82,8 +82,8 @@ public class AssignmentControllerTest extends TestBase {
     @Scenario("当用户根据cardID获取分配记录时,如果指定的卡片并不存在,则返回404客户端错误")
     @Test
     public void findByCardId_shouldReturnErrorWhenCardIsNotExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,reporter) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
-        given().header("userId", "reporterId-foo")
+        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
+        given().header("userId", "authorId-foo")
                 .body("{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -97,8 +97,8 @@ public class AssignmentControllerTest extends TestBase {
     @Scenario("当用户想取消某个分配时,如果指定的分配记录存在,则成功将其取消")
     @Test
     public void delete_shouldReturnSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,reporter) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','reporterId-foo')");
-        given().header("userId", "reporterId-foo")
+        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
+        given().header("userId", "authorId-foo")
                 .when()
                 .delete("/procedures/1/cards/fooId/assignments/fooId")
                 .then()
@@ -110,7 +110,7 @@ public class AssignmentControllerTest extends TestBase {
     @Scenario("当用户想取消某个分配时,如果指定的分配记录并不存在,则返回404客户端错误")
     @Test
     public void delete_shouldReturnErrorWhenAssignmentIsNotExist() {
-        given().header("userId", "reporterId-foo")
+        given().header("userId", "authorId-foo")
                 .when()
                 .delete("/procedures/1/cards/fooId/assignments/fooId")
                 .then()

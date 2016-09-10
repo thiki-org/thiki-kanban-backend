@@ -18,7 +18,7 @@ public class TeamMembersControllerTest extends TestBase {
     @Scenario("加入一个团队")
     @Test
     public void joinTeam_shouldReturn201WhenJoinTeamSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('foo-teamId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-teamId','team-name','someone')");
         given().header("userName", "someone")
                 .body("{\"member\":\"someone\"}")
                 .contentType(ContentType.JSON)
@@ -49,8 +49,8 @@ public class TeamMembersControllerTest extends TestBase {
     @Scenario("加入团队时,如果待加入的成员已经在团队中,则不允许加入")
     @Test
     public void joinTeam_shouldReturnFailedIfMemberIsAreadyIn() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('foo-teamId','team-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,reporter) VALUES ('foo-team-member-id','foo-teamId','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-teamId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','foo-teamId','someone','someone')");
         given().header("userName", "someone")
                 .body("{\"member\":\"someone\"}")
                 .contentType(ContentType.JSON)

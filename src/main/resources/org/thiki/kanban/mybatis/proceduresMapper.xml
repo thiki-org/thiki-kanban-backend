@@ -6,7 +6,7 @@
 
     <insert id="create" parameterType="org.thiki.kanban.procedure.Procedure">
         INSERT INTO
-        kb_procedure(id,title, reporter,board_id,order_number) VALUES (#{procedure.id},#{procedure.title},
+        kb_procedure(id,title, author,board_id,order_number) VALUES (#{procedure.id},#{procedure.title},
         #{userName},#{boardId},(SELECT
         max_order_number from (SELECT CASE WHEN max(order_number) IS NULL THEN 0 ELSE max(order_number)+1 end as
         max_order_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ))

@@ -14,7 +14,7 @@ public class Assignment {
 
     private String name;
 
-    private String reporter;
+    private String author;
 
     private String creationTime;
 
@@ -52,12 +52,12 @@ public class Assignment {
         this.assigner = assigner;
     }
 
-    public String getReporter() {
-        return reporter;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setReporter(String reporter) {
-        this.reporter = reporter;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getCreationTime() {

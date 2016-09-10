@@ -18,7 +18,7 @@ public class Procedure {
     @Length(max = 30, message = ProcedureCodes.titleIsInvalid)
     private String title;
 
-    private String reporter;
+    private String author;
     private String boardId;
     private Integer orderNumber;
 
@@ -41,12 +41,12 @@ public class Procedure {
         this.modificationTime = modificationTime;
     }
 
-    public String getReporter() {
-        return reporter;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setReporter(String reporter) {
-        this.reporter = reporter;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getId() {

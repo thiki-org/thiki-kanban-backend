@@ -5,7 +5,7 @@
 <mapper namespace="org.thiki.kanban.team.TeamsPersistence">
     <insert id="create" parameterType="org.thiki.kanban.team.Team">
         INSERT INTO
-        kb_team(id,name,reporter) VALUES (#{team.id},#{team.name},#{userName})
+        kb_team(id,name,author) VALUES (#{team.id},#{team.name},#{userName})
     </insert>
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
         SELECT * FROM kb_team WHERE id= #{id}
@@ -17,7 +17,7 @@
         UPDATE kb_team SET name=#{name} WHERE id=#{id}
     </update>
     <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
-        SELECT * FROM kb_team WHERE delete_status=0 AND reporter=#{userId}
+        SELECT * FROM kb_team WHERE delete_status=0 AND author=#{userId}
     </select>
     <select id="findByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
         SELECT * FROM kb_team JOIN kb_team_members ON kb_team.id=kb_team_members.team_id WHERE kb_team_members.member=#{userName} and kb_team.delete_status=0 and kb_team_members.delete_status=0

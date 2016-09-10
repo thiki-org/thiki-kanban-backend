@@ -21,9 +21,9 @@ public class AssignmentService {
     @Resource
     private CardsPersistence cardsPersistence;
 
-    public Assignment create(final Assignment assignment, String cardId, String reporterUserId) {
+    public Assignment create(final Assignment assignment, String cardId, String authorUserId) {
         assignment.setCardId(cardId);
-        assignment.setReporter(reporterUserId);
+        assignment.setAuthor(authorUserId);
         assignmentPersistence.create(assignment);
         return assignmentPersistence.findById(assignment.getId());
     }

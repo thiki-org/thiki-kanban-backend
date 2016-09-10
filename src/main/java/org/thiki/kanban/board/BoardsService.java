@@ -21,7 +21,7 @@ public class BoardsService {
         if (isExists) {
             throw new BusinessException(BoardCodes.BOARD_IS_ALREADY_EXISTS);
         }
-        board.setReporter(userName);
+        board.setAuthor(userName);
         boardsPersistence.create(board);
         return boardsPersistence.findById(board.getId());
     }

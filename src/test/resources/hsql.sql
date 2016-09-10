@@ -5,7 +5,7 @@ drop table if exists kb_board;
 CREATE TABLE kb_board (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   name VARCHAR(50) ,
-  reporter VARCHAR(40) NOT NULL,
+  author VARCHAR(40) NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
@@ -18,7 +18,7 @@ drop table if exists kb_procedure;
 CREATE TABLE kb_procedure (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   title  VARCHAR(50) NOT NULL,
-  reporter VARCHAR(40) NOT NULL,
+  author VARCHAR(40) NOT NULL,
   board_id VARCHAR(40)  DEFAULT NULL,
   order_number int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
@@ -36,7 +36,7 @@ CREATE TABLE kb_card (
   summary VARCHAR(50) NOT NULL,
   content VARCHAR(50),
   order_number int DEFAULT 0,
-  reporter VARCHAR(40) DEFAULT NULL,
+  author VARCHAR(40) DEFAULT NULL,
   procedure_id VARCHAR(40)  DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -84,7 +84,7 @@ CREATE TABLE kb_card_assignment (
   card_id VARCHAR(40) NOT NULL,
   assigner VARCHAR(40) NOT NULL,
   assignee VARCHAR(40) NOT NULL,
-  reporter VARCHAR(40) DEFAULT NULL,
+  author VARCHAR(40) DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
@@ -97,7 +97,7 @@ drop table if exists kb_team;
 CREATE TABLE kb_team(
   id VARCHAR(40)NOT NULL PRIMARY KEY,
   name VARCHAR(50)NOT NULL,
-  reporter VARCHAR(40) DEFAULT NULL,
+  author VARCHAR(40) DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
@@ -112,7 +112,7 @@ CREATE TABLE kb_team_members(
   id VARCHAR(40)NOT NULL PRIMARY KEY,
   team_id VARCHAR(50)NOT NULL,
   member VARCHAR(50)NOT NULL,
-  reporter VARCHAR(40) DEFAULT NULL,
+  author VARCHAR(40) DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0

@@ -77,8 +77,8 @@ public class TeamsControllerTest extends TestBase {
     @Scenario("根据用户名获取其所在团队")
     @Test
     public void loadTheTeamsWhichTheUserIsIn() {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,reporter) VALUES ('foo-team-member-id','fooId','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('fooId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','fooId','someone','someone')");
 
         given().header("userName", "someone")
                 .contentType(ContentType.JSON)
@@ -88,7 +88,7 @@ public class TeamsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("[0].id", equalTo("fooId"))
                 .body("[0].name", equalTo("team-name"))
-                .body("[0].reporter", equalTo("someone"))
+                .body("[0].author", equalTo("someone"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/teams/fooId"))
                 .body("[0]._links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
     }
@@ -97,7 +97,7 @@ public class TeamsControllerTest extends TestBase {
     @Scenario("用户根据ID获取team时,如果该team存在,则返回其信息")
     @Test
     public void shouldReturnBoardWhenTeamIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('fooId','team-name','someone')");
         given().header("userName", "someone")
                 .when()
                 .get("/teams/fooId")
@@ -105,7 +105,7 @@ public class TeamsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("team-name"))
-                .body("reporter", equalTo("someone"))
+                .body("author", equalTo("someone"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
     }
@@ -114,7 +114,7 @@ public class TeamsControllerTest extends TestBase {
     @Scenario("更新一个team信息")
     @Test
     public void shouldUpdateSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,reporter) VALUES ('fooId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('fooId','team-name','someone')");
         given().header("userName", "someone")
                 .contentType(ContentType.JSON)
                 .body("{\"name\":\"new-name\"}")
@@ -123,7 +123,7 @@ public class TeamsControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("new-name"))
-                .body("reporter", equalTo("someone"))
+                .body("author", equalTo("someone"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_team where id='fooId'", String.class));
     }

@@ -6,7 +6,7 @@
 
     <insert id="create" parameterType="org.thiki.kanban.board.Board">
         INSERT INTO
-        kb_board(id,name, reporter) VALUES (#{id},#{name}, #{reporter})
+        kb_board(id,name, author) VALUES (#{id},#{name}, #{author})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.board.Board" flushCache="true">
@@ -15,11 +15,11 @@
         WHERE id=#{id}
     </update>
     <select id="unique" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_board WHERE delete_status=0 AND NAME=#{name} AND reporter=#{userName}
+        SELECT count(*) FROM kb_board WHERE delete_status=0 AND NAME=#{name} AND author=#{userName}
     </select>
 
     <select id="loadByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
-        SELECT * FROM kb_board WHERE delete_status=0 AND reporter=#{userName}
+        SELECT * FROM kb_board WHERE delete_status=0 AND author=#{userName}
     </select>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
@@ -31,7 +31,7 @@
     </delete>
 
     <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
-        SELECT * FROM kb_board WHERE delete_status=0 AND reporter=#{userId}
+        SELECT * FROM kb_board WHERE delete_status=0 AND author=#{userId}
     </select>
 
 </mapper>
