@@ -21,4 +21,6 @@ public interface TeamsPersistence {
     Integer update(Team team);
 
     List<Team> findByUserName(String userName);
+
+    boolean isTeamExist(String teamId);
 }

@@ -45,4 +45,8 @@ public class TeamsService {
 
         return teamsPersistence.findByUserName(userName);
     }
+
+    public boolean isTeamExist(String teamId) {
+        return teamsPersistence.isTeamExist(teamId);
+    }
 }

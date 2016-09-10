@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
+import org.thiki.kanban.team.TeamsCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -79,5 +80,18 @@ public class TeamMembersControllerTest extends TestBase {
                 .body("[0].userName", equalTo("someone"))
                 .body("[0].email", equalTo("someone@gmail.com"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/users/someone"));
+    }
+
+    @Scenario("当用户加入一个团队后，可以获取该团队的所有成员。但是当团队不存在时,则不允许获取。")
+    @Test
+    public void NotAllowedIfTeamIsNotExitsWhenLoadingTeamMembersByTeamId() throws Exception {
+        given().header("userName", "someone")
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/teams/foo-teamId/members")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.message()));
     }
 }

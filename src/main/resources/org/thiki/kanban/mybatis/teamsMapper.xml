@@ -22,4 +22,8 @@
     <select id="findByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.team.Team">
         SELECT * FROM kb_team JOIN kb_team_members ON kb_team.id=kb_team_members.team_id WHERE kb_team_members.member=#{userName} and kb_team.delete_status=0 and kb_team_members.delete_status=0
     </select>
+
+    <select id="isTeamExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_team WHERE id= #{teamId}
+    </select>
 </mapper>
