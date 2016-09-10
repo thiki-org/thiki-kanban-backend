@@ -15,6 +15,10 @@
         SELECT * FROM kb_team_members WHERE team_id= #{teamId} AND member=#{member} AND delete_status=0
     </select>
 
+    <select id="isAMemberOfTheTeam" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_team_members WHERE team_id= #{teamId} AND member=#{userName} AND delete_status=0
+    </select>
+
     <select id="loadMembersByTeamId" parameterType="java.lang.String"
             resultType="org.thiki.kanban.teamMembers.Member">
       SELECT user.name as userName,user.email as email FROM kb_team_members  members LEFT JOIN kb_user_registration user ON members.member=user.NAME WHERE team_id=#{teamId} AND delete_status=0

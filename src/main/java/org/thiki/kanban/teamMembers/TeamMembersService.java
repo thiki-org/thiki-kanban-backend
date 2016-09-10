@@ -3,6 +3,7 @@ package org.thiki.kanban.teamMembers;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
+import org.thiki.kanban.foundation.exception.UnauthorisedException;
 import org.thiki.kanban.team.Team;
 import org.thiki.kanban.team.TeamsCodes;
 import org.thiki.kanban.team.TeamsService;
@@ -56,6 +57,11 @@ public class TeamMembersService {
         boolean isTeamExist = teamsService.isTeamExist(teamId);
         if (!isTeamExist) {
             throw new BusinessException(TeamsCodes.TEAM_IS_NOT_EXISTS);
+        }
+
+        boolean isAMember = teamMembersPersistence.isAMemberOfTheTeam(userName, teamId);
+        if (!isAMember) {
+            throw new UnauthorisedException(TeamMembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_TEAM);
         }
         List<Member> members = teamMembersPersistence.loadMembersByTeamId(teamId);
 

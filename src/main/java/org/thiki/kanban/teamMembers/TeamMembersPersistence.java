@@ -19,4 +19,6 @@ public interface TeamMembersPersistence {
     TeamMember findMemberByTeamId(@Param("member") String member, @Param("teamId") String teamId);
 
     List<Member> loadMembersByTeamId(String teamId);
+
+    boolean isAMemberOfTheTeam(@Param("userName") String userName, @Param("teamId") String teamId);
 }

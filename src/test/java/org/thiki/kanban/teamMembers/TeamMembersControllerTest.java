@@ -94,4 +94,18 @@ public class TeamMembersControllerTest extends TestBase {
                 .body("code", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.code()))
                 .body("message", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.message()));
     }
+
+    @Scenario("若当前用户并非团队成员，则不允许获取")
+    @Test
+    public void NotAllowedIfCurrentUserIsNotAMemberOfTheTeamWhenLoadingTeamMembersByTeamId() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-teamId','team-name','someone')");
+        given().header("userName", "someone")
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/teams/foo-teamId/members")
+                .then()
+                .statusCode(401)
+                .body("code", equalTo(TeamMembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_TEAM.code()))
+                .body("message", equalTo(TeamMembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_TEAM.message()));
+    }
 }
