@@ -1,4 +1,4 @@
-package org.thiki.kanban.teamMembers;
+package org.thiki.kanban.teams.teamMembers;
 
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.board.BoardsController;

@@ -1,4 +1,4 @@
-package org.thiki.kanban.teamMembers;
+package org.thiki.kanban.teams.teamMembers;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;

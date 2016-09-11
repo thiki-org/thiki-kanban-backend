@@ -2,16 +2,16 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.thiki.kanban.teamMembers.TeamMembersPersistence">
-    <insert id="joinTeam" parameterType="org.thiki.kanban.teamMembers.TeamMember">
+<mapper namespace="org.thiki.kanban.teams.teamMembers.TeamMembersPersistence">
+    <insert id="joinTeam" parameterType="org.thiki.kanban.teams.teamMembers.TeamMember">
         INSERT INTO
         kb_team_members(id,team_id,member,author) VALUES (#{id},#{teamId},#{member},#{author})
     </insert>
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.teamMembers.TeamMember">
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.teamMembers.TeamMember">
         SELECT * FROM kb_team_members WHERE id= #{id} AND delete_status=0
     </select>
     <select id="findMemberByTeamId" parameterType="java.lang.String"
-            resultType="org.thiki.kanban.teamMembers.TeamMember">
+            resultType="org.thiki.kanban.teams.teamMembers.TeamMember">
         SELECT * FROM kb_team_members WHERE team_id= #{teamId} AND member=#{member} AND delete_status=0
     </select>
 
@@ -20,7 +20,7 @@
     </select>
 
     <select id="loadMembersByTeamId" parameterType="java.lang.String"
-            resultType="org.thiki.kanban.teamMembers.Member">
+            resultType="org.thiki.kanban.teams.teamMembers.Member">
       SELECT user.name as userName,user.email as email FROM kb_team_members  members LEFT JOIN kb_user_registration user ON members.member=user.NAME WHERE team_id=#{teamId} AND members.delete_status=0 AND user.delete_status=0
    </select>
 </mapper>

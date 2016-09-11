@@ -1,4 +1,4 @@
-package org.thiki.kanban.teamMembers;
+package org.thiki.kanban.teams.teamMembers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;

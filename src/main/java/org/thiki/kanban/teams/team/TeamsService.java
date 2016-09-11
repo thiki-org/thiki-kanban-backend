@@ -2,7 +2,7 @@ package org.thiki.kanban.teams.team;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
-import org.thiki.kanban.teamMembers.TeamMembersService;
+import org.thiki.kanban.teams.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;
 import java.util.List;

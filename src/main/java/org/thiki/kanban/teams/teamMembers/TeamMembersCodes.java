@@ -1,4 +1,4 @@
-package org.thiki.kanban.teamMembers;
+package org.thiki.kanban.teams.teamMembers;
 
 /**
  * Created by xubt on 8/8/16.
