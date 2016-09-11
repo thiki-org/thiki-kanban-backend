@@ -1,4 +1,4 @@
-package org.thiki.kanban.team;
+package org.thiki.kanban.teams;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

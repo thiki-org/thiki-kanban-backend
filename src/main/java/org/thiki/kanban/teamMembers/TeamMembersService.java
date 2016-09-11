@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.exception.UnauthorisedException;
-import org.thiki.kanban.team.Team;
-import org.thiki.kanban.team.TeamsCodes;
-import org.thiki.kanban.team.TeamsService;
+import org.thiki.kanban.teams.Team;
+import org.thiki.kanban.teams.TeamsCodes;
+import org.thiki.kanban.teams.TeamsService;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
@@ -30,7 +30,7 @@ public class TeamMembersService {
 
         TeamMember foundMember = teamMembersPersistence.findMemberByTeamId(teamMember.getMember(), teamId);
         if (foundMember != null) {
-            throw new InvalidParamsException(MessageFormat.format("Member named {0} is already in the team.", teamMember.getMember()));
+            throw new InvalidParamsException(MessageFormat.format("Member named {0} is already in the teams.", teamMember.getMember()));
         }
 
         teamMember.setAuthor(userName);

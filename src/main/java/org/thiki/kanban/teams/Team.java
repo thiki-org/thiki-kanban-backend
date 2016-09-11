@@ -1,4 +1,4 @@
-package org.thiki.kanban.team;
+package org.thiki.kanban.teams;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;

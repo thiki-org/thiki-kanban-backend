@@ -1,4 +1,4 @@
-package org.thiki.kanban.team;
+package org.thiki.kanban.teams;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
@@ -31,7 +31,7 @@ public class TeamsService {
     public int deleteById(String id) {
         Team teamToDelete = teamsPersistence.findById(id);
         if (teamToDelete == null) {
-            throw new ResourceNotFoundException("team[" + id + "] is not found.");
+            throw new ResourceNotFoundException("teams[" + id + "] is not found.");
         }
         return teamsPersistence.deleteById(id);
     }

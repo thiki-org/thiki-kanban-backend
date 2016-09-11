@@ -1,4 +1,4 @@
-package org.thiki.kanban.team;
+package org.thiki.kanban.teams;
 
 import com.jayway.restassured.http.ContentType;
 import org.junit.Ignore;
