@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
-import org.thiki.kanban.teams.TeamsCodes;
+import org.thiki.kanban.teams.team.TeamsCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;

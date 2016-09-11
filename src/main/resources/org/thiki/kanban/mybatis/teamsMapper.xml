@@ -2,24 +2,24 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.thiki.kanban.teams.TeamsPersistence">
-    <insert id="create" parameterType="org.thiki.kanban.teams.Team">
+<mapper namespace="org.thiki.kanban.teams.team.TeamsPersistence">
+    <insert id="create" parameterType="org.thiki.kanban.teams.team.Team">
         INSERT INTO
         kb_team(id,name,author) VALUES (#{team.id},#{team.name},#{userName})
     </insert>
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.Team">
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.team.Team">
         SELECT * FROM kb_team WHERE id= #{id}
     </select>
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_team SET delete_status=1 WHERE id=#{id}
     </delete>
-    <update id="update" parameterType="org.thiki.kanban.teams.Team" flushCache="true">
+    <update id="update" parameterType="org.thiki.kanban.teams.team.Team" flushCache="true">
         UPDATE kb_team SET name=#{name} WHERE id=#{id}
     </update>
-    <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.Team">
+    <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.team.Team">
         SELECT * FROM kb_team WHERE delete_status=0 AND author=#{userId}
     </select>
-    <select id="findByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.Team">
+    <select id="findByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.team.Team">
         SELECT * FROM kb_team JOIN kb_team_members ON kb_team.id=kb_team_members.team_id WHERE kb_team_members.member=#{userName} and kb_team.delete_status=0 and kb_team_members.delete_status=0
     </select>
 

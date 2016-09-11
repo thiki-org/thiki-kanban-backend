@@ -1,4 +1,4 @@
-package org.thiki.kanban.teams;
+package org.thiki.kanban.teams.team;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;

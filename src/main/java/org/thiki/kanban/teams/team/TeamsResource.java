@@ -1,4 +1,4 @@
-package org.thiki.kanban.teams;
+package org.thiki.kanban.teams.team;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;

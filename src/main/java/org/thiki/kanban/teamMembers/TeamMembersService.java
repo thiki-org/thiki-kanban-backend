@@ -4,9 +4,9 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.exception.UnauthorisedException;
-import org.thiki.kanban.teams.Team;
-import org.thiki.kanban.teams.TeamsCodes;
-import org.thiki.kanban.teams.TeamsService;
+import org.thiki.kanban.teams.team.Team;
+import org.thiki.kanban.teams.team.TeamsCodes;
+import org.thiki.kanban.teams.team.TeamsService;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;

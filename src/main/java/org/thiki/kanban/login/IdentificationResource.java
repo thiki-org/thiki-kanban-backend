@@ -3,7 +3,7 @@ package org.thiki.kanban.login;
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.foundation.common.RestResource;
-import org.thiki.kanban.teams.TeamsController;
+import org.thiki.kanban.teams.team.TeamsController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
