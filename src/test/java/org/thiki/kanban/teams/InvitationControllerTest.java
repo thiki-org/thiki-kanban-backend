@@ -7,9 +7,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.teams.invitation.InvitationCodes;
-import org.thiki.kanban.teams.invitation.InvitationService;
-
-import javax.annotation.Resource;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -20,9 +17,6 @@ import static org.junit.Assert.assertEquals;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InvitationControllerTest extends TestBase {
-
-    @Resource
-    private InvitationService invitationService;
 
     @Scenario("用户可以通过用户名邀请其他成员加入到团队中")
     @Test
