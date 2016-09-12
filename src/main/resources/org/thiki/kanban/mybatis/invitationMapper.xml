@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.thiki.kanban.teams.invitation.InvitationPersistence">
+
+    <insert id="invite" parameterType="org.thiki.kanban.teams.invitation.Invitation">
+        INSERT INTO
+        kb_team_member_invitation(id, inviter,team_id,invitee) VALUES (#{id}, #{inviter}, #{teamId},#{invitee})
+    </insert>
+
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.invitation.Invitation">
+        SELECT * FROM kb_team_member_invitation WHERE id= #{id} AND delete_status=0
+    </select>
+</mapper>

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
  * Created by bogehu on 7/11/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TeamsControllerTest extends TestBase {
+public class TeamControllerTest extends TestBase {
     @Scenario("创建一个团队")
     @Test
     public void create_shouldReturn201WhenCreateTeamSuccessfully() throws Exception {

@@ -146,3 +146,21 @@ CREATE TABLE kb_password_reset(
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
 );
+
+-- ----------------------------
+-- Table structure for kb_member_invitation
+-- ----------------------------
+drop table if exists kb_member_invitation;
+
+CREATE TABLE kb_team_member_invitation(
+  id VARCHAR(40)NOT NULL PRIMARY KEY,
+  team_id VARCHAR(50)NOT NULL,
+  inviter VARCHAR(50)NOT NULL,
+  invitee VARCHAR(50)NOT NULL,
+  is_accepted int DEFAULT 0,
+  author VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  delete_status int DEFAULT 0
+);
+

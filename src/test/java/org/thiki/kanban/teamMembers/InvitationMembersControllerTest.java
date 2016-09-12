@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  * Created by 濤 on 7/26/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TeamMembersControllerTest extends TestBase {
+public class InvitationMembersControllerTest extends TestBase {
     @Scenario("加入一个团队")
     @Test
     public void joinTeam_shouldReturn201WhenJoinTeamSuccessfully() throws Exception {
