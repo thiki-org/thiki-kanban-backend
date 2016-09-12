@@ -76,4 +76,24 @@ public class InvitationControllerTest extends TestBase {
                 .body("code", equalTo(InvitationCodes.INVITEE_IS_NOT_EXISTS.code()))
                 .body("message", equalTo(InvitationCodes.INVITEE_IS_NOT_EXISTS.message()));
     }
+
+    @Scenario("如果邀请人并非团队的成员则不允许发送邀请")
+    @Test
+    public void NotAllowedIfInviterIsNotAMemberOfTheTeamExist() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','someone','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('another-user-id','766191920@qq.com','another-user','password')");
+
+        given().header("userName", userName)
+                .body("{\"invitee\":\"another-user\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/teams/foo-team-Id/invitation")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM.code()))
+                .body("message", equalTo(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM.message()));
+    }
 }
