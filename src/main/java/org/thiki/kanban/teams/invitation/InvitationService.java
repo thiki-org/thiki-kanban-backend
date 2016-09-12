@@ -9,6 +9,7 @@ import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationService;
 import org.thiki.kanban.teams.team.Team;
 import org.thiki.kanban.teams.team.TeamsService;
+import org.thiki.kanban.teams.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
@@ -30,6 +31,8 @@ public class InvitationService {
     private MailService mailService;
     @Resource
     private RegistrationService registrationService;
+    @Resource
+    private TeamMembersService membersService;
 
     @Resource
     private TeamsService teamsService;
@@ -42,6 +45,10 @@ public class InvitationService {
         Registration invitee = registrationService.findByName(invitation.getInvitee());
         if (invitee == null) {
             throw new BusinessException(InvitationCodes.INVITEE_IS_NOT_EXISTS);
+        }
+        boolean isInviterLegal = membersService.isMember(teamId, userName);
+        if (!isInviterLegal) {
+            throw new BusinessException(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM);
         }
         invitation.setInviter(userName);
         invitation.setTeamId(teamId);

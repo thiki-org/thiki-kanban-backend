@@ -63,4 +63,9 @@ public class TeamMembersService {
 
         return members;
     }
+
+    public boolean isMember(String teamId, String userName) {
+
+        return teamMembersPersistence.isAMemberOfTheTeam(userName, teamId);
+    }
 }
