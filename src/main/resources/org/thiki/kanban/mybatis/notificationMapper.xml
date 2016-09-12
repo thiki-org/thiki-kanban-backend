@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.notification.NotificationPersistence">
+    <insert id="create" parameterType="org.thiki.kanban.notification.Notification">
+        INSERT INTO
+        kb_notification(id,receiver,sender,content,link,type) VALUES (#{id},#{receiver},#{sender},#{content},#{link},#{type})
+    </insert>
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.notification.Notification">
+        SELECT * FROM kb_notification WHERE id= #{id}
+    </select>
+</mapper>

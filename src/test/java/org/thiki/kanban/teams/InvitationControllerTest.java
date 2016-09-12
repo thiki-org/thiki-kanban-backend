@@ -116,4 +116,27 @@ public class InvitationControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='foo-team-Id' AND invitee='invitee-user'").size());
     }
 
+    @Scenario("邀请发出后，用户的消息中心也会收到相应的提示")
+    @Test
+    public void addNotificationAfterSendingInvitation() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','foo-team-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','someone','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
+
+        given().header("userName", userName)
+                .body("{\"invitee\":\"invitee-user\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/teams/foo-team-Id/invitation")
+                .then()
+                .statusCode(201)
+                .body("invitee", equalTo("invitee-user"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/invitation"))
+                .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_notification where type='team_member_invitation' AND receiver='invitee-user'").size());
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
+    }
 }

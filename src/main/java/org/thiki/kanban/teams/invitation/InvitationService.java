@@ -5,6 +5,8 @@ import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
+import org.thiki.kanban.notification.Notification;
+import org.thiki.kanban.notification.NotificationService;
 import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationService;
 import org.thiki.kanban.teams.team.Team;
@@ -25,6 +27,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 @Service
 public class InvitationService {
     private static final String TEAM_INVITATION_TEMPLATE = "team-invitation-template.ftl";
+    public static final String NOTIFICATION_CONTENT = "%s邀请你加入%s";
     @Resource
     private InvitationPersistence invitationPersistence;
     @Resource
@@ -33,9 +36,10 @@ public class InvitationService {
     private RegistrationService registrationService;
     @Resource
     private TeamMembersService membersService;
-
     @Resource
     private TeamsService teamsService;
+    @Resource
+    private NotificationService notificationService;
 
     public Invitation invite(String userName, String teamId, Invitation invitation) throws TemplateException, IOException, MessagingException {
         Team team = teamsService.findById(teamId);
@@ -64,7 +68,13 @@ public class InvitationService {
 
         Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(teamId, invitation.getId())).withRel("invitationLink");
         invitationEmail.setInvitationLink(invitationLink.getHref());
-
+        Notification notification = new Notification();
+        notification.setReceiver(invitee.getName());
+        notification.setSender(userName);
+        notification.setLink(invitationLink.getHref());
+        notification.setContent(String.format(NOTIFICATION_CONTENT, userName, team.getName()));
+        notification.setType("team-members-invitation");
+        notificationService.notify(notification);
         mailService.sendMailByTemplate(invitationEmail, TEAM_INVITATION_TEMPLATE);
         return invitationPersistence.findById(invitation.getId());
     }
