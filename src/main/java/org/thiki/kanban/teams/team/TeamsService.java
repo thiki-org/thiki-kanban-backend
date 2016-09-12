@@ -36,11 +36,6 @@ public class TeamsService {
         return teamsPersistence.deleteById(id);
     }
 
-    public Team update(Team team) {
-        teamsPersistence.update(team);
-        return teamsPersistence.findById(team.getId());
-    }
-
     public List<Team> findByUserName(String userName) {
 
         return teamsPersistence.findByUserName(userName);

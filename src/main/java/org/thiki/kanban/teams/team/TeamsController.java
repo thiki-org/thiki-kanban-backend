@@ -23,7 +23,6 @@ public class TeamsController {
 
     @RequestMapping(value = "/{userName}/teams", method = RequestMethod.GET)
     public HttpEntity findByUserName(@PathVariable("userName") String userName) {
-
         List<Team> teamList = teamsService.findByUserName(userName);
         return Response.build(new TeamsResource(userName, teamList));
     }
@@ -32,12 +31,5 @@ public class TeamsController {
     public HttpEntity findById(@PathVariable String id, @RequestHeader("userName") String userName) {
         Team team = teamsService.findById(id);
         return Response.build(new TeamResource(userName, team));
-    }
-
-    @RequestMapping(value = "/{userName}/teams/{id}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Team team, @PathVariable String id, @PathVariable("userName") String userName) {
-        team.setId(id);
-        Team updatedTeam = teamsService.update(team);
-        return Response.build(new TeamResource(userName, updatedTeam));
     }
 }

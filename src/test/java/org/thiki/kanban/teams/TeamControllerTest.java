@@ -1,7 +1,6 @@
 package org.thiki.kanban.teams;
 
 import com.jayway.restassured.http.ContentType;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -109,23 +108,5 @@ public class TeamControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"))
                 .body("_links.members.href", equalTo("http://localhost:8007/teams/fooId/members"))
                 .body("_links.boards.href", equalTo("http://localhost:8007/teams/fooId/boards"));
-    }
-
-    @Ignore
-    @Scenario("更新一个team信息")
-    @Test
-    public void shouldUpdateSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('fooId','team-name','someone')");
-        given().header("userName", "someone")
-                .contentType(ContentType.JSON)
-                .body("{\"name\":\"new-name\"}")
-                .when()
-                .put("/teams/fooId")
-                .then()
-                .statusCode(200)
-                .body("name", equalTo("new-name"))
-                .body("author", equalTo("someone"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"));
-        assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_team where id='fooId'", String.class));
     }
 }
