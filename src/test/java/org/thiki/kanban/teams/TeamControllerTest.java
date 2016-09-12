@@ -60,6 +60,22 @@ public class TeamControllerTest extends TestBase {
                 .body("message", equalTo(TeamsCodes.nameIsRequired));
     }
 
+    @Scenario("创建团队时，如果在本人名下已经存在相同名称的团队，则不允许创建")
+    @Test
+    public void creationIsNotAllowedIfTeamNameIsConflict() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('fooId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','fooId','someone','someone')");
+
+        given().header("userName", userName)
+                .body("{\"name\":\"team-name\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/someone/teams")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(TeamsCodes.TEAM_IS_ALREADY_EXISTS.code()))
+                .body("message", equalTo(TeamsCodes.TEAM_IS_ALREADY_EXISTS.message()));
+    }
 
     @Scenario("创建团队时，如果团队名称超限，则不允许创建")
     @Test

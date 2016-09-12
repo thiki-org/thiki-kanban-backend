@@ -1,6 +1,7 @@
 package org.thiki.kanban.teams.team;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.teams.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;
@@ -17,6 +18,11 @@ public class TeamsService {
     private TeamMembersService teamMembersService;
 
     public Team create(String userName, final Team team) {
+
+        boolean isNameConflict = teamsPersistence.isNameConflict(userName, team.getName());
+        if (isNameConflict) {
+            throw new BusinessException(TeamsCodes.TEAM_IS_ALREADY_EXISTS);
+        }
         teamsPersistence.create(userName, team);
 
         teamMembersService.joinTeam(userName, team.getId());

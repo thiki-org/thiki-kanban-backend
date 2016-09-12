@@ -19,4 +19,6 @@ public interface TeamsPersistence {
     List<Team> findByUserName(String userName);
 
     boolean isTeamExist(String teamId);
+
+    boolean isNameConflict(@Param("userName") String userName, @Param("teamName") String teamName);
 }

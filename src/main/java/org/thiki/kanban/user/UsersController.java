@@ -31,12 +31,6 @@ public class UsersController {
         return Response.build(new UserResource(updatedUserProfile));
     }
 
-    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String id) {
-        usersService.deleteById(id);
-        return Response.build(new UserResource());
-    }
-
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody UserProfile userProfile, @RequestHeader String userId) {
         UserProfile savedUserProfile = usersService.create(userId, userProfile);

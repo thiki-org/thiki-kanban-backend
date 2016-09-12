@@ -27,4 +27,8 @@
     <select id="isTeamExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
         SELECT count(*) FROM kb_team WHERE id= #{teamId}
     </select>
+
+    <select id="isNameConflict" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_team team JOIN kb_team_members members ON team.id=members.team_id WHERE team.name=#{teamName} AND members.member=#{userName} AND team.delete_status=0 AND members.delete_status=0
+    </select>
 </mapper>
