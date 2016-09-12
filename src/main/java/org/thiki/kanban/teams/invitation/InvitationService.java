@@ -26,8 +26,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
  */
 @Service
 public class InvitationService {
-    private static final String TEAM_INVITATION_TEMPLATE = "team-invitation-template.ftl";
     public static final String NOTIFICATION_CONTENT = "%s邀请你加入%s";
+    private static final String TEAM_INVITATION_TEMPLATE = "team-invitation-template.ftl";
     @Resource
     private InvitationPersistence invitationPersistence;
     @Resource

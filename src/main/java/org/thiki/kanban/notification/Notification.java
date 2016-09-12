@@ -21,6 +21,8 @@ public class Notification implements Serializable {
     private Integer isRead;
 
     private String creationTime;
+    private String type;
+    private String modificationTime;
 
     public String getType() {
         return type;
@@ -29,10 +31,6 @@ public class Notification implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
-
-    private String type;
-
-    private String modificationTime;
 
     public String getCreationTime() {
         return creationTime;

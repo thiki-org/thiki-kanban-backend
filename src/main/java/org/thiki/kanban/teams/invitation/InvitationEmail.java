@@ -6,19 +6,10 @@ import org.thiki.kanban.foundation.mail.MailEntity;
  * Created by xubt on 8/14/16.
  */
 public class InvitationEmail extends MailEntity {
-    private String verificationCode;
     private String inviter;
     private String invitee;
     private String teamName;
     private String invitationLink;
-
-    public String getVerificationCode() {
-        return verificationCode;
-    }
-
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
-    }
 
     @Override
     public String getSubject() {

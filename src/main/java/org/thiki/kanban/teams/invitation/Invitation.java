@@ -31,10 +31,6 @@ public class Invitation {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
     public String getModificationTime() {
         return modificationTime;
     }

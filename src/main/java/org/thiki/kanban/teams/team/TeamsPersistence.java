@@ -16,8 +16,6 @@ public interface TeamsPersistence {
 
     Team findById(@Param("id") String id);
 
-    Integer deleteById(@Param("id") String id);
-
     List<Team> findByUserName(String userName);
 
     boolean isTeamExist(String teamId);
