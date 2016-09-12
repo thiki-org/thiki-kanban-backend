@@ -52,7 +52,9 @@ public class InvitationService {
         }
         invitation.setInviter(userName);
         invitation.setTeamId(teamId);
+        invitationPersistence.cancelPreviousInvitation(invitation);
         invitationPersistence.invite(invitation);
+
 
         InvitationEmail invitationEmail = new InvitationEmail();
         invitationEmail.setReceiver(invitee.getEmail());

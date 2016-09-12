@@ -26,26 +26,26 @@ public class InvitationControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
-                "VALUES ('another-user-id','766191920@qq.com','another-user','password')");
+                "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
 
         given().header("userName", userName)
-                .body("{\"invitee\":\"another-user\"}")
+                .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/teams/foo-team-Id/invitation")
                 .then()
                 .statusCode(201)
-                .body("invitee", equalTo("another-user"))
+                .body("invitee", equalTo("invitee-user"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/invitation"))
                 .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
-        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='another-user'").size());
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
 
     @Scenario("如果邀请加入的团队并不存在，则不允许发送邀请")
     @Test
     public void NotAllowedIfTeamIsNotExist() throws Exception {
         given().header("userName", userName)
-                .body("{\"invitee\":\"another-user\"}")
+                .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/teams/foo-team-Id/invitation")
@@ -61,7 +61,7 @@ public class InvitationControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
 
         given().header("userName", userName)
-                .body("{\"invitee\":\"another-user\"}")
+                .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/teams/foo-team-Id/invitation")
@@ -78,10 +78,10 @@ public class InvitationControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
-                "VALUES ('another-user-id','766191920@qq.com','another-user','password')");
+                "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
 
         given().header("userName", userName)
-                .body("{\"invitee\":\"another-user\"}")
+                .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/teams/foo-team-Id/invitation")
@@ -90,4 +90,30 @@ public class InvitationControllerTest extends TestBase {
                 .body("code", equalTo(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM.code()))
                 .body("message", equalTo(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM.message()));
     }
+
+    @Scenario("如果此前已经存在相同的邀请，则取消之前的邀请")
+    @Test
+    public void cancelPreviousInvitationBeforeSendingNewInvitation() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_member_invitation (id,team_id,inviter,invitee) VALUES ('foo-invitation-Id','foo-team-Id','someone','invitee-user')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','foo-team-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','someone','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
+
+        given().header("userName", userName)
+                .body("{\"invitee\":\"invitee-user\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/teams/foo-team-Id/invitation")
+                .then()
+                .statusCode(201)
+                .body("invitee", equalTo("invitee-user"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/invitation"))
+                .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where id='foo-invitation-Id' AND delete_status=1").size());
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='foo-team-Id' AND invitee='invitee-user'").size());
+    }
+
 }

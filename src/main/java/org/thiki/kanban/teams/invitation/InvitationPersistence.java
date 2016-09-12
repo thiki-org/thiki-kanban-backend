@@ -10,4 +10,6 @@ public interface InvitationPersistence {
     Integer invite(Invitation invitation);
 
     Invitation findById(String id);
+
+    Integer cancelPreviousInvitation(Invitation invitation);
 }
