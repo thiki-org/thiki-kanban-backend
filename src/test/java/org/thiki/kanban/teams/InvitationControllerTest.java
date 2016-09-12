@@ -61,5 +61,19 @@ public class InvitationControllerTest extends TestBase {
                 .body("message", equalTo(InvitationCodes.TEAM_IS_NOT_EXISTS.message()));
     }
 
+    @Scenario("如果被邀请人不存在，则不允许发送邀请")
+    @Test
+    public void NotAllowedIfInviteeIsNotExist() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
 
+        given().header("userName", userName)
+                .body("{\"invitee\":\"another-user\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/teams/foo-team-Id/invitation")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(InvitationCodes.INVITEE_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(InvitationCodes.INVITEE_IS_NOT_EXISTS.message()));
+    }
 }
