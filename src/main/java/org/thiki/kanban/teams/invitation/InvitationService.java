@@ -3,6 +3,7 @@ package org.thiki.kanban.teams.invitation;
 import freemarker.template.TemplateException;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
 import org.thiki.kanban.registration.Registration;
 import org.thiki.kanban.registration.RegistrationService;
@@ -34,9 +35,14 @@ public class InvitationService {
     private TeamsService teamsService;
 
     public Invitation invite(String userName, String teamId, Invitation invitation) throws TemplateException, IOException, MessagingException {
-        Registration invitee = registrationService.findByName(invitation.getInvitee());
-
         Team team = teamsService.findById(teamId);
+        if (team == null) {
+            throw new BusinessException(InvitationCodes.TEAM_IS_NOT_EXISTS);
+        }
+        Registration invitee = registrationService.findByName(invitation.getInvitee());
+        if (invitee == null) {
+            throw new BusinessException(InvitationCodes.INVITEE_IS_NOT_EXISTS);
+        }
         invitation.setInviter(userName);
         invitation.setTeamId(teamId);
         invitationPersistence.invite(invitation);
