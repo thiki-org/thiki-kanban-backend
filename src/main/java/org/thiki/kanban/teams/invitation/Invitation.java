@@ -1,11 +1,17 @@
 package org.thiki.kanban.teams.invitation;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by bogehu on 7/11/16.
  */
 
 public class Invitation {
     private String id;
+    @NotEmpty(message = InvitationCodes.InviteeIsRequired)
+    @NotNull(message = InvitationCodes.InviteeIsRequired)
     private String invitee;
     private String inviter;
     private String teamId;

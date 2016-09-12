@@ -7,8 +7,7 @@ public enum InvitationCodes {
     TEAM_IS_NOT_EXISTS(70011, "团队不存在。"),
     INVITEE_IS_NOT_EXISTS(70012, "被邀请的成员不存在。"),
     INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM(70013, "邀请人并不是当前团队的成员,不允许邀请他人进入该团队。");
-    public static final String nameIsRequired = "团队名称不可以为空。";
-    public static final String nameIsInvalid = "看板名称过长,请保持在10个字以内。";
+    public static final String InviteeIsRequired = "请指定被邀请的成员。";
     private int code;
     private String message;
 

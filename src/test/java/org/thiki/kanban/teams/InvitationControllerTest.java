@@ -41,6 +41,20 @@ public class InvitationControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
 
+    @Scenario("如果邀请人为空，怎不允许发送邀请")
+    @Test
+    public void NotAllowedIfInviteeIsEmpty() throws Exception {
+        given().header("userName", userName)
+                .body("{\"invitee\":\"\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/teams/foo-team-Id/invitation")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo(InvitationCodes.InviteeIsRequired));
+    }
+
+
     @Scenario("如果邀请加入的团队并不存在，则不允许发送邀请")
     @Test
     public void NotAllowedIfTeamIsNotExist() throws Exception {
