@@ -25,35 +25,35 @@ public class InvitationEmail extends MailEntity {
         return "邀请加入团队";
     }
 
-    public void setInviter(String inviter) {
-        this.inviter = inviter;
-    }
-
     public String getInviter() {
         return inviter;
     }
 
-    public void setInvitee(String invitee) {
-        this.invitee = invitee;
+    public void setInviter(String inviter) {
+        this.inviter = inviter;
     }
 
     public String getInvitee() {
         return invitee;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setInvitee(String invitee) {
+        this.invitee = invitee;
     }
 
     public String getTeamName() {
         return teamName;
     }
 
-    public void setInvitationLink(String invitationLink) {
-        this.invitationLink = invitationLink;
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     public String getInvitationLink() {
         return invitationLink;
+    }
+
+    public void setInvitationLink(String invitationLink) {
+        this.invitationLink = invitationLink;
     }
 }

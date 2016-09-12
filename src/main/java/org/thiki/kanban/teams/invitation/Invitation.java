@@ -45,20 +45,20 @@ public class Invitation {
         this.creationTime = creationTime;
     }
 
-    public void setInviter(String inviter) {
-        this.inviter = inviter;
-    }
-
     public String getInviter() {
         return inviter;
     }
 
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
+    public void setInviter(String inviter) {
+        this.inviter = inviter;
     }
 
     public String getTeamId() {
         return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
     }
 
     public String getInvitee() {
