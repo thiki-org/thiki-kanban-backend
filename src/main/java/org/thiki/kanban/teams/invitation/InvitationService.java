@@ -54,6 +54,14 @@ public class InvitationService {
         if (!isInviterLegal) {
             throw new BusinessException(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM);
         }
+
+        boolean isInviteeAlreadyInTheTeam = membersService.isMember(teamId, invitee.getName());
+        if (isInviteeAlreadyInTheTeam) {
+            throw new BusinessException(InvitationCodes.INVITEE_IS_ALREADY_A_MEMBER_OF_THE_TEAM);
+        }
+        if (!isInviterLegal) {
+            throw new BusinessException(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM);
+        }
         invitation.setInviter(userName);
         invitation.setTeamId(teamId);
         invitationPersistence.cancelPreviousInvitation(invitation);

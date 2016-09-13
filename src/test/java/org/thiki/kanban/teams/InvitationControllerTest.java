@@ -87,7 +87,7 @@ public class InvitationControllerTest extends TestBase {
 
     @Scenario("如果邀请人并非团队的成员则不允许发送邀请")
     @Test
-    public void NotAllowedIfInviterIsNotAMemberOfTheTeamExist() throws Exception {
+    public void NotAllowedIfInviterIsNotAMemberOfTheTeam() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
@@ -103,6 +103,27 @@ public class InvitationControllerTest extends TestBase {
                 .statusCode(400)
                 .body("code", equalTo(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM.code()))
                 .body("message", equalTo(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM.message()));
+    }
+    @Scenario("如果被邀请人已经是团队的成员，则不允许发送邀请")
+    @Test
+    public void NotAllowedIfInviteeIsAlreadyAMemberOfTheTeam() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','foo-team-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','someone','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-invitee-member-id','foo-team-Id','invitee-user','someone')");
+
+        given().header("userName", userName)
+                .body("{\"invitee\":\"invitee-user\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/teams/foo-team-Id/members/invitation")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(InvitationCodes.INVITEE_IS_ALREADY_A_MEMBER_OF_THE_TEAM.code()))
+                .body("message", equalTo(InvitationCodes.INVITEE_IS_ALREADY_A_MEMBER_OF_THE_TEAM.message()));
     }
 
     @Scenario("如果此前已经存在相同的邀请，则取消之前的邀请")
