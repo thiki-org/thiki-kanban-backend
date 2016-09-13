@@ -39,4 +39,10 @@ public class RestResource extends ResourceSupport {
     public JSONArray getResources() {
         return resourcesJSON;
     }
+
+    public void buildDataObject(String key, Object value) {
+        JSONObject dataObject = new JSONObject();
+        dataObject.put(key, value);
+        this.domainObject = dataObject;
+    }
 }
