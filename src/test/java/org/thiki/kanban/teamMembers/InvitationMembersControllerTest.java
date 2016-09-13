@@ -78,9 +78,10 @@ public class InvitationMembersControllerTest extends TestBase {
                 .get("/teams/foo-teamId/members")
                 .then()
                 .statusCode(200)
-                .body("[0].userName", equalTo("someone"))
-                .body("[0].email", equalTo("someone@gmail.com"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/users/someone"));
+                .body("members[0].userName", equalTo("someone"))
+                .body("members[0].email", equalTo("someone@gmail.com"))
+                .body("members[0]._links.self.href", equalTo("http://localhost:8007/users/someone"))
+                .body("_links.invitation.href", equalTo("http://localhost:8007/teams/foo-teamId/members/invitation"));
     }
 
     @Scenario("当用户加入一个团队后，可以获取该团队的所有成员。但是当团队不存在时,则不允许获取。")

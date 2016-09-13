@@ -17,13 +17,13 @@ public class InvitationController {
     @Autowired
     private InvitationService invitationService;
 
-    @RequestMapping(value = "teams/{teamId}/invitation", method = RequestMethod.POST)
+    @RequestMapping(value = "teams/{teamId}/members/invitation", method = RequestMethod.POST)
     public HttpEntity invite(@RequestBody Invitation invitation, @PathVariable("teamId") String teamId, @RequestHeader("userName") String userName) throws TemplateException, IOException, MessagingException {
         Invitation savedInvitation = invitationService.invite(userName, teamId, invitation);
         return Response.post(new InvitationResource(userName, teamId, savedInvitation));
     }
 
-    @RequestMapping(value = "teams/{teamId}/invitation", method = RequestMethod.PUT)
+    @RequestMapping(value = "teams/{teamId}/members/invitation", method = RequestMethod.PUT)
     public HttpEntity acceptInvitation(@PathVariable("teamId") String teamId, @RequestParam("invitationId") String invitationId) {
         return null;
     }

@@ -32,11 +32,11 @@ public class InvitationControllerTest extends TestBase {
                 .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-team-Id/invitation")
+                .post("/teams/foo-team-Id/members/invitation")
                 .then()
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/invitation"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
                 .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
@@ -48,7 +48,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("{\"invitee\":\"\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-team-Id/invitation")
+                .post("/teams/foo-team-Id/invitation/members")
                 .then()
                 .statusCode(400)
                 .body("message", equalTo(InvitationCodes.InviteeIsRequired));
@@ -62,7 +62,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-team-Id/invitation")
+                .post("/teams/foo-team-Id/invitation/members")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(InvitationCodes.TEAM_IS_NOT_EXISTS.code()))
@@ -78,7 +78,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-team-Id/invitation")
+                .post("/teams/foo-team-Id/invitation/members")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(InvitationCodes.INVITEE_IS_NOT_EXISTS.code()))
@@ -98,7 +98,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-team-Id/invitation")
+                .post("/teams/foo-team-Id/invitation/members")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM.code()))
@@ -120,11 +120,11 @@ public class InvitationControllerTest extends TestBase {
                 .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-team-Id/invitation")
+                .post("/teams/foo-team-Id/invitation/members")
                 .then()
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/invitation"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/invitation/members"))
                 .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where id='foo-invitation-Id' AND delete_status=1").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='foo-team-Id' AND invitee='invitee-user'").size());
@@ -144,11 +144,11 @@ public class InvitationControllerTest extends TestBase {
                 .body("{\"invitee\":\"invitee-user\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-team-Id/invitation")
+                .post("/teams/foo-team-Id/invitation/members")
                 .then()
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/invitation"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/invitation/members"))
                 .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_notification where type='team_member_invitation' AND receiver='invitee-user'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
