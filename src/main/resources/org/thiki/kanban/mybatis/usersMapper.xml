@@ -11,16 +11,8 @@
         UPDATE kb_user_registration SET
         email=#{email},
         name=#{name}
-        WHERE id=#{id}
+        WHERE id=#{id} AND delete_status=0
     </update>
-
-    <select id="loadAll" parameterType="java.lang.String" resultType="org.thiki.kanban.user.User">
-        SELECT * FROM kb_user_registration WHERE delete_status=0
-    </select>
-
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.user.User">
-        SELECT * FROM kb_user_registration WHERE delete_status=0 and id= #{id}
-    </select>
 
     <select id="findByEmail" parameterType="java.lang.String" resultType="org.thiki.kanban.user.User">
         SELECT * FROM kb_user_registration WHERE delete_status=0 and email= #{email}
