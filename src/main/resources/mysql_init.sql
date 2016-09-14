@@ -184,11 +184,10 @@ CREATE TABLE kb_team_member_invitation (
   team_id           VARCHAR(50) NOT NULL,
   inviter           VARCHAR(50) NOT NULL,
   invitee           VARCHAR(50) NOT NULL,
-  is_accepted       INT         DEFAULT 0,
-  author            VARCHAR(40) DEFAULT NULL,
-  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  is_accepted       INT      DEFAULT 0,
+  creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
-  delete_status     INT(2)      DEFAULT 0,
+  delete_status     INT(2)   DEFAULT 0,
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB

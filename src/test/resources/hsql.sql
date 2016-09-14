@@ -158,7 +158,6 @@ CREATE TABLE kb_team_member_invitation(
   inviter VARCHAR(50)NOT NULL,
   invitee VARCHAR(50)NOT NULL,
   is_accepted int DEFAULT 0,
-  author VARCHAR(40) DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0

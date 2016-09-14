@@ -15,7 +15,6 @@ public class Invitation {
     private String invitee;
     private String inviter;
     private String teamId;
-    private String author;
     private String creationTime;
     private String modificationTime;
 
@@ -25,10 +24,6 @@ public class Invitation {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getAuthor() {
-        return author;
     }
 
     public String getModificationTime() {
