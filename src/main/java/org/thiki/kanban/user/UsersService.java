@@ -1,6 +1,8 @@
 package org.thiki.kanban.user;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.aspect.ValidateParams;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
@@ -48,7 +50,8 @@ public class UsersService {
         return usersPersistence.findByName(userName);
     }
 
-    public User findByIdentity(String identity) {
+    @ValidateParams
+    public User findByIdentity(@NotEmpty(message = UsersCodes.identityInRequired) String identity) {
         return usersPersistence.findByIdentity(identity);
     }
 }
