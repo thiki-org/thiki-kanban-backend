@@ -6,6 +6,7 @@ import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.user.User;
+import org.thiki.kanban.user.UsersCodes;
 import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;

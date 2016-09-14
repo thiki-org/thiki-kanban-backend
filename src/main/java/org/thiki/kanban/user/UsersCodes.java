@@ -1,4 +1,4 @@
-package org.thiki.kanban.user.registration;
+package org.thiki.kanban.user;
 
 /**
  * Created by xubt on 9/14/16.
