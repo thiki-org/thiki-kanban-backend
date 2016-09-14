@@ -11,6 +11,8 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.user.registration.RegistrationService;
+import org.thiki.kanban.user.registration.UsersCodes;
 
 import javax.annotation.Resource;
 
@@ -76,8 +78,8 @@ public class RegistrationControllerTest extends TestBase {
                 .post("/registration")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("code", equalTo(RegistrationCodes.USERNAME_IS_ALREADY_EXISTS.code()))
-                .body("message", equalTo(RegistrationCodes.USERNAME_IS_ALREADY_EXISTS.message()));
+                .body("code", equalTo(UsersCodes.USERNAME_IS_ALREADY_EXISTS.code()))
+                .body("message", equalTo(UsersCodes.USERNAME_IS_ALREADY_EXISTS.message()));
     }
 
     @Scenario("用户注册时,如果邮箱已经存在,则不允许注册")
@@ -93,8 +95,8 @@ public class RegistrationControllerTest extends TestBase {
                 .post("/registration")
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value())
-                .body("code", equalTo(RegistrationCodes.EMAIL_IS_ALREADY_EXISTS.code()))
-                .body("message", equalTo(RegistrationCodes.EMAIL_IS_ALREADY_EXISTS.message()));
+                .body("code", equalTo(UsersCodes.EMAIL_IS_ALREADY_EXISTS.code()))
+                .body("message", equalTo(UsersCodes.EMAIL_IS_ALREADY_EXISTS.message()));
     }
 
     @Scenario("用户注册时,用户名和邮箱在系统中都不存在,但是密码未通过公钥加密,则不允许注册")

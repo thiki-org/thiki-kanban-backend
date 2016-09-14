@@ -1,4 +1,4 @@
-package org.thiki.kanban.registration;
+package org.thiki.kanban.user.registration;
 
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;

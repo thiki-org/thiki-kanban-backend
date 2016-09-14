@@ -1,4 +1,4 @@
-package org.thiki.kanban.registration;
+package org.thiki.kanban.user.registration;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.SequenceNumber;
@@ -30,12 +30,12 @@ public class RegistrationService {
     public User register(Registration registration) throws Exception {
         boolean isNameExist = usersService.isNameExist(registration.getName());
         if (isNameExist) {
-            throw new BusinessException(RegistrationCodes.USERNAME_IS_ALREADY_EXISTS);
+            throw new BusinessException(UsersCodes.USERNAME_IS_ALREADY_EXISTS);
         }
 
         boolean isEmailExist = usersService.isEmailExist(registration.getEmail());
         if (isEmailExist) {
-            throw new BusinessException(RegistrationCodes.EMAIL_IS_ALREADY_EXISTS);
+            throw new BusinessException(UsersCodes.EMAIL_IS_ALREADY_EXISTS);
         }
 
         registration.setSalt(sequenceNumber.generate());

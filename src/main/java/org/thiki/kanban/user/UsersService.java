@@ -3,6 +3,7 @@ package org.thiki.kanban.user;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
+import org.thiki.kanban.user.registration.UsersCodes;
 
 import javax.annotation.Resource;
 

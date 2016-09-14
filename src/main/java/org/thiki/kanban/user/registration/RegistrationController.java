@@ -1,4 +1,4 @@
-package org.thiki.kanban.registration;
+package org.thiki.kanban.user.registration;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.RequestBody;
