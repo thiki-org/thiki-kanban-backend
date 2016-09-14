@@ -12,11 +12,6 @@ public class UsersService {
     @Resource
     private UsersPersistence usersPersistence;
 
-
-    public User findById(String id) {
-        return usersPersistence.findById(id);
-    }
-
     public User findByName(String userName) {
         return usersPersistence.findByName(userName);
     }
