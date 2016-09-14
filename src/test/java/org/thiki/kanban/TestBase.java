@@ -32,6 +32,9 @@ public class TestBase {
 
     @Autowired
     protected DataSource dataSource;
+
+    @Autowired
+    protected DBPreparation dbPreparation;
     protected JdbcTemplate jdbcTemplate;
     protected SequenceNumber sequenceNumber = Mockito.mock(SequenceNumber.class);
     @Autowired
@@ -49,6 +52,7 @@ public class TestBase {
         when(sequenceNumber.generate()).thenReturn("fooId");
         ReflectionTestUtils.setField(dbInterceptor, "sequenceNumber", sequenceNumber);
         jdbcTemplate = new JdbcTemplate(dataSource);
+        dbPreparation.setJDBCTemplate(jdbcTemplate);
     }
 
     @After

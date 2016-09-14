@@ -97,7 +97,9 @@ public class AssignmentControllerTest extends TestBase {
     @Scenario("当用户想取消某个分配时,如果指定的分配记录存在,则成功将其取消")
     @Test
     public void delete_shouldReturnSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
+        dbPreparation.table("kb_card_assignment")
+                .names("id,card_id,assignee,assigner,author")
+                .values("'fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo'").exec();
         given().header("userId", "authorId-foo")
                 .when()
                 .delete("/procedures/1/cards/fooId/assignments/fooId")
