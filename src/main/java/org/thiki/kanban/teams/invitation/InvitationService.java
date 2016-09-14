@@ -64,6 +64,7 @@ public class InvitationService {
         }
         invitation.setInviter(userName);
         invitation.setTeamId(teamId);
+        invitation.setInvitee(inviteeUser.getName());
         invitationPersistence.cancelPreviousInvitation(invitation);
         invitationPersistence.invite(invitation);
 

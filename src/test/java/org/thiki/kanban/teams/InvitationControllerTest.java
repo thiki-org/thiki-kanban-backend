@@ -58,7 +58,7 @@ public class InvitationControllerTest extends TestBase {
                 .post("/teams/foo-team-Id/members/invitation")
                 .then()
                 .statusCode(201)
-                .body("invitee", equalTo("thiki2016@163.com"))
+                .body("invitee", equalTo("invitee-user"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
                 .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
