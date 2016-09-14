@@ -17,23 +17,27 @@ public class UsersService {
     }
 
     @ValidateParams
-    public User findByIdentity(@NotEmpty(message = UsersCodes.identityInRequired) String identity) {
+    public User findByIdentity(@NotEmpty(message = UsersCodes.identityIsRequired) String identity) {
         return usersPersistence.findByIdentity(identity);
     }
 
-    public User findByEmail(String email) {
+    @ValidateParams
+    public User findByEmail(@NotEmpty(message = UsersCodes.emailIsRequired) String email) {
         return usersPersistence.findByIdentity(email);
     }
 
-    public User findByCredential(String identity, String md5Password) {
+    @ValidateParams
+    public User findByCredential(@NotEmpty(message = UsersCodes.identityIsRequired) String identity, @NotEmpty(message = UsersCodes.md5PasswordIsRequired) String md5Password) {
         return usersPersistence.findByCredential(identity, md5Password);
     }
 
-    public boolean isNameExist(String userName) {
+    @ValidateParams
+    public boolean isNameExist(@NotEmpty(message = UsersCodes.userNameIsRequired) String userName) {
         return usersPersistence.isNameExist(userName);
     }
 
-    public boolean isEmailExist(String email) {
+    @ValidateParams
+    public boolean isEmailExist(@NotEmpty(message = UsersCodes.emailIsRequired) String email) {
         return usersPersistence.isEmailExist(email);
     }
 }
