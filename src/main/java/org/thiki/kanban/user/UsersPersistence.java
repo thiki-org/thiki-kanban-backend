@@ -24,4 +24,6 @@ public interface UsersPersistence {
     UserProfile findByName(String userName);
 
     boolean existsUser(Registration registration);
+
+    User findByIdentity(String identity);
 }

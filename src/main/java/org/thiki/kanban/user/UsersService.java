@@ -47,4 +47,8 @@ public class UsersService {
     public UserProfile findByName(String userName) {
         return usersPersistence.findByName(userName);
     }
+
+    public User findByIdentity(String identity) {
+        return usersPersistence.findByIdentity(identity);
+    }
 }

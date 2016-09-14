@@ -7,11 +7,11 @@ import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
 import org.thiki.kanban.notification.Notification;
 import org.thiki.kanban.notification.NotificationService;
-import org.thiki.kanban.registration.Registration;
-import org.thiki.kanban.registration.RegistrationService;
 import org.thiki.kanban.teams.team.Team;
 import org.thiki.kanban.teams.team.TeamsService;
 import org.thiki.kanban.teams.teamMembers.TeamMembersService;
+import org.thiki.kanban.user.User;
+import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
@@ -33,7 +33,7 @@ public class InvitationService {
     @Resource
     private MailService mailService;
     @Resource
-    private RegistrationService registrationService;
+    private UsersService usersService;
     @Resource
     private TeamMembersService membersService;
     @Resource
@@ -46,8 +46,8 @@ public class InvitationService {
         if (team == null) {
             throw new BusinessException(InvitationCodes.TEAM_IS_NOT_EXISTS);
         }
-        Registration invitee = registrationService.findByName(invitation.getInvitee());
-        if (invitee == null) {
+        User inviteeUser = usersService.findByIdentity(invitation.getInvitee());
+        if (inviteeUser == null) {
             throw new BusinessException(InvitationCodes.INVITEE_IS_NOT_EXISTS);
         }
         boolean isInviterLegal = membersService.isMember(teamId, userName);
@@ -55,7 +55,7 @@ public class InvitationService {
             throw new BusinessException(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM);
         }
 
-        boolean isInviteeAlreadyInTheTeam = membersService.isMember(teamId, invitee.getName());
+        boolean isInviteeAlreadyInTheTeam = membersService.isMember(teamId, inviteeUser.getName());
         if (isInviteeAlreadyInTheTeam) {
             throw new BusinessException(InvitationCodes.INVITEE_IS_ALREADY_A_MEMBER_OF_THE_TEAM);
         }
@@ -69,15 +69,15 @@ public class InvitationService {
 
 
         InvitationEmail invitationEmail = new InvitationEmail();
-        invitationEmail.setReceiver(invitee.getEmail());
+        invitationEmail.setReceiver(inviteeUser.getEmail());
         invitationEmail.setInviter(userName);
-        invitationEmail.setInvitee(invitee.getName());
+        invitationEmail.setInvitee(inviteeUser.getName());
         invitationEmail.setTeamName(team.getName());
 
         Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(teamId, invitation.getId())).withRel("invitationLink");
         invitationEmail.setInvitationLink(invitationLink.getHref());
         Notification notification = new Notification();
-        notification.setReceiver(invitee.getName());
+        notification.setReceiver(inviteeUser.getName());
         notification.setSender(userName);
         notification.setLink(invitationLink.getHref());
         notification.setContent(String.format(NOTIFICATION_CONTENT, userName, team.getName()));

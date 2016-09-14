@@ -34,6 +34,12 @@
         SELECT * FROM kb_user_registration WHERE delete_status=0 and name= #{name}
     </select>
 
+    <select id="findByIdentity" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.user.User">
+        SELECT id,email,NAME,salt FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or
+        name=#{identity})
+    </select>
+
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_user_registration SET delete_status=1 WHERE id=#{id}
     </delete>
