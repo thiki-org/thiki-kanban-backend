@@ -60,7 +60,7 @@ public class MailSender {
         // 创建MIME邮件对象
         mimeMsg = new MimeMessage(session);
         mp = new MimeMultipart();
-        log.debug(" create session and mimeMessage success");
+        log.debug(" register session and mimeMessage success");
     }
 
     /**

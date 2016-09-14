@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
+import org.thiki.kanban.user.User;
 
 import javax.annotation.Resource;
 
@@ -19,7 +20,7 @@ public class RegistrationController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public HttpEntity registerNewUser(@RequestBody Registration registration) throws Exception {
-        Registration result = registrationService.register(registration);
-        return Response.post(new RegistrationResource(result));
+        User registeredUser = registrationService.register(registration);
+        return Response.post(new RegistrationResource(registeredUser));
     }
 }

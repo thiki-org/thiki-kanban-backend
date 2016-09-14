@@ -16,10 +16,6 @@ public class DBPreparation {
 
     private Object[] fieldsValues;
 
-    public JdbcTemplate getJDBCTemplate() {
-        return jdbcTemplate;
-    }
-
     public void setJDBCTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }

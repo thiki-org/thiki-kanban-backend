@@ -80,7 +80,6 @@ public class InvitationMembersControllerTest extends TestBase {
                 .statusCode(200)
                 .body("members[0].userName", equalTo("someone"))
                 .body("members[0].email", equalTo("someone@gmail.com"))
-                .body("members[0]._links.self.href", equalTo("http://localhost:8007/users/someone"))
                 .body("_links.invitation.href", equalTo("http://localhost:8007/teams/foo-teamId/members/invitation"));
     }
 

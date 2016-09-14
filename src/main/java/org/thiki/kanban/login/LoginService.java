@@ -8,8 +8,8 @@ import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.TokenService;
-import org.thiki.kanban.registration.Registration;
-import org.thiki.kanban.registration.RegistrationPersistence;
+import org.thiki.kanban.user.User;
+import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 @Service
 public class LoginService {
     @Resource
-    private RegistrationPersistence registrationPersistence;
+    private UsersService usersService;
     @Resource
     private TokenService tokenService;
     @Resource
@@ -28,14 +28,14 @@ public class LoginService {
 
     @ValidateParams
     public Identification login(@NotNull(message = LoginCodes.IdentityIsRequired) String identity, @NotEmpty(message = LoginCodes.PasswordIsRequired) String password) throws Exception {
-        Registration registeredUser = registrationPersistence.findByIdentity(identity);
+        User registeredUser = usersService.findByIdentity(identity);
         if (registeredUser == null) {
             throw new BusinessException(LoginCodes.USER_IS_NOT_EXISTS);
         }
         String rsaDecryptedPassword = rsaService.dencrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());
 
-        Registration matchedUser = registrationPersistence.findByCredential(identity, md5Password);
+        User matchedUser = usersService.findByCredential(identity, md5Password);
         if (matchedUser == null) {
             throw new InvalidParamsException(LoginCodes.USER_OR_PASSWORD_IS_INCORRECT.message());
         }

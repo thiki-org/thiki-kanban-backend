@@ -10,8 +10,8 @@ import org.thiki.kanban.password.passwordReset.PasswordReset;
 import org.thiki.kanban.password.passwordReset.PasswordResetApplication;
 import org.thiki.kanban.password.passwordRetrieval.PasswordRetrievalApplication;
 import org.thiki.kanban.password.passwordRetrieval.VerificationCodeEmailData;
-import org.thiki.kanban.registration.Registration;
-import org.thiki.kanban.registration.RegistrationPersistence;
+import org.thiki.kanban.user.User;
+import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
 import javax.mail.MessagingException;
@@ -29,7 +29,7 @@ public class PasswordService {
     @Resource
     private VerificationCodeService verificationCodeService;
     @Resource
-    private RegistrationPersistence registrationPersistence;
+    private UsersService usersService;
     @Resource
     private RSAService rsaService;
 
@@ -37,7 +37,7 @@ public class PasswordService {
     private MailService mailService;
 
     public String applyRetrieval(PasswordRetrievalApplication passwordRetrievalApplication) throws TemplateException, IOException, MessagingException {
-        Registration registeredUser = registrationPersistence.findByEmail(passwordRetrievalApplication.getEmail());
+        User registeredUser = usersService.findByEmail(passwordRetrievalApplication.getEmail());
         verifyWhetherUserIsExists(registeredUser);
 
         String verificationCode = verificationCodeService.generate();
@@ -70,7 +70,7 @@ public class PasswordService {
         if (!isPasswordResetApplicationExists) {
             throw new BusinessException(PasswordCodes.NO_PASSWORD_RESET_RECORD.code(), PasswordCodes.NO_PASSWORD_RESET_RECORD.message());
         }
-        Registration registeredUser = registrationPersistence.findByIdentity(userName);
+        User registeredUser = usersService.findByIdentity(userName);
         String dencryptPassword = rsaService.dencrypt(passwordReset.getPassword());
 
 
@@ -80,7 +80,7 @@ public class PasswordService {
         passwordPersistence.cleanResetApplication(userName);
     }
 
-    private void verifyWhetherUserIsExists(Registration registeredUser) {
+    private void verifyWhetherUserIsExists(User registeredUser) {
         if (registeredUser == null) {
             throw new BusinessException(PasswordCodes.EMAIL_IS_NOT_EXISTS.code(), PasswordCodes.EMAIL_IS_NOT_EXISTS.message());
         }
@@ -92,7 +92,7 @@ public class PasswordService {
         }
     }
 
-    private void sendVerificationCodeEmail(Registration registeredUser, String verificationCode) throws TemplateException, IOException, MessagingException {
+    private void sendVerificationCodeEmail(User registeredUser, String verificationCode) throws TemplateException, IOException, MessagingException {
         VerificationCodeEmailData verificationCodeEmailData = new VerificationCodeEmailData();
         verificationCodeEmailData.setReceiver(registeredUser.getEmail());
         verificationCodeEmailData.setUserName(registeredUser.getName());

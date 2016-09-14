@@ -4,26 +4,24 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import org.thiki.kanban.registration.Registration;
 
-import java.util.List;
-
 
 @Repository
 public interface UsersPersistence {
-    Integer create(UserProfile userProfile);
-
-    UserProfile findById(@Param("id") String id);
-
-    List<UserProfile> loadAll();
-
-    Integer update(UserProfile userProfile);
+    User findById(@Param("id") String id);
 
     Integer deleteById(@Param("id") String id);
 
-    UserProfile findByEmail(String email);
+    User findByEmail(String email);
 
-    UserProfile findByName(String userName);
+    User findByName(String userName);
 
     boolean existsUser(Registration registration);
 
-    User findByIdentity(String identity);
+    User findByIdentity(@Param("identity") String identity);
+
+    User findByCredential(@Param("identity") String identity, @Param("password") String password);
+
+    boolean isNameExist(String userName);
+
+    boolean isEmailExist(String email);
 }

@@ -2,13 +2,13 @@ package org.thiki.kanban.registration;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.SequenceNumber;
-import org.thiki.kanban.foundation.exception.ExceptionCode;
-import org.thiki.kanban.foundation.exception.ResourceConflictException;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.user.User;
+import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
-import java.text.MessageFormat;
 
 /**
  * Created by joeaniu on 6/21/16.
@@ -18,6 +18,8 @@ public class RegistrationService {
 
     @Resource
     private RegistrationPersistence registrationPersistence;
+    @Resource
+    private UsersService usersService;
 
     @Resource
     private SequenceNumber sequenceNumber;
@@ -25,19 +27,15 @@ public class RegistrationService {
     @Resource
     private RSAService rsaService;
 
-    public Registration findByName(String userName) {
-        return registrationPersistence.findByName(userName);
-    }
-
-    public Registration register(Registration registration) throws Exception {
-        Registration conflictNameUser = registrationPersistence.findByName(registration.getName());
-        if (conflictNameUser != null) {
-            throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("User named {0} is already exists.", registration.getName()));
+    public User register(Registration registration) throws Exception {
+        boolean isNameExist = usersService.isNameExist(registration.getName());
+        if (isNameExist) {
+            throw new BusinessException(RegistrationCodes.USERNAME_IS_ALREADY_EXISTS);
         }
 
-        Registration conflictEmailUser = registrationPersistence.findByEmail(registration.getEmail());
-        if (conflictEmailUser != null) {
-            throw new ResourceConflictException(ExceptionCode.USER_EXISTS.code(), MessageFormat.format("Email {0} is already exists.", registration.getEmail()));
+        boolean isEmailExist = usersService.isEmailExist(registration.getEmail());
+        if (isEmailExist) {
+            throw new BusinessException(RegistrationCodes.EMAIL_IS_ALREADY_EXISTS);
         }
 
         registration.setSalt(sequenceNumber.generate());
@@ -47,7 +45,7 @@ public class RegistrationService {
         if (password != null) {
             registration.setPassword(password);
         }
-        registrationPersistence.create(registration);
-        return findByName(registration.getName());
+        registrationPersistence.register(registration);
+        return usersService.findByName(registration.getName());
     }
 }
