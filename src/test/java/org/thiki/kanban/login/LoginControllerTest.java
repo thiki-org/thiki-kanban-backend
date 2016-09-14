@@ -12,7 +12,6 @@ import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.TokenService;
 
 import javax.annotation.Resource;
-import java.text.MessageFormat;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -101,6 +100,7 @@ public class LoginControllerTest extends TestBase {
                 .get("/login")
                 .then()
                 .statusCode(400)
-                .body("message", equalTo(MessageFormat.format(LoginCodes.USER_IS_NOT_EXISTS.message(), "foo")));
+                .body("code", equalTo(LoginCodes.USER_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(LoginCodes.USER_IS_NOT_EXISTS.message()));
     }
 }

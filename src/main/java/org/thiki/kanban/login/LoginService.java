@@ -3,6 +3,7 @@ package org.thiki.kanban.login;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.security.md5.MD5Service;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
@@ -12,7 +13,6 @@ import org.thiki.kanban.registration.RegistrationPersistence;
 
 import javax.annotation.Resource;
 import javax.validation.constraints.NotNull;
-import java.text.MessageFormat;
 
 /**
  * Created by xubt on 7/5/16.
@@ -30,7 +30,7 @@ public class LoginService {
     public Identification login(@NotNull(message = LoginCodes.IdentityIsRequired) String identity, @NotEmpty(message = LoginCodes.PasswordIsRequired) String password) throws Exception {
         Registration registeredUser = registrationPersistence.findByIdentity(identity);
         if (registeredUser == null) {
-            throw new InvalidParamsException(MessageFormat.format(LoginCodes.USER_IS_NOT_EXISTS.message(), identity));
+            throw new BusinessException(LoginCodes.USER_IS_NOT_EXISTS);
         }
         String rsaDecryptedPassword = rsaService.dencrypt(password);
         String md5Password = MD5Service.encrypt(rsaDecryptedPassword + registeredUser.getSalt());

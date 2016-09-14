@@ -46,10 +46,4 @@ public class BoardsController {
         List<Board> boards = boardsService.loadByUserName(userName);
         return Response.build(new BoardsResource(boards));
     }
-
-    @RequestMapping(value = "/teams/{teamId}/boards", method = RequestMethod.GET)
-    public HttpEntity findByTeamId(@PathVariable String teamId) {
-        List<Board> boards = boardsService.findByTeamId(teamId);
-        return Response.build(new BoardsResource(boards));
-    }
 }

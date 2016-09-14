@@ -54,9 +54,4 @@ public class BoardsService {
         }
         return boardsPersistence.deleteById(id);
     }
-
-    public List<Board> findByTeamId(String teamId) {
-        return boardsPersistence.findByTeamId(teamId);
-    }
-
 }

@@ -2,7 +2,6 @@ package org.thiki.kanban.teams.team;
 
 import freemarker.template.TemplateException;
 import org.springframework.hateoas.Link;
-import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.teams.teamMembers.TeamMembersController;
 
@@ -24,9 +23,6 @@ public class TeamResource extends RestResource {
 
             Link membersLink = linkTo(methodOn(TeamMembersController.class).loadMembersByTeamId(team.getId(), userName)).withRel("members");
             this.add(membersLink);
-
-            Link boardsLink = linkTo(methodOn(BoardsController.class).findByTeamId(team.getId())).withRel("boards");
-            this.add(boardsLink);
         }
     }
 }
