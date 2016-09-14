@@ -16,12 +16,12 @@ public class DBPreparation {
 
     private Object[] fieldsValues;
 
-    public void setJDBCTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
     public JdbcTemplate getJDBCTemplate() {
         return jdbcTemplate;
+    }
+
+    public void setJDBCTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     public DBPreparation table(String tableName) {
