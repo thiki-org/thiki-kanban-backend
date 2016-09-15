@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
+import org.thiki.kanban.foundation.annotations.Theme;
 import org.thiki.kanban.teams.invitation.InvitationCodes;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -15,6 +16,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by xutao on 9/12/16.
  */
+@Theme("7、团队加入邀请")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InvitationControllerTest extends TestBase {
 
