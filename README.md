@@ -2,7 +2,7 @@
 [![Build Status](http://img.shields.io/travis/thiki-org/thiki-kanban-backend/go.svg?style=flat-square)](https://travis-ci.org/thiki-org/thiki-kanban-backend)
 [![Coverage Status](http://img.shields.io/coveralls/thiki-org/thiki-kanban-backend/go.svg?style=flat-square)](https://coveralls.io/r/thiki-org/thiki-kanban-backend?branch=go)
 [![Codacy Badge](https://img.shields.io/codacy/grade/096aad581d3b44f6bde20ab37862512e/go.svg?style=flat-square)](https://www.codacy.com/app/btao-cn/thiki-kanban-backend?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=thiki-org/thiki-kanban-backend&amp;utm_campaign=Badge_Grade)
-[![CocoaPods](https://img.shields.io/cocoapods/metrics/doc-percent/AFNetworking.svg?maxAge=2592000?style=plastic)](https://github.com/thiki-org/thiki-kanban-backend/blob/go/src/test/resources/APIDocument.md)
+[![CocoaPods](https://img.shields.io/badge/文档-API-green.svg?style=plastic)](https://github.com/thiki-org/thiki-kanban-backend/blob/go/src/test/resources/APIDocument.md)
 
 thiki(思奇)是一个充满活力、具有技术追求并热爱创造的团队。我们希望在锤炼工程技艺、尝试软件创新、提升个人能力的同时,打造一款卓越的开源软件,以助力互联网研发团队提高研发效率,并将过程中的技术积累沉淀下来,帮助他人进步。
 
