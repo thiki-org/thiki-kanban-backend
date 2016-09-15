@@ -4,8 +4,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
-import org.thiki.kanban.foundation.annotations.Theme;
+import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -13,7 +14,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 /**
  * Created by xubt on 5/18/16.
  */
-@Theme("0、入口")
+@Domain(order = DomainOrder.ENTRANCE, name = "入口")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class EntranceControllerTest extends TestBase {
     @Scenario("初次访问系统时入口")

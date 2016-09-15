@@ -5,8 +5,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
-import org.thiki.kanban.foundation.annotations.Theme;
+import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.teams.team.TeamsCodes;
 
 import static com.jayway.restassured.RestAssured.given;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  * Created by bogehu on 7/11/16.
  */
 
-@Theme("5、团队")
+@Domain(order = DomainOrder.TEAM, name = "团队")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TeamControllerTest extends TestBase {
     @Scenario("创建一个团队")

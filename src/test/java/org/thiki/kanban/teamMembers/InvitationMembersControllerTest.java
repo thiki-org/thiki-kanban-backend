@@ -5,7 +5,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
+import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.teams.team.TeamsCodes;
 import org.thiki.kanban.teams.teamMembers.TeamMembersCodes;
 
@@ -15,6 +17,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 /**
  * Created by 濤 on 7/26/16.
  */
+@Domain(order = DomainOrder.TEAM_MEMBER, name = "团队成员")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InvitationMembersControllerTest extends TestBase {
     @Scenario("加入一个团队")

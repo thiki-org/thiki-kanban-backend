@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
+import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.foundation.security.token.TokenService;
 
@@ -22,6 +24,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by xubt on 7/5/16.
  */
+@Domain(order = DomainOrder.LOGIN, name = "登录")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class LoginControllerTest extends TestBase {
 

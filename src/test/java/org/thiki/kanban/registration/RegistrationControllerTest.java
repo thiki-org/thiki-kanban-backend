@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
+import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.foundation.security.rsa.RSAService;
 import org.thiki.kanban.user.UsersCodes;
 import org.thiki.kanban.user.registration.RegistrationService;
@@ -23,6 +25,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by xubt on 6/16/16.
  */
+@Domain(order = DomainOrder.REGISTRATION, name = "注册")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class RegistrationControllerTest extends TestBase {
     @Resource

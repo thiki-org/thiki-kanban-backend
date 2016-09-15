@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
+import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.foundation.common.VerificationCodeService;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.common.date.DateStyle;
@@ -29,6 +31,7 @@ import static org.mockito.Mockito.when;
 /**
  * Created by xubt on 8/8/16.
  */
+@Domain(order = DomainOrder.PASSWORD, name = "密码")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class PasswordControllerTest extends TestBase {
     @Resource

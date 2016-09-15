@@ -6,8 +6,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
-import org.thiki.kanban.foundation.annotations.Theme;
+import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
@@ -17,7 +18,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 /**
  * Created by xubt on 5/11/16.
  */
-@Theme("卡片")
+@Domain(order = DomainOrder.CARD, name = "卡片")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CardsControllerTest extends TestBase {
 
