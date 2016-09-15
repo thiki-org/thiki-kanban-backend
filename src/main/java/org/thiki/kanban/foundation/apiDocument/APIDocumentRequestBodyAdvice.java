@@ -4,6 +4,7 @@ package org.thiki.kanban.foundation.apiDocument;
  * Created by xubt on 9/14/16.
  */
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpInputMessage;
@@ -35,8 +36,7 @@ public class APIDocumentRequestBodyAdvice implements RequestBodyAdvice {
 
     @Override
     public Object afterBodyRead(Object o, HttpInputMessage httpInputMessage, MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
-        APIDocument.newRequest();
-        APIDocument.request = o;
+        APIDocument.request = JSONObject.toJSON(o);
         return o;
     }
 }
