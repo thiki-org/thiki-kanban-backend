@@ -1,6 +1,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-*API概要文档*
+# API概要文档 #
 
 - [零、入口](#%E9%9B%B6%E3%80%81%E5%85%A5%E5%8F%A3)
   - [初次访问系统时入口](#%E5%88%9D%E6%AC%A1%E8%AE%BF%E9%97%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E5%85%A5%E5%8F%A3)
