@@ -21,9 +21,8 @@ public class JunitTestAspect {
     @Before("@annotation(org.junit.Test)")
     public void validateQueryParams(JoinPoint joinPoint) throws Throwable {
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
-        Object[] parameterValues = joinPoint.getArgs();
         Scenario scenario = method.getDeclaredAnnotation(Scenario.class);
-        APIDocument.scenario = scenario.value();
+        APIDocument.scenario = scenario == null ? "场景未定义" : scenario.value();
         APIDocument.testCaseName = method.getName();
 
         Theme theme = joinPoint.getTarget().getClass().getAnnotation(Theme.class);
