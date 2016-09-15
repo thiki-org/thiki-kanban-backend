@@ -27,6 +27,7 @@ public class APIDocumentResponseBodyAdvice implements ResponseBodyAdvice {
     @Override
     public Object beforeBodyWrite(Object responseBody, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
         APIDocument.response = responseBody;
+        APIDocument.url = serverHttpRequest.getURI().toString();
         if (responseBody instanceof Map) {
             Object status = ((Map) responseBody).get("status");
             if (status != null && ((int) status) > 300) {
@@ -39,8 +40,6 @@ public class APIDocumentResponseBodyAdvice implements ResponseBodyAdvice {
                 }
                 APIDocument.url = url;
             }
-        } else {
-            APIDocument.url = serverHttpRequest.getURI().toString();
         }
         APIDocument.endRequest();
         return responseBody;
