@@ -5,8 +5,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
-import org.thiki.kanban.foundation.annotations.Theme;
 
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -26,8 +26,8 @@ public class JunitTestAspect {
         APIDocument.scenario = scenario == null ? "场景未定义" : scenario.value();
         APIDocument.testCaseName = method.getName();
 
-        Theme theme = joinPoint.getTarget().getClass().getAnnotation(Theme.class);
-        APIDocument.theme = theme == null ? "未定义" : theme.value();
+        Domain domain = joinPoint.getTarget().getClass().getAnnotation(Domain.class);
+        APIDocument.domainName = domain == null ? "未定义" : domain.order() + "," + domain.name();
     }
 
     private ExecutableValidator getMethodValidator() {

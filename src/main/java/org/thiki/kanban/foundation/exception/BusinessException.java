@@ -21,7 +21,7 @@ public class BusinessException extends RuntimeException {
 
     public BusinessException(Object codeObject) {
         super((String) ReflectionTestUtils.getField(codeObject, "message"));
-        this.code = (int) ReflectionTestUtils.getField(codeObject, "code");
+        this.code = (int) ReflectionTestUtils.invokeGetterMethod(codeObject, "code");
     }
 
     public BusinessException(int code, String message) {

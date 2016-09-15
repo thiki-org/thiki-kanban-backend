@@ -12,7 +12,7 @@ public class NumberFormatter {
     private static char[] numArray = {'零', '一', '二', '三', '四', '五', '六', '七', '八', '九'};
 
     public static String toCN(String chineseString) {
-        String[] chineseStringArray = chineseString.split("、");
+        String[] chineseStringArray = chineseString.split(",");
         if (chineseStringArray.length != 2 || !isNumeric(chineseStringArray[0])) {
             return chineseString;
         }

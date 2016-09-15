@@ -18,7 +18,7 @@ public class APIDocument {
     public static Object response;
     public static String scenario;
     public static String testCaseName;
-    public static String theme;
+    public static String domainName;
 
     public static void newRequest() {
         url = null;
@@ -26,7 +26,7 @@ public class APIDocument {
         response = null;
         scenario = null;
         testCaseName = null;
-        theme = null;
+        domainName = null;
     }
 
     public static void endRequest() {
@@ -44,12 +44,12 @@ public class APIDocument {
         testCase.put("request", JSONObject.toJSONString(request, true));
         testCase.put("response", JSONObject.toJSONString(response, true));
 
-        List<Map<String, Object>> testCases = themes.get(theme);
+        List<Map<String, Object>> testCases = themes.get(domainName);
         if (testCases == null) {
             testCases = new ArrayList();
         }
         testCases.add(testCase);
-        themes.put(theme, testCases);
+        themes.put(domainName, testCases);
 
         FileUtil.saveFile(API_DOCUMENT_FILE_PATH, buildMDContent(themes));
     }
