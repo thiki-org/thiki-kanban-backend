@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.aspect;
+package org.thiki.kanban.foundation.apiDocument;
 
 import com.alibaba.fastjson.JSONObject;
 import org.thiki.kanban.foundation.common.FileUtil;

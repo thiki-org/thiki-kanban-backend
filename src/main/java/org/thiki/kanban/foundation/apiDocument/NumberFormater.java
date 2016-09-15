@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.aspect;
+package org.thiki.kanban.foundation.apiDocument;
 
 /**
  * Created by xubt on 9/15/16.

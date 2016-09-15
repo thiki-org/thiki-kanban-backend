@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.aspect;
+package org.thiki.kanban.foundation.apiDocument;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
