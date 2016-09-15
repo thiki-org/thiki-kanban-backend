@@ -3,7 +3,6 @@ package org.thiki.kanban.foundation.apiDocument;
 import com.alibaba.fastjson.JSONObject;
 import org.thiki.kanban.foundation.common.FileUtil;
 
-import java.net.URI;
 import java.util.*;
 
 /**
@@ -14,7 +13,7 @@ public class APIDocument {
 
     public static Map<String, List> themes = new HashMap<>();
 
-    public static URI url;
+    public static String url;
     public static Object request;
     public static Object response;
     public static String scenario;
@@ -25,6 +24,9 @@ public class APIDocument {
         url = null;
         request = null;
         response = null;
+        scenario = null;
+        testCaseName = null;
+        theme = null;
     }
 
     public static void endRequest() {
@@ -64,12 +66,13 @@ public class APIDocument {
                 content += "\n## " + testCase.get("scenario") + " ##\n";
                 content += "\n**用例名称**\n" + testCase.get("testCaseName") + "\n";
                 content += "\n**URL**\n" + testCase.get("url") + "\n";
-                content += "\n**请求体**\n" + "```\n" + testCase.get("request") + "\n```\n" + "\n";
+                if (!testCase.get("request").equals("null")) {
+                    content += "\n**请求体**\n" + "```\n" + testCase.get("request") + "\n```\n" + "\n";
+                }
                 content += "\n**响应体**\n" + "```\n" + testCase.get("response") + "\n```\n" + "\n";
                 content += "\n-------";
             }
         }
-
         return content;
     }
 }
