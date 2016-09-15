@@ -23,6 +23,7 @@ public class APIDocumentResponseBodyAdvice implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object o, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+        APIDocument.request = null;
         APIDocument.response = o;
         APIDocument.url = serverHttpRequest.getURI();
         APIDocument.endRequest();
