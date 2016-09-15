@@ -4,7 +4,7 @@ package org.thiki.kanban.foundation.apiDocument;
  * Created by xubt on 9/15/16.
  */
 
-public class NumberFormater {
+public class NumberFormatter {
     static String[] units = {"", "十", "百", "千", "万", "十万", "百万", "千万", "亿",
             "十亿", "百亿", "千亿", "万亿"};
     static char[] numArray = {'零', '一', '二', '三', '四', '五', '六', '七', '八', '九'};
