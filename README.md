@@ -96,6 +96,10 @@ http://localhost:8080/entrance
 }
 ```
 
+## API文档
+
+系统在运行测试时可以根据测试用例生成相应的[文档](https://github.com/thiki-org/thiki-kanban-backend/blob/go/src/test/resources/APIDocument.md)。
+
 ## 学习资料
 
 * RESTful
