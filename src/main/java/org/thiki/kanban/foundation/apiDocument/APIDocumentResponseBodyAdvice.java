@@ -14,11 +14,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 @Order(1)
 @ControllerAdvice(basePackages = "org.thiki")
-public class MyResponseBodyAdvice implements ResponseBodyAdvice {
+public class APIDocumentResponseBodyAdvice implements ResponseBodyAdvice {
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
-        //这里可以根据自己的需求
         return true;
     }
 
@@ -29,5 +28,4 @@ public class MyResponseBodyAdvice implements ResponseBodyAdvice {
         APIDocument.endRequest();
         return o;
     }
-
 }

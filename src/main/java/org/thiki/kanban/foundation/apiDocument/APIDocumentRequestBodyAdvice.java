@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 
 @Order(1)
 @ControllerAdvice(basePackages = "org.thiki")
-public class ThikiRequestBodyAdvice implements RequestBodyAdvice {
+public class APIDocumentRequestBodyAdvice implements RequestBodyAdvice {
 
     @Override
     public boolean supports(MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
