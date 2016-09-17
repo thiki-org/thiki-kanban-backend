@@ -6,7 +6,9 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.card.CardsCodes;
+import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
+import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -14,6 +16,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 /**
  * Created by xubt on 6/16/16.
  */
+@Domain(order = DomainOrder.ASSIGNMENT, name = "任务认领")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AssignmentControllerTest extends TestBase {
 
