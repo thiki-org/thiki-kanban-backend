@@ -199,16 +199,16 @@ CREATE TABLE kb_team_member_invitation (
 DROP TABLE IF EXISTS kb_notification;
 
 CREATE TABLE kb_notification (
-  id                VARCHAR(40)  NOT NULL,
-  receiver          VARCHAR(50)  NOT NULL,
-  sender            VARCHAR(50)  NOT NULL,
-  content           VARCHAR(50)  NOT NULL,
-  link              VARCHAR(500) NOT NULL,
-  is_read           INT      DEFAULT 0,
-  type              VARCHAR(50)  NOT NULL,
-  creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
+  id                VARCHAR(40) NOT NULL,
+  receiver          VARCHAR(50) NOT NULL,
+  sender            VARCHAR(50) NOT NULL,
+  content           VARCHAR(50) NOT NULL,
+  link              VARCHAR(500) DEFAULT '',
+  is_read           INT          DEFAULT 0,
+  type              VARCHAR(50) NOT NULL,
+  creation_time     DATETIME     DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
-  delete_status     INT(2)   DEFAULT 0,
+  delete_status     INT(2)       DEFAULT 0,
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB

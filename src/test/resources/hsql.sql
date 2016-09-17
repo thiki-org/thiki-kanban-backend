@@ -173,7 +173,7 @@ CREATE TABLE kb_notification(
   receiver VARCHAR(50)NOT NULL,
   sender VARCHAR(50)NOT NULL,
   content VARCHAR(50)NOT NULL,
-  link VARCHAR(500)NOT NULL,
+  link VARCHAR(500) DEFAULT '',
   is_read int DEFAULT 0,
   type VARCHAR(50)NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
