@@ -12,4 +12,6 @@ public interface NotificationPersistence {
     Integer create(Notification notification);
 
     Notification findById(@Param("id") String id);
+
+    int loadUnreadNotificationTotal(String userName);
 }

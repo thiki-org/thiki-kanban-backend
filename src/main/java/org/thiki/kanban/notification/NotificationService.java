@@ -17,4 +17,11 @@ public class NotificationService {
         notificationPersistence.create(notification);
         return notificationPersistence.findById(notification.getId());
     }
+
+    public Notifications loadUnreadNotificationTotal(String userName) {
+        int unreadNotifications = notificationPersistence.loadUnreadNotificationTotal(userName);
+        Notifications notifications = new Notifications();
+        notifications.setUnreadNotificationsTotal(unreadNotifications);
+        return notifications;
+    }
 }

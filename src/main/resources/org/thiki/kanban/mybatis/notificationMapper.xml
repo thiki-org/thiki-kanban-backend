@@ -11,4 +11,8 @@
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.notification.Notification">
         SELECT * FROM kb_notification WHERE id= #{id}
     </select>
+
+    <select id="loadUnreadNotificationTotal" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) FROM kb_notification WHERE  is_read=0 AND receiver= #{userName} AND delete_status=0
+    </select>
 </mapper>
