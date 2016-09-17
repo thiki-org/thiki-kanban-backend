@@ -6,11 +6,11 @@ package org.thiki.kanban.notification;
 public class Notifications {
     private int unreadNotificationsTotal;
 
-    public void setUnreadNotificationsTotal(int unreadNotificationsTotal) {
-        this.unreadNotificationsTotal = unreadNotificationsTotal;
-    }
-
     public int getUnreadNotificationsTotal() {
         return unreadNotificationsTotal;
+    }
+
+    public void setUnreadNotificationsTotal(int unreadNotificationsTotal) {
+        this.unreadNotificationsTotal = unreadNotificationsTotal;
     }
 }

@@ -7,30 +7,6 @@ import java.math.BigDecimal;
  */
 
 public class NumberFormatter {
-    private static String[] units = {"", "十", "百", "千", "万", "十万", "百万", "千万", "亿",
-            "十亿", "百亿", "千亿", "万亿"};
-    private static char[] numArray = {'零', '一', '二', '三', '四', '五', '六', '七', '八', '九'};
-
-    public static String toCN(String chineseString) {
-        String[] chineseStringArray = chineseString.split(",");
-        if (chineseStringArray.length != 2 || !isNumeric(chineseStringArray[0])) {
-            return chineseString;
-        }
-        double money = Integer.parseInt(chineseStringArray[0]);
-        BigDecimal numberOfMoney = new BigDecimal(money);
-        return number2CNMontrayUnit(numberOfMoney) + "、" + chineseStringArray[1];
-    }
-
-    private static boolean isNumeric(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            System.out.println(str.charAt(i));
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     /**
      * 汉语中数字大写
      */
@@ -58,6 +34,29 @@ public class NumberFormatter {
      * 特殊字符：零元整
      */
     private static final String CN_ZEOR_FULL = "零" + CN_FULL;
+    private static String[] units = {"", "十", "百", "千", "万", "十万", "百万", "千万", "亿",
+            "十亿", "百亿", "千亿", "万亿"};
+    private static char[] numArray = {'零', '一', '二', '三', '四', '五', '六', '七', '八', '九'};
+
+    public static String toCN(String chineseString) {
+        String[] chineseStringArray = chineseString.split(",");
+        if (chineseStringArray.length != 2 || !isNumeric(chineseStringArray[0])) {
+            return chineseString;
+        }
+        double money = Integer.parseInt(chineseStringArray[0]);
+        BigDecimal numberOfMoney = new BigDecimal(money);
+        return number2CNMontrayUnit(numberOfMoney) + "、" + chineseStringArray[1];
+    }
+
+    private static boolean isNumeric(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            System.out.println(str.charAt(i));
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * 把输入的金额转换为汉语中人民币的大写
