@@ -40,7 +40,7 @@ public class DBPreparation {
         for (int i = 0; i < this.fieldsValues.length; i++) {
             values[i] = "'" + this.fieldsValues[i] + "'";
         }
-        String sql = String.format("INSERT INTO %s (%s) values(%s)", tableName, fieldsNames, StringUtils.join(values).replace("''", "'"));
+        String sql = String.format("INSERT INTO %s (%s) values(%s)", tableName, fieldsNames, StringUtils.join(values, ",").replace("''", "'"));
         jdbcTemplate.execute(sql);
     }
 }
