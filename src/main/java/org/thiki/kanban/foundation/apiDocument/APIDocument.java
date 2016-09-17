@@ -60,7 +60,8 @@ public class APIDocument {
         String content = "";
 
         for (Map.Entry<String, List> entry : themes.entrySet()) {
-            content += "\n# " + NumberFormatter.toCN(entry.getKey()) + " #\n";
+            NumberFormatter numberFormatter = new NumberFormatter(entry.getKey());
+            content += "\n# " + numberFormatter.getCnString() + " #\n";
             List<Map> testCases = entry.getValue();
             for (Map testCase : testCases) {
                 content += "\n## " + testCase.get("scenario") + " ##\n";
