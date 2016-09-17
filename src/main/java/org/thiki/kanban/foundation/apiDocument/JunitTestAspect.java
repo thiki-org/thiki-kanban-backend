@@ -27,7 +27,7 @@ public class JunitTestAspect {
         APIDocument.testCaseName = method.getName();
 
         Domain domain = joinPoint.getTarget().getClass().getAnnotation(Domain.class);
-        APIDocument.domainName = domain == null ? "未定义" : domain.order() + "," + domain.name();
+        APIDocument.domainName = domain == null ? "9999,领域未定义" : domain.order() + "," + domain.name();
     }
 
     private ExecutableValidator getMethodValidator() {

@@ -16,4 +16,5 @@ public class DomainOrder {
     public static final int TEAM_MEMBER = 8;
     public static final int PASSWORD = 9;
     public static final int NOTIFICATION = 10;
+    public static final int ASSIGNMENT = 11;
 }

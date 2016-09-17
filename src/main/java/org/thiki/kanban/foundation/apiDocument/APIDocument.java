@@ -2,8 +2,12 @@ package org.thiki.kanban.foundation.apiDocument;
 
 import com.alibaba.fastjson.JSONObject;
 import org.thiki.kanban.foundation.common.FileUtil;
+import org.thiki.kanban.foundation.common.MapUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xubt on 9/14/16.
@@ -56,7 +60,7 @@ public class APIDocument {
 
     private static String buildMDContent(Map<String, List> themes) {
 
-        themes = new TreeMap<>(themes);
+        themes = MapUtil.sortMapByKey(themes);
         String content = "";
 
         for (Map.Entry<String, List> entry : themes.entrySet()) {

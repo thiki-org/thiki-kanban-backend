@@ -42,14 +42,16 @@ public class NumberFormatter {
         // 整数部分处理
         for (int i = 0; i < order.length(); i++) {
             int number = getNumber(order.charAt(i));
-            if (Integer.parseInt(order) > 100 || Integer.parseInt(order) < 10) {
+            if (Integer.parseInt(order) > 100 || Integer.parseInt(order) < 10 || (i > 0 && Integer.parseInt(order) > 10)) {
                 sb.append(cnNumbers[number]);
             }
             if (Integer.parseInt(order) >= 10) {
                 sb.append(series[order.length() - 1 - i]);
             }
         }
-
+        if (Integer.parseInt(order) > 9000) {
+            return this.desc;
+        }
         // 返回拼接好的字符串
         return sb.toString() + "、" + this.desc;
     }
