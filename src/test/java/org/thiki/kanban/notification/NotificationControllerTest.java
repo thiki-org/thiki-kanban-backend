@@ -18,7 +18,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class NotificationControllerTest extends TestBase {
 
-    @Scenario("获取未读消息数-用户登录后，可以获取未读消息数量，以便在醒目位置显示提醒用户及时处理")
+    @Scenario("获取未读消息数>用户登录后,可以获取未读消息数量,以便在醒目位置显示提醒用户及时处理")
     @Test
     public void loadUnreadNotificationAfterLoading() throws Exception {
         dbPreparation.table("kb_notification")
