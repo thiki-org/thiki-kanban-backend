@@ -17,6 +17,7 @@ public class APIDocument {
 
     public static Map<String, List> themes = new HashMap<>();
 
+    public static boolean isJunitTestModel = false;
     public static String url;
     public static Object request;
     public static Object response;
@@ -34,12 +35,9 @@ public class APIDocument {
     }
 
     public static void endRequest() {
-
-        System.out.println(scenario);
-        System.out.println(testCaseName);
-        System.out.println(url);
-        System.out.println(JSONObject.toJSONString(request, true));
-        System.out.println(JSONObject.toJSONString(response, true));
+        if (!isJunitTestModel) {
+            return;
+        }
 
         Map<String, Object> testCase = new HashMap<>();
         testCase.put("testCaseName", testCaseName);
@@ -56,6 +54,7 @@ public class APIDocument {
         themes.put(domainName, testCases);
 
         FileUtil.saveFile(API_DOCUMENT_FILE_PATH, buildMDContent(themes));
+        isJunitTestModel = false;
     }
 
     private static String buildMDContent(Map<String, List> themes) {

@@ -23,6 +23,7 @@ public class JunitTestAspect {
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
         Scenario scenario = method.getDeclaredAnnotation(Scenario.class);
         APIDocument.newRequest();
+        APIDocument.isJunitTestModel = true;
         APIDocument.scenario = scenario == null ? "场景未定义" : scenario.value();
         APIDocument.testCaseName = method.getName();
 
