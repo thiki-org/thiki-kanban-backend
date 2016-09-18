@@ -9,3 +9,4 @@ security:
     - "/{userName}/password"
     - "/unauthorised"
     - "/error"
+    - "/favicon.ico"
