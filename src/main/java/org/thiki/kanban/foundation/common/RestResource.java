@@ -4,6 +4,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
+import org.springframework.test.util.ReflectionTestUtils;
+
+import java.util.List;
 
 /**
  * Created by xubt on 5/26/16.
@@ -41,6 +44,15 @@ public class RestResource extends ResourceSupport {
     }
 
     public void buildDataObject(String key, Object value) {
+        JSONArray domainResources;
+        if (value instanceof List) {
+            domainResources = new JSONArray();
+            for (int i = 0; i < ((List) value).size(); i++) {
+                JSONObject domainResource = ReflectionTestUtils.invokeMethod(((List) value).get(i), "getResource");
+                domainResources.add(domainResource);
+            }
+            value = domainResources;
+        }
         JSONObject dataObject = new JSONObject();
         dataObject.put(key, value);
         this.domainObject = dataObject;
