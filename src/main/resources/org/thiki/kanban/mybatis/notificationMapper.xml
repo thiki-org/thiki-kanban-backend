@@ -8,8 +8,9 @@
         kb_notification(id,receiver,sender,content,link,type) VALUES
         (#{id},#{receiver},#{sender},#{content},#{link},#{type})
     </insert>
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.notification.Notification">
-        SELECT * FROM kb_notification WHERE id= #{id}
+    <select id="loadNotificationsByUserName" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.notification.Notification">
+        SELECT * FROM kb_notification WHERE receiver= #{userName} AND delete_status=0
     </select>
 
     <select id="loadUnreadNotificationTotal" parameterType="java.lang.String" resultType="java.lang.Integer">

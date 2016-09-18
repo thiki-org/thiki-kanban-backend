@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by xubt on 7/5/16.
@@ -19,13 +20,20 @@ public class NotificationController {
 
     @RequestMapping(value = "/users/{userName}/notifications/unread/total", method = RequestMethod.GET)
     public HttpEntity loadUnreadNotificationsTotal(@PathVariable("userName") String userName) throws Exception {
-        Notifications notifications = notificationService.loadUnreadNotificationTotal(userName);
+        Integer unreadNotificationTotal = notificationService.loadUnreadNotificationTotal(userName);
+
+        return Response.build(new UnreadNotificationsResource(userName, unreadNotificationTotal));
+    }
+
+    @RequestMapping(value = "/users/{userName}/notifications", method = RequestMethod.GET)
+    public HttpEntity loadNotifications(@PathVariable("userName") String userName) throws Exception {
+        List<Notification> notifications = notificationService.loadNotifications(userName);
 
         return Response.build(new NotificationsResource(userName, notifications));
     }
 
-    @RequestMapping(value = "/users/{userName}/notifications", method = RequestMethod.GET)
-    public HttpEntity loadNotifications(@PathVariable("userName") String userName) {
+    @RequestMapping(value = "/notifications/{id}", method = RequestMethod.GET)
+    public HttpEntity loadNotificationById(@PathVariable("id") String id) {
         return null;
     }
 }

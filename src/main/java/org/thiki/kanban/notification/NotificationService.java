@@ -3,6 +3,7 @@ package org.thiki.kanban.notification;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by xutao on 09/12/16.
@@ -18,10 +19,12 @@ public class NotificationService {
         return notificationPersistence.findById(notification.getId());
     }
 
-    public Notifications loadUnreadNotificationTotal(String userName) {
-        int unreadNotifications = notificationPersistence.loadUnreadNotificationTotal(userName);
-        Notifications notifications = new Notifications();
-        notifications.setUnreadNotificationsTotal(unreadNotifications);
-        return notifications;
+    public Integer loadUnreadNotificationTotal(String userName) {
+        return notificationPersistence.loadUnreadNotificationTotal(userName);
+    }
+
+    public List<Notification> loadNotifications(String userName) {
+        List<Notification> notificationList = notificationPersistence.loadNotificationsByUserName(userName);
+        return notificationList;
     }
 }

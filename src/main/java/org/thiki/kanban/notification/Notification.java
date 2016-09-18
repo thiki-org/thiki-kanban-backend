@@ -18,7 +18,7 @@ public class Notification implements Serializable {
 
     private String link;
 
-    private Integer isRead;
+    private boolean isRead;
 
     private String creationTime;
     private String type;
@@ -80,11 +80,11 @@ public class Notification implements Serializable {
         this.link = link;
     }
 
-    public Integer getIsRead() {
+    public boolean getIsRead() {
         return isRead;
     }
 
-    public void setIsRead(Integer isRead) {
+    public void setIsRead(boolean isRead) {
         this.isRead = isRead;
     }
 }
