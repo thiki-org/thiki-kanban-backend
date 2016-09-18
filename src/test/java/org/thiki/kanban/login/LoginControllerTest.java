@@ -44,7 +44,7 @@ public class LoginControllerTest extends TestBase {
         ReflectionTestUtils.setField(loginService, "rsaService", rsaService);
     }
 
-    @Scenario("用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配,如果匹配通过则颁发token")
+    @Scenario("登录成功>用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配,如果匹配通过则颁发token")
     @Test
     public void login_loginSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password,salt) " +
@@ -64,7 +64,7 @@ public class LoginControllerTest extends TestBase {
                 .body("token", equalTo("4988ca54a84321490e03fd906b5d2425afba80914c282271fd83ad1438ec8b55976cf77197a77b08c750bfb5e6173790f9f95f4e07a4f273d6fad3645e8377ed8ea865770a8aa4ff05168a98dc2417a4254405fb1639871cfc63f0dd5871a4805dc3778c106d37010b2c20adedd0117a2a8e63632744fa4e33151d880eed022e"));
     }
 
-    @Scenario("用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配,如果匹配未通过则登录失败")
+    @Scenario("密码错误>用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配,如果匹配未通过则登录失败")
     @Test
     public void login_shouldLoginFailedIfUserNameOrPasswordIsIncorrect() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password,salt) " +
@@ -83,7 +83,7 @@ public class LoginControllerTest extends TestBase {
                 .body("message", equalTo(LoginCodes.USER_OR_PASSWORD_IS_INCORRECT.message()));
     }
 
-    @Scenario("用户登录系统时,如果身份信息为空,则不允许登录并告知客户端错误信息")
+    @Scenario("登录信息不完整>用户登录系统时,如果身份信息为空,则不允许登录并告知客户端错误信息")
     @Test
     public void login_loginFailed() throws Exception {
         given().param("password", "foo")
@@ -94,7 +94,7 @@ public class LoginControllerTest extends TestBase {
                 .body("message", equalTo(LoginCodes.IdentityIsRequired));
     }
 
-    @Scenario("用户登录系统时,如果用户不存在,则不允许登录并告知客户端错误信息")
+    @Scenario("用户不存在>用户登录系统时,如果用户不存在,则不允许登录并告知客户端错误信息")
     @Test
     public void login_loginFailedIfRegUserIsNotExists() throws Exception {
         given().param("identity", "foo")
