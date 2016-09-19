@@ -1,10 +1,7 @@
 package org.thiki.kanban.notification;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
@@ -33,7 +30,8 @@ public class NotificationController {
     }
 
     @RequestMapping(value = "/notifications/{id}", method = RequestMethod.GET)
-    public HttpEntity loadNotificationById(@PathVariable("id") String id) {
-        return null;
+    public HttpEntity loadNotificationById(@PathVariable("id") String id, @RequestHeader("userName") String userName) throws Exception {
+        Notification notification = notificationService.findNotificationById(id);
+        return Response.build(new NotificationResource(userName, notification));
     }
 }

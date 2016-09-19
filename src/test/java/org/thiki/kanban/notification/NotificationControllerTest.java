@@ -10,6 +10,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by xutao on 9/12/16.
@@ -54,5 +55,26 @@ public class NotificationControllerTest extends TestBase {
                 .body("notifications[0]._links.self.href", equalTo("http://localhost:8007/notifications/foo-notification-id"))
                 .body("notifications[0]._links.notifications.href", equalTo("http://localhost:8007/users/someone/notifications"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/someone/notifications"));
+    }
+
+    @Scenario("获取指定消息>用户可以在消息中心查看某条具体的消息,查看完毕后将该条消息设置为已读")
+    @Test
+    public void loadNotificationByID() throws Exception {
+        dbPreparation.table("kb_notification")
+                .names("id,receiver,sender,content,type,link")
+                .values("foo-notification-id", "someone", "sender@gmail.com", "content", "notificationType", "http://hello.com").exec();
+
+        given().header("userName", userName)
+                .when()
+                .get("/notifications/foo-notification-id")
+                .then()
+                .statusCode(200)
+                .body("sender", equalTo("sender@gmail.com"))
+                .body("content", equalTo("content"))
+                .body("link", equalTo("http://hello.com"))
+                .body("isRead", equalTo(false))
+                .body("_links.self.href", equalTo("http://localhost:8007/notifications/foo-notification-id"))
+                .body("_links.notifications.href", equalTo("http://localhost:8007/users/someone/notifications"));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_notification WHERE is_read=1 AND ID='foo-notification-id'").size());
     }
 }

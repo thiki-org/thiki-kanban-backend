@@ -16,7 +16,7 @@ public class NotificationService {
 
     public Notification notify(final Notification notification) {
         notificationPersistence.create(notification);
-        return notificationPersistence.findById(notification.getId());
+        return notificationPersistence.read(notification.getId());
     }
 
     public Integer loadUnreadNotificationTotal(String userName) {
@@ -26,5 +26,11 @@ public class NotificationService {
     public List<Notification> loadNotifications(String userName) {
         List<Notification> notificationList = notificationPersistence.loadNotificationsByUserName(userName);
         return notificationList;
+    }
+
+    public Notification findNotificationById(String id) {
+        Notification notification = notificationPersistence.read(id);
+        notificationPersistence.setAlreadyRead(id);
+        return notification;
     }
 }

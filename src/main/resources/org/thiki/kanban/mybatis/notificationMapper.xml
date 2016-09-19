@@ -9,7 +9,7 @@
         (#{id},#{receiver},#{sender},#{content},#{link},#{type})
     </insert>
 
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.notification.Notification">
+    <select id="read" parameterType="java.lang.String" resultType="org.thiki.kanban.notification.Notification">
         SELECT * FROM kb_notification WHERE id= #{id} AND delete_status=0
     </select>
 
@@ -21,4 +21,9 @@
     <select id="loadUnreadNotificationTotal" parameterType="java.lang.String" resultType="java.lang.Integer">
         SELECT count(*) FROM kb_notification WHERE  is_read=0 AND receiver= #{userName} AND delete_status=0
     </select>
+
+    <update id="setAlreadyRead" parameterType="java.lang.String"
+            flushCache="true">
+        UPDATE kb_notification SET is_read=1 WHERE id=#{id} AND delete_status=0
+    </update>
 </mapper>

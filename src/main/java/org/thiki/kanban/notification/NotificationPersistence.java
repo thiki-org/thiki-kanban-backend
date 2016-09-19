@@ -13,9 +13,11 @@ import java.util.List;
 public interface NotificationPersistence {
     Integer create(Notification notification);
 
-    Notification findById(@Param("id") String id);
+    Notification read(@Param("id") String id);
 
     int loadUnreadNotificationTotal(String userName);
 
     List<Notification> loadNotificationsByUserName(String userName);
+
+    int setAlreadyRead(String id);
 }
