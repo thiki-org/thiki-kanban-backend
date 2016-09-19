@@ -77,4 +77,25 @@ public class NotificationControllerTest extends TestBase {
                 .body("_links.notifications.href", equalTo("http://localhost:8007/users/someone/notifications"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_notification WHERE is_read=1 AND ID='foo-notification-id'").size());
     }
+
+    @Scenario("获取指定消息>查看某条具体的消息时，如果该消息已读，则加载后不必再设置为已读")
+    @Test
+    public void notSetNotificationReadIfItHasAlreadyBeenReadAfterLoading() throws Exception {
+        dbPreparation.table("kb_notification")
+                .names("id,receiver,sender,content,type,link,is_read")
+                .values("foo-notification-id", "someone", "sender@gmail.com", "content", "notificationType", "http://hello.com", 1).exec();
+
+        given().header("userName", userName)
+                .when()
+                .get("/notifications/foo-notification-id")
+                .then()
+                .statusCode(200)
+                .body("sender", equalTo("sender@gmail.com"))
+                .body("content", equalTo("content"))
+                .body("link", equalTo("http://hello.com"))
+                .body("isRead", equalTo(true))
+                .body("_links.self.href", equalTo("http://localhost:8007/notifications/foo-notification-id"))
+                .body("_links.notifications.href", equalTo("http://localhost:8007/users/someone/notifications"));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_notification WHERE is_read=1 AND ID='foo-notification-id'").size());
+    }
 }
