@@ -20,7 +20,7 @@ public class IdentificationResource extends RestResource {
 
         Link teamsLink = linkTo(methodOn(TeamsController.class).findByUserName(identification.getUserName())).withRel("teams");
         this.add(teamsLink);
-        Link notificationsLink = linkTo(methodOn(NotificationController.class).loadNotifications(identification.getUserName())).withRel("notifications");
+        Link notificationsLink = linkTo(methodOn(NotificationController.class).loadUnreadNotificationsTotal(identification.getUserName())).withRel("unreadNotificationsTotal");
         this.add(notificationsLink);
     }
 }
