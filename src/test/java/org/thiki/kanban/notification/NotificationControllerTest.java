@@ -28,12 +28,12 @@ public class NotificationControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/users/someone/notifications/unread/total")
+                .get("/someone/notifications/unread/total")
                 .then()
                 .statusCode(200)
                 .body("unreadNotificationsTotal", equalTo(1))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/notifications/unread/total"))
-                .body("_links.notifications.href", equalTo("http://localhost:8007/users/someone/notifications"));
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/notifications/unread/total"))
+                .body("_links.notifications.href", equalTo("http://localhost:8007/someone/notifications"));
     }
 
     @Scenario("获取所有消息>用户登录后,可以在消息中心查看所有消息,以便及时处理未读消息或重新查看已读消息")
@@ -45,16 +45,16 @@ public class NotificationControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/users/someone/notifications")
+                .get("/someone/notifications")
                 .then()
                 .statusCode(200)
                 .body("notifications[0].sender", equalTo("sender@gmail.com"))
                 .body("notifications[0].content", equalTo("content"))
                 .body("notifications[0].link", equalTo("http://hello.com"))
                 .body("notifications[0].isRead", equalTo(false))
-                .body("notifications[0]._links.self.href", equalTo("http://localhost:8007/notifications/foo-notification-id"))
-                .body("notifications[0]._links.notifications.href", equalTo("http://localhost:8007/users/someone/notifications"))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/notifications"));
+                .body("notifications[0]._links.self.href", equalTo("http://localhost:8007/someone/notifications/foo-notification-id"))
+                .body("notifications[0]._links.notifications.href", equalTo("http://localhost:8007/someone/notifications"))
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/notifications"));
     }
 
     @Scenario("获取指定消息>用户可以在消息中心查看某条具体的消息,查看完毕后将该条消息设置为已读")
@@ -66,15 +66,15 @@ public class NotificationControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/notifications/foo-notification-id")
+                .get("/someone/notifications/foo-notification-id")
                 .then()
                 .statusCode(200)
                 .body("sender", equalTo("sender@gmail.com"))
                 .body("content", equalTo("content"))
                 .body("link", equalTo("http://hello.com"))
                 .body("isRead", equalTo(false))
-                .body("_links.self.href", equalTo("http://localhost:8007/notifications/foo-notification-id"))
-                .body("_links.notifications.href", equalTo("http://localhost:8007/users/someone/notifications"));
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/notifications/foo-notification-id"))
+                .body("_links.notifications.href", equalTo("http://localhost:8007/someone/notifications"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_notification WHERE is_read=1 AND ID='foo-notification-id'").size());
     }
 
@@ -87,15 +87,15 @@ public class NotificationControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/notifications/foo-notification-id")
+                .get("/someone/notifications/foo-notification-id")
                 .then()
                 .statusCode(200)
                 .body("sender", equalTo("sender@gmail.com"))
                 .body("content", equalTo("content"))
                 .body("link", equalTo("http://hello.com"))
                 .body("isRead", equalTo(true))
-                .body("_links.self.href", equalTo("http://localhost:8007/notifications/foo-notification-id"))
-                .body("_links.notifications.href", equalTo("http://localhost:8007/users/someone/notifications"));
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/notifications/foo-notification-id"))
+                .body("_links.notifications.href", equalTo("http://localhost:8007/someone/notifications"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_notification WHERE is_read=1 AND ID='foo-notification-id'").size());
     }
 }
