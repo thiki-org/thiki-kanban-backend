@@ -4,7 +4,7 @@ package org.thiki.kanban.notification;
  * Created by xubt on 23/09/2016.
  */
 public enum NotificationType {
-    TEAM_MEMBER_INVITATION("team_member_invitation", "团队邀请");
+    TEAM_MEMBER_INVITATION("team-members-invitation", "团队邀请");
     private String type;
     private String name;
 
