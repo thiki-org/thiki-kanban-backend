@@ -27,4 +27,10 @@ public class InvitationController {
     public HttpEntity acceptInvitation(@PathVariable("teamId") String teamId, @RequestParam("invitationId") String invitationId) {
         return null;
     }
+
+    @RequestMapping(value = "teams/{teamId}/members/invitation/{invitationId}", method = RequestMethod.GET)
+    public HttpEntity loadInvitationById(@PathVariable("teamId") String teamId, @PathVariable("invitationId") String invitationId, @RequestHeader("userName") String userName) throws Exception {
+        Invitation invitation = invitationService.loadInvitation(invitationId);
+        return Response.build(new InvitationResource(userName, teamId, invitation));
+    }
 }

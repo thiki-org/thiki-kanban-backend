@@ -12,6 +12,7 @@ import org.thiki.kanban.teams.invitation.InvitationCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -195,6 +196,30 @@ public class InvitationControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
+                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_notification where type='team_member_invitation' AND receiver='invitee-user'").size());
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
+    }
+
+    @Scenario("接受邀请>当用户接收到邀请后,可以查看邀请的具体内容。")
+    @Test
+    public void loadingInvitationDetailAfterAcceptingInvitation() throws Exception {
+        dbPreparation.table("kb_team_member_invitation")
+                .names("id,inviter,invitee,team_id")
+                .values("invitation-id", "someone", "invitee-user", "foo-team-id")
+                .exec();
+
+        given().header("userName", userName)
+                .body("{\"invitee\":\"invitee-user\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .get("/teams/foo-team-Id/members/invitation/invitation-id")
+                .then()
+                .statusCode(200)
+                .body("invitee", equalTo("invitee-user"))
+                .body("creationTime", notNullValue())
+                .body("isAccepted", equalTo(false))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
                 .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_notification where type='team_member_invitation' AND receiver='invitee-user'").size());

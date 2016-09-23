@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by bogehu on 7/11/16.
+ * Created by xutao on 9/11/16.
  */
 
 public class Invitation {
@@ -15,6 +15,7 @@ public class Invitation {
     private String invitee;
     private String inviter;
     private String teamId;
+    private Integer isAccepted;
     private String creationTime;
     private String modificationTime;
 
@@ -66,4 +67,11 @@ public class Invitation {
         this.invitee = invitee;
     }
 
+    public boolean getIsAccepted() {
+        return isAccepted == 0 ? false : true;
+    }
+
+    public void setIsAccepted(Integer isAccepted) {
+        this.isAccepted = isAccepted;
+    }
 }

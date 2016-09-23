@@ -88,4 +88,9 @@ public class InvitationService {
         mailService.sendMailByTemplate(invitationEmail, TEAM_INVITATION_TEMPLATE);
         return invitationPersistence.findById(invitation.getId());
     }
+
+    public Invitation loadInvitation(String invitationId) {
+        Invitation invitation = invitationPersistence.findById(invitationId);
+        return invitation;
+    }
 }
