@@ -19,7 +19,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 @Domain(order = DomainOrder.TEAM_MEMBER, name = "团队成员")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class InvitationMembersControllerTest extends TestBase {
+public class MembersControllerTest extends TestBase {
     @Scenario("加入一个团队")
     @Test
     public void joinTeam_shouldReturn201WhenJoinTeamSuccessfully() throws Exception {
