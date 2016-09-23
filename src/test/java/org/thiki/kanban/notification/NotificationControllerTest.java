@@ -53,7 +53,7 @@ public class NotificationControllerTest extends TestBase {
                 .body("notifications[0].content", equalTo("content"))
                 .body("notifications[0].link", equalTo("http://hello.com"))
                 .body("notifications[0].isRead", equalTo(false))
-                .body("notifications[0].type", equalTo(NotificationType.TEAM_MEMBER_INVITATION))
+                .body("notifications[0].type", equalTo(NotificationType.TEAM_MEMBER_INVITATION.type()))
                 .body("notifications[0]._links.self.href", equalTo("http://localhost:8007/someone/notifications/foo-notification-id"))
                 .body("notifications[0]._links.notifications.href", equalTo("http://localhost:8007/someone/notifications"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/notifications"));
