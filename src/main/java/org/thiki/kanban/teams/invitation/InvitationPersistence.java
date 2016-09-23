@@ -1,5 +1,6 @@
 package org.thiki.kanban.teams.invitation;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,4 +13,6 @@ public interface InvitationPersistence {
     Invitation findById(String id);
 
     Integer cancelPreviousInvitation(Invitation invitation);
+
+    Integer acceptInvitation(@Param("userName") String userName, @Param("invitationId") String invitationId);
 }

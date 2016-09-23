@@ -1,6 +1,5 @@
 package org.thiki.kanban.teams.invitation;
 
-import freemarker.template.TemplateException;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
@@ -15,8 +14,6 @@ import org.thiki.kanban.user.User;
 import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
-import javax.mail.MessagingException;
-import java.io.IOException;
 
 import static org.springframework.hateoas.core.DummyInvocationUtils.methodOn;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
@@ -42,7 +39,7 @@ public class InvitationService {
     @Resource
     private NotificationService notificationService;
 
-    public Invitation invite(String userName, String teamId, Invitation invitation) throws TemplateException, IOException, MessagingException {
+    public Invitation invite(String userName, String teamId, Invitation invitation) throws Exception {
         Team team = teamsService.findById(teamId);
         if (team == null) {
             throw new BusinessException(InvitationCodes.TEAM_IS_NOT_EXISTS);
@@ -76,7 +73,7 @@ public class InvitationService {
         invitationEmail.setInvitee(inviteeUser.getName());
         invitationEmail.setTeamName(team.getName());
 
-        Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(teamId, invitation.getId())).withRel("invitationLink");
+        Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(userName,teamId, invitation.getId())).withRel("invitationLink");
         invitationEmail.setInvitationLink(invitationLink.getHref());
         Notification notification = new Notification();
         notification.setReceiver(inviteeUser.getName());
@@ -92,5 +89,11 @@ public class InvitationService {
     public Invitation loadInvitation(String invitationId) {
         Invitation invitation = invitationPersistence.findById(invitationId);
         return invitation;
+    }
+
+    public Invitation acceptInvitation(String userName, String teamId, String invitationId) {
+        invitationPersistence.acceptInvitation(userName, invitationId);
+        membersService.joinTeam(userName, teamId);
+        return invitationPersistence.findById(invitationId);
     }
 }

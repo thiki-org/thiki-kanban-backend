@@ -1,13 +1,9 @@
 package org.thiki.kanban.teams.invitation;
 
-import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
-
-import javax.mail.MessagingException;
-import java.io.IOException;
 
 /**
  * Created by bogehu on 7/11/16.
@@ -18,14 +14,15 @@ public class InvitationController {
     private InvitationService invitationService;
 
     @RequestMapping(value = "teams/{teamId}/members/invitation", method = RequestMethod.POST)
-    public HttpEntity invite(@RequestBody Invitation invitation, @PathVariable("teamId") String teamId, @RequestHeader("userName") String userName) throws TemplateException, IOException, MessagingException {
+    public HttpEntity invite(@RequestBody Invitation invitation, @PathVariable("teamId") String teamId, @RequestHeader("userName") String userName) throws Exception {
         Invitation savedInvitation = invitationService.invite(userName, teamId, invitation);
         return Response.post(new InvitationResource(userName, teamId, savedInvitation));
     }
 
-    @RequestMapping(value = "teams/{teamId}/members/invitation", method = RequestMethod.PUT)
-    public HttpEntity acceptInvitation(@PathVariable("teamId") String teamId, @RequestParam("invitationId") String invitationId) {
-        return null;
+    @RequestMapping(value = "teams/{teamId}/members/invitation/{invitationId}", method = RequestMethod.PUT)
+    public HttpEntity acceptInvitation(@PathVariable("teamId") String teamId, @PathVariable("invitationId") String invitationId, @RequestHeader("userName") String userName) throws Exception {
+        Invitation invitation = invitationService.acceptInvitation(userName, teamId, invitationId);
+        return Response.build(new InvitationResource(userName, teamId, invitation));
     }
 
     @RequestMapping(value = "teams/{teamId}/members/invitation/{invitationId}", method = RequestMethod.GET)

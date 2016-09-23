@@ -1,12 +1,8 @@
 package org.thiki.kanban.teams.invitation;
 
-import freemarker.template.TemplateException;
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.teams.team.TeamsController;
-
-import javax.mail.MessagingException;
-import java.io.IOException;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -16,10 +12,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class InvitationResource extends RestResource {
 
-    public InvitationResource(String userName, String teamId, Invitation invitation) throws TemplateException, IOException, MessagingException {
+    public InvitationResource(String userName, String teamId, Invitation invitation) throws Exception {
         this.domainObject = invitation;
         if (invitation != null) {
-            Link selfLink = linkTo(methodOn(InvitationController.class).acceptInvitation(teamId, invitation.getId())).withSelfRel();
+            Link selfLink = linkTo(methodOn(InvitationController.class).acceptInvitation(teamId, invitation.getId(), userName)).withSelfRel();
             this.add(selfLink);
 
             Link teamLink = linkTo(methodOn(TeamsController.class).findById(teamId, userName)).withRel("team");

@@ -202,7 +202,7 @@ public class InvitationControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
 
-    @Scenario("接受邀请>当用户接收到邀请后,可以查看邀请的具体内容。")
+    @Scenario("查看邀请>当用户接收到邀请后,可以查看邀请的具体内容")
     @Test
     public void loadingInvitationDetailAfterAcceptingInvitation() throws Exception {
         dbPreparation.table("kb_team_member_invitation")
@@ -220,9 +220,32 @@ public class InvitationControllerTest extends TestBase {
                 .body("invitee", equalTo("invitee-user"))
                 .body("creationTime", notNullValue())
                 .body("isAccepted", equalTo(false))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id"))
                 .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_notification where type='team_member_invitation' AND receiver='invitee-user'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
+    }
+
+    @Scenario("接受邀请>用户接受邀请,并成功成为团队的一员")
+    @Test
+    public void AcceptInvitation() throws Exception {
+        dbPreparation.table("kb_team_member_invitation")
+                .names("id,inviter,invitee,team_id")
+                .values("invitation-id", "someone", "invitee-user", "foo-team-id")
+                .exec();
+
+        given().header("userName", userName)
+                .when()
+                .put("/teams/foo-team-Id/members/invitation/invitation-id")
+                .then()
+                .statusCode(200)
+                .body("invitee", equalTo("invitee-user"))
+                .body("creationTime", notNullValue())
+                .body("isAccepted", equalTo(true))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id"))
+                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
+
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_members where team_id='foo-team-id' AND member='invitee-user'").size());
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user' AND is_accepted=1").size());
     }
 }

@@ -1,13 +1,10 @@
 package org.thiki.kanban.teams.teamMembers;
 
-import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -25,7 +22,7 @@ public class TeamMembersController {
     }
 
     @RequestMapping(value = "/teams/{teamId}/members", method = RequestMethod.GET)
-    public HttpEntity loadMembersByTeamId(@PathVariable String teamId, @RequestHeader String userName) throws TemplateException, IOException, MessagingException {
+    public HttpEntity loadMembersByTeamId(@PathVariable String teamId, @RequestHeader String userName) throws Exception {
         List<Member> members = teamMembersService.loadMembersByTeamId(userName, teamId);
         return Response.build(new MembersResource(teamId, userName, members));
     }
