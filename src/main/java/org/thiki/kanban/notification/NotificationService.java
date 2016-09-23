@@ -31,6 +31,7 @@ public class NotificationService {
     public Notification findNotificationById(String id) {
         Notification notification = notificationPersistence.read(id);
         if (!notification.getIsRead()) {
+            notification.setIsRead(true);
             notificationPersistence.setAlreadyRead(id);
         }
         return notification;
