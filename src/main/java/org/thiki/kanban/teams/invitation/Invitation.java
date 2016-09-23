@@ -68,7 +68,7 @@ public class Invitation {
     }
 
     public boolean getIsAccepted() {
-        return isAccepted == 0 ? false : true;
+        return (isAccepted == null || isAccepted == 0) ? false : true;
     }
 
     public void setIsAccepted(Integer isAccepted) {
