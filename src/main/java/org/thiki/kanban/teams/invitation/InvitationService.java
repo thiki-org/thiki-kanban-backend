@@ -7,6 +7,7 @@ import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
 import org.thiki.kanban.notification.Notification;
 import org.thiki.kanban.notification.NotificationService;
+import org.thiki.kanban.notification.NotificationType;
 import org.thiki.kanban.teams.team.Team;
 import org.thiki.kanban.teams.team.TeamsService;
 import org.thiki.kanban.teams.teamMembers.TeamMembersService;
@@ -82,7 +83,7 @@ public class InvitationService {
         notification.setSender(userName);
         notification.setLink(invitationLink.getHref());
         notification.setContent(String.format(NOTIFICATION_CONTENT, userName, team.getName()));
-        notification.setType("team-members-invitation");
+        notification.setType(NotificationType.TEAM_MEMBER_INVITATION.type());
         notificationService.notify(notification);
         mailService.sendMailByTemplate(invitationEmail, TEAM_INVITATION_TEMPLATE);
         return invitationPersistence.findById(invitation.getId());
