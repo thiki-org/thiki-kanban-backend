@@ -16,10 +16,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class InvitationResource extends RestResource {
 
-    public InvitationResource(String userName, String teamId, Invitation savedInvitation) throws TemplateException, IOException, MessagingException {
-        this.domainObject = savedInvitation;
-        if (savedInvitation != null) {
-            Link selfLink = linkTo(methodOn(InvitationController.class).invite(savedInvitation, teamId, userName)).withSelfRel();
+    public InvitationResource(String userName, String teamId, Invitation invitation) throws TemplateException, IOException, MessagingException {
+        this.domainObject = invitation;
+        if (invitation != null) {
+            Link selfLink = linkTo(methodOn(InvitationController.class).acceptInvitation(teamId, invitation.getId())).withSelfRel();
             this.add(selfLink);
 
             Link teamLink = linkTo(methodOn(TeamsController.class).findById(teamId, userName)).withRel("team");
