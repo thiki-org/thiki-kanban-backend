@@ -24,6 +24,7 @@ public class Notification implements Serializable {
     private String creationTime;
     private String displayTime;
     private String type;
+    private String typeName;
     private String modificationTime;
 
     public String getType() {
@@ -96,5 +97,9 @@ public class Notification implements Serializable {
 
     public String getDisplayTime() {
         return DateUtil.showTime(this.creationTime);
+    }
+
+    public String getTypeName() {
+        return NotificationType.getNameByType(this.type);
     }
 }
