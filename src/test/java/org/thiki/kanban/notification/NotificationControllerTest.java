@@ -10,6 +10,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -73,6 +74,7 @@ public class NotificationControllerTest extends TestBase {
                 .body("content", equalTo("content"))
                 .body("link", equalTo("http://hello.com"))
                 .body("isRead", equalTo(false))
+                .body("displayTime", notNullValue())
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/notifications/foo-notification-id"))
                 .body("_links.notifications.href", equalTo("http://localhost:8007/someone/notifications"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_notification WHERE is_read=1 AND ID='foo-notification-id'").size());

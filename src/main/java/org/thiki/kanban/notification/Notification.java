@@ -1,5 +1,7 @@
 package org.thiki.kanban.notification;
 
+import org.thiki.kanban.foundation.common.date.DateUtil;
+
 import java.io.Serializable;
 
 /**
@@ -21,6 +23,7 @@ public class Notification implements Serializable {
     private boolean isRead;
 
     private String creationTime;
+    private String displayTime;
     private String type;
     private String modificationTime;
 
@@ -86,5 +89,13 @@ public class Notification implements Serializable {
 
     public void setIsRead(boolean isRead) {
         this.isRead = isRead;
+    }
+
+    public String getCreationTime() {
+        return this.creationTime;
+    }
+
+    public String getDisplayTime() {
+        return DateUtil.showTime(this.creationTime);
     }
 }
