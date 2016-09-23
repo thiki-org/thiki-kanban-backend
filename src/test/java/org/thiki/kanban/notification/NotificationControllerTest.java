@@ -42,7 +42,7 @@ public class NotificationControllerTest extends TestBase {
     public void loadAllNotifications() throws Exception {
         dbPreparation.table("kb_notification")
                 .names("id,receiver,sender,content,type,link")
-                .values("foo-notification-id", "someone", "sender@gmail.com", "content", "notificationType", "http://hello.com").exec();
+                .values("foo-notification-id", "someone", "sender@gmail.com", "content", "team_member_invitation", "http://hello.com").exec();
 
         given().header("userName", userName)
                 .when()
@@ -53,6 +53,7 @@ public class NotificationControllerTest extends TestBase {
                 .body("notifications[0].content", equalTo("content"))
                 .body("notifications[0].link", equalTo("http://hello.com"))
                 .body("notifications[0].isRead", equalTo(false))
+                .body("notifications[0].type", equalTo(NotificationType.TEAM_MEMBER_INVITATION))
                 .body("notifications[0]._links.self.href", equalTo("http://localhost:8007/someone/notifications/foo-notification-id"))
                 .body("notifications[0]._links.notifications.href", equalTo("http://localhost:8007/someone/notifications"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/notifications"));

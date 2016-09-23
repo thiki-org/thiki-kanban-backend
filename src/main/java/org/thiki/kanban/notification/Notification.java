@@ -15,7 +15,6 @@ public class Notification implements Serializable {
 
     private String sender;
 
-
     private String content;
 
     private String link;
