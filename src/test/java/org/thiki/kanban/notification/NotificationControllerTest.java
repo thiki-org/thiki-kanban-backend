@@ -42,7 +42,7 @@ public class NotificationControllerTest extends TestBase {
     public void loadAllNotifications() throws Exception {
         dbPreparation.table("kb_notification")
                 .names("id,receiver,sender,content,type,link")
-                .values("foo-notification-id", "someone", "sender@gmail.com", "content", "team_member_invitation", "http://hello.com").exec();
+                .values("foo-notification-id", "someone", "sender@gmail.com", "content", NotificationType.TEAM_MEMBER_INVITATION.type(), "http://hello.com").exec();
 
         given().header("userName", userName)
                 .when()
