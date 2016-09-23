@@ -40,7 +40,7 @@ public class InvitationControllerTest extends TestBase {
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
-                .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
+                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
 
@@ -63,7 +63,7 @@ public class InvitationControllerTest extends TestBase {
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
-                .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
+                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
 
@@ -172,12 +172,12 @@ public class InvitationControllerTest extends TestBase {
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
-                .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
+                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where id='foo-invitation-Id' AND delete_status=1").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='foo-team-Id' AND invitee='invitee-user'").size());
     }
 
-    @Scenario("邀请发出后，用户的消息中心也会收到相应的提示")
+    @Scenario("邀请发出后，在消息中心通知用户")
     @Test
     public void addNotificationAfterSendingInvitation() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
@@ -196,7 +196,7 @@ public class InvitationControllerTest extends TestBase {
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation"))
-                .body("_links.members.href", equalTo("http://localhost:8007/teams/foo-team-Id/members"));
+                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_notification where type='team_member_invitation' AND receiver='invitee-user'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }

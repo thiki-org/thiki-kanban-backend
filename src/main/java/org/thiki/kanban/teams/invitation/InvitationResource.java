@@ -3,7 +3,7 @@ package org.thiki.kanban.teams.invitation;
 import freemarker.template.TemplateException;
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
-import org.thiki.kanban.teams.teamMembers.TeamMembersController;
+import org.thiki.kanban.teams.team.TeamsController;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
@@ -22,8 +22,8 @@ public class InvitationResource extends RestResource {
             Link selfLink = linkTo(methodOn(InvitationController.class).invite(savedInvitation, teamId, userName)).withSelfRel();
             this.add(selfLink);
 
-            Link membersLink = linkTo(methodOn(TeamMembersController.class).loadMembersByTeamId(teamId, userName)).withRel("members");
-            this.add(membersLink);
+            Link teamLink = linkTo(methodOn(TeamsController.class).findById(teamId, userName)).withRel("team");
+            this.add(teamLink);
         }
     }
 }
