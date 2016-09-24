@@ -312,7 +312,7 @@ public class InvitationControllerTest extends TestBase {
                 .put("/teams/foo-team-Id/members/invitation/invitation-id")
                 .then()
                 .statusCode(400)
-                .body("code", equalTo(Memberc.INVITATION_IS_ALREADY_ACCEPTED.code()))
+                .body("code", equalTo(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED.code()))
                 .body("message", equalTo(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED.message()));
     }
 }
