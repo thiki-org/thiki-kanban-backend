@@ -68,7 +68,7 @@ public class InvitationControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
 
-    @Scenario("如果邀请人为空，怎不允许发送邀请")
+    @Scenario("如果邀请人为空,怎不允许发送邀请")
     @Test
     public void NotAllowedIfInviteeIsEmpty() throws Exception {
         given().header("userName", userName)
@@ -81,7 +81,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("message", equalTo(InvitationCodes.InviteeIsRequired));
     }
 
-    @Scenario("如果邀请加入的团队并不存在，则不允许发送邀请")
+    @Scenario("如果邀请加入的团队并不存在,则不允许发送邀请")
     @Test
     public void NotAllowedIfTeamIsNotExist() throws Exception {
         given().header("userName", userName)
@@ -95,7 +95,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("message", equalTo(InvitationCodes.TEAM_IS_NOT_EXISTS.message()));
     }
 
-    @Scenario("如果被邀请人不存在，则不允许发送邀请")
+    @Scenario("如果被邀请人不存在,则不允许发送邀请")
     @Test
     public void NotAllowedIfInviteeIsNotExist() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
@@ -131,7 +131,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("message", equalTo(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_TEAM.message()));
     }
 
-    @Scenario("如果被邀请人已经是团队的成员，则不允许发送邀请")
+    @Scenario("如果被邀请人已经是团队的成员,则不允许发送邀请")
     @Test
     public void NotAllowedIfInviteeIsAlreadyAMemberOfTheTeam() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
@@ -153,7 +153,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("message", equalTo(InvitationCodes.INVITEE_IS_ALREADY_A_MEMBER_OF_THE_TEAM.message()));
     }
 
-    @Scenario("如果此前已经存在相同的邀请，则取消之前的邀请")
+    @Scenario("如果此前已经存在相同的邀请,则取消之前的邀请")
     @Test
     public void cancelPreviousInvitationBeforeSendingNewInvitation() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
@@ -178,7 +178,7 @@ public class InvitationControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='foo-team-Id' AND invitee='invitee-user'").size());
     }
 
-    @Scenario("邀请发出后，在消息中心通知用户")
+    @Scenario("邀请发出后,在消息中心通知用户")
     @Test
     public void addNotificationAfterSendingInvitation() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
@@ -247,5 +247,17 @@ public class InvitationControllerTest extends TestBase {
 
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_members where team_id='foo-team-id' AND member='invitee-user'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user' AND is_accepted=1").size());
+    }
+
+    @Scenario("接受邀请>用户接受邀请时,若邀请不存在,则告知用户相关错误")
+    @Test
+    public void throwExceptionIfInvitationIsNotExistWhenAcceptingInvitation() throws Exception {
+        given().header("userName", userName)
+                .when()
+                .put("/teams/foo-team-Id/members/invitation/invitation-id")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.code()))
+                .body("message", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.message()));
     }
 }
