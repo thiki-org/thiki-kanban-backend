@@ -40,6 +40,10 @@ public class TeamMembersService {
     }
 
     public TeamMember joinTeam(String userName, String teamId) {
+        boolean isAlreadyJoinTeam = teamMembersPersistence.isAMemberOfTheTeam(userName, teamId);
+        if (isAlreadyJoinTeam) {
+            throw new BusinessException(TeamMembersCodes.USER_IS_ALREADY_A_MEMBER_OF_THE_TEAM);
+        }
         TeamMember teamMember = new TeamMember();
         teamMember.setTeamId(teamId);
         teamMember.setMember(userName);

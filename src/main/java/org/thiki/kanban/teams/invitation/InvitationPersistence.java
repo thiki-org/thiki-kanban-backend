@@ -14,5 +14,5 @@ public interface InvitationPersistence {
 
     Integer cancelPreviousInvitation(Invitation invitation);
 
-    Integer acceptInvitation(@Param("invitee") String invitee, @Param("invitationId") String invitationId);
+    Integer acceptInvitation(@Param("invitee") String invitee, @Param("teamId") String teamId);
 }

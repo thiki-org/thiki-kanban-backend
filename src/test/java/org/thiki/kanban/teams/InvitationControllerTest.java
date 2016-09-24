@@ -289,4 +289,30 @@ public class InvitationControllerTest extends TestBase {
                 .body("code", equalTo(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED.code()))
                 .body("message", equalTo(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED.message()));
     }
+
+    @Scenario("接受邀请>用户接受邀请时,若已经是团队一员,则告知用户相关错误")
+    @Test
+    public void throwExceptionIfInviteeIsAlreadyAMember() throws Exception {
+
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-team-Id','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_member_invitation (id,team_id,inviter,invitee) VALUES ('foo-invitation-Id','foo-team-Id','someone','invitee-user')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','foo-team-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','someone','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+                "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
+
+        dbPreparation.table("kb_team_member_invitation")
+                .names("id,inviter,invitee,team_id,is_accepted")
+                .values("invitation-id", "someone", "invitee-user", "foo-team-id", 1)
+                .exec();
+
+        given().header("userName", userName)
+                .when()
+                .put("/teams/foo-team-Id/members/invitation/invitation-id")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(Memberc.INVITATION_IS_ALREADY_ACCEPTED.code()))
+                .body("message", equalTo(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED.message()));
+    }
 }

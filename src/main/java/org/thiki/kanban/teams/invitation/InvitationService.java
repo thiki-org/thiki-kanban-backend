@@ -102,7 +102,7 @@ public class InvitationService {
         if (invitation.getIsAccepted()) {
             throw new BusinessException(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED);
         }
-        invitationPersistence.acceptInvitation(userName, invitationId);
+        invitationPersistence.acceptInvitation(userName, teamId);
         membersService.joinTeam(userName, teamId);
         return invitationPersistence.findById(invitationId);
     }

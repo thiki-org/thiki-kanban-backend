@@ -18,7 +18,7 @@
     </update>
 
     <update id="acceptInvitation" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_team_member_invitation SET is_accepted=1 WHERE id=#{invitationId} AND invitee=#{invitee}
+        UPDATE kb_team_member_invitation SET is_accepted=1 WHERE team_id=#{teamId} AND invitee=#{invitee}
         AND is_accepted=0 AND delete_status=0
     </update>
 </mapper>
