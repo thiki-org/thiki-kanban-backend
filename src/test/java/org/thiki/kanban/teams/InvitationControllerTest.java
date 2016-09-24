@@ -249,6 +249,18 @@ public class InvitationControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user' AND is_accepted=1").size());
     }
 
+    @Scenario("查看邀请>用户查看邀请时,若邀请不存在,则告知用户相关错误")
+    @Test
+    public void throwExceptionIfInvitationIsNotExistWhenLoadingInvitation() throws Exception {
+        given().header("userName", userName)
+                .when()
+                .get("/teams/foo-team-Id/members/invitation/invitation-id")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.code()))
+                .body("message", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.message()));
+    }
+
     @Scenario("接受邀请>用户接受邀请时,若邀请不存在,则告知用户相关错误")
     @Test
     public void throwExceptionIfInvitationIsNotExistWhenAcceptingInvitation() throws Exception {
@@ -261,15 +273,20 @@ public class InvitationControllerTest extends TestBase {
                 .body("message", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.message()));
     }
 
-    @Scenario("查看邀请>用户查看邀请时,若邀请不存在,则告知用户相关错误")
+    @Scenario("接受邀请>用户接受邀请时,若之前已经接受,则告知用户相关错误")
     @Test
-    public void throwExceptionIfInvitationIsNotExistWhenLoadingInvitation() throws Exception {
+    public void throwExceptionIfInvitationIsAlreadyAccepted() throws Exception {
+        dbPreparation.table("kb_team_member_invitation")
+                .names("id,inviter,invitee,team_id,is_accepted")
+                .values("invitation-id", "someone", "invitee-user", "foo-team-id", 1)
+                .exec();
+
         given().header("userName", userName)
                 .when()
-                .get("/teams/foo-team-Id/members/invitation/invitation-id")
+                .put("/teams/foo-team-Id/members/invitation/invitation-id")
                 .then()
                 .statusCode(400)
-                .body("code", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.code()))
-                .body("message", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.message()));
+                .body("code", equalTo(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED.code()))
+                .body("message", equalTo(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED.message()));
     }
 }

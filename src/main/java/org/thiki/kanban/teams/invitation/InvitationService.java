@@ -99,6 +99,9 @@ public class InvitationService {
         if (invitation == null) {
             throw new BusinessException(InvitationCodes.INVITATION_IS_NOT_EXIST);
         }
+        if (invitation.getIsAccepted()) {
+            throw new BusinessException(InvitationCodes.INVITATION_IS_ALREADY_ACCEPTED);
+        }
         invitationPersistence.acceptInvitation(userName, invitationId);
         membersService.joinTeam(userName, teamId);
         return invitationPersistence.findById(invitationId);
