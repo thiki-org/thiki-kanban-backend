@@ -34,7 +34,11 @@ public class DateUtil {
             convertResult = seconds + "分钟前";
         } else if (diffTimeLong >= 3600000 && diffTimeLong < 86400000) {// 一天内
             long seconds = diffTimeLong / 3600000;
-            convertResult = seconds + "小时前";
+            if (dateService.getDay(date) < dateService.getDay(new Date())) {
+                convertResult = "昨天";
+            } else {
+                convertResult = seconds + "小时前";
+            }
         } else {// 日期格式
             format = "MM-dd HH:mm";
             SimpleDateFormat df = new SimpleDateFormat(format);
