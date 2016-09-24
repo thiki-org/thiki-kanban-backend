@@ -260,4 +260,16 @@ public class InvitationControllerTest extends TestBase {
                 .body("code", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.code()))
                 .body("message", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.message()));
     }
+
+    @Scenario("查看邀请>用户查看邀请时,若邀请不存在,则告知用户相关错误")
+    @Test
+    public void throwExceptionIfInvitationIsNotExistWhenLoadingInvitation() throws Exception {
+        given().header("userName", userName)
+                .when()
+                .get("/teams/foo-team-Id/members/invitation/invitation-id")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.code()))
+                .body("message", equalTo(InvitationCodes.INVITATION_IS_NOT_EXIST.message()));
+    }
 }

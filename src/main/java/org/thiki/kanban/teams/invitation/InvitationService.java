@@ -73,7 +73,7 @@ public class InvitationService {
         invitationEmail.setInvitee(inviteeUser.getName());
         invitationEmail.setTeamName(team.getName());
 
-        Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(userName,teamId, invitation.getId())).withRel("invitationLink");
+        Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(userName, teamId, invitation.getId())).withRel("invitationLink");
         invitationEmail.setInvitationLink(invitationLink.getHref());
         Notification notification = new Notification();
         notification.setReceiver(inviteeUser.getName());
@@ -88,10 +88,17 @@ public class InvitationService {
 
     public Invitation loadInvitation(String invitationId) {
         Invitation invitation = invitationPersistence.findById(invitationId);
+        if (invitation == null) {
+            throw new BusinessException(InvitationCodes.INVITATION_IS_NOT_EXIST);
+        }
         return invitation;
     }
 
     public Invitation acceptInvitation(String userName, String teamId, String invitationId) {
+        Invitation invitation = invitationPersistence.findById(invitationId);
+        if (invitation == null) {
+            throw new BusinessException(InvitationCodes.INVITATION_IS_NOT_EXIST);
+        }
         invitationPersistence.acceptInvitation(userName, invitationId);
         membersService.joinTeam(userName, teamId);
         return invitationPersistence.findById(invitationId);
