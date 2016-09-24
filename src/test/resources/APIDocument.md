@@ -65,16 +65,20 @@
   - [创建团队时，如果在本人名下已经存在相同名称的团队，则不允许创建](#%E5%88%9B%E5%BB%BA%E5%9B%A2%E9%98%9F%E6%97%B6%EF%BC%8C%E5%A6%82%E6%9E%9C%E5%9C%A8%E6%9C%AC%E4%BA%BA%E5%90%8D%E4%B8%8B%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8%E7%9B%B8%E5%90%8C%E5%90%8D%E7%A7%B0%E7%9A%84%E5%9B%A2%E9%98%9F%EF%BC%8C%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%88%9B%E5%BB%BA)
   - [创建团队时，如果未提供团队名称，则不允许创建](#%E5%88%9B%E5%BB%BA%E5%9B%A2%E9%98%9F%E6%97%B6%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%9C%AA%E6%8F%90%E4%BE%9B%E5%9B%A2%E9%98%9F%E5%90%8D%E7%A7%B0%EF%BC%8C%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%88%9B%E5%BB%BA)
 - [七、团队邀请](#%E4%B8%83%E3%80%81%E5%9B%A2%E9%98%9F%E9%82%80%E8%AF%B7)
-  - [如果邀请人为空，怎不允许发送邀请](#%E5%A6%82%E6%9E%9C%E9%82%80%E8%AF%B7%E4%BA%BA%E4%B8%BA%E7%A9%BA%EF%BC%8C%E6%80%8E%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
+  - [如果邀请人为空,怎不允许发送邀请](#%E5%A6%82%E6%9E%9C%E9%82%80%E8%AF%B7%E4%BA%BA%E4%B8%BA%E7%A9%BA%E6%80%8E%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
+  - [接受邀请>用户接受邀请时,若邀请不存在,则告知用户相关错误](#%E6%8E%A5%E5%8F%97%E9%82%80%E8%AF%B7%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%97%E9%82%80%E8%AF%B7%E6%97%B6%E8%8B%A5%E9%82%80%E8%AF%B7%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E5%91%8A%E7%9F%A5%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E9%94%99%E8%AF%AF)
   - [用户可以通过用户名邀请其他成员加入到团队中](#%E7%94%A8%E6%88%B7%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E7%94%A8%E6%88%B7%E5%90%8D%E9%82%80%E8%AF%B7%E5%85%B6%E4%BB%96%E6%88%90%E5%91%98%E5%8A%A0%E5%85%A5%E5%88%B0%E5%9B%A2%E9%98%9F%E4%B8%AD)
-  - [如果被邀请人已经是团队的成员，则不允许发送邀请](#%E5%A6%82%E6%9E%9C%E8%A2%AB%E9%82%80%E8%AF%B7%E4%BA%BA%E5%B7%B2%E7%BB%8F%E6%98%AF%E5%9B%A2%E9%98%9F%E7%9A%84%E6%88%90%E5%91%98%EF%BC%8C%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
-  - [如果此前已经存在相同的邀请，则取消之前的邀请](#%E5%A6%82%E6%9E%9C%E6%AD%A4%E5%89%8D%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8%E7%9B%B8%E5%90%8C%E7%9A%84%E9%82%80%E8%AF%B7%EF%BC%8C%E5%88%99%E5%8F%96%E6%B6%88%E4%B9%8B%E5%89%8D%E7%9A%84%E9%82%80%E8%AF%B7)
-  - [接受邀请>当用户接收到邀请后,可以查看邀请的具体内容。](#%E6%8E%A5%E5%8F%97%E9%82%80%E8%AF%B7%E5%BD%93%E7%94%A8%E6%88%B7%E6%8E%A5%E6%94%B6%E5%88%B0%E9%82%80%E8%AF%B7%E5%90%8E%E5%8F%AF%E4%BB%A5%E6%9F%A5%E7%9C%8B%E9%82%80%E8%AF%B7%E7%9A%84%E5%85%B7%E4%BD%93%E5%86%85%E5%AE%B9%E3%80%82)
+  - [查看邀请>用户查看邀请时,若邀请不存在,则告知用户相关错误](#%E6%9F%A5%E7%9C%8B%E9%82%80%E8%AF%B7%E7%94%A8%E6%88%B7%E6%9F%A5%E7%9C%8B%E9%82%80%E8%AF%B7%E6%97%B6%E8%8B%A5%E9%82%80%E8%AF%B7%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E5%91%8A%E7%9F%A5%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E9%94%99%E8%AF%AF)
+  - [如果被邀请人已经是团队的成员,则不允许发送邀请](#%E5%A6%82%E6%9E%9C%E8%A2%AB%E9%82%80%E8%AF%B7%E4%BA%BA%E5%B7%B2%E7%BB%8F%E6%98%AF%E5%9B%A2%E9%98%9F%E7%9A%84%E6%88%90%E5%91%98%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
+  - [接受邀请>用户接受邀请时,若之前已经接受,则告知用户相关错误](#%E6%8E%A5%E5%8F%97%E9%82%80%E8%AF%B7%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%97%E9%82%80%E8%AF%B7%E6%97%B6%E8%8B%A5%E4%B9%8B%E5%89%8D%E5%B7%B2%E7%BB%8F%E6%8E%A5%E5%8F%97%E5%88%99%E5%91%8A%E7%9F%A5%E7%94%A8%E6%88%B7%E7%9B%B8%E5%85%B3%E9%94%99%E8%AF%AF)
+  - [如果此前已经存在相同的邀请,则取消之前的邀请](#%E5%A6%82%E6%9E%9C%E6%AD%A4%E5%89%8D%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8%E7%9B%B8%E5%90%8C%E7%9A%84%E9%82%80%E8%AF%B7%E5%88%99%E5%8F%96%E6%B6%88%E4%B9%8B%E5%89%8D%E7%9A%84%E9%82%80%E8%AF%B7)
+  - [查看邀请>当用户接收到邀请后,可以查看邀请的具体内容](#%E6%9F%A5%E7%9C%8B%E9%82%80%E8%AF%B7%E5%BD%93%E7%94%A8%E6%88%B7%E6%8E%A5%E6%94%B6%E5%88%B0%E9%82%80%E8%AF%B7%E5%90%8E%E5%8F%AF%E4%BB%A5%E6%9F%A5%E7%9C%8B%E9%82%80%E8%AF%B7%E7%9A%84%E5%85%B7%E4%BD%93%E5%86%85%E5%AE%B9)
+  - [接受邀请>用户接受邀请,并成功成为团队的一员](#%E6%8E%A5%E5%8F%97%E9%82%80%E8%AF%B7%E7%94%A8%E6%88%B7%E6%8E%A5%E5%8F%97%E9%82%80%E8%AF%B7%E5%B9%B6%E6%88%90%E5%8A%9F%E6%88%90%E4%B8%BA%E5%9B%A2%E9%98%9F%E7%9A%84%E4%B8%80%E5%91%98)
   - [用户可以通过用户名邀请其他成员加入到团队中](#%E7%94%A8%E6%88%B7%E5%8F%AF%E4%BB%A5%E9%80%9A%E8%BF%87%E7%94%A8%E6%88%B7%E5%90%8D%E9%82%80%E8%AF%B7%E5%85%B6%E4%BB%96%E6%88%90%E5%91%98%E5%8A%A0%E5%85%A5%E5%88%B0%E5%9B%A2%E9%98%9F%E4%B8%AD-1)
-  - [如果被邀请人不存在，则不允许发送邀请](#%E5%A6%82%E6%9E%9C%E8%A2%AB%E9%82%80%E8%AF%B7%E4%BA%BA%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%8C%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
+  - [如果被邀请人不存在,则不允许发送邀请](#%E5%A6%82%E6%9E%9C%E8%A2%AB%E9%82%80%E8%AF%B7%E4%BA%BA%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
   - [如果邀请人并非团队的成员则不允许发送邀请](#%E5%A6%82%E6%9E%9C%E9%82%80%E8%AF%B7%E4%BA%BA%E5%B9%B6%E9%9D%9E%E5%9B%A2%E9%98%9F%E7%9A%84%E6%88%90%E5%91%98%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
-  - [邀请发出后，在消息中心通知用户](#%E9%82%80%E8%AF%B7%E5%8F%91%E5%87%BA%E5%90%8E%EF%BC%8C%E5%9C%A8%E6%B6%88%E6%81%AF%E4%B8%AD%E5%BF%83%E9%80%9A%E7%9F%A5%E7%94%A8%E6%88%B7)
-  - [如果邀请加入的团队并不存在，则不允许发送邀请](#%E5%A6%82%E6%9E%9C%E9%82%80%E8%AF%B7%E5%8A%A0%E5%85%A5%E7%9A%84%E5%9B%A2%E9%98%9F%E5%B9%B6%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%8C%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
+  - [邀请发出后,在消息中心通知用户](#%E9%82%80%E8%AF%B7%E5%8F%91%E5%87%BA%E5%90%8E%E5%9C%A8%E6%B6%88%E6%81%AF%E4%B8%AD%E5%BF%83%E9%80%9A%E7%9F%A5%E7%94%A8%E6%88%B7)
+  - [如果邀请加入的团队并不存在,则不允许发送邀请](#%E5%A6%82%E6%9E%9C%E9%82%80%E8%AF%B7%E5%8A%A0%E5%85%A5%E7%9A%84%E5%9B%A2%E9%98%9F%E5%B9%B6%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8F%91%E9%80%81%E9%82%80%E8%AF%B7)
 - [八、团队成员](#%E5%85%AB%E3%80%81%E5%9B%A2%E9%98%9F%E6%88%90%E5%91%98)
   - [加入团队时,如果待加入的成员已经在团队中,则不允许加入](#%E5%8A%A0%E5%85%A5%E5%9B%A2%E9%98%9F%E6%97%B6%E5%A6%82%E6%9E%9C%E5%BE%85%E5%8A%A0%E5%85%A5%E7%9A%84%E6%88%90%E5%91%98%E5%B7%B2%E7%BB%8F%E5%9C%A8%E5%9B%A2%E9%98%9F%E4%B8%AD%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%8A%A0%E5%85%A5)
   - [当用户加入一个团队后，可以获取该团队的所有成员](#%E5%BD%93%E7%94%A8%E6%88%B7%E5%8A%A0%E5%85%A5%E4%B8%80%E4%B8%AA%E5%9B%A2%E9%98%9F%E5%90%8E%EF%BC%8C%E5%8F%AF%E4%BB%A5%E8%8E%B7%E5%8F%96%E8%AF%A5%E5%9B%A2%E9%98%9F%E7%9A%84%E6%89%80%E6%9C%89%E6%88%90%E5%91%98)
@@ -170,7 +174,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1474671106145,
+	"timestamp":1474676954581,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -203,7 +207,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1474671106223,
+	"timestamp":1474676954696,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -236,7 +240,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1474671106280,
+	"timestamp":1474676954792,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -260,7 +264,7 @@ http://localhost:8007/registration
 ```
 {
 	"name":"someone",
-	"password":"B1yEkfa687BqLx7wUuayDpgDios8pf8B53tyAQJ+8ze0wifgrVMFwy+SzoSA2gqposbUT7YB7nSgIey6YnyIyteqtGnl7hW+0x9f+PJ7TPCgnOn+xai8279SkXQedWHP7KRvxRbvteiKjbHcGSO835IrO+ZQ1peUYLhn24x8HPY=",
+	"password":"HutU9BNGSrnCyfByHhip0xDesbAqkJBJD38X7QuGDk2pW0Wls1Waj+sDUj+C5flyjpRcBb2KWl6skfA31n4BT8OQTJEg+8X6dcOyIyutILNEXTPfClOxc+sjeOaR4dXyTIIZMRz9tOh2+SJH5Xbwg42himoX7jnsax/R8xrVCak=",
 	"email":"someone@gmail.com"
 }
 ```
@@ -292,12 +296,12 @@ http://localhost:8007/registration
 login_shouldLoginFailedIfUserNameOrPasswordIsIncorrect
 
 **URL**
-http://localhost:8007/login?identity=someone&password=Wq31WqPCgWaAwpYO4jHFRuaoyh6K16L7wsDePcOtiUt7jcJcqIV8upZRbNXJYoQ%2FTszQulp%2F4QKyDRLz0HoWawRYj%2FGTxJn%2FQjk5wXpDOuCbv5hiARSLsBhI7wmhtqTKCUnOuX0sYezljDpnlKXFd3%2BHdUdGF81QyXshK0E6bW0%3D
+http://localhost:8007/login?identity=someone&password=BjQ2JIbU%2BxyiOqel2UWuDAmgmdNrUyiLhmsnTgG3khSmNmvwNv4BShXAzWZ%2FRmUD9cp6fyoixO%2BItvKI1JNJj8oHKx%2FgsgiThWc%2BvjhOVa8YPk7B8%2FrP4JM0TTbmDxfL0%2Fm89zZRbaJngeLTNIZhjE7o3v1fKhpF3alryHlTYFw%3D
 
 **响应体**
 ```
 {
-	"timestamp":1474671102401,
+	"timestamp":1474676949418,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -315,7 +319,7 @@ http://localhost:8007/login?identity=someone&password=Wq31WqPCgWaAwpYO4jHFRuaoyh
 login_loginSuccessfully
 
 **URL**
-http://localhost:8007/login?identity=someone&password=lFvWUTfdJ6%2BJMbtFt%2FC8hRQssdEJ2y8%2FIJUtpqwQU3cBgWASPzA0WFhu9T83tvl15yes9RcWiVFoyX8%2Fehj%2Fk6Y%2FsMpQbsGGvyHYhNBNej7fJSVxFOySUKBLGU5iim8c8BsXbPNqJTokqwDwK%2BmaEJHWFGUF5nYw94dQ43B4mdc%3D
+http://localhost:8007/login?identity=someone&password=Oawm02FXOEvOoyJX66v6T4vT2KF8IiPQ2xbKEdyFn%2BKbMauy%2FW9H5eBQywYi1EViNPCXFzWQgzPb49rmwtSqt%2F42QAldr1fbQ%2FYMbaFBnoGl6dEXKhHMPdIoGcpeePRW8v1l%2F%2FH2lO1y%2Bwz8W7GaiBB4HTNj3jNQfQAovd1dp7I%3D
 
 **响应体**
 ```
@@ -349,7 +353,7 @@ http://localhost:8007/login?password=foo
 **响应体**
 ```
 {
-	"timestamp":1474671102524,
+	"timestamp":1474676949698,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -372,7 +376,7 @@ http://localhost:8007/login?identity=foo&password=foo
 **响应体**
 ```
 {
-	"timestamp":1474671102574,
+	"timestamp":1474676949790,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -405,7 +409,7 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:32.484000",
+	"creationTime":"2016-09-24 08:29:00.252000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards"
@@ -418,7 +422,7 @@ http://localhost:8007/someone/boards/fooId
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-09-24 06:51:32.484000",
+	"modificationTime":"2016-09-24 08:29:00.252000",
 	"name":"new-name",
 	"id":"fooId"
 }
@@ -445,7 +449,7 @@ http://localhost:8007/someone/boards/fooId1
 **响应体**
 ```
 {
-	"timestamp":1474671092625,
+	"timestamp":1474676940382,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -468,7 +472,7 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:32.654000",
+	"creationTime":"2016-09-24 08:29:00.403000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards"
@@ -481,7 +485,7 @@ http://localhost:8007/someone/boards/fooId
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-09-24 06:51:32.654000",
+	"modificationTime":"2016-09-24 08:29:00.403000",
 	"name":"board-name",
 	"id":"fooId"
 }
@@ -508,7 +512,7 @@ http://localhost:8007/someone/boards
 **响应体**
 ```
 {
-	"timestamp":1474671093031,
+	"timestamp":1474676940492,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -532,7 +536,7 @@ http://localhost:8007/someone/boards
 ```
 [
 	{
-		"creationTime":"2016-09-24 06:51:33.051000",
+		"creationTime":"2016-09-24 08:29:00.510000",
 		"_links":{
 			"all":{
 				"href":"http://localhost:8007/someone/boards"
@@ -545,7 +549,7 @@ http://localhost:8007/someone/boards
 			}
 		},
 		"author":"someone",
-		"modificationTime":"2016-09-24 06:51:33.051000",
+		"modificationTime":"2016-09-24 08:29:00.510000",
 		"name":"board-name",
 		"id":"fooId"
 	}
@@ -573,7 +577,7 @@ http://localhost:8007/someone/boards
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:33.149000",
+	"creationTime":"2016-09-24 08:29:00.581000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards"
@@ -586,7 +590,7 @@ http://localhost:8007/someone/boards
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-09-24 06:51:33.149000",
+	"modificationTime":"2016-09-24 08:29:00.581000",
 	"name":"board-name",
 	"id":"fooId"
 }
@@ -634,7 +638,7 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"timestamp":1474671093270,
+	"timestamp":1474676940668,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -657,7 +661,7 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"timestamp":1474671093300,
+	"timestamp":1474676940694,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -691,7 +695,7 @@ http://localhost:8007/boards/feeId/procedures
 ```
 {
 	"orderNumber":1,
-	"creationTime":"2016-09-24 06:51:45.154000",
+	"creationTime":"2016-09-24 08:29:13.689000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures"
@@ -704,7 +708,7 @@ http://localhost:8007/boards/feeId/procedures
 		}
 	},
 	"author":"fooName",
-	"modificationTime":"2016-09-24 06:51:45.154000",
+	"modificationTime":"2016-09-24 08:29:13.689000",
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"title."
@@ -734,7 +738,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 ```
 {
 	"orderNumber":0,
-	"creationTime":"2016-09-24 06:51:45.225000",
+	"creationTime":"2016-09-24 08:29:13.779000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures"
@@ -747,7 +751,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-09-24 06:51:45.225000",
+	"modificationTime":"2016-09-24 08:29:13.779000",
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"newTitle"
@@ -777,7 +781,7 @@ http://localhost:8007/boards/feeId/procedures/fooId2
 ```
 {
 	"orderNumber":0,
-	"creationTime":"2016-09-24 06:51:45.319000",
+	"creationTime":"2016-09-24 08:29:13.834000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures"
@@ -790,7 +794,7 @@ http://localhost:8007/boards/feeId/procedures/fooId2
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-09-24 06:51:45.319000",
+	"modificationTime":"2016-09-24 08:29:13.834000",
 	"boardId":"feeId",
 	"id":"fooId2",
 	"title":"newTitle"
@@ -811,7 +815,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 ```
 {
 	"orderNumber":0,
-	"creationTime":"2016-09-24 06:51:45.413000",
+	"creationTime":"2016-09-24 08:29:13.901000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures"
@@ -824,7 +828,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-09-24 06:51:45.413000",
+	"modificationTime":"2016-09-24 08:29:13.901000",
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"this is the first procedure."
@@ -852,7 +856,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1474671105502,
+	"timestamp":1474676953981,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -884,7 +888,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **响应体**
 ```
 {
-	"timestamp":1474671105552,
+	"timestamp":1474676954022,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -909,7 +913,7 @@ http://localhost:8007/boards/feeId/procedures
 [
 	{
 		"orderNumber":0,
-		"creationTime":"2016-09-24 06:51:45.578000",
+		"creationTime":"2016-09-24 08:29:14.044000",
 		"_links":{
 			"all":{
 				"href":"http://localhost:8007/boards/feeId/procedures"
@@ -922,7 +926,7 @@ http://localhost:8007/boards/feeId/procedures
 			}
 		},
 		"author":"tao",
-		"modificationTime":"2016-09-24 06:51:45.578000",
+		"modificationTime":"2016-09-24 08:29:14.044000",
 		"boardId":"feeId",
 		"id":"fooId",
 		"title":"this is the first procedure."
@@ -951,7 +955,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1474671105672,
+	"timestamp":1474676954143,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1003,7 +1007,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1474671105746,
+	"timestamp":1474676954224,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1026,7 +1030,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **响应体**
 ```
 {
-	"timestamp":1474671105789,
+	"timestamp":1474676954251,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1059,7 +1063,7 @@ http://localhost:8007/boards/feeId/procedures/fooId1
 ```
 {
 	"orderNumber":2,
-	"creationTime":"2016-09-24 06:51:45.827000",
+	"creationTime":"2016-09-24 08:29:14.276000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures"
@@ -1072,7 +1076,7 @@ http://localhost:8007/boards/feeId/procedures/fooId1
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-09-24 06:51:45.827000",
+	"modificationTime":"2016-09-24 08:29:14.276000",
 	"boardId":"feeId",
 	"id":"fooId1",
 	"title":"newTitle"
@@ -1100,7 +1104,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1474671105919,
+	"timestamp":1474676954370,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -1132,7 +1136,7 @@ http://localhost:8007/boards/feeId/procedures
 ```
 {
 	"orderNumber":0,
-	"creationTime":"2016-09-24 06:51:46.004000",
+	"creationTime":"2016-09-24 08:29:14.411000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures"
@@ -1145,7 +1149,7 @@ http://localhost:8007/boards/feeId/procedures
 		}
 	},
 	"author":"fooName",
-	"modificationTime":"2016-09-24 06:51:46.004000",
+	"modificationTime":"2016-09-24 08:29:14.411000",
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"this is the procedure title."
@@ -1179,7 +1183,7 @@ http://localhost:8007/procedures/1/cards/fooId2
 {
 	"summary":"newSummary",
 	"orderNumber":3,
-	"creationTime":"2016-09-24 06:51:33.336000",
+	"creationTime":"2016-09-24 08:29:00.717000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId2/assignments"
@@ -1191,7 +1195,7 @@ http://localhost:8007/procedures/1/cards/fooId2
 			"href":"http://localhost:8007/procedures/1/cards/fooId2"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:33.336000",
+	"modificationTime":"2016-09-24 08:29:00.717000",
 	"id":"fooId2",
 	"procedureId":"1"
 }
@@ -1218,7 +1222,7 @@ http://localhost:8007/procedures/1/cards/fooId
 **响应体**
 ```
 {
-	"timestamp":1474671093606,
+	"timestamp":1474676941178,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1249,7 +1253,7 @@ http://localhost:8007/procedures/fooId/cards
 **响应体**
 ```
 {
-	"timestamp":1474671093691,
+	"timestamp":1474676941243,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1274,7 +1278,7 @@ http://localhost:8007/procedures/1/cards/1
 {
 	"summary":"this is the card summary.",
 	"orderNumber":0,
-	"creationTime":"2016-09-24 06:51:33.707000",
+	"creationTime":"2016-09-24 08:29:01.258000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/1/assignments"
@@ -1287,7 +1291,7 @@ http://localhost:8007/procedures/1/cards/1
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-09-24 06:51:33.707000",
+	"modificationTime":"2016-09-24 08:29:01.258000",
 	"id":"1",
 	"procedureId":"1",
 	"content":"play badminton"
@@ -1319,7 +1323,7 @@ http://localhost:8007/procedures/1/cards/fooId6
 {
 	"summary":"newSummary",
 	"orderNumber":3,
-	"creationTime":"2016-09-24 06:51:33.800000",
+	"creationTime":"2016-09-24 08:29:01.334000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId6/assignments"
@@ -1331,7 +1335,7 @@ http://localhost:8007/procedures/1/cards/fooId6
 			"href":"http://localhost:8007/procedures/1/cards/fooId6"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:33.800000",
+	"modificationTime":"2016-09-24 08:29:01.334000",
 	"id":"fooId6",
 	"procedureId":"1"
 }
@@ -1362,7 +1366,7 @@ http://localhost:8007/procedures/1/cards/fooId4
 {
 	"summary":"newSummary",
 	"orderNumber":1,
-	"creationTime":"2016-09-24 06:51:33.880000",
+	"creationTime":"2016-09-24 08:29:01.440000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId4/assignments"
@@ -1374,7 +1378,7 @@ http://localhost:8007/procedures/1/cards/fooId4
 			"href":"http://localhost:8007/procedures/1/cards/fooId4"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:33.880000",
+	"modificationTime":"2016-09-24 08:29:01.440000",
 	"id":"fooId4",
 	"procedureId":"1"
 }
@@ -1393,7 +1397,7 @@ http://localhost:8007/procedures/fooId/cards/feeId
 **响应体**
 ```
 {
-	"timestamp":1474671093998,
+	"timestamp":1474676941556,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1428,7 +1432,7 @@ http://localhost:8007/procedures/1/cards/fooId
 {
 	"summary":"newSummary",
 	"orderNumber":3,
-	"creationTime":"2016-09-24 06:51:34.023000",
+	"creationTime":"2016-09-24 08:29:01.591000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments"
@@ -1440,7 +1444,7 @@ http://localhost:8007/procedures/1/cards/fooId
 			"href":"http://localhost:8007/procedures/1/cards/fooId"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:34.023000",
+	"modificationTime":"2016-09-24 08:29:01.591000",
 	"id":"fooId",
 	"procedureId":"1"
 }
@@ -1459,7 +1463,7 @@ http://localhost:8007/procedures/feeId/cards/non-exists-cardId
 **响应体**
 ```
 {
-	"timestamp":1474671094104,
+	"timestamp":1474676941723,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1485,7 +1489,7 @@ http://localhost:8007/procedures/fooId/cards
 	{
 		"summary":"this is the card summary.",
 		"orderNumber":0,
-		"creationTime":"2016-09-24 06:51:34.130000",
+		"creationTime":"2016-09-24 08:29:01.747000",
 		"_links":{
 			"assignments":{
 				"href":"http://localhost:8007/procedures/fooId/cards/1/assignments"
@@ -1498,7 +1502,7 @@ http://localhost:8007/procedures/fooId/cards
 			}
 		},
 		"author":"someone",
-		"modificationTime":"2016-09-24 06:51:34.130000",
+		"modificationTime":"2016-09-24 08:29:01.747000",
 		"id":"1",
 		"procedureId":"fooId",
 		"content":"play badminton"
@@ -1527,7 +1531,7 @@ http://localhost:8007/procedures/non-exists-procedureId/cards
 **响应体**
 ```
 {
-	"timestamp":1474671094225,
+	"timestamp":1474676941940,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1581,7 +1585,7 @@ http://localhost:8007/procedures/fooId/cards
 {
 	"summary":"summary",
 	"orderNumber":0,
-	"creationTime":"2016-09-24 06:51:34.310000",
+	"creationTime":"2016-09-24 08:29:02.110000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/fooId/cards/fooId/assignments"
@@ -1594,7 +1598,7 @@ http://localhost:8007/procedures/fooId/cards
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-09-24 06:51:34.310000",
+	"modificationTime":"2016-09-24 08:29:02.110000",
 	"id":"fooId",
 	"procedureId":"fooId"
 }
@@ -1621,7 +1625,7 @@ http://localhost:8007/procedures/fooId/cards
 **响应体**
 ```
 {
-	"timestamp":1474671094412,
+	"timestamp":1474676942261,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1656,7 +1660,7 @@ http://localhost:8007/procedures/1/cards/fooId1
 {
 	"summary":"newSummary",
 	"orderNumber":3,
-	"creationTime":"2016-09-24 06:51:34.449000",
+	"creationTime":"2016-09-24 08:29:02.299000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId1/assignments"
@@ -1668,7 +1672,7 @@ http://localhost:8007/procedures/1/cards/fooId1
 			"href":"http://localhost:8007/procedures/1/cards/fooId1"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:34.449000",
+	"modificationTime":"2016-09-24 08:29:02.299000",
 	"id":"fooId1",
 	"procedureId":"1"
 }
@@ -1687,7 +1691,7 @@ http://localhost:8007/procedures/2/cards
 **响应体**
 ```
 {
-	"timestamp":1474671094623,
+	"timestamp":1474676942500,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1720,7 +1724,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1474671110555,
+	"timestamp":1474676962470,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1743,7 +1747,7 @@ http://localhost:8007/teams/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:50.583000",
+	"creationTime":"2016-09-24 08:29:22.523000",
 	"_links":{
 		"members":{
 			"href":"http://localhost:8007/teams/fooId/members"
@@ -1753,7 +1757,7 @@ http://localhost:8007/teams/fooId
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-09-24 06:51:50.583000",
+	"modificationTime":"2016-09-24 08:29:22.523000",
 	"name":"team-name",
 	"id":"fooId"
 }
@@ -1780,7 +1784,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1474671110667,
+	"timestamp":1474676962678,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1804,7 +1808,7 @@ http://localhost:8007/someone/teams
 ```
 [
 	{
-		"creationTime":"2016-09-24 06:51:50.695000",
+		"creationTime":"2016-09-24 08:29:22.716000",
 		"_links":{
 			"members":{
 				"href":"http://localhost:8007/teams/fooId/members"
@@ -1814,7 +1818,7 @@ http://localhost:8007/someone/teams
 			}
 		},
 		"author":"someone",
-		"modificationTime":"2016-09-24 06:51:50.695000",
+		"modificationTime":"2016-09-24 08:29:22.716000",
 		"name":"team-name",
 		"id":"fooId"
 	}
@@ -1842,7 +1846,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:50.774000",
+	"creationTime":"2016-09-24 08:29:22.785000",
 	"_links":{
 		"members":{
 			"href":"http://localhost:8007/teams/fooId/members"
@@ -1852,7 +1856,7 @@ http://localhost:8007/someone/teams
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-09-24 06:51:50.774000",
+	"modificationTime":"2016-09-24 08:29:22.785000",
 	"name":"思奇团队讨论组",
 	"id":"fooId"
 }
@@ -1879,7 +1883,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1474671110868,
+	"timestamp":1474676962840,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -1909,7 +1913,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1474671110909,
+	"timestamp":1474676962904,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1923,7 +1927,7 @@ http://localhost:8007/someone/teams
 -------
 # 七、团队邀请 #
 
-## 如果邀请人为空，怎不允许发送邀请 ##
+## 如果邀请人为空,怎不允许发送邀请 ##
 
 **用例名称**
 NotAllowedIfInviteeIsEmpty
@@ -1943,13 +1947,36 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1474671106756,
+	"timestamp":1474676955717,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
 	"message":"请指定被邀请的成员。",
 	"path":"/teams/foo-team-Id/members/invitation",
 	"code":400
+}
+```
+
+
+-------
+## 接受邀请>用户接受邀请时,若邀请不存在,则告知用户相关错误 ##
+
+**用例名称**
+throwExceptionIfInvitationIsNotExistWhenAcceptingInvitation
+
+**URL**
+http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
+
+**响应体**
+```
+{
+	"timestamp":1474676955758,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"邀请函不存在。",
+	"path":"/teams/foo-team-Id/members/invitation/invitation-id",
+	"code":7005
 }
 ```
 
@@ -1975,16 +2002,16 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:46.818000",
+	"creationTime":"2016-09-24 08:29:15.859000",
 	"_links":{
 		"self":{
-			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation"
+			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:46.818000",
+	"modificationTime":"2016-09-24 08:29:15.859000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -1995,7 +2022,30 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 
 
 -------
-## 如果被邀请人已经是团队的成员，则不允许发送邀请 ##
+## 查看邀请>用户查看邀请时,若邀请不存在,则告知用户相关错误 ##
+
+**用例名称**
+throwExceptionIfInvitationIsNotExistWhenLoadingInvitation
+
+**URL**
+http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
+
+**响应体**
+```
+{
+	"timestamp":1474676957404,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"邀请函不存在。",
+	"path":"/teams/foo-team-Id/members/invitation/invitation-id",
+	"code":7005
+}
+```
+
+
+-------
+## 如果被邀请人已经是团队的成员,则不允许发送邀请 ##
 
 **用例名称**
 NotAllowedIfInviteeIsAlreadyAMemberOfTheTeam
@@ -2015,7 +2065,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1474671107821,
+	"timestamp":1474676957473,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2027,7 +2077,30 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 
 
 -------
-## 如果此前已经存在相同的邀请，则取消之前的邀请 ##
+## 接受邀请>用户接受邀请时,若之前已经接受,则告知用户相关错误 ##
+
+**用例名称**
+throwExceptionIfInvitationIsAlreadyAccepted
+
+**URL**
+http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
+
+**响应体**
+```
+{
+	"timestamp":1474676957508,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"您此前已经接受邀请。",
+	"path":"/teams/foo-team-Id/members/invitation/invitation-id",
+	"code":7006
+}
+```
+
+
+-------
+## 如果此前已经存在相同的邀请,则取消之前的邀请 ##
 
 **用例名称**
 cancelPreviousInvitationBeforeSendingNewInvitation
@@ -2047,16 +2120,16 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:47.871000",
+	"creationTime":"2016-09-24 08:29:17.645000",
 	"_links":{
 		"self":{
-			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation"
+			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:47.871000",
+	"modificationTime":"2016-09-24 08:29:17.645000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -2067,7 +2140,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 
 
 -------
-## 接受邀请>当用户接收到邀请后,可以查看邀请的具体内容。 ##
+## 查看邀请>当用户接收到邀请后,可以查看邀请的具体内容 ##
 
 **用例名称**
 loadingInvitationDetailAfterAcceptingInvitation
@@ -2078,17 +2151,48 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:48.673000",
+	"creationTime":"2016-09-24 08:29:18.952000",
 	"_links":{
 		"self":{
-			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation"
+			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id"
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:48.673000",
+	"modificationTime":"2016-09-24 08:29:18.952000",
 	"isAccepted":false,
+	"teamId":"foo-team-id",
+	"inviter":"someone",
+	"id":"invitation-id",
+	"invitee":"invitee-user"
+}
+```
+
+
+-------
+## 接受邀请>用户接受邀请,并成功成为团队的一员 ##
+
+**用例名称**
+AcceptInvitation
+
+**URL**
+http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
+
+**响应体**
+```
+{
+	"creationTime":"2016-09-24 08:29:19.072000",
+	"_links":{
+		"self":{
+			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id"
+		},
+		"team":{
+			"href":"http://localhost:8007/teams/foo-team-Id"
+		}
+	},
+	"modificationTime":"2016-09-24 08:29:19.072000",
+	"isAccepted":true,
 	"teamId":"foo-team-id",
 	"inviter":"someone",
 	"id":"invitation-id",
@@ -2118,16 +2222,16 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:48.765000",
+	"creationTime":"2016-09-24 08:29:19.220000",
 	"_links":{
 		"self":{
-			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation"
+			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:48.765000",
+	"modificationTime":"2016-09-24 08:29:19.220000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -2138,7 +2242,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 
 
 -------
-## 如果被邀请人不存在，则不允许发送邀请 ##
+## 如果被邀请人不存在,则不允许发送邀请 ##
 
 **用例名称**
 NotAllowedIfInviteeIsNotExist
@@ -2158,7 +2262,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1474671109550,
+	"timestamp":1474676960782,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2190,7 +2294,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1474671109612,
+	"timestamp":1474676960845,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2202,7 +2306,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 
 
 -------
-## 邀请发出后，在消息中心通知用户 ##
+## 邀请发出后,在消息中心通知用户 ##
 
 **用例名称**
 addNotificationAfterSendingInvitation
@@ -2222,16 +2326,16 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:49.661000",
+	"creationTime":"2016-09-24 08:29:20.902000",
 	"_links":{
 		"self":{
-			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation"
+			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id"
 		}
 	},
-	"modificationTime":"2016-09-24 06:51:49.661000",
+	"modificationTime":"2016-09-24 08:29:20.902000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -2242,7 +2346,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 
 
 -------
-## 如果邀请加入的团队并不存在，则不允许发送邀请 ##
+## 如果邀请加入的团队并不存在,则不允许发送邀请 ##
 
 **用例名称**
 NotAllowedIfTeamIsNotExist
@@ -2262,7 +2366,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1474671110516,
+	"timestamp":1474676962354,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2295,7 +2399,7 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"timestamp":1474671106411,
+	"timestamp":1474676955059,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2354,7 +2458,7 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"timestamp":1474671106533,
+	"timestamp":1474676955297,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2377,7 +2481,7 @@ http://localhost:8007/teams/foo-teamId/members
 **响应体**
 ```
 {
-	"timestamp":1474671106577,
+	"timestamp":1474676955462,
 	"status":401,
 	"error":"Unauthorized",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -2408,14 +2512,14 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:46.638000",
+	"creationTime":"2016-09-24 08:29:15.519000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-teamId/teamMembers"
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-09-24 06:51:46.638000",
+	"modificationTime":"2016-09-24 08:29:15.519000",
 	"teamId":"foo-teamId",
 	"member":"someone",
 	"id":"fooId"
@@ -2435,7 +2539,7 @@ http://localhost:8007/teams/foo-teamId/members
 **响应体**
 ```
 {
-	"timestamp":1474671106688,
+	"timestamp":1474676955624,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2468,7 +2572,7 @@ http://localhost:8007/tao/password
 **响应体**
 ```
 {
-	"timestamp":1474671102973,
+	"timestamp":1474676950253,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2499,7 +2603,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1474671103019,
+	"timestamp":1474676950298,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2558,7 +2662,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1474671103147,
+	"timestamp":1474676950444,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2581,7 +2685,7 @@ http://localhost:8007/tao/password
 **请求体**
 ```
 {
-	"password":"Pfc3iyBBFifZCvnOLp1Zl1e9NAHIgaHct6UyXLLpclvSe0ZAdqYLK8TFq+D+1AIfvJFIAC05gASZ1I8g99+fLn0SytO52oUo0ZI+8jFTtaofWVg/A7GoGtwhDsNQoZaZMqFndjF50xoftfac9ulN5s9nJbZobRkFqgcFAggzZyA="
+	"password":"dI7sTqLxdKQCf0W8TvNhYxrhM7OI3qC+Q+q8Lx24twQftL2kDnJ9ZlaVl9kGB8S5N/wADKkcyB+uHnIX1f6tK9JVc0yNSWWSKojYa448LPOFHPHlKkv2al6d75wl18CzNkM4DxeH+l6Lc0QhHokQu0qHMivQ7gpQwU7vvZEBaCg="
 }
 ```
 
@@ -2647,7 +2751,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1474671104111,
+	"timestamp":1474676952022,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2707,7 +2811,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1474671105033,
+	"timestamp":1474676953553,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2738,7 +2842,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1474671105071,
+	"timestamp":1474676953597,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2769,7 +2873,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1474671105105,
+	"timestamp":1474676953637,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2805,7 +2909,7 @@ http://localhost:8007/someone/notifications
 	"notifications":[
 		{
 			"displayTime":"刚刚",
-			"creationTime":"2016-09-24 06:51:42.591000",
+			"creationTime":"2016-09-24 08:29:09.828000",
 			"receiver":"someone",
 			"sender":"sender@gmail.com",
 			"_links":{
@@ -2841,7 +2945,7 @@ http://localhost:8007/someone/notifications/foo-notification-id
 ```
 {
 	"displayTime":"刚刚",
-	"creationTime":"2016-09-24 06:51:42.687000",
+	"creationTime":"2016-09-24 08:29:09.963000",
 	"receiver":"someone",
 	"sender":"sender@gmail.com",
 	"_links":{
@@ -2900,7 +3004,7 @@ http://localhost:8007/someone/notifications/foo-notification-id
 ```
 {
 	"displayTime":"刚刚",
-	"creationTime":"2016-09-24 06:51:42.797000",
+	"creationTime":"2016-09-24 08:29:10.099000",
 	"receiver":"someone",
 	"sender":"sender@gmail.com",
 	"_links":{
@@ -2935,7 +3039,7 @@ http://localhost:8007/procedures/1/cards/cardId-foo/assignments
 **响应体**
 ```
 {
-	"timestamp":1474671091242,
+	"timestamp":1474676939122,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2996,7 +3100,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 **响应体**
 ```
 {
-	"timestamp":1474671092001,
+	"timestamp":1474676939871,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -3019,7 +3123,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:32.036000",
+	"creationTime":"2016-09-24 08:28:59.900000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/1/procedures"
@@ -3035,7 +3139,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 		}
 	},
 	"author":"authorId-foo",
-	"modificationTime":"2016-09-24 06:51:32.036000",
+	"modificationTime":"2016-09-24 08:28:59.900000",
 	"cardId":"cardId-foo",
 	"assigner":"assignerId-foo",
 	"name":"徐濤",
@@ -3090,7 +3194,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments
 **响应体**
 ```
 {
-	"creationTime":"2016-09-24 06:51:32.331000",
+	"creationTime":"2016-09-24 08:29:00.153000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/1/procedures"
@@ -3106,7 +3210,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments
 		}
 	},
 	"author":"11222",
-	"modificationTime":"2016-09-24 06:51:32.331000",
+	"modificationTime":"2016-09-24 08:29:00.153000",
 	"cardId":"fooId",
 	"assigner":"assignerId",
 	"assignee":"assigneeId",
@@ -3137,7 +3241,7 @@ http://localhost:8007/thief/teams
 **响应体**
 ```
 {
-	"timestamp":1474671094831,
+	"timestamp":1474676942690,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3168,7 +3272,7 @@ http://localhost:8007/procedures/1/cards/fooId
 **响应体**
 ```
 {
-	"timestamp":1474671102188,
+	"timestamp":1474676949010,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -3191,7 +3295,7 @@ http://localhost:8007/resource
 **响应体**
 ```
 {
-	"timestamp":1474671102218,
+	"timestamp":1474676949079,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -3214,7 +3318,7 @@ http://localhost:8007/resource
 **响应体**
 ```
 {
-	"timestamp":1474671102251,
+	"timestamp":1474676949140,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -3237,7 +3341,7 @@ http://localhost:8007/resource
 **响应体**
 ```
 {
-	"timestamp":1474671102292,
+	"timestamp":1474676949205,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
