@@ -73,7 +73,7 @@ public class InvitationService {
         invitationEmail.setInvitee(inviteeUser.getName());
         invitationEmail.setTeamName(team.getName());
 
-        Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(userName, teamId, invitation.getId())).withRel("invitationLink");
+        Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(teamId, invitation.getId(), userName)).withRel("invitationLink");
         invitationEmail.setInvitationLink(invitationLink.getHref());
         Notification notification = new Notification();
         notification.setReceiver(inviteeUser.getName());

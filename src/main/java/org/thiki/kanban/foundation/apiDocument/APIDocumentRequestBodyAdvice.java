@@ -36,7 +36,9 @@ public class APIDocumentRequestBodyAdvice implements RequestBodyAdvice {
 
     @Override
     public Object afterBodyRead(Object o, HttpInputMessage httpInputMessage, MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
-        APIDocument.request = JSONObject.toJSON(o);
+        if (APIDocument.isJunitTestModel) {
+            APIDocument.request = JSONObject.toJSON(o);
+        }
         return o;
     }
 }

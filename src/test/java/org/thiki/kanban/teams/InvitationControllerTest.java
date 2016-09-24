@@ -174,8 +174,8 @@ public class InvitationControllerTest extends TestBase {
                 .body("invitee", equalTo("invitee-user"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"))
                 .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
-        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where id='foo-invitation-Id' AND delete_status=1").size());
-        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='foo-team-Id' AND invitee='invitee-user'").size());
+        assertEquals(1, jdbcTemplate.queryForList("select * from kb_team_member_invitation where id='foo-invitation-Id' AND team_id='foo-team-Id' AND delete_status=1").size());
+        assertEquals(1, jdbcTemplate.queryForList("select * from kb_team_member_invitation where team_id='foo-team-Id' AND invitee='invitee-user' AND delete_status=0").size());
     }
 
     @Scenario("邀请发出后,在消息中心通知用户")
