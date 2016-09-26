@@ -2,15 +2,26 @@ package org.thiki.kanban.user;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
 
 import javax.annotation.Resource;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Service
 public class UsersService {
 
     @Resource
     private UsersPersistence usersPersistence;
+
+    private final Path rootLocation;
+
+    public UsersService() {
+        this.rootLocation = Paths.get(new StorageProperties().getLocation());
+    }
 
     public User findByName(String userName) {
         return usersPersistence.findByName(userName);
@@ -39,5 +50,9 @@ public class UsersService {
     @ValidateParams
     public boolean isEmailExist(@NotEmpty(message = UsersCodes.emailIsRequired) String email) {
         return usersPersistence.isEmailExist(email);
+    }
+
+    public void store(MultipartFile file) throws IOException {
+        Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
     }
 }
