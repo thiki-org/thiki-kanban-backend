@@ -1,4 +1,4 @@
-package org.thiki.kanban.user;
+package org.thiki.kanban.user.profile;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
@@ -8,7 +8,7 @@ public class StorageProperties {
     /**
      * Folder location for storing files
      */
-    private String location = "upload-dir";
+    private String location = "uploadFiles/avatars";
 
     public String getLocation() {
         return location;
@@ -17,5 +17,4 @@ public class StorageProperties {
     public void setLocation(String location) {
         this.location = location;
     }
-
 }
