@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class StorageProperties {
 
     /**
-     * Folder location for storing files
+     * Folder FILES_LOCATION for storing files
      */
     private String location = "uploadFiles/avatars";
 

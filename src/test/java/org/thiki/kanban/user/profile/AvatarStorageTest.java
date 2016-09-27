@@ -16,19 +16,19 @@ import static org.junit.Assert.assertTrue;
  * Created by xubt on 26/09/2016.
  */
 public class AvatarStorageTest {
-    private String location = "uploadFiles";
-    private File avatarDirectory;
+    private String location = "files";
+    private File filesDirectory;
 
     @Before
     public void setUp() throws IOException {
-        avatarDirectory = new File(location);
-        FileUtil.deleteDirectory(avatarDirectory);
+        filesDirectory = new File(location);
+        FileUtil.deleteDirectory(filesDirectory);
     }
 
     @Scenario("当用户上传头像时,如果目录不存在,则创建相关目录")
     @Test
     public void createDirectoryIfItDoesNotExists() throws IOException {
-        File unExistsDirectory = new File("uploadFiles/avatars");
+        File unExistsDirectory = new File("files/avatars");
         assertFalse(unExistsDirectory.exists());
 
         File avatar = new File("src/test/resources/thiki-upload-test-file.jpg");
@@ -36,12 +36,12 @@ public class AvatarStorageTest {
         String userName = "someone";
         avatarStorage.store(userName, avatar);
 
-        File avatarDirectory = new File(AvatarStorage.location);
+        File avatarDirectory = new File(AvatarStorage.FILES_LOCATION);
         assertTrue(avatarDirectory.exists());
     }
 
     @After
     public void clearDirectory() throws IOException {
-        FileUtil.deleteDirectory(avatarDirectory);
+        FileUtil.deleteDirectory(filesDirectory);
     }
 }
