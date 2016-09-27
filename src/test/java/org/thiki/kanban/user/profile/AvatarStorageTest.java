@@ -31,12 +31,24 @@ public class AvatarStorageTest {
         File unExistsDirectory = new File("files/avatars");
         assertFalse(unExistsDirectory.exists());
 
-        File avatar = new File("src/test/resources/thiki-upload-test-file.jpg");
+        File avatar = new File("src/test/resources/avatars/thiki-upload-test-file.jpg");
         AvatarStorage avatarStorage = new AvatarStorage();
         String userName = "someone";
         avatarStorage.store(userName, avatar);
 
         File avatarDirectory = new File(AvatarStorage.FILES_LOCATION);
+        assertTrue(avatarDirectory.exists());
+    }
+
+    @Scenario("当用户上传头像时,保存到目录时将文件名修改为当前用户名")
+    @Test
+    public void renamingAvatarName() throws IOException {
+
+        File avatar = new File("src/test/resources/thiki-upload-test-file.jpg");
+        AvatarStorage avatarStorage = new AvatarStorage();
+        String userName = "someone";
+        String avatarName = avatarStorage.store(userName, avatar);
+        File avatarDirectory = new File(AvatarStorage.FILES_LOCATION + avatarName);
         assertTrue(avatarDirectory.exists());
     }
 

@@ -1,5 +1,6 @@
 package org.thiki.kanban.user.profile;
 
+import com.google.common.io.Files;
 import org.thiki.kanban.foundation.common.FileUtil;
 
 import java.io.File;
@@ -11,11 +12,15 @@ import java.io.IOException;
 public class AvatarStorage {
     public static final String FILES_LOCATION = "files/avatars/";
 
-    public boolean store(String userName, File avatar) throws IOException {
+    public String store(String userName, File avatar) throws IOException {
         File directory = new File(FILES_LOCATION);
         if (!directory.exists()) {
             FileUtil.forceMkdir(directory);
         }
-        return false;
+        String fileName = avatar.getName();
+        String fileType = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String avatarName = userName + "." + fileType;
+        Files.write(Files.toByteArray(avatar), new File(FILES_LOCATION + avatarName));
+        return avatarName;
     }
 }
