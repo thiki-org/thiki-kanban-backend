@@ -9,7 +9,7 @@ import java.io.IOException;
  * Created by xubt on 26/09/2016.
  */
 public class AvatarStorage {
-    public static final String location = "uploadFiles/avatars";
+    public static final String location = "uploadFiles/avatars/";
 
     public boolean store(String userName, File avatar) throws IOException {
         File directory = new File(location);
