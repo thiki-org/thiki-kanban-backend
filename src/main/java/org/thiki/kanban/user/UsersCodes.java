@@ -7,7 +7,8 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  */
 public enum UsersCodes {
     USERNAME_IS_ALREADY_EXISTS("001", "用户名已经被使用,请使用其他用户名。"),
-    EMAIL_IS_ALREADY_EXISTS("002", "邮箱已经存在,请使用其他邮箱。"), AVATAR_IS_EMPTY("003", "请上传头像文件。");
+    EMAIL_IS_ALREADY_EXISTS("002", "邮箱已经存在,请使用其他邮箱。"), AVATAR_IS_EMPTY("003", "请上传头像文件。"),
+    AVATAR_IS_OUT_OF_MAX_SIZE("004", "头像文件已经超过100KB限制。");
     public static final String identityIsRequired = "请提供用户标识:用户名或者密码。";
     public static final String emailIsRequired = "邮箱不可以为空。";
     public static final String userNameIsRequired = "用户名不可以为空。";

@@ -18,6 +18,7 @@ import java.nio.file.Paths;
 @Service
 public class UsersService {
 
+    public static final int AVATAR_MAX_SIZE = 102400;
     private final Path rootLocation;
     @Resource
     private UsersPersistence usersPersistence;
@@ -60,6 +61,9 @@ public class UsersService {
     public String uploadAvatar(String userName, MultipartFile multipartFile) throws IOException {
         if (multipartFile == null) {
             throw new BusinessException(UsersCodes.AVATAR_IS_EMPTY);
+        }
+        if (multipartFile.getSize() > AVATAR_MAX_SIZE) {
+            throw new BusinessException(UsersCodes.AVATAR_IS_OUT_OF_MAX_SIZE);
         }
         File avatar = FileUtil.convert(multipartFile);
         String avatarName = avatarStorage.store(userName, avatar);

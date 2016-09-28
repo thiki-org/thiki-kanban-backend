@@ -53,6 +53,19 @@ public class UsersControllerTest extends TestBase {
                 .body("message", equalTo(UsersCodes.AVATAR_IS_EMPTY.message()));
     }
 
+    @Scenario("上传头像>用户上传头像时,如果头像文件大小超过限制,则告知客户端相关错误")
+    @Test
+    public void nowAllowedIfAvatarWasTooBig() {
+        File avatar = new File("src/test/resources/avatars/big-avatar.jpg");
+
+        given().header("userName", "someone")
+                .multiPart("avatar", avatar)
+                .post("/users/someone/avatar")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(UsersCodes.AVATAR_IS_OUT_OF_MAX_SIZE.code()))
+                .body("message", equalTo(UsersCodes.AVATAR_IS_OUT_OF_MAX_SIZE.message()));
+    }
 
     @After
     public void clearDirectory() throws IOException {
