@@ -24,8 +24,9 @@ public class AvatarStorage {
         return userAvatarName;
     }
 
-    public File loadAvatarByName(String userName) {
-        String avatarPath = AVATAR_FILES_LOCATION + userName;
-        return null;
+    public File loadAvatarByName(String avatarName) {
+        String avatarPath = AVATAR_FILES_LOCATION + avatarName;
+        File avatar = new File(avatarPath);
+        return avatar;
     }
 }

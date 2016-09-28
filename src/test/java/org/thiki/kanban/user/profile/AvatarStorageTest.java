@@ -75,6 +75,16 @@ public class AvatarStorageTest {
         assertTrue(savedAvatar.exists());
     }
 
+    @Scenario("用户上传头像后,可以根据用户名获取头像")
+    @Test
+    public void loadAvatarByUserName() throws IOException {
+        String avatarName = avatarStorage.store(userName, avatar);
+        File myAvatar = avatarStorage.loadAvatarByName(avatarName);
+        File savedAvatar = new File(AvatarStorage.AVATAR_FILES_LOCATION + avatarName);
+        assertTrue(FileUtil.isFilesEqual(avatar, myAvatar));
+        assertTrue(savedAvatar.exists());
+    }
+
     @After
     public void clearDirectory() throws IOException {
         FileUtil.deleteDirectory(filesDirectory);

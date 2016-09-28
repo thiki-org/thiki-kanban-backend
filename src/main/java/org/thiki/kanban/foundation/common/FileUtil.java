@@ -167,4 +167,14 @@ public class FileUtil {
         }
     }
 
+    public static boolean isFilesEqual(File firstFile, File secondFile) throws IOException {
+        FileInputStream firstFileInputStream = new FileInputStream(firstFile);
+        DataInputStream firstFileDataInputStream = new DataInputStream(firstFileInputStream);
+        FileInputStream secondFileInputStream = new FileInputStream(secondFile);
+        DataInputStream secondDataInputStream = new DataInputStream(secondFileInputStream);
+
+        byte firstFileByte = firstFileDataInputStream.readByte();
+        byte secondFileByte = secondDataInputStream.readByte();
+        return firstFileByte == secondFileByte;
+    }
 }
