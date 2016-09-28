@@ -49,10 +49,11 @@ CREATE TABLE kb_card (
 DROP TABLE IF EXISTS kb_user_profile;
 CREATE TABLE kb_user_profile
 (
-  id VARCHAR(40) NOT NULL PRIMARY KEY , -- as userId
-  userName             VARCHAR(200) NOT NULL,
+  id VARCHAR(40) NOT NULL PRIMARY KEY ,
+  user_name             VARCHAR(200) NOT NULL,
   nick             VARCHAR(40) ,
   phone            VARCHAR(40) ,
+  avatar            VARCHAR(200) ,
   delete_status int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP

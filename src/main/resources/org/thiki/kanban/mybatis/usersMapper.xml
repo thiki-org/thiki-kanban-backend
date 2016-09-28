@@ -49,4 +49,19 @@
         SELECT id,email,NAME FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or name=#{identity})
         AND kb_user_registration.password=#{password}
     </select>
+
+    <select id="findProfile" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
+        SELECT * FROM kb_user_profile WHERE user_name=#{userName} AND delete_status=0
+    </select>
+
+    <insert id="initProfile" parameterType="org.thiki.kanban.user.UserProfile">
+        INSERT INTO
+        kb_user_profile(id, user_name) VALUES (#{id}, #{userName})
+    </insert>
+
+    <update id="updateAvatar" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_user_profile SET
+        avatar=#{avatarName}
+        WHERE user_name=#{userName} AND delete_status=0
+    </update>
 </mapper>

@@ -4,21 +4,24 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
+import org.thiki.kanban.foundation.common.FileUtil;
+import org.thiki.kanban.user.profile.AvatarStorage;
 import org.thiki.kanban.user.profile.StorageProperties;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Service
 public class UsersService {
 
+    private final Path rootLocation;
     @Resource
     private UsersPersistence usersPersistence;
-
-    private final Path rootLocation;
+    @Resource
+    private AvatarStorage avatarStorage;
 
     public UsersService() {
         this.rootLocation = Paths.get(new StorageProperties().getLocation());
@@ -53,7 +56,15 @@ public class UsersService {
         return usersPersistence.isEmailExist(email);
     }
 
-    public void store(MultipartFile file) throws IOException {
-        Files.copy(file.getInputStream(), this.rootLocation.resolve(file.getOriginalFilename()));
+    public String uploadAvatar(String userName, MultipartFile multipartFile) throws IOException {
+        File avatar = FileUtil.convert(multipartFile);
+        String avatarName = avatarStorage.store(userName, avatar);
+        UserProfile userProfile = usersPersistence.findProfile(userName);
+        if (userProfile == null) {
+            usersPersistence.initProfile(new UserProfile(userName));
+        }
+        usersPersistence.updateAvatar(userName, avatarName);
+
+        return avatarName;
     }
 }

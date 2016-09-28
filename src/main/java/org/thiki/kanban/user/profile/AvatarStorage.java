@@ -1,6 +1,7 @@
 package org.thiki.kanban.user.profile;
 
 import com.google.common.io.Files;
+import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
 
 import java.io.File;
@@ -9,6 +10,8 @@ import java.io.IOException;
 /**
  * Created by xubt on 26/09/2016.
  */
+
+@Service
 public class AvatarStorage {
     public static final String AVATAR_FILES_LOCATION = "files/avatars/";
     public static final String DEFAULT_AVATAR_FILES_LOCATION = "src/main/resources/avatar/default-avatar.png";

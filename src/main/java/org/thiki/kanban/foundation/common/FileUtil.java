@@ -1,5 +1,7 @@
 package org.thiki.kanban.foundation.common;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.*;
 
 /**
@@ -176,5 +178,14 @@ public class FileUtil {
         byte firstFileByte = firstFileDataInputStream.readByte();
         byte secondFileByte = secondDataInputStream.readByte();
         return firstFileByte == secondFileByte;
+    }
+
+    public static File convert(MultipartFile multipartFile) throws IOException {
+        File file = new File(multipartFile.getOriginalFilename());
+        file.createNewFile();
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(multipartFile.getBytes());
+        fos.close();
+        return file;
     }
 }
