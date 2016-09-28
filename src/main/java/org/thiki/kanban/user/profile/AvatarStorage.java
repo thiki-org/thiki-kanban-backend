@@ -23,4 +23,9 @@ public class AvatarStorage {
         Files.write(Files.toByteArray(avatar), new File(AVATAR_FILES_LOCATION + userAvatarName));
         return userAvatarName;
     }
+
+    public File loadAvatarByName(String userName) {
+        String avatarPath = AVATAR_FILES_LOCATION + userName;
+        return null;
+    }
 }

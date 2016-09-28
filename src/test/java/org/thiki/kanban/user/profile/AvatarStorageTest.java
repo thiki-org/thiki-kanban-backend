@@ -9,8 +9,7 @@ import org.thiki.kanban.foundation.common.FileUtil;
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Created by xubt on 26/09/2016.
@@ -19,6 +18,7 @@ public class AvatarStorageTest {
     private String location = "files";
     private File filesDirectory;
     private File avatar;
+    private File newAvatar;
     private AvatarStorage avatarStorage;
     private String userName = "someone";
 
@@ -28,6 +28,7 @@ public class AvatarStorageTest {
         avatarStorage = new AvatarStorage();
 
         avatar = new File("src/test/resources/avatars/thiki-upload-test-file.jpg");
+        newAvatar = new File("src/test/resources/avatars/new-avatar.jpg");
         FileUtil.deleteDirectory(filesDirectory);
 
         File unExistsDirectory = new File("files/avatars");
@@ -47,6 +48,29 @@ public class AvatarStorageTest {
     @Test
     public void renamingAvatarName() throws IOException {
         String avatarName = avatarStorage.store(userName, avatar);
+        File savedAvatar = new File(AvatarStorage.AVATAR_FILES_LOCATION + avatarName);
+        assertTrue(savedAvatar.exists());
+    }
+
+    @Scenario("当用户上传头像时,若此前已经存在头像,且类型相同,则将其覆盖")
+    @Test
+    public void overwriteAvatarIfItAlreadyExists() throws IOException {
+        String avatarName = avatarStorage.store(userName, avatar);
+        String newAvatarName = avatarStorage.store(userName, newAvatar);
+        assertEquals(avatarName, newAvatarName);
+        File savedAvatar = new File(AvatarStorage.AVATAR_FILES_LOCATION + avatarName);
+        assertTrue(savedAvatar.exists());
+    }
+
+    @Scenario("当用户上传头像时,若此前已经存在头像,且类型不同,则不覆盖")
+    @Test
+    public void NotOverwriteAvatarIfTypeIsNotSame() throws IOException {
+        String avatarName = avatarStorage.store(userName, avatar);
+        File pngAvatar = new File("src/test/resources/avatars/new-avatar.png");
+
+        String expectedName = "someone.png";
+        String actualName = avatarStorage.store(userName, pngAvatar);
+        assertEquals(expectedName, actualName);
         File savedAvatar = new File(AvatarStorage.AVATAR_FILES_LOCATION + avatarName);
         assertTrue(savedAvatar.exists());
     }

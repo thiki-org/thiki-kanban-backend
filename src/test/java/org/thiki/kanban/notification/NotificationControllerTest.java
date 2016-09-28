@@ -79,6 +79,7 @@ public class NotificationControllerTest extends TestBase {
                 .body("displayTime", notNullValue())
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/notifications/foo-notification-id"))
                 .body("_links.notifications.href", equalTo("http://localhost:8007/someone/notifications"));
+
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_notification WHERE is_read=1 AND ID='foo-notification-id'").size());
     }
 
