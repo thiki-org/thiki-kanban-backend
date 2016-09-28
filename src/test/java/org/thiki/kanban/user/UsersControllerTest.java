@@ -27,9 +27,10 @@ public class UsersControllerTest extends TestBase {
     @Test
     public void uploadAvatar() {
         MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
-        map.add("avatar", new File("src/test/resources/thiki-upload-test-file.jpg"));
+        File avatar = new File("src/test/resources/avatars/thiki-upload-test-file.jpg");
+        map.add("avatar", new File("src/test/resources/avatars/thiki-upload-test-file.jpg"));
         given().header("userName", "someone")
-                .multiPart("avatar", new File("src/test/resources/thiki-upload-test-file.jpg"))
+                .multiPart("avatar", avatar)
                 .post("/users/someone/avatar");
     }
 }

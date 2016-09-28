@@ -236,14 +236,14 @@ public class InvitationControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .put("/teams/foo-team-Id/members/invitation/invitation-id")
+                .put("/teams/foo-team-id/members/invitation/invitation-id")
                 .then()
                 .statusCode(200)
                 .body("invitee", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("isAccepted", equalTo(true))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id"))
-                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-id/members/invitation/invitation-id"))
+                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-id"));
 
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_members where team_id='foo-team-id' AND member='someone'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='someone' AND is_accepted=1").size());
