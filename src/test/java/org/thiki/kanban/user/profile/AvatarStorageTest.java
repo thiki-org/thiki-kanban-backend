@@ -85,6 +85,18 @@ public class AvatarStorageTest {
         assertTrue(savedAvatar.exists());
     }
 
+    @Scenario("获取用户头像时,如果头像不存在,则返回默认头像")
+    @Test
+    public void loadDefaultAvatarIfNoAvatarWasFound() throws IOException {
+        String defaultAvatarPath = "src/main/resources/avatar/default-avatar.png";
+        File defaultAvatar = new File(defaultAvatarPath);
+        String avatarName = "foo";
+
+        File myAvatar = avatarStorage.loadAvatarByName(avatarName);
+
+        assertTrue(FileUtil.isFilesEqual(defaultAvatar, myAvatar));
+    }
+
     @After
     public void clearDirectory() throws IOException {
         FileUtil.deleteDirectory(filesDirectory);

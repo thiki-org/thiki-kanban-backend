@@ -11,6 +11,7 @@ import java.io.IOException;
  */
 public class AvatarStorage {
     public static final String AVATAR_FILES_LOCATION = "files/avatars/";
+    public static final String DEFAULT_AVATAR_FILES_LOCATION = "src/main/resources/avatar/default-avatar.png";
 
     public String store(String userName, File avatar) throws IOException {
         File avatarsDirectory = new File(AVATAR_FILES_LOCATION);
@@ -27,6 +28,9 @@ public class AvatarStorage {
     public File loadAvatarByName(String avatarName) {
         String avatarPath = AVATAR_FILES_LOCATION + avatarName;
         File avatar = new File(avatarPath);
+        if (!avatar.exists()) {
+            return new File(DEFAULT_AVATAR_FILES_LOCATION);
+        }
         return avatar;
     }
 }
