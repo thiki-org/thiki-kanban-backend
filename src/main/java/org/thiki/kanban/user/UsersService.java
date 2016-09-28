@@ -72,7 +72,6 @@ public class UsersService {
             usersPersistence.initProfile(new UserProfile(userName));
         }
         usersPersistence.updateAvatar(userName, avatarName);
-
         return avatarName;
     }
 }
