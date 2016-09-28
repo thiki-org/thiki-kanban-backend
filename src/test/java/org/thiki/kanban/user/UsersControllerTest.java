@@ -42,6 +42,18 @@ public class UsersControllerTest extends TestBase {
         assertEquals("someone.jpg", jdbcTemplate.queryForObject("select avatar from kb_user_profile where user_name='someone'", String.class));
     }
 
+    @Scenario("上传头像>用户上传头像时,如果未传头像文件,则告知客户端相关错误")
+    @Test
+    public void nowAllowedIfAvatarWasNull() {
+        given().header("userName", "someone")
+                .post("/users/someone/avatar")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(UsersCodes.AVATAR_IS_EMPTY.code()))
+                .body("message", equalTo(UsersCodes.AVATAR_IS_EMPTY.message()));
+    }
+
+
     @After
     public void clearDirectory() throws IOException {
         super.resetDB();

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
 import org.thiki.kanban.foundation.common.FileUtil;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.user.profile.AvatarStorage;
 import org.thiki.kanban.user.profile.StorageProperties;
 
@@ -57,6 +58,9 @@ public class UsersService {
     }
 
     public String uploadAvatar(String userName, MultipartFile multipartFile) throws IOException {
+        if (multipartFile == null) {
+            throw new BusinessException(UsersCodes.AVATAR_IS_EMPTY);
+        }
         File avatar = FileUtil.convert(multipartFile);
         String avatarName = avatarStorage.store(userName, avatar);
         UserProfile userProfile = usersPersistence.findProfile(userName);
