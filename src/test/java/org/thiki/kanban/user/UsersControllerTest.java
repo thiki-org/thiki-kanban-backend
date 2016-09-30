@@ -1,6 +1,7 @@
 package org.thiki.kanban.user;
 
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -8,7 +9,6 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
-import org.thiki.kanban.foundation.common.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +27,9 @@ public class UsersControllerTest extends TestBase {
     @Scenario("上传头像>用户成功上传头像")
     @Test
     public void uploadAvatar() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
-                "VALUES ('fooUserId','someone@gmail.com','someone','password')");
+        dbPreparation.table("kb_user_registration")
+                .names("id,email,name,password")
+                .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
         File avatar = new File("src/test/resources/avatars/thiki-upload-test-file.jpg");
 
         given().header("userName", "someone")
@@ -67,9 +68,28 @@ public class UsersControllerTest extends TestBase {
                 .body("message", equalTo(UsersCodes.AVATAR_IS_OUT_OF_MAX_SIZE.message()));
     }
 
+    @Ignore
+    @Scenario("获取头像>用户在获取头像时,如果此前头像已经上传,则获取时则返回此前上传的头像")
+    @Test
+    public void loadAvatar() throws IOException {
+        dbPreparation.table("kb_user_registration")
+                .names("id,email,name,password")
+                .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
+
+        dbPreparation.table("kb_user_profile")
+                .names("id,user_name")
+                .values("foo-profile-id", "someone").exec();
+
+        File avatar = new File("src/test/resources/avatars/new-avatar.jpg");
+
+        given().header("userName", "someone")
+                .multiPart("avatar", avatar)
+                .post("/users/someone/avatar");
+    }
+
     @After
     public void clearDirectory() throws IOException {
         super.resetDB();
-        FileUtil.deleteDirectory(new File("files"));
+        //   FileUtil.deleteDirectory(new File("files"));
     }
 }

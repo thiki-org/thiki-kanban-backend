@@ -8,6 +8,8 @@ import java.io.*;
  * Created by xubt on 7/6/16.
  */
 public class FileUtil {
+    public static final String PREFIX = "stream2file";
+    public static final String SUFFIX = ".tmp";
 
     public static String readFile(String fileName) {
         File file = new File(fileName);

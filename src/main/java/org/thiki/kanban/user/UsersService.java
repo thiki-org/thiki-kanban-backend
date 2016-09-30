@@ -1,6 +1,7 @@
 package org.thiki.kanban.user;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
@@ -12,6 +13,7 @@ import org.thiki.kanban.user.profile.StorageProperties;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -73,5 +75,11 @@ public class UsersService {
         }
         usersPersistence.updateAvatar(userName, avatarName);
         return avatarName;
+    }
+
+    public UrlResource loadAvatar(String userName) throws MalformedURLException {
+        UserProfile userProfile = usersPersistence.findProfile(userName);
+        File avatar = avatarStorage.loadAvatarByName(userProfile.getAvatar());
+        return new UrlResource(avatar.toURI());
     }
 }

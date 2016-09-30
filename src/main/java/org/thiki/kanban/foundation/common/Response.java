@@ -1,8 +1,10 @@
 package org.thiki.kanban.foundation.common;
 
 import com.alibaba.fastjson.JSONArray;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 /**
@@ -31,5 +33,11 @@ public class Response {
         JSONArray resources = restResource.getResources();
         ResponseEntity responseEntity = new ResponseEntity(resources != null ? resources : restResource.getResource(), HttpStatus.INTERNAL_SERVER_ERROR);
         return responseEntity;
+    }
+
+    public static HttpEntity build(UrlResource avatar) {
+        return ResponseEntity
+                .ok().contentType(MediaType.MULTIPART_FORM_DATA)
+                .body(avatar);
     }
 }
