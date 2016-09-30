@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
  */
 @Domain(order = DomainOrder.USER, name = "用户")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class UsersControllerTest extends TestBase {
+public class AvatarTest extends TestBase {
 
     @Scenario("上传头像>用户成功上传头像")
     @Test

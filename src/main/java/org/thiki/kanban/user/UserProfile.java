@@ -8,6 +8,8 @@ public class UserProfile {
     private String id;
     private String userName;
     private String avatar;
+    private String nickName;
+    private String email;
 
     public UserProfile(String userName) {
         this.userName = userName;
@@ -34,5 +36,21 @@ public class UserProfile {
 
     public String getUserName() {
         return userName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

@@ -8,7 +8,7 @@ CREATE TABLE kb_user_profile
   COMMENT '编号',
   email             VARCHAR(200) COMMENT '邮箱',
   user_name             VARCHAR(200) NOT NULL,
-  nick              VARCHAR(40),
+  nick_name              VARCHAR(40),
   phone             VARCHAR(40),
   avatar            VARCHAR(200),
   delete_status     INT(2)   DEFAULT 0,

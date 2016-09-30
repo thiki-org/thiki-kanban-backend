@@ -82,4 +82,9 @@ public class UsersService {
         File avatar = avatarStorage.loadAvatarByName(userProfile.getAvatar());
         return new UrlResource(avatar.toURI());
     }
+
+    public UserProfile loadProfileByUserName(String userName) {
+        UserProfile userProfile = usersPersistence.findProfile(userName);
+        return userProfile;
+    }
 }

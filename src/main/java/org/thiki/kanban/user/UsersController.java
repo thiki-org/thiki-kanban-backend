@@ -30,7 +30,8 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/users/{userName}/profile", method = RequestMethod.GET)
-    public HttpEntity loadProfile(@PathVariable("userName") String userName) {
-        return null;
+    public HttpEntity loadProfile(@PathVariable("userName") String userName) throws IOException {
+        UserProfile profile = usersService.loadProfileByUserName(userName);
+        return Response.build(new ProfileResourceResource(profile));
     }
 }
