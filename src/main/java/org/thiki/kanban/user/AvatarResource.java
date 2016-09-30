@@ -16,7 +16,7 @@ public class AvatarResource extends RestResource {
         Link selfLink = linkTo(methodOn(UsersController.class).uploadAvatar(userName, null)).withSelfRel();
         this.add(selfLink);
 
-        Link userLink = linkTo(methodOn(UsersController.class).loadUserByName(userName)).withRel("user");
-        this.add(userLink);
+        Link profileLink = linkTo(methodOn(UsersController.class).loadProfile(userName)).withRel("profile");
+        this.add(profileLink);
     }
 }

@@ -29,8 +29,8 @@ public class UsersController {
         return Response.build(avatar);
     }
 
-    @RequestMapping(value = "/users/{userName}", method = RequestMethod.GET)
-    public HttpEntity loadUserByName(@PathVariable("userName") String userName) {
+    @RequestMapping(value = "/users/{userName}/profile", method = RequestMethod.GET)
+    public HttpEntity loadProfile(@PathVariable("userName") String userName) {
         return null;
     }
 }

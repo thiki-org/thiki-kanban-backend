@@ -9,6 +9,7 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
+import org.thiki.kanban.foundation.common.FileUtil;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,7 +39,7 @@ public class UsersControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("_links.self.href", equalTo("http://localhost:8007/users/someone/avatar"))
-                .body("_links.user.href", equalTo("http://localhost:8007/users/someone"));
+                .body("_links.profile.href", equalTo("http://localhost:8007/users/someone/profile"));
 
         assertEquals("someone.jpg", jdbcTemplate.queryForObject("select avatar from kb_user_profile where user_name='someone'", String.class));
     }
@@ -90,6 +91,6 @@ public class UsersControllerTest extends TestBase {
     @After
     public void clearDirectory() throws IOException {
         super.resetDB();
-        //   FileUtil.deleteDirectory(new File("files"));
+        FileUtil.deleteDirectory(new File("files"));
     }
 }
