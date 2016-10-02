@@ -20,7 +20,7 @@ import java.nio.file.Paths;
 @Service
 public class UsersService {
 
-    public static final int AVATAR_MAX_SIZE = 102400;
+    public static final int AVATAR_MAX_SIZE = 204800;
     private final Path rootLocation;
     @Resource
     private UsersPersistence usersPersistence;

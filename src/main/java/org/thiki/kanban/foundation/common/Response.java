@@ -40,4 +40,10 @@ public class Response {
                 .ok().contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(avatar);
     }
+
+    public static HttpEntity build(String s) {
+        return ResponseEntity
+                .ok().contentType(MediaType.TEXT_PLAIN)
+                .body(s);
+    }
 }
