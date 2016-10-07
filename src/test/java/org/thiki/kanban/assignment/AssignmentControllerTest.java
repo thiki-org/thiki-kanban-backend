@@ -23,7 +23,7 @@ public class AssignmentControllerTest extends TestBase {
     @Scenario("成功创建一条分配记录")
     @Test
     public void assign_shouldReturn201WhenAssigningSuccessfully() {
-        given().header("userId", "11222")
+        given().header("userName", "someone")
                 .body("{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -33,7 +33,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("assignee", equalTo("assigneeId"))
                 .body("assigner", equalTo("assignerId"))
-                .body("author", equalTo("11222"))
+                .body("author", equalTo("someone"))
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/1/cards/fooId"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/fooId/assignments"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/1/cards/fooId/assignments/fooId"));
@@ -44,7 +44,7 @@ public class AssignmentControllerTest extends TestBase {
     public void findById_shouldReturnAssignmentSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,name,email,password) VALUES ('assigneeId-foo','徐濤','766191920@qq.com','password')");
         jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
-        given().header("userId", "authorId-foo")
+        given().header("userName", "authorId-foo")
                 .when()
                 .get("/procedures/1/cards/fooId/assignments/fooId")
                 .then()
@@ -65,7 +65,7 @@ public class AssignmentControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,name,email,password) VALUES ('assigneeId-foo','徐濤','766191920@qq.com','password')");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('cardId-foo','this is the card summary.','play badminton',1,'fooId')");
         jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
-        given().header("userId", "authorId-foo")
+        given().header("userName", "authorId-foo")
                 .body("{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -86,7 +86,7 @@ public class AssignmentControllerTest extends TestBase {
     @Test
     public void findByCardId_shouldReturnErrorWhenCardIsNotExist() {
         jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
-        given().header("userId", "authorId-foo")
+        given().header("userName", "authorId-foo")
                 .body("{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -103,7 +103,7 @@ public class AssignmentControllerTest extends TestBase {
         dbPreparation.table("kb_card_assignment")
                 .names("id,card_id,assignee,assigner,author")
                 .values("'fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo'").exec();
-        given().header("userId", "authorId-foo")
+        given().header("userName", "authorId-foo")
                 .when()
                 .delete("/procedures/1/cards/fooId/assignments/fooId")
                 .then()
@@ -115,7 +115,7 @@ public class AssignmentControllerTest extends TestBase {
     @Scenario("当用户想取消某个分配时,如果指定的分配记录并不存在,则返回404客户端错误")
     @Test
     public void delete_shouldReturnErrorWhenAssignmentIsNotExist() {
-        given().header("userId", "authorId-foo")
+        given().header("userName", "authorId-foo")
                 .when()
                 .delete("/procedures/1/cards/fooId/assignments/fooId")
                 .then()

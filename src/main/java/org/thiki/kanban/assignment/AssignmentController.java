@@ -17,8 +17,8 @@ public class AssignmentController {
     private AssignmentService assignmentService;
 
     @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userId) {
-        Assignment savedAssignment = assignmentService.create(assignment, cardId, userId);
+    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) {
+        Assignment savedAssignment = assignmentService.create(assignment, cardId, userName);
         return Response.post(new AssignmentResource(savedAssignment, procedureId, cardId));
     }
 
