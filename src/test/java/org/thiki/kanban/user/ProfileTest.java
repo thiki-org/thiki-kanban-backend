@@ -41,4 +41,20 @@ public class ProfileTest extends TestBase {
                 .body("_links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/someone/profile"));
     }
+
+    @Scenario("个人资料>用户登录后,可以获取个人资料")
+    @Test
+    public void initProfileIfProfileIsNotExist() throws IOException {
+        dbPreparation.table("kb_user_registration")
+                .names("id,email,name,password")
+                .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
+        given().header("userName", "someone")
+                .get("/users/someone/profile")
+                .then()
+                .statusCode(200)
+                .body("userName", equalTo("someone"))
+                .body("email", equalTo("someone@gmail.com"))
+                .body("_links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
+                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/profile"));
+    }
 }

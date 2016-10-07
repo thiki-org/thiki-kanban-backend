@@ -83,6 +83,9 @@ public class UsersService {
 
     public UserProfile loadProfileByUserName(String userName) {
         UserProfile userProfile = usersPersistence.findProfile(userName);
-        return userProfile;
+        if (userProfile == null) {
+            usersPersistence.initProfile(new UserProfile(userName));
+        }
+        return usersPersistence.findProfile(userName);
     }
 }
