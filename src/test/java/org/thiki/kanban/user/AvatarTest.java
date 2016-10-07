@@ -94,6 +94,31 @@ public class AvatarTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/users/someone/avatar"));
 
     }
+    @Scenario("获取头像>用户在获取头像时,如果此前头像没有上传头像,则返回默认头像")
+    @Test
+    public void loadDefaultAvatar() throws IOException {
+        dbPreparation.table("kb_user_registration")
+                .names("id,email,name,password")
+                .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
+
+        dbPreparation.table("kb_user_profile")
+                .names("id,user_name")
+                .values("foo-profile-id", "someone").exec();
+
+        File defaultAvatar = new File("src/main/resources/avatar/default-avatar.png");
+
+        given().header("userName", "someone")
+                .multiPart("avatar", defaultAvatar)
+                .post("/users/someone/avatar");
+
+        String fileString = FileUtil.fileString(defaultAvatar);
+        given().header("userName", "someone")
+                .get("/users/someone/avatar")
+                .then()
+                .statusCode(200)
+                .body("avatar", equalTo(fileString))
+                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/avatar"));
+    }
 
     @After
     public void clearDirectory() throws IOException {
