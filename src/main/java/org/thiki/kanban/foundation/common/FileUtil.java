@@ -1,5 +1,9 @@
 package org.thiki.kanban.foundation.common;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.StringUtils;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -189,5 +193,15 @@ public class FileUtil {
         fos.write(multipartFile.getBytes());
         fos.close();
         return file;
+    }
+
+    public static String urlResourceToString(UrlResource urlResource) throws IOException {
+        InputStream inputStream = urlResource.getInputStream();
+        return StringUtils.newStringUtf8(Base64.encodeBase64(IOUtils.toByteArray(inputStream), false));
+    }
+
+    public static String fileString(File file) throws IOException {
+        UrlResource urlResource = new UrlResource(file.toURI());
+        return urlResourceToString(urlResource);
     }
 }

@@ -1,7 +1,6 @@
 package org.thiki.kanban.user;
 
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -69,7 +68,6 @@ public class AvatarTest extends TestBase {
                 .body("message", equalTo(UsersCodes.AVATAR_IS_OUT_OF_MAX_SIZE.message()));
     }
 
-    @Ignore
     @Scenario("获取头像>用户在获取头像时,如果此前头像已经上传,则获取时则返回此前上传的头像")
     @Test
     public void loadAvatar() throws IOException {
@@ -86,6 +84,15 @@ public class AvatarTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("avatar", avatar)
                 .post("/users/someone/avatar");
+
+        String fileString = FileUtil.fileString(avatar);
+        given().header("userName", "someone")
+                .get("/users/someone/avatar")
+                .then()
+                .statusCode(200)
+                .body("avatar", equalTo(fileString))
+                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/avatar"));
+
     }
 
     @After
