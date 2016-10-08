@@ -1,5 +1,6 @@
 package org.thiki.kanban.user;
 
+import com.jayway.restassured.http.ContentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -53,6 +54,29 @@ public class ProfileTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("userName", equalTo("someone"))
+                .body("email", equalTo("someone@gmail.com"))
+                .body("_links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
+                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/profile"));
+    }
+
+    @Scenario("个人资料>用户可以更新个人资料")
+    @Test
+    public void updateProfile() throws IOException {
+        dbPreparation.table("kb_user_registration")
+                .names("id,email,name,password")
+                .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
+
+        dbPreparation.table("kb_user_profile")
+                .names("id,user_name,nick_name")
+                .values("foo-profile-id", "someone", "tao").exec();
+
+        given().header("userName", "someone")
+                .contentType(ContentType.JSON)
+                .body("{\"nickName\":\"nick-name\"}")
+                .put("/users/someone/profile")
+                .then()
+                .statusCode(200)
+                .body("nickName", equalTo("nick-name"))
                 .body("email", equalTo("someone@gmail.com"))
                 .body("_links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
                 .body("_links.self.href", equalTo("http://localhost:8007/users/someone/profile"));

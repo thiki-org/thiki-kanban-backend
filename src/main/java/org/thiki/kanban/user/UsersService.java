@@ -88,4 +88,9 @@ public class UsersService {
         }
         return usersPersistence.findProfile(userName);
     }
+
+    public UserProfile updateProfile(UserProfile userProfile, String userName) {
+        usersPersistence.updateProfile(userName, userProfile);
+        return usersPersistence.findProfile(userName);
+    }
 }

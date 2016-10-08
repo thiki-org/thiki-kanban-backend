@@ -30,4 +30,6 @@ public interface UsersPersistence {
     Integer initProfile(UserProfile userProfile);
 
     Integer updateAvatar(@Param("userName") String userName, @Param("avatarName") String avatarName);
+
+    Integer updateProfile(@Param("userName") String userName, @Param("userProfile") UserProfile userProfile);
 }
