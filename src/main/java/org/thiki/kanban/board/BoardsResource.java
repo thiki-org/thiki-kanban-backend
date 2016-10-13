@@ -10,7 +10,7 @@ import java.util.List;
  * Created by xubitao on 05/26/16.
  */
 public class BoardsResource extends RestResource {
-    public BoardsResource(List<Board> boards) {
+    public BoardsResource(List<Board> boards) throws Exception {
         this.domainObject = boards;
         JSONArray boardsJSONArray = new JSONArray();
         for (Board board : boards) {

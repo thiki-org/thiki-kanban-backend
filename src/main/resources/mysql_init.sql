@@ -4,11 +4,11 @@
 DROP TABLE IF EXISTS kb_user_profile;
 CREATE TABLE kb_user_profile
 (
-  id                VARCHAR(40) NOT NULL
+  id                VARCHAR(40)  NOT NULL
   COMMENT '编号',
   email             VARCHAR(200) COMMENT '邮箱',
-  user_name             VARCHAR(200) NOT NULL,
-  nick_name              VARCHAR(40),
+  user_name         VARCHAR(200) NOT NULL,
+  nick_name         VARCHAR(40),
   phone             VARCHAR(40),
   avatar            VARCHAR(200),
   delete_status     INT(2)   DEFAULT 0,
@@ -42,7 +42,8 @@ CREATE TABLE kb_user_registration
 DROP TABLE IF EXISTS kb_board;
 CREATE TABLE kb_board (
   id                VARCHAR(40) NOT NULL,
-  name              TEXT,
+  name              VARCHAR(50),
+  team_id           VARCHAR(50),
   author            VARCHAR(40) NOT NULL,
   delete_status     INT(2)               DEFAULT 0,
   order_number      INT(2)      NOT NULL DEFAULT 0,

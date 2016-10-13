@@ -5,6 +5,7 @@ drop table if exists kb_board;
 CREATE TABLE kb_board (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   name VARCHAR(50) ,
+  team_id VARCHAR(50) ,
   author VARCHAR(40) NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,

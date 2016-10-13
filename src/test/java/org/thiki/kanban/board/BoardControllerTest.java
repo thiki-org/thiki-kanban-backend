@@ -62,7 +62,7 @@ public class BoardControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .contentType(ContentType.JSON)
-                .body("{\"name\":\"new-name\"}")
+                .body("{\"name\":\"new-name\",\"teamId\":\"teamId-foo\"}")
                 .when()
                 .put("/someone/boards/fooId")
                 .then()
@@ -70,8 +70,10 @@ public class BoardControllerTest extends TestBase {
                 .body("name", equalTo("new-name"))
                 .body("author", equalTo("someone"))
                 .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
+                .body("_links.team.href", equalTo("http://localhost:8007/teams/teamId-foo"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
+        assertEquals("teamId-foo", jdbcTemplate.queryForObject("select team_id from kb_board where id='fooId'", String.class));
     }
 
     @Scenario("当看板不存在时,则不允许更新")

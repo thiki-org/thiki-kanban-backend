@@ -15,6 +15,8 @@ public class Board implements Serializable {
     @Length(max = 20, message = BoardCodes.nameIsInvalid)
     private String name;
 
+    private String teamId;
+
     private String author;
 
     private String creationTime;
@@ -59,5 +61,13 @@ public class Board implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
     }
 }

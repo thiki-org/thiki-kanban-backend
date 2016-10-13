@@ -16,13 +16,13 @@ public class BoardsController {
     private BoardsService boardsService;
 
     @RequestMapping(value = "/{userName}/boards/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String id, @PathVariable String userName) {
+    public HttpEntity findById(@PathVariable String id, @PathVariable String userName) throws Exception {
         Board board = boardsService.findById(id);
         return Response.build(new BoardResource(board, userName));
     }
 
     @RequestMapping(value = "/{userName}/boards/{id}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Board board, @PathVariable String id, @PathVariable String userName) {
+    public HttpEntity update(@RequestBody Board board, @PathVariable String id, @PathVariable String userName) throws Exception {
         board.setId(id);
         Board updatedBoard = boardsService.update(userName, board);
         return Response.build(new BoardResource(updatedBoard, userName));
@@ -30,19 +30,19 @@ public class BoardsController {
     }
 
     @RequestMapping(value = "/{userName}/boards/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String id, @PathVariable String userName) {
+    public HttpEntity deleteById(@PathVariable String id, @PathVariable String userName) throws Exception {
         boardsService.deleteById(id);
         return Response.build(new BoardResource(userName));
     }
 
     @RequestMapping(value = "/{userName}/boards", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Board board, @PathVariable String userName) {
+    public HttpEntity create(@RequestBody Board board, @PathVariable String userName) throws Exception {
         Board savedBoard = boardsService.create(userName, board);
         return Response.post(new BoardResource(savedBoard, userName));
     }
 
     @RequestMapping(value = "/{userName}/boards", method = RequestMethod.GET)
-    public HttpEntity loadByUserName(@PathVariable String userName) {
+    public HttpEntity loadByUserName(@PathVariable String userName) throws Exception {
         List<Board> boards = boardsService.loadByUserName(userName);
         return Response.build(new BoardsResource(boards));
     }
