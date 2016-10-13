@@ -23,14 +23,14 @@ public class UsersController {
         return Response.build(new AvatarResource(userName));
     }
 
-    @RequestMapping(value = "/users/{userName}/avatar", method = RequestMethod.GET)
-    public HttpEntity loadAvatar(@PathVariable("userName") String userName) throws IOException {
+    @RequestMapping(value = "/users/{user}/avatar", method = RequestMethod.GET)
+    public HttpEntity loadAvatar(@PathVariable("user") String userName) throws IOException {
         File avatar = usersService.loadAvatar(userName);
         return Response.build(new AvatarResource(userName, avatar));
     }
 
-    @RequestMapping(value = "/users/{userName}/profile", method = RequestMethod.GET)
-    public HttpEntity loadProfile(@PathVariable("userName") String userName) throws IOException {
+    @RequestMapping(value = "/users/{user}/profile", method = RequestMethod.GET)
+    public HttpEntity loadProfile(@PathVariable("user") String userName) throws IOException {
         UserProfile profile = usersService.loadProfileByUserName(userName);
         return Response.build(new ProfileResource(profile));
     }
