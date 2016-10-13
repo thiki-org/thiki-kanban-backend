@@ -32,12 +32,12 @@ public class UsersController {
     @RequestMapping(value = "/users/{userName}/profile", method = RequestMethod.GET)
     public HttpEntity loadProfile(@PathVariable("userName") String userName) throws IOException {
         UserProfile profile = usersService.loadProfileByUserName(userName);
-        return Response.build(new ProfileResourceResource(profile));
+        return Response.build(new ProfileResource(profile));
     }
 
     @RequestMapping(value = "/users/{userName}/profile", method = RequestMethod.PUT)
     public HttpEntity updateProfile(@RequestBody UserProfile userProfile, @PathVariable("userName") String userName) throws IOException {
         UserProfile profile = usersService.updateProfile(userProfile, userName);
-        return Response.build(new ProfileResourceResource(profile));
+        return Response.build(new ProfileResource(profile));
     }
 }

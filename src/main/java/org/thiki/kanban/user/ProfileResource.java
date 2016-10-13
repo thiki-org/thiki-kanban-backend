@@ -11,8 +11,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubt on 30/09/2016.
  */
-public class ProfileResourceResource extends RestResource {
-    public ProfileResourceResource(UserProfile profile) throws IOException {
+public class ProfileResource extends RestResource {
+    public ProfileResource(UserProfile profile) throws IOException {
         this.domainObject = profile;
         Link selfLink = linkTo(methodOn(UsersController.class).loadProfile(profile.getUserName())).withSelfRel();
         this.add(selfLink);
