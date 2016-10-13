@@ -17,5 +17,8 @@ public class MemberResource extends RestResource {
         this.domainObject = member;
         Link profileLink = linkTo(methodOn(UsersController.class).loadProfile(member.getUserName())).withRel("profile");
         this.add(profileLink);
+
+        Link avatarLink = linkTo(methodOn(UsersController.class).loadAvatar(member.getUserName())).withRel("avatar");
+        this.add(avatarLink);
     }
 }
