@@ -143,4 +143,18 @@ public class TeamControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/teamId-foo"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select NAME from kb_team where id='teamId-foo'",String.class));
     }
+
+    @Scenario("更新团队信息>当团队不存在时,不允许更新")
+    @Test
+    public void notAllowedIfTeamIsNotExist() throws Exception {
+        given().header("userName", userName)
+                .body("{\"name\":\"new-name\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/someone/teams/teamId-foo")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.message()));
+    }
 }

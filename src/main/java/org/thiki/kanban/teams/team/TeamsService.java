@@ -43,7 +43,11 @@ public class TeamsService {
     }
 
     public Team update(String teamId, Team team, String userName) {
-        teamsPersistence.update(teamId,team);
+        Team originTeam = findById(teamId);
+        if (originTeam == null) {
+            throw new BusinessException(TeamsCodes.TEAM_IS_NOT_EXISTS);
+        }
+        teamsPersistence.update(teamId, team);
         return teamsPersistence.findById(teamId);
     }
 }
