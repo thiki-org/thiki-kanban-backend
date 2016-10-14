@@ -82,6 +82,7 @@ public class ApplicationContextConfig implements ApplicationContextAware {
             container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, "/error/businessException"));
             container.addErrorPages(new ErrorPage(HttpStatus.BAD_REQUEST, "/error/invalidParamsException"));
             container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
+            container.addErrorPages(new ErrorPage(Exception.class, "/error/500"));
         };
     }
 }
