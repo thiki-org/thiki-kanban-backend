@@ -127,6 +127,18 @@ public class TeamControllerTest extends TestBase {
                 .body("_links.members.href", equalTo("http://localhost:8007/teams/fooId/members"));
     }
 
+    @Scenario("获取指定团队信息>用户根据ID获取team时,如果该team不存在,则告知客户端错误")
+    @Test
+    public void shouldNoticeClientIfTeamIsNotExist() throws Exception {
+        given().header("userName", "someone")
+                .when()
+                .get("/teams/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.message()));
+    }
+
     @Scenario("更新团队信息>用户创建一个团队后,可以更新该团队的信息")
     @Test
     public void updateTeam() throws Exception {

@@ -30,11 +30,14 @@ public class TeamsService {
     }
 
     public Team findById(String id) {
-        return teamsPersistence.findById(id);
+        Team team = teamsPersistence.findById(id);
+        if (team == null) {
+            throw new BusinessException(TeamsCodes.TEAM_IS_NOT_EXISTS);
+        }
+        return team;
     }
 
     public List<Team> findByUserName(String userName) {
-
         return teamsPersistence.findByUserName(userName);
     }
 
@@ -43,7 +46,7 @@ public class TeamsService {
     }
 
     public Team update(String teamId, Team team, String userName) {
-        Team originTeam = findById(teamId);
+        Team originTeam = teamsPersistence.findById(teamId);
         if (originTeam == null) {
             throw new BusinessException(TeamsCodes.TEAM_IS_NOT_EXISTS);
         }
