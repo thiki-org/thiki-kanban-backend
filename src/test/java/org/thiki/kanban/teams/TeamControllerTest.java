@@ -126,4 +126,21 @@ public class TeamControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"))
                 .body("_links.members.href", equalTo("http://localhost:8007/teams/fooId/members"));
     }
+
+    @Scenario("更新团队信息>用户创建一个团队后,可以更新该团队的信息")
+    @Test
+    public void updateTeam() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('teamId-foo','team-name','someone')");
+        given().header("userName", userName)
+                .body("{\"name\":\"new-name\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/someone/teams/teamId-foo")
+                .then()
+                .statusCode(200)
+                .body("name", equalTo("new-name"))
+                .body("id", equalTo("teamId-foo"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/teamId-foo"));
+        assertEquals("new-name", jdbcTemplate.queryForObject("select NAME from kb_team where id='teamId-foo'",String.class));
+    }
 }

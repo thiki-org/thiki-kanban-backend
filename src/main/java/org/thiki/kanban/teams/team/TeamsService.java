@@ -41,4 +41,9 @@ public class TeamsService {
     public boolean isTeamExist(String teamId) {
         return teamsPersistence.isTeamExist(teamId);
     }
+
+    public Team update(String teamId, Team team, String userName) {
+        teamsPersistence.update(teamId,team);
+        return teamsPersistence.findById(teamId);
+    }
 }

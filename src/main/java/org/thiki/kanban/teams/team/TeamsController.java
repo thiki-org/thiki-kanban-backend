@@ -21,6 +21,13 @@ public class TeamsController {
         return Response.post(new TeamResource(userName, savedTeam));
     }
 
+
+    @RequestMapping(value = "/{userName}/teams/{teamId}", method = RequestMethod.PUT)
+    public HttpEntity updateTeam(@RequestBody Team team, @PathVariable("teamId") String teamId, @PathVariable("userName") String userName) throws Exception {
+        Team savedTeam = teamsService.update(teamId, team, userName);
+        return Response.build(new TeamResource(userName, savedTeam));
+    }
+
     @RequestMapping(value = "/{userName}/teams", method = RequestMethod.GET)
     public HttpEntity findByUserName(@PathVariable("userName") String userName) throws Exception {
         List<Team> teamList = teamsService.findByUserName(userName);

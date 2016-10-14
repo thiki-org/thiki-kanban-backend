@@ -21,4 +21,6 @@ public interface TeamsPersistence {
     boolean isTeamExist(String teamId);
 
     boolean isNameConflict(@Param("userName") String userName, @Param("teamName") String teamName);
+
+    Integer update(@Param("teamId") String teamId, @Param("team") Team team);
 }

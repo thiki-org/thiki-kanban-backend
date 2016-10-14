@@ -13,8 +13,8 @@
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_team SET delete_status=1 WHERE id=#{id}
     </delete>
-    <update id="update" parameterType="org.thiki.kanban.teams.team.Team" flushCache="true">
-        UPDATE kb_team SET name=#{name} WHERE id=#{id}
+    <update id="update" parameterType="java.util.Map" flushCache="true">
+        UPDATE kb_team SET name=#{team.name} WHERE id=#{teamId} AND delete_status=0
     </update>
     <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.team.Team">
         SELECT * FROM kb_team WHERE delete_status=0 AND author=#{userId}
