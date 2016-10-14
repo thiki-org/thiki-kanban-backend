@@ -17,7 +17,7 @@ public class BoardsService {
     private BoardsPersistence boardsPersistence;
 
     public Board create(String userName, final Board board) {
-        boolean isExists = boardsPersistence.unique(board.getName(), userName);
+        boolean isExists = boardsPersistence.unique(board.getId(), board.getName(), userName);
         if (isExists) {
             throw new BusinessException(BoardCodes.BOARD_IS_ALREADY_EXISTS);
         }
@@ -39,7 +39,7 @@ public class BoardsService {
         if (boardToDelete == null) {
             throw new ResourceNotFoundException(BoardCodes.BOARD_IS_NOT_EXISTS);
         }
-        boolean isExists = boardsPersistence.unique(board.getName(), userName);
+        boolean isExists = boardsPersistence.unique(board.getId(), board.getName(), userName);
         if (isExists) {
             throw new BusinessException(BoardCodes.BOARD_IS_ALREADY_EXISTS);
         }
