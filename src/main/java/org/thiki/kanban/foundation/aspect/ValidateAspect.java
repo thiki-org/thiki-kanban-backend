@@ -6,10 +6,12 @@ import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.util.UriTemplate;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.security.Constants;
@@ -21,11 +23,19 @@ import javax.validation.ValidatorFactory;
 import javax.validation.executable.ExecutableValidator;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Aspect
 @Component
+@ConfigurationProperties(prefix = "security")
 public class ValidateAspect {
+    private List<String> whiteList = new ArrayList<>();
+
+    public List<String> getWhiteList() {
+        return whiteList;
+    }
 
     @Before("execution(* *(@org.springframework.web.bind.annotation.RequestBody *,..))||execution(* *(@org.springframework.web.bind.annotation.RequestBody (*),..,..))")
     public void validateBodyParams(JoinPoint joinPoint) throws Throwable {
@@ -60,6 +70,10 @@ public class ValidateAspect {
         if (userNameInHeader == null) {
             return;
         }
+        String uri = requestFacade.getRequestURI();
+        if (isFreeSecurity(uri)) {
+            return;
+        }
         final Signature signature = thisJoinPoint.getStaticPart().getSignature();
 
         if (signature instanceof MethodSignature) {
@@ -88,5 +102,15 @@ public class ValidateAspect {
     private Validator getValidator() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         return factory.getValidator();
+    }
+
+    private boolean isFreeSecurity(String uri) {
+        for (String freeSecurityUrl : whiteList) {
+            UriTemplate uriTemplate = new UriTemplate(freeSecurityUrl);
+            if (uriTemplate.matches(uri)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
