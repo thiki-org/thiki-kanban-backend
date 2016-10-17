@@ -6,14 +6,11 @@ package org.thiki.kanban.foundation.apiDocument;
 
 public class NumberFormatter {
 
+    private static final char[] cnNumbers = {'零', '一', '二', '三', '四', '五', '六', '七', '八', '九'};
+    private static final char[] series = {' ', '十', '百', '仟', '万', '拾', '百', '仟', '亿'};
     private String original;
     private String desc = "";
     private String order;
-
-    private static final char[] cnNumbers = {'零', '一', '二', '三', '四', '五', '六', '七', '八', '九'};
-
-    private static final char[] series = {' ', '十', '百', '仟', '万', '拾', '百', '仟', '亿'};
-
     private boolean isOriginalValid = true;
 
     public NumberFormatter(String original) {
@@ -25,6 +22,28 @@ public class NumberFormatter {
         }
         this.order = chineseStringArray[0];
         this.desc = chineseStringArray[1];
+    }
+
+    /**
+     * 将字符形式的数字转化为整形数字
+     * 因为所有实例都要用到所以用静态修饰
+     *
+     * @param c
+     * @return
+     */
+    private static int getNumber(char c) {
+        String str = String.valueOf(c);
+        return Integer.parseInt(str);
+    }
+
+    private static boolean isNumeric(String str) {
+        for (int i = 0; i < str.length(); i++) {
+            System.out.println(str.charAt(i));
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -54,27 +73,5 @@ public class NumberFormatter {
         }
         // 返回拼接好的字符串
         return sb.toString() + "、" + this.desc;
-    }
-
-    /**
-     * 将字符形式的数字转化为整形数字
-     * 因为所有实例都要用到所以用静态修饰
-     *
-     * @param c
-     * @return
-     */
-    private static int getNumber(char c) {
-        String str = String.valueOf(c);
-        return Integer.parseInt(str);
-    }
-
-    private static boolean isNumeric(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            System.out.println(str.charAt(i));
-            if (!Character.isDigit(str.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 }

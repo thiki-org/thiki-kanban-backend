@@ -19,7 +19,7 @@
     </select>
 
     <select id="loadUnreadNotificationTotal" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT count(*) FROM kb_notification WHERE  is_read=0 AND receiver= #{userName} AND delete_status=0
+        SELECT count(*) FROM kb_notification WHERE is_read=0 AND receiver= #{userName} AND delete_status=0
     </select>
 
     <update id="setAlreadyRead" parameterType="java.lang.String"

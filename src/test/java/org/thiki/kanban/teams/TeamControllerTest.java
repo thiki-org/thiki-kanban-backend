@@ -153,7 +153,7 @@ public class TeamControllerTest extends TestBase {
                 .body("name", equalTo("new-name"))
                 .body("id", equalTo("teamId-foo"))
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/teamId-foo"));
-        assertEquals("new-name", jdbcTemplate.queryForObject("select NAME from kb_team where id='teamId-foo'",String.class));
+        assertEquals("new-name", jdbcTemplate.queryForObject("select NAME from kb_team where id='teamId-foo'", String.class));
     }
 
     @Scenario("更新团队信息>当团队不存在时,不允许更新")

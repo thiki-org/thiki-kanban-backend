@@ -13,8 +13,9 @@
 
     <update id="cancelPreviousInvitation" parameterType="org.thiki.kanban.teams.invitation.Invitation"
             flushCache="true">
-        UPDATE kb_team_member_invitation SET delete_status=1 WHERE team_id=#{teamId} AND invitee=#{invitee} AND inviter=#{inviter}  AND
-         is_accepted=0 AND delete_status=0
+        UPDATE kb_team_member_invitation SET delete_status=1 WHERE team_id=#{teamId} AND invitee=#{invitee} AND
+        inviter=#{inviter} AND
+        is_accepted=0 AND delete_status=0
     </update>
 
     <update id="acceptInvitation" parameterType="java.lang.String" flushCache="true">

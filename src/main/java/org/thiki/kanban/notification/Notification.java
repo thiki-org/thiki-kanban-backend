@@ -35,10 +35,6 @@ public class Notification implements Serializable {
         this.type = type;
     }
 
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
-
     public void setModificationTime(String modificationTime) {
         this.modificationTime = modificationTime;
     }
@@ -93,6 +89,10 @@ public class Notification implements Serializable {
 
     public String getCreationTime() {
         return this.creationTime;
+    }
+
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
     }
 
     public String getDisplayTime() {

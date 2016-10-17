@@ -13,14 +13,6 @@ public enum NotificationType {
         this.name = name;
     }
 
-    public String type() {
-        return type;
-    }
-
-    public String typeName() {
-        return name;
-    }
-
     public static String getNameByType(String type) {
         for (NotificationType notificationType : NotificationType.values()) {
             if (notificationType.type.equals(type)) {
@@ -28,5 +20,13 @@ public enum NotificationType {
             }
         }
         return type;
+    }
+
+    public String type() {
+        return type;
+    }
+
+    public String typeName() {
+        return name;
     }
 }

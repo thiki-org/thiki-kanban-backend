@@ -94,6 +94,7 @@ public class AvatarTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/users/someone/avatar"));
 
     }
+
     @Scenario("获取头像>用户在获取头像时,如果此前头像没有上传头像,则返回默认头像")
     @Test
     public void loadDefaultAvatar() throws IOException {

@@ -106,7 +106,7 @@ public class ExceptionController implements ErrorController {
      */
     private boolean getTraceParameter(HttpServletRequest request) {
         String parameter = request.getParameter("trace");
-        return parameter != null && !"false" .equals(parameter.toLowerCase());
+        return parameter != null && !"false".equals(parameter.toLowerCase());
     }
 
     /**
