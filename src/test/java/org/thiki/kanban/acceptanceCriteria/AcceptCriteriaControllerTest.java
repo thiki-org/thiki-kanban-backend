@@ -34,28 +34,35 @@ public class AcceptCriteriaControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/cards/card-fooId/acceptanceCriterias")
+                .post("/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias")
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("AC-summary"))
                 .body("isFinished", equalTo(0))
                 .body("author", equalTo(userName))
-                .body("_links.self.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias/fooId"))
-                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias"));
+                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
+                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
     }
 
     @Scenario("获取指定卡片的验收标准>用户为卡片创建验收标准后,可以查看")
     @Test
     public void loadAcceptanceCriterias() throws Exception {
+        dbPreparation.table("kb_acceptance_criterias")
+                .names("id,summary,card_id,author")
+                .values("fooId", "AC-summary", "card-fooId", "someone").exec();
+
         given().header("userName", userName)
                 .when()
-                .get("/cards/card-fooId/acceptanceCriterias")
+                .get("/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias")
                 .then()
                 .statusCode(200)
-                .body("[0]summary", equalTo("AC-summary"))
-                .body("[0]isFinished", equalTo(0))
-                .body("[0]author", equalTo(userName))
-                .body("[0]_links.self.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias/fooId"))
-                .body("[0]_links.acceptanceCriterias.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias"));
+                .body("acceptanceCriterias[0].summary", equalTo("AC-summary"))
+                .body("acceptanceCriterias[0].isFinished", equalTo(0))
+                .body("acceptanceCriterias[0].author", equalTo(userName))
+                .body("acceptanceCriterias[0]._links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
+                .body("acceptanceCriterias[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
+                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
+                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
     }
 }
