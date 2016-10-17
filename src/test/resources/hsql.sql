@@ -183,3 +183,19 @@ CREATE TABLE kb_notification(
   delete_status int DEFAULT 0
 );
 
+-- ----------------------------
+-- Table structure for kb_acceptance_criterias
+-- ----------------------------
+drop table if exists kb_acceptance_criterias;
+
+CREATE TABLE kb_acceptance_criterias(
+  id VARCHAR(40)NOT NULL PRIMARY KEY,
+  summary VARCHAR(200) DEFAULT '',
+  card_id VARCHAR(50)NOT NULL,
+  is_finished int DEFAULT 0,
+  author VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  delete_status int DEFAULT 0
+);
+

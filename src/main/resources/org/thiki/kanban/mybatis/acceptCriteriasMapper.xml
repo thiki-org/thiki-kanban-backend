@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.acceptanceCriteria.AcceptCriteriaPersistence">
+    <insert id="addAcceptCriteria" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptCriteria">
+        INSERT
+        INTO
+        kb_acceptance_criterias(id,summary, card_id, author)
+        VALUES
+        (#{acceptanceCriteria.id},#{acceptanceCriteria.summary},#{cardId},#{userName})
+    </insert>
+
+    <select id="findById" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.acceptanceCriteria.AcceptCriteria">
+        SELECT * FROM kb_acceptance_criterias WHERE id= #{id} AND delete_status=0
+    </select>
+</mapper>
