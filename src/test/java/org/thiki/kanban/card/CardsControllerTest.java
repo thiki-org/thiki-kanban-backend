@@ -43,7 +43,7 @@ public class CardsControllerTest extends TestBase {
                 .body("author", equalTo(userName))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
-                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/cards/fooId/acceptanceCriterias"))
+                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId/acceptanceCriterias"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId/assignments"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
     }
@@ -110,7 +110,7 @@ public class CardsControllerTest extends TestBase {
                 .body("[0].procedureId", equalTo("fooId"))
                 .body("[0]._links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId"))
                 .body("[0]._links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
-                .body("[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias"))
+                .body("[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/assignments"));
     }
 

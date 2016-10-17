@@ -9,6 +9,7 @@ import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.teams.invitation.InvitationCodes;
+import org.thiki.kanban.teams.team.TeamsCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -91,8 +92,8 @@ public class InvitationControllerTest extends TestBase {
                 .post("/teams/foo-team-Id/members/invitation")
                 .then()
                 .statusCode(400)
-                .body("code", equalTo(InvitationCodes.TEAM_IS_NOT_EXISTS.code()))
-                .body("message", equalTo(InvitationCodes.TEAM_IS_NOT_EXISTS.message()));
+                .body("code", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.message()));
     }
 
     @Scenario("如果被邀请人不存在,则不允许发送邀请")

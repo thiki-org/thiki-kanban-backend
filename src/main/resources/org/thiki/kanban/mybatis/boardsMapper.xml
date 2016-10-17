@@ -16,7 +16,12 @@
         WHERE id=#{id} AND delete_status=0
     </update>
     <select id="unique" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_board WHERE delete_status=0 AND NAME=#{name} AND author=#{userName} AND id !=#{id}
+
+        SELECT count(*) FROM kb_board WHERE delete_status=0 AND NAME=#{name} AND author=#{userName}
+        <if test="id!=null">
+            AND id !=#{id}
+        </if>
+
     </select>
 
     <select id="loadByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">

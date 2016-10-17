@@ -8,6 +8,7 @@ import org.thiki.kanban.notification.Notification;
 import org.thiki.kanban.notification.NotificationService;
 import org.thiki.kanban.notification.NotificationType;
 import org.thiki.kanban.teams.team.Team;
+import org.thiki.kanban.teams.team.TeamsCodes;
 import org.thiki.kanban.teams.team.TeamsService;
 import org.thiki.kanban.teams.teamMembers.TeamMembersService;
 import org.thiki.kanban.user.User;
@@ -42,7 +43,7 @@ public class InvitationService {
     public Invitation invite(String userName, String teamId, Invitation invitation) throws Exception {
         Team team = teamsService.findById(teamId);
         if (team == null) {
-            throw new BusinessException(InvitationCodes.TEAM_IS_NOT_EXISTS);
+            throw new BusinessException(TeamsCodes.TEAM_IS_NOT_EXISTS);
         }
         User inviteeUser = usersService.findByIdentity(invitation.getInvitee());
         if (inviteeUser == null) {

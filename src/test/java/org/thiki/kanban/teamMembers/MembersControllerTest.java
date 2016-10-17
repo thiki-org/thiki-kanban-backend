@@ -47,8 +47,8 @@ public class MembersControllerTest extends TestBase {
                 .post("/teams/foo-teamId/teamMembers")
                 .then()
                 .statusCode(400)
-                .body("code", equalTo(400))
-                .body("message", equalTo("Team foo-teamId is not found."));
+                .body("code", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.message()));
     }
 
     @Scenario("加入团队时,如果待加入的成员已经在团队中,则不允许加入")

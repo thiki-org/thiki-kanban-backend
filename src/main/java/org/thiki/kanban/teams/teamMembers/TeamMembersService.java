@@ -25,7 +25,7 @@ public class TeamMembersService {
     public TeamMember joinTeam(String teamId, final TeamMember teamMember, String userName) {
         Team targetTeam = teamsService.findById(teamId);
         if (targetTeam == null) {
-            throw new InvalidParamsException(MessageFormat.format("Team {0} is not found.", teamId));
+            throw new BusinessException(TeamsCodes.TEAM_IS_NOT_EXISTS);
         }
 
         TeamMember foundMember = teamMembersPersistence.findMemberByTeamId(teamMember.getMember(), teamId);
