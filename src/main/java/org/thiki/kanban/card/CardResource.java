@@ -1,6 +1,7 @@
 package org.thiki.kanban.card;
 
 import org.springframework.hateoas.Link;
+import org.thiki.kanban.acceptanceCriteria.AcceptCriteriaController;
 import org.thiki.kanban.assignment.AssignmentController;
 import org.thiki.kanban.foundation.common.RestResource;
 
@@ -21,8 +22,10 @@ public class CardResource extends RestResource {
 
             Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(procedureId, card.getId())).withRel("assignments");
             this.add(assignmentsLink);
-        }
 
+            Link acceptanceCriteriasLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(card.getId())).withRel("acceptanceCriterias");
+            this.add(acceptanceCriteriasLink);
+        }
         this.add(linkTo(methodOn(CardsController.class).findByProcedureId(procedureId)).withRel("cards"));
 
     }

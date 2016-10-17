@@ -43,6 +43,7 @@ public class CardsControllerTest extends TestBase {
                 .body("author", equalTo(userName))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
+                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/cards/fooId/acceptanceCriterias"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/fooId/assignments"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
     }
@@ -97,7 +98,7 @@ public class CardsControllerTest extends TestBase {
     @Scenario("当根据procedureId查找其下属的卡片时,可以返回其所有卡片")
     @Test
     public void shouldReturnCardsWhenFindCardsByProcedureIdSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES (1,'this is the card summary.','play badminton','someone','fooId')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('card-fooId','this is the card summary.','play badminton','someone','fooId')");
         given().header("userName", userName)
                 .when()
                 .get("/procedures/fooId/cards")
@@ -107,9 +108,10 @@ public class CardsControllerTest extends TestBase {
                 .body("[0].content", equalTo("play badminton"))
                 .body("[0].author", equalTo(userName))
                 .body("[0].procedureId", equalTo("fooId"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/1"))
+                .body("[0]._links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId"))
                 .body("[0]._links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
-                .body("[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/1/assignments"));
+                .body("[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias"))
+                .body("[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/assignments"));
     }
 
     @Scenario("根据ID查找一个卡片时,如果卡片存在,则返回该卡片")

@@ -43,4 +43,19 @@ public class AcceptCriteriaControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias/fooId"))
                 .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias"));
     }
+
+    @Scenario("获取指定卡片的验收标准>用户为卡片创建验收标准后,可以查看")
+    @Test
+    public void loadAcceptanceCriterias() throws Exception {
+        given().header("userName", userName)
+                .when()
+                .get("/cards/card-fooId/acceptanceCriterias")
+                .then()
+                .statusCode(200)
+                .body("[0]summary", equalTo("AC-summary"))
+                .body("[0]isFinished", equalTo(0))
+                .body("[0]author", equalTo(userName))
+                .body("[0]_links.self.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias/fooId"))
+                .body("[0]_links.acceptanceCriterias.href", equalTo("http://localhost:8007/cards/card-fooId/acceptanceCriterias"));
+    }
 }
