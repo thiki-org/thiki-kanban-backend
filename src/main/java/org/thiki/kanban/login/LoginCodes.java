@@ -1,5 +1,7 @@
 package org.thiki.kanban.login;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.thiki.kanban.foundation.application.DomainOrder;
 
 /**
@@ -11,6 +13,7 @@ public enum LoginCodes {
 
     public static final String IdentityIsRequired = "登录失败,请输入您的用户名或邮箱。";
     public static final String PasswordIsRequired = "登录失败,您尚未输入密码。";
+
 
     private String code;
     private String message;
