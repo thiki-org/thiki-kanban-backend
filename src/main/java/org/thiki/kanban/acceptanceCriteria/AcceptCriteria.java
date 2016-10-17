@@ -12,9 +12,9 @@ public class AcceptCriteria {
 
     private String id;
 
-    @NotNull(message = AcceptCriteriaCodes.summaryIsRequired)
-    @NotEmpty(message = AcceptCriteriaCodes.summaryIsRequired)
-    @Length(max = 50, message = AcceptCriteriaCodes.summaryIsInvalid)
+    @NotNull(message = AcceptanceCriteriaCodes.summaryIsRequired)
+    @NotEmpty(message = AcceptanceCriteriaCodes.summaryIsRequired)
+    @Length(max = 100, message = AcceptanceCriteriaCodes.summaryIsInvalid)
     private String summary;
     private Integer isFinished;
     private String author;

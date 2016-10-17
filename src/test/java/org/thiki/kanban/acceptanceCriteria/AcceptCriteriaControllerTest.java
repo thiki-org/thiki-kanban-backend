@@ -45,6 +45,20 @@ public class AcceptCriteriaControllerTest extends TestBase {
                 .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
     }
 
+    @Scenario("创建验收标准>如果用户在创建验收标准时,未提供概述,则不允许创建,可以创建为其创建相应的验收标准")
+    @Test
+    public void notAllowedIfSummaryIsEmpty() throws Exception {
+        given().body("{\"summary\":\"\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(400))
+                .body("message", equalTo(AcceptanceCriteriaCodes.summaryIsRequired));
+    }
+
     @Scenario("获取指定卡片的验收标准>用户为卡片创建验收标准后,可以查看")
     @Test
     public void loadAcceptanceCriterias() throws Exception {
