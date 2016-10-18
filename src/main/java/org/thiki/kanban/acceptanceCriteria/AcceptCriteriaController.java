@@ -17,22 +17,29 @@ public class AcceptCriteriaController {
     private AcceptCriteriaService acceptCriteriaService;
 
     @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody AcceptCriteria acceptCriteria, @RequestHeader String userName, @PathVariable("cardId") String cardId, @PathVariable("procedureId") String procedureId) {
-        AcceptCriteria savedAcceptCriteria = acceptCriteriaService.addAcceptCriteria(userName, cardId, acceptCriteria);
+    public HttpEntity create(@RequestBody AcceptanceCriteria acceptanceCriteria, @RequestHeader String userName, @PathVariable("cardId") String cardId, @PathVariable("procedureId") String procedureId) {
+        AcceptanceCriteria savedAcceptanceCriteria = acceptCriteriaService.addAcceptCriteria(userName, cardId, acceptanceCriteria);
 
-        return Response.post(new AcceptanceCriteriaResource(savedAcceptCriteria, cardId, procedureId));
+        return Response.post(new AcceptanceCriteriaResource(savedAcceptanceCriteria, cardId, procedureId));
+    }
+
+    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.PUT)
+    public HttpEntity updateAcceptCriteria(@RequestBody AcceptanceCriteria acceptanceCriteria, @PathVariable("cardId") String cardId, @PathVariable("acceptanceCriteriaId") String acceptanceCriteriaId, @PathVariable("procedureId") String procedureId) {
+        AcceptanceCriteria savedAcceptanceCriteria = acceptCriteriaService.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
+
+        return Response.build(new AcceptanceCriteriaResource(savedAcceptanceCriteria, cardId, procedureId));
     }
 
     @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.GET)
     public HttpEntity findById(@PathVariable("cardId") String cardId, @PathVariable("acceptanceCriteriaId") String acceptanceCriteriaId, @PathVariable("procedureId") String procedureId) {
-        AcceptCriteria savedAcceptCriteria = acceptCriteriaService.loadAcceptanceCriteriaById(acceptanceCriteriaId);
+        AcceptanceCriteria savedAcceptanceCriteria = acceptCriteriaService.loadAcceptanceCriteriaById(acceptanceCriteriaId);
 
-        return Response.build(new AcceptanceCriteriaResource(savedAcceptCriteria, cardId, procedureId));
+        return Response.build(new AcceptanceCriteriaResource(savedAcceptanceCriteria, cardId, procedureId));
     }
 
     @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias", method = RequestMethod.GET)
     public HttpEntity loadAcceptanceCriteriasByCardId(@PathVariable("cardId") String cardId, @PathVariable("procedureId") String procedureId) {
-        List<AcceptCriteria> acceptCriteriaList = acceptCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
-        return Response.build(new AcceptCriteriasResource(acceptCriteriaList, cardId, procedureId));
+        List<AcceptanceCriteria> acceptanceCriteriaList = acceptCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
+        return Response.build(new AcceptCriteriasResource(acceptanceCriteriaList, cardId, procedureId));
     }
 }

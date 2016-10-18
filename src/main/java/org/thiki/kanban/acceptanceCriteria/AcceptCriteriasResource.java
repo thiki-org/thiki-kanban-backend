@@ -14,10 +14,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubt on 10/17/16.
  */
 public class AcceptCriteriasResource extends RestResource {
-    public AcceptCriteriasResource(List<AcceptCriteria> acceptCriterias, String cardId, String procedureId) {
+    public AcceptCriteriasResource(List<AcceptanceCriteria> acceptanceCriterias, String cardId, String procedureId) {
         List<AcceptanceCriteriaResource> acceptanceCriteriaResources = new ArrayList<>();
-        for (AcceptCriteria acceptCriteria : acceptCriterias) {
-            AcceptanceCriteriaResource acceptanceCriteriaResource = new AcceptanceCriteriaResource(acceptCriteria, cardId, procedureId);
+        for (AcceptanceCriteria acceptanceCriteria : acceptanceCriterias) {
+            AcceptanceCriteriaResource acceptanceCriteriaResource = new AcceptanceCriteriaResource(acceptanceCriteria, cardId, procedureId);
             acceptanceCriteriaResources.add(acceptanceCriteriaResource);
         }
 

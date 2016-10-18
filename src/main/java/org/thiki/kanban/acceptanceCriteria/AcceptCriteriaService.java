@@ -14,18 +14,23 @@ public class AcceptCriteriaService {
     @Resource
     private AcceptCriteriaPersistence acceptCriteriaPersistence;
 
-    public AcceptCriteria addAcceptCriteria(String userName, String cardId, AcceptCriteria acceptCriteria) {
+    public AcceptanceCriteria addAcceptCriteria(String userName, String cardId, AcceptanceCriteria acceptanceCriteria) {
 
-        acceptCriteriaPersistence.addAcceptCriteria(userName, cardId, acceptCriteria);
-        return acceptCriteriaPersistence.findById(acceptCriteria.getId());
+        acceptCriteriaPersistence.addAcceptCriteria(userName, cardId, acceptanceCriteria);
+        return acceptCriteriaPersistence.findById(acceptanceCriteria.getId());
     }
 
-    public List<AcceptCriteria> loadAcceptanceCriteriasByCardId(String cardId) {
-        List<AcceptCriteria> acceptCriterias = acceptCriteriaPersistence.loadAcceptanceCriteriasByCardId(cardId);
-        return acceptCriterias;
+    public List<AcceptanceCriteria> loadAcceptanceCriteriasByCardId(String cardId) {
+        List<AcceptanceCriteria> acceptanceCriterias = acceptCriteriaPersistence.loadAcceptanceCriteriasByCardId(cardId);
+        return acceptanceCriterias;
     }
 
-    public AcceptCriteria loadAcceptanceCriteriaById(String acceptanceCriteriaId) {
+    public AcceptanceCriteria loadAcceptanceCriteriaById(String acceptanceCriteriaId) {
+        return acceptCriteriaPersistence.findById(acceptanceCriteriaId);
+    }
+
+    public AcceptanceCriteria updateAcceptCriteria(String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria) {
+        acceptCriteriaPersistence.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
         return acceptCriteriaPersistence.findById(acceptanceCriteriaId);
     }
 }

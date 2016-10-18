@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by xubt on 10/17/16.
  */
-public class AcceptCriteria {
+public class AcceptanceCriteria {
 
     private String id;
 
@@ -16,7 +16,7 @@ public class AcceptCriteria {
     @NotEmpty(message = AcceptanceCriteriaCodes.summaryIsRequired)
     @Length(max = 100, message = AcceptanceCriteriaCodes.summaryIsInvalid)
     private String summary;
-    private Integer isFinished;
+    private int isFinished;
     private String author;
 
     private String creationTime;

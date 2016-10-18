@@ -19,7 +19,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 @Domain(order = DomainOrder.ACCEPT_CRITERIA, name = "验收标准")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AcceptCriteriaControllerTest extends TestBase {
+public class AcceptanceCriteriaControllerTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {
@@ -93,6 +93,28 @@ public class AcceptCriteriaControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("AC-summary"))
+                .body("isFinished", equalTo(0))
+                .body("author", equalTo(userName))
+                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
+                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
+    }
+
+    @Scenario("更新指定的验收标准>用户为卡片创建验收标准后,可以更新指定的验收标准")
+    @Test
+    public void updateAC() throws Exception {
+        dbPreparation.table("kb_acceptance_criterias")
+                .names("id,summary,card_id,author")
+                .values("fooId", "AC-summary", "card-fooId", "someone").exec();
+
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .body("{\"summary\":\"new-AC-summary\"}")
+                .when()
+                .put("/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("new-AC-summary"))
                 .body("isFinished", equalTo(0))
                 .body("author", equalTo(userName))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"))

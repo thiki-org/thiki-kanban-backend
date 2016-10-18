@@ -11,7 +11,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubt on 10/17/16.
  */
 public class AcceptanceCriteriaResource extends RestResource {
-    public AcceptanceCriteriaResource(AcceptCriteria acceptanceCriteria, String cardId, String procedureId) {
+    public AcceptanceCriteriaResource(AcceptanceCriteria acceptanceCriteria, String cardId, String procedureId) {
         this.domainObject = acceptanceCriteria;
         if (acceptanceCriteria != null) {
             Link selfLink = linkTo(methodOn(AcceptCriteriaController.class).findById(cardId, acceptanceCriteria.getId(), procedureId)).withSelfRel();

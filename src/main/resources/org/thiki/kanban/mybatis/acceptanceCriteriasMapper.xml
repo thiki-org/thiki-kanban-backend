@@ -3,21 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.thiki.kanban.acceptanceCriteria.AcceptCriteriaPersistence">
-    <insert id="addAcceptCriteria" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptCriteria">
+    <insert id="addAcceptCriteria" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria">
         INSERT
         INTO
         kb_acceptance_criterias(id,summary, card_id, author)
         VALUES
         (#{acceptanceCriteria.id},#{acceptanceCriteria.summary},#{cardId},#{userName})
     </insert>
-
+    <update id="updateAcceptCriteria" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria"
+            flushCache="true">
+        UPDATE kb_acceptance_criterias SET
+        summary=#{acceptanceCriteria.summary},
+        is_finished=#{acceptanceCriteria.isFinished}
+        WHERE id=#{acceptanceCriteriaId} AND delete_status=0
+    </update>
     <select id="findById" parameterType="java.lang.String"
-            resultType="org.thiki.kanban.acceptanceCriteria.AcceptCriteria">
+            resultType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria">
         SELECT * FROM kb_acceptance_criterias WHERE id= #{id} AND delete_status=0
     </select>
 
     <select id="loadAcceptanceCriteriasByCardId" parameterType="java.lang.String"
-            resultType="org.thiki.kanban.acceptanceCriteria.AcceptCriteria">
+            resultType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria">
         SELECT * FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0
     </select>
 </mapper>

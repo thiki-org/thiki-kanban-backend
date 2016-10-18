@@ -10,9 +10,11 @@ import java.util.List;
  */
 @Repository
 public interface AcceptCriteriaPersistence {
-    Integer addAcceptCriteria(@Param("userName") String userName, @Param("cardId") String cardId, @Param("acceptanceCriteria") AcceptCriteria acceptCriteria);
+    Integer addAcceptCriteria(@Param("userName") String userName, @Param("cardId") String cardId, @Param("acceptanceCriteria") AcceptanceCriteria acceptanceCriteria);
 
-    AcceptCriteria findById(String id);
+    AcceptanceCriteria findById(String id);
 
-    List<AcceptCriteria> loadAcceptanceCriteriasByCardId(@Param("cardId") String cardId);
+    List<AcceptanceCriteria> loadAcceptanceCriteriasByCardId(@Param("cardId") String cardId);
+
+    Integer updateAcceptCriteria(@Param("acceptanceCriteriaId") String acceptanceCriteriaId, @Param("acceptanceCriteria") AcceptanceCriteria acceptanceCriteria);
 }
