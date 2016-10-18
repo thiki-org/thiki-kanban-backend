@@ -45,7 +45,7 @@ public class AcceptCriteriaControllerTest extends TestBase {
                 .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
     }
 
-    @Scenario("创建验收标准>如果用户在创建验收标准时,未提供概述,则不允许创建,可以创建为其创建相应的验收标准")
+    @Scenario("创建验收标准>如果用户在创建验收标准时,未提供概述,则不允许创建")
     @Test
     public void notAllowedIfSummaryIsEmpty() throws Exception {
         given().body("{\"summary\":\"\"}")
@@ -78,5 +78,25 @@ public class AcceptCriteriaControllerTest extends TestBase {
                 .body("acceptanceCriterias[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
+    }
+
+    @Scenario("获取指定的验收标准>用户为卡片创建验收标准后,可以根据ID获取指定的验收标准")
+    @Test
+    public void loadACById() throws Exception {
+        dbPreparation.table("kb_acceptance_criterias")
+                .names("id,summary,card_id,author")
+                .values("fooId", "AC-summary", "card-fooId", "someone").exec();
+
+        given().header("userName", userName)
+                .when()
+                .get("/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("AC-summary"))
+                .body("isFinished", equalTo(0))
+                .body("author", equalTo(userName))
+                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
+                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
     }
 }

@@ -24,4 +24,8 @@ public class AcceptCriteriaService {
         List<AcceptCriteria> acceptCriterias = acceptCriteriaPersistence.loadAcceptanceCriteriasByCardId(cardId);
         return acceptCriterias;
     }
+
+    public AcceptCriteria loadAcceptanceCriteriaById(String acceptanceCriteriaId) {
+        return acceptCriteriaPersistence.findById(acceptanceCriteriaId);
+    }
 }

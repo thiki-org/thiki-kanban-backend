@@ -25,7 +25,9 @@ public class AcceptCriteriaController {
 
     @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.GET)
     public HttpEntity findById(@PathVariable("cardId") String cardId, @PathVariable("acceptanceCriteriaId") String acceptanceCriteriaId, @PathVariable("procedureId") String procedureId) {
-        return null;
+        AcceptCriteria savedAcceptCriteria = acceptCriteriaService.loadAcceptanceCriteriaById(acceptanceCriteriaId);
+
+        return Response.build(new AcceptanceCriteriaResource(savedAcceptCriteria, cardId, procedureId));
     }
 
     @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias", method = RequestMethod.GET)
