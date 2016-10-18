@@ -19,7 +19,7 @@ public class AvatarStorage {
     public String store(String userName, File avatar) throws IOException {
         File avatarsDirectory = new File(AVATAR_FILES_LOCATION);
         if (!avatarsDirectory.exists()) {
-            FileUtil.forceMkdir(avatarsDirectory);
+            FileUtil.forceMakeDirectory(avatarsDirectory);
         }
         String avatarName = avatar.getName();
         String avatarType = avatarName.substring(avatarName.lastIndexOf(".") + 1);

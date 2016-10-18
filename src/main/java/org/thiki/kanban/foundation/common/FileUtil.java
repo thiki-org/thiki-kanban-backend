@@ -91,7 +91,7 @@ public class FileUtil {
         }
     }
 
-    public static void forceMkdir(File directory) throws IOException {
+    public static void forceMakeDirectory(File directory) throws IOException {
         if (directory.exists()) {
             if (!directory.isDirectory()) {
                 String message = "File " + directory + " exists and is "
@@ -186,12 +186,13 @@ public class FileUtil {
         return firstFileByte == secondFileByte;
     }
 
-    public static File convert(MultipartFile multipartFile) throws IOException {
-        File file = new File(multipartFile.getOriginalFilename());
+    public static File convert(String filePath, MultipartFile multipartFile) throws IOException {
+        FileUtil.forceMakeDirectory(new File(filePath));
+        File file = new File(filePath + multipartFile.getOriginalFilename());
         file.createNewFile();
-        FileOutputStream fos = new FileOutputStream(file);
-        fos.write(multipartFile.getBytes());
-        fos.close();
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
+        fileOutputStream.write(multipartFile.getBytes());
+        fileOutputStream.close();
         return file;
     }
 

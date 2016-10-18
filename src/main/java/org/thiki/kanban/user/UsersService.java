@@ -26,6 +26,8 @@ public class UsersService {
     @Resource
     private AvatarStorage avatarStorage;
 
+    private static String avatarFileTempPath = "files/avatars/temp/";
+
     public UsersService() {
         this.rootLocation = Paths.get(new StorageProperties().getLocation());
     }
@@ -66,7 +68,7 @@ public class UsersService {
         if (multipartFile.getSize() > AVATAR_MAX_SIZE) {
             throw new BusinessException(UsersCodes.AVATAR_IS_OUT_OF_MAX_SIZE);
         }
-        File avatar = FileUtil.convert(multipartFile);
+        File avatar = FileUtil.convert(avatarFileTempPath, multipartFile);
         String avatarName = avatarStorage.store(userName, avatar);
         UserProfile userProfile = usersPersistence.findProfile(userName);
         if (userProfile == null) {
