@@ -14,7 +14,7 @@
             flushCache="true">
         UPDATE kb_acceptance_criterias SET
         summary=#{acceptanceCriteria.summary},
-        is_finished=#{acceptanceCriteria.isFinished}
+        finished=#{acceptanceCriteria.finished}
         WHERE id=#{acceptanceCriteriaId} AND delete_status=0
     </update>
     <select id="findById" parameterType="java.lang.String"

@@ -215,3 +215,22 @@ CREATE TABLE kb_notification (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+-- ----------------------------
+-- Table structure for kb_acceptance_criterias
+-- ----------------------------
+DROP TABLE IF EXISTS kb_acceptance_criterias;
+
+CREATE TABLE kb_acceptance_criterias (
+  id                VARCHAR(40) NOT NULL,
+  summary           VARCHAR(200) DEFAULT '',
+  card_id           VARCHAR(50) NOT NULL,
+  finished          BOOLEAN      DEFAULT 0,
+  author            VARCHAR(40)  DEFAULT NULL,
+  creation_time     DATETIME     DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  delete_status     INT(2)       DEFAULT 0,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;

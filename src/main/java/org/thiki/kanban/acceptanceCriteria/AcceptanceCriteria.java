@@ -16,7 +16,7 @@ public class AcceptanceCriteria {
     @NotEmpty(message = AcceptanceCriteriaCodes.summaryIsRequired)
     @Length(max = 100, message = AcceptanceCriteriaCodes.summaryIsInvalid)
     private String summary;
-    private int isFinished;
+    private Boolean finished;
     private String author;
 
     private String creationTime;
@@ -62,11 +62,12 @@ public class AcceptanceCriteria {
         this.summary = summary;
     }
 
-    public Integer getIsFinished() {
-        return isFinished;
+    public Boolean getFinished() {
+        return finished;
     }
 
-    public void setIsFinished(Integer isFinished) {
-        this.isFinished = isFinished;
+    public void setFinished(Boolean finished) {
+        this.finished = finished;
     }
+
 }
