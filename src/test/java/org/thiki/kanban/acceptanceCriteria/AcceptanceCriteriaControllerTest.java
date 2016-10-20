@@ -74,10 +74,12 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("acceptanceCriterias[0].summary", equalTo("AC-summary"))
                 .body("acceptanceCriterias[0].finished", equalTo(false))
                 .body("acceptanceCriterias[0].author", equalTo(userName))
+                .body("acceptanceCriterias[0].sortNumber", equalTo(0))
                 .body("acceptanceCriterias[0]._links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
                 .body("acceptanceCriterias[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
-                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
+                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.sortNumbers.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers"));
     }
 
     @Scenario("获取指定的验收标准>用户为卡片创建验收标准后,可以根据ID获取指定的验收标准")
@@ -161,6 +163,7 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("acceptanceCriterias[1].summary", equalTo("AC-summary-2"))
                 .body("acceptanceCriterias[1].sortNumber", equalTo(2))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
-                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
+                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.sortNumbers.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers"));
     }
 }

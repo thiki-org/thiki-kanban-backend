@@ -25,6 +25,9 @@ public class AcceptCriteriasResource extends RestResource {
         Link selfLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(cardId, procedureId)).withSelfRel();
         this.add(selfLink);
 
+        Link sortNumbersLink = linkTo(methodOn(AcceptCriteriaController.class).resortAcceptCriterias(null, cardId, procedureId)).withRel("sortNumbers");
+        this.add(sortNumbersLink);
+
         Link cardLink = linkTo(methodOn(CardsController.class).findById(procedureId, cardId)).withRel("card");
         this.add(cardLink);
     }

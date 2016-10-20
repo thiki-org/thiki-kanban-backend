@@ -14,7 +14,7 @@ public class AcceptanceCriteria {
 
     @NotNull(message = AcceptanceCriteriaCodes.summaryIsRequired)
     @NotEmpty(message = AcceptanceCriteriaCodes.summaryIsRequired)
-    @Length(max = 100, message = AcceptanceCriteriaCodes.summaryIsInvalid)
+    @Length(max = 200, message = AcceptanceCriteriaCodes.summaryIsInvalid)
     private String summary;
     private Boolean finished;
     private String author;
