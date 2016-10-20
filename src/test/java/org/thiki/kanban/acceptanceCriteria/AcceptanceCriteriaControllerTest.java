@@ -121,4 +121,21 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
                 .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
     }
+
+    @Scenario("删除指定的验收标准>用户为卡片创建验收标准后,可以删除指定的验收标准")
+    @Test
+    public void deleteAC() throws Exception {
+        dbPreparation.table("kb_acceptance_criterias")
+                .names("id,summary,card_id,author")
+                .values("fooId", "AC-summary", "card-fooId", "someone").exec();
+
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .body("{\"summary\":\"new-AC-summary\",\"finished\":\"true\"}")
+                .when()
+                .delete("/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId")
+                .then()
+                .statusCode(200)
+                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
+    }
 }

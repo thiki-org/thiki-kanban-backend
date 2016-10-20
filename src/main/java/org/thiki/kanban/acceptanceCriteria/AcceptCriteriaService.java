@@ -33,4 +33,8 @@ public class AcceptCriteriaService {
         acceptCriteriaPersistence.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
         return acceptCriteriaPersistence.findById(acceptanceCriteriaId);
     }
+
+    public Integer removeAcceptanceCriteria(String acceptanceCriteriaId) {
+        return acceptCriteriaPersistence.deleteAcceptanceCriteria(acceptanceCriteriaId);
+    }
 }

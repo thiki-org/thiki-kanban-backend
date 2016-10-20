@@ -17,4 +17,6 @@ public interface AcceptCriteriaPersistence {
     List<AcceptanceCriteria> loadAcceptanceCriteriasByCardId(@Param("cardId") String cardId);
 
     Integer updateAcceptCriteria(@Param("acceptanceCriteriaId") String acceptanceCriteriaId, @Param("acceptanceCriteria") AcceptanceCriteria acceptanceCriteria);
+
+    Integer deleteAcceptanceCriteria(String acceptanceCriteriaId);
 }

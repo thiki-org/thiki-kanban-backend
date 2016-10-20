@@ -26,4 +26,8 @@
             resultType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria">
         SELECT * FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0
     </select>
+
+    <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_acceptance_criterias SET delete_status=1 WHERE id=#{acceptanceCriteriaId}
+    </delete>
 </mapper>

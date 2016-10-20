@@ -37,6 +37,13 @@ public class AcceptCriteriaController {
         return Response.build(new AcceptanceCriteriaResource(savedAcceptanceCriteria, cardId, procedureId));
     }
 
+    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.DELETE)
+    public HttpEntity removeAcceptanceCriteria(@PathVariable("cardId") String cardId, @PathVariable("acceptanceCriteriaId") String acceptanceCriteriaId, @PathVariable("procedureId") String procedureId) {
+        acceptCriteriaService.removeAcceptanceCriteria(acceptanceCriteriaId);
+
+        return Response.build(new AcceptanceCriteriaResource(cardId, procedureId));
+    }
+
     @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias", method = RequestMethod.GET)
     public HttpEntity loadAcceptanceCriteriasByCardId(@PathVariable("cardId") String cardId, @PathVariable("procedureId") String procedureId) {
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptCriteriaService.loadAcceptanceCriteriasByCardId(cardId);

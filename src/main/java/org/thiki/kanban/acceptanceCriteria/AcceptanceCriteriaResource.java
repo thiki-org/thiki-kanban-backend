@@ -23,4 +23,9 @@ public class AcceptanceCriteriaResource extends RestResource {
             this.add(cardLink);
         }
     }
+
+    public AcceptanceCriteriaResource(String cardId, String procedureId) {
+        Link acceptanceCriteriasLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(cardId, procedureId)).withRel("acceptanceCriterias");
+        this.add(acceptanceCriteriasLink);
+    }
 }
