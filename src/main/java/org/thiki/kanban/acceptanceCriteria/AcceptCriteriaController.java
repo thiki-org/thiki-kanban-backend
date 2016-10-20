@@ -49,4 +49,10 @@ public class AcceptCriteriaController {
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
         return Response.build(new AcceptCriteriasResource(acceptanceCriteriaList, cardId, procedureId));
     }
+
+    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/sortNumbers", method = RequestMethod.PUT)
+    public HttpEntity resortAcceptCriterias(@RequestBody List<AcceptanceCriteria> acceptanceCriterias, @PathVariable("cardId") String cardId, @PathVariable("procedureId") String procedureId) {
+        List<AcceptanceCriteria> acceptanceCriteriaList = acceptCriteriaService.resortAcceptCriterias(cardId, acceptanceCriterias);
+        return Response.build(new AcceptCriteriasResource(acceptanceCriteriaList, cardId, procedureId));
+    }
 }

@@ -30,4 +30,10 @@
     <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_acceptance_criterias SET delete_status=1 WHERE id=#{acceptanceCriteriaId}
     </delete>
+    <update id="resort" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria"
+            flushCache="true">
+        UPDATE kb_acceptance_criterias SET
+        sort_number=#{acceptanceCriteria.sortNumber}
+        WHERE id=#{acceptanceCriteria.id} AND delete_status=0
+    </update>
 </mapper>

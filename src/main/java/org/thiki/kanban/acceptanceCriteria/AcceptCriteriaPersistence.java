@@ -19,4 +19,6 @@ public interface AcceptCriteriaPersistence {
     Integer updateAcceptCriteria(@Param("acceptanceCriteriaId") String acceptanceCriteriaId, @Param("acceptanceCriteria") AcceptanceCriteria acceptanceCriteria);
 
     Integer deleteAcceptanceCriteria(String acceptanceCriteriaId);
+
+    Integer resort(@Param("acceptanceCriteria") AcceptanceCriteria acceptanceCriteria);
 }

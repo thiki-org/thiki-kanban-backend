@@ -138,4 +138,29 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .statusCode(200)
                 .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
     }
+
+    @Scenario("调整验收标准的顺序>用户创建完卡片后,可以调整验收标准的排列顺序")
+    @Test
+    public void resortAcceptanceCriterias() throws Exception {
+        dbPreparation.table("kb_acceptance_criterias")
+                .names("id,summary,card_id,author")
+                .values("acceptanceCriteria-id1", "AC-summary-1", "card-fooId", "someone").exec();
+        dbPreparation.table("kb_acceptance_criterias")
+                .names("id,summary,card_id,author")
+                .values("acceptanceCriteria-id2", "AC-summary-2", "card-fooId", "someone").exec();
+
+        given().body("[{\"id\":\"acceptanceCriteria-id1\",\"sortNumber\":\"1\"},{\"id\":\"acceptanceCriteria-id2\",\"sortNumber\":\"2\"}]")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers")
+                .then()
+                .statusCode(200)
+                .body("acceptanceCriterias[0].summary", equalTo("AC-summary-1"))
+                .body("acceptanceCriterias[0].sortNumber", equalTo(1))
+                .body("acceptanceCriterias[1].summary", equalTo("AC-summary-2"))
+                .body("acceptanceCriterias[1].sortNumber", equalTo(2))
+                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
+                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
+    }
 }

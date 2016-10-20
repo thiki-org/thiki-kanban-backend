@@ -18,7 +18,7 @@ public class AcceptanceCriteria {
     private String summary;
     private Boolean finished;
     private String author;
-
+    private Integer sortNumber;
     private String creationTime;
     private String modificationTime;
 
@@ -70,4 +70,11 @@ public class AcceptanceCriteria {
         this.finished = finished;
     }
 
+    public Integer getSortNumber() {
+        return sortNumber;
+    }
+
+    public void setSortNumber(Integer sortNumber) {
+        this.sortNumber = sortNumber;
+    }
 }

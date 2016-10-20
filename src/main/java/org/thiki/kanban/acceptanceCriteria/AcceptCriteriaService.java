@@ -37,4 +37,11 @@ public class AcceptCriteriaService {
     public Integer removeAcceptanceCriteria(String acceptanceCriteriaId) {
         return acceptCriteriaPersistence.deleteAcceptanceCriteria(acceptanceCriteriaId);
     }
+
+    public List<AcceptanceCriteria> resortAcceptCriterias(String cardId, List<AcceptanceCriteria> acceptanceCriterias) {
+        for (AcceptanceCriteria acceptanceCriteria : acceptanceCriterias) {
+            acceptCriteriaPersistence.resort(acceptanceCriteria);
+        }
+        return acceptCriteriaPersistence.loadAcceptanceCriteriasByCardId(cardId);
+    }
 }

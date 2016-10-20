@@ -192,6 +192,7 @@ CREATE TABLE kb_acceptance_criterias(
   id VARCHAR(40)NOT NULL PRIMARY KEY,
   summary VARCHAR(200) DEFAULT '',
   card_id VARCHAR(50)NOT NULL,
+  sort_number int DEFAULT 0,
   finished BOOLEAN DEFAULT FALSE ,
   author VARCHAR(40) DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
