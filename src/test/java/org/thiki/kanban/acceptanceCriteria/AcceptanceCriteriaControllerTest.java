@@ -74,7 +74,7 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("acceptanceCriterias[0].summary", equalTo("AC-summary"))
                 .body("acceptanceCriterias[0].finished", equalTo(false))
                 .body("acceptanceCriterias[0].author", equalTo(userName))
-                .body("acceptanceCriterias[0].sortNumber", equalTo(0))
+                .body("acceptanceCriterias[0].sortNumber", equalTo(9999))
                 .body("acceptanceCriterias[0]._links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
                 .body("acceptanceCriterias[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"))
