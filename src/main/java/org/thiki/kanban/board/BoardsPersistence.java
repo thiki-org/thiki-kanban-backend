@@ -26,4 +26,6 @@ public interface BoardsPersistence {
     List<Board> findByTeamId(String TeamId);
 
     boolean unique(@Param("id") String id, @Param("name") String boardName, @Param("userName") String userName);
+
+    String findTeamId(String boardId);
 }
