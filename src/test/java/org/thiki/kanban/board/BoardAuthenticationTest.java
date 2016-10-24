@@ -3,7 +3,7 @@ package org.thiki.kanban.board;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.thiki.kanban.TestBase;
+import org.thiki.kanban.AuthenticationTestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
@@ -16,7 +16,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 @Domain(order = DomainOrder.BOARD, name = "看板")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BoardAuthenticationTest extends TestBase {
+public class BoardAuthenticationTest extends AuthenticationTestBase {
     @Scenario("鉴权>当用户删除一个指定的board时,如果该用户并非board所属团队的成员,且board非个人所属,则不允许删除")
     @Test
     public void notAllowedIfCurrentHasNoAuthority() throws Exception {

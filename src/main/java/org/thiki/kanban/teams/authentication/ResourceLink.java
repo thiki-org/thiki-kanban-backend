@@ -28,7 +28,7 @@ public class ResourceLink {
     }
 
     private void loadAuthenticationFormAuthProvider() {
-        Authentication authentication = getAuthentication();
+        Authentication authentication = getAuthenticationProvider();
         if (authentication == null) {
             return;
         }
@@ -64,12 +64,12 @@ public class ResourceLink {
         return authenticatedLink;
     }
 
-    private Authentication getAuthentication() {
+    private Authentication getAuthenticationProvider() {
         Map<String, Authentication> authProviders = ApplicationContextProvider.getApplicationContext().getBeansOfType(Authentication.class);
         for (Map.Entry entry : authProviders.entrySet()) {
-            Authentication auth = (Authentication) entry.getValue();
-            if (auth.matchPath(linkHref)) {
-                return auth;
+            Authentication authProvider = (Authentication) entry.getValue();
+            if (authProvider.getClass().getName().indexOf("org.thiki") > -1 && authProvider.matchPath(linkHref)) {
+                return authProvider;
             }
         }
         return null;

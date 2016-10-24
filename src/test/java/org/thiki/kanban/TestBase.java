@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.foundation.aspect.DBInterceptor;
 import org.thiki.kanban.foundation.common.SequenceNumber;
+import org.thiki.kanban.foundation.security.Constants;
 
 import javax.sql.DataSource;
 
@@ -43,7 +44,10 @@ public class TestBase {
     @BeforeClass
     public static void globalInit() {
         RestAssured.port = port;
-        RequestSpecification requestSpecification = new RequestSpecBuilder().addHeader("authentication", "no").build();
+        RequestSpecification requestSpecification = new RequestSpecBuilder()
+                .addHeader(Constants.HEADER_PARAMS_IDENTIFICATION, "no")
+                .addHeader(Constants.HEADER_PARAMS_AUTHENTICATION, "no")
+                .build();
         RestAssured.requestSpecification = requestSpecification;
     }
 

@@ -5,7 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.thiki.kanban.AuthenticationTestBase;
+import org.thiki.kanban.IdentificationTestBase;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.common.date.DateStyle;
@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
  * Created by xubt on 7/10/16.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AuthenticationFilterTest extends AuthenticationTestBase {
+public class IdentificationFilterTest extends IdentificationTestBase {
     @Resource
     private RSAService rsaService;
     @Resource
