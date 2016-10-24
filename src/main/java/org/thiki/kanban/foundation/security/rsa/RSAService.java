@@ -61,7 +61,7 @@ public class RSAService {
             PublicKey publicKey = keyFactory.generatePublic(keySpec);
             return publicKey;
         } catch (Exception e) {
-            throw new IllegalArgumentException("Failed to get public key!", e);
+            throw new IllegalArgumentException("Failed to authGet public key!", e);
         }
     }
 
@@ -72,7 +72,7 @@ public class RSAService {
             PrivateKey privateKey = keyFactory.generatePrivate(keySpec);
             return privateKey;
         } catch (Exception e) {
-            throw new InvalidParamsException("Failed to get private key!");
+            throw new InvalidParamsException("Failed to authGet private key!");
         }
     }
 

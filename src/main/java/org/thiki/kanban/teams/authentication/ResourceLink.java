@@ -33,10 +33,10 @@ public class ResourceLink {
             return;
         }
         authentication.config(linkHref, userName);
-        isAllowedRead = authentication.get();
-        isAllowedCreate = authentication.post();
-        isAllowedDelete = authentication.delete();
-        isAllowedModify = authentication.put();
+        isAllowedRead = authentication.authGet();
+        isAllowedCreate = authentication.authPost();
+        isAllowedDelete = authentication.authDelete();
+        isAllowedModify = authentication.authPut();
     }
 
     private JSONObject rebuildLinkWithAuthenticationInformation() {
@@ -56,23 +56,19 @@ public class ResourceLink {
         JSONObject deleteMethod = new JSONObject();
         deleteMethod.put("isAllowed", isAllowedDelete);
 
-        methodsAuthInformation.put("post", postMethod);
-        methodsAuthInformation.put("get", getMethod);
-        methodsAuthInformation.put("put", putMethod);
-        methodsAuthInformation.put("delete", deleteMethod);
+        methodsAuthInformation.put("authPost", postMethod);
+        methodsAuthInformation.put("authGet", getMethod);
+        methodsAuthInformation.put("authPut", putMethod);
+        methodsAuthInformation.put("authDelete", deleteMethod);
         authenticatedLink.put("methods", methodsAuthInformation);
         return authenticatedLink;
-    }
-
-    private String toPath() {
-        return "/boards/feeId/procedures";
     }
 
     private Authentication getAuthentication() {
         Map<String, Authentication> authProviders = ApplicationContextProvider.getApplicationContext().getBeansOfType(Authentication.class);
         for (Map.Entry entry : authProviders.entrySet()) {
             Authentication auth = (Authentication) entry.getValue();
-            if (auth.matchPath(toPath())) {
+            if (auth.matchPath(linkHref)) {
                 return auth;
             }
         }

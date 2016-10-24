@@ -25,7 +25,7 @@ public class TeamsAuth implements Authentication {
     private TeamMembersService teamMembersService;
 
     @Override
-    public boolean authenticate(String url, String userName) {
+    public boolean authenticate(String url, String method, String userName) {
         UriTemplate uriTemplate = new UriTemplate("/boards/{boardId}/procedures");
         Map values = uriTemplate.match(url);
         String boardId = (String) values.get("boardId");
@@ -44,27 +44,27 @@ public class TeamsAuth implements Authentication {
     }
 
     @Override
-    public boolean get() {
+    public boolean authGet() {
         return false;
     }
 
     @Override
-    public boolean post() {
+    public boolean authPost() {
         return false;
     }
 
     @Override
-    public boolean delete() {
+    public boolean authDelete() {
         return false;
     }
 
     @Override
-    public boolean put() {
+    public boolean authPut() {
         return false;
     }
 
     @Override
-    public String getPath() {
+    public String getPathTemplate() {
         return null;
     }
 

@@ -21,11 +21,8 @@ import java.util.Map;
 @ControllerAdvice(basePackages = "org.thiki")
 public class TeamsRequestBodyAdvice implements RequestBodyAdvice {
 
-    @Autowired(required = true)
-    private HttpServletRequest request;
-
     @Autowired
-    private ApplicationContextProvider applicationContextProvider;
+    private HttpServletRequest request;
 
     @Override
     public boolean supports(MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
@@ -48,10 +45,13 @@ public class TeamsRequestBodyAdvice implements RequestBodyAdvice {
             return o;
         }
         String currentURL = request.getRequestURI();
-        Map<String, Authentication> authProvidersauthProviders = ApplicationContextProvider.getApplicationContext().getBeansOfType(Authentication.class);
-        for (Map.Entry entry : authProvidersauthProviders.entrySet()) {
+        String method = request.getMethod();
+        Map<String, Authentication> authProviders = ApplicationContextProvider.getApplicationContext().getBeansOfType(Authentication.class);
+        for (Map.Entry entry : authProviders.entrySet()) {
             Authentication auth = (Authentication) entry.getValue();
-            auth.authenticate(currentURL, request.getHeader("userName"));
+            if (auth.matchPath(currentURL)) {
+                auth.authenticate(currentURL, method, request.getHeader("userName"));
+            }
         }
         return o;
     }

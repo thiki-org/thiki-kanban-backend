@@ -118,7 +118,7 @@ public class FileUtil {
         cleanDirectory(directory);
 
         if (!directory.delete()) {
-            String message = "Unable to delete directory " + directory + ".";
+            String message = "Unable to authDelete directory " + directory + ".";
             throw new IOException(message);
         }
     }
@@ -169,7 +169,7 @@ public class FileUtil {
                     throw new FileNotFoundException("File does not exist: "
                             + file);
                 }
-                String message = "Unable to delete file: " + file;
+                String message = "Unable to authDelete file: " + file;
                 throw new IOException(message);
             }
         }

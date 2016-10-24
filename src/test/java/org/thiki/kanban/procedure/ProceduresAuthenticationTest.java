@@ -37,7 +37,7 @@ public class ProceduresAuthenticationTest extends TestBase {
                 .body("message", equalTo(TeamMembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_TEAM.message()));
     }
 
-    @Scenario("创建一个新的procedure后,返回自身及links信息")
+    @Scenario("权限管控>当用户创建一个新的procedure后,返回自身及links信息")
     @Test
     public void shouldReturn201WhenCreateProcedureSuccessfully() {
         given().header("userName", userName)
@@ -53,9 +53,9 @@ public class ProceduresAuthenticationTest extends TestBase {
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))
-                .body("_links.self.methods.get.isAllowed", equalTo(true))
-                .body("_links.self.methods.post.isAllowed", equalTo(true))
-                .body("_links.self.methods.put.isAllowed", equalTo(true))
-                .body("_links.self.methods.delete.isAllowed", equalTo(true));
+                .body("_links.self.methods.authGet.isAllowed", equalTo(true))
+                .body("_links.self.methods.authPost.isAllowed", equalTo(true))
+                .body("_links.self.methods.authPut.isAllowed", equalTo(true))
+                .body("_links.self.methods.authDelete.isAllowed", equalTo(true));
     }
 }
