@@ -18,7 +18,17 @@ public abstract class AuthProvider implements Authentication {
 
     @Override
     public boolean authenticate(String url, String method, String userName) {
-        return true;
+        if (method.equals(MethodType.GET)) {
+            return authGet();
+        }
+        if (method.equals(MethodType.POST)) {
+            return authPost();
+        }
+        if (method.equals(MethodType.DELETE)) {
+            return authDelete();
+        }
+
+        return !method.equals(MethodType.PUT) || authPut();
     }
 
     @Override

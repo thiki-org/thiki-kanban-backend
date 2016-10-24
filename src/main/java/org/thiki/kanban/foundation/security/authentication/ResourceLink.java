@@ -12,10 +12,10 @@ public class ResourceLink {
     private final String linkName;
     private final String linkHref;
     private final String userName;
-    private boolean isAllowedCreate = true;
-    private boolean isAllowedModify = true;
-    private boolean isAllowedDelete = true;
-    private boolean isAllowedRead = true;
+    private boolean isAllowedCreate = false;
+    private boolean isAllowedModify = false;
+    private boolean isAllowedDelete = false;
+    private boolean isAllowedRead = false;
 
     public ResourceLink(String linkName, String linkHref, String userName) {
         this.linkName = linkName;

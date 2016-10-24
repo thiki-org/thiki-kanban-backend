@@ -51,16 +51,16 @@ http://localhost:8007/entrance
 			"href":"http://localhost:8007/passwordRetrievalApplication",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -94,7 +94,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1477295553304,
+	"timestamp":1477296276310,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -127,7 +127,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1477295553366,
+	"timestamp":1477296276373,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -160,7 +160,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1477295553421,
+	"timestamp":1477296276449,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -184,7 +184,7 @@ http://localhost:8007/registration
 ```
 {
 	"name":"someone",
-	"password":"H7dqyJ8iZfdAgHWpp7XfkJvgpWDixop+J1d+7vMC2rkghnncHEGqUZNONsVegWEFbRnaO/f0CLHz7vm4JI098231PvBAlrO+/pYkplk0PuxS3qAhWlNMiQrUeLxTiPJMnI++L/mXs8hsfhM2ZPHSGJ4yNEXSHJP6zMtBgWQL6RA=",
+	"password":"c9Y7kXJnWm8oaf+Ktw/AjAf8T5Zb1VVSN5ApIxEWov2iRMZ1pTB2YWEcz5E9Ao9Nq5hUcMcva+g+QPvbq7tPhtV1TW2RmHbg1zOIWQmGUd52PgQ4QQmwjYBl1ErC69mIvVxouddOZ5CsBISCvWVxFHz1BflEWFDNe+E4bjvmWjY=",
 	"email":"someone@gmail.com"
 }
 ```
@@ -200,16 +200,16 @@ http://localhost:8007/registration
 			"href":"http://localhost:8007/login",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -230,12 +230,12 @@ http://localhost:8007/registration
 login_shouldLoginFailedIfUserNameOrPasswordIsIncorrect
 
 **URL**
-http://localhost:8007/login?identity=someone&password=juxWcqDBO4Cs4T6LmbTB0sWFvVmXcII5tOaGD8NU1kV21aXmFjv3IgmnwJ0FnOym1LsiSZLYR7eBf4MltbhAZxKH0T8pqQCIbKLLX2YoG1E0wvdHwcRd5uzAPpD2ZlN9U%2BA7lIYn9LKjmA3DRAO0sGBejy8vCr78jmQdtTKNQxQ%3D
+http://localhost:8007/login?identity=someone&password=rYfU45SH67YSLyrTH8p%2FOUyOyTfitXxROxKVtYyBaFTyhV9iQrVZLiSHaMacu9JeWGm7NxvZiuwAUgozQVro%2F7L6%2BPHKFLHh0QvQ0FHpBl%2FPO%2BDZglx8CdEIU8EpTxzNk147ucWkFsR0HhFX%2BKUEon8K9oAKTN6Nmoi5aB4a3Ug%3D
 
 **响应体**
 ```
 {
-	"timestamp":1477295546214,
+	"timestamp":1477296271554,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -253,7 +253,7 @@ http://localhost:8007/login?identity=someone&password=juxWcqDBO4Cs4T6LmbTB0sWFvV
 login_loginSuccessfully
 
 **URL**
-http://localhost:8007/login?identity=someone&password=H%2BXameX5Fs%2FB79kmvqfHS46s6mK2BPs1sVxSjGGN8JuHq0JgzbOofEZMUOJ3dNz8hwjzgDnHrtqwFG%2FX4xh8SEDSvx84V0pp%2F1sj9rIN1wngKgQZupFz8nabjUQjW2gdrxIaFTPYvyACRVlkljcMLnTkVD4tUwQ1zZUGhDkoFpQ%3D
+http://localhost:8007/login?identity=someone&password=FExa7DIUL49q%2BbqNq2IaSwIahqiAAUD9f0THv25ZJ66lpVjlSADyri3mtv6sm8u7B7y4F1Yr94U%2BvK%2BKTMAIbQt%2F93273%2FGM5ycRloTA6JT%2BMjpD66Dxdov6ghpY4hUrw6G8gvBlVCaAzsqWWq3SK80kxrSXwWDo%2BRYT%2Fp2PTEY%3D
 
 **响应体**
 ```
@@ -263,16 +263,16 @@ http://localhost:8007/login?identity=someone&password=H%2BXameX5Fs%2FB79kmvqfHS4
 			"href":"http://localhost:8007/someone/teams",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -280,16 +280,16 @@ http://localhost:8007/login?identity=someone&password=H%2BXameX5Fs%2FB79kmvqfHS4
 			"href":"http://localhost:8007/someone/notifications/unread/total",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -297,16 +297,16 @@ http://localhost:8007/login?identity=someone&password=H%2BXameX5Fs%2FB79kmvqfHS4
 			"href":"http://localhost:8007/users/someone/profile",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -314,16 +314,16 @@ http://localhost:8007/login?identity=someone&password=H%2BXameX5Fs%2FB79kmvqfHS4
 			"href":"http://localhost:8007/someone/boards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -346,7 +346,7 @@ http://localhost:8007/login?password=foo
 **响应体**
 ```
 {
-	"timestamp":1477295546362,
+	"timestamp":1477296271693,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -369,7 +369,7 @@ http://localhost:8007/login?identity=foo&password=foo
 **响应体**
 ```
 {
-	"timestamp":1477295546403,
+	"timestamp":1477296271755,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -394,7 +394,7 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295535090,
+	"timestamp":1477296263229,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.AuthenticationException",
@@ -426,22 +426,22 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:15.113000",
+	"creationTime":"2016-10-24 16:04:23.254000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -449,16 +449,16 @@ http://localhost:8007/someone/boards/fooId
 			"href":"http://localhost:8007/boards/fooId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -483,22 +483,22 @@ http://localhost:8007/someone/boards/fooId
 			"href":"http://localhost:8007/teams/teamId-foo",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:15.113000",
+	"modificationTime":"2016-10-24 16:04:23.254000",
 	"teamId":"teamId-foo",
 	"name":"new-name",
 	"id":"fooId"
@@ -526,7 +526,7 @@ http://localhost:8007/someone/boards/fooId1
 **响应体**
 ```
 {
-	"timestamp":1477295535231,
+	"timestamp":1477296263448,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -549,22 +549,22 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:15.249000",
+	"creationTime":"2016-10-24 16:04:23.471000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -572,16 +572,16 @@ http://localhost:8007/someone/boards/fooId
 			"href":"http://localhost:8007/boards/fooId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -604,7 +604,7 @@ http://localhost:8007/someone/boards/fooId
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:15.249000",
+	"modificationTime":"2016-10-24 16:04:23.471000",
 	"name":"board-name",
 	"id":"fooId"
 }
@@ -631,7 +631,7 @@ http://localhost:8007/someone/boards
 **响应体**
 ```
 {
-	"timestamp":1477295535322,
+	"timestamp":1477296263554,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -655,7 +655,7 @@ http://localhost:8007/someone/boards
 ```
 [
 	{
-		"creationTime":"2016-10-24 15:52:15.338000",
+		"creationTime":"2016-10-24 16:04:23.572000",
 		"_links":{
 			"all":{
 				"href":"http://localhost:8007/someone/boards"
@@ -668,7 +668,7 @@ http://localhost:8007/someone/boards
 			}
 		},
 		"author":"someone",
-		"modificationTime":"2016-10-24 15:52:15.338000",
+		"modificationTime":"2016-10-24 16:04:23.572000",
 		"name":"board-name",
 		"id":"fooId"
 	}
@@ -697,22 +697,22 @@ http://localhost:8007/someone/boards
 ```
 {
 	"owner":"someone",
-	"creationTime":"2016-10-24 15:52:15.404000",
+	"creationTime":"2016-10-24 16:04:23.665000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -720,16 +720,16 @@ http://localhost:8007/someone/boards
 			"href":"http://localhost:8007/boards/fooId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -752,7 +752,7 @@ http://localhost:8007/someone/boards
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:15.404000",
+	"modificationTime":"2016-10-24 16:04:23.665000",
 	"name":"board-name",
 	"id":"fooId"
 }
@@ -776,16 +776,16 @@ http://localhost:8007/someone/boards/fooId
 			"href":"http://localhost:8007/someone/boards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -814,7 +814,7 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295535486,
+	"timestamp":1477296263778,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -837,7 +837,7 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295535512,
+	"timestamp":1477296263802,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -871,22 +871,22 @@ http://localhost:8007/boards/feeId/procedures
 ```
 {
 	"orderNumber":1,
-	"creationTime":"2016-10-24 15:52:32.425000",
+	"creationTime":"2016-10-24 16:04:35.475000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -894,16 +894,16 @@ http://localhost:8007/boards/feeId/procedures
 			"href":"http://localhost:8007/procedures/fooId/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -911,22 +911,22 @@ http://localhost:8007/boards/feeId/procedures
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"fooName",
-	"modificationTime":"2016-10-24 15:52:32.425000",
+	"modificationTime":"2016-10-24 16:04:35.475000",
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"title."
@@ -956,22 +956,22 @@ http://localhost:8007/boards/feeId/procedures/fooId
 ```
 {
 	"orderNumber":0,
-	"creationTime":"2016-10-24 15:52:32.485000",
+	"creationTime":"2016-10-24 16:04:35.534000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -979,16 +979,16 @@ http://localhost:8007/boards/feeId/procedures/fooId
 			"href":"http://localhost:8007/procedures/fooId/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -996,22 +996,22 @@ http://localhost:8007/boards/feeId/procedures/fooId
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-10-24 15:52:32.485000",
+	"modificationTime":"2016-10-24 16:04:35.534000",
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"newTitle"
@@ -1041,22 +1041,22 @@ http://localhost:8007/boards/feeId/procedures/fooId2
 ```
 {
 	"orderNumber":0,
-	"creationTime":"2016-10-24 15:52:32.547000",
+	"creationTime":"2016-10-24 16:04:35.588000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1064,16 +1064,16 @@ http://localhost:8007/boards/feeId/procedures/fooId2
 			"href":"http://localhost:8007/procedures/fooId2/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1081,22 +1081,22 @@ http://localhost:8007/boards/feeId/procedures/fooId2
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId2",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-10-24 15:52:32.547000",
+	"modificationTime":"2016-10-24 16:04:35.588000",
 	"boardId":"feeId",
 	"id":"fooId2",
 	"title":"newTitle"
@@ -1117,22 +1117,22 @@ http://localhost:8007/boards/feeId/procedures/fooId
 ```
 {
 	"orderNumber":0,
-	"creationTime":"2016-10-24 15:52:32.606000",
+	"creationTime":"2016-10-24 16:04:35.652000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1140,16 +1140,16 @@ http://localhost:8007/boards/feeId/procedures/fooId
 			"href":"http://localhost:8007/procedures/fooId/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1157,22 +1157,22 @@ http://localhost:8007/boards/feeId/procedures/fooId
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-10-24 15:52:32.606000",
+	"modificationTime":"2016-10-24 16:04:35.652000",
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"this is the first procedure."
@@ -1200,7 +1200,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1477295552666,
+	"timestamp":1477296275710,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1232,7 +1232,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295552705,
+	"timestamp":1477296275755,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1257,7 +1257,7 @@ http://localhost:8007/boards/feeId/procedures
 [
 	{
 		"orderNumber":0,
-		"creationTime":"2016-10-24 15:52:32.733000",
+		"creationTime":"2016-10-24 16:04:35.778000",
 		"_links":{
 			"all":{
 				"href":"http://localhost:8007/boards/feeId/procedures"
@@ -1270,7 +1270,7 @@ http://localhost:8007/boards/feeId/procedures
 			}
 		},
 		"author":"tao",
-		"modificationTime":"2016-10-24 15:52:32.733000",
+		"modificationTime":"2016-10-24 16:04:35.778000",
 		"boardId":"feeId",
 		"id":"fooId",
 		"title":"this is the first procedure."
@@ -1299,7 +1299,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1477295552822,
+	"timestamp":1477296275852,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1327,16 +1327,16 @@ http://localhost:8007/boards/feeId/procedures/fooId
 			"href":"http://localhost:8007/boards/feeId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -1365,7 +1365,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1477295552895,
+	"timestamp":1477296275943,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1388,7 +1388,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295552928,
+	"timestamp":1477296275981,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1421,22 +1421,22 @@ http://localhost:8007/boards/feeId/procedures/fooId1
 ```
 {
 	"orderNumber":2,
-	"creationTime":"2016-10-24 15:52:32.952000",
+	"creationTime":"2016-10-24 16:04:36.026000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1444,16 +1444,16 @@ http://localhost:8007/boards/feeId/procedures/fooId1
 			"href":"http://localhost:8007/procedures/fooId1/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1461,22 +1461,22 @@ http://localhost:8007/boards/feeId/procedures/fooId1
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId1",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-10-24 15:52:32.952000",
+	"modificationTime":"2016-10-24 16:04:36.026000",
 	"boardId":"feeId",
 	"id":"fooId1",
 	"title":"newTitle"
@@ -1504,7 +1504,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1477295553020,
+	"timestamp":1477296276123,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -1536,22 +1536,22 @@ http://localhost:8007/boards/feeId/procedures
 ```
 {
 	"orderNumber":0,
-	"creationTime":"2016-10-24 15:52:33.080000",
+	"creationTime":"2016-10-24 16:04:36.172000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1559,16 +1559,16 @@ http://localhost:8007/boards/feeId/procedures
 			"href":"http://localhost:8007/procedures/fooId/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1576,22 +1576,22 @@ http://localhost:8007/boards/feeId/procedures
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"fooName",
-	"modificationTime":"2016-10-24 15:52:33.080000",
+	"modificationTime":"2016-10-24 16:04:36.172000",
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"this is the procedure title."
@@ -1625,22 +1625,22 @@ http://localhost:8007/procedures/1/cards/fooId2
 {
 	"summary":"newSummary",
 	"orderNumber":3,
-	"creationTime":"2016-10-24 15:52:15.534000",
+	"creationTime":"2016-10-24 16:04:23.830000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId2/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1648,16 +1648,16 @@ http://localhost:8007/procedures/1/cards/fooId2
 			"href":"http://localhost:8007/procedures/1/cards/fooId2/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1665,16 +1665,16 @@ http://localhost:8007/procedures/1/cards/fooId2
 			"href":"http://localhost:8007/procedures/1/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1682,21 +1682,21 @@ http://localhost:8007/procedures/1/cards/fooId2
 			"href":"http://localhost:8007/procedures/1/cards/fooId2",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:15.534000",
+	"modificationTime":"2016-10-24 16:04:23.830000",
 	"id":"fooId2",
 	"procedureId":"1"
 }
@@ -1723,7 +1723,7 @@ http://localhost:8007/procedures/1/cards/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295535619,
+	"timestamp":1477296263937,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1754,7 +1754,7 @@ http://localhost:8007/procedures/fooId/cards
 **响应体**
 ```
 {
-	"timestamp":1477295535651,
+	"timestamp":1477296263982,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1779,22 +1779,22 @@ http://localhost:8007/procedures/1/cards/1
 {
 	"summary":"this is the card summary.",
 	"orderNumber":0,
-	"creationTime":"2016-10-24 15:52:15.662000",
+	"creationTime":"2016-10-24 16:04:24.010000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/1/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1802,16 +1802,16 @@ http://localhost:8007/procedures/1/cards/1
 			"href":"http://localhost:8007/procedures/1/cards/1/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1819,16 +1819,16 @@ http://localhost:8007/procedures/1/cards/1
 			"href":"http://localhost:8007/procedures/1/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1836,22 +1836,22 @@ http://localhost:8007/procedures/1/cards/1
 			"href":"http://localhost:8007/procedures/1/cards/1",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:15.662000",
+	"modificationTime":"2016-10-24 16:04:24.010000",
 	"id":"1",
 	"procedureId":"1",
 	"content":"play badminton"
@@ -1883,22 +1883,22 @@ http://localhost:8007/procedures/1/cards/fooId6
 {
 	"summary":"newSummary",
 	"orderNumber":3,
-	"creationTime":"2016-10-24 15:52:15.712000",
+	"creationTime":"2016-10-24 16:04:24.098000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId6/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1906,16 +1906,16 @@ http://localhost:8007/procedures/1/cards/fooId6
 			"href":"http://localhost:8007/procedures/1/cards/fooId6/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1923,16 +1923,16 @@ http://localhost:8007/procedures/1/cards/fooId6
 			"href":"http://localhost:8007/procedures/1/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -1940,21 +1940,21 @@ http://localhost:8007/procedures/1/cards/fooId6
 			"href":"http://localhost:8007/procedures/1/cards/fooId6",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:15.712000",
+	"modificationTime":"2016-10-24 16:04:24.098000",
 	"id":"fooId6",
 	"procedureId":"1"
 }
@@ -1985,22 +1985,22 @@ http://localhost:8007/procedures/1/cards/fooId4
 {
 	"summary":"newSummary",
 	"orderNumber":1,
-	"creationTime":"2016-10-24 15:52:15.772000",
+	"creationTime":"2016-10-24 16:04:24.181000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId4/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2008,16 +2008,16 @@ http://localhost:8007/procedures/1/cards/fooId4
 			"href":"http://localhost:8007/procedures/1/cards/fooId4/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2025,16 +2025,16 @@ http://localhost:8007/procedures/1/cards/fooId4
 			"href":"http://localhost:8007/procedures/1/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2042,21 +2042,21 @@ http://localhost:8007/procedures/1/cards/fooId4
 			"href":"http://localhost:8007/procedures/1/cards/fooId4",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:15.772000",
+	"modificationTime":"2016-10-24 16:04:24.181000",
 	"id":"fooId4",
 	"procedureId":"1"
 }
@@ -2075,7 +2075,7 @@ http://localhost:8007/procedures/fooId/cards/feeId
 **响应体**
 ```
 {
-	"timestamp":1477295535854,
+	"timestamp":1477296264296,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -2110,22 +2110,22 @@ http://localhost:8007/procedures/1/cards/fooId
 {
 	"summary":"newSummary",
 	"orderNumber":3,
-	"creationTime":"2016-10-24 15:52:15.882000",
+	"creationTime":"2016-10-24 16:04:24.314000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2133,16 +2133,16 @@ http://localhost:8007/procedures/1/cards/fooId
 			"href":"http://localhost:8007/procedures/1/cards/fooId/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2150,16 +2150,16 @@ http://localhost:8007/procedures/1/cards/fooId
 			"href":"http://localhost:8007/procedures/1/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2167,21 +2167,21 @@ http://localhost:8007/procedures/1/cards/fooId
 			"href":"http://localhost:8007/procedures/1/cards/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:15.882000",
+	"modificationTime":"2016-10-24 16:04:24.314000",
 	"id":"fooId",
 	"procedureId":"1"
 }
@@ -2200,7 +2200,7 @@ http://localhost:8007/procedures/feeId/cards/non-exists-cardId
 **响应体**
 ```
 {
-	"timestamp":1477295535983,
+	"timestamp":1477296264415,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -2226,7 +2226,7 @@ http://localhost:8007/procedures/fooId/cards
 	{
 		"summary":"this is the card summary.",
 		"orderNumber":0,
-		"creationTime":"2016-10-24 15:52:16.016000",
+		"creationTime":"2016-10-24 16:04:24.440000",
 		"_links":{
 			"assignments":{
 				"href":"http://localhost:8007/procedures/fooId/cards/card-fooId/assignments"
@@ -2242,7 +2242,7 @@ http://localhost:8007/procedures/fooId/cards
 			}
 		},
 		"author":"someone",
-		"modificationTime":"2016-10-24 15:52:16.016000",
+		"modificationTime":"2016-10-24 16:04:24.440000",
 		"id":"card-fooId",
 		"procedureId":"fooId",
 		"content":"play badminton"
@@ -2271,7 +2271,7 @@ http://localhost:8007/procedures/non-exists-procedureId/cards
 **响应体**
 ```
 {
-	"timestamp":1477295536117,
+	"timestamp":1477296264531,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -2299,16 +2299,16 @@ http://localhost:8007/procedures/feeId/cards/fooId
 			"href":"http://localhost:8007/procedures/feeId/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -2339,22 +2339,22 @@ http://localhost:8007/procedures/fooId/cards
 {
 	"summary":"summary",
 	"orderNumber":0,
-	"creationTime":"2016-10-24 15:52:16.213000",
+	"creationTime":"2016-10-24 16:04:24.608000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/fooId/cards/fooId/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2362,16 +2362,16 @@ http://localhost:8007/procedures/fooId/cards
 			"href":"http://localhost:8007/procedures/fooId/cards/fooId/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2379,16 +2379,16 @@ http://localhost:8007/procedures/fooId/cards
 			"href":"http://localhost:8007/procedures/fooId/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2396,22 +2396,22 @@ http://localhost:8007/procedures/fooId/cards
 			"href":"http://localhost:8007/procedures/fooId/cards/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:16.213000",
+	"modificationTime":"2016-10-24 16:04:24.608000",
 	"id":"fooId",
 	"procedureId":"fooId"
 }
@@ -2438,7 +2438,7 @@ http://localhost:8007/procedures/fooId/cards
 **响应体**
 ```
 {
-	"timestamp":1477295536273,
+	"timestamp":1477296264687,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2473,22 +2473,22 @@ http://localhost:8007/procedures/1/cards/fooId1
 {
 	"summary":"newSummary",
 	"orderNumber":3,
-	"creationTime":"2016-10-24 15:52:16.287000",
+	"creationTime":"2016-10-24 16:04:24.713000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId1/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2496,16 +2496,16 @@ http://localhost:8007/procedures/1/cards/fooId1
 			"href":"http://localhost:8007/procedures/1/cards/fooId1/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2513,16 +2513,16 @@ http://localhost:8007/procedures/1/cards/fooId1
 			"href":"http://localhost:8007/procedures/1/cards",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2530,21 +2530,21 @@ http://localhost:8007/procedures/1/cards/fooId1
 			"href":"http://localhost:8007/procedures/1/cards/fooId1",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:16.287000",
+	"modificationTime":"2016-10-24 16:04:24.713000",
 	"id":"fooId1",
 	"procedureId":"1"
 }
@@ -2563,7 +2563,7 @@ http://localhost:8007/procedures/2/cards
 **响应体**
 ```
 {
-	"timestamp":1477295536347,
+	"timestamp":1477296264791,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -2588,7 +2588,7 @@ http://localhost:8007/teams/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295570228,
+	"timestamp":1477296283515,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2619,7 +2619,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1477295570272,
+	"timestamp":1477296283574,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2650,7 +2650,7 @@ http://localhost:8007/teams/teamId-foo
 **响应体**
 ```
 {
-	"timestamp":1477295570316,
+	"timestamp":1477296283634,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2673,22 +2673,22 @@ http://localhost:8007/teams/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:50.358000",
+	"creationTime":"2016-10-24 16:04:43.716000",
 	"_links":{
 		"members":{
 			"href":"http://localhost:8007/teams/fooId/members",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2696,22 +2696,22 @@ http://localhost:8007/teams/fooId
 			"href":"http://localhost:8007/teams/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:50.358000",
+	"modificationTime":"2016-10-24 16:04:43.716000",
 	"name":"team-name",
 	"id":"fooId"
 }
@@ -2738,7 +2738,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1477295570463,
+	"timestamp":1477296283845,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2762,7 +2762,7 @@ http://localhost:8007/someone/teams
 ```
 [
 	{
-		"creationTime":"2016-10-24 15:52:50.509000",
+		"creationTime":"2016-10-24 16:04:43.885000",
 		"_links":{
 			"members":{
 				"href":"http://localhost:8007/teams/fooId/members"
@@ -2772,7 +2772,7 @@ http://localhost:8007/someone/teams
 			}
 		},
 		"author":"someone",
-		"modificationTime":"2016-10-24 15:52:50.509000",
+		"modificationTime":"2016-10-24 16:04:43.885000",
 		"name":"team-name",
 		"id":"fooId"
 	}
@@ -2800,22 +2800,22 @@ http://localhost:8007/teams/teamId-foo
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:50.558000",
+	"creationTime":"2016-10-24 16:04:43.937000",
 	"_links":{
 		"members":{
 			"href":"http://localhost:8007/teams/teamId-foo/members",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2823,22 +2823,22 @@ http://localhost:8007/teams/teamId-foo
 			"href":"http://localhost:8007/teams/teamId-foo",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:50.558000",
+	"modificationTime":"2016-10-24 16:04:43.937000",
 	"name":"new-name",
 	"id":"teamId-foo"
 }
@@ -2865,22 +2865,22 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:50.622000",
+	"creationTime":"2016-10-24 16:04:44.023000",
 	"_links":{
 		"members":{
 			"href":"http://localhost:8007/teams/fooId/members",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -2888,22 +2888,22 @@ http://localhost:8007/someone/teams
 			"href":"http://localhost:8007/teams/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:50.622000",
+	"modificationTime":"2016-10-24 16:04:44.023000",
 	"name":"思奇团队讨论组",
 	"id":"fooId"
 }
@@ -2930,7 +2930,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1477295570682,
+	"timestamp":1477296284094,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2960,7 +2960,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1477295570781,
+	"timestamp":1477296284161,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2994,7 +2994,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477295553855,
+	"timestamp":1477296276921,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -3017,7 +3017,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **响应体**
 ```
 {
-	"timestamp":1477295553939,
+	"timestamp":1477296276958,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3049,22 +3049,22 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:34.023000",
+	"creationTime":"2016-10-24 16:04:37.032000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -3072,21 +3072,21 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 			"href":"http://localhost:8007/teams/foo-team-Id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:34.023000",
+	"modificationTime":"2016-10-24 16:04:37.032000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -3108,7 +3108,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **响应体**
 ```
 {
-	"timestamp":1477295556888,
+	"timestamp":1477296278708,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3140,7 +3140,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477295556942,
+	"timestamp":1477296278775,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3163,7 +3163,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **响应体**
 ```
 {
-	"timestamp":1477295556976,
+	"timestamp":1477296278811,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3195,22 +3195,22 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:37.036000",
+	"creationTime":"2016-10-24 16:04:38.877000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -3218,21 +3218,21 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 			"href":"http://localhost:8007/teams/foo-team-Id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:37.036000",
+	"modificationTime":"2016-10-24 16:04:38.877000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -3254,22 +3254,22 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:44.643000",
+	"creationTime":"2016-10-24 16:04:40.228000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -3277,21 +3277,21 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 			"href":"http://localhost:8007/teams/foo-team-Id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:44.643000",
+	"modificationTime":"2016-10-24 16:04:40.228000",
 	"isAccepted":false,
 	"teamId":"foo-team-id",
 	"inviter":"someone",
@@ -3313,22 +3313,22 @@ http://localhost:8007/teams/foo-team-id/members/invitation/invitation-id
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:44.706000",
+	"creationTime":"2016-10-24 16:04:40.324000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-id/members/invitation/invitation-id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -3336,21 +3336,21 @@ http://localhost:8007/teams/foo-team-id/members/invitation/invitation-id
 			"href":"http://localhost:8007/teams/foo-team-id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:44.706000",
+	"modificationTime":"2016-10-24 16:04:40.324000",
 	"isAccepted":true,
 	"teamId":"foo-team-id",
 	"inviter":"inviter",
@@ -3381,22 +3381,22 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:44.786000",
+	"creationTime":"2016-10-24 16:04:40.422000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -3404,21 +3404,21 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 			"href":"http://localhost:8007/teams/foo-team-Id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:44.786000",
+	"modificationTime":"2016-10-24 16:04:40.422000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -3449,7 +3449,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477295567219,
+	"timestamp":1477296281994,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3472,7 +3472,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **响应体**
 ```
 {
-	"timestamp":1477295567261,
+	"timestamp":1477296282048,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3504,7 +3504,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477295567325,
+	"timestamp":1477296282115,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3536,22 +3536,22 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:47.436000",
+	"creationTime":"2016-10-24 16:04:42.226000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -3559,21 +3559,21 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 			"href":"http://localhost:8007/teams/foo-team-Id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
-	"modificationTime":"2016-10-24 15:52:47.436000",
+	"modificationTime":"2016-10-24 16:04:42.226000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -3604,7 +3604,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477295570184,
+	"timestamp":1477296283451,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3637,7 +3637,7 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"timestamp":1477295553546,
+	"timestamp":1477296276583,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -3665,16 +3665,16 @@ http://localhost:8007/teams/foo-teamId/members
 			"href":"http://localhost:8007/teams/foo-teamId/members/invitation",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -3717,7 +3717,7 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"timestamp":1477295553653,
+	"timestamp":1477296276675,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3740,7 +3740,7 @@ http://localhost:8007/teams/foo-teamId/members
 **响应体**
 ```
 {
-	"timestamp":1477295553697,
+	"timestamp":1477296276727,
 	"status":401,
 	"error":"Unauthorized",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -3771,28 +3771,28 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:33.752000",
+	"creationTime":"2016-10-24 16:04:36.813000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-teamId/teamMembers",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:33.752000",
+	"modificationTime":"2016-10-24 16:04:36.813000",
 	"teamId":"foo-teamId",
 	"member":"someone",
 	"id":"fooId"
@@ -3812,7 +3812,7 @@ http://localhost:8007/teams/foo-teamId/members
 **响应体**
 ```
 {
-	"timestamp":1477295553806,
+	"timestamp":1477296276873,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3845,7 +3845,7 @@ http://localhost:8007/tao/password
 **响应体**
 ```
 {
-	"timestamp":1477295546686,
+	"timestamp":1477296272093,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3876,7 +3876,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1477295546723,
+	"timestamp":1477296272129,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3912,16 +3912,16 @@ http://localhost:8007/tao/passwordResetApplication
 			"href":"http://localhost:8007/tao/password",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -3949,7 +3949,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1477295546816,
+	"timestamp":1477296272224,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -3972,7 +3972,7 @@ http://localhost:8007/tao/password
 **请求体**
 ```
 {
-	"password":"XDKwBEHigvQhbcWqCOBmZlvB/+8uB6QDdFMQMpoUtK/nHENsNITe4prwXOmD3YcCte8DlpCoJS4kJ0tydJHoeVyB5d6MFpbduc14llwZFgTJHAXHSDhLLINOaK32800mD5QhKd7wokYpPBcITi+UxaFN4hbYX74LMi83if5S/ZM="
+	"password":"U88Oy+LtrlYQ+gQ/S4DN/pPSEVsY0H4z0QomNBXhxR83QJkEjiCQGoFNxsNWKHjsKCGxdzXVAQ7U1lkhbol7cf7k3isKgmfM6JL1Kf4a7juNFTTHlvhPGJo8AuNDoE6r3bEP6/iI6Fe01fi+qiNUUobG4kVSwKmapacGWyyZ5gE="
 }
 ```
 
@@ -3985,16 +3985,16 @@ http://localhost:8007/tao/password
 			"href":"http://localhost:8007/login",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4028,16 +4028,16 @@ http://localhost:8007/passwordRetrievalApplication
 			"href":"http://localhost:8007/tao/passwordResetApplication",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4066,7 +4066,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1477295549577,
+	"timestamp":1477296273794,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4102,16 +4102,16 @@ http://localhost:8007/passwordRetrievalApplication
 			"href":"http://localhost:8007/tao/passwordResetApplication",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4140,7 +4140,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1477295552226,
+	"timestamp":1477296275321,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4171,7 +4171,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1477295552262,
+	"timestamp":1477296275355,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -4202,7 +4202,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1477295552305,
+	"timestamp":1477296275418,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4232,16 +4232,16 @@ http://localhost:8007/someone/notifications
 			"href":"http://localhost:8007/someone/notifications",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4249,16 +4249,16 @@ http://localhost:8007/someone/notifications
 			"href":"http://localhost:8007/someone/notifications",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4266,7 +4266,7 @@ http://localhost:8007/someone/notifications
 	"notifications":[
 		{
 			"displayTime":"刚刚",
-			"creationTime":"2016-10-24 15:52:26.425000",
+			"creationTime":"2016-10-24 16:04:31.814000",
 			"receiver":"someone",
 			"sender":"sender@gmail.com",
 			"_links":{
@@ -4302,7 +4302,7 @@ http://localhost:8007/someone/notifications/foo-notification-id
 ```
 {
 	"displayTime":"刚刚",
-	"creationTime":"2016-10-24 15:52:26.496000",
+	"creationTime":"2016-10-24 16:04:31.886000",
 	"receiver":"someone",
 	"sender":"sender@gmail.com",
 	"_links":{
@@ -4310,16 +4310,16 @@ http://localhost:8007/someone/notifications/foo-notification-id
 			"href":"http://localhost:8007/someone/notifications/foo-notification-id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4327,16 +4327,16 @@ http://localhost:8007/someone/notifications/foo-notification-id
 			"href":"http://localhost:8007/someone/notifications",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4369,16 +4369,16 @@ http://localhost:8007/someone/notifications/unread/total
 			"href":"http://localhost:8007/someone/notifications/unread/total",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4386,16 +4386,16 @@ http://localhost:8007/someone/notifications/unread/total
 			"href":"http://localhost:8007/someone/notifications",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4417,7 +4417,7 @@ http://localhost:8007/someone/notifications/foo-notification-id
 ```
 {
 	"displayTime":"刚刚",
-	"creationTime":"2016-10-24 15:52:26.582000",
+	"creationTime":"2016-10-24 16:04:31.974000",
 	"receiver":"someone",
 	"sender":"sender@gmail.com",
 	"_links":{
@@ -4425,16 +4425,16 @@ http://localhost:8007/someone/notifications/foo-notification-id
 			"href":"http://localhost:8007/someone/notifications/foo-notification-id",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4442,16 +4442,16 @@ http://localhost:8007/someone/notifications/foo-notification-id
 			"href":"http://localhost:8007/someone/notifications",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4480,7 +4480,7 @@ http://localhost:8007/procedures/1/cards/cardId-foo/assignments
 **响应体**
 ```
 {
-	"timestamp":1477295534504,
+	"timestamp":1477296262838,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -4541,7 +4541,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295534630,
+	"timestamp":1477296262957,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -4564,22 +4564,22 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:14.648000",
+	"creationTime":"2016-10-24 16:04:22.975000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/1/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4587,16 +4587,16 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4604,16 +4604,16 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4621,22 +4621,22 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 			"href":"http://localhost:8007/procedures/1/cards/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"authorId-foo",
-	"modificationTime":"2016-10-24 15:52:14.648000",
+	"modificationTime":"2016-10-24 16:04:22.975000",
 	"cardId":"cardId-foo",
 	"assigner":"assignerId-foo",
 	"name":"徐濤",
@@ -4663,16 +4663,16 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4680,16 +4680,16 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 			"href":"http://localhost:8007/procedures/1/cards/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4719,22 +4719,22 @@ http://localhost:8007/procedures/1/cards/fooId/assignments
 **响应体**
 ```
 {
-	"creationTime":"2016-10-24 15:52:15.016000",
+	"creationTime":"2016-10-24 16:04:23.124000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/1/procedures",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4742,16 +4742,16 @@ http://localhost:8007/procedures/1/cards/fooId/assignments
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4759,16 +4759,16 @@ http://localhost:8007/procedures/1/cards/fooId/assignments
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4776,22 +4776,22 @@ http://localhost:8007/procedures/1/cards/fooId/assignments
 			"href":"http://localhost:8007/procedures/1/cards/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:15.016000",
+	"modificationTime":"2016-10-24 16:04:23.124000",
 	"cardId":"fooId",
 	"assigner":"assignerId",
 	"assignee":"assigneeId",
@@ -4819,16 +4819,16 @@ http://localhost:8007/users/someone/avatar
 			"href":"http://localhost:8007/users/someone/profile",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4836,16 +4836,16 @@ http://localhost:8007/users/someone/avatar
 			"href":"http://localhost:8007/users/someone/avatar",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4866,7 +4866,7 @@ http://localhost:8007/users/someone/avatar
 **响应体**
 ```
 {
-	"timestamp":1477295570960,
+	"timestamp":1477296284348,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4889,7 +4889,7 @@ http://localhost:8007/users/someone/avatar
 **响应体**
 ```
 {
-	"timestamp":1477295571017,
+	"timestamp":1477296284396,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4917,16 +4917,16 @@ http://localhost:8007/users/someone/avatar
 			"href":"http://localhost:8007/users/someone/profile",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4934,16 +4934,16 @@ http://localhost:8007/users/someone/avatar
 			"href":"http://localhost:8007/users/someone/avatar",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -4969,16 +4969,16 @@ http://localhost:8007/users/someone/avatar
 			"href":"http://localhost:8007/users/someone/profile",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -4986,16 +4986,16 @@ http://localhost:8007/users/someone/avatar
 			"href":"http://localhost:8007/users/someone/avatar",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -5029,16 +5029,16 @@ http://localhost:8007/users/someone/profile
 			"href":"http://localhost:8007/users/someone/profile",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5046,16 +5046,16 @@ http://localhost:8007/users/someone/profile
 			"href":"http://localhost:8007/users/someone/avatar",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -5084,16 +5084,16 @@ http://localhost:8007/users/someone/profile
 			"href":"http://localhost:8007/users/someone/profile",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5101,16 +5101,16 @@ http://localhost:8007/users/someone/profile
 			"href":"http://localhost:8007/users/someone/avatar",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -5139,16 +5139,16 @@ http://localhost:8007/users/someone/profile
 			"href":"http://localhost:8007/users/someone/profile",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5156,16 +5156,16 @@ http://localhost:8007/users/someone/profile
 			"href":"http://localhost:8007/users/someone/avatar",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -5199,22 +5199,22 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 ```
 {
 	"summary":"AC-summary",
-	"creationTime":"2016-10-24 15:52:13.472000",
+	"creationTime":"2016-10-24 16:04:21.402000",
 	"_links":{
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5222,16 +5222,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5239,22 +5239,22 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:13.472000",
+	"modificationTime":"2016-10-24 16:04:21.402000",
 	"sortNumber":9999,
 	"finished":false,
 	"id":"fooId"
@@ -5292,7 +5292,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 	"acceptanceCriterias":[
 		{
 			"summary":"AC-summary-1",
-			"creationTime":"2016-10-24 15:52:13.961000",
+			"creationTime":"2016-10-24 16:04:22.022000",
 			"_links":{
 				"acceptanceCriterias":{
 					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"
@@ -5305,14 +5305,14 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 				}
 			},
 			"author":"someone",
-			"modificationTime":"2016-10-24 15:52:13.961000",
+			"modificationTime":"2016-10-24 16:04:22.022000",
 			"sortNumber":1,
 			"finished":false,
 			"id":"acceptanceCriteria-id1"
 		},
 		{
 			"summary":"AC-summary-2",
-			"creationTime":"2016-10-24 15:52:13.962000",
+			"creationTime":"2016-10-24 16:04:22.022000",
 			"_links":{
 				"acceptanceCriterias":{
 					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"
@@ -5325,7 +5325,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 				}
 			},
 			"author":"someone",
-			"modificationTime":"2016-10-24 15:52:13.962000",
+			"modificationTime":"2016-10-24 16:04:22.022000",
 			"sortNumber":2,
 			"finished":false,
 			"id":"acceptanceCriteria-id2"
@@ -5336,16 +5336,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5353,16 +5353,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5370,16 +5370,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -5401,22 +5401,22 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 ```
 {
 	"summary":"AC-summary",
-	"creationTime":"2016-10-24 15:52:14.116000",
+	"creationTime":"2016-10-24 16:04:22.180000",
 	"_links":{
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5424,16 +5424,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5441,22 +5441,22 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:14.116000",
+	"modificationTime":"2016-10-24 16:04:22.180000",
 	"sortNumber":9999,
 	"finished":false,
 	"id":"fooId"
@@ -5484,7 +5484,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **响应体**
 ```
 {
-	"timestamp":1477295534248,
+	"timestamp":1477296262387,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -5510,7 +5510,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 	"acceptanceCriterias":[
 		{
 			"summary":"AC-summary",
-			"creationTime":"2016-10-24 15:52:14.275000",
+			"creationTime":"2016-10-24 16:04:22.413000",
 			"_links":{
 				"acceptanceCriterias":{
 					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"
@@ -5523,7 +5523,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 				}
 			},
 			"author":"someone",
-			"modificationTime":"2016-10-24 15:52:14.275000",
+			"modificationTime":"2016-10-24 16:04:22.413000",
 			"sortNumber":9999,
 			"finished":false,
 			"id":"fooId"
@@ -5534,16 +5534,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5551,16 +5551,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5568,16 +5568,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -5603,16 +5603,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
@@ -5643,22 +5643,22 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 ```
 {
 	"summary":"new-AC-summary",
-	"creationTime":"2016-10-24 15:52:14.395000",
+	"creationTime":"2016-10-24 16:04:22.743000",
 	"_links":{
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5666,16 +5666,16 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5683,22 +5683,22 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-24 15:52:14.395000",
+	"modificationTime":"2016-10-24 16:04:22.743000",
 	"sortNumber":9999,
 	"finished":true,
 	"id":"fooId"
@@ -5728,7 +5728,7 @@ http://localhost:8007/thief/teams
 **响应体**
 ```
 {
-	"timestamp":1477295536449,
+	"timestamp":1477296264925,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -5759,7 +5759,7 @@ http://localhost:8007/procedures/1/cards/fooId
 **响应体**
 ```
 {
-	"timestamp":1477295546027,
+	"timestamp":1477296271356,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -5782,7 +5782,7 @@ http://localhost:8007/resource
 **响应体**
 ```
 {
-	"timestamp":1477295546057,
+	"timestamp":1477296271384,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -5805,7 +5805,7 @@ http://localhost:8007/resource
 **响应体**
 ```
 {
-	"timestamp":1477295546091,
+	"timestamp":1477296271411,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -5828,7 +5828,7 @@ http://localhost:8007/resource
 **响应体**
 ```
 {
-	"timestamp":1477295546122,
+	"timestamp":1477296271454,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -5856,16 +5856,16 @@ http://localhost:8007/publicKey
 			"href":"http://localhost:8007/registration",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		},
@@ -5873,16 +5873,16 @@ http://localhost:8007/publicKey
 			"href":"http://localhost:8007/login",
 			"actions":{
 				"modify":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"read":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"create":{
-					"isAllowed":true
+					"isAllowed":false
 				},
 				"delete":{
-					"isAllowed":true
+					"isAllowed":false
 				}
 			}
 		}
