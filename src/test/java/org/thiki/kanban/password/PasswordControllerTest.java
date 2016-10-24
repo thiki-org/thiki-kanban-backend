@@ -15,7 +15,7 @@ import org.thiki.kanban.foundation.common.VerificationCodeService;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.exception.ExceptionCode;
-import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.foundation.security.identification.rsa.RSAService;
 import org.thiki.kanban.password.password.PasswordCodes;
 import org.thiki.kanban.password.password.PasswordService;
 

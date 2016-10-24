@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.security.rsa;
+package org.thiki.kanban.foundation.security.identification.rsa;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Service;

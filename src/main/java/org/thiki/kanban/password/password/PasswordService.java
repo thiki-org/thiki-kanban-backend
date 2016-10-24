@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.VerificationCodeService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.mail.MailService;
-import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.foundation.security.identification.rsa.RSAService;
 import org.thiki.kanban.password.passwordReset.PasswordReset;
 import org.thiki.kanban.password.passwordReset.PasswordResetApplication;
 import org.thiki.kanban.password.passwordRetrieval.PasswordRetrievalApplication;

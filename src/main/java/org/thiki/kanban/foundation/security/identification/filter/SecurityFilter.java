@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.security.filter;
+package org.thiki.kanban.foundation.security.identification.filter;
 
 import org.apache.catalina.connector.RequestFacade;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -7,8 +7,8 @@ import org.springframework.web.util.UriTemplate;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.UnauthorisedException;
 import org.thiki.kanban.foundation.security.Constants;
-import org.thiki.kanban.foundation.security.token.IdentityResult;
-import org.thiki.kanban.foundation.security.token.TokenService;
+import org.thiki.kanban.foundation.security.identification.token.IdentityResult;
+import org.thiki.kanban.foundation.security.identification.token.TokenService;
 
 import javax.annotation.Resource;
 import javax.servlet.*;

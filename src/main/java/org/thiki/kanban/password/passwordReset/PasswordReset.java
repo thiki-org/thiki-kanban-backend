@@ -1,7 +1,7 @@
 package org.thiki.kanban.password.passwordReset;
 
 import org.hibernate.validator.constraints.Length;
-import org.thiki.kanban.foundation.security.md5.MD5Service;
+import org.thiki.kanban.foundation.security.identification.md5.MD5Service;
 
 import javax.validation.constraints.NotNull;
 

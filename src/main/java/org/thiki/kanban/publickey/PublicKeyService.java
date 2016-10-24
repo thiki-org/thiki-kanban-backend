@@ -1,7 +1,7 @@
 package org.thiki.kanban.publickey;
 
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.foundation.security.identification.rsa.RSAService;
 
 import javax.annotation.Resource;
 

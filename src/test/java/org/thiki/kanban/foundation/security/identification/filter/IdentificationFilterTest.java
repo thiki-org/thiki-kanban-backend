@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.security.filter;
+package org.thiki.kanban.foundation.security.identification.filter;
 
 import com.jayway.restassured.http.ContentType;
 import org.junit.Test;
@@ -10,9 +10,9 @@ import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.security.Constants;
-import org.thiki.kanban.foundation.security.rsa.RSAService;
-import org.thiki.kanban.foundation.security.token.AuthenticationToken;
-import org.thiki.kanban.foundation.security.token.TokenService;
+import org.thiki.kanban.foundation.security.identification.rsa.RSAService;
+import org.thiki.kanban.foundation.security.identification.token.AuthenticationToken;
+import org.thiki.kanban.foundation.security.identification.token.TokenService;
 
 import javax.annotation.Resource;
 import java.util.Date;

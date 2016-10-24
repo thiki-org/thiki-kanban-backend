@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.security.token;
+package org.thiki.kanban.foundation.security.identification.token;
 
 /**
  * Created by xubt on 8/5/16.

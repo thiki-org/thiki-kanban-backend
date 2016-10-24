@@ -1,11 +1,11 @@
-package org.thiki.kanban.foundation.security.token;
+package org.thiki.kanban.foundation.security.identification.token;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.security.Constants;
-import org.thiki.kanban.foundation.security.rsa.RSAService;
+import org.thiki.kanban.foundation.security.identification.rsa.RSAService;
 
 import javax.annotation.Resource;
 import java.util.Date;

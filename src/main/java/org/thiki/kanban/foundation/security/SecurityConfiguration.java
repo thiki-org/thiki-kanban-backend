@@ -3,7 +3,7 @@ package org.thiki.kanban.foundation.security;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.thiki.kanban.foundation.security.filter.SecurityFilter;
+import org.thiki.kanban.foundation.security.identification.filter.SecurityFilter;
 
 import javax.annotation.Resource;
 

@@ -10,8 +10,8 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
-import org.thiki.kanban.foundation.security.rsa.RSAService;
-import org.thiki.kanban.foundation.security.token.TokenService;
+import org.thiki.kanban.foundation.security.identification.rsa.RSAService;
+import org.thiki.kanban.foundation.security.identification.token.TokenService;
 
 import javax.annotation.Resource;
 

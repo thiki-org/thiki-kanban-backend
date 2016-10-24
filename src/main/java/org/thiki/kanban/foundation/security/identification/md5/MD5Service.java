@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.security.md5;
+package org.thiki.kanban.foundation.security.identification.md5;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

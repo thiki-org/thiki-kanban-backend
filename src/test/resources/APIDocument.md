@@ -1,31 +1,71 @@
 
-# 四、工序 #
+# 零、入口 #
 
-## 创建一个新的procedure后,返回自身及links信息 ##
+## 初次访问系统时入口 ##
 
 **用例名称**
-shouldReturn201WhenCreateProcedureSuccessfully
+enter_shouldReturnEntranceSuccessfully
 
 **URL**
-http://localhost:8007/error/500
-
-**请求体**
-```
-{
-	"title":"this is the procedure title."
-}
-```
-
+http://localhost:8007/entrance
 
 **响应体**
 ```
 {
-	"timestamp":1477145560138,
-	"status":500,
-	"error":"Internal Server Error",
-	"exception":"java.lang.ClassCastException",
-	"message":"Request processing failed; nested exception is java.lang.ClassCastException: com.alibaba.fastjson.JSONObject cannot be cast to com.alibaba.fastjson.JSONArray",
-	"path":"/boards/feeId/procedures"
+	"_links":{
+		"self":{
+			"methods":{
+				"modify":{
+					"isAllowed":false
+				},
+				"read":{
+					"isAllowed":true
+				},
+				"create":{
+					"isAllowed":false
+				},
+				"delete":{
+					"isAllowed":false
+				}
+			},
+			"href":"http://localhost:8007/entrance"
+		},
+		"publicKey":{
+			"methods":{
+				"modify":{
+					"isAllowed":true
+				},
+				"read":{
+					"isAllowed":true
+				},
+				"create":{
+					"isAllowed":true
+				},
+				"delete":{
+					"isAllowed":true
+				}
+			},
+			"href":"http://localhost:8007/publicKey"
+		},
+		"passwordRetrievalApplication":{
+			"methods":{
+				"modify":{
+					"isAllowed":true
+				},
+				"read":{
+					"isAllowed":true
+				},
+				"create":{
+					"isAllowed":true
+				},
+				"delete":{
+					"isAllowed":true
+				}
+			},
+			"href":"http://localhost:8007/passwordRetrievalApplication"
+		}
+	},
+	"description":"Welcome!"
 }
 ```
 
