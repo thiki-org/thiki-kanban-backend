@@ -56,10 +56,10 @@ public class ResourceLink {
         JSONObject deleteMethod = new JSONObject();
         deleteMethod.put("isAllowed", isAllowedDelete);
 
-        methodsAuthInformation.put("authPost", postMethod);
-        methodsAuthInformation.put("authGet", getMethod);
-        methodsAuthInformation.put("authPut", putMethod);
-        methodsAuthInformation.put("authDelete", deleteMethod);
+        methodsAuthInformation.put("create", postMethod);
+        methodsAuthInformation.put("read", getMethod);
+        methodsAuthInformation.put("modify", putMethod);
+        methodsAuthInformation.put("delete", deleteMethod);
         authenticatedLink.put("methods", methodsAuthInformation);
         return authenticatedLink;
     }
