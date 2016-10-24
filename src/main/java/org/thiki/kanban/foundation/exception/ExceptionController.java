@@ -78,6 +78,9 @@ public class ExceptionController implements ErrorController {
     @ResponseBody
     public ResponseEntity<Map<String, Object>> error500(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
+        if (body.get("message").equals("No message available")) {
+            body.put("message", body.get("exception"));
+        }
         HttpStatus status = getStatus(request, isIncludeStackTrace(request));
         return new ResponseEntity<>(body, status);
     }
