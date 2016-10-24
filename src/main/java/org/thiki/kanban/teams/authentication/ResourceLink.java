@@ -22,7 +22,12 @@ public class ResourceLink {
         this.userName = userName;
     }
 
-    private void auth() {
+    public JSONObject auth() {
+        loadAuthenticationFormAuthProvider();
+        return rebuildLinkWithAuthenticationInformation();
+    }
+
+    private void loadAuthenticationFormAuthProvider() {
         Authentication authentication = getAuthentication();
         if (authentication == null) {
             return;
@@ -34,8 +39,7 @@ public class ResourceLink {
         isAllowedModify = authentication.put();
     }
 
-    public JSONObject end() {
-        auth();
+    private JSONObject rebuildLinkWithAuthenticationInformation() {
         JSONObject authenticatedLink = new JSONObject();
         authenticatedLink.put("href", linkHref);
 

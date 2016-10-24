@@ -22,10 +22,10 @@ public class ResourceLinks {
     }
 
     public JSONObject auth() {
-        JSONObject jsonObject = new JSONObject();
+        JSONObject authenticatedLinks = new JSONObject();
         for (ResourceLink resourceLink : resourceLinks) {
-            jsonObject.put(resourceLink.getName(), resourceLink.end());
+            authenticatedLinks.put(resourceLink.getName(), resourceLink.auth());
         }
-        return jsonObject;
+        return authenticatedLinks;
     }
 }
