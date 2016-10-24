@@ -20,6 +20,7 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.thiki.kanban.foundation.exception.AuthenticationException;
 import org.thiki.kanban.foundation.exception.UnauthorisedException;
 
 import java.util.concurrent.TimeUnit;
@@ -79,7 +80,8 @@ public class ApplicationContextConfig implements ApplicationContextAware {
     public EmbeddedServletContainerCustomizer containerCustomizer() {
         return container -> {
             container.addErrorPages(new ErrorPage(UnauthorisedException.class, "/error/businessException"));
-            container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, "/error/businessException"));
+            container.addErrorPages(new ErrorPage(AuthenticationException.class, "/error/401"));
+            container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, "/error/401"));
             container.addErrorPages(new ErrorPage(HttpStatus.BAD_REQUEST, "/error/invalidParamsException"));
             container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
             container.addErrorPages(new ErrorPage(Exception.class, "/error/500"));

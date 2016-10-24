@@ -3,13 +3,12 @@ package org.thiki.kanban.entrance.auth;
 import org.springframework.web.util.UriTemplate;
 import org.thiki.kanban.teams.authentication.Authentication;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.Map;
 
 /**
  * Created by xubt on 24/10/2016.
  */
-public class AuthProvider implements Authentication {
+public abstract class AuthProvider implements Authentication {
 
     protected String userName;
     protected String hrefValue;
@@ -51,12 +50,14 @@ public class AuthProvider implements Authentication {
 
     @Override
     public boolean matchPath(String url) {
-        try {
-            String path = new URL(url).getPath();
-            UriTemplate uriTemplate = new UriTemplate(getPathTemplate());
-            return uriTemplate.matches(path);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException("提取Path出错。URL:" + url);
-        }
+        UriTemplate uriTemplate = new UriTemplate(getPathTemplate());
+        return uriTemplate.matches(url);
+    }
+
+    @Override
+    public Map getPathValues(String url) {
+        UriTemplate uriTemplate = new UriTemplate(getPathTemplate());
+        Map pathValues = uriTemplate.match(url);
+        return pathValues;
     }
 }

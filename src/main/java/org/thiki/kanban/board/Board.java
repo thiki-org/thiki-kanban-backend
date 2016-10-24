@@ -19,6 +19,8 @@ public class Board implements Serializable {
 
     private String author;
 
+    private String owner;
+
     private String creationTime;
 
     private String modificationTime;
@@ -69,5 +71,13 @@ public class Board implements Serializable {
 
     public void setTeamId(String teamId) {
         this.teamId = teamId;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

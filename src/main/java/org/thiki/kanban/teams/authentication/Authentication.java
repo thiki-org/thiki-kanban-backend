@@ -1,5 +1,7 @@
 package org.thiki.kanban.teams.authentication;
 
+import java.util.Map;
+
 /**
  * Created by xubt on 21/10/2016.
  */
@@ -19,4 +21,6 @@ public interface Authentication {
     String getPathTemplate();
 
     boolean matchPath(String path);
+
+    Map getPathValues(String url);
 }

@@ -7,6 +7,7 @@ CREATE TABLE kb_board (
   name VARCHAR(50) ,
   team_id VARCHAR(50) ,
   author VARCHAR(40) NOT NULL,
+  owner VARCHAR(40) NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0

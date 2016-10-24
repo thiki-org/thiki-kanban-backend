@@ -6,7 +6,7 @@
 
     <insert id="create" parameterType="org.thiki.kanban.board.Board">
         INSERT INTO
-        kb_board(id,name, author) VALUES (#{id},#{name}, #{author})
+        kb_board(id,name, author,owner) VALUES (#{id},#{name}, #{author}, #{author})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.board.Board" flushCache="true">

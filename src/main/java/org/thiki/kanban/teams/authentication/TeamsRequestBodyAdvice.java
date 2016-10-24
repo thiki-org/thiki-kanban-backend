@@ -31,6 +31,15 @@ public class TeamsRequestBodyAdvice implements RequestBodyAdvice {
 
     @Override
     public Object handleEmptyBody(Object o, HttpInputMessage httpInputMessage, MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
+        String currentURL = request.getRequestURI();
+        String method = request.getMethod();
+        Map<String, Authentication> authProviders = ApplicationContextProvider.getApplicationContext().getBeansOfType(Authentication.class);
+        for (Map.Entry entry : authProviders.entrySet()) {
+            Authentication auth = (Authentication) entry.getValue();
+            if (auth.matchPath(currentURL)) {
+                auth.authenticate(currentURL, method, request.getHeader("userName"));
+            }
+        }
         return null;
     }
 
@@ -41,9 +50,7 @@ public class TeamsRequestBodyAdvice implements RequestBodyAdvice {
 
     @Override
     public Object afterBodyRead(Object o, HttpInputMessage httpInputMessage, MethodParameter methodParameter, Type type, Class<? extends HttpMessageConverter<?>> aClass) {
-        if (request.getHeader("authentication").equals("no")) {
-            return o;
-        }
+
         String currentURL = request.getRequestURI();
         String method = request.getMethod();
         Map<String, Authentication> authProviders = ApplicationContextProvider.getApplicationContext().getBeansOfType(Authentication.class);

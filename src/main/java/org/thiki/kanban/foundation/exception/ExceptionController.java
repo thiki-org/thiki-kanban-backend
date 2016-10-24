@@ -53,10 +53,17 @@ public class ExceptionController implements ErrorController {
 
     @RequestMapping(value = "businessException")
     @ResponseBody
-    public ResponseEntity<Map<String, Object>> error401(HttpServletRequest request) {
+    public ResponseEntity<Map<String, Object>> businessException(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
         HttpStatus status = getStatus(request, isIncludeStackTrace(request));
         return new ResponseEntity<>(body, status);
+    }
+
+    @RequestMapping(value = "401")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> error401(HttpServletRequest request) {
+        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 
     @RequestMapping(value = "invalidParamsException")
@@ -74,7 +81,6 @@ public class ExceptionController implements ErrorController {
         HttpStatus status = getStatus(request, isIncludeStackTrace(request));
         return new ResponseEntity<>(body, status);
     }
-
 
     private boolean isIncludeStackTrace(HttpServletRequest request) {
         ErrorProperties.IncludeStacktrace include = this.serverProperties.getError().getIncludeStacktrace();
@@ -94,6 +100,9 @@ public class ExceptionController implements ErrorController {
         Map<String, Object> errorAttributes = this.errorAttributes.getErrorAttributes(requestAttributes, includeStackTrace);
         if (this.errorAttributes.getError(requestAttributes) instanceof BusinessException) {
             errorAttributes.put("code", ((BusinessException) this.errorAttributes.getError(requestAttributes)).getCode());
+        }
+        if (this.errorAttributes.getError(requestAttributes) instanceof AuthenticationException) {
+            errorAttributes.put("code", ((AuthenticationException) this.errorAttributes.getError(requestAttributes)).getCode());
         }
         return errorAttributes;
     }

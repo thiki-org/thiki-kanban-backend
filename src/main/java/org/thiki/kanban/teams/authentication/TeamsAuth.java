@@ -73,4 +73,9 @@ public class TeamsAuth implements Authentication {
         return true;
         // TODO: 22/10/2016  具体的匹配规则
     }
+
+    @Override
+    public Map getPathValues(String url) {
+        return null;
+    }
 }
