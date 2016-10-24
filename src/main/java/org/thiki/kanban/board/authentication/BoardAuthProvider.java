@@ -5,9 +5,9 @@ import org.thiki.kanban.board.Board;
 import org.thiki.kanban.board.BoardCodes;
 import org.thiki.kanban.board.BoardResource;
 import org.thiki.kanban.board.BoardsService;
-import org.thiki.kanban.entrance.auth.AuthProvider;
 import org.thiki.kanban.foundation.exception.AuthenticationException;
 import org.thiki.kanban.foundation.exception.BusinessException;
+import org.thiki.kanban.foundation.security.authentication.AuthProvider;
 import org.thiki.kanban.teams.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;

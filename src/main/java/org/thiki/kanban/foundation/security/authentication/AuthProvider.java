@@ -1,7 +1,6 @@
-package org.thiki.kanban.entrance.auth;
+package org.thiki.kanban.foundation.security.authentication;
 
 import org.springframework.web.util.UriTemplate;
-import org.thiki.kanban.teams.authentication.Authentication;
 
 import java.net.MalformedURLException;
 import java.net.URL;

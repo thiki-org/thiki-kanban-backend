@@ -1,9 +1,9 @@
-package org.thiki.kanban.entrance.auth;
+package org.thiki.kanban.foundation.security.authentication;
 
 /**
  * Created by xubt on 24/10/2016.
  */
-public enum MethodTye {
+public enum MethodType {
     GET("get"),
     POST("post"),
     PUT("put"),
@@ -11,7 +11,7 @@ public enum MethodTye {
 
     private String methodType;
 
-    MethodTye(String methodType) {
+    MethodType(String methodType) {
         this.methodType = methodType;
     }
 }

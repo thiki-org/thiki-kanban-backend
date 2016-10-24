@@ -1,11 +1,9 @@
-package org.thiki.kanban.board.authentication;
+package org.thiki.kanban.foundation.security.authentication;
 
 import org.apache.catalina.connector.RequestFacade;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.security.Constants;
-import org.thiki.kanban.teams.authentication.ApplicationContextProvider;
-import org.thiki.kanban.teams.authentication.Authentication;
 
 import javax.servlet.*;
 import java.io.IOException;

@@ -1,6 +1,7 @@
-package org.thiki.kanban.entrance.auth;
+package org.thiki.kanban.entrance.authentication;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.security.authentication.AuthProvider;
 
 /**
  * Created by xubt on 10/24/2016.

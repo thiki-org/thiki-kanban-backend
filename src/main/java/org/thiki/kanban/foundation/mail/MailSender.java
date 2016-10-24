@@ -73,11 +73,11 @@ public class MailSender {
         if (props == null)
             props = System.getProperties();
         if (need) {
-            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.authentication", "true");
         } else {
-            props.put("mail.smtp.auth", "false");
+            props.put("mail.smtp.authentication", "false");
         }
-        log.debug("set smtp auth success：mail.smtp.auth= " + need);
+        log.debug("set smtp authentication success：mail.smtp.authentication= " + need);
 
     }
 

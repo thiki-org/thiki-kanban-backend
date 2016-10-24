@@ -1,4 +1,4 @@
-package org.thiki.kanban.teams.authentication;
+package org.thiki.kanban.foundation.security.authentication;
 
 /**
  * Created by xubt on 9/14/16.
