@@ -44,24 +44,24 @@ public class ResourceLink {
         JSONObject authenticatedLink = new JSONObject();
         authenticatedLink.put("href", linkHref);
 
-        JSONObject methodsAuthInformation = new JSONObject();
-        JSONObject postMethod = new JSONObject();
-        postMethod.put("isAllowed", isAllowedCreate);
+        JSONObject ActionsAuthInformation = new JSONObject();
+        JSONObject postAction = new JSONObject();
+        postAction.put("isAllowed", isAllowedCreate);
 
-        JSONObject getMethod = new JSONObject();
-        getMethod.put("isAllowed", isAllowedRead);
+        JSONObject getAction = new JSONObject();
+        getAction.put("isAllowed", isAllowedRead);
 
-        JSONObject putMethod = new JSONObject();
-        putMethod.put("isAllowed", isAllowedModify);
+        JSONObject putAction = new JSONObject();
+        putAction.put("isAllowed", isAllowedModify);
 
-        JSONObject deleteMethod = new JSONObject();
-        deleteMethod.put("isAllowed", isAllowedDelete);
+        JSONObject deleteAction = new JSONObject();
+        deleteAction.put("isAllowed", isAllowedDelete);
 
-        methodsAuthInformation.put("create", postMethod);
-        methodsAuthInformation.put("read", getMethod);
-        methodsAuthInformation.put("modify", putMethod);
-        methodsAuthInformation.put("delete", deleteMethod);
-        authenticatedLink.put("methods", methodsAuthInformation);
+        ActionsAuthInformation.put("create", postAction);
+        ActionsAuthInformation.put("read", getAction);
+        ActionsAuthInformation.put("modify", putAction);
+        ActionsAuthInformation.put("delete", deleteAction);
+        authenticatedLink.put("actions", ActionsAuthInformation);
         return authenticatedLink;
     }
 

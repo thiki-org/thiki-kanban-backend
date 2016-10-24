@@ -26,10 +26,10 @@ public class EntranceControllerTest extends AuthenticationTestBase {
                 .statusCode(200)
                 .body("description", equalTo("Welcome!"))
                 .body("_links.self.href", equalTo("http://localhost:8007/entrance"))
-                .body("_links.self.methods.create.isAllowed", equalTo(false))
-                .body("_links.self.methods.read.isAllowed", equalTo(true))
-                .body("_links.self.methods.modify.isAllowed", equalTo(false))
-                .body("_links.self.methods.delete.isAllowed", equalTo(false))
+                .body("_links.self.actions.create.isAllowed", equalTo(false))
+                .body("_links.self.actions.read.isAllowed", equalTo(true))
+                .body("_links.self.actions.modify.isAllowed", equalTo(false))
+                .body("_links.self.actions.delete.isAllowed", equalTo(false))
                 .body("_links.passwordRetrievalApplication.href", equalTo("http://localhost:8007/passwordRetrievalApplication"));
     }
 }
