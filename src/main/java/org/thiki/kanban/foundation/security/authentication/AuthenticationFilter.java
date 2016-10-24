@@ -3,6 +3,7 @@ package org.thiki.kanban.foundation.security.authentication;
 import org.apache.catalina.connector.RequestFacade;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.configuration.ApplicationContextProvider;
 import org.thiki.kanban.foundation.security.Constants;
 
 import javax.servlet.*;

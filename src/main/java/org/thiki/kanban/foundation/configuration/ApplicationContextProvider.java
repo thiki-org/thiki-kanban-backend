@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.security.authentication;
+package org.thiki.kanban.foundation.configuration;
 
 
 import org.springframework.beans.BeansException;

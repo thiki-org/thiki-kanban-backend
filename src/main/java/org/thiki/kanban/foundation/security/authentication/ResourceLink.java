@@ -1,6 +1,7 @@
 package org.thiki.kanban.foundation.security.authentication;
 
 import com.alibaba.fastjson.JSONObject;
+import org.thiki.kanban.foundation.configuration.ApplicationContextProvider;
 
 import java.util.Map;
 
