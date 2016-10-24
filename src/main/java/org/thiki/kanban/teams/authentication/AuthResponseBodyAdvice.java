@@ -5,7 +5,6 @@ package org.thiki.kanban.teams.authentication;
  */
 
 import com.alibaba.fastjson.JSONObject;
-import org.apache.catalina.connector.RequestFacade;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
@@ -13,7 +12,6 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
-import org.thiki.kanban.foundation.apiDocument.APIDocument;
 
 import java.util.Map;
 
@@ -28,19 +26,20 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object responseBody, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        APIDocument.response = responseBody;
-        APIDocument.url = serverHttpRequest.getURI().toString();
         if (responseBody instanceof Map) {
             Object status = ((Map) responseBody).get("status");
             if (status == null) {
                 JSONObject jsonObjectResponse = (JSONObject) responseBody;
-                Map<String, String> links = (Map<String, String>) jsonObjectResponse.get("_links");
-                String userName = ((RequestFacade) serverHttpRequest).getHeader("userName");
+                Map<String, Object> links = (Map<String, Object>) jsonObjectResponse.get("_links");
+                String userName = String.valueOf(serverHttpRequest.getHeaders().get("userName"));
 
-                Tlinks tlinks = new Tlinks(links, userName);
+                ResourceLinks resourceLinks = new ResourceLinks(links, userName);
+                JSONObject authenticatedLinks = resourceLinks.auth();
+                System.out.println(authenticatedLinks.toJSONString());
+                jsonObjectResponse.put("_links", authenticatedLinks);
+                return jsonObjectResponse;
             }
         }
-        APIDocument.endRequest();
         return responseBody;
     }
 }

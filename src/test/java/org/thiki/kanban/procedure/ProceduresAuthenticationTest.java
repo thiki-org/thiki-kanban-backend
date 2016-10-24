@@ -52,10 +52,10 @@ public class ProceduresAuthenticationTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
-                .body("_links.self.href.post", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))
-                .body("_links.self.methods.get", equalTo(true))
-                .body("_links.self.methods.post", equalTo(true))
-                .body("_links.self.methods.put", equalTo(true))
-                .body("_links.self.methods.delete", equalTo(true));
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))
+                .body("_links.self.methods.get.isAllowed", equalTo(true))
+                .body("_links.self.methods.post.isAllowed", equalTo(true))
+                .body("_links.self.methods.put.isAllowed", equalTo(true))
+                .body("_links.self.methods.delete.isAllowed", equalTo(true));
     }
 }
