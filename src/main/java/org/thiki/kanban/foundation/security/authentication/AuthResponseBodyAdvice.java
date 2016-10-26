@@ -31,7 +31,7 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
             if (status == null) {
                 JSONObject jsonObjectResponse = (JSONObject) responseBody;
                 Map<String, Object> links = (Map<String, Object>) jsonObjectResponse.get("_links");
-                String userName = String.valueOf(serverHttpRequest.getHeaders().get("userName"));
+                String userName = String.valueOf(serverHttpRequest.getHeaders().get("userName").get(0));
 
                 ResourceLinks resourceLinks = new ResourceLinks(links, userName);
                 JSONObject authenticatedLinks = resourceLinks.auth();
