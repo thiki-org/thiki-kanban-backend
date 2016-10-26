@@ -3,6 +3,7 @@ package org.thiki.kanban.board;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
+import org.thiki.kanban.teams.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -15,6 +16,8 @@ public class BoardsService {
 
     @Resource
     private BoardsPersistence boardsPersistence;
+    @Resource
+    private TeamMembersService teamMembersService;
 
     public Board create(String userName, final Board board) {
         boolean isExists = boardsPersistence.unique(board.getId(), board.getName(), userName);
@@ -53,5 +56,17 @@ public class BoardsService {
             throw new ResourceNotFoundException(BoardCodes.BOARD_IS_NOT_EXISTS);
         }
         return boardsPersistence.deleteById(id);
+    }
+
+    public boolean isBoardOwner(String boardId, String userName) {
+        Board board = findById(boardId);
+        if (board == null) {
+            throw new BusinessException(BoardCodes.BOARD_IS_NOT_EXISTS);
+        }
+        if (board.isOwner(userName)) {
+            return true;
+        }
+        boolean isTeamMember = teamMembersService.isMember(board.getTeamId(), userName);
+        return isTeamMember && board.getOwner().equals(userName);
     }
 }

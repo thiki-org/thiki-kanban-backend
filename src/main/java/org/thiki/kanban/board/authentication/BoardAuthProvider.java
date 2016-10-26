@@ -19,6 +19,11 @@ import javax.annotation.Resource;
 public class BoardAuthProvider extends AuthProvider {
     @Resource
     private BoardsService boardsService;
+
+    public String getPathTemplate() {
+        return BoardResource.URL;
+    }
+
     @Resource
     private TeamMembersService teamMembersService;
 
@@ -39,7 +44,28 @@ public class BoardAuthProvider extends AuthProvider {
         return true;
     }
 
-    public String getPathTemplate() {
-        return BoardResource.URL;
+    @Override
+    public boolean authGet() {
+        String boardId = (String) getPathValues(this.hrefValue).get("boardId");
+        Board board = boardsService.findById(boardId);
+        if (board == null) {
+            throw new BusinessException(BoardCodes.BOARD_IS_NOT_EXISTS);
+        }
+        return board.isOwner(userName) || teamMembersService.isMember(board.getTeamId(), userName);
+    }
+
+    @Override
+    public boolean authPost() {
+        return false;
+    }
+
+    @Override
+    public boolean authDelete() {
+        return boardsService.isBoardOwner(pathParams.get("boardId"), userName);
+    }
+
+    @Override
+    public boolean authPut() {
+        return boardsService.isBoardOwner(pathParams.get("boardId"), userName);
     }
 }

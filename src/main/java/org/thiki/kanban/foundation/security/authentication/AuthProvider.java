@@ -15,6 +15,7 @@ public abstract class AuthProvider implements Authentication {
 
     protected String userName;
     protected String hrefValue;
+    protected Map<String, String> pathParams;
 
     @Override
     public boolean authenticate(String url, String method, String userName) {
@@ -35,6 +36,7 @@ public abstract class AuthProvider implements Authentication {
     public void config(String hrefValue, String userName) {
         this.hrefValue = hrefValue;
         this.userName = userName;
+        this.pathParams = getPathValues(hrefValue);
     }
 
     @Override

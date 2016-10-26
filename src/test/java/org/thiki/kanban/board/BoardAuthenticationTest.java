@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 @Domain(order = DomainOrder.BOARD, name = "看板")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BoardAuthenticationTest extends AuthenticationTestBase {
-    @Scenario("鉴权>当用户删除一个指定的board时,如果该用户并非board所属团队的成员,且board非个人所属,则不允许删除")
+    @Scenario("看板权限管控>当用户删除一个指定的看板时,如果该用户并非看板所属团队的成员,且看板非个人所属,则不允许删除")
     @Test
     public void notAllowedIfCurrentHasNoAuthority() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author,owner) VALUES ('fooId','board-name','someone','others')");
@@ -28,5 +28,29 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
                 .statusCode(401)
                 .body("code", equalTo(BoardCodes.FORBID_CURRENT_IS_NOT_A_MEMBER_OF_THE_TEAM.code()))
                 .body("message", equalTo(BoardCodes.FORBID_CURRENT_IS_NOT_A_MEMBER_OF_THE_TEAM.message()));
+    }
+
+    @Scenario("看板权限管控>当用户为看板所属团队成员时,但并非团队看板,则只允许读取、更新,不允许删除")
+    @Test
+    public void allowReadOnlyIfTheUserIsNotTheTeamAndTheBoardOwner() throws Exception {
+        dbPreparation.table("kb_board").names("id,name,author,owner,team_id").values("fooId", "board-name", "others", "others", "teamId-foo").exec();
+        dbPreparation.table("kb_team_members").names("id,team_id,member").values("fooId", "teamId-foo", "someone").exec();
+
+        given().header("userName", "someone")
+                .when()
+                .get("/someone/boards/fooId")
+                .then()
+                .statusCode(200)
+                .body("id", equalTo("fooId"))
+                .body("name", equalTo("board-name"))
+                .body("author", equalTo("others"))
+                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("_links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
+
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
+                .body("_links.self.actions.create.isAllowed", equalTo(false))
+                .body("_links.self.actions.read.isAllowed", equalTo(true))
+                .body("_links.self.actions.modify.isAllowed", equalTo(false))
+                .body("_links.self.actions.delete.isAllowed", equalTo(false));
     }
 }

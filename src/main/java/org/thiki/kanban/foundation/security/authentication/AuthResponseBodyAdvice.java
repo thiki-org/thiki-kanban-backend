@@ -13,6 +13,7 @@ import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import java.util.List;
 import java.util.Map;
 
 @Order(0)
@@ -31,7 +32,11 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
             if (status == null) {
                 JSONObject jsonObjectResponse = (JSONObject) responseBody;
                 Map<String, Object> links = (Map<String, Object>) jsonObjectResponse.get("_links");
-                String userName = String.valueOf(serverHttpRequest.getHeaders().get("userName").get(0));
+                List userNameObject = serverHttpRequest.getHeaders().get("userName");
+                String userName = "";
+                if (userNameObject != null) {
+                    userName = String.valueOf(userNameObject.get(0));
+                }
 
                 ResourceLinks resourceLinks = new ResourceLinks(links, userName);
                 JSONObject authenticatedLinks = resourceLinks.auth();

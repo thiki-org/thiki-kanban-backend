@@ -80,4 +80,8 @@ public class Board implements Serializable {
     public void setOwner(String owner) {
         this.owner = owner;
     }
+
+    public boolean isOwner(String userName) {
+        return userName.equals(this.owner);
+    }
 }
