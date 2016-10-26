@@ -30,7 +30,7 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
                 .body("message", equalTo(BoardCodes.FORBID_CURRENT_IS_NOT_A_MEMBER_OF_THE_TEAM.message()));
     }
 
-    @Scenario("看板权限管控>当用户为看板所属团队成员时,但并非团队看板,则只允许读取、更新,不允许删除")
+    @Scenario("看板权限管控>当用户为看板所属团队成员时,但并非团队看板,则只允许读取,不允许其他操作")
     @Test
     public void allowReadOnlyIfTheUserIsNotTheTeamAndTheBoardOwner() throws Exception {
         dbPreparation.table("kb_board").names("id,name,author,owner,team_id").values("fooId", "board-name", "others", "others", "teamId-foo").exec();
