@@ -307,6 +307,7 @@
                     <excludes>
                         <exclude>**/*Application.*</exclude>
                         <exclude>**/AuthenticationTestBase.*</exclude>
+                        <exclude>**/IdentificationTestBase.*</exclude>
                         <exclude>**/DBPreparation.*</exclude>
                         <exclude>**/*Test.*</exclude>
                         <exclude>**/Test*.*</exclude>
