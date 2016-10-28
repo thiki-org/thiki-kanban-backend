@@ -7,7 +7,7 @@ import org.thiki.kanban.board.BoardResource;
 import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.foundation.exception.AuthenticationException;
 import org.thiki.kanban.foundation.exception.BusinessException;
-import org.thiki.kanban.foundation.security.authentication.AuthProvider;
+import org.thiki.kanban.foundation.security.authentication.AuthenticationProvider;
 import org.thiki.kanban.teams.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;
@@ -15,8 +15,8 @@ import javax.annotation.Resource;
 /**
  * Created by xubt on 24/10/2016.
  */
-@Service("boardAuthProvider")
-public class BoardAuthProvider extends AuthProvider {
+@Service("boardAuthenticationProvider")
+public class BoardAuthenticationProvider extends AuthenticationProvider {
     @Resource
     private BoardsService boardsService;
 

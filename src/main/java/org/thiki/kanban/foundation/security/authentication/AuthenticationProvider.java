@@ -11,7 +11,7 @@ import static org.springframework.util.ResourceUtils.isUrl;
 /**
  * Created by xubt on 24/10/2016.
  */
-public abstract class AuthProvider implements Authentication {
+public abstract class AuthenticationProvider implements Authentication {
 
     protected String userName;
     protected String hrefValue;
