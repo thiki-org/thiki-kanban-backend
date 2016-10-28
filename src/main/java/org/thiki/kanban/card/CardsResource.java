@@ -1,23 +1,28 @@
 package org.thiki.kanban.card;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  *
  */
 public class CardsResource extends RestResource {
     public CardsResource(List<Card> cardList, String procedureId) {
-        this.domainObject = cardList;
-        JSONArray cardsJSONArray = new JSONArray();
+
+        List<CardResource> cardResources = new ArrayList<>();
         for (Card card : cardList) {
             CardResource cardResource = new CardResource(card, procedureId);
-            JSONObject cardJSON = cardResource.getResource();
-            cardsJSONArray.add(cardJSON);
+            cardResources.add(cardResource);
         }
-        this.resourcesJSON = cardsJSONArray;
+
+        this.buildDataObject("cards", cardResources);
+        Link selfLink = linkTo(methodOn(CardsController.class).resortCards(cardList, procedureId)).withSelfRel();
+        this.add(selfLink);
     }
 }

@@ -34,7 +34,7 @@ public class Card {
     /**
      * 排序号
      */
-    private Integer orderNumber;
+    private Integer sortNumber;
     private String creationTime;
     private String modificationTime;
     /**
@@ -98,12 +98,12 @@ public class Card {
         this.content = content;
     }
 
-    public Integer getOrderNumber() {
-        return orderNumber;
+    public Integer getSortNumber() {
+        return sortNumber;
     }
 
-    public void setOrderNumber(Integer orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setSortNumber(Integer sortNumber) {
+        this.sortNumber = sortNumber;
     }
 
 }

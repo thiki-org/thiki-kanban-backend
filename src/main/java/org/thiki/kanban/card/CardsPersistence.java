@@ -18,9 +18,5 @@ public interface CardsPersistence {
 
     Integer deleteById(@Param("id") String id);
 
-    Integer resortTargetProcedure(@Param("cardId") String cardId, @Param("currentProcedureId") String currentProcedureId, @Param("currentOrderNumber") Integer currentOrderNumber);
-
-    Integer resortOriginProcedure(@Param("cardId") String cardId, @Param("originProcedureId") String originProcedureId, @Param("originOrderNumber") Integer originOrderNumber);
-
-    Integer resortOrder(@Param("cardId") String cardId, @Param("procedureId") String procedureId, @Param("originOrderNumber") Integer originOrderNumber, @Param("currentOrderNumber") Integer currentOrderNumber, @Param("increment") int increment);
+    Integer resort(@Param("procedureId") String procedureId, @Param("card") Card card);
 }

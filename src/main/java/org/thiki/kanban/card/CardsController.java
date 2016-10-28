@@ -48,4 +48,11 @@ public class CardsController {
 
         return Response.post(new CardResource(savedCard, procedureId));
     }
+
+    @RequestMapping(value = "/procedures/{procedureId}/cards/sortNumbers", method = RequestMethod.PUT)
+    public HttpEntity resortCards(@RequestBody List<Card> cards, @PathVariable String procedureId) {
+        List<Card> sortedCards = cardsService.resortCards(cards, procedureId);
+
+        return Response.build(new CardsResource(sortedCards, procedureId));
+    }
 }

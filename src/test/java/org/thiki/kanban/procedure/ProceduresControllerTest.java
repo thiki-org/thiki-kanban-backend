@@ -167,8 +167,8 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("当移动一个procedure时,移动后的排序小于其原先的排序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsLessThanOriginNumber() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\"}}")
@@ -179,16 +179,16 @@ public class ProceduresControllerTest extends TestBase {
                 .body("title", equalTo("newTitle"))
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId2"));
-        assertEquals("1", jdbcTemplate.queryForObject("select order_number from kb_procedure where id='fooId1'", String.class));
-        assertEquals("0", jdbcTemplate.queryForObject("select order_number from kb_procedure where id='fooId2'", String.class));
+        assertEquals("1", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId1'", String.class));
+        assertEquals("0", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId2'", String.class));
     }
 
     @Scenario("当移动一个procedure时,移动后的排序大于其原先的排序")
     @Test
     public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsMoreThanOriginNumber() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,order_number) VALUES ('fooId3','this is the first procedure.',1,'feeId',2)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId3','this is the first procedure.',1,'feeId',2)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"orderNumber\":\"2\"}}")
@@ -199,9 +199,9 @@ public class ProceduresControllerTest extends TestBase {
                 .body("title", equalTo("newTitle"))
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId1"));
-        assertEquals("2", jdbcTemplate.queryForObject("select order_number from kb_procedure where id='fooId1'", String.class));
-        assertEquals("0", jdbcTemplate.queryForObject("select order_number from kb_procedure where id='fooId2'", String.class));
-        assertEquals("1", jdbcTemplate.queryForObject("select order_number from kb_procedure where id='fooId3'", String.class));
+        assertEquals("2", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId1'", String.class));
+        assertEquals("0", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId2'", String.class));
+        assertEquals("1", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId3'", String.class));
     }
 
     @Scenario("当删除一个procedure时,如果待删除的procedure存在,则删除成功")

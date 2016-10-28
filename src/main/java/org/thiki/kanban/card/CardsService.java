@@ -1,6 +1,7 @@
 package org.thiki.kanban.card;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.procedure.Procedure;
 import org.thiki.kanban.procedure.ProceduresPersistence;
@@ -29,28 +30,10 @@ public class CardsService {
         return cardsPersistence.findById(newCard.getId());
     }
 
-    public Card update(String cardId, Card currentCard) {
-        Card originCard = findById(cardId);
-
-        cardsPersistence.update(cardId, currentCard);
-
-        if (isCardMovedAcrossProcedure(currentCard, originCard)) {
-            cardsPersistence.resortTargetProcedure(originCard.getId(), currentCard.getProcedureId(), currentCard.getOrderNumber());
-            cardsPersistence.resortOriginProcedure(originCard.getId(), originCard.getProcedureId(), originCard.getOrderNumber());
-        }
-        if (isCardMovedWithinOriginProcedure(currentCard, originCard)) {
-            int increment = currentCard.getOrderNumber() > originCard.getOrderNumber() ? 1 : 0;
-            cardsPersistence.resortOrder(originCard.getId(), originCard.getProcedureId(), originCard.getOrderNumber(), currentCard.getOrderNumber(), increment);
-        }
+    public Card update(String cardId, Card card) {
+        loadAndValidateCard(cardId);
+        cardsPersistence.update(cardId, card);
         return cardsPersistence.findById(cardId);
-    }
-
-    private boolean isCardMovedWithinOriginProcedure(Card currentCard, Card originCard) {
-        return (currentCard.getProcedureId().equals(originCard.getProcedureId())) && (!currentCard.getOrderNumber().equals(originCard.getOrderNumber()));
-    }
-
-    private boolean isCardMovedAcrossProcedure(Card currentCard, Card originCard) {
-        return !currentCard.getProcedureId().equals(originCard.getProcedureId());
     }
 
     public int deleteById(String cardId) {
@@ -73,8 +56,15 @@ public class CardsService {
     private Card loadAndValidateCard(String cardId) {
         Card foundCard = cardsPersistence.findById(cardId);
         if (foundCard == null) {
-            throw new ResourceNotFoundException(MessageFormat.format("card[{0}] is not found.", cardId));
+            throw new BusinessException(CardsCodes.CARD_IS_NOT_EXISTS);
         }
         return foundCard;
+    }
+
+    public List<Card> resortCards(List<Card> cards, String procedureId) {
+        for (Card card : cards) {
+            cardsPersistence.resort(procedureId, card);
+        }
+        return findByProcedureId(procedureId);
     }
 }

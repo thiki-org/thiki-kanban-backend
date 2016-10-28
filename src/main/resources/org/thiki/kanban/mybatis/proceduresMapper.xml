@@ -6,31 +6,31 @@
 
     <insert id="create" parameterType="org.thiki.kanban.procedure.Procedure">
         INSERT INTO
-        kb_procedure(id,title, author,board_id,order_number) VALUES (#{procedure.id},#{procedure.title},
+        kb_procedure(id,title, author,board_id,sort_number) VALUES (#{procedure.id},#{procedure.title},
         #{userName},#{boardId},(SELECT
-        max_order_number from (SELECT CASE WHEN max(order_number) IS NULL THEN 0 ELSE max(order_number)+1 end as
-        max_order_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ))
+        max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
+        max_sort_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ))
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
         UPDATE kb_procedure SET
         title=#{title},
-        order_number=#{orderNumber}
+        sort_number=#{sortNumber}
         WHERE id=#{id} AND delete_status=0
     </update>
 
     <update id="resort" parameterType="java.util.Map" flushCache="true">
         <if test="increment == 0">
-            UPDATE kb_procedure SET order_number = order_number+1
+            UPDATE kb_procedure SET sort_number = sort_number+1
             <![CDATA[
-            WHERE order_number >= #{currentOrderNumber} AND order_number<=#{originOrderNumber}
+            WHERE sort_number >= #{currentOrderNumber} AND sort_number<=#{originOrderNumber}
             ]]>
         </if>
 
         <if test="increment == 1">
-            UPDATE kb_procedure SET order_number = order_number-1
+            UPDATE kb_procedure SET sort_number = sort_number-1
             <![CDATA[
-            WHERE order_number <= #{currentOrderNumber} AND order_number>=#{originOrderNumber}
+            WHERE sort_number <= #{currentOrderNumber} AND sort_number>=#{originOrderNumber}
             ]]>
         </if>
 
@@ -42,7 +42,7 @@
     </select>
 
     <select id="loadByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">
-        SELECT * FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} ORDER BY order_number
+        SELECT * FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} ORDER BY sort_number
     </select>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">

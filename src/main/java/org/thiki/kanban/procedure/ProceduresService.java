@@ -38,12 +38,12 @@ public class ProceduresService {
     public Procedure update(Procedure procedure) {
         Procedure foundProcedure = checkingWhetherProcedureIsExists(procedure.getId());
         proceduresPersistence.update(procedure);
-        if (foundProcedure.getOrderNumber() != procedure.getOrderNumber()) {
-            int increment = procedure.getOrderNumber() > foundProcedure.getOrderNumber() ? 1 : 0;
+        if (foundProcedure.getSortNumber() != procedure.getSortNumber()) {
+            int increment = procedure.getSortNumber() > foundProcedure.getSortNumber() ? 1 : 0;
             Map<String, Object> resort = ImmutableMap.<String, Object>builder()
                     .put("boardId", foundProcedure.getBoardId())
-                    .put("originOrderNumber", foundProcedure.getOrderNumber())
-                    .put("currentOrderNumber", procedure.getOrderNumber())
+                    .put("originOrderNumber", foundProcedure.getSortNumber())
+                    .put("currentOrderNumber", procedure.getSortNumber())
                     .put("increment", increment)
                     .put("id", procedure.getId())
                     .build();
