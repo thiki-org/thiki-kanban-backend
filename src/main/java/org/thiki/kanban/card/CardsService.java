@@ -63,7 +63,7 @@ public class CardsService {
 
     public List<Card> resortCards(List<Card> cards, String procedureId) {
         for (Card card : cards) {
-            cardsPersistence.resort(procedureId, card);
+            cardsPersistence.resort(card);
         }
         return findByProcedureId(procedureId);
     }
