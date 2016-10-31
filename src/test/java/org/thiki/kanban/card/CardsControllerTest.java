@@ -111,7 +111,9 @@ public class CardsControllerTest extends TestBase {
                 .body("cards[0]._links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId"))
                 .body("cards[0]._links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
                 .body("cards[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/acceptanceCriterias"))
-                .body("cards[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/assignments"));
+                .body("cards[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/assignments"))
+                .body("_links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
+                .body("_links.sortNumbers.href", equalTo("http://localhost:8007/procedures/fooId/cards/sortNumbers"));
     }
 
     @Scenario("根据ID查找一个卡片时,如果卡片存在,则返回该卡片")
