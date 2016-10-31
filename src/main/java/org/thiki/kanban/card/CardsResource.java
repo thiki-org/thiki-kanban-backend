@@ -22,7 +22,10 @@ public class CardsResource extends RestResource {
         }
 
         this.buildDataObject("cards", cardResources);
-        Link selfLink = linkTo(methodOn(CardsController.class).resortCards(cardList, procedureId)).withSelfRel();
+        Link selfLink = linkTo(methodOn(CardsController.class).findByProcedureId(procedureId)).withSelfRel();
         this.add(selfLink);
+
+        Link sortNumbersLink = linkTo(methodOn(CardsController.class).resortCards(cardList, procedureId)).withRel("sortNumbers");
+        this.add(sortNumbersLink);
     }
 }
