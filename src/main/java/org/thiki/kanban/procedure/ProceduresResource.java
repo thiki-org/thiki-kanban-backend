@@ -23,7 +23,10 @@ public class ProceduresResource extends RestResource {
         }
 
         this.buildDataObject("procedures", procedureResources);
-        Link selfLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId)).withSelfRel();
+        Link selfLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId)).withSelfRel();
         this.add(selfLink);
+
+        Link sortNumbersLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId)).withRel("sortNumbers");
+        this.add(sortNumbersLink);
     }
 }
