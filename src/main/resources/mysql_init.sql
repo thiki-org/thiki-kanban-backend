@@ -236,3 +236,20 @@ CREATE TABLE kb_acceptance_criterias (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+-- ----------------------------
+-- Table structure for kb_comment
+-- ----------------------------
+DROP TABLE IF EXISTS kb_comment;
+
+CREATE TABLE kb_comment (
+  id                VARCHAR(40) NOT NULL,
+  summary           VARCHAR(200) DEFAULT '',
+  card_id           VARCHAR(50) NOT NULL,
+  author            VARCHAR(40)  DEFAULT NULL,
+  creation_time     DATETIME     DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  delete_status     INT(2)       DEFAULT 0,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
