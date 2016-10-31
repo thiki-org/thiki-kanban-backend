@@ -2,7 +2,6 @@ package org.thiki.kanban.procedure;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
-import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -42,7 +41,7 @@ public class ProceduresService {
     private Procedure checkingWhetherProcedureIsExists(String id) {
         Procedure foundProcedure = proceduresPersistence.findById(id);
         if (foundProcedure == null) {
-            throw new ResourceNotFoundException("procedure[" + id + "] is not found.");
+            throw new BusinessException(ProcedureCodes.PROCEDURE_IS_NOT_EXIST);
         }
         return foundProcedure;
     }

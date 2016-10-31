@@ -140,8 +140,9 @@ public class ProceduresControllerTest extends TestBase {
                 .when()
                 .put("/boards/feeId/procedures/fooId")
                 .then()
-                .statusCode(404)
-                .body("message", equalTo("procedure[fooId] is not found."));
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_EXIST.code()))
+                .body("message", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_EXIST.message()));
     }
 
     @Scenario("重新排序>用户创建工序后,可以调整其顺序")
@@ -183,8 +184,9 @@ public class ProceduresControllerTest extends TestBase {
                 .when()
                 .delete("/boards/feeId/procedures/fooId")
                 .then()
-                .statusCode(404)
-                .body("message", equalTo("procedure[fooId] is not found."));
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_EXIST.code()))
+                .body("message", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_EXIST.message()));
     }
 
     @Scenario("通过boardId获取所有的procedure")
