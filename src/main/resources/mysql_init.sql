@@ -44,9 +44,10 @@ CREATE TABLE kb_board (
   id                VARCHAR(40) NOT NULL,
   name              VARCHAR(50),
   team_id           VARCHAR(50),
+  owner             VARCHAR(40),
   author            VARCHAR(40) NOT NULL,
   delete_status     INT(2)               DEFAULT 0,
-  sort_number      INT(2)      NOT NULL DEFAULT 0,
+  sort_number       INT(2)      NOT NULL DEFAULT 0,
   creation_time     DATETIME             DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id)
@@ -63,7 +64,7 @@ CREATE TABLE kb_procedure (
   title             VARCHAR(50) NOT NULL,
   author            VARCHAR(40) NOT NULL,
   delete_status     INT(2)               DEFAULT 0,
-  sort_number      INT(2)      NOT NULL DEFAULT 0,
+  sort_number       INT(2)      NOT NULL DEFAULT 0,
   board_id          VARCHAR(40)          DEFAULT NULL,
   creation_time     DATETIME             DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
@@ -80,7 +81,7 @@ CREATE TABLE kb_card (
   id                VARCHAR(40)   NOT NULL,
   summary           VARCHAR(1023) NOT NULL,
   content           TEXT,
-  sort_number      INT(2)        NOT NULL  DEFAULT 0,
+  sort_number       INT(2)        NOT NULL  DEFAULT 0,
   author            VARCHAR(40)             DEFAULT NULL,
   procedure_id      VARCHAR(40)             DEFAULT NULL,
   creation_time     DATETIME                DEFAULT CURRENT_TIMESTAMP,
@@ -179,7 +180,7 @@ CREATE TABLE kb_password_reset (
 -- ----------------------------
 -- Table structure for kb_member_invitation
 -- ----------------------------
-DROP TABLE IF EXISTS kb_member_invitation;
+DROP TABLE IF EXISTS kb_team_member_invitation;
 
 CREATE TABLE kb_team_member_invitation (
   id                VARCHAR(40) NOT NULL,
@@ -225,7 +226,7 @@ CREATE TABLE kb_acceptance_criterias (
   id                VARCHAR(40) NOT NULL,
   summary           VARCHAR(200) DEFAULT '',
   card_id           VARCHAR(50) NOT NULL,
-  sort_number int DEFAULT 0,
+  sort_number       INT          DEFAULT 0,
   finished          BOOLEAN      DEFAULT 0,
   author            VARCHAR(40)  DEFAULT NULL,
   creation_time     DATETIME     DEFAULT CURRENT_TIMESTAMP,
