@@ -95,7 +95,7 @@ public class FileUtil {
         if (directory.exists()) {
             if (!directory.isDirectory()) {
                 String message = "File " + directory + " exists and is "
-                        + "not a directory. Unable to addAcceptCriteria directory.";
+                        + "not a directory. Unable to addComment directory.";
                 throw new IOException(message);
             }
         } else {
@@ -103,7 +103,7 @@ public class FileUtil {
                 // Double-check that some other thread or process hasn't made
                 // the directory in the background
                 if (!directory.isDirectory()) {
-                    String message = "Unable to addAcceptCriteria directory " + directory;
+                    String message = "Unable to addComment directory " + directory;
                     throw new IOException(message);
                 }
             }

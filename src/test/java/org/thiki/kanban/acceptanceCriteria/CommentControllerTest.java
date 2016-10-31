@@ -19,7 +19,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 @Domain(order = DomainOrder.ACCEPT_CRITERIA, name = "验收标准")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class AcceptanceCriteriaControllerTest extends TestBase {
+public class CommentControllerTest extends TestBase {
 
     @Before
     public void setUp() throws Exception {

@@ -19,4 +19,5 @@ public class DomainOrder {
     public static final int ASSIGNMENT = 11;
     public static final int USER = 12;
     public static final int ACCEPT_CRITERIA = 13;
+    public static final int COMMENT = 14;
 }

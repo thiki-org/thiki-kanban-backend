@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.comment.CommentPersistence">
+    <insert id="addComment" parameterType="org.thiki.kanban.comment.Comment">
+        INSERT
+        INTO
+        kb_comment(id,summary, card_id, author)
+        VALUES
+        (#{comment.id},#{comment.summary},#{cardId},#{userName})
+    </insert>
+    <select id="findById" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.comment.Comment">
+        SELECT * FROM kb_comment WHERE id= #{id} AND delete_status=0
+    </select>
+
+    <select id="loadCommentsByCardId" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.comment.Comment">
+        SELECT * FROM kb_comment WHERE card_id= #{cardId} AND delete_status=0
+    </select>
+
+    <delete id="deleteComment" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_comment SET delete_status=1 WHERE id=#{commentId}
+    </delete>
+</mapper>
