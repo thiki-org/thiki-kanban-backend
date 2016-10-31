@@ -18,5 +18,5 @@ public interface CardsPersistence {
 
     Integer deleteById(@Param("id") String id);
 
-    Integer resort(@Param("procedureId") String procedureId, @Param("card") Card card);
+    Integer resort(Card card);
 }
