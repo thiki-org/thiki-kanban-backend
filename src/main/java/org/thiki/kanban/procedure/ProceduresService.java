@@ -1,13 +1,11 @@
 package org.thiki.kanban.procedure;
 
-import com.google.common.collect.ImmutableMap;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -36,19 +34,8 @@ public class ProceduresService {
     }
 
     public Procedure update(Procedure procedure) {
-        Procedure foundProcedure = checkingWhetherProcedureIsExists(procedure.getId());
+        checkingWhetherProcedureIsExists(procedure.getId());
         proceduresPersistence.update(procedure);
-        if (foundProcedure.getSortNumber() != procedure.getSortNumber()) {
-            int increment = procedure.getSortNumber() > foundProcedure.getSortNumber() ? 1 : 0;
-            Map<String, Object> resort = ImmutableMap.<String, Object>builder()
-                    .put("boardId", foundProcedure.getBoardId())
-                    .put("originOrderNumber", foundProcedure.getSortNumber())
-                    .put("currentOrderNumber", procedure.getSortNumber())
-                    .put("increment", increment)
-                    .put("id", procedure.getId())
-                    .build();
-            proceduresPersistence.resort(resort);
-        }
         return proceduresPersistence.findById(procedure.getId());
     }
 
@@ -63,5 +50,12 @@ public class ProceduresService {
     public int deleteById(String id) {
         checkingWhetherProcedureIsExists(id);
         return proceduresPersistence.deleteById(id);
+    }
+
+    public List<Procedure> resortProcedures(List<Procedure> procedures, String boardId) {
+        for (Procedure procedure : procedures) {
+            proceduresPersistence.resort(procedure);
+        }
+        return loadByBoardId(boardId);
     }
 }

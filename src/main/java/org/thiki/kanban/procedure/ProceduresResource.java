@@ -1,10 +1,13 @@
 package org.thiki.kanban.procedure;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by xubitao on 04/26/16.
@@ -12,13 +15,15 @@ import java.util.List;
 public class ProceduresResource extends RestResource {
 
     public ProceduresResource(List<Procedure> procedureList, String boardId) {
-        this.domainObject = procedureList;
-        JSONArray proceduresJSONArray = new JSONArray();
+
+        List<ProcedureResource> procedureResources = new ArrayList<>();
         for (Procedure procedure : procedureList) {
             ProcedureResource procedureResource = new ProcedureResource(procedure, boardId);
-            JSONObject procedureJSON = procedureResource.getResource();
-            proceduresJSONArray.add(procedureJSON);
+            procedureResources.add(procedureResource);
         }
-        this.resourcesJSON = proceduresJSONArray;
+
+        this.buildDataObject("procedures", procedureResources);
+        Link selfLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId)).withSelfRel();
+        this.add(selfLink);
     }
 }

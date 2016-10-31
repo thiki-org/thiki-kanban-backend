@@ -19,22 +19,8 @@
         WHERE id=#{id} AND delete_status=0
     </update>
 
-    <update id="resort" parameterType="java.util.Map" flushCache="true">
-        <if test="increment == 0">
-            UPDATE kb_procedure SET sort_number = sort_number+1
-            <![CDATA[
-            WHERE sort_number >= #{currentOrderNumber} AND sort_number<=#{originOrderNumber}
-            ]]>
-        </if>
-
-        <if test="increment == 1">
-            UPDATE kb_procedure SET sort_number = sort_number-1
-            <![CDATA[
-            WHERE sort_number <= #{currentOrderNumber} AND sort_number>=#{originOrderNumber}
-            ]]>
-        </if>
-
-        AND board_id=#{boardId} AND delete_status=0 AND id != #{id}
+    <update id="resort" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
+            UPDATE kb_procedure SET sort_number = #{sortNumber} WHERE delete_status=0 AND id = #{id}
     </update>
 
     <select id="uniqueTitle" parameterType="java.lang.String" resultType="java.lang.Boolean">

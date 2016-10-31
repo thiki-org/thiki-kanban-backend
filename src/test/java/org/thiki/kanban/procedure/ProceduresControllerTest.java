@@ -41,26 +41,6 @@ public class ProceduresControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"));
     }
 
-    @Scenario("创建一个新的procedure,如果它并不是指定boardId下第一个procedure,则其排序号应根据当前procedure数量自动增加")
-    @Test
-    public void create_orderNumberShouldAutoIncrease() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('existedFooId','this is the first procedure.',1,'feeId')");
-        given().header("userName", userName)
-                .body("{\"title\":\"title.\"}")
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/boards/feeId/procedures")
-                .then()
-                .statusCode(201)
-                .body("title", equalTo("title."))
-                .body("author", equalTo(userName))
-                .body("creationTime", notNullValue())
-                .body("orderNumber", equalTo(1))
-                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"));
-    }
-
     @Scenario("创建新的procedure时,如果名称为空,则不允许创建并返回客户端400错误")
     @Test
     public void shouldFailedIfProcedureTitleIsEmpty() {
@@ -164,44 +144,24 @@ public class ProceduresControllerTest extends TestBase {
                 .body("message", equalTo("procedure[fooId] is not found."));
     }
 
-    @Scenario("当移动一个procedure时,移动后的排序小于其原先的排序")
+    @Scenario("重新排序>用户创建工序后,可以调整其顺序")
     @Test
-    public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsLessThanOriginNumber() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
-        given().header("userName", userName)
-                .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\"}}")
-                .when()
-                .put("/boards/feeId/procedures/fooId2")
-                .then()
-                .statusCode(200)
-                .body("title", equalTo("newTitle"))
-                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId2"));
-        assertEquals("1", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId1'", String.class));
-        assertEquals("0", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId2'", String.class));
-    }
+    public void resortProcedure() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('procedure-fooId1','procedureTitle1',1,'feeId',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('procedure-fooId2','procedureTitle2',1,'feeId',1)");
 
-    @Scenario("当移动一个procedure时,移动后的排序大于其原先的排序")
-    @Test
-    public void update_shouldResortSuccessfullyWhenCurrentSortNumberIsMoreThanOriginNumber() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId1','this is the first procedure.',1,'feeId',0)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId2','this is the first procedure.',1,'feeId',1)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('fooId3','this is the first procedure.',1,'feeId',2)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"orderNumber\":\"2\"}}")
+                .body("[{\"id\":\"procedure-fooId1\",\"sortNumber\":2},{\"id\":\"procedure-fooId2\",\"sortNumber\":3}]")
                 .when()
-                .put("/boards/feeId/procedures/fooId1")
+                .put("/boards/feeId/procedures/sortNumbers")
                 .then()
                 .statusCode(200)
-                .body("title", equalTo("newTitle"))
-                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId1"));
-        assertEquals("2", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId1'", String.class));
-        assertEquals("0", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId2'", String.class));
-        assertEquals("1", jdbcTemplate.queryForObject("select sort_number from kb_procedure where id='fooId3'", String.class));
+                .body("procedures[0].title", equalTo("procedureTitle1"))
+                .body("procedures[0].sortNumber", equalTo(2))
+                .body("procedures[1].title", equalTo("procedureTitle2"))
+                .body("procedures[1].sortNumber", equalTo(3))
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/sortNumbers"));
     }
 
     @Scenario("当删除一个procedure时,如果待删除的procedure存在,则删除成功")
@@ -237,11 +197,11 @@ public class ProceduresControllerTest extends TestBase {
                 .get("/boards/feeId/procedures")
                 .then()
                 .statusCode(200)
-                .body("[0].title", equalTo("this is the first procedure."))
-                .body("[0].author", equalTo("tao"))
-                .body("[0].creationTime", notNullValue())
-                .body("[0]._links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))
-                .body("[0]._links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"));
+                .body("procedures[0].title", equalTo("this is the first procedure."))
+                .body("procedures[0].author", equalTo("tao"))
+                .body("procedures[0].creationTime", notNullValue())
+                .body("procedures[0]._links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
+                .body("procedures[0]._links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))
+                .body("procedures[0]._links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"));
     }
 }

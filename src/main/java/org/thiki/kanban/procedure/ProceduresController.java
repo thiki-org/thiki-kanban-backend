@@ -19,7 +19,6 @@ public class ProceduresController {
     public HttpEntity loadAll(@PathVariable String boardId) {
         List<Procedure> procedureList = proceduresService.loadByBoardId(boardId);
         return Response.build(new ProceduresResource(procedureList, boardId));
-
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{id}", method = RequestMethod.GET)
@@ -48,5 +47,11 @@ public class ProceduresController {
         Procedure savedProcedure = proceduresService.create(userName, boardId, procedure);
 
         return Response.post(new ProcedureResource(savedProcedure, boardId));
+    }
+
+    @RequestMapping(value = "/boards/{boardId}/procedures/sortNumbers", method = RequestMethod.PUT)
+    public HttpEntity resort(@RequestBody List<Procedure> procedures, @PathVariable String boardId) {
+        List<Procedure> procedureList = proceduresService.resortProcedures(procedures,boardId);
+        return Response.build(new ProceduresResource(procedureList, boardId));
     }
 }
