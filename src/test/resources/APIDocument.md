@@ -1,6 +1,6 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-# API概要文档 #
+# API 概要文档 #
 
 - [零、入口](#%E9%9B%B6%E3%80%81%E5%85%A5%E5%8F%A3)
   - [初次访问系统时入口](#%E5%88%9D%E6%AC%A1%E8%AE%BF%E9%97%AE%E7%B3%BB%E7%BB%9F%E6%97%B6%E5%85%A5%E5%8F%A3)
@@ -27,36 +27,31 @@
   - [当看板不存在时,则不允许更新](#%E5%BD%93%E7%9C%8B%E6%9D%BF%E4%B8%8D%E5%AD%98%E5%9C%A8%E6%97%B6%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E6%9B%B4%E6%96%B0)
   - [当用户删除一个指定的board时,如果该board不存在,则返回客户端404错误](#%E5%BD%93%E7%94%A8%E6%88%B7%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E6%8C%87%E5%AE%9A%E7%9A%84board%E6%97%B6%E5%A6%82%E6%9E%9C%E8%AF%A5board%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AF404%E9%94%99%E8%AF%AF)
 - [四、工序](#%E5%9B%9B%E3%80%81%E5%B7%A5%E5%BA%8F)
-  - [创建一个新的procedure,如果它并不是指定boardId下第一个procedure,则其排序号应根据当前procedure数量自动增加](#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84procedure%E5%A6%82%E6%9E%9C%E5%AE%83%E5%B9%B6%E4%B8%8D%E6%98%AF%E6%8C%87%E5%AE%9Aboardid%E4%B8%8B%E7%AC%AC%E4%B8%80%E4%B8%AAprocedure%E5%88%99%E5%85%B6%E6%8E%92%E5%BA%8F%E5%8F%B7%E5%BA%94%E6%A0%B9%E6%8D%AE%E5%BD%93%E5%89%8Dprocedure%E6%95%B0%E9%87%8F%E8%87%AA%E5%8A%A8%E5%A2%9E%E5%8A%A0)
   - [更新procedure时,如果参数合法且待更新的procedure存在,则更新成功](#%E6%9B%B4%E6%96%B0procedure%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8F%82%E6%95%B0%E5%90%88%E6%B3%95%E4%B8%94%E5%BE%85%E6%9B%B4%E6%96%B0%E7%9A%84procedure%E5%AD%98%E5%9C%A8%E5%88%99%E6%9B%B4%E6%96%B0%E6%88%90%E5%8A%9F)
-  - [当移动一个procedure时,移动后的排序小于其原先的排序](#%E5%BD%93%E7%A7%BB%E5%8A%A8%E4%B8%80%E4%B8%AAprocedure%E6%97%B6%E7%A7%BB%E5%8A%A8%E5%90%8E%E7%9A%84%E6%8E%92%E5%BA%8F%E5%B0%8F%E4%BA%8E%E5%85%B6%E5%8E%9F%E5%85%88%E7%9A%84%E6%8E%92%E5%BA%8F)
   - [当根据procedureId查找procedure时,如果procedure存在,则将其返回](#%E5%BD%93%E6%A0%B9%E6%8D%AEprocedureid%E6%9F%A5%E6%89%BEprocedure%E6%97%B6%E5%A6%82%E6%9E%9Cprocedure%E5%AD%98%E5%9C%A8%E5%88%99%E5%B0%86%E5%85%B6%E8%BF%94%E5%9B%9E)
   - [创建新的procedure时,如果名称为空,则不允许创建并返回客户端400错误](#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84procedure%E6%97%B6%E5%A6%82%E6%9E%9C%E5%90%8D%E7%A7%B0%E4%B8%BA%E7%A9%BA%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AF400%E9%94%99%E8%AF%AF)
   - [更新procedure时,如果参数合法但待更新的procedure不存在,则更新失败](#%E6%9B%B4%E6%96%B0procedure%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8F%82%E6%95%B0%E5%90%88%E6%B3%95%E4%BD%86%E5%BE%85%E6%9B%B4%E6%96%B0%E7%9A%84procedure%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E6%9B%B4%E6%96%B0%E5%A4%B1%E8%B4%A5)
   - [通过boardId获取所有的procedure](#%E9%80%9A%E8%BF%87boardid%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%9A%84procedure)
+  - [重新排序>用户创建工序后,可以调整其顺序](#%E9%87%8D%E6%96%B0%E6%8E%92%E5%BA%8F%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E5%B7%A5%E5%BA%8F%E5%90%8E%E5%8F%AF%E4%BB%A5%E8%B0%83%E6%95%B4%E5%85%B6%E9%A1%BA%E5%BA%8F)
   - [创建新的procedure时,如果名称长度超限,则不允许创建并返回客户端400错误](#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84procedure%E6%97%B6%E5%A6%82%E6%9E%9C%E5%90%8D%E7%A7%B0%E9%95%BF%E5%BA%A6%E8%B6%85%E9%99%90%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AF400%E9%94%99%E8%AF%AF)
   - [当删除一个procedure时,如果待删除的procedure存在,则删除成功](#%E5%BD%93%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AAprocedure%E6%97%B6%E5%A6%82%E6%9E%9C%E5%BE%85%E5%88%A0%E9%99%A4%E7%9A%84procedure%E5%AD%98%E5%9C%A8%E5%88%99%E5%88%A0%E9%99%A4%E6%88%90%E5%8A%9F)
   - [创建新的procedure时,如果名称为空字符串,则不允许创建并返回客户端400错误](#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84procedure%E6%97%B6%E5%A6%82%E6%9E%9C%E5%90%8D%E7%A7%B0%E4%B8%BA%E7%A9%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AF400%E9%94%99%E8%AF%AF)
   - [当删除一个procedure时,如果待删除的procedure不存在,则删除成功并返回客户端错误](#%E5%BD%93%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AAprocedure%E6%97%B6%E5%A6%82%E6%9E%9C%E5%BE%85%E5%88%A0%E9%99%A4%E7%9A%84procedure%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E5%88%A0%E9%99%A4%E6%88%90%E5%8A%9F%E5%B9%B6%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF)
-  - [当移动一个procedure时,移动后的排序大于其原先的排序](#%E5%BD%93%E7%A7%BB%E5%8A%A8%E4%B8%80%E4%B8%AAprocedure%E6%97%B6%E7%A7%BB%E5%8A%A8%E5%90%8E%E7%9A%84%E6%8E%92%E5%BA%8F%E5%A4%A7%E4%BA%8E%E5%85%B6%E5%8E%9F%E5%85%88%E7%9A%84%E6%8E%92%E5%BA%8F)
   - [创建新的procedure时,同一看板下已经存在同名,则不允许创建并返回客户端400错误](#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84procedure%E6%97%B6%E5%90%8C%E4%B8%80%E7%9C%8B%E6%9D%BF%E4%B8%8B%E5%B7%B2%E7%BB%8F%E5%AD%98%E5%9C%A8%E5%90%8C%E5%90%8D%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%88%9B%E5%BB%BA%E5%B9%B6%E8%BF%94%E5%9B%9E%E5%AE%A2%E6%88%B7%E7%AB%AF400%E9%94%99%E8%AF%AF)
   - [创建一个新的procedure后,返回自身及links信息](#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84procedure%E5%90%8E%E8%BF%94%E5%9B%9E%E8%87%AA%E8%BA%AB%E5%8F%8Alinks%E4%BF%A1%E6%81%AF)
 - [五、卡片](#%E4%BA%94%E3%80%81%E5%8D%A1%E7%89%87)
-  - [当移动一个卡片时,移动后的顺序大于初始顺序](#%E5%BD%93%E7%A7%BB%E5%8A%A8%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E7%A7%BB%E5%8A%A8%E5%90%8E%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%A4%A7%E4%BA%8E%E5%88%9D%E5%A7%8B%E9%A1%BA%E5%BA%8F)
   - [当更新一个卡片时,如果待更新的卡片不存在,则抛出资源不存在的错误](#%E5%BD%93%E6%9B%B4%E6%96%B0%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%BE%85%E6%9B%B4%E6%96%B0%E7%9A%84%E5%8D%A1%E7%89%87%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E6%8A%9B%E5%87%BA%E8%B5%84%E6%BA%90%E4%B8%8D%E5%AD%98%E5%9C%A8%E7%9A%84%E9%94%99%E8%AF%AF)
   - [当创建一个卡片时,如果卡片概述长度超过50,则创建失败](#%E5%BD%93%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8D%A1%E7%89%87%E6%A6%82%E8%BF%B0%E9%95%BF%E5%BA%A6%E8%B6%85%E8%BF%8750%E5%88%99%E5%88%9B%E5%BB%BA%E5%A4%B1%E8%B4%A5)
   - [根据ID查找一个卡片时,如果卡片存在,则返回该卡片](#%E6%A0%B9%E6%8D%AEid%E6%9F%A5%E6%89%BE%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8D%A1%E7%89%87%E5%AD%98%E5%9C%A8%E5%88%99%E8%BF%94%E5%9B%9E%E8%AF%A5%E5%8D%A1%E7%89%87)
   - [当一个卡片从某个procedure移动到另一个procedure时,不仅需要重新排序目标procedure,也要对原始procedure排序](#%E5%BD%93%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E4%BB%8E%E6%9F%90%E4%B8%AAprocedure%E7%A7%BB%E5%8A%A8%E5%88%B0%E5%8F%A6%E4%B8%80%E4%B8%AAprocedure%E6%97%B6%E4%B8%8D%E4%BB%85%E9%9C%80%E8%A6%81%E9%87%8D%E6%96%B0%E6%8E%92%E5%BA%8F%E7%9B%AE%E6%A0%87procedure%E4%B9%9F%E8%A6%81%E5%AF%B9%E5%8E%9F%E5%A7%8Bprocedure%E6%8E%92%E5%BA%8F)
-  - [当移动一个卡片时,移动后的顺序小于其前置顺序](#%E5%BD%93%E7%A7%BB%E5%8A%A8%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E7%A7%BB%E5%8A%A8%E5%90%8E%E7%9A%84%E9%A1%BA%E5%BA%8F%E5%B0%8F%E4%BA%8E%E5%85%B6%E5%89%8D%E7%BD%AE%E9%A1%BA%E5%BA%8F)
-  - [根据ID查找一个卡片时,如果卡片不存在,则抛出404的错误](#%E6%A0%B9%E6%8D%AEid%E6%9F%A5%E6%89%BE%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8D%A1%E7%89%87%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E6%8A%9B%E5%87%BA404%E7%9A%84%E9%94%99%E8%AF%AF)
+  - [根据ID查找一个卡片时,如果卡片不存在,则抛出400错误](#%E6%A0%B9%E6%8D%AEid%E6%9F%A5%E6%89%BE%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8D%A1%E7%89%87%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E6%8A%9B%E5%87%BA400%E9%94%99%E8%AF%AF)
   - [更新卡片成功](#%E6%9B%B4%E6%96%B0%E5%8D%A1%E7%89%87%E6%88%90%E5%8A%9F)
-  - [当删除一个卡片时,如果待删除的卡片不存在,则抛出404错误](#%E5%BD%93%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%BE%85%E5%88%A0%E9%99%A4%E7%9A%84%E5%8D%A1%E7%89%87%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E6%8A%9B%E5%87%BA404%E9%94%99%E8%AF%AF)
+  - [当删除一个卡片时,如果待删除的卡片不存在,400](#%E5%BD%93%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%BE%85%E5%88%A0%E9%99%A4%E7%9A%84%E5%8D%A1%E7%89%87%E4%B8%8D%E5%AD%98%E5%9C%A8400)
   - [当根据procedureId查找其下属的卡片时,可以返回其所有卡片](#%E5%BD%93%E6%A0%B9%E6%8D%AEprocedureid%E6%9F%A5%E6%89%BE%E5%85%B6%E4%B8%8B%E5%B1%9E%E7%9A%84%E5%8D%A1%E7%89%87%E6%97%B6%E5%8F%AF%E4%BB%A5%E8%BF%94%E5%9B%9E%E5%85%B6%E6%89%80%E6%9C%89%E5%8D%A1%E7%89%87)
   - [当创建一个卡片时,如果卡片所属的procedure并不存在,则创建失败](#%E5%BD%93%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8D%A1%E7%89%87%E6%89%80%E5%B1%9E%E7%9A%84procedure%E5%B9%B6%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E5%88%9B%E5%BB%BA%E5%A4%B1%E8%B4%A5)
   - [当删除一个卡片时,如果卡片存在,则删除成功](#%E5%BD%93%E5%88%A0%E9%99%A4%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8D%A1%E7%89%87%E5%AD%98%E5%9C%A8%E5%88%99%E5%88%A0%E9%99%A4%E6%88%90%E5%8A%9F)
   - [创建一个新的卡片](#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8D%A1%E7%89%87)
   - [当创建一个卡片时,如果卡片概述为空,则创建失败](#%E5%BD%93%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9C%E5%8D%A1%E7%89%87%E6%A6%82%E8%BF%B0%E4%B8%BA%E7%A9%BA%E5%88%99%E5%88%9B%E5%BB%BA%E5%A4%B1%E8%B4%A5)
-  - [当移动一个卡片时,卡片移动后的序号大于其前置序号,但在procedure中它移动后的序号并不是最大的。](#%E5%BD%93%E7%A7%BB%E5%8A%A8%E4%B8%80%E4%B8%AA%E5%8D%A1%E7%89%87%E6%97%B6%E5%8D%A1%E7%89%87%E7%A7%BB%E5%8A%A8%E5%90%8E%E7%9A%84%E5%BA%8F%E5%8F%B7%E5%A4%A7%E4%BA%8E%E5%85%B6%E5%89%8D%E7%BD%AE%E5%BA%8F%E5%8F%B7%E4%BD%86%E5%9C%A8procedure%E4%B8%AD%E5%AE%83%E7%A7%BB%E5%8A%A8%E5%90%8E%E7%9A%84%E5%BA%8F%E5%8F%B7%E5%B9%B6%E4%B8%8D%E6%98%AF%E6%9C%80%E5%A4%A7%E7%9A%84%E3%80%82)
   - [当根据procedureID查找卡片时,如果procedure不存在,则抛出404异常](#%E5%BD%93%E6%A0%B9%E6%8D%AEprocedureid%E6%9F%A5%E6%89%BE%E5%8D%A1%E7%89%87%E6%97%B6%E5%A6%82%E6%9E%9Cprocedure%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E6%8A%9B%E5%87%BA404%E5%BC%82%E5%B8%B8)
 - [六、团队](#%E5%85%AD%E3%80%81%E5%9B%A2%E9%98%9F)
   - [获取指定团队信息>用户根据ID获取team时,如果该team不存在,则告知客户端错误](#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%9B%A2%E9%98%9F%E4%BF%A1%E6%81%AF%E7%94%A8%E6%88%B7%E6%A0%B9%E6%8D%AEid%E8%8E%B7%E5%8F%96team%E6%97%B6%E5%A6%82%E6%9E%9C%E8%AF%A5team%E4%B8%8D%E5%AD%98%E5%9C%A8%E5%88%99%E5%91%8A%E7%9F%A5%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF)
@@ -133,6 +128,14 @@
   - [获取指定卡片的验收标准>用户为卡片创建验收标准后,可以查看](#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%8D%A1%E7%89%87%E7%9A%84%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86%E7%94%A8%E6%88%B7%E4%B8%BA%E5%8D%A1%E7%89%87%E5%88%9B%E5%BB%BA%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86%E5%90%8E%E5%8F%AF%E4%BB%A5%E6%9F%A5%E7%9C%8B)
   - [删除指定的验收标准>用户为卡片创建验收标准后,可以删除指定的验收标准](#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9A%84%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86%E7%94%A8%E6%88%B7%E4%B8%BA%E5%8D%A1%E7%89%87%E5%88%9B%E5%BB%BA%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86%E5%90%8E%E5%8F%AF%E4%BB%A5%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9A%84%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86)
   - [更新指定的验收标准>用户为卡片创建验收标准后,可以更新指定的验收标准](#%E6%9B%B4%E6%96%B0%E6%8C%87%E5%AE%9A%E7%9A%84%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86%E7%94%A8%E6%88%B7%E4%B8%BA%E5%8D%A1%E7%89%87%E5%88%9B%E5%BB%BA%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86%E5%90%8E%E5%8F%AF%E4%BB%A5%E6%9B%B4%E6%96%B0%E6%8C%87%E5%AE%9A%E7%9A%84%E9%AA%8C%E6%94%B6%E6%A0%87%E5%87%86)
+- [十四 、评论](#%E5%8D%81%E5%9B%9B-%E3%80%81%E8%AF%84%E8%AE%BA)
+  - [获取指定卡片的评论>用户在获取卡片的评论时,只可以操作自己的卡片](#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%8D%A1%E7%89%87%E7%9A%84%E8%AF%84%E8%AE%BA%E7%94%A8%E6%88%B7%E5%9C%A8%E8%8E%B7%E5%8F%96%E5%8D%A1%E7%89%87%E7%9A%84%E8%AF%84%E8%AE%BA%E6%97%B6%E5%8F%AA%E5%8F%AF%E4%BB%A5%E6%93%8D%E4%BD%9C%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%A1%E7%89%87)
+  - [删除指定的评论>当用户创建删除评论时,只可以删除由自己撰写的评论](#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9A%84%E8%AF%84%E8%AE%BA%E5%BD%93%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E5%88%A0%E9%99%A4%E8%AF%84%E8%AE%BA%E6%97%B6%E5%8F%AA%E5%8F%AF%E4%BB%A5%E5%88%A0%E9%99%A4%E7%94%B1%E8%87%AA%E5%B7%B1%E6%92%B0%E5%86%99%E7%9A%84%E8%AF%84%E8%AE%BA)
+  - [撰写评论>用户创建完卡片后,可以创建为其撰写相应的评论](#%E6%92%B0%E5%86%99%E8%AF%84%E8%AE%BA%E7%94%A8%E6%88%B7%E5%88%9B%E5%BB%BA%E5%AE%8C%E5%8D%A1%E7%89%87%E5%90%8E%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E4%B8%BA%E5%85%B6%E6%92%B0%E5%86%99%E7%9B%B8%E5%BA%94%E7%9A%84%E8%AF%84%E8%AE%BA)
+  - [创建评论>如果用户在创建评论时,未提供概述,则不允许创建](#%E5%88%9B%E5%BB%BA%E8%AF%84%E8%AE%BA%E5%A6%82%E6%9E%9C%E7%94%A8%E6%88%B7%E5%9C%A8%E5%88%9B%E5%BB%BA%E8%AF%84%E8%AE%BA%E6%97%B6%E6%9C%AA%E6%8F%90%E4%BE%9B%E6%A6%82%E8%BF%B0%E5%88%99%E4%B8%8D%E5%85%81%E8%AE%B8%E5%88%9B%E5%BB%BA)
+  - [获取指定的评论>用户为卡片创建评论后,可以根据ID获取指定的评论](#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%9A%84%E8%AF%84%E8%AE%BA%E7%94%A8%E6%88%B7%E4%B8%BA%E5%8D%A1%E7%89%87%E5%88%9B%E5%BB%BA%E8%AF%84%E8%AE%BA%E5%90%8E%E5%8F%AF%E4%BB%A5%E6%A0%B9%E6%8D%AEid%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%9A%84%E8%AF%84%E8%AE%BA)
+  - [获取指定卡片的评论>用户为卡片创建评论后,可以查看](#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E5%8D%A1%E7%89%87%E7%9A%84%E8%AF%84%E8%AE%BA%E7%94%A8%E6%88%B7%E4%B8%BA%E5%8D%A1%E7%89%87%E5%88%9B%E5%BB%BA%E8%AF%84%E8%AE%BA%E5%90%8E%E5%8F%AF%E4%BB%A5%E6%9F%A5%E7%9C%8B)
+  - [删除指定的评论>用户为卡片创建评论后,可以删除指定的评论](#%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9A%84%E8%AF%84%E8%AE%BA%E7%94%A8%E6%88%B7%E4%B8%BA%E5%8D%A1%E7%89%87%E5%88%9B%E5%BB%BA%E8%AF%84%E8%AE%BA%E5%90%8E%E5%8F%AF%E4%BB%A5%E5%88%A0%E9%99%A4%E6%8C%87%E5%AE%9A%E7%9A%84%E8%AF%84%E8%AE%BA)
 - [领域未定义](#%E9%A2%86%E5%9F%9F%E6%9C%AA%E5%AE%9A%E4%B9%89)
   - [当头部信息的userName和路径中的不一致时,告知客户端错误](#%E5%BD%93%E5%A4%B4%E9%83%A8%E4%BF%A1%E6%81%AF%E7%9A%84username%E5%92%8C%E8%B7%AF%E5%BE%84%E4%B8%AD%E7%9A%84%E4%B8%8D%E4%B8%80%E8%87%B4%E6%97%B6%E5%91%8A%E7%9F%A5%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%94%99%E8%AF%AF)
   - [当token不为空且未失效时,请求到达后更新token的有效期](#%E5%BD%93token%E4%B8%8D%E4%B8%BA%E7%A9%BA%E4%B8%94%E6%9C%AA%E5%A4%B1%E6%95%88%E6%97%B6%E8%AF%B7%E6%B1%82%E5%88%B0%E8%BE%BE%E5%90%8E%E6%9B%B4%E6%96%B0token%E7%9A%84%E6%9C%89%E6%95%88%E6%9C%9F)
@@ -151,7 +154,7 @@
 **用例名称**
 enter_shouldReturnEntranceSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/entrance
 
 **响应体**
@@ -161,53 +164,22 @@ http://localhost:8007/entrance
 		"self":{
 			"href":"http://localhost:8007/entrance",
 			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
 				"read":{
 					"isAllowed":true
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
 				}
 			}
 		},
 		"publicKey":{
 			"href":"http://localhost:8007/publicKey",
 			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
 				"read":{
 					"isAllowed":true
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
 				}
 			}
 		},
 		"passwordRetrievalApplication":{
 			"href":"http://localhost:8007/passwordRetrievalApplication",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"description":"Welcome!"
@@ -223,7 +195,7 @@ http://localhost:8007/entrance
 **用例名称**
 registerNewUser_shouldRejectWithConflictWhenUserNameExists
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/registration
 
 **请求体**
@@ -239,7 +211,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1477491133733,
+	"timestamp":1477971044251,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -256,7 +228,7 @@ http://localhost:8007/registration
 **用例名称**
 registerNewUser_shouldFailIfPasswordIsNotEncryptedWithPublicKey
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/registration
 
 **请求体**
@@ -272,7 +244,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1477491133846,
+	"timestamp":1477971044361,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -289,7 +261,7 @@ http://localhost:8007/registration
 **用例名称**
 registerNewUser_shouldRejectWithConflictWhenUserEmailExists
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/registration
 
 **请求体**
@@ -305,7 +277,7 @@ http://localhost:8007/registration
 **响应体**
 ```
 {
-	"timestamp":1477491133939,
+	"timestamp":1477971044481,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -322,14 +294,14 @@ http://localhost:8007/registration
 **用例名称**
 registerNewUser_shouldReturn201WhenRegisterSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/registration
 
 **请求体**
 ```
 {
 	"name":"someone",
-	"password":"SmQ3Cz2my5QbOSjkqNLb4qmLUKn8LFw8CvWEQlX5zfNYMUd0Z8rwW649uWqwDAqa1W5PVI20FpiRLnFkyBN0NZjd6O8Rl3ydohpIYxa/sDwIfAtqKh2j1kQT1Hhl1L1MPiXXZFmZP0Klm1rLRg2Q6vSNyFoJWCHOjyUFuUc/Bv4=",
+	"password":"Q2fd0c1ZQ3YYDFoBD4Aru/6jxKaz3AD0hl4to6goZej/sFk8ns+h0OOSyZ2FYUugj/ZJMrqGlsmjGZMRLLG/OKm+MN0cdy2Oz+tVx+Cy5UrlqXl4YIZ8phUVzqrWytd3c+wSv2EIRTCTBpfK8FrqOKXI+i5+lhLElLTy6mMElxQ=",
 	"email":"someone@gmail.com"
 }
 ```
@@ -343,20 +315,7 @@ http://localhost:8007/registration
 	"_links":{
 		"login":{
 			"href":"http://localhost:8007/login",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"name":"someone",
@@ -374,13 +333,13 @@ http://localhost:8007/registration
 **用例名称**
 login_shouldLoginFailedIfUserNameOrPasswordIsIncorrect
 
-**URL**
-http://localhost:8007/login?identity=someone&password=iLopuPKjb7gRTmwtmyupXImO%2BxZ76DYy7Fg7Rnvt8eBVizS559jTeIQcs1UZlnEefmtlUdjKkNOkipDt8SmocgZRiEkbKIIMeIgvx2Y%2BIZZNPlbm2xFvIYbAX7OwqRnnBgES28IOEUjtaKPnxtU4M0r%2B3hB0zd1luTPa3qXx3Zs%3D
+**URL_TEMPLATE**
+http://localhost:8007/login?identity=someone&password=eR6Ru6N1SLIdaXW2QuJo12VHV5r0CjdxwJst9ViQ9MGWHpQQ7mizkC3H50JHe55z4RoKbAgT3dqGixEnJ3E1dzU%2Fd%2BRaadL7ck2GvcK%2Fz7wwljADEv7uhsmJzOwUjc3CP3Sp1JLAEmUMj3cMf8CvwlQGkyDAqhOlg9nxIhsjHUU%3D
 
 **响应体**
 ```
 {
-	"timestamp":1477491128651,
+	"timestamp":1477971037731,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -397,8 +356,8 @@ http://localhost:8007/login?identity=someone&password=iLopuPKjb7gRTmwtmyupXImO%2
 **用例名称**
 login_loginSuccessfully
 
-**URL**
-http://localhost:8007/login?identity=someone&password=ngHlvKgVhreVfyUU43lzscYCnyU5iYDqLnpmytjbrXPaCXYf4OkRdRVQ5%2FxZrpDcgSwVo58BmWLehdyHxdj5%2BiZdez%2FRUbE6JMHQuKhLcNBfKxbpRREAxCE0%2BRuIu%2BfkD%2FnkVXKPWh3ddEvFO9C2PUl%2BRAX%2BV0cqucWiixcQY94%3D
+**URL_TEMPLATE**
+http://localhost:8007/login?identity=someone&password=flnsHjNsUocWxsO3VvGnPfGegxdWXq5AiVRfG9fLyuC7ziQWhJKuNzV0FIHa%2BJnxHi79NJqgJuOciC%2FSKv2G%2BjWWh8XuSa%2BNTs%2B5%2BI4ePd04sAub9d7ha2qlOw5r%2By7QJe1THiTlob75YKPnfS24vnCoIVERdj2Nj0%2B1R4pKiQE%3D
 
 **响应体**
 ```
@@ -406,71 +365,19 @@ http://localhost:8007/login?identity=someone&password=ngHlvKgVhreVfyUU43lzscYCny
 	"_links":{
 		"teams":{
 			"href":"http://localhost:8007/someone/teams",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"unreadNotificationsTotal":{
 			"href":"http://localhost:8007/someone/notifications/unread/total",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"profile":{
 			"href":"http://localhost:8007/users/someone/profile",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"boards":{
 			"href":"http://localhost:8007/someone/boards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"userName":"someone",
@@ -485,13 +392,13 @@ http://localhost:8007/login?identity=someone&password=ngHlvKgVhreVfyUU43lzscYCny
 **用例名称**
 login_loginFailed
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/login?password=foo
 
 **响应体**
 ```
 {
-	"timestamp":1477491128792,
+	"timestamp":1477971037922,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -508,13 +415,13 @@ http://localhost:8007/login?password=foo
 **用例名称**
 login_loginFailedIfRegUserIsNotExists
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/login?identity=foo&password=foo
 
 **响应体**
 ```
 {
-	"timestamp":1477491128849,
+	"timestamp":1477971037995,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -533,86 +440,38 @@ http://localhost:8007/login?identity=foo&password=foo
 **用例名称**
 allowReadOnlyIfTheUserIsNotTheTeamAndTheBoardOwner
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards/fooId
 
 **响应体**
 ```
 {
 	"owner":"others",
-	"creationTime":"2016-10-26 22:12:00.864000",
+	"creationTime":"2016-11-01 11:28:48.644000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"procedures":{
 			"href":"http://localhost:8007/boards/fooId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/someone/boards/fooId",
 			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
 				"read":{
 					"isAllowed":true
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
 				}
 			}
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/teamId-foo",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"others",
-	"modificationTime":"2016-10-26 22:12:00.864000",
+	"modificationTime":"2016-11-01 11:28:48.644000",
 	"teamId":"teamId-foo",
 	"name":"board-name",
 	"id":"fooId"
@@ -626,13 +485,13 @@ http://localhost:8007/someone/boards/fooId
 **用例名称**
 notAllowedIfCurrentHasNoAuthority
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards/fooId
 
 **响应体**
 ```
 {
-	"timestamp":1477491121020,
+	"timestamp":1477970928836,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.AuthenticationException",
@@ -649,7 +508,7 @@ http://localhost:8007/someone/boards/fooId
 **用例名称**
 shouldUpdateSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards/fooId
 
 **请求体**
@@ -664,79 +523,27 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:01.048000",
+	"creationTime":"2016-11-01 11:28:48.863000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"procedures":{
 			"href":"http://localhost:8007/boards/fooId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/someone/boards/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/teamId-foo",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:01.048000",
+	"modificationTime":"2016-11-01 11:28:48.863000",
 	"teamId":"teamId-foo",
 	"name":"new-name",
 	"id":"fooId"
@@ -750,7 +557,7 @@ http://localhost:8007/someone/boards/fooId
 **用例名称**
 UpdateIsNotAllowedIfBoardWithSameNameIsAlreadyExists
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards/fooId1
 
 **请求体**
@@ -764,7 +571,7 @@ http://localhost:8007/someone/boards/fooId1
 **响应体**
 ```
 {
-	"timestamp":1477491121182,
+	"timestamp":1477970929059,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -781,68 +588,29 @@ http://localhost:8007/someone/boards/fooId1
 **用例名称**
 shouldReturnBoardWhenBoardIsExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards/fooId
 
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:01.199000",
+	"creationTime":"2016-11-01 11:28:49.077000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"procedures":{
 			"href":"http://localhost:8007/boards/fooId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/someone/boards/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:01.199000",
+	"modificationTime":"2016-11-01 11:28:49.077000",
 	"name":"board-name",
 	"id":"fooId"
 }
@@ -855,7 +623,7 @@ http://localhost:8007/someone/boards/fooId
 **用例名称**
 NotAllowedIfBoardWithSameNameIsAlreadyExists
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards
 
 **请求体**
@@ -869,7 +637,7 @@ http://localhost:8007/someone/boards
 **响应体**
 ```
 {
-	"timestamp":1477491121292,
+	"timestamp":1477970929205,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -886,14 +654,14 @@ http://localhost:8007/someone/boards
 **用例名称**
 findByUserName_shouldReturnAllBoardsSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards
 
 **响应体**
 ```
 [
 	{
-		"creationTime":"2016-10-26 22:12:01.310000",
+		"creationTime":"2016-11-01 11:28:49.243000",
 		"_links":{
 			"all":{
 				"href":"http://localhost:8007/someone/boards"
@@ -906,7 +674,7 @@ http://localhost:8007/someone/boards
 			}
 		},
 		"author":"someone",
-		"modificationTime":"2016-10-26 22:12:01.310000",
+		"modificationTime":"2016-11-01 11:28:49.243000",
 		"name":"board-name",
 		"id":"fooId"
 	}
@@ -920,7 +688,7 @@ http://localhost:8007/someone/boards
 **用例名称**
 shouldReturn201WhenCreateBoardSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards
 
 **请求体**
@@ -935,41 +703,15 @@ http://localhost:8007/someone/boards
 ```
 {
 	"owner":"someone",
-	"creationTime":"2016-10-26 22:12:01.399000",
+	"creationTime":"2016-11-01 11:28:49.362000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"procedures":{
 			"href":"http://localhost:8007/boards/fooId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/someone/boards/fooId",
@@ -980,9 +722,6 @@ http://localhost:8007/someone/boards
 				"read":{
 					"isAllowed":true
 				},
-				"create":{
-					"isAllowed":false
-				},
 				"delete":{
 					"isAllowed":true
 				}
@@ -990,7 +729,7 @@ http://localhost:8007/someone/boards
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:01.399000",
+	"modificationTime":"2016-11-01 11:28:49.362000",
 	"name":"board-name",
 	"id":"fooId"
 }
@@ -1003,7 +742,7 @@ http://localhost:8007/someone/boards
 **用例名称**
 shouldDeleteSuccessfullyWhenTheBoardIsExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards/fooId
 
 **响应体**
@@ -1012,20 +751,7 @@ http://localhost:8007/someone/boards/fooId
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/someone/boards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -1038,7 +764,7 @@ http://localhost:8007/someone/boards/fooId
 **用例名称**
 shouldUpdateFailedWhenTheBoardIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards/fooId
 
 **请求体**
@@ -1052,7 +778,7 @@ http://localhost:8007/someone/boards/fooId
 **响应体**
 ```
 {
-	"timestamp":1477491121514,
+	"timestamp":1477970929496,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1069,13 +795,13 @@ http://localhost:8007/someone/boards/fooId
 **用例名称**
 shouldThrowResourceNotFoundExceptionWhenBoardToDeleteIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/boards/fooId
 
 **响应体**
 ```
 {
-	"timestamp":1477491121545,
+	"timestamp":1477970929532,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -1089,102 +815,17 @@ http://localhost:8007/someone/boards/fooId
 -------
 # 四、工序 #
 
-## 创建一个新的procedure,如果它并不是指定boardId下第一个procedure,则其排序号应根据当前procedure数量自动增加 ##
-
-**用例名称**
-create_orderNumberShouldAutoIncrease
-
-**URL**
-http://localhost:8007/boards/feeId/procedures
-
-**请求体**
-```
-{
-	"title":"title."
-}
-```
-
-
-**响应体**
-```
-{
-	"orderNumber":1,
-	"creationTime":"2016-10-26 22:12:12.799000",
-	"_links":{
-		"all":{
-			"href":"http://localhost:8007/boards/feeId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"cards":{
-			"href":"http://localhost:8007/procedures/fooId/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"self":{
-			"href":"http://localhost:8007/boards/feeId/procedures/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		}
-	},
-	"author":"fooName",
-	"modificationTime":"2016-10-26 22:12:12.799000",
-	"boardId":"feeId",
-	"id":"fooId",
-	"title":"title."
-}
-```
-
-
--------
 ## 更新procedure时,如果参数合法且待更新的procedure存在,则更新成功 ##
 
 **用例名称**
 shouldUpdateSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures/fooId
 
 **请求体**
 ```
 {
-	"orderNumber":0,
 	"title":"newTitle"
 }
 ```
@@ -1193,150 +834,25 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **响应体**
 ```
 {
-	"orderNumber":0,
-	"creationTime":"2016-10-26 22:12:12.876000",
+	"creationTime":"2016-11-01 11:30:42.999000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"cards":{
 			"href":"http://localhost:8007/procedures/fooId/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-10-26 22:12:12.876000",
+	"modificationTime":"2016-11-01 11:30:42.999000",
 	"boardId":"feeId",
 	"id":"fooId",
-	"title":"newTitle"
-}
-```
-
-
--------
-## 当移动一个procedure时,移动后的排序小于其原先的排序 ##
-
-**用例名称**
-update_shouldResortSuccessfullyWhenCurrentSortNumberIsLessThanOriginNumber
-
-**URL**
-http://localhost:8007/boards/feeId/procedures/fooId2
-
-**请求体**
-```
-{
-	"orderNumber":0,
-	"title":"newTitle"
-}
-```
-
-
-**响应体**
-```
-{
-	"orderNumber":0,
-	"creationTime":"2016-10-26 22:12:12.945000",
-	"_links":{
-		"all":{
-			"href":"http://localhost:8007/boards/feeId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"cards":{
-			"href":"http://localhost:8007/procedures/fooId2/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"self":{
-			"href":"http://localhost:8007/boards/feeId/procedures/fooId2",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		}
-	},
-	"author":"1",
-	"modificationTime":"2016-10-26 22:12:12.945000",
-	"boardId":"feeId",
-	"id":"fooId2",
 	"title":"newTitle"
 }
 ```
@@ -1348,69 +864,30 @@ http://localhost:8007/boards/feeId/procedures/fooId2
 **用例名称**
 shouldReturnProcedureWhenFindProcedureById
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures/fooId
 
 **响应体**
 ```
 {
-	"orderNumber":0,
-	"creationTime":"2016-10-26 22:12:13.020000",
+	"creationTime":"2016-11-01 11:30:43.125000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"cards":{
 			"href":"http://localhost:8007/procedures/fooId/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"1",
-	"modificationTime":"2016-10-26 22:12:13.020000",
+	"modificationTime":"2016-11-01 11:30:43.125000",
+	"sortNumber":0,
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"this is the first procedure."
@@ -1424,7 +901,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **用例名称**
 shouldFailedIfProcedureTitleIsEmpty
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures
 
 **请求体**
@@ -1438,7 +915,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1477491133090,
+	"timestamp":1477971043245,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1455,13 +932,12 @@ http://localhost:8007/boards/feeId/procedures
 **用例名称**
 update_shouldFailedWhenTheProcedureToUpdateIsNotExists
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures/fooId
 
 **请求体**
 ```
 {
-	"orderNumber":0,
 	"title":"newTitle"
 }
 ```
@@ -1470,13 +946,13 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **响应体**
 ```
 {
-	"timestamp":1477491133136,
-	"status":404,
-	"error":"Not Found",
-	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
-	"message":"procedure[fooId] is not found.",
+	"timestamp":1477971043308,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"工序不存在",
 	"path":"/boards/feeId/procedures/fooId",
-	"code":404
+	"code":4003
 }
 ```
 
@@ -1487,33 +963,137 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **用例名称**
 shouldReturnAllEntriesSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures
 
 **响应体**
 ```
+{
+	"_links":{
+		"self":{
+			"href":"http://localhost:8007/boards/feeId/procedures",
+			"actions":{}
+		},
+		"sortNumbers":{
+			"href":"http://localhost:8007/boards/feeId/procedures/sortNumbers",
+			"actions":{}
+		}
+	},
+	"procedures":[
+		{
+			"creationTime":"2016-11-01 11:30:43.427000",
+			"_links":{
+				"all":{
+					"href":"http://localhost:8007/boards/feeId/procedures",
+					"actions":{}
+				},
+				"cards":{
+					"href":"http://localhost:8007/procedures/fooId/cards",
+					"actions":{}
+				},
+				"self":{
+					"href":"http://localhost:8007/boards/feeId/procedures/fooId",
+					"actions":{}
+				}
+			},
+			"author":"tao",
+			"modificationTime":"2016-11-01 11:30:43.427000",
+			"sortNumber":0,
+			"boardId":"feeId",
+			"id":"fooId",
+			"title":"this is the first procedure."
+		}
+	]
+}
+```
+
+
+-------
+## 重新排序>用户创建工序后,可以调整其顺序 ##
+
+**用例名称**
+resortProcedure
+
+**URL_TEMPLATE**
+http://localhost:8007/boards/feeId/procedures/sortNumbers
+
+**请求体**
+```
 [
 	{
-		"orderNumber":0,
-		"creationTime":"2016-10-26 22:12:13.192000",
-		"_links":{
-			"all":{
-				"href":"http://localhost:8007/boards/feeId/procedures"
-			},
-			"cards":{
-				"href":"http://localhost:8007/procedures/fooId/cards"
-			},
-			"self":{
-				"href":"http://localhost:8007/boards/feeId/procedures/fooId"
-			}
-		},
-		"author":"tao",
-		"modificationTime":"2016-10-26 22:12:13.192000",
-		"boardId":"feeId",
-		"id":"fooId",
-		"title":"this is the first procedure."
+		"sortNumber":2,
+		"id":"procedure-fooId1"
+	},
+	{
+		"sortNumber":3,
+		"id":"procedure-fooId2"
 	}
 ]
+```
+
+
+**响应体**
+```
+{
+	"_links":{
+		"procedures":{
+			"href":"http://localhost:8007/boards/feeId/procedures",
+			"actions":{}
+		},
+		"self":{
+			"href":"http://localhost:8007/boards/feeId/procedures/sortNumbers",
+			"actions":{}
+		}
+	},
+	"procedures":[
+		{
+			"creationTime":"2016-11-01 11:30:43.560000",
+			"_links":{
+				"all":{
+					"href":"http://localhost:8007/boards/feeId/procedures",
+					"actions":{}
+				},
+				"cards":{
+					"href":"http://localhost:8007/procedures/procedure-fooId1/cards",
+					"actions":{}
+				},
+				"self":{
+					"href":"http://localhost:8007/boards/feeId/procedures/procedure-fooId1",
+					"actions":{}
+				}
+			},
+			"author":"1",
+			"modificationTime":"2016-11-01 11:30:43.560000",
+			"sortNumber":2,
+			"boardId":"feeId",
+			"id":"procedure-fooId1",
+			"title":"procedureTitle1"
+		},
+		{
+			"creationTime":"2016-11-01 11:30:43.560000",
+			"_links":{
+				"all":{
+					"href":"http://localhost:8007/boards/feeId/procedures",
+					"actions":{}
+				},
+				"cards":{
+					"href":"http://localhost:8007/procedures/procedure-fooId2/cards",
+					"actions":{}
+				},
+				"self":{
+					"href":"http://localhost:8007/boards/feeId/procedures/procedure-fooId2",
+					"actions":{}
+				}
+			},
+			"author":"1",
+			"modificationTime":"2016-11-01 11:30:43.560000",
+			"sortNumber":3,
+			"boardId":"feeId",
+			"id":"procedure-fooId2",
+			"title":"procedureTitle2"
+		}
+	]
+}
 ```
 
 
@@ -1523,7 +1103,7 @@ http://localhost:8007/boards/feeId/procedures
 **用例名称**
 shouldReturnBadRequestWhenProcedureTitleIsTooLong
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures
 
 **请求体**
@@ -1537,7 +1117,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1477491133276,
+	"timestamp":1477971043751,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1554,7 +1134,7 @@ http://localhost:8007/boards/feeId/procedures
 **用例名称**
 shouldDeleteSuccessfullyWhenTheProcedureIsExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures/fooId
 
 **响应体**
@@ -1563,20 +1143,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -1589,7 +1156,7 @@ http://localhost:8007/boards/feeId/procedures/fooId
 **用例名称**
 shouldReturnBadRequestWhenProcedureTitleIsEmpty
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures
 
 **请求体**
@@ -1603,7 +1170,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1477491133350,
+	"timestamp":1477971043865,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -1620,104 +1187,19 @@ http://localhost:8007/boards/feeId/procedures
 **用例名称**
 shouldThrowResourceNotFoundExceptionWhenProcedureToDeleteIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures/fooId
 
 **响应体**
 ```
 {
-	"timestamp":1477491133388,
-	"status":404,
-	"error":"Not Found",
-	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
-	"message":"procedure[fooId] is not found.",
+	"timestamp":1477971043924,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"工序不存在",
 	"path":"/boards/feeId/procedures/fooId",
-	"code":404
-}
-```
-
-
--------
-## 当移动一个procedure时,移动后的排序大于其原先的排序 ##
-
-**用例名称**
-update_shouldResortSuccessfullyWhenCurrentSortNumberIsMoreThanOriginNumber
-
-**URL**
-http://localhost:8007/boards/feeId/procedures/fooId1
-
-**请求体**
-```
-{
-	"orderNumber":2,
-	"title":"newTitle"
-}
-```
-
-
-**响应体**
-```
-{
-	"orderNumber":2,
-	"creationTime":"2016-10-26 22:12:13.436000",
-	"_links":{
-		"all":{
-			"href":"http://localhost:8007/boards/feeId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"cards":{
-			"href":"http://localhost:8007/procedures/fooId1/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"self":{
-			"href":"http://localhost:8007/boards/feeId/procedures/fooId1",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		}
-	},
-	"author":"1",
-	"modificationTime":"2016-10-26 22:12:13.436000",
-	"boardId":"feeId",
-	"id":"fooId1",
-	"title":"newTitle"
+	"code":4003
 }
 ```
 
@@ -1728,7 +1210,7 @@ http://localhost:8007/boards/feeId/procedures/fooId1
 **用例名称**
 shouldReturnBadRequestWhenProcedureTitleIsAlreadyExits
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures
 
 **请求体**
@@ -1742,7 +1224,7 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"timestamp":1477491133522,
+	"timestamp":1477971043986,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -1759,7 +1241,7 @@ http://localhost:8007/boards/feeId/procedures
 **用例名称**
 shouldReturn201WhenCreateProcedureSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/boards/feeId/procedures
 
 **请求体**
@@ -1773,63 +1255,24 @@ http://localhost:8007/boards/feeId/procedures
 **响应体**
 ```
 {
-	"orderNumber":0,
-	"creationTime":"2016-10-26 22:12:13.571000",
+	"creationTime":"2016-11-01 11:30:44.058000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/feeId/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"cards":{
 			"href":"http://localhost:8007/procedures/fooId/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/boards/feeId/procedures/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"fooName",
-	"modificationTime":"2016-10-26 22:12:13.571000",
+	"modificationTime":"2016-11-01 11:30:44.058000",
+	"sortNumber":0,
 	"boardId":"feeId",
 	"id":"fooId",
 	"title":"this is the procedure title."
@@ -1840,114 +1283,12 @@ http://localhost:8007/boards/feeId/procedures
 -------
 # 五、卡片 #
 
-## 当移动一个卡片时,移动后的顺序大于初始顺序 ##
-
-**用例名称**
-update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumber
-
-**URL**
-http://localhost:8007/procedures/1/cards/fooId2
-
-**请求体**
-```
-{
-	"summary":"newSummary",
-	"orderNumber":3,
-	"procedureId":"1"
-}
-```
-
-
-**响应体**
-```
-{
-	"summary":"newSummary",
-	"orderNumber":3,
-	"creationTime":"2016-10-26 22:12:01.576000",
-	"_links":{
-		"assignments":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId2/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"acceptanceCriterias":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId2/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"cards":{
-			"href":"http://localhost:8007/procedures/1/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"self":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId2",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		}
-	},
-	"modificationTime":"2016-10-26 22:12:01.576000",
-	"id":"fooId2",
-	"procedureId":"1"
-}
-```
-
-
--------
 ## 当更新一个卡片时,如果待更新的卡片不存在,则抛出资源不存在的错误 ##
 
 **用例名称**
 update_shouldThrowResourceNotFoundExceptionWhenCardToUpdateIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/fooId
 
 **请求体**
@@ -1961,13 +1302,13 @@ http://localhost:8007/procedures/1/cards/fooId
 **响应体**
 ```
 {
-	"timestamp":1477491121674,
-	"status":404,
-	"error":"Not Found",
-	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
-	"message":"card[fooId] is not found.",
+	"timestamp":1477970929597,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"卡片未找到。",
 	"path":"/procedures/1/cards/fooId",
-	"code":404
+	"code":5001
 }
 ```
 
@@ -1978,7 +1319,7 @@ http://localhost:8007/procedures/1/cards/fooId
 **用例名称**
 create_shouldFailedIfSummaryIsTooLong
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/fooId/cards
 
 **请求体**
@@ -1992,7 +1333,7 @@ http://localhost:8007/procedures/fooId/cards
 **响应体**
 ```
 {
-	"timestamp":1477491121710,
+	"timestamp":1477970929669,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2009,87 +1350,39 @@ http://localhost:8007/procedures/fooId/cards
 **用例名称**
 findById_shouldReturnCardSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/1
 
 **响应体**
 ```
 {
 	"summary":"this is the card summary.",
-	"orderNumber":0,
-	"creationTime":"2016-10-26 22:12:01.745000",
+	"creationTime":"2016-11-01 11:28:49.760000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/1/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/1/cards/1/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
+		},
+		"comments":{
+			"href":"http://localhost:8007/procedures/1/cards/1/comments",
+			"actions":{}
 		},
 		"cards":{
 			"href":"http://localhost:8007/procedures/1/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/1/cards/1",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:01.745000",
+	"modificationTime":"2016-11-01 11:28:49.760000",
+	"sortNumber":0,
 	"id":"1",
 	"procedureId":"1",
 	"content":"play badminton"
@@ -2103,14 +1396,14 @@ http://localhost:8007/procedures/1/cards/1
 **用例名称**
 update_shouldResortSuccessfullyWhenCardIsFromAntherProcedure
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/fooId6
 
 **请求体**
 ```
 {
 	"summary":"newSummary",
-	"orderNumber":3,
+	"sortNumber":3,
 	"procedureId":"1"
 }
 ```
@@ -2120,79 +1413,31 @@ http://localhost:8007/procedures/1/cards/fooId6
 ```
 {
 	"summary":"newSummary",
-	"orderNumber":3,
-	"creationTime":"2016-10-26 22:12:01.798000",
+	"creationTime":"2016-11-01 11:28:49.882000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId6/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId6/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
+		},
+		"comments":{
+			"href":"http://localhost:8007/procedures/1/cards/fooId6/comments",
+			"actions":{}
 		},
 		"cards":{
 			"href":"http://localhost:8007/procedures/1/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId6",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
-	"modificationTime":"2016-10-26 22:12:01.798000",
+	"modificationTime":"2016-11-01 11:28:49.882000",
+	"sortNumber":3,
 	"id":"fooId6",
 	"procedureId":"1"
 }
@@ -2200,126 +1445,24 @@ http://localhost:8007/procedures/1/cards/fooId6
 
 
 -------
-## 当移动一个卡片时,移动后的顺序小于其前置顺序 ##
-
-**用例名称**
-update_shouldResortSuccessfullyWhenCurrentOrderNumberLessThanOriginNumber
-
-**URL**
-http://localhost:8007/procedures/1/cards/fooId4
-
-**请求体**
-```
-{
-	"summary":"newSummary",
-	"orderNumber":1,
-	"procedureId":"1"
-}
-```
-
-
-**响应体**
-```
-{
-	"summary":"newSummary",
-	"orderNumber":1,
-	"creationTime":"2016-10-26 22:12:01.872000",
-	"_links":{
-		"assignments":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId4/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"acceptanceCriterias":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId4/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"cards":{
-			"href":"http://localhost:8007/procedures/1/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"self":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId4",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		}
-	},
-	"modificationTime":"2016-10-26 22:12:01.872000",
-	"id":"fooId4",
-	"procedureId":"1"
-}
-```
-
-
--------
-## 根据ID查找一个卡片时,如果卡片不存在,则抛出404的错误 ##
+## 根据ID查找一个卡片时,如果卡片不存在,则抛出400错误 ##
 
 **用例名称**
 update_shouldFailedWhenCardIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/fooId/cards/feeId
 
 **响应体**
 ```
 {
-	"timestamp":1477491121955,
-	"status":404,
-	"error":"Not Found",
-	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
-	"message":"card[feeId] is not found.",
+	"timestamp":1477970930025,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"卡片未找到。",
 	"path":"/procedures/fooId/cards/feeId",
-	"code":404
+	"code":5001
 }
 ```
 
@@ -2330,14 +1473,14 @@ http://localhost:8007/procedures/fooId/cards/feeId
 **用例名称**
 update_shouldReturn200WhenUpdateCardSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/fooId
 
 **请求体**
 ```
 {
 	"summary":"newSummary",
-	"orderNumber":3,
+	"sortNumber":3,
 	"procedureId":"1"
 }
 ```
@@ -2347,79 +1490,31 @@ http://localhost:8007/procedures/1/cards/fooId
 ```
 {
 	"summary":"newSummary",
-	"orderNumber":3,
-	"creationTime":"2016-10-26 22:12:01.986000",
+	"creationTime":"2016-11-01 11:28:50.058000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
+		},
+		"comments":{
+			"href":"http://localhost:8007/procedures/1/cards/fooId/comments",
+			"actions":{}
 		},
 		"cards":{
 			"href":"http://localhost:8007/procedures/1/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
-	"modificationTime":"2016-10-26 22:12:01.986000",
+	"modificationTime":"2016-11-01 11:28:50.058000",
+	"sortNumber":3,
 	"id":"fooId",
 	"procedureId":"1"
 }
@@ -2427,24 +1522,24 @@ http://localhost:8007/procedures/1/cards/fooId
 
 
 -------
-## 当删除一个卡片时,如果待删除的卡片不存在,则抛出404错误 ##
+## 当删除一个卡片时,如果待删除的卡片不存在,400 ##
 
 **用例名称**
 delete_shouldDeleteFailedWhenTheCardIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/feeId/cards/non-exists-cardId
 
 **响应体**
 ```
 {
-	"timestamp":1477491122058,
-	"status":404,
-	"error":"Not Found",
-	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
-	"message":"card[non-exists-cardId] is not found.",
+	"timestamp":1477970930156,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"卡片未找到。",
 	"path":"/procedures/feeId/cards/non-exists-cardId",
-	"code":404
+	"code":5001
 }
 ```
 
@@ -2455,37 +1550,57 @@ http://localhost:8007/procedures/feeId/cards/non-exists-cardId
 **用例名称**
 shouldReturnCardsWhenFindCardsByProcedureIdSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/fooId/cards
 
 **响应体**
 ```
-[
-	{
-		"summary":"this is the card summary.",
-		"orderNumber":0,
-		"creationTime":"2016-10-26 22:12:02.081000",
-		"_links":{
-			"assignments":{
-				"href":"http://localhost:8007/procedures/fooId/cards/card-fooId/assignments"
+{
+	"cards":[
+		{
+			"summary":"this is the card summary.",
+			"creationTime":"2016-11-01 11:28:50.191000",
+			"_links":{
+				"assignments":{
+					"href":"http://localhost:8007/procedures/fooId/cards/card-fooId/assignments",
+					"actions":{}
+				},
+				"acceptanceCriterias":{
+					"href":"http://localhost:8007/procedures/fooId/cards/card-fooId/acceptanceCriterias",
+					"actions":{}
+				},
+				"comments":{
+					"href":"http://localhost:8007/procedures/fooId/cards/card-fooId/comments",
+					"actions":{}
+				},
+				"cards":{
+					"href":"http://localhost:8007/procedures/fooId/cards",
+					"actions":{}
+				},
+				"self":{
+					"href":"http://localhost:8007/procedures/fooId/cards/card-fooId",
+					"actions":{}
+				}
 			},
-			"acceptanceCriterias":{
-				"href":"http://localhost:8007/procedures/fooId/cards/card-fooId/acceptanceCriterias"
-			},
-			"cards":{
-				"href":"http://localhost:8007/procedures/fooId/cards"
-			},
-			"self":{
-				"href":"http://localhost:8007/procedures/fooId/cards/card-fooId"
-			}
+			"author":"someone",
+			"modificationTime":"2016-11-01 11:28:50.191000",
+			"sortNumber":0,
+			"id":"card-fooId",
+			"procedureId":"fooId",
+			"content":"play badminton"
+		}
+	],
+	"_links":{
+		"self":{
+			"href":"http://localhost:8007/procedures/fooId/cards",
+			"actions":{}
 		},
-		"author":"someone",
-		"modificationTime":"2016-10-26 22:12:02.081000",
-		"id":"card-fooId",
-		"procedureId":"fooId",
-		"content":"play badminton"
+		"sortNumbers":{
+			"href":"http://localhost:8007/procedures/fooId/cards/sortNumbers",
+			"actions":{}
+		}
 	}
-]
+}
 ```
 
 
@@ -2495,7 +1610,7 @@ http://localhost:8007/procedures/fooId/cards
 **用例名称**
 create_shouldCreateFailedWhenProcedureIsNotFound
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/non-exists-procedureId/cards
 
 **请求体**
@@ -2509,7 +1624,7 @@ http://localhost:8007/procedures/non-exists-procedureId/cards
 **响应体**
 ```
 {
-	"timestamp":1477491122153,
+	"timestamp":1477970930438,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -2526,7 +1641,7 @@ http://localhost:8007/procedures/non-exists-procedureId/cards
 **用例名称**
 delete_shouldDeleteSuccessfullyWhenTheCardIsExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/feeId/cards/fooId
 
 **响应体**
@@ -2535,20 +1650,7 @@ http://localhost:8007/procedures/feeId/cards/fooId
 	"_links":{
 		"cards":{
 			"href":"http://localhost:8007/procedures/feeId/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -2561,7 +1663,7 @@ http://localhost:8007/procedures/feeId/cards/fooId
 **用例名称**
 create_shouldReturn201WhenCreateCardSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/fooId/cards
 
 **请求体**
@@ -2576,80 +1678,32 @@ http://localhost:8007/procedures/fooId/cards
 ```
 {
 	"summary":"summary",
-	"orderNumber":0,
-	"creationTime":"2016-10-26 22:12:02.236000",
+	"creationTime":"2016-11-01 11:28:50.554000",
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/fooId/cards/fooId/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/fooId/cards/fooId/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
+		},
+		"comments":{
+			"href":"http://localhost:8007/procedures/fooId/cards/fooId/comments",
+			"actions":{}
 		},
 		"cards":{
 			"href":"http://localhost:8007/procedures/fooId/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/fooId/cards/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:02.236000",
+	"modificationTime":"2016-11-01 11:28:50.554000",
+	"sortNumber":0,
 	"id":"fooId",
 	"procedureId":"fooId"
 }
@@ -2662,7 +1716,7 @@ http://localhost:8007/procedures/fooId/cards
 **用例名称**
 create_shouldFailedIfSummaryIsNull
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/fooId/cards
 
 **请求体**
@@ -2676,7 +1730,7 @@ http://localhost:8007/procedures/fooId/cards
 **响应体**
 ```
 {
-	"timestamp":1477491122315,
+	"timestamp":1477970930672,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2688,120 +1742,18 @@ http://localhost:8007/procedures/fooId/cards
 
 
 -------
-## 当移动一个卡片时,卡片移动后的序号大于其前置序号,但在procedure中它移动后的序号并不是最大的。 ##
-
-**用例名称**
-update_shouldResortSuccessfullyWhenCurrentOrderNumberMoreThanOriginNumberButNotTheBiggest
-
-**URL**
-http://localhost:8007/procedures/1/cards/fooId1
-
-**请求体**
-```
-{
-	"summary":"newSummary",
-	"orderNumber":3,
-	"procedureId":"1"
-}
-```
-
-
-**响应体**
-```
-{
-	"summary":"newSummary",
-	"orderNumber":3,
-	"creationTime":"2016-10-26 22:12:02.333000",
-	"_links":{
-		"assignments":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId1/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"acceptanceCriterias":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId1/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"cards":{
-			"href":"http://localhost:8007/procedures/1/cards",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		},
-		"self":{
-			"href":"http://localhost:8007/procedures/1/cards/fooId1",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
-		}
-	},
-	"modificationTime":"2016-10-26 22:12:02.333000",
-	"id":"fooId1",
-	"procedureId":"1"
-}
-```
-
-
--------
 ## 当根据procedureID查找卡片时,如果procedure不存在,则抛出404异常 ##
 
 **用例名称**
 findCardsByProcedureId_shouldReturn404WhenProcedureIsNotFound
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/2/cards
 
 **响应体**
 ```
 {
-	"timestamp":1477491122434,
+	"timestamp":1477970930709,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -2820,13 +1772,13 @@ http://localhost:8007/procedures/2/cards
 **用例名称**
 shouldNoticeClientIfTeamIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/fooId
 
 **响应体**
 ```
 {
-	"timestamp":1477491141426,
+	"timestamp":1477971052532,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2843,7 +1795,7 @@ http://localhost:8007/teams/fooId
 **用例名称**
 creationIsNotAllowedIfTeamNameIsEmpty
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/teams
 
 **请求体**
@@ -2857,7 +1809,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1477491141488,
+	"timestamp":1477971052601,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2874,7 +1826,7 @@ http://localhost:8007/someone/teams
 **用例名称**
 notAllowedIfTeamIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/teamId-foo
 
 **请求体**
@@ -2888,7 +1840,7 @@ http://localhost:8007/teams/teamId-foo
 **响应体**
 ```
 {
-	"timestamp":1477491141557,
+	"timestamp":1477971052683,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -2905,51 +1857,25 @@ http://localhost:8007/teams/teamId-foo
 **用例名称**
 shouldReturnBoardWhenTeamIsExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/fooId
 
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:21.621000",
+	"creationTime":"2016-11-01 11:30:52.769000",
 	"_links":{
 		"members":{
 			"href":"http://localhost:8007/teams/fooId/members",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/teams/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:21.621000",
+	"modificationTime":"2016-11-01 11:30:52.769000",
 	"name":"team-name",
 	"id":"fooId"
 }
@@ -2962,7 +1888,7 @@ http://localhost:8007/teams/fooId
 **用例名称**
 creationIsNotAllowedIfTeamNameIsTooLong
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/teams
 
 **请求体**
@@ -2976,7 +1902,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1477491141790,
+	"timestamp":1477971052886,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -2993,14 +1919,14 @@ http://localhost:8007/someone/teams
 **用例名称**
 loadTheTeamsWhichTheUserIsIn
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/teams
 
 **响应体**
 ```
 [
 	{
-		"creationTime":"2016-10-26 22:12:21.827000",
+		"creationTime":"2016-11-01 11:30:52.942000",
 		"_links":{
 			"members":{
 				"href":"http://localhost:8007/teams/fooId/members"
@@ -3010,7 +1936,7 @@ http://localhost:8007/someone/teams
 			}
 		},
 		"author":"someone",
-		"modificationTime":"2016-10-26 22:12:21.827000",
+		"modificationTime":"2016-11-01 11:30:52.942000",
 		"name":"team-name",
 		"id":"fooId"
 	}
@@ -3024,7 +1950,7 @@ http://localhost:8007/someone/teams
 **用例名称**
 updateTeam
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/teamId-foo
 
 **请求体**
@@ -3038,45 +1964,19 @@ http://localhost:8007/teams/teamId-foo
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:21.892000",
+	"creationTime":"2016-11-01 11:30:53.042000",
 	"_links":{
 		"members":{
 			"href":"http://localhost:8007/teams/teamId-foo/members",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/teams/teamId-foo",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:21.892000",
+	"modificationTime":"2016-11-01 11:30:53.042000",
 	"name":"new-name",
 	"id":"teamId-foo"
 }
@@ -3089,7 +1989,7 @@ http://localhost:8007/teams/teamId-foo
 **用例名称**
 create_shouldReturn201WhenCreateTeamSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/teams
 
 **请求体**
@@ -3103,45 +2003,19 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:21.966000",
+	"creationTime":"2016-11-01 11:30:53.136000",
 	"_links":{
 		"members":{
 			"href":"http://localhost:8007/teams/fooId/members",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/teams/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:21.966000",
+	"modificationTime":"2016-11-01 11:30:53.136000",
 	"name":"思奇团队讨论组",
 	"id":"fooId"
 }
@@ -3154,7 +2028,7 @@ http://localhost:8007/someone/teams
 **用例名称**
 creationIsNotAllowedIfTeamNameIsConflict
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/teams
 
 **请求体**
@@ -3168,7 +2042,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1477491142054,
+	"timestamp":1477971053206,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3185,7 +2059,7 @@ http://localhost:8007/someone/teams
 **用例名称**
 creationIsNotAllowedIfTeamNameIsNull
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/teams
 
 **请求体**
@@ -3198,7 +2072,7 @@ http://localhost:8007/someone/teams
 **响应体**
 ```
 {
-	"timestamp":1477491142126,
+	"timestamp":1477971053286,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -3217,7 +2091,7 @@ http://localhost:8007/someone/teams
 **用例名称**
 NotAllowedIfInviteeIsEmpty
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3232,7 +2106,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477491134544,
+	"timestamp":1477971045203,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -3249,13 +2123,13 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 throwExceptionIfInvitationIsNotExistWhenAcceptingInvitation
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 
 **响应体**
 ```
 {
-	"timestamp":1477491134615,
+	"timestamp":1477971045320,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3272,7 +2146,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **用例名称**
 inviteOthersWithEmailToJoinTeam
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3287,44 +2161,18 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:14.677000",
+	"creationTime":"2016-11-01 11:30:45.431000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
-	"modificationTime":"2016-10-26 22:12:14.677000",
+	"modificationTime":"2016-11-01 11:30:45.431000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -3340,13 +2188,13 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 throwExceptionIfInvitationIsNotExistWhenLoadingInvitation
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 
 **响应体**
 ```
 {
-	"timestamp":1477491136153,
+	"timestamp":1477971047017,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3363,7 +2211,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **用例名称**
 NotAllowedIfInviteeIsAlreadyAMemberOfTheTeam
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3378,7 +2226,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477491136231,
+	"timestamp":1477971047090,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3395,13 +2243,13 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 throwExceptionIfInvitationIsAlreadyAccepted
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 
 **响应体**
 ```
 {
-	"timestamp":1477491136285,
+	"timestamp":1477971047128,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3418,7 +2266,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **用例名称**
 cancelPreviousInvitationBeforeSendingNewInvitation
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3433,44 +2281,18 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:16.375000",
+	"creationTime":"2016-11-01 11:30:47.241000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
-	"modificationTime":"2016-10-26 22:12:16.375000",
+	"modificationTime":"2016-11-01 11:30:47.241000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -3486,50 +2308,24 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 loadingInvitationDetailAfterAcceptingInvitation
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:17.642000",
+	"creationTime":"2016-11-01 11:30:48.965000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
-	"modificationTime":"2016-10-26 22:12:17.642000",
+	"modificationTime":"2016-11-01 11:30:48.965000",
 	"isAccepted":false,
 	"teamId":"foo-team-id",
 	"inviter":"someone",
@@ -3545,50 +2341,24 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **用例名称**
 AcceptInvitation
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-id/members/invitation/invitation-id
 
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:17.766000",
+	"creationTime":"2016-11-01 11:30:49.033000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-id/members/invitation/invitation-id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
-	"modificationTime":"2016-10-26 22:12:17.766000",
+	"modificationTime":"2016-11-01 11:30:49.033000",
 	"isAccepted":true,
 	"teamId":"foo-team-id",
 	"inviter":"inviter",
@@ -3604,7 +2374,7 @@ http://localhost:8007/teams/foo-team-id/members/invitation/invitation-id
 **用例名称**
 inviteOthersWithUserNameToJoinTeam
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3619,44 +2389,18 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:17.958000",
+	"creationTime":"2016-11-01 11:30:49.150000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
-	"modificationTime":"2016-10-26 22:12:17.958000",
+	"modificationTime":"2016-11-01 11:30:49.150000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -3672,7 +2416,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 NotAllowedIfInviteeIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3687,7 +2431,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477491139674,
+	"timestamp":1477971050734,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3704,13 +2448,13 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 throwExceptionIfInviteeIsAlreadyAMember
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 
 **响应体**
 ```
 {
-	"timestamp":1477491139718,
+	"timestamp":1477971050819,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3727,7 +2471,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id
 **用例名称**
 NotAllowedIfInviterIsNotAMemberOfTheTeam
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3742,7 +2486,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477491139789,
+	"timestamp":1477971050900,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3759,7 +2503,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 addNotificationAfterSendingInvitation
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3774,44 +2518,18 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:19.881000",
+	"creationTime":"2016-11-01 11:30:50.995000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-team-Id/members/invitation/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"team":{
 			"href":"http://localhost:8007/teams/foo-team-Id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
-	"modificationTime":"2016-10-26 22:12:19.881000",
+	"modificationTime":"2016-11-01 11:30:50.995000",
 	"isAccepted":false,
 	"teamId":"foo-team-Id",
 	"inviter":"someone",
@@ -3827,7 +2545,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 NotAllowedIfTeamIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-team-Id/members/invitation
 
 **请求体**
@@ -3842,7 +2560,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **响应体**
 ```
 {
-	"timestamp":1477491141368,
+	"timestamp":1477971052459,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3861,7 +2579,7 @@ http://localhost:8007/teams/foo-team-Id/members/invitation
 **用例名称**
 joinTeam_shouldReturnFailedIfMemberIsAlreadyIn
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-teamId/teamMembers
 
 **请求体**
@@ -3875,7 +2593,7 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"timestamp":1477491134089,
+	"timestamp":1477971044625,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -3892,7 +2610,7 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **用例名称**
 loadTeamMembersByTeamId
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-teamId/members
 
 **响应体**
@@ -3901,30 +2619,19 @@ http://localhost:8007/teams/foo-teamId/members
 	"_links":{
 		"invitation":{
 			"href":"http://localhost:8007/teams/foo-teamId/members/invitation",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"members":[
 		{
 			"_links":{
 				"profile":{
-					"href":"http://localhost:8007/users/someone/profile"
+					"href":"http://localhost:8007/users/someone/profile",
+					"actions":{}
 				},
 				"avatar":{
-					"href":"http://localhost:8007/users/someone/avatar"
+					"href":"http://localhost:8007/users/someone/avatar",
+					"actions":{}
 				}
 			},
 			"userName":"someone",
@@ -3941,7 +2648,7 @@ http://localhost:8007/teams/foo-teamId/members
 **用例名称**
 joinTeam_shouldReturnFailedIfTeamIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-teamId/teamMembers
 
 **请求体**
@@ -3955,7 +2662,7 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"timestamp":1477491134227,
+	"timestamp":1477971044862,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -3972,13 +2679,13 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **用例名称**
 NotAllowedIfCurrentUserIsNotAMemberOfTheTeamWhenLoadingTeamMembersByTeamId
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-teamId/members
 
 **响应体**
 ```
 {
-	"timestamp":1477491134281,
+	"timestamp":1477971044938,
 	"status":401,
 	"error":"Unauthorized",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -3995,7 +2702,7 @@ http://localhost:8007/teams/foo-teamId/members
 **用例名称**
 joinTeam_shouldReturn201WhenJoinTeamSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-teamId/teamMembers
 
 **请求体**
@@ -4009,28 +2716,15 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:14.335000",
+	"creationTime":"2016-11-01 11:30:45.058000",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/teams/foo-teamId/teamMembers",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:14.335000",
+	"modificationTime":"2016-11-01 11:30:45.058000",
 	"teamId":"foo-teamId",
 	"member":"someone",
 	"id":"fooId"
@@ -4044,13 +2738,13 @@ http://localhost:8007/teams/foo-teamId/teamMembers
 **用例名称**
 NotAllowedIfTeamIsNotExitsWhenLoadingTeamMembersByTeamId
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/teams/foo-teamId/members
 
 **响应体**
 ```
 {
-	"timestamp":1477491134385,
+	"timestamp":1477971045122,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4069,7 +2763,7 @@ http://localhost:8007/teams/foo-teamId/members
 **用例名称**
 ResetPasswordIsNotAllowedIfTheApplicationHasBeenAlreadyReset
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/tao/password
 
 **请求体**
@@ -4083,7 +2777,7 @@ http://localhost:8007/tao/password
 **响应体**
 ```
 {
-	"timestamp":1477491129276,
+	"timestamp":1477971038567,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4100,7 +2794,7 @@ http://localhost:8007/tao/password
 **用例名称**
 verificationCodeWillBeInvalidIfAlreadyBeingUsed
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/tao/passwordResetApplication
 
 **请求体**
@@ -4114,7 +2808,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1477491129315,
+	"timestamp":1477971038613,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4131,7 +2825,7 @@ http://localhost:8007/tao/passwordResetApplication
 **用例名称**
 verifyVerificationCode
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/tao/passwordResetApplication
 
 **请求体**
@@ -4148,20 +2842,7 @@ http://localhost:8007/tao/passwordResetApplication
 	"_links":{
 		"password":{
 			"href":"http://localhost:8007/tao/password",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -4174,7 +2855,7 @@ http://localhost:8007/tao/passwordResetApplication
 **用例名称**
 NotAllowedIfEmailIsNotProvide
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/passwordRetrievalApplication
 
 **请求体**
@@ -4187,7 +2868,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1477491129411,
+	"timestamp":1477971038803,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -4204,13 +2885,13 @@ http://localhost:8007/passwordRetrievalApplication
 **用例名称**
 resetPassword
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/tao/password
 
 **请求体**
 ```
 {
-	"password":"kVDa65OSK9GnPrlqrT9Jc7629kcg+fjYeH9tnBiT4kWUtDqu7eZvq9GFdwy6kvJFjdALwbcFuPlyiLZBprDG9c5I+Y9CNdQwo7c+7lmPb1+uzFgiQPyeAhfvSFp6nDbdEOdx/7Za5ES36lfbyMky8dxGnv3K9XOFAjQ9+RNjeHk="
+	"password":"QG0bk1ryEhGpzJtT+9xeYZ8aIvABF5NPk4FrJUx96pWH5V1SG0PDehi/j4G1oZBm41yhLeAGGEgnWa7X0am/sLHiRdkXkbwy6KzQcEJw4sdSeMcaIg1KbLxLp3SL4kgPSWVO2QiA8nvB6fR9G+2mXWddL2iA3EusMKQ8jb/Y8A8="
 }
 ```
 
@@ -4221,20 +2902,7 @@ http://localhost:8007/tao/password
 	"_links":{
 		"login":{
 			"href":"http://localhost:8007/login",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -4247,7 +2915,7 @@ http://localhost:8007/tao/password
 **用例名称**
 discardingUnfinishedPasswordRetrievalApplication
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/passwordRetrievalApplication
 
 **请求体**
@@ -4264,20 +2932,7 @@ http://localhost:8007/passwordRetrievalApplication
 	"_links":{
 		"passwordResetApplication":{
 			"href":"http://localhost:8007/tao/passwordResetApplication",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -4290,7 +2945,7 @@ http://localhost:8007/passwordRetrievalApplication
 **用例名称**
 verificationCodeTimeOut
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/tao/passwordResetApplication
 
 **请求体**
@@ -4304,7 +2959,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1477491131113,
+	"timestamp":1477971040792,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4321,7 +2976,7 @@ http://localhost:8007/tao/passwordResetApplication
 **用例名称**
 sendVerificationCode
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/passwordRetrievalApplication
 
 **请求体**
@@ -4338,20 +2993,7 @@ http://localhost:8007/passwordRetrievalApplication
 	"_links":{
 		"passwordResetApplication":{
 			"href":"http://localhost:8007/tao/passwordResetApplication",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -4364,7 +3006,7 @@ http://localhost:8007/passwordRetrievalApplication
 **用例名称**
 NotAllowedIfEmailFormatIsNotExists
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/passwordRetrievalApplication
 
 **请求体**
@@ -4378,7 +3020,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1477491132650,
+	"timestamp":1477971042844,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4395,7 +3037,7 @@ http://localhost:8007/passwordRetrievalApplication
 **用例名称**
 NotAllowedIfEmailFormatIsNotCorrect
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/passwordRetrievalApplication
 
 **请求体**
@@ -4409,7 +3051,7 @@ http://localhost:8007/passwordRetrievalApplication
 **响应体**
 ```
 {
-	"timestamp":1477491132703,
+	"timestamp":1477971042907,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -4426,7 +3068,7 @@ http://localhost:8007/passwordRetrievalApplication
 **用例名称**
 VerificationWillBeFailedIfVerificationCodeIsNotCorrect
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/tao/passwordResetApplication
 
 **请求体**
@@ -4440,7 +3082,7 @@ http://localhost:8007/tao/passwordResetApplication
 **响应体**
 ```
 {
-	"timestamp":1477491132752,
+	"timestamp":1477971042952,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -4459,7 +3101,7 @@ http://localhost:8007/tao/passwordResetApplication
 **用例名称**
 loadAllNotifications
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/notifications
 
 **响应体**
@@ -4468,51 +3110,27 @@ http://localhost:8007/someone/notifications
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/someone/notifications",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"notifications":{
 			"href":"http://localhost:8007/someone/notifications",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"notifications":[
 		{
 			"displayTime":"刚刚",
-			"creationTime":"2016-10-26 22:12:08.884000",
+			"creationTime":"2016-11-01 11:30:38.083000",
 			"receiver":"someone",
 			"sender":"sender@gmail.com",
 			"_links":{
 				"self":{
-					"href":"http://localhost:8007/someone/notifications/foo-notification-id"
+					"href":"http://localhost:8007/someone/notifications/foo-notification-id",
+					"actions":{}
 				},
 				"notifications":{
-					"href":"http://localhost:8007/someone/notifications"
+					"href":"http://localhost:8007/someone/notifications",
+					"actions":{}
 				}
 			},
 			"isRead":false,
@@ -4533,50 +3151,24 @@ http://localhost:8007/someone/notifications
 **用例名称**
 loadNotificationByID
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/notifications/foo-notification-id
 
 **响应体**
 ```
 {
-	"displayTime":"1秒前",
-	"creationTime":"2016-10-26 22:12:08.994000",
+	"displayTime":"刚刚",
+	"creationTime":"2016-11-01 11:30:38.223000",
 	"receiver":"someone",
 	"sender":"sender@gmail.com",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/someone/notifications/foo-notification-id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"notifications":{
 			"href":"http://localhost:8007/someone/notifications",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"isRead":true,
@@ -4595,7 +3187,7 @@ http://localhost:8007/someone/notifications/foo-notification-id
 **用例名称**
 loadUnreadNotificationAfterLoading
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/notifications/unread/total
 
 **响应体**
@@ -4605,37 +3197,11 @@ http://localhost:8007/someone/notifications/unread/total
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/someone/notifications/unread/total",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"notifications":{
 			"href":"http://localhost:8007/someone/notifications",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -4648,50 +3214,24 @@ http://localhost:8007/someone/notifications/unread/total
 **用例名称**
 notSetNotificationReadIfItHasAlreadyBeenReadAfterLoading
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/someone/notifications/foo-notification-id
 
 **响应体**
 ```
 {
 	"displayTime":"刚刚",
-	"creationTime":"2016-10-26 22:12:09.118000",
+	"creationTime":"2016-11-01 11:30:38.365000",
 	"receiver":"someone",
 	"sender":"sender@gmail.com",
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/someone/notifications/foo-notification-id",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"notifications":{
 			"href":"http://localhost:8007/someone/notifications",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"isRead":true,
@@ -4712,13 +3252,13 @@ http://localhost:8007/someone/notifications/foo-notification-id
 **用例名称**
 findByCardId_shouldReturnErrorWhenCardIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/cardId-foo/assignments
 
 **响应体**
 ```
 {
-	"timestamp":1477491120547,
+	"timestamp":1477970928264,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -4735,7 +3275,7 @@ http://localhost:8007/procedures/1/cards/cardId-foo/assignments
 **用例名称**
 findByCardId_shouldReturnAssignmentsSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/cardId-foo/assignments
 
 **响应体**
@@ -4773,13 +3313,13 @@ http://localhost:8007/procedures/1/cards/cardId-foo/assignments
 **用例名称**
 delete_shouldReturnErrorWhenAssignmentIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 
 **响应体**
 ```
 {
-	"timestamp":1477491120664,
+	"timestamp":1477970928392,
 	"status":404,
 	"error":"Not Found",
 	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
@@ -4796,85 +3336,33 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 **用例名称**
 findById_shouldReturnAssignmentSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:00.683000",
+	"creationTime":"2016-11-01 11:28:48.414000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/1/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"card":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"authorId-foo",
-	"modificationTime":"2016-10-26 22:12:00.683000",
+	"modificationTime":"2016-11-01 11:28:48.414000",
 	"cardId":"cardId-foo",
 	"assigner":"assignerId-foo",
 	"name":"徐濤",
@@ -4890,7 +3378,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 **用例名称**
 delete_shouldReturnSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 
 **响应体**
@@ -4899,37 +3387,11 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 	"_links":{
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"card":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -4942,7 +3404,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments/fooId
 **用例名称**
 assign_shouldReturn201WhenAssigningSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/fooId/assignments
 
 **请求体**
@@ -4957,79 +3419,27 @@ http://localhost:8007/procedures/1/cards/fooId/assignments
 **响应体**
 ```
 {
-	"creationTime":"2016-10-26 22:12:00.813000",
+	"creationTime":"2016-11-01 11:28:48.576000",
 	"_links":{
 		"all":{
 			"href":"http://localhost:8007/boards/1/procedures",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"assignments":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId/assignments/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"card":{
 			"href":"http://localhost:8007/procedures/1/cards/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:00.813000",
+	"modificationTime":"2016-11-01 11:28:48.576000",
 	"cardId":"fooId",
 	"assigner":"assignerId",
 	"assignee":"assigneeId",
@@ -5046,7 +3456,7 @@ http://localhost:8007/procedures/1/cards/fooId/assignments
 **用例名称**
 loadAvatar
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/users/someone/avatar
 
 **响应体**
@@ -5055,37 +3465,11 @@ http://localhost:8007/users/someone/avatar
 	"_links":{
 		"profile":{
 			"href":"http://localhost:8007/users/someone/profile",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/users/someone/avatar",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -5098,13 +3482,13 @@ http://localhost:8007/users/someone/avatar
 **用例名称**
 nowAllowedIfAvatarWasTooBig
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/users/someone/avatar
 
 **响应体**
 ```
 {
-	"timestamp":1477491142399,
+	"timestamp":1477971053610,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -5121,13 +3505,13 @@ http://localhost:8007/users/someone/avatar
 **用例名称**
 nowAllowedIfAvatarWasNull
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/users/someone/avatar
 
 **响应体**
 ```
 {
-	"timestamp":1477491142454,
+	"timestamp":1477971053684,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -5144,7 +3528,7 @@ http://localhost:8007/users/someone/avatar
 **用例名称**
 loadDefaultAvatar
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/users/someone/avatar
 
 **响应体**
@@ -5153,37 +3537,11 @@ http://localhost:8007/users/someone/avatar
 	"_links":{
 		"profile":{
 			"href":"http://localhost:8007/users/someone/profile",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/users/someone/avatar",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -5196,7 +3554,7 @@ http://localhost:8007/users/someone/avatar
 **用例名称**
 uploadAvatar
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/users/someone/avatar
 
 **响应体**
@@ -5205,37 +3563,11 @@ http://localhost:8007/users/someone/avatar
 	"_links":{
 		"profile":{
 			"href":"http://localhost:8007/users/someone/profile",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/users/someone/avatar",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -5248,7 +3580,7 @@ http://localhost:8007/users/someone/avatar
 **用例名称**
 updateProfile
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/users/someone/profile
 
 **请求体**
@@ -5265,37 +3597,11 @@ http://localhost:8007/users/someone/profile
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/users/someone/profile",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"avatar":{
 			"href":"http://localhost:8007/users/someone/avatar",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"nickName":"nick-name",
@@ -5311,7 +3617,7 @@ http://localhost:8007/users/someone/profile
 **用例名称**
 loadProfile
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/users/someone/profile
 
 **响应体**
@@ -5320,37 +3626,11 @@ http://localhost:8007/users/someone/profile
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/users/someone/profile",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"avatar":{
 			"href":"http://localhost:8007/users/someone/avatar",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"nickName":"tao",
@@ -5366,7 +3646,7 @@ http://localhost:8007/users/someone/profile
 **用例名称**
 initProfileIfProfileIsNotExist
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/users/someone/profile
 
 **响应体**
@@ -5375,37 +3655,11 @@ http://localhost:8007/users/someone/profile
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/users/someone/profile",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"avatar":{
 			"href":"http://localhost:8007/users/someone/avatar",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"userName":"someone",
@@ -5422,7 +3676,7 @@ http://localhost:8007/users/someone/profile
 **用例名称**
 create_shouldReturn201WhenCreateACSuccessfully
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias
 
 **请求体**
@@ -5437,62 +3691,23 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 ```
 {
 	"summary":"AC-summary",
-	"creationTime":"2016-10-26 22:11:59.048000",
+	"creationTime":"2016-11-01 11:28:46.691000",
 	"_links":{
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"card":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:11:59.048000",
+	"modificationTime":"2016-11-01 11:28:46.691000",
 	"sortNumber":9999,
 	"finished":false,
 	"id":"fooId"
@@ -5506,7 +3721,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **用例名称**
 resortAcceptanceCriterias
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers
 
 **请求体**
@@ -5530,40 +3745,46 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 	"acceptanceCriterias":[
 		{
 			"summary":"AC-summary-1",
-			"creationTime":"2016-10-26 22:11:59.674000",
+			"creationTime":"2016-11-01 11:28:47.359000",
 			"_links":{
 				"acceptanceCriterias":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
+					"actions":{}
 				},
 				"self":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/acceptanceCriteria-id1"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/acceptanceCriteria-id1",
+					"actions":{}
 				},
 				"card":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+					"actions":{}
 				}
 			},
 			"author":"someone",
-			"modificationTime":"2016-10-26 22:11:59.674000",
+			"modificationTime":"2016-11-01 11:28:47.359000",
 			"sortNumber":1,
 			"finished":false,
 			"id":"acceptanceCriteria-id1"
 		},
 		{
 			"summary":"AC-summary-2",
-			"creationTime":"2016-10-26 22:11:59.674000",
+			"creationTime":"2016-11-01 11:28:47.360000",
 			"_links":{
 				"acceptanceCriterias":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
+					"actions":{}
 				},
 				"self":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/acceptanceCriteria-id2"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/acceptanceCriteria-id2",
+					"actions":{}
 				},
 				"card":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+					"actions":{}
 				}
 			},
 			"author":"someone",
-			"modificationTime":"2016-10-26 22:11:59.674000",
+			"modificationTime":"2016-11-01 11:28:47.360000",
 			"sortNumber":2,
 			"finished":false,
 			"id":"acceptanceCriteria-id2"
@@ -5572,54 +3793,15 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"sortNumbers":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"card":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -5632,69 +3814,30 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **用例名称**
 loadACById
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId
 
 **响应体**
 ```
 {
 	"summary":"AC-summary",
-	"creationTime":"2016-10-26 22:11:59.852000",
+	"creationTime":"2016-11-01 11:28:47.522000",
 	"_links":{
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"card":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:11:59.852000",
+	"modificationTime":"2016-11-01 11:28:47.522000",
 	"sortNumber":9999,
 	"finished":false,
 	"id":"fooId"
@@ -5708,7 +3851,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **用例名称**
 notAllowedIfSummaryIsEmpty
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias
 
 **请求体**
@@ -5722,7 +3865,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **响应体**
 ```
 {
-	"timestamp":1477491120060,
+	"timestamp":1477970927938,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
@@ -5739,7 +3882,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **用例名称**
 loadAcceptanceCriterias
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias
 
 **响应体**
@@ -5748,20 +3891,23 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 	"acceptanceCriterias":[
 		{
 			"summary":"AC-summary",
-			"creationTime":"2016-10-26 22:12:00.092000",
+			"creationTime":"2016-11-01 11:28:47.965000",
 			"_links":{
 				"acceptanceCriterias":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
+					"actions":{}
 				},
 				"self":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId",
+					"actions":{}
 				},
 				"card":{
-					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+					"actions":{}
 				}
 			},
 			"author":"someone",
-			"modificationTime":"2016-10-26 22:12:00.092000",
+			"modificationTime":"2016-11-01 11:28:47.965000",
 			"sortNumber":9999,
 			"finished":false,
 			"id":"fooId"
@@ -5770,54 +3916,15 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 	"_links":{
 		"self":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"sortNumbers":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"card":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -5830,7 +3937,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **用例名称**
 deleteAC
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId
 
 **响应体**
@@ -5839,20 +3946,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 	"_links":{
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	}
 }
@@ -5865,7 +3959,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **用例名称**
 updateAC
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId
 
 **请求体**
@@ -5881,65 +3975,337 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 ```
 {
 	"summary":"new-AC-summary",
-	"creationTime":"2016-10-26 22:12:00.446000",
+	"creationTime":"2016-11-01 11:28:48.117000",
 	"_links":{
 		"acceptanceCriterias":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"self":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"card":{
 			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"author":"someone",
-	"modificationTime":"2016-10-26 22:12:00.446000",
+	"modificationTime":"2016-11-01 11:28:48.117000",
 	"sortNumber":9999,
 	"finished":true,
 	"id":"fooId"
+}
+```
+
+
+-------
+# 十四 、评论 #
+
+## 获取指定卡片的评论>用户在获取卡片的评论时,只可以操作自己的卡片 ##
+
+**用例名称**
+loadComments
+
+**URL_TEMPLATE**
+http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments
+
+**响应体**
+```
+{
+	"comments":[
+		{
+			"summary":"comment-summary",
+			"creationTime":"2016-11-01 11:28:50.757000",
+			"_links":{
+				"comments":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments",
+					"actions":{}
+				},
+				"self":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId1",
+					"actions":{
+						"delete":{
+							"isAllowed":true
+						}
+					}
+				},
+				"avatar":{
+					"href":"http://localhost:8007/users/someone/avatar",
+					"actions":{}
+				},
+				"card":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+					"actions":{}
+				}
+			},
+			"author":"someone",
+			"modificationTime":"2016-11-01 11:28:50.757000",
+			"id":"fooId1"
+		},
+		{
+			"summary":"comment-summary",
+			"creationTime":"2016-11-01 11:28:50.758000",
+			"_links":{
+				"comments":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments",
+					"actions":{}
+				},
+				"self":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId",
+					"actions":{}
+				},
+				"avatar":{
+					"href":"http://localhost:8007/users/others/avatar",
+					"actions":{}
+				},
+				"card":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+					"actions":{}
+				}
+			},
+			"author":"others",
+			"modificationTime":"2016-11-01 11:28:50.758000",
+			"id":"fooId"
+		}
+	],
+	"_links":{
+		"self":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments",
+			"actions":{}
+		},
+		"card":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+			"actions":{}
+		}
+	}
+}
+```
+
+
+-------
+## 删除指定的评论>当用户创建删除评论时,只可以删除由自己撰写的评论 ##
+
+**用例名称**
+deleteComment
+
+**URL_TEMPLATE**
+http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId
+
+**响应体**
+```
+{
+	"timestamp":1477971030092,
+	"status":500,
+	"error":"Internal Server Error",
+	"exception":"org.thiki.kanban.foundation.exception.AuthenticationException",
+	"message":"该条评论并非你所有撰写,你不可以删除。",
+	"path":"/procedures/procedures-fooId/cards/card-fooId/comments/fooId",
+	"code":5002
+}
+```
+
+
+-------
+## 撰写评论>用户创建完卡片后,可以创建为其撰写相应的评论 ##
+
+**用例名称**
+create_shouldReturn201WhenCreateACSuccessfully
+
+**URL_TEMPLATE**
+http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments
+
+**请求体**
+```
+{
+	"summary":"comment-summary"
+}
+```
+
+
+**响应体**
+```
+{
+	"summary":"comment-summary",
+	"creationTime":"2016-11-01 11:30:30.166000",
+	"_links":{
+		"comments":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments",
+			"actions":{}
+		},
+		"self":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId",
+			"actions":{
+				"delete":{
+					"isAllowed":true
+				}
+			}
+		},
+		"avatar":{
+			"href":"http://localhost:8007/users/someone/avatar",
+			"actions":{}
+		},
+		"card":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+			"actions":{}
+		}
+	},
+	"author":"someone",
+	"modificationTime":"2016-11-01 11:30:30.166000",
+	"id":"fooId"
+}
+```
+
+
+-------
+## 创建评论>如果用户在创建评论时,未提供概述,则不允许创建 ##
+
+**用例名称**
+notAllowedIfSummaryIsEmpty
+
+**URL_TEMPLATE**
+http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments
+
+**请求体**
+```
+{
+	"summary":""
+}
+```
+
+
+**响应体**
+```
+{
+	"timestamp":1477971030256,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.InvalidParamsException",
+	"message":"验收标准的概述不能为空。",
+	"path":"/procedures/procedures-fooId/cards/card-fooId/comments",
+	"code":400
+}
+```
+
+
+-------
+## 获取指定的评论>用户为卡片创建评论后,可以根据ID获取指定的评论 ##
+
+**用例名称**
+loadCommentById
+
+**URL_TEMPLATE**
+http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId
+
+**响应体**
+```
+{
+	"summary":"comment-summary",
+	"creationTime":"2016-11-01 11:30:30.272000",
+	"_links":{
+		"comments":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments",
+			"actions":{}
+		},
+		"self":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId",
+			"actions":{
+				"delete":{
+					"isAllowed":true
+				}
+			}
+		},
+		"avatar":{
+			"href":"http://localhost:8007/users/someone/avatar",
+			"actions":{}
+		},
+		"card":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+			"actions":{}
+		}
+	},
+	"author":"someone",
+	"modificationTime":"2016-11-01 11:30:30.272000",
+	"id":"fooId"
+}
+```
+
+
+-------
+## 获取指定卡片的评论>用户为卡片创建评论后,可以查看 ##
+
+**用例名称**
+loadComments
+
+**URL_TEMPLATE**
+http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments
+
+**响应体**
+```
+{
+	"comments":[
+		{
+			"summary":"comment-summary",
+			"creationTime":"2016-11-01 11:30:30.338000",
+			"_links":{
+				"comments":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments",
+					"actions":{}
+				},
+				"self":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId",
+					"actions":{
+						"delete":{
+							"isAllowed":true
+						}
+					}
+				},
+				"avatar":{
+					"href":"http://localhost:8007/users/someone/avatar",
+					"actions":{}
+				},
+				"card":{
+					"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+					"actions":{}
+				}
+			},
+			"author":"someone",
+			"modificationTime":"2016-11-01 11:30:30.338000",
+			"id":"fooId"
+		}
+	],
+	"_links":{
+		"self":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments",
+			"actions":{}
+		},
+		"card":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId",
+			"actions":{}
+		}
+	}
+}
+```
+
+
+-------
+## 删除指定的评论>用户为卡片创建评论后,可以删除指定的评论 ##
+
+**用例名称**
+deleteComment
+
+**URL_TEMPLATE**
+http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId
+
+**响应体**
+```
+{
+	"_links":{
+		"comments":{
+			"href":"http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments",
+			"actions":{}
+		}
+	}
 }
 ```
 
@@ -5952,7 +4318,7 @@ http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/acceptanceCri
 **用例名称**
 throwExceptionIfUserNameInHeaderIsNotEqualWithItInPath
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/thief/teams
 
 **请求体**
@@ -5966,7 +4332,7 @@ http://localhost:8007/thief/teams
 **响应体**
 ```
 {
-	"timestamp":1477491122566,
+	"timestamp":1477971030529,
 	"status":400,
 	"error":"Bad Request",
 	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
@@ -5983,7 +4349,7 @@ http://localhost:8007/thief/teams
 **用例名称**
 shouldUpdateTokenExpiredTime
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/procedures/1/cards/fooId
 
 **请求体**
@@ -5997,13 +4363,13 @@ http://localhost:8007/procedures/1/cards/fooId
 **响应体**
 ```
 {
-	"timestamp":1477491128430,
-	"status":404,
-	"error":"Not Found",
-	"exception":"org.thiki.kanban.foundation.exception.ResourceNotFoundException",
-	"message":"card[fooId] is not found.",
+	"timestamp":1477971037434,
+	"status":400,
+	"error":"Bad Request",
+	"exception":"org.thiki.kanban.foundation.exception.BusinessException",
+	"message":"卡片未找到。",
 	"path":"/procedures/1/cards/fooId",
-	"code":404
+	"code":5001
 }
 ```
 
@@ -6014,13 +4380,13 @@ http://localhost:8007/procedures/1/cards/fooId
 **用例名称**
 shouldReturnTimeOut
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/resource
 
 **响应体**
 ```
 {
-	"timestamp":1477491128461,
+	"timestamp":1477971037501,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -6037,13 +4403,13 @@ http://localhost:8007/resource
 **用例名称**
 shouldReturn401WhenAuthIsRequired
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/resource
 
 **响应体**
 ```
 {
-	"timestamp":1477491128498,
+	"timestamp":1477971037548,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -6060,13 +4426,13 @@ http://localhost:8007/resource
 **用例名称**
 shouldAuthenticatedFailedWhenUserNameIsNotConsistent
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/resource
 
 **响应体**
 ```
 {
-	"timestamp":1477491128542,
+	"timestamp":1477971037589,
 	"status":500,
 	"error":"Internal Server Error",
 	"exception":"org.thiki.kanban.foundation.exception.UnauthorisedException",
@@ -6083,7 +4449,7 @@ http://localhost:8007/resource
 **用例名称**
 identification_askForAuthenticationWhenUserIsExists
 
-**URL**
+**URL_TEMPLATE**
 http://localhost:8007/publicKey
 
 **响应体**
@@ -6092,37 +4458,11 @@ http://localhost:8007/publicKey
 	"_links":{
 		"registration":{
 			"href":"http://localhost:8007/registration",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		},
 		"login":{
 			"href":"http://localhost:8007/login",
-			"actions":{
-				"modify":{
-					"isAllowed":false
-				},
-				"read":{
-					"isAllowed":false
-				},
-				"create":{
-					"isAllowed":false
-				},
-				"delete":{
-					"isAllowed":false
-				}
-			}
+			"actions":{}
 		}
 	},
 	"publicKey":"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCvt2Q1aDhixfv0VWZTEzVYmf4QQtVMSwSC1bYociaw/dgGaQY/c+bcdubcY5LrZdaj9BPJApGvEIQGnXDDIURXW8p5w+xZ6ntbb8vextGg38TD3MasCpcabb18bBsi/hiEVgSxGL4yZtR7gtwA5aTQbzDxii9j27vAVQX6ZGiG4QIDAQAB\r\n"
