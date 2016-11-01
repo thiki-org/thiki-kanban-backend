@@ -40,6 +40,7 @@ public class CommentControllerTest extends TestBase {
                 .statusCode(201)
                 .body("summary", equalTo("comment-summary"))
                 .body("author", equalTo(userName))
+                .body("publishTime", equalTo("刚刚"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
                 .body("_links.comments.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments"));

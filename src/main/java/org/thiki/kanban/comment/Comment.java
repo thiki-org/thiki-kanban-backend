@@ -2,6 +2,7 @@ package org.thiki.kanban.comment;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.thiki.kanban.foundation.common.date.DateUtil;
 
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,7 @@ public class Comment {
     private Integer sortNumber;
     private String creationTime;
     private String modificationTime;
+    private String publishTime;
 
     public String getCreationTime() {
         return creationTime;
@@ -76,5 +78,9 @@ public class Comment {
 
     public void setSortNumber(Integer sortNumber) {
         this.sortNumber = sortNumber;
+    }
+
+    public String getPublishTime() {
+        return DateUtil.showTime(creationTime);
     }
 }
