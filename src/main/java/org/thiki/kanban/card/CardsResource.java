@@ -3,6 +3,7 @@ package org.thiki.kanban.card;
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  *
  */
 public class CardsResource extends RestResource {
-    public CardsResource(List<Card> cardList, String procedureId) {
+    public CardsResource(List<Card> cardList, String procedureId) throws IOException {
 
         List<CardResource> cardResources = new ArrayList<>();
         for (Card card : cardList) {

@@ -4,6 +4,8 @@ import org.springframework.hateoas.Link;
 import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 
+import java.io.IOException;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -11,7 +13,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubitao on 04/26/16.
  */
 public class ProcedureResource extends RestResource {
-    public ProcedureResource(Procedure procedure, String boardId) {
+    public ProcedureResource(Procedure procedure, String boardId) throws IOException {
         this.domainObject = procedure;
         if (procedure != null) {
             Link selfLink = linkTo(methodOn(ProceduresController.class).findById(procedure.getId(), boardId)).withSelfRel();
@@ -23,7 +25,7 @@ public class ProcedureResource extends RestResource {
         this.add(linkTo(methodOn(ProceduresController.class).loadAll(boardId)).withRel("all"));
     }
 
-    public ProcedureResource(String boardId) {
+    public ProcedureResource(String boardId) throws IOException {
         this.add(linkTo(methodOn(ProceduresController.class).loadAll(boardId)).withRel("all"));
     }
 }

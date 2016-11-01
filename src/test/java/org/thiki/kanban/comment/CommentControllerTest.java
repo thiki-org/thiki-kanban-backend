@@ -75,6 +75,7 @@ public class CommentControllerTest extends TestBase {
                 .body("comments[0].author", equalTo(userName))
                 .body("comments[0]._links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
                 .body("comments[0]._links.comments.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments"))
+                .body("comments[0]._links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments"))
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
     }
