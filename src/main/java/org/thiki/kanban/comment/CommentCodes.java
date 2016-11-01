@@ -6,7 +6,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  * Created by xubt on 10/31/16.
  */
 public enum CommentCodes {
-    SUMMARY_IS_EMPTY("001", "验收标准的概述不能为空。");
+    SUMMARY_IS_EMPTY("001", "验收标准的概述不能为空。"), AUTH_THE_COMMENT_YOU_WANT_TO_DELETE_IS_NOT_YOURS("002", "该条评论并非你所有撰写,你不可以删除。");
     public static final String summaryIsRequired = "验收标准的概述不能为空。";
     public static final String summaryIsInvalid = "卡片概述长度超限,请保持在200个字符以内。";
     private String code;

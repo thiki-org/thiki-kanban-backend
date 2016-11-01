@@ -72,7 +72,7 @@ public abstract class AuthenticationProvider implements Authentication {
             UriTemplate uriTemplate = new UriTemplate(getPathTemplate());
             return uriTemplate.matches(path);
         } catch (MalformedURLException e) {
-            throw new RuntimeException("提取Path出错。URL:" + path);
+            throw new RuntimeException("提取Path出错。URL_TEMPLATE:" + path);
         }
     }
 

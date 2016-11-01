@@ -21,7 +21,7 @@ public class BoardAuthenticationProvider extends AuthenticationProvider {
     private BoardsService boardsService;
 
     public String getPathTemplate() {
-        return BoardResource.URL;
+        return BoardResource.URL_TEMPLATE;
     }
 
     @Resource

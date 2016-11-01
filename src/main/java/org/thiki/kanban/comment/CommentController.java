@@ -31,7 +31,7 @@ public class CommentController {
         return Response.build(new CommentResource(savedComment, cardId, procedureId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/comments/{commentId}", method = RequestMethod.DELETE)
+    @RequestMapping(value = CommentResource.URL_TEMPLATE, method = RequestMethod.DELETE)
     public HttpEntity removeComment(@PathVariable("cardId") String cardId, @PathVariable("commentId") String commentId, @PathVariable("procedureId") String procedureId) throws IOException {
         commentService.removeComment(commentId);
 

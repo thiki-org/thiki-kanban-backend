@@ -13,7 +13,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class BoardResource extends RestResource {
 
-    public static final String URL = "/{userName}/boards/{boardId}";
+    public static final String URL_TEMPLATE = "/{userName}/boards/{boardId}";
 
     public BoardResource(Board board, String userName) throws Exception {
         this.domainObject = board;

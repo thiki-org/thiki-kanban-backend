@@ -69,7 +69,7 @@ public class APIDocument {
             for (Map testCase : testCases) {
                 content += "\n## " + testCase.get("scenario") + " ##\n";
                 content += "\n**用例名称**\n" + testCase.get("testCaseName") + "\n";
-                content += "\n**URL**\n" + testCase.get("url") + "\n";
+                content += "\n**URL_TEMPLATE**\n" + testCase.get("url") + "\n";
                 if (!testCase.get("request").equals("null")) {
                     content += "\n**请求体**\n" + "```\n" + testCase.get("request") + "\n```\n" + "\n";
                 }

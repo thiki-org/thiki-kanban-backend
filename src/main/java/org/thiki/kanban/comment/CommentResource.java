@@ -14,6 +14,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubt on 10/31/16.
  */
 public class CommentResource extends RestResource {
+    public static final String URL_TEMPLATE = "/procedures/{procedureId}/cards/{cardId}/comments/{commentId}";
+
     public CommentResource(Comment comment, String cardId, String procedureId) throws IOException {
         this.domainObject = comment;
         if (comment != null) {

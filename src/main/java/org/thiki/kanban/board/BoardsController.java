@@ -15,13 +15,13 @@ public class BoardsController {
     @Resource
     private BoardsService boardsService;
 
-    @RequestMapping(value = BoardResource.URL, method = RequestMethod.GET)
+    @RequestMapping(value = BoardResource.URL_TEMPLATE, method = RequestMethod.GET)
     public HttpEntity findById(@PathVariable String boardId, @PathVariable String userName) throws Exception {
         Board board = boardsService.findById(boardId);
         return Response.build(new BoardResource(board, userName));
     }
 
-    @RequestMapping(value = BoardResource.URL, method = RequestMethod.PUT)
+    @RequestMapping(value = BoardResource.URL_TEMPLATE, method = RequestMethod.PUT)
     public HttpEntity update(@RequestBody Board board, @PathVariable String boardId, @PathVariable String userName) throws Exception {
         board.setId(boardId);
         Board updatedBoard = boardsService.update(userName, board);
@@ -29,7 +29,7 @@ public class BoardsController {
 
     }
 
-    @RequestMapping(value = BoardResource.URL, method = RequestMethod.DELETE)
+    @RequestMapping(value = BoardResource.URL_TEMPLATE, method = RequestMethod.DELETE)
     public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String userName) throws Exception {
         boardsService.deleteById(boardId);
         return Response.build(new BoardResource(userName));
