@@ -22,8 +22,8 @@ public class CommentAuthenticationTest extends AuthenticationTestBase {
     @Test
     public void deleteComment() throws Exception {
         dbPreparation.table("kb_comment")
-                .names("id,summary,card_id,author")
-                .values("fooId", "comment-summary", "card-fooId", "others").exec();
+                .names("id,summary,card_id,author,creation_time")
+                .values("fooId", "comment-summary", "card-fooId", "others", "2016-11-01 12:36:54").exec();
 
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -40,20 +40,19 @@ public class CommentAuthenticationTest extends AuthenticationTestBase {
     @Test
     public void loadComments() throws Exception {
         dbPreparation.table("kb_comment")
-                .names("id,summary,card_id,author")
-                .values("fooId1", "comment-summary", "card-fooId", "someone").exec();
+                .names("id,summary,card_id,author,creation_time")
+                .values("fooId1", "comment-summary", "card-fooId", "someone", "2016-11-01 12:36:54").exec();
 
         dbPreparation.table("kb_comment")
-                .names("id,summary,card_id,author")
-                .values("fooId", "comment-summary", "card-fooId", "others").exec();
+                .names("id,summary,card_id,author,creation_time")
+                .values("fooId", "comment-summary", "card-fooId", "others", "2016-11-01 12:36:00").exec();
         given().header("userName", userName)
                 .when()
                 .get("/procedures/procedures-fooId/cards/card-fooId/comments")
                 .then()
                 .statusCode(200)
 
-                .body("comments[0]._links.self.actions.delete", notNullValue())
-                .body("comments[1]._links.self.actions.delete", nullValue());
-
+                .body("comments[0]._links.self.actions.delete", nullValue())
+                .body("comments[1]._links.self.actions.delete", notNullValue());
     }
 }
