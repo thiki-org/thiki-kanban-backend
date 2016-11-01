@@ -30,21 +30,41 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
         if (responseBody instanceof Map) {
             Object status = ((Map) responseBody).get("status");
             if (status == null) {
-                JSONObject jsonObjectResponse = (JSONObject) responseBody;
-                Map<String, Object> links = (Map<String, Object>) jsonObjectResponse.get("_links");
-                List userNameObject = serverHttpRequest.getHeaders().get("userName");
-                String userName = "";
-                if (userNameObject != null) {
-                    userName = String.valueOf(userNameObject.get(0));
+                if (responseBody instanceof Map) {
+                    return rebuildEntityLinks((JSONObject) responseBody, serverHttpRequest);
                 }
-
-                ResourceLinks resourceLinks = new ResourceLinks(links, userName);
-                JSONObject authenticatedLinks = resourceLinks.auth();
-                System.out.println(authenticatedLinks.toJSONString());
-                jsonObjectResponse.put("_links", authenticatedLinks);
-                return jsonObjectResponse;
             }
         }
         return responseBody;
+    }
+
+    private Object rebuildEntityLinks(JSONObject mainResourceBody, ServerHttpRequest serverHttpRequest) {
+
+        List userNameObject = serverHttpRequest.getHeaders().get("userName");
+        String userName = "";
+        if (userNameObject != null) {
+            userName = String.valueOf(userNameObject.get(0));
+        }
+        for (Object resourceFieldValue : mainResourceBody.values()) {
+            if (resourceFieldValue instanceof List) {
+                List resourceFieldValueList = (List) resourceFieldValue;
+                for (Object childResourceObject : resourceFieldValueList) {
+                    if (childResourceObject instanceof JSONObject) {
+                        buildLinks((JSONObject) childResourceObject, userName);
+                    }
+                }
+            }
+        }
+
+        return buildLinks(mainResourceBody, userName);
+    }
+
+    private Object buildLinks(JSONObject jsonObjectResponse, String userName) {
+        Map<String, Object> links = (Map<String, Object>) jsonObjectResponse.get("_links");
+        ResourceLinks resourceLinks = new ResourceLinks(links, userName);
+        JSONObject authenticatedLinks = resourceLinks.auth();
+        System.out.println(authenticatedLinks.toJSONString());
+        jsonObjectResponse.put("_links", authenticatedLinks);
+        return jsonObjectResponse;
     }
 }

@@ -10,6 +10,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.nullValue;
 
 /**
  * Created by xubt on 5/18/16.
@@ -48,9 +49,9 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
                 .body("_links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
 
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
-                .body("_links.self.actions.create.isAllowed", equalTo(false))
+                .body("_links.self.actions.create", nullValue())
                 .body("_links.self.actions.read.isAllowed", equalTo(true))
-                .body("_links.self.actions.modify.isAllowed", equalTo(false))
-                .body("_links.self.actions.delete.isAllowed", equalTo(false));
+                .body("_links.self.actions.modify", nullValue())
+                .body("_links.self.actions.delete", nullValue());
     }
 }

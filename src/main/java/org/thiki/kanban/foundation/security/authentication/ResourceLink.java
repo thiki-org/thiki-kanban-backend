@@ -12,10 +12,10 @@ public class ResourceLink {
     private final String linkName;
     private final String linkHref;
     private final String userName;
-    private boolean isAllowedCreate = false;
-    private boolean isAllowedModify = false;
-    private boolean isAllowedDelete = false;
-    private boolean isAllowedRead = false;
+    private boolean isAllowedCreate;
+    private boolean isAllowedModify;
+    private boolean isAllowedDelete;
+    private boolean isAllowedRead;
 
     public ResourceLink(String linkName, String linkHref, String userName) {
         this.linkName = linkName;
@@ -45,22 +45,26 @@ public class ResourceLink {
         authenticatedLink.put("href", linkHref);
 
         JSONObject ActionsAuthInformation = new JSONObject();
-        JSONObject postAction = new JSONObject();
-        postAction.put("isAllowed", isAllowedCreate);
-
-        JSONObject getAction = new JSONObject();
-        getAction.put("isAllowed", isAllowedRead);
-
-        JSONObject putAction = new JSONObject();
-        putAction.put("isAllowed", isAllowedModify);
-
-        JSONObject deleteAction = new JSONObject();
-        deleteAction.put("isAllowed", isAllowedDelete);
-
-        ActionsAuthInformation.put("create", postAction);
-        ActionsAuthInformation.put("read", getAction);
-        ActionsAuthInformation.put("modify", putAction);
-        ActionsAuthInformation.put("delete", deleteAction);
+        if (isAllowedCreate) {
+            JSONObject postAction = new JSONObject();
+            postAction.put("isAllowed", isAllowedCreate);
+            ActionsAuthInformation.put("create", postAction);
+        }
+        if (isAllowedRead) {
+            JSONObject getAction = new JSONObject();
+            getAction.put("isAllowed", isAllowedRead);
+            ActionsAuthInformation.put("read", getAction);
+        }
+        if (isAllowedModify) {
+            JSONObject putAction = new JSONObject();
+            putAction.put("isAllowed", isAllowedModify);
+            ActionsAuthInformation.put("modify", putAction);
+        }
+        if (isAllowedDelete) {
+            JSONObject deleteAction = new JSONObject();
+            deleteAction.put("isAllowed", isAllowedDelete);
+            ActionsAuthInformation.put("delete", deleteAction);
+        }
         authenticatedLink.put("actions", ActionsAuthInformation);
         return authenticatedLink;
     }
@@ -75,7 +79,6 @@ public class ResourceLink {
         }
         return null;
     }
-
 
     public String getName() {
         return linkName;
