@@ -25,7 +25,7 @@ public class WorktileControllerTest extends TestBase {
     @Scenario("数据导入>数据导入时,新建worktile board")
     @Test
     public void createNewBoard() {
-        File worktileTasks = new File("src/test/resources/worktile_tasks.json");
+        File worktileTasks = new File("src/test/resources/import/worktile_tasks.json");
 
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
@@ -46,7 +46,7 @@ public class WorktileControllerTest extends TestBase {
     @Scenario("数据导入>新建board后,导入entry")
     @Test
     public void importEntry() {
-        File worktileTasks = new File("src/test/resources/worktile_tasks.json");
+        File worktileTasks = new File("src/test/resources/import/worktile_tasks.json");
 
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
@@ -67,7 +67,7 @@ public class WorktileControllerTest extends TestBase {
     @Scenario("数据导入>新建board后,导入tasks")
     @Test
     public void importCards() {
-        File worktileTasks = new File("src/test/resources/worktile_tasks.json");
+        File worktileTasks = new File("src/test/resources/import/worktile_tasks.json");
 
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
@@ -83,5 +83,77 @@ public class WorktileControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
 
         assertEquals("任务名称", jdbcTemplate.queryForObject("select summary from kb_card where author='someone'", String.class));
+    }
+
+    @Scenario("数据导入>如果文件长度为空,则抛出异常")
+    @Test
+    public void throwExceptionIfFileContentIsEmpty() {
+        File worktileTasks = new File("src/test/resources/import/worktile_tasks_empty.json");
+
+        given().header("userName", "someone")
+                .multiPart("worktileTasks", worktileTasks)
+                .when()
+                .post("/someone/worktileTasks")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(WorktileCodes.FILE_IS_EMPTY.code()))
+                .body("message", equalTo(WorktileCodes.FILE_IS_EMPTY.message()));
+    }
+
+    @Scenario("数据导入>如果文件内容格式错误,则抛出异常")
+    @Test
+    public void throwExceptionIfFileContentFormatIsInvalid() {
+        File worktileTasks = new File("src/test/resources/import/worktile_tasks_format_error.json");
+
+        given().header("userName", "someone")
+                .multiPart("worktileTasks", worktileTasks)
+                .when()
+                .post("/someone/worktileTasks")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(WorktileCodes.FILE_CONTENT_FORMAT_INVALID.code()))
+                .body("message", equalTo(WorktileCodes.FILE_CONTENT_FORMAT_INVALID.message()));
+    }
+
+    @Scenario("数据导入>如果文件类型错误,则抛出异常")
+    @Test
+    public void throwExceptionIfFileFormatIsInvalid() {
+        File worktileTasks = new File("src/test/resources/import/worktile_tasks_invalid_file_format.jpg");
+
+        given().header("userName", "someone")
+                .multiPart("worktileTasks", worktileTasks)
+                .when()
+                .post("/someone/worktileTasks")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(WorktileCodes.FILE_TYPE_INVALID.code()))
+                .body("message", equalTo(WorktileCodes.FILE_TYPE_INVALID.message()));
+    }
+
+    @Scenario("数据导入>如果文件没有拓展名,则抛出异常")
+    @Test
+    public void throwExceptionIfNoExtensionNameWasFound() {
+        File worktileTasks = new File("src/test/resources/import/worktile_tasks");
+
+        given().header("userName", "someone")
+                .multiPart("worktileTasks", worktileTasks)
+                .when()
+                .post("/someone/worktileTasks")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(WorktileCodes.FILE_NAME_INVALID.code()))
+                .body("message", equalTo(WorktileCodes.FILE_NAME_INVALID.message()));
+    }
+
+    @Scenario("数据导入>如果未上传文件,则抛出异常")
+    @Test
+    public void throwExceptionIfNoFileWasUpload() {
+        given().header("userName", "someone")
+                .when()
+                .post("/someone/worktileTasks")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(WorktileCodes.FILE_IS_UN_UPLOAD.code()))
+                .body("message", equalTo(WorktileCodes.FILE_IS_UN_UPLOAD.message()));
     }
 }

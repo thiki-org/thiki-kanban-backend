@@ -8,6 +8,7 @@ import org.thiki.kanban.board.Board;
 import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsService;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.procedure.Procedure;
 import org.thiki.kanban.procedure.ProceduresService;
 import org.thiki.kanban.worktile.domains.Entry;
@@ -24,6 +25,7 @@ import java.util.List;
  */
 @Service
 public class WorktileService {
+    public static final String JSON_TYPE = "json";
     @Resource
     private BoardsService boardsService;
     @Resource
@@ -32,8 +34,33 @@ public class WorktileService {
     private CardsService cardsService;
 
     public Board importWorktileTasks(String userName, MultipartFile worktileTasksFile) throws IOException {
-        ByteArrayInputStream stream = new ByteArrayInputStream(worktileTasksFile.getBytes());
-        String tasksJSONString = IOUtils.toString(stream, "UTF-8");
+        String tasksJSONString;
+        if (null == worktileTasksFile) {
+            throw new BusinessException(WorktileCodes.FILE_IS_UN_UPLOAD);
+        }
+        String[] fileNameInformation = worktileTasksFile.getOriginalFilename().split("\\.");
+        if (fileNameInformation.length < 2) {
+            throw new BusinessException(WorktileCodes.FILE_NAME_INVALID);
+        }
+        String fileExtensionName = fileNameInformation[1];
+        if (!JSON_TYPE.equals(fileExtensionName)) {
+            throw new BusinessException(WorktileCodes.FILE_TYPE_INVALID);
+        }
+        try {
+            worktileTasksFile.getOriginalFilename();
+            ByteArrayInputStream stream = new ByteArrayInputStream(worktileTasksFile.getBytes());
+            tasksJSONString = IOUtils.toString(stream, "UTF-8");
+        } catch (Exception e) {
+            throw new BusinessException(WorktileCodes.FILE_CONTENT_READ_ERROR);
+        }
+        if (tasksJSONString == null || "".equals(tasksJSONString)) {
+            throw new BusinessException(WorktileCodes.FILE_IS_EMPTY);
+        }
+        try {
+            JSON.parseArray(tasksJSONString);
+        } catch (Exception e) {
+            throw new BusinessException(WorktileCodes.FILE_CONTENT_FORMAT_INVALID);
+        }
         List<Task> tasks = JSON.parseArray(tasksJSONString, Task.class);
 
         Board savedBoard = buildNewBoard(userName);
