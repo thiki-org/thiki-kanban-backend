@@ -20,13 +20,12 @@ import java.nio.file.Paths;
 public class UsersService {
 
     public static final int AVATAR_MAX_SIZE = 102400;
+    private static String avatarFileTempPath = "files/avatars/temp/";
     private final Path rootLocation;
     @Resource
     private UsersPersistence usersPersistence;
     @Resource
     private AvatarStorage avatarStorage;
-
-    private static String avatarFileTempPath = "files/avatars/temp/";
 
     public UsersService() {
         this.rootLocation = Paths.get(new StorageProperties().getLocation());

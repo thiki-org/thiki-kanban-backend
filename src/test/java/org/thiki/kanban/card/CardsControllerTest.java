@@ -235,6 +235,7 @@ public class CardsControllerTest extends TestBase {
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.code()))
-                .body("message", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.message()));;
+                .body("message", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.message()));
+        ;
     }
 }

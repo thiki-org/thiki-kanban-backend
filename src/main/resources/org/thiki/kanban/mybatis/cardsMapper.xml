@@ -24,7 +24,7 @@
 
     <update id="resort" parameterType="org.thiki.kanban.card.Card" flushCache="true">
         UPDATE kb_card SET sort_number = #{sortNumber},procedure_id=#{procedureId}
-       WHERE id=#{id} AND delete_status=0
+        WHERE id=#{id} AND delete_status=0
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">

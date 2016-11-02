@@ -20,7 +20,8 @@
         SELECT * FROM kb_team WHERE delete_status=0 AND author=#{userId}
     </select>
     <select id="findByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.teams.team.Team">
-        SELECT * FROM kb_team where id in (SELECT team_Id FROM kb_team_members WHERE kb_team_members.member=#{userName} AND kb_team_members.delete_status=0) and kb_team.delete_status=0
+        SELECT * FROM kb_team where id in (SELECT team_Id FROM kb_team_members WHERE kb_team_members.member=#{userName}
+        AND kb_team_members.delete_status=0) and kb_team.delete_status=0
     </select>
 
     <select id="isTeamExist" parameterType="java.lang.String" resultType="java.lang.Boolean">

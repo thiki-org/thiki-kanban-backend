@@ -52,7 +52,7 @@ public class ProceduresController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/sortNumbers", method = RequestMethod.PUT)
     public HttpEntity resort(@RequestBody List<Procedure> procedures, @PathVariable String boardId) throws IOException {
-        List<Procedure> procedureList = proceduresService.resortProcedures(procedures,boardId);
+        List<Procedure> procedureList = proceduresService.resortProcedures(procedures, boardId);
         return Response.build(new ResortProceduresResource(procedureList, boardId));
     }
 }

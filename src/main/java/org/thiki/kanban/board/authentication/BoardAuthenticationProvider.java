@@ -19,13 +19,12 @@ import javax.annotation.Resource;
 public class BoardAuthenticationProvider extends AuthenticationProvider {
     @Resource
     private BoardsService boardsService;
+    @Resource
+    private TeamMembersService teamMembersService;
 
     public String getPathTemplate() {
         return BoardResource.URL_TEMPLATE;
     }
-
-    @Resource
-    private TeamMembersService teamMembersService;
 
     @Override
     public boolean authenticate(String url, String method, String userName) {

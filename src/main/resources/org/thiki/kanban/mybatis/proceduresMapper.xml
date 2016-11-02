@@ -20,7 +20,7 @@
     </update>
 
     <update id="resort" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
-            UPDATE kb_procedure SET sort_number = #{sortNumber} WHERE delete_status=0 AND id = #{id}
+        UPDATE kb_procedure SET sort_number = #{sortNumber} WHERE delete_status=0 AND id = #{id}
     </update>
 
     <select id="uniqueTitle" parameterType="java.lang.String" resultType="java.lang.Boolean">
