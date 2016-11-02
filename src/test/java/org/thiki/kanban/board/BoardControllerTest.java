@@ -140,12 +140,15 @@ public class BoardControllerTest extends TestBase {
                 .get("/someone/boards")
                 .then()
                 .statusCode(200)
-                .body("[0].name", equalTo("board-name"))
-                .body("[0].author", equalTo("someone"))
-                .body("[0].creationTime", notNullValue())
-                .body("[0]._links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
-                .body("[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"));
+                .body("boards[0].name", equalTo("board-name"))
+                .body("boards[0].author", equalTo("someone"))
+                .body("boards[0].creationTime", notNullValue())
+                .body("boards[0]._links.all.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("boards[0]._links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
+                .body("boards[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("_links.worktileTasks.href", equalTo("http://localhost:8007/someone/worktileTasks"));
+
     }
 
     @Scenario("当用户创建一个board时,如果存在同名,则不允许创建,并告知客户端错误信息")

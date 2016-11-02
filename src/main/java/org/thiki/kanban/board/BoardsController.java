@@ -44,6 +44,6 @@ public class BoardsController {
     @RequestMapping(value = "/{userName}/boards", method = RequestMethod.GET)
     public HttpEntity loadByUserName(@PathVariable String userName) throws Exception {
         List<Board> boards = boardsService.loadByUserName(userName);
-        return Response.build(new BoardsResource(boards));
+        return Response.build(new BoardsResource(boards, userName));
     }
 }
