@@ -88,7 +88,9 @@ public class WorktileService {
                 acceptanceCriteria.setAuthor(userName);
                 acceptanceCriteria.setSummary(todo.getName());
                 acceptanceCriteria.setFinished(todo.getChecked() != 0);
-                savedCards.stream().filter(card -> card.getSummary().equals(task.getName())).forEach(card -> acceptCriteriaService.addAcceptCriteria(userName, card.getId(), acceptanceCriteria));
+                savedCards.stream()
+                        .filter(card -> card.getSummary().equals(task.getName()))
+                        .forEach(card -> acceptCriteriaService.addAcceptCriteria(userName, card.getId(), acceptanceCriteria));
             }
         }
     }
@@ -99,11 +101,13 @@ public class WorktileService {
             Card card = new Card();
             card.setSummary(task.getName());
             card.setAuthor(userName);
-            savedProcedures.stream().filter(procedure -> procedure.getTitle().equals(task.getEntry().getName())).forEach(procedure -> {
-                card.setProcedureId(procedure.getId());
-                Card savedCard = cardsService.create(userName, procedure.getId(), card);
-                savedCards.add(savedCard);
-            });
+            savedProcedures.stream()
+                    .filter(procedure -> procedure.getTitle().equals(task.getEntry().getName()))
+                    .forEach(procedure -> {
+                        card.setProcedureId(procedure.getId());
+                        Card savedCard = cardsService.create(userName, procedure.getId(), card);
+                        savedCards.add(savedCard);
+                    });
         }
         return savedCards;
     }
@@ -117,6 +121,7 @@ public class WorktileService {
             }
             Procedure procedure = new Procedure();
             procedure.setTitle(entry.getName());
+            procedure.setSortNumber(savedProcedures.size());
             Procedure savedProcedure = proceduresService.create(userName, savedBoard.getId(), procedure);
             savedProcedures.add(savedProcedure);
         }
