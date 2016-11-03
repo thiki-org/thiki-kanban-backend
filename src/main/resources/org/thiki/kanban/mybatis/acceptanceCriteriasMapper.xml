@@ -6,9 +6,9 @@
     <insert id="addAcceptCriteria" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria">
         INSERT
         INTO
-        kb_acceptance_criterias(id,summary, card_id, author)
+        kb_acceptance_criterias(id,summary,finished, card_id, author)
         VALUES
-        (#{acceptanceCriteria.id},#{acceptanceCriteria.summary},#{cardId},#{userName})
+        (#{acceptanceCriteria.id},#{acceptanceCriteria.summary},#{acceptanceCriteria.finished},#{cardId},#{userName})
     </insert>
     <update id="updateAcceptCriteria" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria"
             flushCache="true">

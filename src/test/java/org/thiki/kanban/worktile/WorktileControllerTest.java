@@ -7,8 +7,12 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
+import org.thiki.kanban.foundation.common.date.DateService;
+import org.thiki.kanban.foundation.common.date.DateStyle;
 
+import javax.annotation.Resource;
 import java.io.File;
+import java.util.Date;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -21,12 +25,14 @@ import static org.junit.Assert.assertEquals;
 @Domain(order = DomainOrder.WORKTILE, name = "Worktile")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class WorktileControllerTest extends TestBase {
+    @Resource
+    private DateService dateService;
 
     @Scenario("数据导入>数据导入时,新建worktile board")
     @Test
     public void createNewBoard() {
         File worktileTasks = new File("src/test/resources/import/worktile_tasks.json");
-
+        String expectedWorktileName = "worktile" + dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_EN);
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
@@ -34,13 +40,13 @@ public class WorktileControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
-                .body("name", equalTo("worktile"))
+                .body("name", equalTo(expectedWorktileName))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
 
-        assertEquals("worktile", jdbcTemplate.queryForObject("select name from kb_board where author='someone'", String.class));
+        assertEquals(expectedWorktileName, jdbcTemplate.queryForObject("select name from kb_board where author='someone'", String.class));
     }
 
     @Scenario("数据导入>新建board后,导入entry")
@@ -55,7 +61,6 @@ public class WorktileControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
-                .body("name", equalTo("worktile"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
@@ -76,7 +81,6 @@ public class WorktileControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
-                .body("name", equalTo("worktile"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
@@ -84,7 +88,26 @@ public class WorktileControllerTest extends TestBase {
 
         assertEquals("任务名称", jdbcTemplate.queryForObject("select summary from kb_card where author='someone'", String.class));
     }
+    @Scenario("数据导入>新建tasks后,导入todos")
+    @Test
+    public void importTodos() {
+        File worktileTasks = new File("src/test/resources/import/worktile_tasks.json");
 
+        given().header("userName", "someone")
+                .multiPart("worktileTasks", worktileTasks)
+                .when()
+                .post("/someone/worktileTasks")
+                .then()
+                .statusCode(201)
+                .body("id", equalTo("fooId"))
+                .body("author", equalTo("someone"))
+                .body("creationTime", notNullValue())
+                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
+
+        assertEquals("todo", jdbcTemplate.queryForObject("select summary from kb_acceptance_criterias where card_id='fooId' AND author='someone'", String.class));
+        assertEquals("TRUE", jdbcTemplate.queryForObject("select finished from kb_acceptance_criterias where card_id='fooId' AND author='someone'", String.class));
+    }
     @Scenario("数据导入>如果文件长度为空,则抛出异常")
     @Test
     public void throwExceptionIfFileContentIsEmpty() {

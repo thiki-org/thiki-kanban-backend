@@ -63,6 +63,9 @@ public class AcceptanceCriteria {
     }
 
     public Boolean getFinished() {
+        if (finished == null) {
+            return false;
+        }
         return finished;
     }
 

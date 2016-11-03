@@ -18,8 +18,8 @@ public class WorktileController {
     private WorktileService worktileService;
 
     @RequestMapping(value = "/{userName}/worktileTasks", method = RequestMethod.POST)
-    public HttpEntity uploadAvatar(@PathVariable("userName") String userName, @RequestParam(value = "worktileTasks", required = false) Object worktileTasks) throws Exception {
-        Board savedWorktileCards = worktileService.importWorktileTasks(userName, (MultipartFile)worktileTasks);
+    public HttpEntity importTasks(@PathVariable("userName") String userName, @RequestParam(value = "worktileTasks", required = false) Object worktileTasks) throws Exception {
+        Board savedWorktileCards = worktileService.importWorktileTasks(userName, (MultipartFile) worktileTasks);
         return Response.post(new BoardResource(savedWorktileCards, userName));
     }
 }

@@ -51,21 +51,9 @@
     "todos": [
       {
         "todo_id": "e17f667ec35e42ea85a314e0bb9af635",
-        "name": "客户端的board名称为空时不允许创或更新建；",
+        "name": "todo",
         "pos": 65535,
-        "checked": 0
-      },
-      {
-        "todo_id": "321e0bffb657454bb3a8a53a6417e347",
-        "name": "客户端的entry名称或boardID为空时不允许创建或更新；",
-        "pos": 131070,
-        "checked": 0
-      },
-      {
-        "todo_id": "2ed0eb98fe034b46a8980697b6e53ddd",
-        "name": "客户端的task概述或entryID为空时不允许创建或更新。",
-        "pos": 196605,
-        "checked": 0
+        "checked": 1
       }
     ],
     "attachments": []
