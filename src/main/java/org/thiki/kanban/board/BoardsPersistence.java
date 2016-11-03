@@ -15,17 +15,13 @@ public interface BoardsPersistence {
 
     Board findById(@Param("id") String id);
 
-    List<Board> loadByUserName(String userName);
-
     Integer update(Board board);
 
     Integer deleteById(@Param("id") String id);
 
-    List<Board> findByUserId(String userId);
-
-    List<Board> findByTeamId(String TeamId);
-
     boolean unique(@Param("id") String id, @Param("name") String boardName, @Param("userName") String userName);
 
-    String findTeamId(String boardId);
+    List<Board> findTeamsBoards(String teamId);
+
+    List<Board> findPersonalBoards(String TeamId);
 }

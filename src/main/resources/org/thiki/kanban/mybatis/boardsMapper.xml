@@ -12,6 +12,9 @@
     <update id="update" parameterType="org.thiki.kanban.board.Board" flushCache="true">
         UPDATE kb_board SET
         name=#{name},
+        <if test="teamId!=null">
+            owner=#{teamId},
+        </if>
         team_id=#{teamId}
         WHERE id=#{id} AND delete_status=0
     </update>
@@ -24,10 +27,6 @@
 
     </select>
 
-    <select id="loadByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
-        SELECT * FROM kb_board WHERE delete_status=0 AND author=#{userName}
-    </select>
-
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
         SELECT * FROM kb_board WHERE delete_status=0 and id= #{id}
     </select>
@@ -36,8 +35,11 @@
         UPDATE kb_board SET delete_status=1 WHERE id=#{id}
     </delete>
 
-    <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
-        SELECT * FROM kb_board WHERE delete_status=0 AND author=#{userId}
+    <select id="findPersonalBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0 AND owner=#{userName}
     </select>
 
+    <select id="findTeamsBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0 and team_id= #{teamId}
+    </select>
 </mapper>

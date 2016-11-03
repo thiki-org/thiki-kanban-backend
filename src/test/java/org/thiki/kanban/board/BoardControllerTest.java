@@ -134,7 +134,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("获取指定用户所拥有的boards")
     @Test
     public void findByUserName_shouldReturnAllBoardsSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,owner,author) VALUES ('fooId','board-name','someone','someone')");
         given().header("userName", "someone")
                 .when()
                 .get("/someone/boards")

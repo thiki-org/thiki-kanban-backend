@@ -26,5 +26,8 @@ public class MembersResource extends RestResource {
 
         Link invitationLink = linkTo(methodOn(InvitationController.class).invite(null, teamId, userName)).withRel("invitation");
         this.add(invitationLink);
+
+        Link memberLink = linkTo(methodOn(TeamMembersController.class).getMember(teamId, userName)).withRel("member");
+        this.add(memberLink);
     }
 }

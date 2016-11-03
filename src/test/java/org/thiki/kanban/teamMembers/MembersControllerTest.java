@@ -37,9 +37,9 @@ public class MembersControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/members"));
     }
 
-    @Scenario("退出团队>用户加入某个团队后,可以选择退出")
+    @Scenario("退出团队>用户加入某个团队后,可以选择离开团队")
     @Test
-    public void quitTeam() throws Exception {
+    public void leaveTeam() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-teamId','team-name','someone')");
         jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','foo-teamId','someone','someone')");
         given().header("userName", "someone")
@@ -100,7 +100,8 @@ public class MembersControllerTest extends TestBase {
                 .body("members[0]._links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/members/someone"))
                 .body("members[0]._links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
                 .body("members[0]._links.profile.href", equalTo("http://localhost:8007/users/someone/profile"))
-                .body("_links.invitation.href", equalTo("http://localhost:8007/teams/foo-teamId/members/invitation"));
+                .body("_links.invitation.href", equalTo("http://localhost:8007/teams/foo-teamId/members/invitation"))
+                .body("_links.member.href", equalTo("http://localhost:8007/teams/foo-teamId/members/someone"));
     }
 
     @Scenario("当用户加入一个团队后，可以获取该团队的所有成员。但是当团队不存在时,则不允许获取。")

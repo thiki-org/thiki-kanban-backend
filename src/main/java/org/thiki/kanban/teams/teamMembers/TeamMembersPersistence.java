@@ -2,6 +2,7 @@ package org.thiki.kanban.teams.teamMembers;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.thiki.kanban.teams.team.Team;
 
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface TeamMembersPersistence {
 
     boolean isAMemberOfTheTeam(@Param("userName") String userName, @Param("teamId") String teamId);
 
-    Integer quitTeam(@Param("teamId") String teamId, @Param("memberName") String memberName);
+    Integer leaveTeam(@Param("teamId") String teamId, @Param("memberName") String memberName);
+
+    List<Team> findTeams(String userName);
 }

@@ -73,7 +73,11 @@ public class TeamMembersService {
         return teamMembersPersistence.isAMemberOfTheTeam(userName, teamId);
     }
 
-    public void quitTeam(String teamId, String memberName) {
-        teamMembersPersistence.quitTeam(teamId, memberName);
+    public void leaveTeam(String teamId, String memberName) {
+        teamMembersPersistence.leaveTeam(teamId, memberName);
+    }
+
+    public List<Team> loadTeamsByUserName(String userName) {
+        return teamMembersPersistence.findTeams(userName);
     }
 }

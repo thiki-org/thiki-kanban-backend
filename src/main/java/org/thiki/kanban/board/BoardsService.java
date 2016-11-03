@@ -3,9 +3,11 @@ package org.thiki.kanban.board;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
+import org.thiki.kanban.teams.team.Team;
 import org.thiki.kanban.teams.teamMembers.TeamMembersService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,8 +35,24 @@ public class BoardsService {
         return boardsPersistence.findById(id);
     }
 
-    public List<Board> loadByUserName(String userName) {
-        return boardsPersistence.loadByUserName(userName);
+    public List<Board> loadBoards(String userName) {
+        List<Board> personalBoards = boardsPersistence.findPersonalBoards(userName);
+        List<Board> teamsBoards = loadTeamsBoards(userName);
+
+        List<Board> boards = new ArrayList<>();
+        boards.addAll(personalBoards);
+        boards.addAll(teamsBoards);
+        return boards;
+    }
+
+    private List<Board> loadTeamsBoards(String userName) {
+        List<Board> teamsBoards = new ArrayList<>();
+        List<Team> teams = teamMembersService.loadTeamsByUserName(userName);
+        for (Team team : teams) {
+            List<Board> teamBoards = boardsPersistence.findTeamsBoards(team.getId());
+            teamsBoards.addAll(teamBoards);
+        }
+        return teamsBoards;
     }
 
     public Board update(String userName, Board board) {

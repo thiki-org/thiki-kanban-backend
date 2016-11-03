@@ -33,8 +33,8 @@ public class TeamMembersController {
     }
 
     @RequestMapping(value = "/teams/{teamId}/members/{memberName}", method = RequestMethod.DELETE)
-    public HttpEntity quitTeam(@PathVariable String teamId, @PathVariable String memberName) throws Exception {
-        teamMembersService.quitTeam(teamId, memberName);
+    public HttpEntity leaveTeam(@PathVariable String teamId, @PathVariable String memberName) throws Exception {
+        teamMembersService.leaveTeam(teamId, memberName);
         return Response.build(new MemberResource(teamId, memberName));
     }
 }
