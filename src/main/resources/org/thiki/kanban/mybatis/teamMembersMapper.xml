@@ -24,4 +24,8 @@
         SELECT user.name as userName,user.email as email FROM kb_team_members members LEFT JOIN kb_user_registration
         user ON members.member=user.NAME WHERE team_id=#{teamId} AND members.delete_status=0 AND user.delete_status=0
     </select>
+
+    <delete id="quitTeam" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_team_members SET delete_status=1 WHERE member=#{memberName} AND team_id=#{teamId} AND delete_status=0
+    </delete>
 </mapper>

@@ -28,13 +28,27 @@ public class MembersControllerTest extends TestBase {
                 .body("{\"member\":\"someone\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-teamId/teamMembers")
+                .post("/teams/foo-teamId/members")
                 .then()
                 .statusCode(201)
                 .body("teamId", equalTo("foo-teamId"))
                 .body("member", equalTo("someone"))
                 .body("id", equalTo("fooId"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/teamMembers"));
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/members"));
+    }
+
+    @Scenario("退出团队>用户加入某个团队后,可以选择退出")
+    @Test
+    public void quitTeam() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_team (id,name,author) VALUES ('foo-teamId','team-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_team_members (id,team_id,member,author) VALUES ('foo-team-member-id','foo-teamId','someone','someone')");
+        given().header("userName", "someone")
+                .when()
+                .delete("/teams/foo-teamId/members/someone")
+                .then()
+                .statusCode(200)
+                .body("_links.teams.href", equalTo("http://localhost:8007/someone/teams"))
+                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/members/someone"));
     }
 
     @Scenario("加入团队时,如果该团队并不存在,则不允许加入")
@@ -44,7 +58,7 @@ public class MembersControllerTest extends TestBase {
                 .body("{\"member\":\"someone\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-teamId/teamMembers")
+                .post("/teams/foo-teamId/members")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(TeamsCodes.TEAM_IS_NOT_EXISTS.code()))
@@ -60,7 +74,7 @@ public class MembersControllerTest extends TestBase {
                 .body("{\"member\":\"someone\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/teams/foo-teamId/teamMembers")
+                .post("/teams/foo-teamId/members")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
@@ -83,6 +97,7 @@ public class MembersControllerTest extends TestBase {
                 .statusCode(200)
                 .body("members[0].userName", equalTo("someone"))
                 .body("members[0].email", equalTo("someone@gmail.com"))
+                .body("members[0]._links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/members/someone"))
                 .body("members[0]._links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
                 .body("members[0]._links.profile.href", equalTo("http://localhost:8007/users/someone/profile"))
                 .body("_links.invitation.href", equalTo("http://localhost:8007/teams/foo-teamId/members/invitation"));

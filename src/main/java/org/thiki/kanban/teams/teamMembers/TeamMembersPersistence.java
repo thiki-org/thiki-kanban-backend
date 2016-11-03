@@ -21,4 +21,6 @@ public interface TeamMembersPersistence {
     List<Member> loadMembersByTeamId(String teamId);
 
     boolean isAMemberOfTheTeam(@Param("userName") String userName, @Param("teamId") String teamId);
+
+    Integer quitTeam(@Param("teamId") String teamId, @Param("memberName") String memberName);
 }

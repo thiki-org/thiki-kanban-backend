@@ -72,4 +72,8 @@ public class TeamMembersService {
 
         return teamMembersPersistence.isAMemberOfTheTeam(userName, teamId);
     }
+
+    public void quitTeam(String teamId, String memberName) {
+        teamMembersPersistence.quitTeam(teamId, memberName);
+    }
 }

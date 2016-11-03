@@ -18,7 +18,7 @@ public class MembersResource extends RestResource {
 
         List<MemberResource> memberResources = new ArrayList<>();
         for (Member member : members) {
-            MemberResource memberResource = new MemberResource(member);
+            MemberResource memberResource = new MemberResource(teamId, member);
             memberResources.add(memberResource);
         }
 

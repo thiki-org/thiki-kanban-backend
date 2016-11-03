@@ -15,7 +15,7 @@ public class TeamMembersController {
     @Autowired
     private TeamMembersService teamMembersService;
 
-    @RequestMapping(value = "/teams/{teamId}/teamMembers", method = RequestMethod.POST)
+    @RequestMapping(value = "/teams/{teamId}/members", method = RequestMethod.POST)
     public HttpEntity joinTeam(@RequestBody TeamMember teamMember, @PathVariable String teamId, @RequestHeader String userName) {
         TeamMember savedTeamMember = teamMembersService.joinTeam(teamId, teamMember, userName);
         return Response.post(new TeamMembersResource(teamId, savedTeamMember));
@@ -25,5 +25,16 @@ public class TeamMembersController {
     public HttpEntity loadMembersByTeamId(@PathVariable String teamId, @RequestHeader String userName) throws Exception {
         List<Member> members = teamMembersService.loadMembersByTeamId(userName, teamId);
         return Response.build(new MembersResource(teamId, userName, members));
+    }
+
+    @RequestMapping(value = "/teams/{teamId}/members/{userName}", method = RequestMethod.GET)
+    public HttpEntity getMember(@PathVariable String teamId, @PathVariable String userName) throws Exception {
+        return null;
+    }
+
+    @RequestMapping(value = "/teams/{teamId}/members/{memberName}", method = RequestMethod.DELETE)
+    public HttpEntity quitTeam(@PathVariable String teamId, @PathVariable String memberName) throws Exception {
+        teamMembersService.quitTeam(teamId, memberName);
+        return Response.build(new MemberResource(teamId, memberName));
     }
 }
