@@ -72,14 +72,16 @@ public class AssignmentControllerTest extends TestBase {
                 .get("/procedures/1/cards/cardId-foo/assignments")
                 .then()
                 .statusCode(200)
-                .body("[0].id", equalTo("fooId"))
-                .body("[0].assignee", equalTo("assigneeId-foo"))
-                .body("[0].assigner", equalTo("assignerId-foo"))
-                .body("[0].name", equalTo("徐濤"))
-                .body("[0].author", equalTo("authorId-foo"))
-                .body("[0]._links.card.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo"))
-                .body("[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments/fooId"));
+                .body("assignments[0].id", equalTo("fooId"))
+                .body("assignments[0].assignee", equalTo("assigneeId-foo"))
+                .body("assignments[0].assigner", equalTo("assignerId-foo"))
+                .body("assignments[0].name", equalTo("徐濤"))
+                .body("assignments[0].author", equalTo("authorId-foo"))
+                .body("assignments[0]._links.card.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo"))
+                .body("assignments[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments"))
+                .body("assignments[0]._links.self.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments/fooId"))
+                .body("_links.self.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments"))
+                .body("_links.card.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo"));
     }
 
     @Scenario("当用户根据cardID获取分配记录时,如果指定的卡片并不存在,则返回404客户端错误")

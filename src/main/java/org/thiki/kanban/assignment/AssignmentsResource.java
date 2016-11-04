@@ -1,24 +1,32 @@
 package org.thiki.kanban.assignment;
 
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import org.springframework.hateoas.Link;
+import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
  * Created by xubitao on 6/16/16.
  */
 public class AssignmentsResource extends RestResource {
     public AssignmentsResource(List<Assignment> assignmentList, String procedureId, String cardId) throws IOException {
-        this.domainObject = assignmentList;
-        JSONArray assignmentsJSONArray = new JSONArray();
+        List<AssignmentResource> assignmentResources = new ArrayList<>();
         for (Assignment assignment : assignmentList) {
             AssignmentResource assignmentResource = new AssignmentResource(assignment, procedureId, cardId);
-            JSONObject assignmentJSON = assignmentResource.getResource();
-            assignmentsJSONArray.add(assignmentJSON);
+            assignmentResources.add(assignmentResource);
         }
-        this.resourcesJSON = assignmentsJSONArray;
+
+        this.buildDataObject("assignments", assignmentResources);
+        Link selfLink = linkTo(methodOn(AssignmentController.class).findByCardId(procedureId, cardId)).withSelfRel();
+        this.add(selfLink);
+
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(procedureId, cardId)).withRel("card");
+        this.add(cardLink);
     }
 }
