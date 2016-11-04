@@ -16,6 +16,7 @@
         UPDATE kb_card SET
         summary = #{card.summary},
         content = #{card.content},
+        code = #{card.code},
         sort_number = #{card.sortNumber},
         author = #{card.author},
         procedure_id = #{card.procedureId}

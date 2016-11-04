@@ -186,7 +186,7 @@ public class CardsControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number) VALUES ('fooId2','summary2','play badminton',1,'procedure-fooId',1)");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number) VALUES ('fooId6','this is the card summary.','play badminton',1,2,3)");
 
-        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1}")
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1,\"code\":\"code-foo\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -195,6 +195,7 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("sortNumber", equalTo(3))
+                .body("code", equalTo("code-foo"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/1/cards/fooId6"))
                 .body("_links.cards.href", equalTo("http://localhost:8007/procedures/1/cards"))
                 .body("_links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/fooId6/assignments"));

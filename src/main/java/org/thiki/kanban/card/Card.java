@@ -23,6 +23,9 @@ public class Card {
     @NotEmpty(message = CardsCodes.summaryIsRequired)
     @Length(max = 50, message = CardsCodes.summaryIsInvalid)
     private String summary;
+
+    @Length(max = 50, message = CardsCodes.codeIsInvalid)
+    private String code;
     /**
      * 卡片内容
      */
@@ -106,4 +109,11 @@ public class Card {
         this.sortNumber = sortNumber;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
 }

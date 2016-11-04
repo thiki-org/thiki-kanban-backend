@@ -80,6 +80,7 @@ DROP TABLE IF EXISTS kb_card;
 CREATE TABLE kb_card (
   id                VARCHAR(40)   NOT NULL,
   summary           VARCHAR(1023) NOT NULL,
+  code VARCHAR(50),
   content           TEXT,
   sort_number       INT(2)        NOT NULL  DEFAULT 0,
   author            VARCHAR(40)             DEFAULT NULL,
