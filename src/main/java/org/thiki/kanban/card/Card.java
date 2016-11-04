@@ -21,7 +21,7 @@ public class Card {
      */
     @NotNull(message = CardsCodes.summaryIsRequired)
     @NotEmpty(message = CardsCodes.summaryIsRequired)
-    @Length(max = 50, message = CardsCodes.summaryIsInvalid)
+    @Length(max = 200, message = CardsCodes.summaryIsInvalid)
     private String summary;
 
     @Length(max = 50, message = CardsCodes.codeIsInvalid)
