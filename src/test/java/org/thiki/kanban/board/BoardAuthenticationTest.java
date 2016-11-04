@@ -49,7 +49,7 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
                 .body("_links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
 
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
-                .body("_links.self.actions.create", nullValue())
+                .body("_links.self.actions.assign", nullValue())
                 .body("_links.self.actions.read.isAllowed", equalTo(true))
                 .body("_links.self.actions.modify", nullValue())
                 .body("_links.self.actions.delete", nullValue());

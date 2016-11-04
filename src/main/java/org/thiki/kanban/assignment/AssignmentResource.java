@@ -4,6 +4,7 @@ import org.springframework.hateoas.Link;
 import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.procedure.ProceduresController;
+import org.thiki.kanban.user.UsersController;
 
 import java.io.IOException;
 
@@ -25,6 +26,12 @@ public class AssignmentResource extends RestResource {
 
             Link cardLink = linkTo(methodOn(CardsController.class).findById(procedureId, cardId)).withRel("card");
             this.add(cardLink);
+
+            Link AssigneeProfileLink = linkTo(methodOn(UsersController.class).loadProfile(assignment.getAssignee())).withRel("assigneeProfile");
+            this.add(AssigneeProfileLink);
+
+            Link AssigneeAvatarLink = linkTo(methodOn(UsersController.class).loadAvatar(assignment.getAssignee())).withRel("assigneeAvatar");
+            this.add(AssigneeAvatarLink);
         }
         this.add(linkTo(methodOn(ProceduresController.class).loadAll(procedureId)).withRel("all"));
     }

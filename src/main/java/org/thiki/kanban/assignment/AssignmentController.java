@@ -19,7 +19,7 @@ public class AssignmentController {
 
     @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws IOException {
-        Assignment savedAssignment = assignmentService.create(assignment, cardId, userName);
+        Assignment savedAssignment = assignmentService.assign(assignment, cardId, userName);
         return Response.post(new AssignmentResource(savedAssignment, procedureId, cardId));
     }
 

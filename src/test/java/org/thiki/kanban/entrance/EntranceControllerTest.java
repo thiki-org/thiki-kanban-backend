@@ -27,7 +27,7 @@ public class EntranceControllerTest extends AuthenticationTestBase {
                 .statusCode(200)
                 .body("description", equalTo("Welcome!"))
                 .body("_links.self.href", equalTo("http://localhost:8007/entrance"))
-                .body("_links.self.actions.create", nullValue())
+                .body("_links.self.actions.assign", nullValue())
                 .body("_links.self.actions.read.isAllowed", equalTo(true))
                 .body("_links.self.actions.modify", nullValue())
                 .body("_links.self.actions.delete", nullValue())

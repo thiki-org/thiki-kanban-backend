@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsCodes;
 import org.thiki.kanban.card.CardsPersistence;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
@@ -21,7 +22,11 @@ public class AssignmentService {
     @Resource
     private CardsPersistence cardsPersistence;
 
-    public Assignment create(final Assignment assignment, String cardId, String authorUserId) {
+    public Assignment assign(final Assignment assignment, String cardId, String authorUserId) {
+        boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
+        if (isAlreadyAssigned) {
+            throw new BusinessException(AssignmentCodes.ALREADY_ASSIGNED);
+        }
         assignment.setCardId(cardId);
         assignment.setAuthor(authorUserId);
         assignmentPersistence.create(assignment);

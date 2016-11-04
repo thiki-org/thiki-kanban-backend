@@ -18,4 +18,6 @@ public interface AssignmentPersistence {
     List<Assignment> findByCardId(String cardId);
 
     int deleteById(String id);
+
+    boolean isAlreadyAssigned(@Param("assignee") String assignee, @Param("cardId") String cardId);
 }

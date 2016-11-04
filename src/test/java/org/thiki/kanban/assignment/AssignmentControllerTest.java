@@ -80,8 +80,27 @@ public class AssignmentControllerTest extends TestBase {
                 .body("assignments[0]._links.card.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo"))
                 .body("assignments[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments"))
                 .body("assignments[0]._links.self.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments/fooId"))
+                .body("assignments[0]._links.assigneeProfile.href", equalTo("http://localhost:8007/users/assigneeId-foo/profile"))
+                .body("assignments[0]._links.assigneeAvatar.href", equalTo("http://localhost:8007/users/assigneeId-foo/avatar"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo/assignments"))
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/1/cards/cardId-foo"));
+    }
+
+    @Scenario("任务认领>当用户此前已经认领该任务后,则不可以再次认领")
+    @Test
+    public void notAllowedIfAlreadyAssigned() {
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,name,email,password) VALUES ('assigneeId-foo','徐濤','766191920@qq.com','password')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('cardId-foo','this is the card summary.','play badminton',1,'fooId')");
+        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
+        given().header("userName", "authorId-foo")
+                .body("{\"assignee\":\"assigneeId-foo\",\"assigner\":\"assignerId\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/procedures/1/cards/cardId-foo/assignments")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(AssignmentCodes.ALREADY_ASSIGNED.code()))
+                .body("message", equalTo(AssignmentCodes.ALREADY_ASSIGNED.message()));
     }
 
     @Scenario("当用户根据cardID获取分配记录时,如果指定的卡片并不存在,则返回404客户端错误")

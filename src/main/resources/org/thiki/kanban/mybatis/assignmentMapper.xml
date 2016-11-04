@@ -24,6 +24,11 @@
         WHERE assignment.card_id= #{cardId} AND assignment.delete_status=0
     </select>
 
+    <select id="isAlreadyAssigned" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_card_assignment
+        WHERE card_id= #{cardId} AND  assignee=#{assignee} AND delete_status=0
+    </select>
+
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_card_assignment SET delete_status=1 WHERE id=#{id}
     </delete>

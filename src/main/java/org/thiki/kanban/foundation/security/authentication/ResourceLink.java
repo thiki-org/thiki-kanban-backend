@@ -48,7 +48,7 @@ public class ResourceLink {
         if (isAllowedCreate) {
             JSONObject postAction = new JSONObject();
             postAction.put("isAllowed", isAllowedCreate);
-            ActionsAuthInformation.put("create", postAction);
+            ActionsAuthInformation.put("assign", postAction);
         }
         if (isAllowedRead) {
             JSONObject getAction = new JSONObject();
