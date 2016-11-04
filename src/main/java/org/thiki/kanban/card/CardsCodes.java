@@ -6,7 +6,8 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  * Created by xubt on 8/8/16.
  */
 public enum CardsCodes {
-    CARD_IS_NOT_EXISTS("001", "卡片未找到。");
+    CARD_IS_NOT_EXISTS("001", "卡片未找到。"),
+    CODE_IS_ALREADY_EXISTS("002", "当前看板下该编号已经存在,请使用其他编号。");
     public static final String summaryIsRequired = "卡片概述不能为空。";
     public static final String summaryIsInvalid = "卡片概述长度超限,请保持在50个字符以内。";
     public static final String codeIsInvalid="编号长度超长。";

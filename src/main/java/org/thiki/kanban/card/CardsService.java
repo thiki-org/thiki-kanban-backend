@@ -32,6 +32,12 @@ public class CardsService {
 
     public Card update(String cardId, Card card) {
         loadAndValidateCard(cardId);
+        if (card.getCode() != null) {
+            boolean isCoedAlreadyExist = cardsPersistence.isCodeAlreadyExist(cardId, card.getCode(), card.getProcedureId());
+            if (isCoedAlreadyExist) {
+                throw new BusinessException(CardsCodes.CODE_IS_ALREADY_EXISTS);
+            }
+        }
         cardsPersistence.update(cardId, card);
         return cardsPersistence.findById(cardId);
     }

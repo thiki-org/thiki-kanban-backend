@@ -32,6 +32,10 @@
         SELECT * FROM kb_card WHERE id= #{id}
     </select>
 
+    <select id="isCodeAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_card WHERE id!= #{cardId} AND code=#{code} AND procedure_id=#{procedureId} AND delete_status=0
+    </select>
+
     <select id="findByProcedureId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
         SELECT * FROM kb_card WHERE procedure_id= #{procedure_id} AND delete_status=0 ORDER BY sort_number
     </select>

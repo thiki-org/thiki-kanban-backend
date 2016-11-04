@@ -215,6 +215,25 @@ public class CardsControllerTest extends TestBase {
                 .body("message", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.message()));
     }
 
+    @Scenario("编号检查>当更新一个卡片时,如果当前看版中已经存在相同编号,则不予许更新")
+    @Test
+    public void notAllowedIfCodeIsAlreadyExist() throws Exception {
+
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number,code) VALUES ('fooId1','summary1','play badminton',1,'procedure-fooId',0,'code1')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number,code) VALUES ('fooId2','summary2','play badminton',1,'procedure-fooId',1,'code2')");
+
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":\"procedure-fooId\",\"code\":\"code2\"}")
+
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/procedures/1/cards/fooId1")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(CardsCodes.CODE_IS_ALREADY_EXISTS.code()))
+                .body("message", equalTo(CardsCodes.CODE_IS_ALREADY_EXISTS.message()));
+    }
+
     @Scenario("当删除一个卡片时,如果卡片存在,则删除成功")
     @Test
     public void delete_shouldDeleteSuccessfullyWhenTheCardIsExist() {
