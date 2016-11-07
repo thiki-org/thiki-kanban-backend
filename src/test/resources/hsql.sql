@@ -35,7 +35,7 @@ drop table if exists kb_card;
 
 CREATE TABLE kb_card (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
-  summary VARCHAR(50) NOT NULL,
+  summary VARCHAR(200) NOT NULL,
   code VARCHAR(50),
   content VARCHAR(50),
   sort_number int DEFAULT 0,
