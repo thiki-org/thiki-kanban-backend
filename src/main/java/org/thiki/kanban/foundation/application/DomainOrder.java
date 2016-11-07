@@ -21,4 +21,5 @@ public class DomainOrder {
     public static final int ACCEPT_CRITERIA = 13;
     public static final int COMMENT = 14;
     public static final int WORKTILE = 15;
+    public static final int TAG = 16;
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.tag.TagPersistence">
+    <insert id="addTag" parameterType="org.thiki.kanban.tag.Tag">
+        INSERT
+        INTO
+        kb_tag(id,name,color, owner, author)
+        VALUES
+        (#{tag.id},#{tag.name},#{tag.color},#{userName},#{userName})
+    </insert>
+    <update id="updateAcceptCriteria" parameterType="org.thiki.kanban.tag.Tag"
+            flushCache="true">
+        UPDATE kb_tag SET
+        name=#{tag.name},
+        finished=#{tag.finished}
+        WHERE id=#{tagId} AND delete_status=0
+    </update>
+    <select id="findById" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.tag.Tag">
+        SELECT * FROM kb_tag WHERE id= #{id} AND delete_status=0
+    </select>
+
+    <select id="loadAcceptanceCriteriasByCardId" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.tag.Tag">
+        SELECT * FROM kb_tag WHERE card_id= #{cardId} AND delete_status=0
+    </select>
+
+    <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_tag SET delete_status=1 WHERE id=#{tagId}
+    </delete>
+    <update id="resort" parameterType="org.thiki.kanban.tag.Tag"
+            flushCache="true">
+        UPDATE kb_tag SET
+        sort_number=#{tag.sortNumber}
+        WHERE id=#{tag.id} AND delete_status=0
+    </update>
+</mapper>

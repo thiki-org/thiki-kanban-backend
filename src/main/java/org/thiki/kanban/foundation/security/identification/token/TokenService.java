@@ -24,7 +24,7 @@ public class TokenService {
     public String buildToken(String userName) throws Exception {
         AuthenticationToken authenticationToken = new AuthenticationToken();
         authenticationToken.setUserName(userName);
-        Date expirationTime = dateService.addMinute(new Date(), Constants.TOKEN_EXPIRED_TIME);
+        Date expirationTime = dateService.addSecond(new Date(), Constants.TOKEN_EXPIRED_TIME);
         String expirationTimeStr = dateService.DateToString(expirationTime, DateStyle.YYYY_MM_DD_HH_MM_SS);
 
         authenticationToken.setExpirationTime(expirationTimeStr);

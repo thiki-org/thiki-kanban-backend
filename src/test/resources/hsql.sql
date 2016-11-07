@@ -216,3 +216,18 @@ CREATE TABLE kb_comment(
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
 );
+-- ----------------------------
+-- Table structure for kb_tag
+-- ----------------------------
+drop table if exists kb_tag;
+
+CREATE TABLE kb_tag(
+  id VARCHAR(40)NOT NULL PRIMARY KEY,
+  name VARCHAR(50) DEFAULT '',
+  color VARCHAR(20)NOT NULL,
+  owner VARCHAR(40) DEFAULT NULL,
+  author VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  delete_status int DEFAULT 0
+);
