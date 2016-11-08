@@ -22,9 +22,9 @@
         SELECT * FROM kb_tag WHERE id= #{id} AND delete_status=0
     </select>
 
-    <select id="loadAcceptanceCriteriasByCardId" parameterType="java.lang.String"
+    <select id="loadTagsByUserName" parameterType="java.lang.String"
             resultType="org.thiki.kanban.tag.Tag">
-        SELECT * FROM kb_tag WHERE card_id= #{cardId} AND delete_status=0
+        SELECT * FROM kb_tag WHERE owner= #{userName} AND delete_status=0
     </select>
 
     <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">

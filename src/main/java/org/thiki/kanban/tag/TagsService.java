@@ -9,7 +9,7 @@ import java.util.List;
  * Created by xubt on 11/7/16.
  */
 @Service
-public class TagService {
+public class TagsService {
 
     @Resource
     private TagPersistence tagPersistence;
@@ -19,8 +19,8 @@ public class TagService {
         return tagPersistence.findById(tag.getId());
     }
 
-    public List<Tag> loadAcceptanceCriteriasByCardId(String cardId) {
-        List<Tag> tags = tagPersistence.loadAcceptanceCriteriasByCardId(cardId);
+    public List<Tag> loadTagsByUserName(String userName) {
+        List<Tag> tags = tagPersistence.loadTagsByUserName(userName);
         return tags;
     }
 
@@ -41,6 +41,6 @@ public class TagService {
         for (Tag tag : tags) {
             tagPersistence.resort(tag);
         }
-        return tagPersistence.loadAcceptanceCriteriasByCardId(cardId);
+        return tagPersistence.loadTagsByUserName(cardId);
     }
 }

@@ -19,7 +19,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
  */
 @Domain(order = DomainOrder.TAG, name = "标签")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TagControllerTest extends TestBase {
+public class TagsControllerTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
@@ -41,5 +41,25 @@ public class TagControllerTest extends TestBase {
                 .body("owner", equalTo(userName))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/tags/fooId"))
                 .body("_links.tags.href", equalTo("http://localhost:8007/someone/tags"));
+    }
+
+    @Scenario("获取个人标签>用户为卡片创建个人标签后,可以查看")
+    @Test
+    public void loadPersonalTags() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,owner")
+                .values("fooId", "tag-name", "tag-color", "someone", "someone").exec();
+
+        given().header("userName", userName)
+                .when()
+                .get("/someone/tags")
+                .then()
+                .statusCode(200)
+                .body("tags[0].name", equalTo("tag-name"))
+                .body("tags[0].color", equalTo("tag-color"))
+                .body("tags[0].owner", equalTo(userName))
+                .body("tags[0]._links.self.href", equalTo("http://localhost:8007/someone/tags/fooId"))
+                .body("tags[0]._links.tags.href", equalTo("http://localhost:8007/someone/tags"))
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/tags"));
     }
 }

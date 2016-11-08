@@ -15,10 +15,10 @@ public class TagResource extends RestResource {
     public TagResource(Tag tag, String userName) throws IOException {
         this.domainObject = tag;
         if (tag != null) {
-            Link selfLink = linkTo(methodOn(TagController.class).findById(userName, tag.getId())).withSelfRel();
+            Link selfLink = linkTo(methodOn(TagsController.class).findById(userName, tag.getId())).withSelfRel();
             this.add(selfLink);
 
-            Link tagsLink = linkTo(methodOn(TagController.class).loadTagsByUserName(userName)).withRel("tags");
+            Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByUserName(userName)).withRel("tags");
             this.add(tagsLink);
         }
     }
