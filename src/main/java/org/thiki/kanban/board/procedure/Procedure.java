@@ -1,4 +1,4 @@
-package org.thiki.kanban.procedure;
+package org.thiki.kanban.board.procedure;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;

@@ -1,8 +1,8 @@
 package org.thiki.kanban.board;
 
 import org.springframework.hateoas.Link;
+import org.thiki.kanban.board.procedure.ProceduresController;
 import org.thiki.kanban.foundation.common.RestResource;
-import org.thiki.kanban.procedure.ProceduresController;
 import org.thiki.kanban.teams.team.TeamsController;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;

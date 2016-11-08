@@ -1,4 +1,4 @@
-package org.thiki.kanban.procedure;
+package org.thiki.kanban.board.procedure;
 
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -13,9 +13,9 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubitao on 04/26/16.
  */
-public class ResortProceduresResource extends RestResource {
+public class ProceduresResource extends RestResource {
 
-    public ResortProceduresResource(List<Procedure> procedureList, String boardId) throws IOException {
+    public ProceduresResource(List<Procedure> procedureList, String boardId) throws IOException {
 
         List<ProcedureResource> procedureResources = new ArrayList<>();
         for (Procedure procedure : procedureList) {
@@ -24,10 +24,10 @@ public class ResortProceduresResource extends RestResource {
         }
 
         this.buildDataObject("procedures", procedureResources);
-        Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId)).withRel("procedures");
-        this.add(proceduresLink);
-
-        Link selfLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId)).withSelfRel();
+        Link selfLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId)).withSelfRel();
         this.add(selfLink);
+
+        Link sortNumbersLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId)).withRel("sortNumbers");
+        this.add(sortNumbersLink);
     }
 }

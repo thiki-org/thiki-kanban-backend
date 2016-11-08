@@ -2,7 +2,7 @@ package org.thiki.kanban.card;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.thiki.kanban.procedure.Procedure;
+import org.thiki.kanban.board.procedure.Procedure;
 
 import javax.validation.constraints.NotNull;
 

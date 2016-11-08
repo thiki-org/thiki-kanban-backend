@@ -1,10 +1,10 @@
 package org.thiki.kanban.card;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.board.procedure.Procedure;
+import org.thiki.kanban.board.procedure.ProceduresPersistence;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
-import org.thiki.kanban.procedure.Procedure;
-import org.thiki.kanban.procedure.ProceduresPersistence;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
