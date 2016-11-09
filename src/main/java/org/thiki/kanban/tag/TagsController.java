@@ -24,9 +24,9 @@ public class TagsController {
         return Response.post(new TagResource(savedTag, boardId));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/tags/clone/{fromBoardId}", method = RequestMethod.POST)
-    public HttpEntity cloneTagsFromOtherBoard(@PathVariable("boardId") String boardId, @PathVariable("fromBoardId") String fromBoardId) throws IOException {
-        tagsService.cloneTagsFromOtherBoard(boardId, fromBoardId);
+    @RequestMapping(value = "/boards/{boardId}/tags/clone", method = RequestMethod.POST)
+    public HttpEntity cloneTagsFromOtherBoard(@PathVariable("boardId") String boardId, @RequestParam("sourceBoardId") String sourceBoardId) throws IOException {
+        tagsService.cloneTagsFromOtherBoard(boardId, sourceBoardId);
 
         return Response.build(new TagsResource(boardId));
     }

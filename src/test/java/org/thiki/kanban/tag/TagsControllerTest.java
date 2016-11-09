@@ -184,12 +184,48 @@ public class TagsControllerTest extends TestBase {
                 .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
 
         given().header("userName", userName)
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/boards/boardId-foo/tags/clone/otherBoardId")
+                .param("fromBoardId", "otherBoardId")
+                .post("/boards/boardId-foo/tags/clone")
                 .then()
                 .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_tag WHERE board_id='boardId-foo' AND delete_status=0").size());
+    }
+
+    @Scenario("复制标签>用户从某一看板中复制标签时,如果标签已经存在,则跳过该标签继续复制")
+    @Test
+    public void skipExistingTagWhenCopyingFromOthers() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId1", "tag-name", "tag-color", "someone", "otherBoardId").exec();
+
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId2", "tag-name2", "tag-color", "someone", "otherBoardId").exec();
+
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId3", "tag-name", "tag-color", "someone", "boardId-foo").exec();
+
+        given().header("userName", userName)
+                .when()
+                .param("fromBoardId", "otherBoardId")
+                .post("/boards/boardId-foo/tags/clone")
+                .then()
+                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
+
+        assertEquals(2, jdbcTemplate.queryForList("SELECT * FROM kb_tag WHERE board_id='boardId-foo' AND delete_status=0").size());
+    }
+
+
+    @Scenario("复制标签>若用未提供来源看板信息,则不允许复制并告知客户端错误")
+    @Test
+    public void notAllowedIfSourceBoardIdNotProvided() throws Exception {
+        given().header("userName", userName)
+                .when()
+                .post("/boards/boardId-foo/tags/clone")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo("Required String parameter 'sourceBoardId' is not present"));
     }
 }
