@@ -1,6 +1,7 @@
 package org.thiki.kanban.tag;
 
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.BusinessException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -25,6 +26,10 @@ public class TagsService {
     }
 
     public Tag updateTag(String boardId, String tagId, Tag tag) {
+        boolean isNameDuplicate = tagPersistence.isNameDuplicate(boardId, tag.getName());
+        if (isNameDuplicate) {
+            throw new BusinessException(TagsCodes.NAME_IS_ALREADY_EXIST);
+        }
         tagPersistence.updateTag(tagId, tag);
         return tagPersistence.findById(tagId);
     }

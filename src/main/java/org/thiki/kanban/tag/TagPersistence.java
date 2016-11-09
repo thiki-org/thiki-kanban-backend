@@ -21,4 +21,6 @@ public interface TagPersistence {
     Integer updateTag(@Param("tagId") String tagId, @Param("tag") Tag tag);
 
     Integer deleteTag(String tagId);
+
+    boolean isNameDuplicate(@Param("boardId") String boardId, @Param("name") String name);
 }
