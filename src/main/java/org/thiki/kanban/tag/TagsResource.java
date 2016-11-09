@@ -26,4 +26,9 @@ public class TagsResource extends RestResource {
         Link selfLink = linkTo(methodOn(TagsController.class).loadTagsByUserName(userName)).withSelfRel();
         this.add(selfLink);
     }
+
+    public TagsResource(String userName) throws IOException {
+        Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByUserName(userName)).withRel("tags");
+        this.add(tagsLink);
+    }
 }

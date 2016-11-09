@@ -24,23 +24,12 @@ public class TagsService {
         return tags;
     }
 
-    public Tag loadAcceptanceCriteriaById(String acceptanceCriteriaId) {
-        return tagPersistence.findById(acceptanceCriteriaId);
-    }
-
-    public Integer removeAcceptanceCriteria(String acceptanceCriteriaId) {
-        return tagPersistence.deleteAcceptanceCriteria(acceptanceCriteriaId);
-    }
-
-    public List<Tag> resortAcceptCriterias(String cardId, List<Tag> tags) {
-        for (Tag tag : tags) {
-            tagPersistence.resort(tag);
-        }
-        return tagPersistence.loadTagsByUserName(cardId);
-    }
-
     public Tag updatePersonalTag(String userName, String tagId, Tag tag) {
         tagPersistence.updateTag(tagId, tag);
         return tagPersistence.findById(tagId);
+    }
+
+    public Integer deletePersonalTag(String userName, String tagId) {
+        return tagPersistence.deleteTag(tagId);
     }
 }

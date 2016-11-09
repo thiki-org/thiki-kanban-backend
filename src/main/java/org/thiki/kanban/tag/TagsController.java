@@ -40,4 +40,10 @@ public class TagsController {
         Tag updatedTag = tagsService.updatePersonalTag(userName, tagId, tag);
         return Response.build(new TagResource(updatedTag, userName));
     }
+
+    @RequestMapping(value = "/{userName}/tags/{tagId}", method = RequestMethod.DELETE)
+    public HttpEntity deletePersonalTag(@PathVariable("userName") String userName, @PathVariable("tagId") String tagId) throws IOException {
+        tagsService.deletePersonalTag(userName, tagId);
+        return Response.build(new TagsResource(userName));
+    }
 }

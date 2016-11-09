@@ -21,4 +21,6 @@ public interface TagPersistence {
     Integer resort(@Param("tag") Tag tag);
 
     Integer updateTag(@Param("tagId") String tagId, @Param("tag") Tag tag);
+
+    Integer deleteTag(String tagId);
 }

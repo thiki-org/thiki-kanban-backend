@@ -83,4 +83,19 @@ public class TagsControllerTest extends TestBase {
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/tags/fooId"))
                 .body("_links.tags.href", equalTo("http://localhost:8007/someone/tags"));
     }
+
+    @Scenario("删除个人标签>针对不再使用的标签,用户可以删除")
+    @Test
+    public void deletePersonalTag() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,owner")
+                .values("fooId", "tag-name", "tag-color", "someone", "someone").exec();
+
+        given().header("userName", userName)
+                .when()
+                .delete("/someone/tags/fooId")
+                .then()
+                .statusCode(200)
+                .body("_links.tags.href", equalTo("http://localhost:8007/someone/tags"));
+    }
 }
