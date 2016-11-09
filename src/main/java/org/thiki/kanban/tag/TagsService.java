@@ -16,6 +16,16 @@ public class TagsService {
     private TagPersistence tagPersistence;
 
     public Tag createTag(String boardId, Tag tag) {
+        boolean isNameDuplicate = tagPersistence.isNameDuplicate(boardId, tag.getName());
+        if (isNameDuplicate) {
+            throw new BusinessException(TagsCodes.NAME_IS_ALREADY_EXIST);
+        }
+
+        boolean isColorDuplicate = tagPersistence.isColorDuplicate(boardId, tag.getColor());
+        if (isColorDuplicate) {
+            throw new BusinessException(TagsCodes.COLOR_IS_ALREADY_EXIST);
+        }
+
         tagPersistence.addTag(boardId, tag);
         return tagPersistence.findById(tag.getId());
     }
@@ -26,10 +36,7 @@ public class TagsService {
     }
 
     public Tag updateTag(String boardId, String tagId, Tag tag) {
-        boolean isNameDuplicate = tagPersistence.isNameDuplicate(boardId, tag.getName());
-        if (isNameDuplicate) {
-            throw new BusinessException(TagsCodes.NAME_IS_ALREADY_EXIST);
-        }
+
         tagPersistence.updateTag(tagId, tag);
         return tagPersistence.findById(tagId);
     }

@@ -95,13 +95,9 @@ public class TagsControllerTest extends TestBase {
                 .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
     }
 
-    @Scenario("更新标签>当用户更新标签时,如果同一看板下,已经存在相同名称,则不允许创建")
+    @Scenario("创建标签>当用户创建标签时,如果同一看板下,已经存在相同名称,则不允许创建")
     @Test
     public void notAllowedIfTagNameIsAlreadyExist() throws Exception {
-        dbPreparation.table("kb_tag")
-                .names("id,name,color,author,board_id")
-                .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
-
         dbPreparation.table("kb_tag")
                 .names("id,name,color,author,board_id")
                 .values("fooId-other", "tag-name-new", "tag-color", "someone", "boardId-foo").exec();
@@ -110,10 +106,28 @@ public class TagsControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/boards/boardId-foo/tags/fooId")
+                .post("/boards/boardId-foo/tags")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(TagsCodes.NAME_IS_ALREADY_EXIST.code()))
                 .body("message", equalTo(TagsCodes.NAME_IS_ALREADY_EXIST.message()));
+    }
+
+    @Scenario("创建标签>当用户创建签时,如果同一看板下,已经存在相同颜色,则不允许创建")
+    @Test
+    public void notAllowedIfTagColorIsAlreadyExist() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId-other", "tag-name", "tag-color", "someone", "boardId-foo").exec();
+
+        given().body("{\"name\":\"tag-name-new\",\"color\":\"tag-color\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/boardId-foo/tags")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(TagsCodes.COLOR_IS_ALREADY_EXIST.code()))
+                .body("message", equalTo(TagsCodes.COLOR_IS_ALREADY_EXIST.message()));
     }
 }
