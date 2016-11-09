@@ -37,7 +37,7 @@ public class TagsController {
     }
 
     @RequestMapping(value = "/boards/{boardId}/tags", method = RequestMethod.GET)
-    public HttpEntity loadTagsByUserName(@PathVariable("boardId") String boardId) throws IOException {
+    public HttpEntity loadTagsByBoard(@PathVariable("boardId") String boardId) throws IOException {
         List<Tag> tags = tagsService.loadTagsByBoard(boardId);
         return Response.build(new TagsResource(tags, boardId));
     }
@@ -49,7 +49,7 @@ public class TagsController {
     }
 
     @RequestMapping(value = "/boards/{boardId}/tags/{tagId}", method = RequestMethod.DELETE)
-    public HttpEntity deletePersonalTag(@PathVariable("boardId") String boardId, @PathVariable("tagId") String tagId) throws IOException {
+    public HttpEntity deleteTag(@PathVariable("boardId") String boardId, @PathVariable("tagId") String tagId) throws IOException {
         tagsService.deleteTag(boardId, tagId);
         return Response.build(new TagsResource(boardId));
     }

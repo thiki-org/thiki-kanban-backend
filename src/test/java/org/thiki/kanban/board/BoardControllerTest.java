@@ -36,6 +36,7 @@ public class BoardControllerTest extends TestBase {
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
+                .body("_links.tags.href", equalTo("http://localhost:8007/boards/fooId/tags"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
     }
 

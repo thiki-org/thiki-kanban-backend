@@ -18,7 +18,7 @@ public class TagResource extends RestResource {
             Link selfLink = linkTo(methodOn(TagsController.class).findById(userName, tag.getId())).withSelfRel();
             this.add(selfLink);
 
-            Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByUserName(userName)).withRel("tags");
+            Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(userName)).withRel("tags");
             this.add(tagsLink);
         }
     }
