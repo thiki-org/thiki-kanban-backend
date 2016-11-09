@@ -68,7 +68,7 @@ public class TagsControllerTest extends TestBase {
                 .names("id,name,color,author,board_id")
                 .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
 
-        given().body("{\"name\":\"tag-name-new\",\"color\":\"tag-color-new\"}")
+        given().body("{\"name\":\"tag-name-new\",\"color\":\"color-new\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -76,7 +76,7 @@ public class TagsControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("tag-name-new"))
-                .body("color", equalTo("tag-color-new"))
+                .body("color", equalTo("color-new"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/fooId"))
                 .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
     }
@@ -103,7 +103,7 @@ public class TagsControllerTest extends TestBase {
                 .names("id,name,color,author,board_id")
                 .values("fooId-other", "tag-name-new", "tag-color", "someone", "boardId-foo").exec();
 
-        given().body("{\"name\":\"tag-name-new\",\"color\":\"tag-color-new\"}")
+        given().body("{\"name\":\"tag-name-new\",\"color\":\"color-new\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -143,7 +143,7 @@ public class TagsControllerTest extends TestBase {
                 .names("id,name,color,author,board_id")
                 .values("fooId-other", "tag-name-new", "tag-color", "someone", "boardId-foo").exec();
 
-        given().body("{\"name\":\"tag-name-new\",\"color\":\"tag-color-new\"}")
+        given().body("{\"name\":\"tag-name-new\",\"color\":\"color-new\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -165,7 +165,7 @@ public class TagsControllerTest extends TestBase {
                 .names("id,name,color,author,board_id")
                 .values("fooId-other", "tag-name", "tag-color", "someone", "boardId-foo").exec();
 
-        given().body("{\"name\":\"tag-name\",\"color\":\"tag-color-new\"}")
+        given().body("{\"name\":\"tag-name\",\"color\":\"color-new\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -184,7 +184,7 @@ public class TagsControllerTest extends TestBase {
                 .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
 
         given().header("userName", userName)
-                .param("fromBoardId", "otherBoardId")
+                .param("sourceBoardId", "otherBoardId")
                 .post("/boards/boardId-foo/tags/clone")
                 .then()
                 .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
@@ -209,14 +209,13 @@ public class TagsControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .param("fromBoardId", "otherBoardId")
+                .param("sourceBoardId", "otherBoardId")
                 .post("/boards/boardId-foo/tags/clone")
                 .then()
                 .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
 
         assertEquals(2, jdbcTemplate.queryForList("SELECT * FROM kb_tag WHERE board_id='boardId-foo' AND delete_status=0").size());
     }
-
 
     @Scenario("复制标签>若用未提供来源看板信息,则不允许复制并告知客户端错误")
     @Test

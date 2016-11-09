@@ -16,10 +16,12 @@ public class Tag {
     @NotEmpty(message = TagsCodes.nameIsRequired)
     @Length(max = 20, message = TagsCodes.nameIsInvalid)
     private String name;
+
     @NotNull(message = TagsCodes.colorIsRequired)
     @NotEmpty(message = TagsCodes.colorIsRequired)
-    @Length(max = 0, message = TagsCodes.colorIsInvalid)
+    @Length(max = 10, message = TagsCodes.colorIsInvalid)
     private String color;
+
     private String creationTime;
     private String modificationTime;
 
