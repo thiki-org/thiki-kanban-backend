@@ -26,7 +26,7 @@
 
     <select id="isAlreadyAssigned" parameterType="java.lang.String" resultType="java.lang.Boolean">
         SELECT count(*) FROM kb_card_assignment
-        WHERE card_id= #{cardId} AND  assignee=#{assignee} AND delete_status=0
+        WHERE card_id= #{cardId} AND assignee=#{assignee} AND delete_status=0
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">

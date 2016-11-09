@@ -10,7 +10,7 @@ public enum CardsCodes {
     CODE_IS_ALREADY_EXISTS("002", "当前看板下该编号已经存在,请使用其他编号。");
     public static final String summaryIsRequired = "卡片概述不能为空。";
     public static final String summaryIsInvalid = "卡片概述长度超限,请保持在50个字符以内。";
-    public static final String codeIsInvalid="编号长度超长。";
+    public static final String codeIsInvalid = "编号长度超长。";
     private String code;
     private String message;
 

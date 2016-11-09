@@ -88,6 +88,7 @@ public class WorktileControllerTest extends TestBase {
 
         assertEquals("任务名称", jdbcTemplate.queryForObject("select summary from kb_card where author='someone'", String.class));
     }
+
     @Scenario("数据导入>新建tasks后,导入todos")
     @Test
     public void importTodos() {
@@ -108,6 +109,7 @@ public class WorktileControllerTest extends TestBase {
         assertEquals("todo", jdbcTemplate.queryForObject("select summary from kb_acceptance_criterias where card_id='fooId' AND author='someone'", String.class));
         assertEquals("TRUE", jdbcTemplate.queryForObject("select finished from kb_acceptance_criterias where card_id='fooId' AND author='someone'", String.class));
     }
+
     @Scenario("数据导入>如果文件长度为空,则抛出异常")
     @Test
     public void throwExceptionIfFileContentIsEmpty() {

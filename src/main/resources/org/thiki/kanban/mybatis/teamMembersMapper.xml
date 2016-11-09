@@ -27,7 +27,8 @@
 
     <select id="findTeams" parameterType="java.lang.String"
             resultType="org.thiki.kanban.teams.team.Team">
-        SELECT team.id AS id,team.name AS name FROM kb_team team LEFT JOIN kb_team_members members ON team.id=members.team_id WHERE members.member=#{userName} AND team.delete_status=0 AND members.delete_status=0
+        SELECT team.id AS id,team.name AS name FROM kb_team team LEFT JOIN kb_team_members members ON
+        team.id=members.team_id WHERE members.member=#{userName} AND team.delete_status=0 AND members.delete_status=0
     </select>
 
     <delete id="leaveTeam" parameterType="java.util.Map" flushCache="true">

@@ -33,7 +33,8 @@
     </select>
 
     <select id="isCodeAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_card WHERE id!= #{cardId} AND code=#{code} AND procedure_id=#{procedureId} AND delete_status=0
+        SELECT count(*) FROM kb_card WHERE id!= #{cardId} AND code=#{code} AND procedure_id=#{procedureId} AND
+        delete_status=0
     </select>
 
     <select id="findByProcedureId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
