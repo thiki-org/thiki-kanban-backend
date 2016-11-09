@@ -10,13 +10,11 @@ import java.util.List;
  */
 @Repository
 public interface TagPersistence {
-    Integer addTag(@Param("userName") String userName, @Param("tag") Tag tag);
+    Integer addTag(@Param("boardId") String boardId, @Param("tag") Tag tag);
 
     Tag findById(String id);
 
-    List<Tag> loadTagsByUserName(@Param("userName") String userName);
-
-    Integer deleteAcceptanceCriteria(String acceptanceCriteriaId);
+    List<Tag> loadTagsByBoard(@Param("boardId") String boardId);
 
     Integer resort(@Param("tag") Tag tag);
 

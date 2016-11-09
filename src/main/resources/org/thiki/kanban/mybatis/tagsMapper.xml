@@ -5,9 +5,9 @@
 <mapper namespace="org.thiki.kanban.tag.TagPersistence">
     <insert id="addTag" parameterType="org.thiki.kanban.tag.Tag">
         INSERT INTO
-        kb_tag(id,name,color, owner, author)
+        kb_tag(id,name,color, board_id, author)
         VALUES
-        (#{tag.id},#{tag.name},#{tag.color},#{userName},#{userName})
+        (#{tag.id},#{tag.name},#{tag.color},#{boardId},#{boardId})
     </insert>
     <update id="updateTag" parameterType="java.util.Map"
             flushCache="true">
@@ -21,9 +21,9 @@
         SELECT * FROM kb_tag WHERE id= #{id} AND delete_status=0
     </select>
 
-    <select id="loadTagsByUserName" parameterType="java.lang.String"
+    <select id="loadTagsByBoard" parameterType="java.lang.String"
             resultType="org.thiki.kanban.tag.Tag">
-        SELECT * FROM kb_tag WHERE owner= #{userName} AND delete_status=0
+        SELECT * FROM kb_tag WHERE board_id= #{boardId} AND delete_status=0
     </select>
 
     <delete id="deleteTag" parameterType="java.lang.String" flushCache="true">

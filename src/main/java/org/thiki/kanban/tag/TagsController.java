@@ -17,33 +17,33 @@ public class TagsController {
     @Autowired
     private TagsService tagsService;
 
-    @RequestMapping(value = "/{userName}/tags", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Tag tag, @PathVariable("userName") String userName) throws IOException {
-        Tag savedTag = tagsService.createTag(userName, tag);
+    @RequestMapping(value = "/boards/{boardId}/tags", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Tag tag, @PathVariable("boardId") String boardId) throws IOException {
+        Tag savedTag = tagsService.createTag(boardId, tag);
 
-        return Response.post(new TagResource(savedTag, userName));
+        return Response.post(new TagResource(savedTag, boardId));
     }
 
-    @RequestMapping(value = "/{userName}/tags/{tagId}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable("userName") String userName, @PathVariable("tagId") String tagId) throws IOException {
+    @RequestMapping(value = "/boards/{boardId}/tags/{tagId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable("boardId") String boardId, @PathVariable("tagId") String tagId) throws IOException {
         return null;
     }
 
-    @RequestMapping(value = "/{userName}/tags", method = RequestMethod.GET)
-    public HttpEntity loadTagsByUserName(@PathVariable("userName") String userName) throws IOException {
-        List<Tag> tags = tagsService.loadTagsByUserName(userName);
-        return Response.build(new TagsResource(tags, userName));
+    @RequestMapping(value = "/boards/{boardId}/tags", method = RequestMethod.GET)
+    public HttpEntity loadTagsByUserName(@PathVariable("boardId") String boardId) throws IOException {
+        List<Tag> tags = tagsService.loadTagsByBoard(boardId);
+        return Response.build(new TagsResource(tags, boardId));
     }
 
-    @RequestMapping(value = "/{userName}/tags/{tagId}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Tag tag, @PathVariable String userName, @PathVariable("tagId") String tagId) throws Exception {
-        Tag updatedTag = tagsService.updatePersonalTag(userName, tagId, tag);
-        return Response.build(new TagResource(updatedTag, userName));
+    @RequestMapping(value = "/boards/{boardId}/tags/{tagId}", method = RequestMethod.PUT)
+    public HttpEntity update(@RequestBody Tag tag, @PathVariable String boardId, @PathVariable("tagId") String tagId) throws Exception {
+        Tag updatedTag = tagsService.updateTag(boardId, tagId, tag);
+        return Response.build(new TagResource(updatedTag, boardId));
     }
 
-    @RequestMapping(value = "/{userName}/tags/{tagId}", method = RequestMethod.DELETE)
-    public HttpEntity deletePersonalTag(@PathVariable("userName") String userName, @PathVariable("tagId") String tagId) throws IOException {
-        tagsService.deletePersonalTag(userName, tagId);
-        return Response.build(new TagsResource(userName));
+    @RequestMapping(value = "/boards/{boardId}/tags/{tagId}", method = RequestMethod.DELETE)
+    public HttpEntity deletePersonalTag(@PathVariable("boardId") String boardId, @PathVariable("tagId") String tagId) throws IOException {
+        tagsService.deleteTag(boardId, tagId);
+        return Response.build(new TagsResource(boardId));
     }
 }

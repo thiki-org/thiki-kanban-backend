@@ -23,7 +23,6 @@ public class TagsControllerTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author) VALUES ('card-fooId','this is the first card.','someone')");
     }
 
     @Scenario("创建个人标签>用户可以创建个人标签,以便可以给自己的卡片归纳属性")
@@ -33,69 +32,66 @@ public class TagsControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/someone/tags")
+                .post("/boards/boardId-foo/tags")
                 .then()
                 .statusCode(201)
                 .body("name", equalTo("tag-name"))
                 .body("color", equalTo("tag-color"))
-                .body("owner", equalTo(userName))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/tags/fooId"))
-                .body("_links.tags.href", equalTo("http://localhost:8007/someone/tags"));
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/fooId"))
+                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
     }
 
     @Scenario("获取个人标签>用户为卡片创建个人标签后,可以查看")
     @Test
     public void loadPersonalTags() throws Exception {
         dbPreparation.table("kb_tag")
-                .names("id,name,color,author,owner")
-                .values("fooId", "tag-name", "tag-color", "someone", "someone").exec();
+                .names("id,name,color,author,board_id")
+                .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
 
         given().header("userName", userName)
                 .when()
-                .get("/someone/tags")
+                .get("/boards/boardId-foo/tags")
                 .then()
                 .statusCode(200)
                 .body("tags[0].name", equalTo("tag-name"))
                 .body("tags[0].color", equalTo("tag-color"))
-                .body("tags[0].owner", equalTo(userName))
-                .body("tags[0]._links.self.href", equalTo("http://localhost:8007/someone/tags/fooId"))
-                .body("tags[0]._links.tags.href", equalTo("http://localhost:8007/someone/tags"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/tags"));
+                .body("tags[0]._links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/fooId"))
+                .body("tags[0]._links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"))
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
     }
 
     @Scenario("更新个人标签>用户创建标签后,可以更新该标签的相关属性")
     @Test
     public void updatePersonalTag() throws Exception {
         dbPreparation.table("kb_tag")
-                .names("id,name,color,author,owner")
-                .values("fooId", "tag-name", "tag-color", "someone", "someone").exec();
+                .names("id,name,color,author,board_id")
+                .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
 
         given().body("{\"name\":\"tag-name-new\",\"color\":\"tag-color-new\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/someone/tags/fooId")
+                .put("/boards/boardId-foo/tags/fooId")
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("tag-name-new"))
                 .body("color", equalTo("tag-color-new"))
-                .body("owner", equalTo(userName))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/tags/fooId"))
-                .body("_links.tags.href", equalTo("http://localhost:8007/someone/tags"));
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/fooId"))
+                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
     }
 
     @Scenario("删除个人标签>针对不再使用的标签,用户可以删除")
     @Test
     public void deletePersonalTag() throws Exception {
         dbPreparation.table("kb_tag")
-                .names("id,name,color,author,owner")
-                .values("fooId", "tag-name", "tag-color", "someone", "someone").exec();
+                .names("id,name,color,author,board_id")
+                .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
 
         given().header("userName", userName)
                 .when()
-                .delete("/someone/tags/fooId")
+                .delete("/boards/boardId-foo/tags/fooId")
                 .then()
                 .statusCode(200)
-                .body("_links.tags.href", equalTo("http://localhost:8007/someone/tags"));
+                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
     }
 }

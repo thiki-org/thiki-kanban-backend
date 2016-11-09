@@ -14,22 +14,22 @@ public class TagsService {
     @Resource
     private TagPersistence tagPersistence;
 
-    public Tag createTag(String userName, Tag tag) {
-        tagPersistence.addTag(userName, tag);
+    public Tag createTag(String boardId, Tag tag) {
+        tagPersistence.addTag(boardId, tag);
         return tagPersistence.findById(tag.getId());
     }
 
-    public List<Tag> loadTagsByUserName(String userName) {
-        List<Tag> tags = tagPersistence.loadTagsByUserName(userName);
+    public List<Tag> loadTagsByBoard(String boardId) {
+        List<Tag> tags = tagPersistence.loadTagsByBoard(boardId);
         return tags;
     }
 
-    public Tag updatePersonalTag(String userName, String tagId, Tag tag) {
+    public Tag updateTag(String boardId, String tagId, Tag tag) {
         tagPersistence.updateTag(tagId, tag);
         return tagPersistence.findById(tagId);
     }
 
-    public Integer deletePersonalTag(String userName, String tagId) {
+    public Integer deleteTag(String boardId, String tagId) {
         return tagPersistence.deleteTag(tagId);
     }
 }
