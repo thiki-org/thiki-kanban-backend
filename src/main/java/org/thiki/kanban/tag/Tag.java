@@ -12,12 +12,14 @@ public class Tag {
 
     private String id;
 
-    @NotNull(message = TagsCodes.summaryIsRequired)
-    @NotEmpty(message = TagsCodes.summaryIsRequired)
-    @Length(max = 200, message = TagsCodes.summaryIsInvalid)
+    @NotNull(message = TagsCodes.nameIsRequired)
+    @NotEmpty(message = TagsCodes.nameIsRequired)
+    @Length(max = 20, message = TagsCodes.nameIsInvalid)
     private String name;
+    @NotNull(message = TagsCodes.colorIsRequired)
+    @NotEmpty(message = TagsCodes.colorIsRequired)
+    @Length(max = 0, message = TagsCodes.colorIsInvalid)
     private String color;
-    private String owner;
     private String creationTime;
     private String modificationTime;
 
@@ -35,14 +37,6 @@ public class Tag {
 
     public void setModificationTime(String modificationTime) {
         this.modificationTime = modificationTime;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
     }
 
     public String getId() {
