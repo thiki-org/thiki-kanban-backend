@@ -4,17 +4,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.thiki.kanban.tag.TagPersistence">
     <insert id="addTag" parameterType="org.thiki.kanban.tag.Tag">
-        INSERT
-        INTO
+        INSERT INTO
         kb_tag(id,name,color, owner, author)
         VALUES
         (#{tag.id},#{tag.name},#{tag.color},#{userName},#{userName})
     </insert>
-    <update id="updateAcceptCriteria" parameterType="org.thiki.kanban.tag.Tag"
+    <update id="updateTag" parameterType="java.util.Map"
             flushCache="true">
         UPDATE kb_tag SET
         name=#{tag.name},
-        finished=#{tag.finished}
+        color=#{tag.color}
         WHERE id=#{tagId} AND delete_status=0
     </update>
     <select id="findById" parameterType="java.lang.String"
@@ -27,13 +26,7 @@
         SELECT * FROM kb_tag WHERE owner= #{userName} AND delete_status=0
     </select>
 
-    <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">
+    <delete id="deleteTag" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_tag SET delete_status=1 WHERE id=#{tagId}
     </delete>
-    <update id="resort" parameterType="org.thiki.kanban.tag.Tag"
-            flushCache="true">
-        UPDATE kb_tag SET
-        sort_number=#{tag.sortNumber}
-        WHERE id=#{tag.id} AND delete_status=0
-    </update>
 </mapper>

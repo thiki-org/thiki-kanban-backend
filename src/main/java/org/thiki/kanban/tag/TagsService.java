@@ -28,11 +28,6 @@ public class TagsService {
         return tagPersistence.findById(acceptanceCriteriaId);
     }
 
-    public Tag updateAcceptCriteria(String acceptanceCriteriaId, Tag tag) {
-        tagPersistence.updateAcceptCriteria(acceptanceCriteriaId, tag);
-        return tagPersistence.findById(acceptanceCriteriaId);
-    }
-
     public Integer removeAcceptanceCriteria(String acceptanceCriteriaId) {
         return tagPersistence.deleteAcceptanceCriteria(acceptanceCriteriaId);
     }
@@ -42,5 +37,10 @@ public class TagsService {
             tagPersistence.resort(tag);
         }
         return tagPersistence.loadTagsByUserName(cardId);
+    }
+
+    public Tag updatePersonalTag(String userName, String tagId, Tag tag) {
+        tagPersistence.updateTag(tagId, tag);
+        return tagPersistence.findById(tagId);
     }
 }

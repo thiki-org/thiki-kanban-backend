@@ -1,4 +1,4 @@
-package org.thiki.kanban.board.procedure;
+package org.thiki.kanban.procedure;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package org.thiki.kanban.board.procedure;
+package org.thiki.kanban.procedure;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

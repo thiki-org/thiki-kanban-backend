@@ -62,4 +62,25 @@ public class TagsControllerTest extends TestBase {
                 .body("tags[0]._links.tags.href", equalTo("http://localhost:8007/someone/tags"))
                 .body("_links.self.href", equalTo("http://localhost:8007/someone/tags"));
     }
+
+    @Scenario("更新个人标签>用户创建标签后,可以更新该标签的相关属性")
+    @Test
+    public void updatePersonalTag() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,owner")
+                .values("fooId", "tag-name", "tag-color", "someone", "someone").exec();
+
+        given().body("{\"name\":\"tag-name-new\",\"color\":\"tag-color-new\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/someone/tags/fooId")
+                .then()
+                .statusCode(200)
+                .body("name", equalTo("tag-name-new"))
+                .body("color", equalTo("tag-color-new"))
+                .body("owner", equalTo(userName))
+                .body("_links.self.href", equalTo("http://localhost:8007/someone/tags/fooId"))
+                .body("_links.tags.href", equalTo("http://localhost:8007/someone/tags"));
+    }
 }

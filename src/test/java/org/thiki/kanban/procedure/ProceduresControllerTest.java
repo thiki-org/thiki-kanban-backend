@@ -1,4 +1,4 @@
-package org.thiki.kanban.board.procedure;
+package org.thiki.kanban.procedure;
 
 import com.jayway.restassured.http.ContentType;
 import org.junit.Test;

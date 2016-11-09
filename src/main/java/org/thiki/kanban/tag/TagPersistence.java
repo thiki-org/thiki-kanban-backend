@@ -16,9 +16,9 @@ public interface TagPersistence {
 
     List<Tag> loadTagsByUserName(@Param("userName") String userName);
 
-    Integer updateAcceptCriteria(@Param("acceptanceCriteriaId") String acceptanceCriteriaId, @Param("tag") Tag tag);
-
     Integer deleteAcceptanceCriteria(String acceptanceCriteriaId);
 
     Integer resort(@Param("tag") Tag tag);
+
+    Integer updateTag(@Param("tagId") String tagId, @Param("tag") Tag tag);
 }

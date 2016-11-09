@@ -1,4 +1,4 @@
-package org.thiki.kanban.board.procedure;
+package org.thiki.kanban.procedure;
 
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.card.CardsController;

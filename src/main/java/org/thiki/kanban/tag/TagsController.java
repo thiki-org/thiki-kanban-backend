@@ -34,4 +34,10 @@ public class TagsController {
         List<Tag> tags = tagsService.loadTagsByUserName(userName);
         return Response.build(new TagsResource(tags, userName));
     }
+
+    @RequestMapping(value = "/{userName}/tags/{tagId}", method = RequestMethod.PUT)
+    public HttpEntity update(@RequestBody Tag tag, @PathVariable String userName, @PathVariable("tagId") String tagId) throws Exception {
+        Tag updatedTag = tagsService.updatePersonalTag(userName, tagId, tag);
+        return Response.build(new TagResource(updatedTag, userName));
+    }
 }

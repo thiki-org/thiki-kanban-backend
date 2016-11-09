@@ -1,4 +1,4 @@
-package org.thiki.kanban.board.procedure;
+package org.thiki.kanban.procedure;
 
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
