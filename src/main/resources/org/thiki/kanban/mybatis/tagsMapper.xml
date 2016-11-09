@@ -32,11 +32,22 @@
 
     <select id="isNameDuplicate" parameterType="java.lang.String"
             resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_tag WHERE board_id= #{boardId} AND name=#{name} AND delete_status=0
+        SELECT count(*) FROM kb_tag WHERE board_id= #{boardId}
+        <if test="tag.id!=null">
+            AND id! = #{tag.id},
+        </if>
+
+        AND name=#{tag.name} AND delete_status=0
     </select>
 
     <select id="isColorDuplicate" parameterType="java.lang.String"
             resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_tag WHERE board_id= #{boardId} AND color=#{color} AND delete_status=0
+        SELECT count(*) FROM kb_tag WHERE board_id= #{boardId}
+
+        <if test="tag.id!=null">
+            AND id! = #{tag.id},
+        </if>
+
+        AND color=#{tag.color} AND delete_status=0
     </select>
 </mapper>

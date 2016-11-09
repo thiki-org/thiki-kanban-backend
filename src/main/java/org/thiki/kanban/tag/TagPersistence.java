@@ -22,6 +22,7 @@ public interface TagPersistence {
 
     Integer deleteTag(String tagId);
 
-    boolean isNameDuplicate(@Param("boardId") String boardId, @Param("name") String name);
-    boolean isColorDuplicate(@Param("boardId") String boardId, @Param("color") String name);
+    boolean isNameDuplicate(@Param("boardId") String boardId, @Param("tag") Tag tag);
+
+    boolean isColorDuplicate(@Param("boardId") String boardId, @Param("tag") Tag tag);
 }

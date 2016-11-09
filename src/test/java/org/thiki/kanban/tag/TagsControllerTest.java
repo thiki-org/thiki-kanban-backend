@@ -130,4 +130,48 @@ public class TagsControllerTest extends TestBase {
                 .body("code", equalTo(TagsCodes.COLOR_IS_ALREADY_EXIST.code()))
                 .body("message", equalTo(TagsCodes.COLOR_IS_ALREADY_EXIST.message()));
     }
+
+    @Scenario("更新标签>当用户更新标签时,如果同一看板下,已经存在相同名称,则不允许创建")
+    @Test
+    public void notAllowedIfTagNameIsAlreadyExistWhenUpdatingTag() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
+
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId-other", "tag-name-new", "tag-color", "someone", "boardId-foo").exec();
+
+        given().body("{\"name\":\"tag-name-new\",\"color\":\"tag-color-new\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/tags/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(TagsCodes.NAME_IS_ALREADY_EXIST.code()))
+                .body("message", equalTo(TagsCodes.NAME_IS_ALREADY_EXIST.message()));
+    }
+
+    @Scenario("更新标签>当用户更新标签时,如果同一看板下,已经存在相同颜色,则不允许创建")
+    @Test
+    public void notAllowedIfTagColorIsAlreadyExistWhenUpdatingTag() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
+
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId-other", "tag-name", "tag-color", "someone", "boardId-foo").exec();
+
+        given().body("{\"name\":\"tag-name\",\"color\":\"tag-color-new\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/tags/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(TagsCodes.NAME_IS_ALREADY_EXIST.code()))
+                .body("message", equalTo(TagsCodes.NAME_IS_ALREADY_EXIST.message()));
+    }
 }
