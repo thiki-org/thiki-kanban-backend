@@ -132,8 +132,6 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .values("fooId", "AC-summary", "card-fooId", "someone").exec();
 
         given().header("userName", userName)
-                .contentType(ContentType.JSON)
-                .body("{\"summary\":\"new-AC-summary\",\"finished\":\"true\"}")
                 .when()
                 .delete("/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId")
                 .then()
