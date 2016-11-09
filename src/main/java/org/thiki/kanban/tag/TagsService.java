@@ -47,4 +47,11 @@ public class TagsService {
     public Integer deleteTag(String boardId, String tagId) {
         return tagPersistence.deleteTag(tagId);
     }
+
+    public void cloneTagsFromOtherBoard(String boardId, String fromBoardId) {
+        List<Tag> tags = loadTagsByBoard(fromBoardId);
+        for (Tag tag : tags) {
+            tagPersistence.addTag(boardId, tag);
+        }
+    }
 }

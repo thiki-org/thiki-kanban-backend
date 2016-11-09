@@ -25,4 +25,6 @@ public interface TagPersistence {
     boolean isNameDuplicate(@Param("boardId") String boardId, @Param("tag") Tag tag);
 
     boolean isColorDuplicate(@Param("boardId") String boardId, @Param("tag") Tag tag);
+
+    void cloneTagsFromOtherBoard(@Param("boardId") String boardId, @Param("fromBoardId") String fromBoardId);
 }

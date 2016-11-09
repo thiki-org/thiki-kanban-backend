@@ -11,6 +11,7 @@ import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 
@@ -27,7 +28,7 @@ public class TagsControllerTest extends TestBase {
 
     @Scenario("创建标签>用户可以创建标签,以便可以给看板的卡片归纳属性")
     @Test
-    public void createPersonalTag() throws Exception {
+    public void createTag() throws Exception {
         given().body("{\"name\":\"tag-name\",\"color\":\"tag-color\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -43,7 +44,7 @@ public class TagsControllerTest extends TestBase {
 
     @Scenario("获取标签>用户为卡片创建标签后,可以查看")
     @Test
-    public void loadPersonalTags() throws Exception {
+    public void loadTags() throws Exception {
         dbPreparation.table("kb_tag")
                 .names("id,name,color,author,board_id")
                 .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
@@ -62,7 +63,7 @@ public class TagsControllerTest extends TestBase {
 
     @Scenario("更新标签>用户创建标签后,可以更新该标签的相关属性")
     @Test
-    public void updatePersonalTag() throws Exception {
+    public void updateTag() throws Exception {
         dbPreparation.table("kb_tag")
                 .names("id,name,color,author,board_id")
                 .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
@@ -82,7 +83,7 @@ public class TagsControllerTest extends TestBase {
 
     @Scenario("删除标签>针对不再使用的标签,用户可以删除")
     @Test
-    public void deletePersonalTag() throws Exception {
+    public void deleteTag() throws Exception {
         dbPreparation.table("kb_tag")
                 .names("id,name,color,author,board_id")
                 .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
@@ -173,5 +174,22 @@ public class TagsControllerTest extends TestBase {
                 .statusCode(400)
                 .body("code", equalTo(TagsCodes.NAME_IS_ALREADY_EXIST.code()))
                 .body("message", equalTo(TagsCodes.NAME_IS_ALREADY_EXIST.message()));
+    }
+
+    @Scenario("复制标签>用户可以从某一看板中复制标签")
+    @Test
+    public void copyTagsFromOtherBoard() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("fooId", "tag-name", "tag-color", "someone", "boardId-foo").exec();
+
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/boardId-foo/tags/clone/otherBoardId")
+                .then()
+                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
+
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_tag WHERE board_id='boardId-foo' AND delete_status=0").size());
     }
 }
