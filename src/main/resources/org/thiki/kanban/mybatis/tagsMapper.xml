@@ -23,7 +23,7 @@
 
     <select id="loadTagsByBoard" parameterType="java.lang.String"
             resultType="org.thiki.kanban.tag.Tag">
-        SELECT * FROM kb_tag WHERE board_id= #{boardId} AND delete_status=0
+        SELECT * FROM kb_tag WHERE board_id= #{boardId} AND delete_status=0 ORDER by creation_time ASC
     </select>
 
     <delete id="deleteTag" parameterType="java.lang.String" flushCache="true">
