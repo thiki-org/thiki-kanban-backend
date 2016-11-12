@@ -34,7 +34,7 @@
             resultType="java.lang.Boolean">
         SELECT count(*) FROM kb_tag WHERE board_id= #{boardId}
         <if test="tag.id!=null">
-            AND id! = #{tag.id},
+            AND id != #{tag.id}
         </if>
 
         AND name=#{tag.name} AND delete_status=0
@@ -45,7 +45,7 @@
         SELECT count(*) FROM kb_tag WHERE board_id= #{boardId}
 
         <if test="tag.id!=null">
-            AND id! = #{tag.id},
+            AND id != #{tag.id}
         </if>
 
         AND color=#{tag.color} AND delete_status=0

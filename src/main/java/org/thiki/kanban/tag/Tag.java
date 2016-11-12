@@ -19,7 +19,7 @@ public class Tag {
 
     @NotNull(message = TagsCodes.colorIsRequired)
     @NotEmpty(message = TagsCodes.colorIsRequired)
-    @Length(max = 10, message = TagsCodes.colorIsInvalid)
+    @Length(max = 20, message = TagsCodes.colorIsInvalid)
     private String color;
 
     private String creationTime;

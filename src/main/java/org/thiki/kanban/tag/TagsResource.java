@@ -15,16 +15,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class TagsResource extends RestResource {
 
-    public TagsResource(List<Tag> tags, String userName) throws IOException {
+    public TagsResource(List<Tag> tags, String boardId) throws IOException {
         List<TagResource> tagResources = new ArrayList<>();
         for (Tag tag : tags) {
-            TagResource tagResource = new TagResource(tag, userName);
+            TagResource tagResource = new TagResource(tag, boardId);
             tagResources.add(tagResource);
         }
 
         this.buildDataObject("tags", tagResources);
-        Link selfLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(userName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(boardId)).withSelfRel();
         this.add(selfLink);
+
+        Link cloneLink = linkTo(methodOn(TagsController.class).cloneTagsFromOtherBoard(boardId, "")).withRel("clone");
+        this.add(cloneLink);
     }
 
     public TagsResource(String userName) throws IOException {

@@ -58,6 +58,7 @@ public class TagsControllerTest extends TestBase {
                 .body("tags[0].color", equalTo("tag-color"))
                 .body("tags[0]._links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/fooId"))
                 .body("tags[0]._links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"))
+                .body("_links.clone.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/clone?sourceBoardId="))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
     }
 
