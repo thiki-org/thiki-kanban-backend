@@ -41,16 +41,16 @@ public class CardTagsControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/procedures/procedures-fooId/cards/card-fooId/tags")
+                .post("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags")
                 .then()
                 .statusCode(201)
                 .body("cardTags[0].name", equalTo("tag-name"))
                 .body("cardTags[0].color", equalTo("tag-color"))
-                .body("cardTags[0]._links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/tags/fooId"))
-                .body("cardTags[0]._links.tags.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/tags"))
-                .body("cardTags[0]._links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
-                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/tags"))
-                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
+                .body("cardTags[0]._links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags/fooId"))
+                .body("cardTags[0]._links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
+                .body("cardTags[0]._links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
+                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"));
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE card_id='card-fooId' AND delete_status=0").size());
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE id='foo-cards-tags' AND delete_status=0").size());

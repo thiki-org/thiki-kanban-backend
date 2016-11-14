@@ -35,15 +35,15 @@ public class CommentControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/procedures/procedures-fooId/cards/card-fooId/comments")
+                .post("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments")
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("comment-summary"))
                 .body("author", equalTo(userName))
                 .body("publishTime", equalTo("刚刚"))
-                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
-                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
-                .body("_links.comments.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments"));
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
+                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.comments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments"));
     }
 
     @Scenario("创建评论>如果用户在创建评论时,未提供概述,则不允许创建")
@@ -53,7 +53,7 @@ public class CommentControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/procedures/procedures-fooId/cards/card-fooId/comments")
+                .post("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
@@ -69,16 +69,16 @@ public class CommentControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/procedures/procedures-fooId/cards/card-fooId/comments")
+                .get("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments")
                 .then()
                 .statusCode(200)
                 .body("comments[0].summary", equalTo("comment-summary"))
                 .body("comments[0].author", equalTo(userName))
-                .body("comments[0]._links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
-                .body("comments[0]._links.comments.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments"))
+                .body("comments[0]._links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
+                .body("comments[0]._links.comments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments"))
                 .body("comments[0]._links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
-                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments"))
-                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments"))
+                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"));
     }
 
     @Scenario("获取指定的评论>用户为卡片创建评论后,可以根据ID获取指定的评论")
@@ -90,14 +90,14 @@ public class CommentControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/procedures/procedures-fooId/cards/card-fooId/comments/fooId")
+                .get("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments/fooId")
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("comment-summary"))
                 .body("author", equalTo(userName))
-                .body("_links.self.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
-                .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"))
-                .body("_links.comments.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments"));
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
+                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.comments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments"));
     }
 
     @Scenario("删除指定的评论>用户为卡片创建评论后,可以删除指定的评论")
@@ -111,9 +111,9 @@ public class CommentControllerTest extends TestBase {
                 .contentType(ContentType.JSON)
                 .body("{\"summary\":\"new-comment-summary\",\"finished\":\"true\"}")
                 .when()
-                .delete("/procedures/procedures-fooId/cards/card-fooId/comments/fooId")
+                .delete("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments/fooId")
                 .then()
                 .statusCode(200)
-                .body("_links.comments.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId/comments"));
+                .body("_links.comments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments"));
     }
 }

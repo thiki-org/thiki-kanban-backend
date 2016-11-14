@@ -13,21 +13,21 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubt on 10/17/16.
  */
 public class AcceptanceCriteriaResource extends RestResource {
-    public AcceptanceCriteriaResource(AcceptanceCriteria acceptanceCriteria, String cardId, String procedureId) throws IOException {
+    public AcceptanceCriteriaResource(AcceptanceCriteria acceptanceCriteria, String boardId, String procedureId, String cardId) throws IOException {
         this.domainObject = acceptanceCriteria;
         if (acceptanceCriteria != null) {
-            Link selfLink = linkTo(methodOn(AcceptCriteriaController.class).findById(cardId, acceptanceCriteria.getId(), procedureId)).withSelfRel();
+            Link selfLink = linkTo(methodOn(AcceptCriteriaController.class).findById(boardId, procedureId, cardId, acceptanceCriteria.getId())).withSelfRel();
             this.add(selfLink);
-            Link acceptanceCriteriasLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(cardId, procedureId)).withRel("acceptanceCriterias");
+            Link acceptanceCriteriasLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, procedureId, cardId)).withRel("acceptanceCriterias");
             this.add(acceptanceCriteriasLink);
 
-            Link cardLink = linkTo(methodOn(CardsController.class).findById(procedureId, cardId)).withRel("card");
+            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId)).withRel("card");
             this.add(cardLink);
         }
     }
 
-    public AcceptanceCriteriaResource(String cardId, String procedureId) throws IOException {
-        Link acceptanceCriteriasLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(cardId, procedureId)).withRel("acceptanceCriterias");
+    public AcceptanceCriteriaResource(String boardId, String procedureId, String cardId) throws IOException {
+        Link acceptanceCriteriasLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId,procedureId,cardId)).withRel("acceptanceCriterias");
         this.add(acceptanceCriteriasLink);
     }
 }

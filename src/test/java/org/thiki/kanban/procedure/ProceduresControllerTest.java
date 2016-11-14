@@ -37,7 +37,7 @@ public class ProceduresControllerTest extends TestBase {
                 .body("author", equalTo(userName))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("_links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
+                .body("_links.cards.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId/cards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"));
     }
 
@@ -204,7 +204,7 @@ public class ProceduresControllerTest extends TestBase {
                 .body("procedures[0].creationTime", notNullValue())
                 .body("procedures[0]._links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("procedures[0]._links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))
-                .body("procedures[0]._links.cards.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
+                .body("procedures[0]._links.cards.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId/cards"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
                 .body("_links.sortNumbers.href", equalTo("http://localhost:8007/boards/feeId/procedures/sortNumbers"));
     }

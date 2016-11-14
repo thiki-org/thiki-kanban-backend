@@ -18,42 +18,42 @@ public class CardsController {
     @Autowired
     private CardsService cardsService;
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards", method = RequestMethod.GET)
-    public HttpEntity findByProcedureId(@PathVariable String procedureId) throws IOException {
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards", method = RequestMethod.GET)
+    public HttpEntity findByProcedureId(@PathVariable String boardId, @PathVariable String procedureId) throws IOException {
         List<Card> cardList = cardsService.findByProcedureId(procedureId);
-        return Response.build(new CardsResource(cardList, procedureId));
+        return Response.build(new CardsResource(cardList, boardId, procedureId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String procedureId, @PathVariable String id) throws IOException {
-        Card foundCard = cardsService.findById(id);
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws IOException {
+        Card foundCard = cardsService.findById(cardId);
 
-        return Response.build(new CardResource(foundCard, procedureId));
+        return Response.build(new CardResource(foundCard, boardId, procedureId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Card card, @PathVariable String procedureId, @PathVariable String cardId) throws IOException {
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.PUT)
+    public HttpEntity update(@RequestBody Card card, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws IOException {
         Card updatedCard = cardsService.update(cardId, card);
-        return Response.build(new CardResource(updatedCard, procedureId));
+        return Response.build(new CardResource(updatedCard, boardId, procedureId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String procedureId, @PathVariable String id) throws IOException {
-        cardsService.deleteById(id);
-        return Response.build(new CardResource(procedureId));
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws IOException {
+        cardsService.deleteById(cardId);
+        return Response.build(new CardResource(boardId, procedureId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Card card, @RequestHeader String userName, @PathVariable String procedureId) throws IOException {
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Card card, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String procedureId) throws IOException {
         Card savedCard = cardsService.create(userName, procedureId, card);
 
-        return Response.post(new CardResource(savedCard, procedureId));
+        return Response.post(new CardResource(savedCard, boardId, procedureId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/sortNumbers", method = RequestMethod.PUT)
-    public HttpEntity resortCards(@RequestBody List<Card> cards, @PathVariable String procedureId) throws IOException {
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/sortNumbers", method = RequestMethod.PUT)
+    public HttpEntity resortCards(@RequestBody List<Card> cards, @PathVariable String boardId, @PathVariable String procedureId) throws IOException {
         List<Card> sortedCards = cardsService.resortCards(cards, procedureId);
 
-        return Response.build(new CardsResource(sortedCards, procedureId));
+        return Response.build(new CardsResource(sortedCards, boardId, procedureId));
     }
 }

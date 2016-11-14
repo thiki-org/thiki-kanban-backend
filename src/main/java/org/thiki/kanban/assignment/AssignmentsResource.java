@@ -15,18 +15,18 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubitao on 6/16/16.
  */
 public class AssignmentsResource extends RestResource {
-    public AssignmentsResource(List<Assignment> assignmentList, String procedureId, String cardId) throws IOException {
+    public AssignmentsResource(List<Assignment> assignmentList, String boardId, String procedureId, String cardId) throws IOException {
         List<AssignmentResource> assignmentResources = new ArrayList<>();
         for (Assignment assignment : assignmentList) {
-            AssignmentResource assignmentResource = new AssignmentResource(assignment, procedureId, cardId);
+            AssignmentResource assignmentResource = new AssignmentResource(assignment, boardId, procedureId, cardId);
             assignmentResources.add(assignmentResource);
         }
 
         this.buildDataObject("assignments", assignmentResources);
-        Link selfLink = linkTo(methodOn(AssignmentController.class).findByCardId(procedureId, cardId)).withSelfRel();
+        Link selfLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId,procedureId, cardId)).withSelfRel();
         this.add(selfLink);
 
-        Link cardLink = linkTo(methodOn(CardsController.class).findById(procedureId, cardId)).withRel("card");
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId)).withRel("card");
         this.add(cardLink);
     }
 }

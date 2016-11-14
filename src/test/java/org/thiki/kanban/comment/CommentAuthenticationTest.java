@@ -29,7 +29,7 @@ public class CommentAuthenticationTest extends AuthenticationTestBase {
                 .contentType(ContentType.JSON)
                 .body("{\"summary\":\"new-comment-summary\",\"finished\":\"true\"}")
                 .when()
-                .delete("/procedures/procedures-fooId/cards/card-fooId/comments/fooId")
+                .delete("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments/fooId")
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(CommentCodes.AUTH_THE_COMMENT_YOU_WANT_TO_DELETE_IS_NOT_YOURS.code()))
@@ -48,7 +48,7 @@ public class CommentAuthenticationTest extends AuthenticationTestBase {
                 .values("fooId", "comment-summary", "card-fooId", "others", "2016-11-01 12:36:00").exec();
         given().header("userName", userName)
                 .when()
-                .get("/procedures/procedures-fooId/cards/card-fooId/comments")
+                .get("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments")
                 .then()
                 .statusCode(200)
 

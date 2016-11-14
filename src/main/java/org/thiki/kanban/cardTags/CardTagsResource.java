@@ -15,19 +15,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubt on 11/14/16.
  */
 public class CardTagsResource extends RestResource {
-    public CardTagsResource(List<CardTag> cardTags, String procedureId, String cardId) throws IOException {
+    public CardTagsResource(List<CardTag> cardTags, String boardId, String procedureId, String cardId) throws IOException {
         List<CardTagResource> cardTagResources = new ArrayList<>();
         for (CardTag cardTag : cardTags) {
-            CardTagResource cardTagResource = new CardTagResource(cardTag, procedureId, cardId);
+            CardTagResource cardTagResource = new CardTagResource(cardTag, boardId, procedureId, cardId);
             cardTagResources.add(cardTagResource);
         }
 
         this.buildDataObject("cardTags", cardTagResources);
 
-        Link selfLink = linkTo(methodOn(CardTagsController.class).stick(null, procedureId, cardId, null)).withSelfRel();
+        Link selfLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, procedureId, cardId, null)).withSelfRel();
         this.add(selfLink);
 
-        Link cardLink = linkTo(methodOn(CardsController.class).findById(procedureId, cardId)).withRel("card");
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId)).withRel("card");
         this.add(cardLink);
     }
 }

@@ -15,18 +15,18 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubt on 10/31/16.
  */
 public class CommentsResource extends RestResource {
-    public CommentsResource(List<Comment> comments, String cardId, String procedureId) throws IOException {
+    public CommentsResource(List<Comment> comments, String boardId, String procedureId, String cardId) throws IOException {
         List<CommentResource> commentResources = new ArrayList<>();
         for (Comment comment : comments) {
-            CommentResource commentResource = new CommentResource(comment, cardId, procedureId);
+            CommentResource commentResource = new CommentResource(comment, boardId, procedureId, cardId);
             commentResources.add(commentResource);
         }
 
         this.buildDataObject("comments", commentResources);
-        Link selfLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(cardId, procedureId)).withSelfRel();
+        Link selfLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, procedureId, cardId)).withSelfRel();
         this.add(selfLink);
 
-        Link cardLink = linkTo(methodOn(CardsController.class).findById(procedureId, cardId)).withRel("card");
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId)).withRel("card");
         this.add(cardLink);
     }
 }

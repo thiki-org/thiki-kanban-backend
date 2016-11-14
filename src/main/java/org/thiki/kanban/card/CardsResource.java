@@ -14,19 +14,19 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  *
  */
 public class CardsResource extends RestResource {
-    public CardsResource(List<Card> cardList, String procedureId) throws IOException {
+    public CardsResource(List<Card> cardList, String boardId, String procedureId) throws IOException {
 
         List<CardResource> cardResources = new ArrayList<>();
         for (Card card : cardList) {
-            CardResource cardResource = new CardResource(card, procedureId);
+            CardResource cardResource = new CardResource(card, boardId, procedureId);
             cardResources.add(cardResource);
         }
 
         this.buildDataObject("cards", cardResources);
-        Link selfLink = linkTo(methodOn(CardsController.class).findByProcedureId(procedureId)).withSelfRel();
+        Link selfLink = linkTo(methodOn(CardsController.class).findByProcedureId(boardId, procedureId)).withSelfRel();
         this.add(selfLink);
 
-        Link sortNumbersLink = linkTo(methodOn(CardsController.class).resortCards(cardList, procedureId)).withRel("sortNumbers");
+        Link sortNumbersLink = linkTo(methodOn(CardsController.class).resortCards(cardList, boardId, procedureId)).withRel("sortNumbers");
         this.add(sortNumbersLink);
     }
 }

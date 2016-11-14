@@ -17,28 +17,28 @@ public class AssignmentController {
     @Autowired
     private AssignmentService assignmentService;
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws IOException {
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws IOException {
         Assignment savedAssignment = assignmentService.assign(assignment, cardId, userName);
-        return Response.post(new AssignmentResource(savedAssignment, procedureId, cardId));
+        return Response.post(new AssignmentResource(savedAssignment, boardId, procedureId, cardId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/assignments/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String procedureId, @PathVariable String cardId, @PathVariable String id) throws IOException {
-        Assignment foundAssignment = assignmentService.findById(id);
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String assignmentId) throws IOException {
+        Assignment foundAssignment = assignmentService.findById(assignmentId);
 
-        return Response.build(new AssignmentResource(foundAssignment, procedureId, cardId));
+        return Response.build(new AssignmentResource(foundAssignment, boardId, procedureId, cardId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.GET)
-    public HttpEntity findByCardId(@PathVariable String procedureId, @PathVariable String cardId) throws IOException {
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.GET)
+    public HttpEntity findByCardId(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws IOException {
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
-        return Response.build(new AssignmentsResource(assignmentList, procedureId, cardId));
+        return Response.build(new AssignmentsResource(assignmentList, boardId, procedureId, cardId));
     }
 
-    @RequestMapping(value = "/procedures/{procedureId}/cards/{cardId}/assignments/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String procedureId, @PathVariable String cardId, @PathVariable String id) throws IOException {
-        assignmentService.deleteById(id);
-        return Response.build(new AssignmentResource(procedureId, cardId));
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String assignmentId) throws IOException {
+        assignmentService.deleteById(assignmentId);
+        return Response.build(new AssignmentResource(boardId, procedureId, cardId));
     }
 }
