@@ -15,6 +15,7 @@ public class CardTagsService {
     private CardTagPersistence cardTagPersistence;
 
     public List<CardTag> stickTags(List<CardTag> cardTags, String cardId, String userName) {
+        cardTagPersistence.deleteTagsByCardId(cardId);
         for (CardTag cardTag : cardTags) {
             cardTagPersistence.stick(cardId, cardTag, userName);
         }

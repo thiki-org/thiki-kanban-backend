@@ -14,4 +14,6 @@ public interface CardTagPersistence {
     Integer stick(@Param("cardId") String cardId, @Param("cardTag") CardTag cardTag, @Param("userName") String userName);
 
     List<CardTag> findByCardId(String cardId);
+
+    Integer deleteTagsByCardId(String cardId);
 }

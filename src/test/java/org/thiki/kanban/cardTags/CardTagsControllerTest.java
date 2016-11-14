@@ -33,6 +33,10 @@ public class CardTagsControllerTest extends TestBase {
                 .names("id,name,color,author,board_id")
                 .values("foo-tagId1", "tag-name", "tag-color", "someone", "boardId-foo").exec();
 
+        dbPreparation.table("kb_cards_tags")
+                .names("id,card_id,tag_id,author")
+                .values("foo-cards-tags", "card-fooId", "tagId-foo", "someone").exec();
+
         given().body("[{\"tagId\":\"foo-tagId1\"}]")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -49,5 +53,6 @@ public class CardTagsControllerTest extends TestBase {
                 .body("_links.card.href", equalTo("http://localhost:8007/procedures/procedures-fooId/cards/card-fooId"));
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE card_id='card-fooId' AND delete_status=0").size());
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE id='foo-cards-tags' AND delete_status=0").size());
     }
 }
