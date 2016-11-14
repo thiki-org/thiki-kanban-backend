@@ -46,7 +46,6 @@ public class CardTagsControllerTest extends TestBase {
                 .statusCode(201)
                 .body("cardTags[0].name", equalTo("tag-name"))
                 .body("cardTags[0].color", equalTo("tag-color"))
-                .body("cardTags[0]._links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags/fooId"))
                 .body("cardTags[0]._links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
                 .body("cardTags[0]._links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
@@ -54,5 +53,29 @@ public class CardTagsControllerTest extends TestBase {
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE card_id='card-fooId' AND delete_status=0").size());
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE id='foo-cards-tags' AND delete_status=0").size());
+    }
+
+    @Scenario("获取卡片标签>用户给卡片贴完标签后,可以获取卡片所贴标签")
+    @Test
+    public void loadTags() throws Exception {
+        dbPreparation.table("kb_tag")
+                .names("id,name,color,author,board_id")
+                .values("tagId-foo", "tag-name", "tag-color", "someone", "boardId-foo").exec();
+
+        dbPreparation.table("kb_cards_tags")
+                .names("id,card_id,tag_id,author")
+                .values("fooId", "card-fooId", "tagId-foo", "someone").exec();
+
+        given().header("userName", userName)
+                .when()
+                .get("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags")
+                .then()
+                .statusCode(200)
+                .body("cardTags[0].name", equalTo("tag-name"))
+                .body("cardTags[0].color", equalTo("tag-color"))
+                .body("cardTags[0]._links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
+                .body("cardTags[0]._links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
+                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
+                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"));
     }
 }

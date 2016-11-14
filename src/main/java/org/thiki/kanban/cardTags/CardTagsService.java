@@ -21,4 +21,8 @@ public class CardTagsService {
         }
         return cardTagPersistence.findByCardId(cardId);
     }
+
+    public List<CardTag> loadTags(String cardId) {
+        return cardTagPersistence.findByCardId(cardId);
+    }
 }

@@ -24,8 +24,10 @@ public class CardTagsController {
         return Response.post(new CardTagsResource(stickCardTags, boardId, procedureId, cardId));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/tags/{tagId}", method = RequestMethod.POST)
-    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String tagId) {
-        return null;
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/tags", method = RequestMethod.GET)
+    public HttpEntity loadTags(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws IOException {
+        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId);
+
+        return Response.build(new CardTagsResource(stickCardTags, boardId, procedureId, cardId));
     }
 }

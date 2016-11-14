@@ -273,3 +273,22 @@ CREATE TABLE kb_tag (
 )
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
+
+-- ----------------------------
+-- Table structure for kb_cards_tags
+-- ----------------------------
+DROP TABLE IF EXISTS kb_cards_tags;
+
+CREATE TABLE kb_cards_tags (
+  id                VARCHAR(40) NOT NULL,
+  card_id           VARCHAR(40) DEFAULT NULL,
+  tag_id            VARCHAR(40) DEFAULT NULL,
+  author            VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  delete_status     INT(2)      DEFAULT 0,
+  PRIMARY KEY (id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+

@@ -17,8 +17,6 @@ public class CardTagResource extends RestResource {
     public CardTagResource(CardTag cardTag, String boardId, String procedureId, String cardId) throws IOException {
         this.domainObject = cardTag;
         if (cardTag != null) {
-            Link selfLink = linkTo(methodOn(CardTagsController.class).findById(boardId, procedureId, cardId, cardTag.getId())).withSelfRel();
-            this.add(selfLink);
 
             Link tagsLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, procedureId, cardId, null)).withRel("tags");
             this.add(tagsLink);
