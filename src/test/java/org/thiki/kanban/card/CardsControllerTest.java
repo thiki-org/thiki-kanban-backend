@@ -112,6 +112,7 @@ public class CardsControllerTest extends TestBase {
                 .body("cards[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("cards[0]._links.comments.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/comments"))
                 .body("cards[0]._links.assignments.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/assignments"))
+                .body("cards[0]._links.cardTags.href", equalTo("http://localhost:8007/procedures/fooId/cards/card-fooId/tags"))
                 .body("_links.self.href", equalTo("http://localhost:8007/procedures/fooId/cards"))
                 .body("_links.sortNumbers.href", equalTo("http://localhost:8007/procedures/fooId/cards/sortNumbers"));
     }
