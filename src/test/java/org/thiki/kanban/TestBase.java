@@ -76,5 +76,6 @@ public class TestBase {
         jdbcTemplate.execute("TRUNCATE TABLE kb_acceptance_criterias");
         jdbcTemplate.execute("TRUNCATE TABLE kb_comment");
         jdbcTemplate.execute("TRUNCATE TABLE kb_tag");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_cards_tags");
     }
 }

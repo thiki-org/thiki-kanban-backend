@@ -22,4 +22,5 @@ public class DomainOrder {
     public static final int COMMENT = 14;
     public static final int WORKTILE = 15;
     public static final int TAG = 16;
+    public static final int CARD_TAGS = 17;
 }

@@ -231,3 +231,18 @@ CREATE TABLE kb_tag(
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
 );
+
+-- ----------------------------
+-- Table structure for kb_cards_tags
+-- ----------------------------
+drop table if exists kb_cards_tags;
+
+CREATE TABLE kb_cards_tags(
+  id VARCHAR(40)NOT NULL PRIMARY KEY,
+  card_id VARCHAR(40) DEFAULT NULL,
+  tag_id VARCHAR(40) DEFAULT NULL,
+  author VARCHAR(40) DEFAULT NULL,
+  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
+  delete_status int DEFAULT 0
+);
