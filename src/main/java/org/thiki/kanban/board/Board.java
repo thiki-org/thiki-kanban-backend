@@ -12,7 +12,7 @@ public class Board implements Serializable {
 
     private String id;
     @NotEmpty(message = BoardCodes.nameIsRequired)
-    @Length(max = 20, message = BoardCodes.nameIsInvalid)
+    @Length(max = 30, message = BoardCodes.nameIsInvalid)
     private String name;
 
     private String teamId;
