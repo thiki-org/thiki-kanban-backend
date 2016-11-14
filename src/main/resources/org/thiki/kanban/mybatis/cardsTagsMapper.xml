@@ -15,7 +15,7 @@
         SELECT cardsTags.id AS id,tags.name AS name,tags.color AS color FROM kb_cards_tags cardsTags LEFT JOIN kb_tag tags ON cardsTags.tag_id=tags.id WHERE card_id= #{cardId} AND cardsTags.delete_status=0 AND tags.delete_status=0 ORDER by creation_time ASC
     </select>
 
-    <delete id="deleteTagsByCardId" parameterType="java.lang.String" flushCache="true">
+    <delete id="removeTagsByCardId" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_cards_tags SET delete_status=1 WHERE card_id=#{cardId} AND delete_status=0
     </delete>
 </mapper>

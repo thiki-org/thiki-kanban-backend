@@ -15,5 +15,5 @@ public interface CardTagPersistence {
 
     List<CardTag> findByCardId(String cardId);
 
-    Integer deleteTagsByCardId(String cardId);
+    Integer removeTagsByCardId(String cardId);
 }
