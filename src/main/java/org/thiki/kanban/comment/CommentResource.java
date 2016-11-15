@@ -5,8 +5,6 @@ import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.user.UsersController;
 
-import java.io.IOException;
-
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -16,7 +14,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class CommentResource extends RestResource {
     public static final String URL_TEMPLATE = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/comments/{commentId}";
 
-    public CommentResource(Comment comment, String boardId, String procedureId, String cardId) throws IOException {
+    public CommentResource(Comment comment, String boardId, String procedureId, String cardId) throws Exception {
         this.domainObject = comment;
         if (comment != null) {
             Link selfLink = linkTo(methodOn(CommentController.class).findById(boardId, procedureId, cardId, comment.getId())).withSelfRel();
@@ -32,7 +30,7 @@ public class CommentResource extends RestResource {
         }
     }
 
-    public CommentResource(String boardId, String procedureId, String cardId) throws IOException {
+    public CommentResource(String boardId, String procedureId, String cardId) throws Exception {
         Link commentsLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, procedureId, cardId)).withRel("comments");
         this.add(commentsLink);
     }

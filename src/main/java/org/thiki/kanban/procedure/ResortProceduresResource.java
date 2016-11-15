@@ -3,7 +3,6 @@ package org.thiki.kanban.procedure;
 import org.springframework.hateoas.Link;
 import org.thiki.kanban.foundation.common.RestResource;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 public class ResortProceduresResource extends RestResource {
 
-    public ResortProceduresResource(List<Procedure> procedureList, String boardId) throws IOException {
+    public ResortProceduresResource(List<Procedure> procedureList, String boardId) throws Exception {
 
         List<ProcedureResource> procedureResources = new ArrayList<>();
         for (Procedure procedure : procedureList) {

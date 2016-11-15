@@ -8,8 +8,6 @@ import org.thiki.kanban.comment.CommentController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.tag.TagsController;
 
-import java.io.IOException;
-
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -19,7 +17,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * @author joeaniu
  */
 public class CardResource extends RestResource {
-    public CardResource(Card card, String boardId, String procedureId) throws IOException {
+    public CardResource(Card card, String boardId, String procedureId) throws Exception {
         this.domainObject = card;
         if (card != null) {
             Link selfLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, card.getId())).withSelfRel();
@@ -44,7 +42,7 @@ public class CardResource extends RestResource {
 
     }
 
-    public CardResource(String boardId, String procedureId) throws IOException {
+    public CardResource(String boardId, String procedureId) throws Exception {
         this.add(linkTo(methodOn(CardsController.class).findByProcedureId(boardId, procedureId)).withRel("cards"));
     }
 }

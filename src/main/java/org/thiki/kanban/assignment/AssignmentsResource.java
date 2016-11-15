@@ -4,7 +4,6 @@ import org.springframework.hateoas.Link;
 import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubitao on 6/16/16.
  */
 public class AssignmentsResource extends RestResource {
-    public AssignmentsResource(List<Assignment> assignmentList, String boardId, String procedureId, String cardId) throws IOException {
+    public AssignmentsResource(List<Assignment> assignmentList, String boardId, String procedureId, String cardId) throws Exception {
         List<AssignmentResource> assignmentResources = new ArrayList<>();
         for (Assignment assignment : assignmentList) {
             AssignmentResource assignmentResource = new AssignmentResource(assignment, boardId, procedureId, cardId);

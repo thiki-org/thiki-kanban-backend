@@ -4,8 +4,6 @@ import org.springframework.hateoas.Link;
 import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 
-import java.io.IOException;
-
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -14,7 +12,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  * Created by xubt on 11/14/16.
  */
 public class CardTagResource extends RestResource {
-    public CardTagResource(CardTag cardTag, String boardId, String procedureId, String cardId) throws IOException {
+    public CardTagResource(CardTag cardTag, String boardId, String procedureId, String cardId) throws Exception {
         this.domainObject = cardTag;
         if (cardTag != null) {
 

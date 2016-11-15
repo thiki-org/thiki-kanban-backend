@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -17,19 +16,19 @@ public class ProceduresController {
     private ProceduresService proceduresService;
 
     @RequestMapping(value = "/boards/{boardId}/procedures", method = RequestMethod.GET)
-    public HttpEntity loadAll(@PathVariable String boardId) throws IOException {
+    public HttpEntity loadAll(@PathVariable String boardId) throws Exception {
         List<Procedure> procedureList = proceduresService.loadByBoardId(boardId);
         return Response.build(new ProceduresResource(procedureList, boardId));
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{id}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String id, @PathVariable String boardId) throws IOException {
+    public HttpEntity findById(@PathVariable String id, @PathVariable String boardId) throws Exception {
         Procedure procedure = proceduresService.findById(id);
         return Response.build(new ProcedureResource(procedure, boardId));
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{id}", method = RequestMethod.PUT)
-    public HttpEntity<ProcedureResource> update(@RequestBody Procedure procedure, @PathVariable String id, @PathVariable String boardId) throws IOException {
+    public HttpEntity<ProcedureResource> update(@RequestBody Procedure procedure, @PathVariable String id, @PathVariable String boardId) throws Exception {
         procedure.setId(id);
         Procedure updatedProcedure = proceduresService.update(procedure);
 
@@ -37,21 +36,21 @@ public class ProceduresController {
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{id}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String id, @PathVariable String boardId) throws IOException {
+    public HttpEntity deleteById(@PathVariable String id, @PathVariable String boardId) throws Exception {
         proceduresService.deleteById(id);
         return Response.build(new ProcedureResource(boardId));
 
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Procedure procedure, @RequestHeader String userName, @PathVariable String boardId) throws IOException {
+    public HttpEntity create(@RequestBody Procedure procedure, @RequestHeader String userName, @PathVariable String boardId) throws Exception {
         Procedure savedProcedure = proceduresService.create(userName, boardId, procedure);
 
         return Response.post(new ProcedureResource(savedProcedure, boardId));
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/sortNumbers", method = RequestMethod.PUT)
-    public HttpEntity resort(@RequestBody List<Procedure> procedures, @PathVariable String boardId) throws IOException {
+    public HttpEntity resort(@RequestBody List<Procedure> procedures, @PathVariable String boardId) throws Exception {
         List<Procedure> procedureList = proceduresService.resortProcedures(procedures, boardId);
         return Response.build(new ResortProceduresResource(procedureList, boardId));
     }
