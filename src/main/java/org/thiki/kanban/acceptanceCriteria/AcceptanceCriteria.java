@@ -80,4 +80,17 @@ public class AcceptanceCriteria {
     public void setSortNumber(Integer sortNumber) {
         this.sortNumber = sortNumber;
     }
+
+    @Override
+    public String toString() {
+        return "AcceptanceCriteria{" +
+                "id='" + id + '\'' +
+                ", summary='" + summary + '\'' +
+                ", finished=" + finished +
+                ", author='" + author + '\'' +
+                ", sortNumber=" + sortNumber +
+                ", creationTime='" + creationTime + '\'' +
+                ", modificationTime='" + modificationTime + '\'' +
+                '}';
+    }
 }

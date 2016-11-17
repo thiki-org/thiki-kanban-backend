@@ -1,5 +1,7 @@
 package org.thiki.kanban.acceptanceCriteria;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -10,12 +12,13 @@ import java.util.List;
  */
 @Service
 public class AcceptCriteriaService {
+    public static Logger logger = LoggerFactory.getLogger(AcceptCriteriaService.class);
 
     @Resource
     private AcceptCriteriaPersistence acceptCriteriaPersistence;
 
     public AcceptanceCriteria addAcceptCriteria(String userName, String cardId, AcceptanceCriteria acceptanceCriteria) {
-
+        logger.info(String.format("User [%s] adds a acceptance criteria in card [%s],the acceptanceCriteria is:%s", userName, cardId, acceptanceCriteria));
         acceptCriteriaPersistence.addAcceptCriteria(userName, cardId, acceptanceCriteria);
         return acceptCriteriaPersistence.findById(acceptanceCriteria.getId());
     }
