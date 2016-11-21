@@ -141,7 +141,7 @@ public class WorktileService {
         Board board = new Board();
         board.setAuthor(userName);
         board.setOwner(userName);
-        board.setName("worktile" + dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_EN));
+        board.setName("worktile" + dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD));
         return boardsService.create(userName, board);
     }
 }

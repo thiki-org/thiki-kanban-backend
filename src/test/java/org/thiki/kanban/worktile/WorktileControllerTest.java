@@ -32,7 +32,7 @@ public class WorktileControllerTest extends TestBase {
     @Test
     public void createNewBoard() {
         File worktileTasks = new File("src/test/resources/import/worktile_tasks.json");
-        String expectedWorktileName = "worktile" + dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_EN);
+        String expectedWorktileName = "worktile" + dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD);
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
