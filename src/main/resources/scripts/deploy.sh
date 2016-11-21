@@ -20,6 +20,6 @@ echo "copy new artifact to server directory..."
 mv $artifacts_path/*.jar $server_dir
 
 echo "start server ..."
-java -jar *.jar
+java -jar *.jar 1>> log.log 2>&1&
 
 echo "deploy done."
