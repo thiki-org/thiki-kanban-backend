@@ -19,8 +19,8 @@ echo "init database done."
 
 echo "init database properties ..."
 
-echo "jdbc.url=jdbc:mysql://$host_name:3306/thiki-kanban?useUnicode=true&characterEncoding=utf8" >>../../kanban.properties
-echo "jdbc.username=$username" >>../../kanban.properties
-echo "jdbc.password=$password" >>../../kanban.properties
+echo "jdbc.url=jdbc:mysql://$host_name:3306/thiki-kanban?useUnicode=true&characterEncoding=utf8" >>src/main/resources/kanban.properties
+echo "jdbc.username=$username" >>src/main/resources/kanban.properties
+echo "jdbc.password=$password" >>src/main/resources/kanban.properties
 
 echo "init database properties done."
