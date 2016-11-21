@@ -15,6 +15,7 @@ public class ShutdownService {
     public static Logger logger = LoggerFactory.getLogger(ShutdownService.class);
 
     public void shutdown(String remoteAddr) {
+        logger.info("The remoteAddr is:" + remoteAddr);
         logger.info("The service will be closed 15 seconds later.");
         if (!HTTPUtil.isLocalRequest(remoteAddr)) {
             return;
