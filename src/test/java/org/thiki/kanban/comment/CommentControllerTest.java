@@ -13,6 +13,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 
 
 /**
@@ -40,7 +41,7 @@ public class CommentControllerTest extends TestBase {
                 .statusCode(201)
                 .body("summary", equalTo("comment-summary"))
                 .body("author", equalTo(userName))
-                .body("publishTime", equalTo("刚刚"))
+                .body("publishTime", equalTo(notNullValue()))
                 .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments/fooId"))
                 .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
                 .body("_links.comments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/comments"));
