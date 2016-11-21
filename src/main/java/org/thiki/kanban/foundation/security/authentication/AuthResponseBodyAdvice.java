@@ -63,7 +63,6 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
         Map<String, Object> links = (Map<String, Object>) jsonObjectResponse.get("_links");
         ResourceLinks resourceLinks = new ResourceLinks(links, userName);
         JSONObject authenticatedLinks = resourceLinks.auth();
-        System.out.println(authenticatedLinks.toJSONString());
         jsonObjectResponse.put("_links", authenticatedLinks);
         return jsonObjectResponse;
     }
