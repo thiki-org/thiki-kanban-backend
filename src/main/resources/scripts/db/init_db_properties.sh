@@ -38,3 +38,7 @@ echo "jdbc.password=$password" >>src/main/resources/kanban.properties
 echo "http.port=$http_port" >>src/main/resources/kanban.properties
 
 echo "init database properties done."
+
+echo "copy deploy.sh to sit directory"
+mv src/main/resources/scripts/deploy.sh /data/thiki-kanban/sit
+echo "copy done."
