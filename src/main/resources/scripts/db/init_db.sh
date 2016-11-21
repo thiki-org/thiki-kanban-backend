@@ -9,7 +9,7 @@ echo "init database $database_name ..."
 mysql -u "$username" "-p$password" -e  "DROP DATABASE  IF EXISTS $database_name;"
 mysql -u "$username" "-p$password" -e  "CREATE DATABASE $database_name DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;"
 mysql -u "$username" "-p$password" -e  "USE $database_name;"
-mysql -u "$username" "-p$password" "$database_name" < "mysql_init_sit.sql"
+mysql -u "$username" "-p$password" "$database_name" < "mysql_init.sql"
 
 echo "init database done."
 
