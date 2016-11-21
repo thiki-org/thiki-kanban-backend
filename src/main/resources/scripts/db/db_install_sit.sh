@@ -1,10 +1,10 @@
 #!/bin/sh
 set -e
-env_params_path=$2
+env_params_path=$1
 
-echo "env_params_path:$2"
+echo "env_params_path:$1"
 
-source $2
+source $1
 
 echo "init database $database_name_sit ..."
 mysql -u "$username_sit" "-p$password_sit" -e  "DROP DATABASE  IF EXISTS $database_name_sit;"
