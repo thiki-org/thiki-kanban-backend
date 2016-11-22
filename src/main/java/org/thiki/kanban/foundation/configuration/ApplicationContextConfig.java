@@ -7,6 +7,7 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.ErrorPage;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.MessageSource;
@@ -30,9 +31,13 @@ import java.util.concurrent.TimeUnit;
  */
 @Configuration
 @PropertySources(value = {@PropertySource("kanban.properties")})
+@ConfigurationProperties(prefix = "security")
 public class ApplicationContextConfig implements ApplicationContextAware {
     @Value("${http.port}")
     private int port;
+    private int maxAllowedOrigins = 20;
+
+    private String[] allowedOrigins = new String[maxAllowedOrigins];
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         ((AnnotationConfigEmbeddedWebApplicationContext) applicationContext).scan("org.thiki", "cn.xubitao");
@@ -52,7 +57,7 @@ public class ApplicationContextConfig implements ApplicationContextAware {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:8008")
+                        .allowedOrigins(allowedOrigins)
                         .allowedHeaders("token", "userName", "X-token")
                         .exposedHeaders("token", "userName", "X-token")
                         .allowedMethods("POST", "GET", "PUT", "DELETE", "OPTIONS")
@@ -86,5 +91,9 @@ public class ApplicationContextConfig implements ApplicationContextAware {
             container.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/error/404"));
             container.addErrorPages(new ErrorPage(Exception.class, "/error/500"));
         };
+    }
+
+    public String[] getAllowedOrigins() {
+        return allowedOrigins;
     }
 }

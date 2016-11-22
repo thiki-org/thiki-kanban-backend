@@ -11,3 +11,8 @@ security:
     - "/error"
     - "/shutdown"
     - "/favicon.ico"
+  allowedOrigins:
+    - "http://localhost:8008"
+    - "http://23.234.54.252:8089"
+
+
