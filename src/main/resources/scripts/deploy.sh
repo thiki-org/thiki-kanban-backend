@@ -7,10 +7,8 @@ url=$3
 echo "artifacts_path:$1"
 echo "server_dir:$2"
 echo "server_addr:$3"
-if curl --output /dev/null --silent --head --fail "$3"; then
-    echo "The server is running,stop server..."
-    wget --post-data ""  $server_addr
-fi
+
+sh killServer.sh
 
 echo "clean server directory..."
 cd $server_dir
