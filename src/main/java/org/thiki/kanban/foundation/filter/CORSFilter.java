@@ -8,6 +8,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 /**
  * Created by xubt on 7/26/16.
@@ -26,7 +28,7 @@ public class CORSFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
 
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8008");
+        response.setHeader("Access-Control-Allow-Origin", getRemoteHost(request));
         response.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "X-Requested-With,token,userName,Content-Type");
@@ -34,6 +36,16 @@ public class CORSFilter implements Filter {
         if (!"OPTIONS".equalsIgnoreCase(request.getMethod())) {
             chain.doFilter(req, res);
         }
+    }
+
+    private String getRemoteHost(HttpServletRequest request) {
+        URI referURI = null;
+        try {
+            referURI = new URI(request.getHeader("referer"));
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        return "http://" + referURI.getHost() + ":" + referURI.getPort();
     }
 
     @Override
