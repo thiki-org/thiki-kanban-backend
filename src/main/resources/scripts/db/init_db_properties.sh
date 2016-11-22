@@ -16,6 +16,7 @@ username=$username_sit
 password=$password_sit
 host_name=$host_name_sit
 http_port=$http_port_sit
+database_name=$database_name
 fi
 
 if [ "$1" = "prod" ]
@@ -24,6 +25,7 @@ username=$username_prod
 password=$password_prod
 host_name=$host_name_prod
 http_port=$http_port_prod
+database_name=$database_name
 fi
 
 echo "username: $username"
@@ -32,7 +34,7 @@ echo "host_name: $host_name"
 echo "http_port: $http_port"
 
 echo "jdbc.driver=com.mysql.jdbc.Driver" >>src/main/resources/kanban.properties
-echo "jdbc.url=jdbc:mysql://$host_name:3306/thiki-kanban?useUnicode=true&characterEncoding=utf8" >>src/main/resources/kanban.properties
+echo "jdbc.url=jdbc:mysql://$host_name:3306/$database_name?useUnicode=true&characterEncoding=utf8" >>src/main/resources/kanban.properties
 echo "jdbc.username=$username" >>src/main/resources/kanban.properties
 echo "jdbc.password=$password" >>src/main/resources/kanban.properties
 echo "http.port=$http_port" >>src/main/resources/kanban.properties
