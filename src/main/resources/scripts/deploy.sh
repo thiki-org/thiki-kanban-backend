@@ -11,7 +11,6 @@ rm -rf killServer.sh
 rm -rf deploy.sh
 
 echo "copy new scripts..."
-mv $artifacts_path/src/main/resources/scripts/deploy.sh  $server_dir
 mv $artifacts_path/src/main/resources/scripts/killServer.sh  $server_dir
 
 echo "chmod new scripts..."
