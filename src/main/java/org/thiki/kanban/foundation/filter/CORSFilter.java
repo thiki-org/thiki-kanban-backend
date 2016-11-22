@@ -18,6 +18,8 @@ import java.net.URISyntaxException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CORSFilter implements Filter {
 
+    public static final String REQUEST_REFERER_NAME = "referer";
+
     @Override
     public void destroy() {
     }
@@ -39,9 +41,13 @@ public class CORSFilter implements Filter {
     }
 
     private String getRemoteHost(HttpServletRequest request) {
-        URI referURI = null;
+        URI referURI;
         try {
-            referURI = new URI(request.getHeader("referer"));
+            String referer = request.getHeader(REQUEST_REFERER_NAME);
+            if (referer == null) {
+                return null;
+            }
+            referURI = new URI(request.getHeader(REQUEST_REFERER_NAME));
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
