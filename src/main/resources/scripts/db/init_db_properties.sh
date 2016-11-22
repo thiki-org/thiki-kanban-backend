@@ -16,7 +16,7 @@ username=$username_sit
 password=$password_sit
 host_name=$host_name_sit
 http_port=$http_port_sit
-database_name=$database_name
+database_name=$database_name_sit
 fi
 
 if [ "$1" = "prod" ]
@@ -25,7 +25,7 @@ username=$username_prod
 password=$password_prod
 host_name=$host_name_prod
 http_port=$http_port_prod
-database_name=$database_name
+database_name=$database_name_prod
 fi
 
 echo "username: $username"
