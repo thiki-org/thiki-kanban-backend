@@ -14,7 +14,6 @@ echo "copy new scripts..."
 mv $artifacts_path/src/main/resources/scripts/killServer.sh  $server_dir
 
 echo "chmod new scripts..."
-chmod 777 deploy.sh
 chmod 777 killServer.sh
 
 echo "stop server..."
