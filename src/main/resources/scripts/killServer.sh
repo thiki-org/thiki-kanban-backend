@@ -6,8 +6,8 @@ SPRING_OPTS="--logging.file=application.log"
 function check_if_pid_file_exists {
     if [ ! -f $PIDFile ]
     then
- echo "PID file not found: $PIDFile"
-        exit 1
+        echo "PID file not found: $PIDFile"
+        exit 0
     fi
 }
 
