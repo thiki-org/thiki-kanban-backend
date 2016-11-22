@@ -51,6 +51,10 @@ public class CORSFilter implements Filter {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
+        int port = referURI.getPort();
+        if (port < 0) {
+            return "http://" + referURI.getHost();
+        }
         return "http://" + referURI.getHost() + ":" + referURI.getPort();
     }
 
