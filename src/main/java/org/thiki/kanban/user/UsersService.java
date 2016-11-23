@@ -12,7 +12,6 @@ import org.thiki.kanban.user.profile.StorageProperties;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -77,7 +76,7 @@ public class UsersService {
         return avatarName;
     }
 
-    public File loadAvatar(String userName) throws MalformedURLException {
+    public File loadAvatar(String userName) throws IOException {
         UserProfile userProfile = usersPersistence.findProfile(userName);
         return avatarStorage.loadAvatarByName(userProfile.getAvatar());
     }

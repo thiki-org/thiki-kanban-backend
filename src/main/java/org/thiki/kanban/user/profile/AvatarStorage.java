@@ -14,7 +14,7 @@ import java.io.IOException;
 @Service
 public class AvatarStorage {
     public static final String AVATAR_FILES_LOCATION = "files/avatars/";
-    public static final String DEFAULT_AVATAR_FILES_LOCATION = "src/main/resources/avatar/default-avatar.png";
+    public static final String DEFAULT_AVATAR_FILES_LOCATION = "avatar/default-avatar.png";
 
     public String store(String userName, File avatar) throws IOException {
         File avatarsDirectory = new File(AVATAR_FILES_LOCATION);
@@ -29,11 +29,11 @@ public class AvatarStorage {
         return userAvatarName;
     }
 
-    public File loadAvatarByName(String avatarName) {
+    public File loadAvatarByName(String avatarName) throws IOException {
         String avatarPath = AVATAR_FILES_LOCATION + avatarName;
         File avatar = new File(avatarPath);
         if (!avatar.exists()) {
-            return new File(DEFAULT_AVATAR_FILES_LOCATION);
+            return FileUtil.loadFile(DEFAULT_AVATAR_FILES_LOCATION);
         }
         return avatar;
     }

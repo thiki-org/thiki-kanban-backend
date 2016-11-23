@@ -14,6 +14,9 @@ import java.io.*;
  * Created by xubt on 7/6/16.
  */
 public class FileUtil {
+    public static final String PREFIX = "stream2file";
+    public static final String SUFFIX = ".tmp";
+
     public static String readFile(String fileName) {
         BufferedReader reader = null;
         StringBuilder stringBuffer = new StringBuilder();
@@ -204,5 +207,14 @@ public class FileUtil {
     public static String fileString(File file) throws IOException {
         UrlResource urlResource = new UrlResource(file.toURI());
         return urlResourceToString(urlResource);
+    }
+
+    public static File loadFile(String filePath) throws IOException {
+        Resource resource = new ClassPathResource(filePath);
+        File tempFile = File.createTempFile(PREFIX, SUFFIX);
+        tempFile.deleteOnExit();
+        FileOutputStream out = new FileOutputStream(tempFile);
+        IOUtils.copy(resource.getInputStream(), out);
+        return tempFile;
     }
 }
