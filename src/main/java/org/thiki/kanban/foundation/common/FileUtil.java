@@ -3,6 +3,8 @@ package org.thiki.kanban.foundation.common;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,16 +14,14 @@ import java.io.*;
  * Created by xubt on 7/6/16.
  */
 public class FileUtil {
-    public static final String PREFIX = "stream2file";
-    public static final String SUFFIX = ".tmp";
-
     public static String readFile(String fileName) {
         BufferedReader reader = null;
         StringBuilder stringBuffer = new StringBuilder();
 
         try {
-            String filePath = Thread.currentThread().getContextClassLoader().getResource(fileName).getPath();
-            reader = new BufferedReader(new FileReader(filePath));
+            Resource resource = new ClassPathResource(fileName);
+
+            reader = new BufferedReader(new InputStreamReader(resource.getInputStream()));
             String tempString;
             while ((tempString = reader.readLine()) != null) {
                 stringBuffer.append(tempString);
