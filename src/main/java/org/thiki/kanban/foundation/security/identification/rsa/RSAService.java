@@ -21,8 +21,8 @@ public class RSAService {
 
     private static final String ALGORITHM = "RSA";
 
-    private static String privateKeyPath = "src/main/resources/rsakey.pem";
-    private static String publicKeyPath = "src/main/resources/rsakey.pub";
+    private static String privateKeyPath = "rsakey.pem";
+    private static String publicKeyPath = "rsakey.pub";
 
     public String encrypt(String publicKey, String plaintext) throws Exception {
         return Base64.encodeBase64String(encryptAsByteArray(plaintext, getPublicKey(publicKey)));

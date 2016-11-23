@@ -16,16 +16,16 @@ public class FileUtil {
     public static final String SUFFIX = ".tmp";
 
     public static String readFile(String fileName) {
-        File file = new File(fileName);
         BufferedReader reader = null;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder stringBuffer = new StringBuilder();
 
         try {
-            reader = new BufferedReader(new FileReader(file));
-            String tempString = null;
+            String filePath = Thread.currentThread().getContextClassLoader().getResource(fileName).getPath();
+            reader = new BufferedReader(new FileReader(filePath));
+            String tempString;
             while ((tempString = reader.readLine()) != null) {
-                sb.append(tempString);
-                sb.append("\r\n");
+                stringBuffer.append(tempString);
+                stringBuffer.append("\r\n");
             }
             reader.close();
         } catch (IOException e) {
@@ -34,11 +34,11 @@ public class FileUtil {
             if (reader != null) {
                 try {
                     reader.close();
-                } catch (IOException e1) {
+                } catch (IOException ignored) {
                 }
             }
         }
-        return sb.toString();
+        return stringBuffer.toString();
     }
 
     /***

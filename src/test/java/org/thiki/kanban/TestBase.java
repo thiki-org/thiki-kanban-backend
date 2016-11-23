@@ -27,7 +27,7 @@ import static org.mockito.Mockito.when;
 @WebIntegrationTest("server.port:8007")
 public class TestBase {
     protected static int port = 8007;
-    protected String publicKeyFilePath = "src/main/resources/rsakey.pub";
+    protected String publicKeyFilePath = "rsakey.pub";
 
     protected String userName = "someone";
 
