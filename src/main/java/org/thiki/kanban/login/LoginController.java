@@ -16,11 +16,13 @@ import javax.annotation.Resource;
  */
 @RestController
 public class LoginController {
+    public static Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Resource
     public LoginService loginService;
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public HttpEntity login(@RequestParam(required = false) String identity, @RequestParam(required = false) String password) throws Exception {
+        logger.info("Login request arrived controller,identity:" + identity);
         Identification identification = loginService.login(identity, password);
         return Response.build(new IdentificationResource(identification));
     }

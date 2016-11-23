@@ -22,4 +22,12 @@ public class Identification {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    @Override
+    public String toString() {
+        return "Identification{" +
+                "token='" + token + '\'' +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }
