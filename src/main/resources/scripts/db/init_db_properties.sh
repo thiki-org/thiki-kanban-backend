@@ -2,6 +2,7 @@
 set -e
 env_name=$1
 env_params_path=$2
+server_dir=$3
 
 echo "init database properties ..."
 
@@ -41,6 +42,6 @@ echo "http.port=$http_port" >>src/main/resources/kanban.properties
 
 echo "init database properties done."
 
-echo "copy deploy.sh to sit directory"
-mv src/main/resources/scripts/deploy.sh /data/thiki-kanban/sit
+echo "copy deploy.sh to $server_dir directory"
+mv src/main/resources/scripts/deploy.sh $server_dir
 echo "copy done."
