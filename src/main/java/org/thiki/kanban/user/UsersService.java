@@ -21,7 +21,7 @@ import java.nio.file.Paths;
 public class UsersService {
     public static Logger logger = LoggerFactory.getLogger(UsersService.class);
 
-    public static final int AVATAR_MAX_SIZE = 204800;
+    public static final int AVATAR_MAX_SIZE = 102400;
     private static String avatarFileTempPath = "files/avatars/temp/";
     private final Path rootLocation;
     @Resource
