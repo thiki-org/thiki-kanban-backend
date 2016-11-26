@@ -24,7 +24,10 @@
     </update>
 
     <update id="resort" parameterType="org.thiki.kanban.card.Card" flushCache="true">
-        UPDATE kb_card SET sort_number = #{sortNumber},procedure_id=#{procedureId}
+        UPDATE kb_card SET sort_number = #{sortNumber}
+        <if test="procedureId!=null">
+            ,procedure_id=#{procedureId}
+        </if>
         WHERE id=#{id} AND delete_status=0
     </update>
 
