@@ -21,7 +21,7 @@ CREATE TABLE kb_procedure (
   id VARCHAR(40) NOT NULL PRIMARY KEY,
   title  VARCHAR(50) NOT NULL,
   author VARCHAR(40) NOT NULL,
-  board_id VARCHAR(40)  DEFAULT NULL,
+  board_id VARCHAR(40)  NOT NULL,
   sort_number int DEFAULT 0,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME  DEFAULT CURRENT_TIMESTAMP,
@@ -40,7 +40,7 @@ CREATE TABLE kb_card (
   content VARCHAR(50),
   sort_number int DEFAULT 0,
   author VARCHAR(40) DEFAULT NULL,
-  procedure_id VARCHAR(40)  DEFAULT NULL,
+  procedure_id VARCHAR(40)  NOT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
   delete_status int DEFAULT 0
