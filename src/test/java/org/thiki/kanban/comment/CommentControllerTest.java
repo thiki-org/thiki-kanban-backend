@@ -25,7 +25,7 @@ public class CommentControllerTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author) VALUES ('card-fooId','this is the first card.','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author,procedure_id) VALUES ('card-fooId','this is the first card.','someone','procedure-id-foo')");
     }
 
     @Scenario("撰写评论>用户创建完卡片后,可以创建为其撰写相应的评论")

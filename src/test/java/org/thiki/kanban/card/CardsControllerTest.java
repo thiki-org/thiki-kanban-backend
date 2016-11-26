@@ -25,7 +25,7 @@ public class CardsControllerTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author) VALUES ('fooId','this is the first procedure.',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','this is the first procedure.','someone','board-id-foo')");
     }
 
     @Scenario("创建一个新的卡片")

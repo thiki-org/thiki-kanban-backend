@@ -24,7 +24,7 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author) VALUES ('card-fooId','this is the first card.','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author,procedure_id) VALUES ('card-fooId','this is the first card.','someone','procedure-id-foo')");
     }
 
     @Scenario("创建验收标准>用户创建完卡片后,可以创建为其创建相应的验收标准")
