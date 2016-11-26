@@ -1,6 +1,8 @@
 package org.thiki.kanban.user.profile;
 
 import com.google.common.io.Files;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
 
@@ -13,10 +15,13 @@ import java.io.IOException;
 
 @Service
 public class AvatarStorage {
+    public static Logger logger = LoggerFactory.getLogger(AvatarStorage.class);
+
     public static final String AVATAR_FILES_LOCATION = "files/avatars/";
     public static final String DEFAULT_AVATAR_FILES_LOCATION = "avatar/default-avatar.png";
 
     public String store(String userName, File avatar) throws IOException {
+        logger.info("store avatar,user:%s", userName);
         File avatarsDirectory = new File(AVATAR_FILES_LOCATION);
         if (!avatarsDirectory.exists()) {
             FileUtil.forceMakeDirectory(avatarsDirectory);
@@ -30,9 +35,12 @@ public class AvatarStorage {
     }
 
     public File loadAvatarByName(String avatarName) throws IOException {
+        logger.info("load avatar,avatarName:%s", avatarName);
+
         String avatarPath = AVATAR_FILES_LOCATION + avatarName;
         File avatar = new File(avatarPath);
         if (!avatar.exists()) {
+            logger.info("no avatar was found,return default avatar.");
             return FileUtil.loadFile(DEFAULT_AVATAR_FILES_LOCATION);
         }
         return avatar;

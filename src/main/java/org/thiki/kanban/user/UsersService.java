@@ -1,6 +1,8 @@
 package org.thiki.kanban.user;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
@@ -17,8 +19,9 @@ import java.nio.file.Paths;
 
 @Service
 public class UsersService {
+    public static Logger logger = LoggerFactory.getLogger(UsersService.class);
 
-    public static final int AVATAR_MAX_SIZE = 102400;
+    public static final int AVATAR_MAX_SIZE = 204800;
     private static String avatarFileTempPath = "files/avatars/temp/";
     private final Path rootLocation;
     @Resource
@@ -77,6 +80,7 @@ public class UsersService {
     }
 
     public File loadAvatar(String userName) throws IOException {
+        logger.info("load avatar by userName:%s", userName);
         UserProfile userProfile = usersPersistence.findProfile(userName);
         return avatarStorage.loadAvatarByName(userProfile.getAvatar());
     }
