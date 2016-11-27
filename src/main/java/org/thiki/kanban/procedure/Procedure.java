@@ -92,4 +92,16 @@ public class Procedure {
         this.boardId = boardId;
     }
 
+    @Override
+    public String toString() {
+        return "Procedure{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", boardId='" + boardId + '\'' +
+                ", sortNumber=" + sortNumber +
+                ", creationTime='" + creationTime + '\'' +
+                ", modificationTime='" + modificationTime + '\'' +
+                '}';
+    }
 }

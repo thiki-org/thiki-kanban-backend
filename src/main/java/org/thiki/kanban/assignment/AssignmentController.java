@@ -1,5 +1,7 @@
 package org.thiki.kanban.assignment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,7 @@ import java.util.List;
  */
 @RestController
 public class AssignmentController {
-
+    private static Logger logger = LoggerFactory.getLogger(AssignmentController.class);
     @Autowired
     private AssignmentService assignmentService;
 
@@ -31,6 +33,7 @@ public class AssignmentController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.GET)
     public HttpEntity findByCardId(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws Exception {
+        logger.info("Loading assignments by board [%s]", boardId);
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
         return Response.build(new AssignmentsResource(assignmentList, boardId, procedureId, cardId));
     }

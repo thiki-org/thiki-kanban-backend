@@ -1,5 +1,7 @@
 package org.thiki.kanban.tag;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 
@@ -11,7 +13,7 @@ import java.util.List;
  */
 @Service
 public class TagsService {
-
+    private static Logger logger = LoggerFactory.getLogger(TagsService.class);
     @Resource
     private TagPersistence tagPersistence;
 
@@ -23,7 +25,10 @@ public class TagsService {
     }
 
     public List<Tag> loadTagsByBoard(String boardId) {
-        return tagPersistence.loadTagsByBoard(boardId);
+        logger.info("Loading tags of the board [%s]", boardId);
+        List<Tag> tags = tagPersistence.loadTagsByBoard(boardId);
+        logger.info("The tags of the board are %s", tags);
+        return tags;
     }
 
     public Tag updateTag(String boardId, String tagId, Tag tag) {

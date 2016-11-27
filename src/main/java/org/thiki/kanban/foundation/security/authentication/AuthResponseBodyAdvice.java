@@ -5,6 +5,8 @@ package org.thiki.kanban.foundation.security.authentication;
  */
 
 import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
@@ -19,6 +21,7 @@ import java.util.Map;
 @Order(0)
 @ControllerAdvice(basePackages = "org.thiki")
 public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
+    private static Logger logger = LoggerFactory.getLogger(AuthResponseBodyAdvice.class);
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class aClass) {
@@ -39,7 +42,7 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
     }
 
     private Object rebuildEntityLinks(JSONObject mainResourceBody, ServerHttpRequest serverHttpRequest) {
-
+        logger.info("rebuilding the links of the response body :[%s]", mainResourceBody);
         List userNameObject = serverHttpRequest.getHeaders().get("userName");
         String userName = "";
         if (userNameObject != null) {
@@ -55,8 +58,9 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
                 }
             }
         }
-
-        return buildLinks(mainResourceBody, userName);
+        Object buildResult = buildLinks(mainResourceBody, userName);
+        logger.info("rebuild result:%s", buildResult);
+        return buildResult;
     }
 
     private Object buildLinks(JSONObject jsonObjectResponse, String userName) {

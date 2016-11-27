@@ -83,4 +83,18 @@ public class Assignment {
     public void setName(String name) {
         this.name = name;
     }
+
+    @Override
+    public String toString() {
+        return "Assignment{" +
+                "id='" + id + '\'' +
+                ", cardId='" + cardId + '\'' +
+                ", assignee='" + assignee + '\'' +
+                ", assigner='" + assigner + '\'' +
+                ", name='" + name + '\'' +
+                ", author='" + author + '\'' +
+                ", creationTime='" + creationTime + '\'' +
+                ", modificationTime='" + modificationTime + '\'' +
+                '}';
+    }
 }

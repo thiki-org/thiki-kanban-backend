@@ -1,7 +1,5 @@
 package org.thiki.kanban.login;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.thiki.kanban.foundation.application.DomainOrder;
 
 /**

@@ -1,6 +1,8 @@
 package org.thiki.kanban.foundation.security.identification.filter;
 
 import org.apache.catalina.connector.RequestFacade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
@@ -23,6 +25,7 @@ import java.util.List;
 @Service
 @ConfigurationProperties(prefix = "security")
 public class SecurityFilter implements Filter {
+    private static Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
     @Resource
     private TokenService tokenService;
 
@@ -49,6 +52,7 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        logger.info("identification start.");
         String uri = ((RequestFacade) servletRequest).getRequestURI();
         String localAddress = servletRequest.getLocalAddr();
         String authentication = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_IDENTIFICATION);
@@ -77,6 +81,7 @@ public class SecurityFilter implements Filter {
         response.setHeader(Constants.HEADER_PARAMS_TOKEN, updatedToken);
         response.setHeader(Constants.ACCESS_CONTROL_EXPOSE_HEADERS, Constants.HEADER_PARAMS_TOKEN);
         filterChain.doFilter(servletRequest, servletResponse);
+        logger.info("identification end.");
     }
 
     private boolean isLocalTestEnvironmentAndFreeAuthentication(String localAddress, String authentication) {

@@ -1,6 +1,8 @@
 package org.thiki.kanban.foundation.security.authentication;
 
 import org.apache.catalina.connector.RequestFacade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.configuration.ApplicationContextProvider;
@@ -16,6 +18,8 @@ import java.util.Map;
 @Service
 @ConfigurationProperties(prefix = "security")
 public class AuthenticationFilter implements Filter {
+    private static Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -23,6 +27,7 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        logger.info("authentication start.");
         String localAddress = servletRequest.getLocalAddr();
         String authentication = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_AUTHENTICATION);
 
@@ -39,6 +44,7 @@ public class AuthenticationFilter implements Filter {
                 authProvider.authenticate(currentURL, method, ((RequestFacade) servletRequest).getHeader("userName"));
             }
         }
+        logger.info("authentication end.");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 

@@ -1,6 +1,9 @@
 package org.thiki.kanban.card;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.acceptanceCriteria.AcceptCriteriaService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.procedure.Procedure;
@@ -12,6 +15,7 @@ import java.util.List;
 
 @Service
 public class CardsService {
+    public static Logger logger = LoggerFactory.getLogger(AcceptCriteriaService.class);
 
     @Resource
     private CardsPersistence cardsPersistence;
@@ -48,11 +52,14 @@ public class CardsService {
     }
 
     public List<Card> findByProcedureId(String procedureId) {
+        logger.info("Loading cards by procedureId:%s", procedureId);
         Procedure procedure = proceduresPersistence.findById(procedureId);
         if (procedure == null) {
             throw new ResourceNotFoundException(MessageFormat.format("procedure[{0}] is not found.", procedureId));
         }
-        return cardsPersistence.findByProcedureId(procedureId);
+        List<Card> cards = cardsPersistence.findByProcedureId(procedureId);
+        logger.info("The cards belongs to the procedure %s are %s", procedureId, cards);
+        return cards;
     }
 
     public Card findById(String cardId) {

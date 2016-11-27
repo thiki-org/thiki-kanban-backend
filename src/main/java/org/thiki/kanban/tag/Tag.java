@@ -80,4 +80,15 @@ public class Tag {
     public int hashCode() {
         return name != null ? name.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        return "Tag{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", color='" + color + '\'' +
+                ", creationTime='" + creationTime + '\'' +
+                ", modificationTime='" + modificationTime + '\'' +
+                '}';
+    }
 }

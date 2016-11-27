@@ -1,5 +1,7 @@
 package org.thiki.kanban.card;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +15,14 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "")
 public class CardsController {
+    private static Logger logger = LoggerFactory.getLogger(CardsController.class);
 
     @Autowired
     private CardsService cardsService;
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards", method = RequestMethod.GET)
     public HttpEntity findByProcedureId(@PathVariable String boardId, @PathVariable String procedureId) throws Exception {
+        logger.info("Loading cards by procedureId [%s]", procedureId);
         List<Card> cardList = cardsService.findByProcedureId(procedureId);
         return Response.build(new CardsResource(cardList, boardId, procedureId));
     }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
-import org.thiki.kanban.login.LoginCodes;
 
 /**
  * Created by xubitao on 04/26/16.

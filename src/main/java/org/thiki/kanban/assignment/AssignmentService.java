@@ -1,5 +1,7 @@
 package org.thiki.kanban.assignment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsCodes;
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @Service
 public class AssignmentService {
+    public static Logger logger = LoggerFactory.getLogger(AssignmentService.class);
 
     @Resource
     private AssignmentPersistence assignmentPersistence;
@@ -38,11 +41,14 @@ public class AssignmentService {
     }
 
     public List<Assignment> findByCardId(String cardId) {
+        logger.info("Loading assignments of the card:%s", cardId);
         Card card = cardsPersistence.findById(cardId);
         if (card == null) {
             throw new InvalidParamsException(CardsCodes.CARD_IS_NOT_EXISTS.code(), CardsCodes.CARD_IS_NOT_EXISTS.message());
         }
-        return assignmentPersistence.findByCardId(cardId);
+        List<Assignment> assignments = assignmentPersistence.findByCardId(cardId);
+        logger.info("The assignments of the card [%s] are %s", cardId, assignments);
+        return assignments;
     }
 
     public int deleteById(String id) {

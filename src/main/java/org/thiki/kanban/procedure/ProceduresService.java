@@ -1,5 +1,7 @@
 package org.thiki.kanban.procedure;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 
@@ -11,6 +13,7 @@ import java.util.List;
  */
 @Service
 public class ProceduresService {
+    public static Logger logger = LoggerFactory.getLogger(ProceduresService.class);
 
     @Resource
     private ProceduresPersistence proceduresPersistence;
@@ -29,7 +32,10 @@ public class ProceduresService {
     }
 
     public List<Procedure> loadByBoardId(String boardId) {
-        return proceduresPersistence.loadByBoardId(boardId);
+        logger.info("Loading the procedures of the board [%s]", boardId);
+        List<Procedure> procedures = proceduresPersistence.loadByBoardId(boardId);
+        logger.info("The procedures of the board are %s", procedures);
+        return procedures;
     }
 
     public Procedure update(Procedure procedure) {
