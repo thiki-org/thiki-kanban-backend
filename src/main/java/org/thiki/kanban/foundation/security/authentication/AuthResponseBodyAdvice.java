@@ -42,7 +42,7 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
     }
 
     private Object rebuildEntityLinks(JSONObject mainResourceBody, ServerHttpRequest serverHttpRequest) {
-        logger.info("rebuilding the links of the response body :[%s]", mainResourceBody);
+        logger.info("rebuilding the links of the response body:{}", mainResourceBody);
         List userNameObject = serverHttpRequest.getHeaders().get("userName");
         String userName = "";
         if (userNameObject != null) {
@@ -59,7 +59,7 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
             }
         }
         Object buildResult = buildLinks(mainResourceBody, userName);
-        logger.info("rebuild result:%s", buildResult);
+        logger.info("rebuild result:{}", buildResult);
         return buildResult;
     }
 

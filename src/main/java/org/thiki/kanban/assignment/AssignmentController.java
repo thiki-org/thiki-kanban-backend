@@ -33,7 +33,7 @@ public class AssignmentController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.GET)
     public HttpEntity findByCardId(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws Exception {
-        logger.info("Loading assignments by board [%s]", boardId);
+        logger.info("Loading assignments by board [{}]", boardId);
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
         return Response.build(new AssignmentsResource(assignmentList, boardId, procedureId, cardId));
     }

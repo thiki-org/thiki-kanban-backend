@@ -25,9 +25,9 @@ public class TagsService {
     }
 
     public List<Tag> loadTagsByBoard(String boardId) {
-        logger.info("Loading tags of the board [%s]", boardId);
+        logger.info("Loading tags of the board [{}]", boardId);
         List<Tag> tags = tagPersistence.loadTagsByBoard(boardId);
-        logger.info("The tags of the board are %s", tags);
+        logger.info("The tags of the board are {}", tags);
         return tags;
     }
 

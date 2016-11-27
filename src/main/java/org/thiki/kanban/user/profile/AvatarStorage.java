@@ -21,7 +21,7 @@ public class AvatarStorage {
     public static final String DEFAULT_AVATAR_FILES_LOCATION = "avatar/default-avatar.png";
 
     public String store(String userName, File avatar) throws IOException {
-        logger.info("store avatar,user:%s", userName);
+        logger.info("store avatar,user:{}", userName);
         File avatarsDirectory = new File(AVATAR_FILES_LOCATION);
         if (!avatarsDirectory.exists()) {
             FileUtil.forceMakeDirectory(avatarsDirectory);
@@ -35,7 +35,7 @@ public class AvatarStorage {
     }
 
     public File loadAvatarByName(String avatarName) throws IOException {
-        logger.info("load avatar,avatarName:%s", avatarName);
+        logger.info("load avatar,avatarName:{}", avatarName);
 
         String avatarPath = AVATAR_FILES_LOCATION + avatarName;
         File avatar = new File(avatarPath);

@@ -41,13 +41,13 @@ public class AssignmentService {
     }
 
     public List<Assignment> findByCardId(String cardId) {
-        logger.info("Loading assignments of the card:%s", cardId);
+        logger.info("Loading assignments of the card:{}", cardId);
         Card card = cardsPersistence.findById(cardId);
         if (card == null) {
             throw new InvalidParamsException(CardsCodes.CARD_IS_NOT_EXISTS.code(), CardsCodes.CARD_IS_NOT_EXISTS.message());
         }
         List<Assignment> assignments = assignmentPersistence.findByCardId(cardId);
-        logger.info("The assignments of the card [%s] are %s", cardId, assignments);
+        logger.info("The assignments of the card [{}] are {}", cardId, assignments);
         return assignments;
     }
 

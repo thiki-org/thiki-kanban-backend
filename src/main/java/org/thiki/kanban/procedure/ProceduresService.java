@@ -32,9 +32,9 @@ public class ProceduresService {
     }
 
     public List<Procedure> loadByBoardId(String boardId) {
-        logger.info("Loading the procedures of the board [%s]", boardId);
+        logger.info("Loading the procedures of the board [{}]", boardId);
         List<Procedure> procedures = proceduresPersistence.loadByBoardId(boardId);
-        logger.info("The procedures of the board are %s", procedures);
+        logger.info("The procedures of the board are {}", procedures);
         return procedures;
     }
 

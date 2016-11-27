@@ -22,7 +22,7 @@ public class CardsController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards", method = RequestMethod.GET)
     public HttpEntity findByProcedureId(@PathVariable String boardId, @PathVariable String procedureId) throws Exception {
-        logger.info("Loading cards by procedureId [%s]", procedureId);
+        logger.info("Loading cards by procedureId [{}]", procedureId);
         List<Card> cardList = cardsService.findByProcedureId(procedureId);
         return Response.build(new CardsResource(cardList, boardId, procedureId));
     }

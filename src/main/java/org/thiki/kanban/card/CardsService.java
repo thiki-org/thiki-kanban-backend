@@ -52,13 +52,13 @@ public class CardsService {
     }
 
     public List<Card> findByProcedureId(String procedureId) {
-        logger.info("Loading cards by procedureId:%s", procedureId);
+        logger.info("Loading cards by procedureId:{}", procedureId);
         Procedure procedure = proceduresPersistence.findById(procedureId);
         if (procedure == null) {
             throw new ResourceNotFoundException(MessageFormat.format("procedure[{0}] is not found.", procedureId));
         }
         List<Card> cards = cardsPersistence.findByProcedureId(procedureId);
-        logger.info("The cards belongs to the procedure %s are %s", procedureId, cards);
+        logger.info("The cards belongs to the procedure {} are {}", procedureId, cards);
         return cards;
     }
 

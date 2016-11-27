@@ -18,7 +18,7 @@ public class AcceptCriteriaService {
     private AcceptCriteriaPersistence acceptCriteriaPersistence;
 
     public AcceptanceCriteria addAcceptCriteria(String userName, String cardId, AcceptanceCriteria acceptanceCriteria) {
-        logger.info(String.format("User [%s] adds a acceptance criteria in card [%s],the acceptanceCriteria is:%s", userName, cardId, acceptanceCriteria));
+        logger.info("User {} adds a acceptance criteria in card [{}],the acceptanceCriteria is:{}", userName, cardId, acceptanceCriteria);
         acceptCriteriaPersistence.addAcceptCriteria(userName, cardId, acceptanceCriteria);
         return acceptCriteriaPersistence.findById(acceptanceCriteria.getId());
     }

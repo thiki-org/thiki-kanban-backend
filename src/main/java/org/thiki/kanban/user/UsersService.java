@@ -80,7 +80,7 @@ public class UsersService {
     }
 
     public File loadAvatar(String userName) throws IOException {
-        logger.info("load avatar by userName:%s", userName);
+        logger.info("load avatar by userName:{}", userName);
         UserProfile userProfile = usersPersistence.findProfile(userName);
         return avatarStorage.loadAvatarByName(userProfile.getAvatar());
     }
