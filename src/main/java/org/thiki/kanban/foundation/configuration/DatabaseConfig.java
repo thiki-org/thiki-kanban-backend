@@ -52,11 +52,11 @@ public class DatabaseConfig {
         org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
         configuration.setMapUnderscoreToCamelCase(true);
         configuration.addInterceptor(dbInterceptor);
+        configuration.setCacheEnabled(true);
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
 
         SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();
         sqlSessionFactoryBuilder.build(configuration);
-
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:org/thiki/kanban/mybatis/**/*.xml"));
         sqlSessionFactoryBean.setSqlSessionFactoryBuilder(sqlSessionFactoryBuilder);
         sqlSessionFactoryBean.setConfiguration(configuration);
