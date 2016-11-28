@@ -52,8 +52,9 @@ public class SecurityFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.info("identification start.");
+        String userName = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_USER_NAME);
         String uri = ((RequestFacade) servletRequest).getRequestURI();
+        logger.info("identification start.userName:{},uri:{}", userName, uri);
         String localAddress = servletRequest.getLocalAddr();
         String authentication = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_IDENTIFICATION);
 
@@ -67,10 +68,10 @@ public class SecurityFilter implements Filter {
         }
         String updatedToken;
         try {
-            if (!isPassedSecurityVerify(servletRequest, servletResponse)) {
+            String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
+            if (!isPassedSecurityVerify(token, userName)) {
                 return;
             }
-            String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
             updatedToken = tokenService.updateToken(token);
         } catch (BusinessException businessException) {
             throw new UnauthorisedException(businessException.getCode(), businessException.getMessage());
@@ -93,10 +94,7 @@ public class SecurityFilter implements Filter {
 
     }
 
-    private boolean isPassedSecurityVerify(ServletRequest servletRequest, ServletResponse servletResponse) throws Exception {
-        String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
-        String userName = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_USER_NAME);
-
+    private boolean isPassedSecurityVerify(String token, String userName) throws Exception {
         IdentityResult identityResult = tokenService.identify(token, userName);
         if (identityResult.getErrorCode() == (Constants.SECURITY_IDENTIFY_PASSED_CODE)) {
             return true;

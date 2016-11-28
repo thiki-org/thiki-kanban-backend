@@ -27,7 +27,8 @@ public class AuthenticationFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        logger.info("authentication start.");
+        String currentURL = ((RequestFacade) servletRequest).getRequestURI();
+        logger.info("authentication start.currentURL:{}", currentURL);
         String localAddress = servletRequest.getLocalAddr();
         String authentication = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_AUTHENTICATION);
 
@@ -35,7 +36,6 @@ public class AuthenticationFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-        String currentURL = ((RequestFacade) servletRequest).getRequestURI();
         String method = ((RequestFacade) servletRequest).getMethod();
         Map<String, Authentication> authProviders = ApplicationContextProvider.getApplicationContext().getBeansOfType(Authentication.class);
         for (Map.Entry entry : authProviders.entrySet()) {
