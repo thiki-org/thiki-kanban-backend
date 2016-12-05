@@ -39,7 +39,7 @@ public class SecurityFilter implements Filter {
 
     private boolean isFreeSecurity(String uri) {
         for (String freeSecurityUrl : whiteList) {
-            UriTemplate uriTemplate = new UriTemplate(freeSecurityUrl);
+            UriTemplate uriTemplate = new UriTemplate(contextPath + freeSecurityUrl);
             if (uriTemplate.matches(uri)) {
                 return true;
             }
