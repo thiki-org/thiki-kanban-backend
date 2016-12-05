@@ -13,6 +13,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 
 /**
@@ -41,10 +42,10 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
                 .body("author", equalTo(userName))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/fooId"))
-                .body("_links.cards.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards"))
-                .body("_links.acceptanceCriterias.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/fooId/acceptanceCriterias"))
-                .body("_links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/fooId/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))
+                .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/acceptanceCriterias"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/assignments"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
     }
 
@@ -109,15 +110,15 @@ public class CardsControllerTest extends TestBase {
                 .body("cards[0].content", equalTo("play badminton"))
                 .body("cards[0].author", equalTo(userName))
                 .body("cards[0].procedureId", equalTo("fooId"))
-                .body("cards[0]._links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/card-fooId"))
-                .body("cards[0]._links.cards.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards"))
-                .body("cards[0]._links.acceptanceCriterias.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/card-fooId/acceptanceCriterias"))
-                .body("cards[0]._links.comments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/card-fooId/comments"))
-                .body("cards[0]._links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/card-fooId/assignments"))
-                .body("cards[0]._links.cardTags.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/card-fooId/tags"))
-                .body("cards[0]._links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards"))
-                .body("_links.sortNumbers.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/fooId/cards/sortNumbers"));
+                .body("cards[0]._links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/card-fooId"))
+                .body("cards[0]._links.cards.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))
+                .body("cards[0]._links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/card-fooId/acceptanceCriterias"))
+                .body("cards[0]._links.comments.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/card-fooId/comments"))
+                .body("cards[0]._links.assignments.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/card-fooId/assignments"))
+                .body("cards[0]._links.cardTags.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/card-fooId/tags"))
+                .body("cards[0]._links.tags.href", endsWith("/boards/boardId-foo/tags"))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))
+                .body("_links.sortNumbers.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/sortNumbers"));
     }
 
     @Scenario("根据ID查找一个卡片时,如果卡片存在,则返回该卡片")
@@ -132,9 +133,9 @@ public class CardsControllerTest extends TestBase {
                 .body("summary", equalTo("this is the card summary."))
                 .body("content", equalTo("play badminton"))
                 .body("author", equalTo(userName))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/1"))
-                .body("_links.cards.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards"))
-                .body("_links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/1/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/1"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/1/assignments"));
     }
 
     @Scenario("根据ID查找一个卡片时,如果卡片不存在,则抛出400错误")
@@ -176,9 +177,9 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("sortNumber", equalTo(3))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId"))
-                .body("_links.cards.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards"))
-                .body("_links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
         assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_card WHERE id='fooId'", String.class));
     }
 
@@ -199,9 +200,9 @@ public class CardsControllerTest extends TestBase {
                 .body("summary", equalTo("newSummary"))
                 .body("sortNumber", equalTo(3))
                 .body("code", equalTo("code-foo"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId6"))
-                .body("_links.cards.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards"))
-                .body("_links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId6/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId6"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId6/assignments"));
     }
 
     @Scenario("当更新一个卡片时,如果待更新的卡片不存在,则抛出资源不存在的错误")

@@ -12,6 +12,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**
  * Created by xubt on 6/16/16.
@@ -34,9 +35,9 @@ public class AssignmentControllerTest extends TestBase {
                 .body("assignee", equalTo("assigneeId"))
                 .body("assigner", equalTo("assignerId"))
                 .body("author", equalTo("someone"))
-                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId"))
-                .body("_links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId/assignments"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId/assignments/fooId"));
+                .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments/fooId"));
     }
 
     @Scenario("当用户根据ID查找分配记录时,如果该记录存在则将其返回")
@@ -54,9 +55,9 @@ public class AssignmentControllerTest extends TestBase {
                 .body("assigner", equalTo("assignerId-foo"))
                 .body("name", equalTo("徐濤"))
                 .body("author", equalTo("authorId-foo"))
-                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId"))
-                .body("_links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId/assignments"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId/assignments/fooId"));
+                .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments/fooId"));
     }
 
     @Scenario("当用户根据cardID获取分配记录时,如果指定的卡片存在,则返回分配记录集合")
@@ -77,13 +78,13 @@ public class AssignmentControllerTest extends TestBase {
                 .body("assignments[0].assigner", equalTo("assignerId-foo"))
                 .body("assignments[0].name", equalTo("徐濤"))
                 .body("assignments[0].author", equalTo("authorId-foo"))
-                .body("assignments[0]._links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/cardId-foo"))
-                .body("assignments[0]._links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/cardId-foo/assignments"))
-                .body("assignments[0]._links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/cardId-foo/assignments/fooId"))
-                .body("assignments[0]._links.assigneeProfile.href", equalTo("http://localhost:8007/users/assigneeId-foo/profile"))
-                .body("assignments[0]._links.assigneeAvatar.href", equalTo("http://localhost:8007/users/assigneeId-foo/avatar"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/cardId-foo/assignments"))
-                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/cardId-foo"));
+                .body("assignments[0]._links.card.href", endsWith("/boards/boardId-foo/procedures/1/cards/cardId-foo"))
+                .body("assignments[0]._links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/cardId-foo/assignments"))
+                .body("assignments[0]._links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/cardId-foo/assignments/fooId"))
+                .body("assignments[0]._links.assigneeProfile.href", endsWith("/users/assigneeId-foo/profile"))
+                .body("assignments[0]._links.assigneeAvatar.href", endsWith("/users/assigneeId-foo/avatar"))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/cardId-foo/assignments"))
+                .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/1/cards/cardId-foo"));
     }
 
     @Scenario("任务认领>当用户此前已经认领该任务后,则不可以再次认领")
@@ -129,8 +130,8 @@ public class AssignmentControllerTest extends TestBase {
                 .delete("/boards/boardId-foo/procedures/1/cards/fooId/assignments/fooId")
                 .then()
                 .statusCode(200)
-                .body("_links.card.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId"))
-                .body("_links.assignments.href", equalTo("http://localhost:8007/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
+                .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
     }
 
     @Scenario("当用户想取消某个分配时,如果指定的分配记录并不存在,则返回404客户端错误")

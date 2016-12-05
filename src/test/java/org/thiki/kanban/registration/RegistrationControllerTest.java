@@ -20,6 +20,7 @@ import javax.annotation.Resource;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -62,7 +63,7 @@ public class RegistrationControllerTest extends TestBase {
                 .body("name", equalTo("someone"))
                 .body("id", equalTo("fooId"))
                 .body("email", equalTo("someone@gmail.com"))
-                .body("_links.login.href", equalTo("http://localhost:8007/login"));
+                .body("_links.login.href", endsWith("/login"));
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_user_registration").size());
         assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration", String.class));

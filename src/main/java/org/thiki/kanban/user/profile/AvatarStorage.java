@@ -15,10 +15,9 @@ import java.io.IOException;
 
 @Service
 public class AvatarStorage {
-    public static Logger logger = LoggerFactory.getLogger(AvatarStorage.class);
-
     public static final String AVATAR_FILES_LOCATION = "files/avatars/";
     public static final String DEFAULT_AVATAR_FILES_LOCATION = "avatar/default-avatar.png";
+    public static Logger logger = LoggerFactory.getLogger(AvatarStorage.class);
 
     public String store(String userName, File avatar) throws IOException {
         logger.info("store avatar,user:{}", userName);

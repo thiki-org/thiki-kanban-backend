@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -37,8 +38,8 @@ public class AvatarTest extends TestBase {
                 .post("/users/someone/avatar")
                 .then()
                 .statusCode(200)
-                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/avatar"))
-                .body("_links.profile.href", equalTo("http://localhost:8007/users/someone/profile"));
+                .body("_links.self.href", endsWith("/users/someone/avatar"))
+                .body("_links.profile.href", endsWith("/users/someone/profile"));
 
         assertEquals("someone.jpg", jdbcTemplate.queryForObject("select avatar from kb_user_profile where user_name='someone'", String.class));
     }
@@ -91,7 +92,7 @@ public class AvatarTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("avatar", equalTo(fileString))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/avatar"));
+                .body("_links.self.href", endsWith("/users/someone/avatar"));
 
     }
 
@@ -118,7 +119,7 @@ public class AvatarTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("avatar", equalTo(fileString))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/avatar"));
+                .body("_links.self.href", endsWith("/users/someone/avatar"));
     }
 
     @After

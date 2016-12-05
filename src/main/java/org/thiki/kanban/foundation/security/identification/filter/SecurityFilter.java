@@ -3,6 +3,7 @@ package org.thiki.kanban.foundation.security.identification.filter;
 import org.apache.catalina.connector.RequestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriTemplate;
@@ -26,9 +27,10 @@ import java.util.List;
 @ConfigurationProperties(prefix = "security")
 public class SecurityFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
+    @Value("${server.contextPath}")
+    protected String contextPath;
     @Resource
     private TokenService tokenService;
-
     private List<String> whiteList = new ArrayList<>();
 
     public List<String> getWhiteList() {

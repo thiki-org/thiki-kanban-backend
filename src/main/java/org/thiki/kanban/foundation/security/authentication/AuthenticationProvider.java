@@ -1,5 +1,6 @@
 package org.thiki.kanban.foundation.security.authentication;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.util.UriTemplate;
 
 import java.net.MalformedURLException;
@@ -16,6 +17,8 @@ public abstract class AuthenticationProvider implements Authentication {
     protected String userName;
     protected String hrefValue;
     protected Map<String, String> pathParams;
+    @Value("${server.contextPath}")
+    protected String contextPath;
 
     @Override
     public boolean authenticate(String url, String method, String userName) {
@@ -69,6 +72,7 @@ public abstract class AuthenticationProvider implements Authentication {
             if (isUrl(path)) {
                 path = new URL(path).getPath();
             }
+            path = path.replace(contextPath, "");
             UriTemplate uriTemplate = new UriTemplate(getPathTemplate());
             return uriTemplate.matches(path);
         } catch (MalformedURLException e) {

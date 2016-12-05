@@ -11,6 +11,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**
  * Created by xubt on 5/18/16.
@@ -37,7 +38,7 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
         dbPreparation.table("kb_board").names("id,name,author,owner,team_id").values("fooId", "board-name", "others", "others", "teamId-foo").exec();
         dbPreparation.table("kb_team_members").names("id,team_id,member").values("fooId", "teamId-foo", "someone").exec();
 
-        given().header("userName", "someone")
+        given().header("userName", "someone").log().all()
                 .when()
                 .get("/someone/boards/fooId")
                 .then()
@@ -45,10 +46,10 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
                 .body("author", equalTo("others"))
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
+                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.procedures.href", endsWith("/boards/fooId/procedures"))
 
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
+                .body("_links.self.href", endsWith("/someone/boards/fooId"))
                 .body("_links.self.actions.assign", nullValue())
                 .body("_links.self.actions.read.isAllowed", equalTo(true))
                 .body("_links.self.actions.modify", nullValue())

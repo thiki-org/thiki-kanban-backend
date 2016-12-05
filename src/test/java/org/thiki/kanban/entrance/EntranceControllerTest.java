@@ -11,6 +11,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**
  * Created by xubt on 5/18/16.
@@ -26,11 +27,11 @@ public class EntranceControllerTest extends AuthenticationTestBase {
                 .then()
                 .statusCode(200)
                 .body("description", equalTo("Welcome!"))
-                .body("_links.self.href", equalTo("http://localhost:8007/entrance"))
+                .body("_links.self.href", endsWith("/entrance"))
                 .body("_links.self.actions.assign", nullValue())
                 .body("_links.self.actions.read.isAllowed", equalTo(true))
                 .body("_links.self.actions.modify", nullValue())
                 .body("_links.self.actions.delete", nullValue())
-                .body("_links.passwordRetrievalApplication.href", equalTo("http://localhost:8007/passwordRetrievalApplication"));
+                .body("_links.passwordRetrievalApplication.href", endsWith("/passwordRetrievalApplication"));
     }
 }

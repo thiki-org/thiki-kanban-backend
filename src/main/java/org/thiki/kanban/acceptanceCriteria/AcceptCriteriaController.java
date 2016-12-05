@@ -12,7 +12,6 @@ import java.util.List;
  */
 @RestController
 public class AcceptCriteriaController {
-
     @Autowired
     private AcceptCriteriaService acceptCriteriaService;
 
@@ -24,23 +23,22 @@ public class AcceptCriteriaController {
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.PUT)
-    public HttpEntity updateAcceptCriteria(@RequestBody AcceptanceCriteria acceptanceCriteria, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable("acceptanceCriteriaId") String acceptanceCriteriaId) throws Exception {
+    public HttpEntity updateAcceptCriteria(@RequestBody AcceptanceCriteria acceptanceCriteria, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId) throws Exception {
         AcceptanceCriteria savedAcceptanceCriteria = acceptCriteriaService.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
 
         return Response.build(new AcceptanceCriteriaResource(savedAcceptanceCriteria, boardId, procedureId, cardId));
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable("acceptanceCriteriaId") String acceptanceCriteriaId) throws Exception {
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId) throws Exception {
         AcceptanceCriteria savedAcceptanceCriteria = acceptCriteriaService.loadAcceptanceCriteriaById(acceptanceCriteriaId);
 
         return Response.build(new AcceptanceCriteriaResource(savedAcceptanceCriteria, boardId, procedureId, cardId));
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.DELETE)
-    public HttpEntity removeAcceptanceCriteria(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable("acceptanceCriteriaId") String acceptanceCriteriaId) throws Exception {
+    public HttpEntity removeAcceptanceCriteria(@PathVariable("") String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId) throws Exception {
         acceptCriteriaService.removeAcceptanceCriteria(acceptanceCriteriaId);
-
         return Response.build(new AcceptanceCriteriaResource(boardId, procedureId, cardId));
     }
 

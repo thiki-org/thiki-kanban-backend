@@ -25,7 +25,7 @@ public class AcceptanceCriteriaResource extends RestResource {
     }
 
     public AcceptanceCriteriaResource(String boardId, String procedureId, String cardId) throws Exception {
-        Link acceptanceCriteriasLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId,procedureId,cardId)).withRel("acceptanceCriterias");
+        Link acceptanceCriteriasLink = linkTo(methodOn(AcceptCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, procedureId, cardId)).withRel("acceptanceCriterias");
         this.add(acceptanceCriteriasLink);
     }
 }

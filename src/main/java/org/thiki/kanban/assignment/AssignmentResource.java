@@ -16,10 +16,10 @@ public class AssignmentResource extends RestResource {
     public AssignmentResource(Assignment assignment, String boardId, String procedureId, String cardId) throws Exception {
         this.domainObject = assignment;
         if (assignment != null) {
-            Link selfLink = linkTo(methodOn(AssignmentController.class).findById(boardId,procedureId, cardId, assignment.getId())).withSelfRel();
+            Link selfLink = linkTo(methodOn(AssignmentController.class).findById(boardId, procedureId, cardId, assignment.getId())).withSelfRel();
             this.add(selfLink);
 
-            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId,procedureId, cardId)).withRel("assignments");
+            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, procedureId, cardId)).withRel("assignments");
             this.add(assignmentsLink);
 
             Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId)).withRel("card");
@@ -35,7 +35,7 @@ public class AssignmentResource extends RestResource {
     }
 
     public AssignmentResource(String boardId, String procedureId, String cardId) throws Exception {
-        Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId,procedureId, cardId)).withRel("assignments");
+        Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, procedureId, cardId)).withRel("assignments");
         this.add(assignmentsLink);
 
         Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId)).withRel("card");

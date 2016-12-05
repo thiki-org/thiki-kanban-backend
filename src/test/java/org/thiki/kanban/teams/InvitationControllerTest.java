@@ -14,6 +14,7 @@ import org.thiki.kanban.teams.team.TeamsCodes;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -41,8 +42,8 @@ public class InvitationControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"))
-                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
+                .body("_links.self.href", endsWith("/teams/foo-team-Id/members/invitation/fooId"))
+                .body("_links.team.href", endsWith("/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
 
@@ -64,8 +65,8 @@ public class InvitationControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"))
-                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
+                .body("_links.self.href", endsWith("/teams/foo-team-Id/members/invitation/fooId"))
+                .body("_links.team.href", endsWith("/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
 
@@ -173,8 +174,8 @@ public class InvitationControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"))
-                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
+                .body("_links.self.href", endsWith("/teams/foo-team-Id/members/invitation/fooId"))
+                .body("_links.team.href", endsWith("/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_team_member_invitation where id='foo-invitation-Id' AND team_id='foo-team-Id' AND delete_status=1").size());
         assertEquals(1, jdbcTemplate.queryForList("select * from kb_team_member_invitation where team_id='foo-team-Id' AND invitee='invitee-user' AND delete_status=0").size());
     }
@@ -197,8 +198,8 @@ public class InvitationControllerTest extends TestBase {
                 .then()
                 .statusCode(201)
                 .body("invitee", equalTo("invitee-user"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/fooId"))
-                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
+                .body("_links.self.href", endsWith("/teams/foo-team-Id/members/invitation/fooId"))
+                .body("_links.team.href", endsWith("/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_notification where type='team_member_invitation' AND receiver='invitee-user'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
@@ -221,8 +222,8 @@ public class InvitationControllerTest extends TestBase {
                 .body("invitee", equalTo("invitee-user"))
                 .body("creationTime", notNullValue())
                 .body("isAccepted", equalTo(false))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-Id/members/invitation/invitation-id"))
-                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-Id"));
+                .body("_links.self.href", endsWith("/teams/foo-team-Id/members/invitation/invitation-id"))
+                .body("_links.team.href", endsWith("/teams/foo-team-Id"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_notification where type='team_member_invitation' AND receiver='invitee-user'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='invitee-user'").size());
     }
@@ -243,8 +244,8 @@ public class InvitationControllerTest extends TestBase {
                 .body("invitee", equalTo("someone"))
                 .body("creationTime", notNullValue())
                 .body("isAccepted", equalTo(true))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-team-id/members/invitation/invitation-id"))
-                .body("_links.team.href", equalTo("http://localhost:8007/teams/foo-team-id"));
+                .body("_links.self.href", endsWith("/teams/foo-team-id/members/invitation/invitation-id"))
+                .body("_links.team.href", endsWith("/teams/foo-team-id"));
 
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_members where team_id='foo-team-id' AND member='someone'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_member_invitation where team_id='fooId' AND invitee='someone' AND is_accepted=1").size());

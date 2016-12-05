@@ -13,6 +13,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 
 /**
@@ -38,8 +39,8 @@ public class TagsControllerTest extends TestBase {
                 .statusCode(201)
                 .body("name", equalTo("tag-name"))
                 .body("color", equalTo("tag-color"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/fooId"))
-                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/tags/fooId"))
+                .body("_links.tags.href", endsWith("/boards/boardId-foo/tags"));
     }
 
     @Scenario("获取标签>用户为卡片创建标签后,可以查看")
@@ -56,10 +57,10 @@ public class TagsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("tags[0].name", equalTo("tag-name"))
                 .body("tags[0].color", equalTo("tag-color"))
-                .body("tags[0]._links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/fooId"))
-                .body("tags[0]._links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"))
-                .body("_links.clone.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/clone?sourceBoardId="))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
+                .body("tags[0]._links.self.href", endsWith("/boards/boardId-foo/tags/fooId"))
+                .body("tags[0]._links.tags.href", endsWith("/boards/boardId-foo/tags"))
+                .body("_links.clone.href", endsWith("/boards/boardId-foo/tags/clone?sourceBoardId="))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/tags"));
     }
 
     @Scenario("更新标签>用户创建标签后,可以更新该标签的相关属性")
@@ -78,8 +79,8 @@ public class TagsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("name", equalTo("tag-name-new"))
                 .body("color", equalTo("color-new"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/boardId-foo/tags/fooId"))
-                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/tags/fooId"))
+                .body("_links.tags.href", endsWith("/boards/boardId-foo/tags"));
     }
 
     @Scenario("删除标签>针对不再使用的标签,用户可以删除")
@@ -94,7 +95,7 @@ public class TagsControllerTest extends TestBase {
                 .delete("/boards/boardId-foo/tags/fooId")
                 .then()
                 .statusCode(200)
-                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
+                .body("_links.tags.href", endsWith("/boards/boardId-foo/tags"));
     }
 
     @Scenario("创建标签>当用户创建标签时,如果同一看板下,已经存在相同名称,则不允许创建")
@@ -188,7 +189,7 @@ public class TagsControllerTest extends TestBase {
                 .param("sourceBoardId", "otherBoardId")
                 .post("/boards/boardId-foo/tags/clone")
                 .then()
-                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
+                .body("_links.tags.href", endsWith("/boards/boardId-foo/tags"));
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_tag WHERE board_id='boardId-foo' AND delete_status=0").size());
     }
@@ -213,7 +214,7 @@ public class TagsControllerTest extends TestBase {
                 .param("sourceBoardId", "otherBoardId")
                 .post("/boards/boardId-foo/tags/clone")
                 .then()
-                .body("_links.tags.href", equalTo("http://localhost:8007/boards/boardId-foo/tags"));
+                .body("_links.tags.href", endsWith("/boards/boardId-foo/tags"));
 
         assertEquals(2, jdbcTemplate.queryForList("SELECT * FROM kb_tag WHERE board_id='boardId-foo' AND delete_status=0").size());
     }

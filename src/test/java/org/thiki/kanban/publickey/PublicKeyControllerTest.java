@@ -9,6 +9,7 @@ import org.thiki.kanban.foundation.common.FileUtil;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**
  * Created by xubt on 7/13/16.
@@ -24,7 +25,7 @@ public class PublicKeyControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("publicKey", equalTo(publicKey))
-                .body("_links.login.href", equalTo("http://localhost:8007/login"))
-                .body("_links.registration.href", equalTo("http://localhost:8007/registration"));
+                .body("_links.login.href", endsWith("/login"))
+                .body("_links.registration.href", endsWith("/registration"));
     }
 }

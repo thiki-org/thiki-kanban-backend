@@ -25,6 +25,7 @@ import java.util.Date;
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -92,7 +93,7 @@ public class PasswordControllerTest extends TestBase {
                 .post("/passwordRetrievalApplication")
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
-                .body("_links.passwordResetApplication.href", equalTo("http://localhost:8007/tao/passwordResetApplication"));
+                .body("_links.passwordResetApplication.href", endsWith("/tao/passwordResetApplication"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where user_name='tao'").size());
     }
 
@@ -109,7 +110,7 @@ public class PasswordControllerTest extends TestBase {
                 .post("/passwordRetrievalApplication")
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
-                .body("_links.passwordResetApplication.href", equalTo("http://localhost:8007/tao/passwordResetApplication"));
+                .body("_links.passwordResetApplication.href", endsWith("/tao/passwordResetApplication"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where user_name='tao' and is_verify_passed=0").size());
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where user_name='tao' and is_verify_passed=-1").size());
     }
@@ -132,7 +133,7 @@ public class PasswordControllerTest extends TestBase {
                 .post("/tao/passwordResetApplication")
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
-                .body("_links.password.href", equalTo("http://localhost:8007/tao/password"));
+                .body("_links.password.href", endsWith("/tao/password"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_retrieval where user_name='tao' and is_verify_passed=1").size());
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where user_name='tao'").size());
     }
@@ -161,7 +162,7 @@ public class PasswordControllerTest extends TestBase {
                 .put("/tao/password")
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
-                .body("_links.login.href", equalTo("http://localhost:8007/login"));
+                .body("_links.login.href", endsWith("/login"));
         assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration where name='tao'", String.class));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where user_name='tao' and is_reset=1").size());
     }

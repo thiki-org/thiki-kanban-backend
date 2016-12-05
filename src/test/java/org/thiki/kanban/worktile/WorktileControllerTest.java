@@ -17,6 +17,7 @@ import java.util.Date;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -43,8 +44,8 @@ public class WorktileControllerTest extends TestBase {
                 .body("name", equalTo(expectedWorktileName))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.self.href", endsWith("/someone/boards/fooId"));
 
         assertEquals(expectedWorktileName, jdbcTemplate.queryForObject("select name from kb_board where author='someone'", String.class));
     }
@@ -63,8 +64,8 @@ public class WorktileControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.self.href", endsWith("/someone/boards/fooId"));
 
         assertEquals("Product Backlog", jdbcTemplate.queryForObject("select title from kb_procedure where board_id='fooId'", String.class));
     }
@@ -83,8 +84,8 @@ public class WorktileControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.self.href", endsWith("/someone/boards/fooId"));
 
         assertEquals("任务名称", jdbcTemplate.queryForObject("select summary from kb_card where author='someone'", String.class));
     }
@@ -103,8 +104,8 @@ public class WorktileControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.self.href", endsWith("/someone/boards/fooId"));
 
         assertEquals("todo", jdbcTemplate.queryForObject("select summary from kb_acceptance_criterias where card_id='fooId' AND author='someone'", String.class));
         assertEquals("TRUE", jdbcTemplate.queryForObject("select finished from kb_acceptance_criterias where card_id='fooId' AND author='someone'", String.class));

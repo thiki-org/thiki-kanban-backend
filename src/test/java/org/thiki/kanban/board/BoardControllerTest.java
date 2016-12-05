@@ -12,6 +12,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -35,16 +36,18 @@ public class BoardControllerTest extends TestBase {
                 .body("name", equalTo("board-name"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.tags.href", equalTo("http://localhost:8007/boards/fooId/tags"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.tags.href", endsWith("/boards/fooId/tags"))
+                .body("_links.self.href", endsWith("/someone/boards/fooId"));
     }
 
     @Scenario("用户根据ID获取board时,如果该board存在,则返回其信息")
     @Test
     public void shouldReturnBoardWhenBoardIsExist() {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
+
         given().header("userName", "someone")
+                .log().all()
                 .when()
                 .get("/someone/boards/fooId")
                 .then()
@@ -52,9 +55,9 @@ public class BoardControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
                 .body("author", equalTo("someone"))
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.procedures.href", endsWith("/boards/fooId/procedures"))
+                .body("_links.self.href", endsWith("/someone/boards/fooId"));
     }
 
     @Scenario("成功更新一个board信息")
@@ -70,9 +73,9 @@ public class BoardControllerTest extends TestBase {
                 .statusCode(200)
                 .body("name", equalTo("new-name"))
                 .body("author", equalTo("someone"))
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
-                .body("_links.team.href", equalTo("http://localhost:8007/teams/teamId-foo"));
+                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.self.href", endsWith("/someone/boards/fooId"))
+                .body("_links.team.href", endsWith("/teams/teamId-foo"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
         assertEquals("teamId-foo", jdbcTemplate.queryForObject("select team_id from kb_board where id='fooId'", String.class));
     }
@@ -116,7 +119,7 @@ public class BoardControllerTest extends TestBase {
                 .delete("/someone/boards/fooId")
                 .then()
                 .statusCode(200)
-                .body("_links.all.href", equalTo("http://localhost:8007/someone/boards"));
+                .body("_links.all.href", endsWith("/someone/boards"));
         assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_board WHERE  delete_status=1").size());
     }
 
@@ -144,11 +147,11 @@ public class BoardControllerTest extends TestBase {
                 .body("boards[0].name", equalTo("board-name"))
                 .body("boards[0].author", equalTo("someone"))
                 .body("boards[0].creationTime", notNullValue())
-                .body("boards[0]._links.all.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("boards[0]._links.self.href", equalTo("http://localhost:8007/someone/boards/fooId"))
-                .body("boards[0]._links.procedures.href", equalTo("http://localhost:8007/boards/fooId/procedures"))
-                .body("_links.self.href", equalTo("http://localhost:8007/someone/boards"))
-                .body("_links.worktileTasks.href", equalTo("http://localhost:8007/someone/worktileTasks"));
+                .body("boards[0]._links.all.href", endsWith("/someone/boards"))
+                .body("boards[0]._links.self.href", endsWith("/someone/boards/fooId"))
+                .body("boards[0]._links.procedures.href", endsWith("/boards/fooId/procedures"))
+                .body("_links.self.href", endsWith("/someone/boards"))
+                .body("_links.worktileTasks.href", endsWith("/someone/worktileTasks"));
 
     }
 

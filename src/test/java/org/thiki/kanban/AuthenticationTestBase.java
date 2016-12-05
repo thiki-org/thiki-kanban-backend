@@ -2,7 +2,6 @@ package org.thiki.kanban;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.builder.RequestSpecBuilder;
-import com.jayway.restassured.specification.RequestSpecification;
 import org.junit.Before;
 import org.thiki.kanban.foundation.security.Constants;
 
@@ -13,9 +12,11 @@ public class AuthenticationTestBase extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        RequestSpecification requestSpecification = new RequestSpecBuilder()
+        requestSpecification = new RequestSpecBuilder()
                 .addHeader(Constants.HEADER_PARAMS_IDENTIFICATION, "no")
                 .addHeader(Constants.HEADER_PARAMS_AUTHENTICATION, "yes")
+                .setBasePath(contextPath)
+                .setPort(port)
                 .build();
         RestAssured.requestSpecification = requestSpecification;
     }

@@ -5,12 +5,13 @@ import com.jayway.restassured.builder.RequestSpecBuilder;
 import com.jayway.restassured.specification.RequestSpecification;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.foundation.aspect.DBInterceptor;
 import org.thiki.kanban.foundation.common.SequenceNumber;
@@ -24,9 +25,14 @@ import static org.mockito.Mockito.when;
  * Created by xubt on 5/14/16.
  */
 @SpringApplicationConfiguration({Application.class, TestContextConfiguration.class})
-@WebIntegrationTest("server.port:8007")
+@WebIntegrationTest
+@ActiveProfiles("local-test")
 public class TestBase {
-    protected static int port = 8007;
+    @Value("${server.port}")
+    protected int port;
+
+    @Value("${server.contextPath}")
+    protected String contextPath;
     protected String publicKeyFilePath = "rsakey.pub";
 
     protected String userName = "someone";
@@ -38,21 +44,19 @@ public class TestBase {
     protected DBPreparation dbPreparation;
     protected JdbcTemplate jdbcTemplate;
     protected SequenceNumber sequenceNumber = Mockito.mock(SequenceNumber.class);
+    protected RequestSpecification requestSpecification;
     @Autowired
     private DBInterceptor dbInterceptor;
 
-    @BeforeClass
-    public static void globalInit() {
-        RestAssured.port = port;
-        RequestSpecification requestSpecification = new RequestSpecBuilder()
-                .addHeader(Constants.HEADER_PARAMS_IDENTIFICATION, "no")
-                .addHeader(Constants.HEADER_PARAMS_AUTHENTICATION, "no")
-                .build();
-        RestAssured.requestSpecification = requestSpecification;
-    }
-
     @Before
     public void setUp() throws Exception {
+        requestSpecification = new RequestSpecBuilder()
+                .addHeader(Constants.HEADER_PARAMS_IDENTIFICATION, "no")
+                .addHeader(Constants.HEADER_PARAMS_AUTHENTICATION, "no")
+                .setBasePath(contextPath)
+                .setPort(port)
+                .build();
+        RestAssured.requestSpecification = requestSpecification;
         when(sequenceNumber.generate()).thenReturn("fooId");
         ReflectionTestUtils.setField(dbInterceptor, "sequenceNumber", sequenceNumber);
         jdbcTemplate = new JdbcTemplate(dataSource);

@@ -13,6 +13,7 @@ import org.thiki.kanban.teams.teamMembers.TeamMembersCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**
  * Created by 濤 on 7/26/16.
@@ -34,7 +35,7 @@ public class MembersControllerTest extends TestBase {
                 .body("teamId", equalTo("foo-teamId"))
                 .body("member", equalTo("someone"))
                 .body("id", equalTo("fooId"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/members"));
+                .body("_links.self.href", endsWith("/teams/foo-teamId/members"));
     }
 
     @Scenario("退出团队>用户加入某个团队后,可以选择离开团队")
@@ -47,8 +48,8 @@ public class MembersControllerTest extends TestBase {
                 .delete("/teams/foo-teamId/members/someone")
                 .then()
                 .statusCode(200)
-                .body("_links.teams.href", equalTo("http://localhost:8007/someone/teams"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/members/someone"));
+                .body("_links.teams.href", endsWith("/someone/teams"))
+                .body("_links.self.href", endsWith("/teams/foo-teamId/members/someone"));
     }
 
     @Scenario("加入团队时,如果该团队并不存在,则不允许加入")
@@ -97,11 +98,11 @@ public class MembersControllerTest extends TestBase {
                 .statusCode(200)
                 .body("members[0].userName", equalTo("someone"))
                 .body("members[0].email", equalTo("someone@gmail.com"))
-                .body("members[0]._links.self.href", equalTo("http://localhost:8007/teams/foo-teamId/members/someone"))
-                .body("members[0]._links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
-                .body("members[0]._links.profile.href", equalTo("http://localhost:8007/users/someone/profile"))
-                .body("_links.invitation.href", equalTo("http://localhost:8007/teams/foo-teamId/members/invitation"))
-                .body("_links.member.href", equalTo("http://localhost:8007/teams/foo-teamId/members/someone"));
+                .body("members[0]._links.self.href", endsWith("/teams/foo-teamId/members/someone"))
+                .body("members[0]._links.avatar.href", endsWith("/users/someone/avatar"))
+                .body("members[0]._links.profile.href", endsWith("/users/someone/profile"))
+                .body("_links.invitation.href", endsWith("/teams/foo-teamId/members/invitation"))
+                .body("_links.member.href", endsWith("/teams/foo-teamId/members/someone"));
     }
 
     @Scenario("当用户加入一个团队后，可以获取该团队的所有成员。但是当团队不存在时,则不允许获取。")

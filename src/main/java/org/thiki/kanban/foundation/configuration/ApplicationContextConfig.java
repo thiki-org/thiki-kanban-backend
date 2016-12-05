@@ -14,7 +14,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -30,10 +29,10 @@ import java.util.concurrent.TimeUnit;
  * Created by xubitao on 04/26/16.
  */
 @Configuration
-@PropertySources(value = {@PropertySource("kanban.properties")})
+@PropertySource(ignoreResourceNotFound = true, value = "classpath:kanban-${spring.profiles.active}.properties")
 @ConfigurationProperties(prefix = "security")
 public class ApplicationContextConfig implements ApplicationContextAware {
-    @Value("${http.port}")
+    @Value("${server.port}")
     private int port;
     private int maxAllowedOrigins = 20;
 

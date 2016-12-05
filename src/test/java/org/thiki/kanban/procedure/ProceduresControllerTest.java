@@ -12,6 +12,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -36,9 +37,9 @@ public class ProceduresControllerTest extends TestBase {
                 .body("title", equalTo("this is the procedure title."))
                 .body("author", equalTo(userName))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("_links.cards.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId/cards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"));
+                .body("_links.all.href", endsWith("/boards/feeId/procedures"))
+                .body("_links.cards.href", endsWith("/boards/feeId/procedures/fooId/cards"))
+                .body("_links.self.href", endsWith("/boards/feeId/procedures/fooId"));
     }
 
     @Scenario("创建新的procedure时,如果名称为空,则不允许创建并返回客户端400错误")
@@ -110,8 +111,8 @@ public class ProceduresControllerTest extends TestBase {
                 .statusCode(200)
                 .body("id", equalTo("fooId"))
                 .body("title", equalTo("this is the first procedure."))
-                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"));
+                .body("_links.all.href", endsWith("/boards/feeId/procedures"))
+                .body("_links.self.href", endsWith("/boards/feeId/procedures/fooId"));
     }
 
     @Scenario("更新procedure时,如果参数合法且待更新的procedure存在,则更新成功")
@@ -126,8 +127,8 @@ public class ProceduresControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("title", equalTo("newTitle"))
-                .body("_links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"));
+                .body("_links.all.href", endsWith("/boards/feeId/procedures"))
+                .body("_links.self.href", endsWith("/boards/feeId/procedures/fooId"));
         assertEquals("newTitle", jdbcTemplate.queryForObject("select title from kb_procedure where id='fooId'", String.class));
     }
 
@@ -162,7 +163,7 @@ public class ProceduresControllerTest extends TestBase {
                 .body("procedures[0].sortNumber", equalTo(2))
                 .body("procedures[1].title", equalTo("procedureTitle2"))
                 .body("procedures[1].sortNumber", equalTo(3))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/sortNumbers"));
+                .body("_links.self.href", endsWith("/boards/feeId/procedures/sortNumbers"));
     }
 
     @Scenario("当删除一个procedure时,如果待删除的procedure存在,则删除成功")
@@ -202,10 +203,10 @@ public class ProceduresControllerTest extends TestBase {
                 .body("procedures[0].title", equalTo("this is the first procedure."))
                 .body("procedures[0].author", equalTo("tao"))
                 .body("procedures[0].creationTime", notNullValue())
-                .body("procedures[0]._links.all.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("procedures[0]._links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId"))
-                .body("procedures[0]._links.cards.href", equalTo("http://localhost:8007/boards/feeId/procedures/fooId/cards"))
-                .body("_links.self.href", equalTo("http://localhost:8007/boards/feeId/procedures"))
-                .body("_links.sortNumbers.href", equalTo("http://localhost:8007/boards/feeId/procedures/sortNumbers"));
+                .body("procedures[0]._links.all.href", endsWith("/boards/feeId/procedures"))
+                .body("procedures[0]._links.self.href", endsWith("/boards/feeId/procedures/fooId"))
+                .body("procedures[0]._links.cards.href", endsWith("/boards/feeId/procedures/fooId/cards"))
+                .body("_links.self.href", endsWith("/boards/feeId/procedures"))
+                .body("_links.sortNumbers.href", endsWith("/boards/feeId/procedures/sortNumbers"));
     }
 }

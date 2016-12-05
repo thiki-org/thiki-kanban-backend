@@ -22,7 +22,7 @@ public class AssignmentsResource extends RestResource {
         }
 
         this.buildDataObject("assignments", assignmentResources);
-        Link selfLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId,procedureId, cardId)).withSelfRel();
+        Link selfLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, procedureId, cardId)).withSelfRel();
         this.add(selfLink);
 
         Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId)).withRel("card");

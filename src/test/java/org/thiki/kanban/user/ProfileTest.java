@@ -13,6 +13,7 @@ import java.io.IOException;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**
  * Created by xubt on 26/09/2016.
@@ -39,8 +40,8 @@ public class ProfileTest extends TestBase {
                 .body("userName", equalTo("someone"))
                 .body("nickName", equalTo("tao"))
                 .body("email", equalTo("someone@gmail.com"))
-                .body("_links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/profile"));
+                .body("_links.avatar.href", endsWith("/users/someone/avatar"))
+                .body("_links.self.href", endsWith("/users/someone/profile"));
     }
 
     @Scenario("个人资料>用户登录后,可以获取个人资料")
@@ -55,8 +56,8 @@ public class ProfileTest extends TestBase {
                 .statusCode(200)
                 .body("userName", equalTo("someone"))
                 .body("email", equalTo("someone@gmail.com"))
-                .body("_links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/profile"));
+                .body("_links.avatar.href", endsWith("/users/someone/avatar"))
+                .body("_links.self.href", endsWith("/users/someone/profile"));
     }
 
     @Scenario("个人资料>用户可以更新个人资料")
@@ -78,7 +79,7 @@ public class ProfileTest extends TestBase {
                 .statusCode(200)
                 .body("nickName", equalTo("nick-name"))
                 .body("email", equalTo("someone@gmail.com"))
-                .body("_links.avatar.href", equalTo("http://localhost:8007/users/someone/avatar"))
-                .body("_links.self.href", equalTo("http://localhost:8007/users/someone/profile"));
+                .body("_links.avatar.href", endsWith("/users/someone/avatar"))
+                .body("_links.self.href", endsWith("/users/someone/profile"));
     }
 }

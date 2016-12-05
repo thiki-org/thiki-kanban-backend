@@ -12,6 +12,7 @@ import org.thiki.kanban.teams.team.TeamsCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -33,7 +34,7 @@ public class TeamControllerTest extends TestBase {
                 .statusCode(201)
                 .body("name", equalTo("思奇团队讨论组"))
                 .body("id", equalTo("fooId"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"));
+                .body("_links.self.href", endsWith("/teams/fooId"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_team_members where team_id='fooId' AND member='someone'").size());
     }
 
@@ -108,7 +109,7 @@ public class TeamControllerTest extends TestBase {
                 .body("[0].id", equalTo("fooId"))
                 .body("[0].name", equalTo("team-name"))
                 .body("[0].author", equalTo("someone"))
-                .body("[0]._links.self.href", equalTo("http://localhost:8007/teams/fooId"));
+                .body("[0]._links.self.href", endsWith("/teams/fooId"));
     }
 
     @Scenario("用户根据ID获取team时,如果该team存在,则返回其信息")
@@ -123,8 +124,8 @@ public class TeamControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("team-name"))
                 .body("author", equalTo("someone"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/fooId"))
-                .body("_links.members.href", equalTo("http://localhost:8007/teams/fooId/members"));
+                .body("_links.self.href", endsWith("/teams/fooId"))
+                .body("_links.members.href", endsWith("/teams/fooId/members"));
     }
 
     @Scenario("获取指定团队信息>用户根据ID获取team时,如果该team不存在,则告知客户端错误")
@@ -152,7 +153,7 @@ public class TeamControllerTest extends TestBase {
                 .statusCode(200)
                 .body("name", equalTo("new-name"))
                 .body("id", equalTo("teamId-foo"))
-                .body("_links.self.href", equalTo("http://localhost:8007/teams/teamId-foo"));
+                .body("_links.self.href", endsWith("/teams/teamId-foo"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select NAME from kb_team where id='teamId-foo'", String.class));
     }
 
