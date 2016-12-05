@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
  * Created by xubitao on 04/26/16.
  */
 @Configuration
-@PropertySource(ignoreResourceNotFound = true, value = "classpath:kanban-${spring.profiles.active}.properties")
+@PropertySource(ignoreResourceNotFound = true, value = "classpath:application-${spring.profiles.active}.properties")
 @ConfigurationProperties(prefix = "security")
 public class ApplicationContextConfig implements ApplicationContextAware {
     @Value("${server.port}")
