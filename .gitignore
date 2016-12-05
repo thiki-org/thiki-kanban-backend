@@ -20,3 +20,4 @@ README.html
 /bin/
 .settings/
 kanban.iml
+/src/main/resources/static/
