@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.thiki.kanban.foundation.hateoas.TLink;
 
 import java.util.List;
 
@@ -19,9 +20,7 @@ public class RestResource extends ResourceSupport {
         JSONObject resourceJSON = new JSONObject();
         JSONObject links = new JSONObject();
         for (Link link : super.getLinks()) {
-            JSONObject linkJSON = new JSONObject();
-            linkJSON.put("href", link.getHref());
-            links.put(link.getRel(), linkJSON);
+            links.put(link.getRel(), ((TLink) link).toJSON());
         }
         JSONObject domainJSON = JSONObject.parseObject(JSONObject.toJSONString(domainObject));
         if (domainJSON != null) {

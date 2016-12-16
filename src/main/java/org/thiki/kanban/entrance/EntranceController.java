@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
 
+import javax.annotation.Resource;
+
 /**
  * Created by xubitao on 04/26/16.
  */
@@ -15,10 +17,12 @@ import org.thiki.kanban.foundation.common.Response;
 @RequestMapping(value = "/entrance")
 public class EntranceController {
     private final static Logger logger = LoggerFactory.getLogger(EntranceController.class);
+    @Resource
+    private EntranceResource entranceResource;
 
     @RequestMapping(method = RequestMethod.GET)
     public HttpEntity enter() throws Exception {
         logger.warn("entrance called!");
-        return Response.build(new EntranceResource());
+        return Response.build(entranceResource.toResource());
     }
 }

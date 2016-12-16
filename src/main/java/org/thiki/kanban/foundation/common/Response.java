@@ -46,4 +46,10 @@ public class Response {
                 .ok().contentType(MediaType.TEXT_PLAIN)
                 .body(s);
     }
+
+    public static HttpEntity build(Object o) {
+        return ResponseEntity
+                .ok().contentType(MediaType.APPLICATION_JSON)
+                .body(o);
+    }
 }

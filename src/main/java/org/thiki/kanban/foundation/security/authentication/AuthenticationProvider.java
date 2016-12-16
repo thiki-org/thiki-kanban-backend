@@ -2,9 +2,11 @@ package org.thiki.kanban.foundation.security.authentication;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.util.UriTemplate;
+import org.thiki.kanban.foundation.hateoas.Action;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.util.ResourceUtils.isUrl;
@@ -85,5 +87,9 @@ public abstract class AuthenticationProvider implements Authentication {
         UriTemplate uriTemplate = new UriTemplate(getPathTemplate());
         Map pathValues = uriTemplate.match(url);
         return pathValues;
+    }
+
+    public List<Action> authenticate() {
+        return null;
     }
 }

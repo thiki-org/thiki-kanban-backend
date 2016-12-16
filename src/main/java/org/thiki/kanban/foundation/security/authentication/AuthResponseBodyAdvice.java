@@ -30,14 +30,7 @@ public class AuthResponseBodyAdvice implements ResponseBodyAdvice {
 
     @Override
     public Object beforeBodyWrite(Object responseBody, MethodParameter methodParameter, MediaType mediaType, Class aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
-        if (responseBody instanceof Map) {
-            Object status = ((Map) responseBody).get("status");
-            if (status == null) {
-                if (responseBody instanceof Map) {
-                    return rebuildEntityLinks((JSONObject) responseBody, serverHttpRequest);
-                }
-            }
-        }
+
         return responseBody;
     }
 
