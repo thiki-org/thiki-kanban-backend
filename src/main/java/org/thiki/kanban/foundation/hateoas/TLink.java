@@ -2,10 +2,8 @@ package org.thiki.kanban.foundation.hateoas;
 
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.test.util.ReflectionTestUtils;
-import org.thiki.kanban.foundation.security.authentication.AuthenticationProvider;
 
 import java.util.List;
 
@@ -15,19 +13,16 @@ import java.util.List;
 @Service
 public class TLink extends Link {
     private List<Action> actions;
-    private ControllerLinkBuilder controllerLinkBuilder;
 
-    public TLink appendActions(Link publicKeyLink) {
+    public TLink from(Link link) {
         TLink tlink = new TLink();
-        ReflectionTestUtils.setField(tlink, "href", publicKeyLink.getHref());
-        ReflectionTestUtils.setField(tlink, "rel", publicKeyLink.getRel());
-        ReflectionTestUtils.setField(tlink, "template", ReflectionTestUtils.getField(publicKeyLink, "template"));
+        ReflectionTestUtils.setField(tlink, "href", link.getHref());
+        ReflectionTestUtils.setField(tlink, "rel", link.getRel());
+        ReflectionTestUtils.setField(tlink, "template", ReflectionTestUtils.getField(link, "template"));
         return tlink;
     }
 
-    public TLink withAuthenticationProvider(AuthenticationProvider authenticationProvider) {
-
-        List<Action> actions = authenticationProvider.authenticate();
+    public TLink withActions(List<Action> actions) {
         this.actions = actions;
         return this;
     }
@@ -36,12 +31,14 @@ public class TLink extends Link {
         JSONObject linkJSON = new JSONObject();
         linkJSON.put("href", this.getHref());
         JSONObject actions = new JSONObject();
-        for (Action action : this.actions) {
-            JSONObject actionJSON = new JSONObject();
-            actionJSON.put("isAllowed", action.isAllowed());
-            actions.put(action.getActionName(), actionJSON);
+        if (this.actions != null) {
+            for (Action action : this.actions) {
+                JSONObject actionJSON = new JSONObject();
+                actionJSON.put("isAllowed", action.isAllowed());
+                actions.put(action.getActionName(), actionJSON);
+            }
+            linkJSON.put("actions", actions);
         }
-        linkJSON.put("actions", actions);
         return linkJSON;
     }
 }

@@ -20,7 +20,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @Service
 public class EntranceResource extends RestResource {
     @Resource
-    TLink tLink;
+    private TLink tlink;
     @Resource
     private EntranceAuthenticationProvider entranceAuthenticationProvider;
 
@@ -33,10 +33,9 @@ public class EntranceResource extends RestResource {
         Link publicKeyLink = linkTo(methodOn(PublicKeyController.class).identify()).withRel("publicKey");
         Link passwordRetrievalLink = linkTo(methodOn(PasswordController.class).passwordRetrievalApply(null)).withRel("passwordRetrievalApplication");
 
-        this.add(tLink.appendActions(publicKeyLink).withAuthenticationProvider(entranceAuthenticationProvider));
-        this.add(tLink.appendActions(selfLink).withAuthenticationProvider(entranceAuthenticationProvider));
-        this.add(tLink.appendActions(passwordRetrievalLink).withAuthenticationProvider(entranceAuthenticationProvider));
-        this.add(tLink.appendActions(publicKeyLink).withAuthenticationProvider(entranceAuthenticationProvider));
+        this.add(tlink.from(selfLink).withActions(entranceAuthenticationProvider.authenticate()));
+        this.add(tlink.from(publicKeyLink));
+        this.add(tlink.from(passwordRetrievalLink));
         return getResource();
     }
 }
