@@ -40,7 +40,7 @@
         SELECT * FROM kb_board WHERE delete_status=0 AND owner=#{userName}
     </select>
 
-    <select id="find TeamsBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+    <select id="findTeamsBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
         SELECT * FROM kb_board WHERE delete_status=0 and team_id= #{teamId}
     </select>
 </mapper>
