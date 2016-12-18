@@ -106,10 +106,10 @@ public class TeamControllerTest extends TestBase {
                 .get("/someone/teams")
                 .then()
                 .statusCode(200)
-                .body("[0].id", equalTo("fooId"))
-                .body("[0].name", equalTo("team-name"))
-                .body("[0].author", equalTo("someone"))
-                .body("[0]._links.self.href", endsWith("/teams/fooId"));
+                .body("teams[0].id", equalTo("fooId"))
+                .body("teams[0].name", equalTo("team-name"))
+                .body("teams[0].author", equalTo("someone"))
+                .body("teams[0]._links.self.href", endsWith("/teams/fooId"));
     }
 
     @Scenario("用户根据ID获取team时,如果该team存在,则返回其信息")
