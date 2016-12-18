@@ -1,5 +1,7 @@
 package org.thiki.kanban.foundation.hateoas;
 
+import org.thiki.kanban.foundation.security.authentication.MethodType;
+
 /**
  * Created by xubt on 16/12/2016.
  */
@@ -12,7 +14,18 @@ public class Action {
     }
 
     public void setActionName(String actionName) {
-        this.actionName = actionName;
+        if (MethodType.GET.name().equals(actionName)) {
+            this.actionName = "read";
+        }
+        if (MethodType.POST.name().equals(actionName)) {
+            this.actionName = "create";
+        }
+        if (MethodType.PUT.name().equals(actionName)) {
+            this.actionName = "modify";
+        }
+        if (MethodType.DELETE.name().equals(actionName)) {
+            this.actionName = "delete";
+        }
     }
 
     public boolean isAllowed() {
