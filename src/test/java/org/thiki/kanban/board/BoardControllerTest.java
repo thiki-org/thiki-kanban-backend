@@ -113,7 +113,7 @@ public class BoardControllerTest extends TestBase {
     @Scenario("当用户删除一个指定的board时,如果该board存在,则删除成功")
     @Test
     public void shouldDeleteSuccessfullyWhenTheBoardIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author,owner) VALUES ('fooId','board-name','someone','someone')");
         given().header("userName", "someone")
                 .when()
                 .delete("/someone/boards/fooId")
