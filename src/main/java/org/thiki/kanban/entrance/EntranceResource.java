@@ -22,7 +22,8 @@ public class EntranceResource extends RestResource {
     private TLink tlink;
 
     public Object toResource() throws Exception {
-        this.domainObject = new JSONObject() {{
+        EntranceResource entranceResource = new EntranceResource();
+        entranceResource.domainObject = new JSONObject() {{
             put("description", "Welcome!");
         }};
 
@@ -30,9 +31,9 @@ public class EntranceResource extends RestResource {
         Link publicKeyLink = linkTo(methodOn(PublicKeyController.class).identify()).withRel("publicKey");
         Link passwordRetrievalLink = linkTo(methodOn(PasswordController.class).passwordRetrievalApply(null)).withRel("passwordRetrievalApplication");
 
-        this.add(tlink.from(selfLink).build());
-        this.add(tlink.from(publicKeyLink));
-        this.add(tlink.from(passwordRetrievalLink));
-        return getResource();
+        entranceResource.add(tlink.from(selfLink).build());
+        entranceResource.add(tlink.from(publicKeyLink).build());
+        entranceResource.add(tlink.from(passwordRetrievalLink).build());
+        return entranceResource.getResource();
     }
 }

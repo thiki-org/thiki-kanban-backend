@@ -3,15 +3,10 @@ roles:
     resources:
       - template: /entrance
         GET: true
-      - template: /entrance2
-        GET: false
-
-  - name: teamMember
-    resources:
-      - template: /entrance2
+      - template: /publicKey
         GET: true
-      - template: /entrance2
-        GET: false
+      - template: /passwordRetrievalApplication
+        GET: true
 
   - name: personal
     resources:
@@ -20,8 +15,6 @@ roles:
         POST: true
         DELETE: true
         PUT: true
-      - template: /entrance2
-        GET: false
 
 
 
