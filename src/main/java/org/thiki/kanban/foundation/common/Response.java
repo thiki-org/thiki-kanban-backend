@@ -25,6 +25,7 @@ public class Response {
         return responseEntity;
     }
 
+
     public static HttpEntity unauthorised(RestResource restResource) {
         JSONArray resources = restResource.getResources();
         ResponseEntity responseEntity = new ResponseEntity(resources != null ? resources : restResource.getResource(), HttpStatus.UNAUTHORIZED);
@@ -43,13 +44,22 @@ public class Response {
 
     public static HttpEntity build(String s) {
         return ResponseEntity
-                .ok().contentType(MediaType.TEXT_PLAIN)
+                .ok()
+                .contentType(MediaType.TEXT_PLAIN)
                 .body(s);
     }
 
     public static HttpEntity build(Object o) {
         return ResponseEntity
-                .ok().contentType(MediaType.APPLICATION_JSON)
+                .ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(o);
+    }
+
+    public static HttpEntity post(Object o) {
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .contentType(MediaType.APPLICATION_JSON)
                 .body(o);
     }
 }

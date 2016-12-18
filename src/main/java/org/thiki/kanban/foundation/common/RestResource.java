@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.ResourceSupport;
-import org.springframework.test.util.ReflectionTestUtils;
 import org.thiki.kanban.foundation.hateoas.TLink;
 
 import java.util.List;
@@ -47,8 +46,7 @@ public class RestResource extends ResourceSupport {
         if (value instanceof List) {
             domainResources = new JSONArray();
             for (int i = 0; i < ((List) value).size(); i++) {
-                JSONObject domainResource = ReflectionTestUtils.invokeMethod(((List) value).get(i), "getResource");
-                domainResources.add(domainResource);
+                domainResources.add(((List) value).get(i));
             }
             value = domainResources;
         }
