@@ -5,6 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -12,21 +13,22 @@ import java.util.List;
  */
 @RestController
 public class CardTagsController {
-
     @Autowired
     private CardTagsService cardTagsService;
+    @Resource
+    private CardTagsResource cardTagsResource;
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/tags", method = RequestMethod.POST)
     public HttpEntity stick(@RequestBody List<CardTag> cardTags, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         List<CardTag> stickCardTags = cardTagsService.stickTags(cardTags, cardId, userName);
 
-        return Response.post(new CardTagsResource(stickCardTags, boardId, procedureId, cardId, userName));
+        return Response.post(cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName));
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/tags", method = RequestMethod.GET)
     public HttpEntity loadTags(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         List<CardTag> stickCardTags = cardTagsService.loadTags(cardId);
 
-        return Response.build(new CardTagsResource(stickCardTags, boardId, procedureId, cardId, userName));
+        return Response.build(cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName));
     }
 }
