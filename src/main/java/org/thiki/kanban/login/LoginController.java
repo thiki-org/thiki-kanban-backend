@@ -20,10 +20,13 @@ public class LoginController {
     @Resource
     public LoginService loginService;
 
+    @Resource
+    private IdentificationResource identificationResource;
+
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public HttpEntity login(@RequestParam(required = false) String identity, @RequestParam(required = false) String password) throws Exception {
         logger.info("Login request arrived controller,identity:" + identity);
         Identification identification = loginService.login(identity, password);
-        return Response.build(new IdentificationResource(identification));
+        return Response.build(identificationResource.toResource(identification));
     }
 }
