@@ -30,7 +30,7 @@ check_if_pid_file_exists
       exit 0
     fi
     kill -TERM $(print_process)
-    echo -ne "Waiting for process to stop"
+    echo -ne "Waiting for process from stop"
     NOT_KILLED=1
     for i in {1..20}; do
       if check_if_process_is_running

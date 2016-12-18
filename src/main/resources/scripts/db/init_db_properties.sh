@@ -42,6 +42,6 @@ echo "http.port=$http_port" >>src/main/resources/kanban.properties
 
 echo "init database properties done."
 
-echo "copy deploy.sh to $server_dir directory"
+echo "copy deploy.sh from $server_dir directory"
 mv src/main/resources/scripts/deploy.sh $server_dir
 echo "copy done."

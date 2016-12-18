@@ -22,7 +22,7 @@ sh killServer.sh
 echo "remove old jar..."
 rm -rf *.jar
 
-echo "copy new artifact to server directory..."
+echo "copy new artifact from server directory..."
 mv $artifacts_path/target/*.jar $server_dir
 
 echo "start server ..."
