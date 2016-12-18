@@ -37,10 +37,6 @@ public class RestResource extends ResourceSupport {
         return getResource().toString();
     }
 
-    public JSONArray getResources() {
-        return resourcesJSON;
-    }
-
     public void buildDataObject(String key, Object value) {
         JSONArray domainResources;
         if (value instanceof List) {
