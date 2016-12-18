@@ -71,4 +71,20 @@ public class TLink extends Link {
     public void setAuthenticationProviderFactory(AuthenticationProviderFactory authenticationProviderFactory) {
         this.authenticationProviderFactory = authenticationProviderFactory;
     }
+
+    public Link build(String userName) {
+        this.actions = new ArrayList<>();
+        List<MethodType> methods = Arrays.asList(MethodType.GET, MethodType.POST, MethodType.DELETE, MethodType.PUT);
+        for (MethodType methodType : methods) {
+            MatchResult matchResult = rolesResources.match(this.getHref(), methodType.name());
+            Authentication authenticationProvider = authenticationProviderFactory.loadProviderByRole(matchResult.getRoleName());
+            if (null != authenticationProvider) {
+                Action action = new Action();
+                action.setActionName(methodType.name());
+                action.setAllowed(true);
+                this.actions.add(action);
+            }
+        }
+        return this;
+    }
 }
