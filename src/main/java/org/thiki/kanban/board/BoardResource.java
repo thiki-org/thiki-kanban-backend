@@ -40,7 +40,7 @@ public class BoardResource extends RestResource {
                 this.add(tlink.from(teamLink).build());
             }
 
-            Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(board.getId())).withRel("tags");
+            Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(board.getId(), userName)).withRel("tags");
             this.add(tlink.from(tagsLink).build());
         }
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");

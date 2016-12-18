@@ -1,8 +1,11 @@
 package org.thiki.kanban.tag;
 
 import org.springframework.hateoas.Link;
+import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.foundation.hateoas.TLink;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,25 +16,34 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubt on 11/7/16.
  */
+@Service
 public class TagsResource extends RestResource {
+    @Resource
+    private TLink tlink;
+    @Resource
+    private TagResource tagResourceService;
 
-    public TagsResource(List<Tag> tags, String boardId) throws IOException {
-        List<TagResource> tagResources = new ArrayList<>();
+    public Object toResource(List<Tag> tags, String boardId, String userName) throws IOException {
+        TagsResource tagsResource = new TagsResource();
+        List<Object> tagResources = new ArrayList<>();
         for (Tag tag : tags) {
-            TagResource tagResource = new TagResource(tag, boardId);
+            Object tagResource = tagResourceService.toResource(tag, boardId, userName);
             tagResources.add(tagResource);
         }
 
-        this.buildDataObject("tags", tagResources);
-        Link selfLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(boardId)).withSelfRel();
-        this.add(selfLink);
+        tagsResource.buildDataObject("tags", tagResources);
+        Link selfLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(boardId, userName)).withSelfRel();
+        tagsResource.add(tlink.from(selfLink).build(userName));
 
-        Link cloneLink = linkTo(methodOn(TagsController.class).cloneTagsFromOtherBoard(boardId, "")).withRel("clone");
-        this.add(cloneLink);
+        Link cloneLink = linkTo(methodOn(TagsController.class).cloneTagsFromOtherBoard(boardId, "", userName)).withRel("clone");
+        tagsResource.add(tlink.from(cloneLink).build(userName));
+        return tagsResource.getResource();
     }
 
-    public TagsResource(String userName) throws IOException {
-        Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(userName)).withRel("tags");
-        this.add(tagsLink);
+    public Object toResource(String boardId, String userName) throws IOException {
+        TagsResource tagsResource = new TagsResource();
+        Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(boardId, userName)).withRel("tags");
+        tagsResource.add(tlink.from(tagsLink).build(userName));
+        return tagsResource.getResource();
     }
 }

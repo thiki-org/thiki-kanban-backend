@@ -43,7 +43,7 @@ public class CardResource extends RestResource {
             Link commentsLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, procedureId, card.getId(), userName)).withRel("comments");
             cardResource.add(tLink.from(commentsLink).build(userName));
 
-            Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(boardId)).withRel("tags");
+            Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(boardId, userName)).withRel("tags");
             cardResource.add(tLink.from(tagsLink).build(userName));
 
             Link cardTagsLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, procedureId, card.getId(), null)).withRel("cardTags");
