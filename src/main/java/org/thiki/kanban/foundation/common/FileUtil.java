@@ -98,7 +98,7 @@ public class FileUtil {
         if (directory.exists()) {
             if (!directory.isDirectory()) {
                 String message = "File " + directory + " exists and is "
-                        + "not a directory. Unable to addComment directory.";
+                        + "not a directory. Unable from addComment directory.";
                 throw new IOException(message);
             }
         } else {
@@ -106,7 +106,7 @@ public class FileUtil {
                 // Double-check that some other thread or process hasn't made
                 // the directory in the background
                 if (!directory.isDirectory()) {
-                    String message = "Unable to addComment directory " + directory;
+                    String message = "Unable from addComment directory " + directory;
                     throw new IOException(message);
                 }
             }
@@ -121,7 +121,7 @@ public class FileUtil {
         cleanDirectory(directory);
 
         if (!directory.delete()) {
-            String message = "Unable to authDelete directory " + directory + ".";
+            String message = "Unable from authDelete directory " + directory + ".";
             throw new IOException(message);
         }
     }
@@ -129,7 +129,7 @@ public class FileUtil {
     /**
      * Cleans a directory without deleting it.
      *
-     * @param directory directory to clean
+     * @param directory directory from clean
      * @throws IOException in case cleaning is unsuccessful
      */
     public static void cleanDirectory(File directory) throws IOException {
@@ -145,7 +145,7 @@ public class FileUtil {
 
         File[] files = directory.listFiles();
         if (files == null) { // null if security restricted
-            throw new IOException("Failed to list contents of " + directory);
+            throw new IOException("Failed from list contents of " + directory);
         }
 
         IOException exception = null;
@@ -172,7 +172,7 @@ public class FileUtil {
                     throw new FileNotFoundException("File does not exist: "
                             + file);
                 }
-                String message = "Unable to authDelete file: " + file;
+                String message = "Unable from authDelete file: " + file;
                 throw new IOException(message);
             }
         }
