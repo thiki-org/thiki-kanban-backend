@@ -1,8 +1,11 @@
 package org.thiki.kanban.notification;
 
 import org.springframework.hateoas.Link;
+import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.foundation.hateoas.TLink;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,20 +15,27 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubt on 9/17/16.
  */
+@Service
 public class NotificationsResource extends RestResource {
-    public NotificationsResource(String userName, List<Notification> notifications) throws Exception {
+    @Resource
+    private TLink tlink;
+    @Resource
+    private NotificationResource notificationResourceService;
 
-        List<NotificationResource> notificationResources = new ArrayList<>();
+    public Object toResource(String userName, List<Notification> notifications) throws Exception {
+        NotificationsResource notificationsResource = new NotificationsResource();
+        List<Object> notificationResources = new ArrayList<>();
         for (Notification notification : notifications) {
-            NotificationResource notificationResource = new NotificationResource(userName, notification);
+            Object notificationResource = notificationResourceService.toResource(userName, notification);
             notificationResources.add(notificationResource);
         }
 
-        this.buildDataObject("notifications", notificationResources);
+        notificationsResource.buildDataObject("notifications", notificationResources);
         Link selfLink = linkTo(methodOn(NotificationController.class).loadNotifications(userName)).withSelfRel();
-        this.add(selfLink);
+        notificationsResource.add(tlink.from(selfLink).build(userName));
 
         Link notificationsLink = linkTo(methodOn(NotificationController.class).loadNotifications(userName)).withRel("notifications");
-        this.add(notificationsLink);
+        notificationsResource.add(tlink.from(notificationsLink).build(userName));
+        return notificationsResource.getResource();
     }
 }

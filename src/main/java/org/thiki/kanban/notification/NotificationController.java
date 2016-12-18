@@ -17,24 +17,30 @@ import java.util.List;
 public class NotificationController {
     @Resource
     public NotificationService notificationService;
+    @Resource
+    private NotificationResource notificationResource;
+    @Resource
+    NotificationsResource notificationsResource;
+    @Resource
+    private UnreadNotificationsResource unreadNotificationsResource;
 
     @RequestMapping(value = "/{userName}/notifications/unread/total", method = RequestMethod.GET)
     public HttpEntity loadUnreadNotificationsTotal(@PathVariable("userName") String userName) throws Exception {
         Integer unreadNotificationTotal = notificationService.loadUnreadNotificationTotal(userName);
 
-        return Response.build(new UnreadNotificationsResource(userName, unreadNotificationTotal));
+        return Response.build(unreadNotificationsResource.toResource(userName, unreadNotificationTotal));
     }
 
     @RequestMapping(value = "/{userName}/notifications", method = RequestMethod.GET)
     public HttpEntity loadNotifications(@PathVariable("userName") String userName) throws Exception {
         List<Notification> notifications = notificationService.loadNotifications(userName);
 
-        return Response.build(new NotificationsResource(userName, notifications));
+        return Response.build(notificationsResource.toResource(userName, notifications));
     }
 
     @RequestMapping(value = "/{userName}/notifications/{id}", method = RequestMethod.GET)
     public HttpEntity loadNotificationById(@PathVariable("id") String id, @PathVariable("userName") String userName) throws Exception {
         Notification notification = notificationService.findNotificationById(id);
-        return Response.build(new NotificationResource(userName, notification));
+        return Response.build(notificationResource.toResource(userName, notification));
     }
 }
