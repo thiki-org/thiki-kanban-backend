@@ -14,12 +14,14 @@ import javax.annotation.Resource;
 @RestController
 public class PublicKeyController {
     @Resource
-    public PublicKeyService publicKeyService;
+    private PublicKeyService publicKeyService;
+    @Resource
+    private PublicKeyResource publicKeyResource;
 
     @RequestMapping(value = "/publicKey", method = RequestMethod.GET)
     public HttpEntity identify() throws Exception {
         PublicKey publicPublicKey = publicKeyService.authenticate();
 
-        return Response.build(new PublicKeyResource(publicPublicKey));
+        return Response.build(publicKeyResource.toResource(publicPublicKey));
     }
 }
