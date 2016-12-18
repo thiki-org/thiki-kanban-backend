@@ -1,0 +1,19 @@
+roles:
+  - name: visitor
+    resources:
+      - url: /entrance
+        GET: 'true'
+      - url: /entrance2
+        GET: 'false'
+
+  - name: team-member
+    resources:
+      - url: /entrance
+        GET: 'true'
+      - url: /entrance2
+        GET: 'false'
+
+
+
+
+
