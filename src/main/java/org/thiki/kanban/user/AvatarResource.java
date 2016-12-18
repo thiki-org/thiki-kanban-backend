@@ -1,9 +1,12 @@
 package org.thiki.kanban.user;
 
 import org.springframework.hateoas.Link;
+import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
 import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.foundation.hateoas.TLink;
 
+import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 
@@ -13,18 +16,26 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubt on 28/09/2016.
  */
+@Service
 public class AvatarResource extends RestResource {
-    public AvatarResource(String userName) throws IOException {
+    @Resource
+    private TLink tlink;
+
+    public Object toResource(String userName) throws IOException {
+        AvatarResource avatarResource = new AvatarResource();
         Link selfLink = linkTo(methodOn(UsersController.class).uploadAvatar(userName, null)).withSelfRel();
-        this.add(selfLink);
+        avatarResource.add(tlink.from(selfLink).build(userName));
 
         Link profileLink = linkTo(methodOn(UsersController.class).loadProfile(userName)).withRel("profile");
-        this.add(profileLink);
+        avatarResource.add(tlink.from(profileLink).build(userName));
+        return avatarResource.getResource();
     }
 
-    public AvatarResource(String userName, File avatar) throws IOException {
-        this.buildDataObject("avatar", FileUtil.fileString(avatar));
+    public Object toResource(String userName, File avatar) throws IOException {
+        AvatarResource avatarResource = new AvatarResource();
+        avatarResource.buildDataObject("avatar", FileUtil.fileString(avatar));
         Link selfLink = linkTo(methodOn(UsersController.class).uploadAvatar(userName, null)).withSelfRel();
-        this.add(selfLink);
+        avatarResource.add(tlink.from(selfLink).build(userName));
+        return avatarResource.getResource();
     }
 }

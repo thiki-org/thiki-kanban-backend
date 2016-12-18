@@ -17,10 +17,12 @@ import javax.annotation.Resource;
 public class RegistrationController {
     @Resource
     private RegistrationService registrationService;
+    @Resource
+    private RegistrationResource registrationResource;
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public HttpEntity registerNewUser(@RequestBody Registration registration) throws Exception {
         User registeredUser = registrationService.register(registration);
-        return Response.post(new RegistrationResource(registeredUser));
+        return Response.post(registrationResource.toResource(registeredUser));
     }
 }
