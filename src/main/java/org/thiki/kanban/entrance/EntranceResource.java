@@ -3,7 +3,6 @@ package org.thiki.kanban.entrance;
 import com.alibaba.fastjson.JSONObject;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.entrance.authentication.EntranceAuthenticationProvider;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.password.PasswordController;
@@ -21,8 +20,6 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class EntranceResource extends RestResource {
     @Resource
     private TLink tlink;
-    @Resource
-    private EntranceAuthenticationProvider entranceAuthenticationProvider;
 
     public Object toResource() throws Exception {
         this.domainObject = new JSONObject() {{
@@ -33,7 +30,7 @@ public class EntranceResource extends RestResource {
         Link publicKeyLink = linkTo(methodOn(PublicKeyController.class).identify()).withRel("publicKey");
         Link passwordRetrievalLink = linkTo(methodOn(PasswordController.class).passwordRetrievalApply(null)).withRel("passwordRetrievalApplication");
 
-        this.add(tlink.from(selfLink).withActions(entranceAuthenticationProvider.authenticate()));
+        this.add(tlink.from(selfLink).build());
         this.add(tlink.from(publicKeyLink));
         this.add(tlink.from(passwordRetrievalLink));
         return getResource();

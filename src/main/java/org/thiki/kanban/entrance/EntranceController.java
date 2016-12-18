@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.thiki.kanban.foundation.common.Response;
+import org.thiki.kanban.foundation.security.authentication.RolesResources;
 
 import javax.annotation.Resource;
 
@@ -19,7 +20,8 @@ public class EntranceController {
     private final static Logger logger = LoggerFactory.getLogger(EntranceController.class);
     @Resource
     private EntranceResource entranceResource;
-
+    @Resource
+    RolesResources rolesResources;
     @RequestMapping(method = RequestMethod.GET)
     public HttpEntity enter() throws Exception {
         logger.warn("entrance called!");
