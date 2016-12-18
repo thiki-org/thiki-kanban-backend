@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Role {
     private String name;
-    private List<Resource> resources;
+    private List<ResourceTemplate> resources;
 
     public String getName() {
         return name;
@@ -17,11 +17,11 @@ public class Role {
         this.name = name;
     }
 
-    public List<Resource> getResources() {
+    public List<ResourceTemplate> getResources() {
         return resources;
     }
 
-    public void setResources(List<Resource> resources) {
+    public void setResources(List<ResourceTemplate> resources) {
         this.resources = resources;
     }
 }

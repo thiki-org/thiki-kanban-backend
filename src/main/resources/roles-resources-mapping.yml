@@ -1,16 +1,16 @@
 roles:
   - name: visitor
     resources:
-      - url: /entrance
+      - template: /entrance
         GET: 'true'
-      - url: /entrance2
+      - template: /entrance2
         GET: 'false'
 
-  - name: team-member
+  - name: teamMember
     resources:
-      - url: /entrance
+      - template: /entrance2
         GET: 'true'
-      - url: /entrance2
+      - template: /entrance2
         GET: 'false'
 
 

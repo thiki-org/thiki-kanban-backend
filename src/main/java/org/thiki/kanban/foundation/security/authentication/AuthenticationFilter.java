@@ -5,12 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.foundation.configuration.ApplicationContextProvider;
+import org.thiki.kanban.foundation.exception.UnauthorisedException;
 import org.thiki.kanban.foundation.security.Constants;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by xubt on 10/24/16.
@@ -19,6 +19,10 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "security")
 public class AuthenticationFilter implements Filter {
     private static Logger logger = LoggerFactory.getLogger(AuthenticationFilter.class);
+    @Resource
+    private RolesResources rolesResources;
+    @Resource
+    private AuthenticationProviderFactory authenticationProviderFactory;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -36,14 +40,19 @@ public class AuthenticationFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
+        String userName = ((RequestFacade) servletRequest).getHeader("userName");
         String method = ((RequestFacade) servletRequest).getMethod();
-        Map<String, Authentication> authProviders = ApplicationContextProvider.getApplicationContext().getBeansOfType(Authentication.class);
-        for (Map.Entry entry : authProviders.entrySet()) {
-            Authentication authProvider = (Authentication) entry.getValue();
-            if (authProvider.getClass().getName().indexOf("org.thiki") > -1 && authProvider.matchPath(currentURL)) {
-                authProvider.authenticate(currentURL, method, ((RequestFacade) servletRequest).getHeader("userName"));
-            }
+
+        MatchResult matchResult = rolesResources.match(currentURL, method);
+        Authentication authenticationProvider = authenticationProviderFactory.loadProviderByRole(matchResult.getRoleName());
+        if (authenticationProvider == null) {
+            throw new RuntimeException("roles-resources configuration error!");
         }
+        AuthenticationResult authenticateResult = authenticationProvider.authenticate(matchResult.getPathValues(), userName);
+        if (authenticateResult.isFailed()) {
+            throw new UnauthorisedException(authenticateResult);
+        }
+
         logger.info("authentication end.");
         filterChain.doFilter(servletRequest, servletResponse);
     }
