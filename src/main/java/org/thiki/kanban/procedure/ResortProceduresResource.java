@@ -1,8 +1,11 @@
 package org.thiki.kanban.procedure;
 
 import org.springframework.hateoas.Link;
+import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.foundation.hateoas.TLink;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,21 +15,29 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubitao on 04/26/16.
  */
+@Service
 public class ResortProceduresResource extends RestResource {
 
-    public ResortProceduresResource(List<Procedure> procedureList, String boardId) throws Exception {
+    @Resource
+    private ProcedureResource procedureResourceService;
 
-        List<ProcedureResource> procedureResources = new ArrayList<>();
+    @Resource
+    private TLink tlink;
+
+    public Object toResource(List<Procedure> procedureList, String boardId, String userName) throws Exception {
+        ResortProceduresResource resortProceduresResource = new ResortProceduresResource();
+        List<Object> procedureResources = new ArrayList<>();
         for (Procedure procedure : procedureList) {
-            ProcedureResource procedureResource = new ProcedureResource(procedure, boardId);
+            Object procedureResource = procedureResourceService.toResource(procedure, boardId, userName);
             procedureResources.add(procedureResource);
         }
 
-        this.buildDataObject("procedures", procedureResources);
-        Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId)).withRel("procedures");
-        this.add(proceduresLink);
+        resortProceduresResource.buildDataObject("procedures", procedureResources);
+        Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, userName)).withRel("procedures");
+        resortProceduresResource.add(tlink.from(proceduresLink).build(userName));
 
-        Link selfLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId)).withSelfRel();
-        this.add(selfLink);
+        Link selfLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId, userName)).withSelfRel();
+        resortProceduresResource.add(tlink.from(selfLink).build(userName));
+        return resortProceduresResource.getResource();
     }
 }

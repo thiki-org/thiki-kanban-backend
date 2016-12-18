@@ -33,7 +33,7 @@ public class BoardResource extends RestResource {
             Link selfLink = linkTo(methodOn(BoardsController.class).findById(board.getId(), userName)).withSelfRel();
             this.add(tlink.from(selfLink).build());
 
-            Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId())).withRel("procedures");
+            Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), userName)).withRel("procedures");
             this.add(tlink.from(proceduresLink).build());
             if (board.getTeamId() != null) {
                 Link teamLink = linkTo(methodOn(TeamsController.class).findById(board.getTeamId(), userName)).withRel("team");

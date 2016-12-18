@@ -41,7 +41,7 @@ public class AssignmentResource extends RestResource {
             Link AssigneeAvatarLink = linkTo(methodOn(UsersController.class).loadAvatar(assignment.getAssignee())).withRel("assigneeAvatar");
             assignmentResource.add(tlink.from(AssigneeAvatarLink).build(userName));
         }
-        Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(procedureId)).withRel("all");
+        Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(procedureId, userName)).withRel("all");
         assignmentResource.add(tlink.from(allLink).build(userName));
         return assignmentResource.getResource();
     }
