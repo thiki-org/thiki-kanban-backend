@@ -17,9 +17,12 @@ public class WorktileController {
     @Resource
     private WorktileService worktileService;
 
+    @Resource
+    private BoardResource boardResource;
+
     @RequestMapping(value = "/{userName}/worktileTasks", method = RequestMethod.POST)
     public HttpEntity importTasks(@PathVariable("userName") String userName, @RequestParam(value = "worktileTasks", required = false) Object worktileTasks) throws Exception {
         Board savedWorktileCards = worktileService.importWorktileTasks(userName, (MultipartFile) worktileTasks);
-        return Response.post(new BoardResource(savedWorktileCards, userName));
+        return Response.post(boardResource.toResource(savedWorktileCards, userName));
     }
 }

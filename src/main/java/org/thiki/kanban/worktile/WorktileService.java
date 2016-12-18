@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import org.apache.commons.io.IOUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-import org.thiki.kanban.acceptanceCriteria.AcceptCriteriaService;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.board.Board;
 import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.card.Card;
@@ -41,7 +41,7 @@ public class WorktileService {
     @Resource
     private DateService dateService;
     @Resource
-    private AcceptCriteriaService acceptCriteriaService;
+    private AcceptanceCriteriaService acceptanceCriteriaService;
 
     public Board importWorktileTasks(String userName, MultipartFile worktileTasksFile) throws IOException {
         String tasksJSONString;
@@ -90,7 +90,7 @@ public class WorktileService {
                 acceptanceCriteria.setFinished(todo.getChecked() != 0);
                 savedCards.stream()
                         .filter(card -> card.getSummary().equals(task.getName()))
-                        .forEach(card -> acceptCriteriaService.addAcceptCriteria(userName, card.getId(), acceptanceCriteria));
+                        .forEach(card -> acceptanceCriteriaService.addAcceptCriteria(userName, card.getId(), acceptanceCriteria));
             }
         }
     }
