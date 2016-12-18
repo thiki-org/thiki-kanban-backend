@@ -31,15 +31,16 @@
         SELECT * FROM kb_board WHERE delete_status=0 and id= #{id}
     </select>
 
+
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_board SET delete_status=1 WHERE id=#{id}
+        UPDATE kb_board SET delete_status=1 WHERE id=#{id} AND owner= #{userName}
     </delete>
 
     <select id="findPersonalBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
         SELECT * FROM kb_board WHERE delete_status=0 AND owner=#{userName}
     </select>
 
-    <select id="findTeamsBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+    <select id="find TeamsBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
         SELECT * FROM kb_board WHERE delete_status=0 and team_id= #{teamId}
     </select>
 </mapper>

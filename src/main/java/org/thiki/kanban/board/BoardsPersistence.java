@@ -17,7 +17,7 @@ public interface BoardsPersistence {
 
     Integer update(Board board);
 
-    Integer deleteById(@Param("id") String id);
+    Integer deleteById(@Param("id") String id, @Param("userName") String userName);
 
     boolean unique(@Param("id") String id, @Param("name") String boardName, @Param("userName") String userName);
 

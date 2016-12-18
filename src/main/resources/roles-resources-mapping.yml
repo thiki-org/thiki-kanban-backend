@@ -2,17 +2,26 @@ roles:
   - name: visitor
     resources:
       - template: /entrance
-        GET: 'true'
+        GET: true
       - template: /entrance2
-        GET: 'false'
+        GET: false
 
   - name: teamMember
     resources:
       - template: /entrance2
-        GET: 'true'
+        GET: true
       - template: /entrance2
-        GET: 'false'
+        GET: false
 
+  - name: personal
+    resources:
+      - template: /{userName}/boards/{boardId}
+        GET: true
+        POST: true
+        DELETE: true
+        PUT: true
+      - template: /entrance2
+        GET: false
 
 
 

@@ -68,12 +68,12 @@ public class BoardsService {
         return boardsPersistence.findById(board.getId());
     }
 
-    public int deleteById(String id) {
-        Board boardToDelete = boardsPersistence.findById(id);
-        if (boardToDelete == null) {
+    public int deleteById(String boardId, String userName) {
+        Board boardToDelete = boardsPersistence.findById(boardId);
+        if (boardToDelete == null || !boardToDelete.isOwner(userName)) {
             throw new ResourceNotFoundException(BoardCodes.BOARD_IS_NOT_EXISTS);
         }
-        return boardsPersistence.deleteById(id);
+        return boardsPersistence.deleteById(boardId, userName);
     }
 
     public boolean isBoardOwner(String boardId, String userName) {

@@ -1,10 +1,14 @@
 package org.thiki.kanban.board;
 
 import org.springframework.hateoas.Link;
+import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
+import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.procedure.ProceduresController;
 import org.thiki.kanban.tag.TagsController;
 import org.thiki.kanban.teams.team.TeamsController;
+
+import javax.annotation.Resource;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -12,31 +16,35 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 /**
  * Created by xubitao on 05/26/16.
  */
+@Service
 public class BoardResource extends RestResource {
+    @Resource
+    private TLink tlink;
 
-    public static final String URL_TEMPLATE = "/{userName}/boards/{boardId}";
+    public Object toResource(String userName) throws Exception {
+        Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
+        this.add(tlink.from(allLink));
+        return getResource();
+    }
 
-    public BoardResource(Board board, String userName) throws Exception {
+    public Object toResource(Board board, String userName) throws Exception {
         this.domainObject = board;
         if (board != null) {
             Link selfLink = linkTo(methodOn(BoardsController.class).findById(board.getId(), userName)).withSelfRel();
-            this.add(selfLink);
+            this.add(tlink.from(selfLink).build());
 
             Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId())).withRel("procedures");
-            this.add(proceduresLink);
+            this.add(tlink.from(proceduresLink).build());
             if (board.getTeamId() != null) {
                 Link teamLink = linkTo(methodOn(TeamsController.class).findById(board.getTeamId(), userName)).withRel("team");
-                this.add(teamLink);
+                this.add(tlink.from(teamLink).build());
             }
 
             Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(board.getId())).withRel("tags");
-            this.add(tagsLink);
-
+            this.add(tlink.from(tagsLink).build());
         }
-        this.add(linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all"));
-    }
-
-    public BoardResource(String userName) throws Exception {
-        this.add(linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all"));
+        Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
+        this.add(tlink.from(allLink).build());
+        return getResource();
     }
 }
