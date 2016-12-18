@@ -9,7 +9,7 @@ import java.util.List;
  * Created by xubt on 10/17/16.
  */
 @Repository
-public interface AcceptCriteriaPersistence {
+public interface AcceptanceCriteriaPersistence {
     Integer addAcceptCriteria(@Param("userName") String userName, @Param("cardId") String cardId, @Param("acceptanceCriteria") AcceptanceCriteria acceptanceCriteria);
 
     AcceptanceCriteria findById(String id);
