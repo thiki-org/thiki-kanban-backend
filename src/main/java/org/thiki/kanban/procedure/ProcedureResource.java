@@ -1,5 +1,7 @@
 package org.thiki.kanban.procedure;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
@@ -16,10 +18,12 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @Service
 public class ProcedureResource extends RestResource {
+    public static Logger logger = LoggerFactory.getLogger(ProcedureResource.class);
     @Resource
     private TLink tlink;
 
     public Object toResource(Procedure procedure, String boardId, String userName) throws Exception {
+        logger.info("build procedure resource.board:{},userName:{}", boardId, userName);
         ProcedureResource procedureResource = new ProcedureResource();
         procedureResource.domainObject = procedure;
         if (procedure != null) {
@@ -31,14 +35,17 @@ public class ProcedureResource extends RestResource {
         }
         Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, userName)).withRel("all");
         procedureResource.add(tlink.from(allLink).build(userName));
+        logger.info("procedure resource building completed.board:{},userName:{}", boardId, userName);
         return procedureResource.getResource();
 
     }
 
     public Object toResource(String boardId, String userName) throws Exception {
+        logger.info("build procedure resource.board:{},userName:{}", boardId, userName);
         ProcedureResource procedureResource = new ProcedureResource();
         Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, userName)).withRel("all");
         procedureResource.add(tlink.from(allLink).build(userName));
+        logger.info("procedure resource building completed.board:{},userName:{}", boardId, userName);
         return procedureResource.getResource();
     }
 }

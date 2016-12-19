@@ -1,5 +1,7 @@
 package org.thiki.kanban.procedure;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -18,12 +20,14 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @Service
 public class ProceduresResource extends RestResource {
+    public static Logger logger = LoggerFactory.getLogger(ProceduresResource.class);
     @Resource
     private TLink tlink;
     @Resource
     private ProcedureResource procedureResourceService;
 
     public Object toResource(List<Procedure> procedureList, String boardId, String userName) throws Exception {
+        logger.info("build procedures resource.board:{},userName:{}", boardId, userName);
         ProceduresResource proceduresResource = new ProceduresResource();
         List<Object> procedureResources = new ArrayList<>();
         for (Procedure procedure : procedureList) {
@@ -37,6 +41,7 @@ public class ProceduresResource extends RestResource {
 
         Link sortNumbersLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId, userName)).withRel("sortNumbers");
         proceduresResource.add(tlink.from(sortNumbersLink).build(userName));
+        logger.info("procedures resource building completed.board:{},userName:{}", boardId, userName);
         return proceduresResource.getResource();
     }
 }

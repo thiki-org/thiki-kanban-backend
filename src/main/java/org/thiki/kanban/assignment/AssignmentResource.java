@@ -1,5 +1,7 @@
 package org.thiki.kanban.assignment;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
@@ -18,11 +20,12 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @Service
 public class AssignmentResource extends RestResource {
-
+    public static Logger logger = LoggerFactory.getLogger(AssignmentResource.class);
     @Resource
     private TLink tlink;
 
     public Object toResource(Assignment assignment, String boardId, String procedureId, String cardId, String userName) throws Exception {
+        logger.info("build assignment resource.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
         AssignmentResource assignmentResource = new AssignmentResource();
         assignmentResource.domainObject = assignment;
         if (assignment != null) {
@@ -43,10 +46,12 @@ public class AssignmentResource extends RestResource {
         }
         Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(procedureId, userName)).withRel("all");
         assignmentResource.add(tlink.from(allLink).build(userName));
+        logger.info("assignment resource building completed.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
         return assignmentResource.getResource();
     }
 
     public Object toResource(String boardId, String procedureId, String cardId, String userName) throws Exception {
+        logger.info("build assignment resource.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
         AssignmentResource assignmentResource = new AssignmentResource();
 
         Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, procedureId, cardId, userName)).withRel("assignments");
@@ -54,6 +59,7 @@ public class AssignmentResource extends RestResource {
 
         Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
         assignmentResource.add(tlink.from(cardLink).build(userName));
+        logger.info("assignment resource building completed.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
         return assignmentResource.getResource();
     }
 }

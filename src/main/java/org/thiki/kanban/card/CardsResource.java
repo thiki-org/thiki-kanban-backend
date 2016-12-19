@@ -1,5 +1,7 @@
 package org.thiki.kanban.card;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -12,17 +14,17 @@ import java.util.List;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
-/**
- *
- */
 @Service
 public class CardsResource extends RestResource {
+    public static Logger logger = LoggerFactory.getLogger(CardResource.class);
+
     @Resource
     private TLink tLink;
     @Resource
     private CardResource cardResourceService;
 
     public Object toResource(List<Card> cardList, String boardId, String procedureId, String userName) throws Exception {
+        logger.info("build cards resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         CardsResource cardsResource = new CardsResource();
         List<Object> cardResources = new ArrayList<>();
         for (Card card : cardList) {
@@ -36,6 +38,7 @@ public class CardsResource extends RestResource {
 
         Link sortNumbersLink = linkTo(methodOn(CardsController.class).resortCards(cardList, boardId, procedureId, userName)).withRel("sortNumbers");
         cardsResource.add(tLink.from(sortNumbersLink).build(userName));
+        logger.info("cards resource building completed.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         return cardsResource.getResource();
     }
 }

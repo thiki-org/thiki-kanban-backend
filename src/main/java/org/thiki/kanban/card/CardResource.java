@@ -1,5 +1,7 @@
 package org.thiki.kanban.card;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaController;
@@ -23,11 +25,13 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 @Service
 public class CardResource extends RestResource {
+    public static Logger logger = LoggerFactory.getLogger(CardResource.class);
+
     @Resource
     private TLink tLink;
 
     public Object toResource(Card card, String boardId, String procedureId, String userName) throws Exception {
-
+        logger.info("build card resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         CardResource cardResource = new CardResource();
         cardResource.domainObject = card;
         if (card != null) {
@@ -51,13 +55,16 @@ public class CardResource extends RestResource {
         }
         Link cardsLink = linkTo(methodOn(CardsController.class).findByProcedureId(boardId, procedureId, userName)).withRel("cards");
         cardResource.add(tLink.from(cardsLink).build(userName));
+        logger.info("card resource building completed.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         return cardResource.getResource();
     }
 
     public Object toResource(String boardId, String procedureId, String userName) throws Exception {
+        logger.info("build card resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         CardResource cardResource = new CardResource();
         Link cardsLink = linkTo(methodOn(CardsController.class).findByProcedureId(boardId, procedureId, userName)).withRel("cards");
         cardResource.add(tLink.from(cardsLink).build(userName));
+        logger.info("card resource building completed.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         return cardResource.getResource();
     }
 }

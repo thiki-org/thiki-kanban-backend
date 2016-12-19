@@ -1,5 +1,7 @@
 package org.thiki.kanban.board;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -18,6 +20,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @Service
 public class BoardsResource extends RestResource {
+    public static Logger logger = LoggerFactory.getLogger(BoardsResource.class);
+
     @Resource
     private TLink tlink;
 
@@ -25,7 +29,9 @@ public class BoardsResource extends RestResource {
     private BoardResource boardResourceService;
 
     public Object toResource(List<Board> boards, String userName) throws Exception {
-        this.domainObject = boards;
+        logger.info("build boards resource.userName:{}", userName);
+        BoardsResource boardsResource = new BoardsResource();
+        boardsResource.domainObject = boards;
 
         List<Object> boardResources = new ArrayList<>();
         for (Board board : boards) {
@@ -33,13 +39,14 @@ public class BoardsResource extends RestResource {
             boardResources.add(boardResource);
         }
 
-        this.buildDataObject("boards", boardResources);
+        boardsResource.buildDataObject("boards", boardResources);
         Link selfLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withSelfRel();
 
-        this.add(tlink.from(selfLink));
+        boardsResource.add(tlink.from(selfLink));
 
         Link worktileTasksLinks = linkTo(methodOn(WorktileController.class).importTasks(userName, null)).withRel("worktileTasks");
-        this.add(tlink.from(worktileTasksLinks));
-        return getResource();
+        boardsResource.add(tlink.from(worktileTasksLinks));
+        logger.info("boards resource building complete.userName:{}", userName);
+        return boardsResource.getResource();
     }
 }

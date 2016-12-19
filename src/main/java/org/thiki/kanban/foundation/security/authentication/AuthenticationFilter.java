@@ -45,14 +45,12 @@ public class AuthenticationFilter implements Filter {
 
         MatchResult matchResult = rolesResources.match(currentURL, method);
         Authentication authenticationProvider = authenticationProviderFactory.loadProviderByRole(matchResult.getRoleName());
-        if (authenticationProvider == null) {
-            throw new RuntimeException("roles-resources configuration error!");
+        if (authenticationProvider != null) {
+            AuthenticationResult authenticateResult = authenticationProvider.authenticate(matchResult.getPathValues(), userName);
+            if (authenticateResult.isFailed()) {
+                throw new UnauthorisedException(authenticateResult);
+            }
         }
-        AuthenticationResult authenticateResult = authenticationProvider.authenticate(matchResult.getPathValues(), userName);
-        if (authenticateResult.isFailed()) {
-            throw new UnauthorisedException(authenticateResult);
-        }
-
         logger.info("authentication end.");
         filterChain.doFilter(servletRequest, servletResponse);
     }
