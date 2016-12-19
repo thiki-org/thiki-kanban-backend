@@ -1,0 +1,107 @@
+package org.thiki.kanban.board.overall;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriasResource;
+import org.thiki.kanban.assignment.Assignment;
+import org.thiki.kanban.assignment.AssignmentService;
+import org.thiki.kanban.assignment.AssignmentsResource;
+import org.thiki.kanban.board.Board;
+import org.thiki.kanban.board.BoardResource;
+import org.thiki.kanban.board.BoardsService;
+import org.thiki.kanban.card.Card;
+import org.thiki.kanban.card.CardsResource;
+import org.thiki.kanban.card.CardsService;
+import org.thiki.kanban.cardTags.CardTag;
+import org.thiki.kanban.cardTags.CardTagsResource;
+import org.thiki.kanban.cardTags.CardTagsService;
+import org.thiki.kanban.procedure.Procedure;
+import org.thiki.kanban.procedure.ProceduresResource;
+import org.thiki.kanban.procedure.ProceduresService;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+ * Created by xubitao on 05/26/16.
+ */
+@Service
+public class OverallService {
+    public static Logger logger = LoggerFactory.getLogger(OverallService.class);
+
+    @Resource
+    private BoardsService boardsService;
+    @Resource
+    private BoardResource boardResource;
+    @Resource
+    private ProceduresService proceduresService;
+    @Resource
+    private ProceduresResource proceduresResource;
+    @Resource
+    private CardsService cardsService;
+    @Resource
+    private CardsResource cardsResource;
+    @Resource
+    private AssignmentService assignmentService;
+    @Resource
+    private AssignmentsResource assignmentsResource;
+    @Resource
+    private AcceptanceCriteriaService acceptanceCriteriaService;
+    @Resource
+    private AcceptanceCriteriasResource acceptanceCriteriasResource;
+    @Resource
+    private CardTagsService cardTagsService;
+    @Resource
+    private CardTagsResource cardTagsResource;
+
+    private Object result;
+
+    public Object loadAllByBoard(String boardId, String userName) throws Exception {
+        logger.info("load overall.");
+        Board board = boardsService.findById(boardId);
+        JSONObject boardJSON = (JSONObject) boardResource.toResource(board, userName);
+
+        List<Procedure> procedureList = proceduresService.loadByBoardId(boardId);
+        JSONObject proceduresJSON = (JSONObject) proceduresResource.toResource(procedureList, boardId, userName);
+        JSONArray proceduresArray = (JSONArray) proceduresJSON.get("procedures");
+        JSONArray newProceduresArray = new JSONArray();
+        for (int i = 0; i < proceduresArray.size(); i++) {
+            JSONObject procedureJSON = proceduresArray.getJSONObject(i);
+            String procedureId = procedureJSON.getString("id");
+            List<Card> cardList = cardsService.findByProcedureId(procedureId);
+            JSONObject cardsJSON = (JSONObject) cardsResource.toResource(cardList, boardId, procedureId, userName);
+            JSONArray cardsArray = (JSONArray) cardsJSON.get("cards");
+
+            JSONArray newCardsArray = new JSONArray();
+            for (int j = 0; j < cardsArray.size(); j++) {
+                JSONObject cardJSON = cardsArray.getJSONObject(j);
+                String cardId = cardJSON.getString("id");
+                List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
+                JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
+                cardJSON.put("assignments", assignmentsJSON);
+
+                List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
+                JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName);
+                cardJSON.put("acceptanceCriterias", acceptanceCriteriasJSON);
+
+                List<CardTag> stickCardTags = cardTagsService.loadTags(cardId);
+                JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName);
+                cardJSON.put("tags", tagsJSON);
+
+                newCardsArray.add(cardJSON);
+            }
+            cardsJSON.put("cards", newCardsArray);
+            procedureJSON.put("cards", cardsJSON);
+            newProceduresArray.add(procedureJSON);
+        }
+        proceduresJSON.put("procedures", newProceduresArray);
+        boardJSON.put("procedures", proceduresJSON);
+        logger.info("overall loading completed.");
+        return boardJSON;
+    }
+}
