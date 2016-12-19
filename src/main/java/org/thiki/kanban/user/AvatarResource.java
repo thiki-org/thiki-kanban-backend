@@ -1,5 +1,6 @@
 package org.thiki.kanban.user;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
@@ -31,6 +32,7 @@ public class AvatarResource extends RestResource {
         return avatarResource.getResource();
     }
 
+    @Cacheable(value = "avatar", key = "'avatar'+#userName")
     public Object toResource(String userName, File avatar) throws IOException {
         AvatarResource avatarResource = new AvatarResource();
         avatarResource.buildDataObject("avatar", FileUtil.fileString(avatar));

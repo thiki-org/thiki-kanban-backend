@@ -2,6 +2,7 @@ package org.thiki.kanban.board;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -28,6 +29,7 @@ public class BoardsResource extends RestResource {
     @Resource
     private BoardResource boardResourceService;
 
+    @Cacheable(value = "board", key = "#userName+'boards'")
     public Object toResource(List<Board> boards, String userName) throws Exception {
         logger.info("build boards resource.userName:{}", userName);
         BoardsResource boardsResource = new BoardsResource();

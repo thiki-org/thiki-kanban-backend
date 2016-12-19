@@ -1,5 +1,6 @@
 package org.thiki.kanban.user;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -19,6 +20,7 @@ public class ProfileResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "profile", key = "'profile'+#userName")
     public Object toResource(UserProfile profile, String userName) throws IOException {
         ProfileResource profileResource = new ProfileResource();
         profileResource.domainObject = profile;

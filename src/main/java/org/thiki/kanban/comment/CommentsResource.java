@@ -1,5 +1,6 @@
 package org.thiki.kanban.comment;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
@@ -23,6 +24,7 @@ public class CommentsResource extends RestResource {
     @Resource
     private CommentResource commentResourceService;
 
+    @Cacheable(value = "comment", key = "'comments'+#boardId+#procedureId+#cardId+#userName")
     public Object toResource(List<Comment> comments, String boardId, String procedureId, String cardId, String userName) throws Exception {
         CommentsResource commentsResource = new CommentsResource();
         List<Object> commentResources = new ArrayList<>();

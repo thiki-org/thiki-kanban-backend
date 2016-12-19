@@ -1,5 +1,6 @@
 package org.thiki.kanban.teams.teamMembers;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -24,6 +25,7 @@ public class MembersResource extends RestResource {
     @Resource
     private MemberResource memberResourceService;
 
+    @Cacheable(value = "team", key = "'members'+#teamId+#userName")
     public Object toResource(String teamId, List<Member> members, String userName) throws Exception {
         MembersResource membersResource = new MembersResource();
         List<Object> memberResources = new ArrayList<>();

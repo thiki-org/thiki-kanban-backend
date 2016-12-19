@@ -2,6 +2,7 @@ package org.thiki.kanban.procedure;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -26,6 +27,7 @@ public class ProceduresResource extends RestResource {
     @Resource
     private ProcedureResource procedureResourceService;
 
+    @Cacheable(value = "procedure", key = "#userName+'procedures'+#boardId")
     public Object toResource(List<Procedure> procedureList, String boardId, String userName) throws Exception {
         logger.info("build procedures resource.board:{},userName:{}", boardId, userName);
         ProceduresResource proceduresResource = new ProceduresResource();

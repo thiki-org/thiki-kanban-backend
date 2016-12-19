@@ -2,6 +2,7 @@ package org.thiki.kanban.assignment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
@@ -24,6 +25,7 @@ public class AssignmentResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "assignment", key = "'assignment'+#assignment.id+#boardId+#procedureId+#cardId+#userName")
     public Object toResource(Assignment assignment, String boardId, String procedureId, String cardId, String userName) throws Exception {
         logger.info("build assignment resource.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
         AssignmentResource assignmentResource = new AssignmentResource();
@@ -50,6 +52,7 @@ public class AssignmentResource extends RestResource {
         return assignmentResource.getResource();
     }
 
+    @Cacheable(value = "assignment", key = "'assignment'+#boardId+#procedureId+#cardId+#userName")
     public Object toResource(String boardId, String procedureId, String cardId, String userName) throws Exception {
         logger.info("build assignment resource.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
         AssignmentResource assignmentResource = new AssignmentResource();

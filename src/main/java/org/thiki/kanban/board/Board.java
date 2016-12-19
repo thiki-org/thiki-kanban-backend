@@ -84,4 +84,17 @@ public class Board implements Serializable {
     public boolean isOwner(String userName) {
         return userName.equals(this.owner);
     }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", teamId='" + teamId + '\'' +
+                ", author='" + author + '\'' +
+                ", owner='" + owner + '\'' +
+                ", creationTime='" + creationTime + '\'' +
+                ", modificationTime='" + modificationTime + '\'' +
+                '}';
+    }
 }

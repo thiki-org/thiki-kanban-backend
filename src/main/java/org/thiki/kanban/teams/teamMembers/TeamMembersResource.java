@@ -1,5 +1,6 @@
 package org.thiki.kanban.teams.teamMembers;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -18,6 +19,7 @@ public class TeamMembersResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "team", key = "'teamMember'+teamMember.id+#teamId+#userName")
     public Object toResource(String teamId, TeamMember teamMember, String userName) {
         TeamMembersResource teamMembersResource = new TeamMembersResource();
         teamMembersResource.domainObject = teamMember;

@@ -2,6 +2,7 @@ package org.thiki.kanban.procedure;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
@@ -22,6 +23,7 @@ public class ProcedureResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "procedure", key = "#userName+'procedure'+#boardId+#procedure.id")
     public Object toResource(Procedure procedure, String boardId, String userName) throws Exception {
         logger.info("build procedure resource.board:{},userName:{}", boardId, userName);
         ProcedureResource procedureResource = new ProcedureResource();
@@ -40,6 +42,7 @@ public class ProcedureResource extends RestResource {
 
     }
 
+    @Cacheable(value = "procedure", key = "#userName+'procedure'+#boardId")
     public Object toResource(String boardId, String userName) throws Exception {
         logger.info("build procedure resource.board:{},userName:{}", boardId, userName);
         ProcedureResource procedureResource = new ProcedureResource();

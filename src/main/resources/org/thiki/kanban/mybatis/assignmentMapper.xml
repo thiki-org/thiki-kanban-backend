@@ -11,14 +11,16 @@
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
         SELECT
-        assignment.id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.author,assignment.creation_time,assignment.modification_time,userRegistration.name
+        assignment.id AS
+        id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.author,assignment.creation_time,assignment.modification_time,userRegistration.name
         FROM kb_card_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
         assignment.assignee=userRegistration.id WHERE assignment.id= #{id}
     </select>
 
     <select id="findByCardId" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
         SELECT
-        assignment.id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.author,userRegistration.name
+        assignment.id AS
+        id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.author,userRegistration.name
         FROM kb_card_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
         assignment.assignee=userRegistration.id
         WHERE assignment.card_id= #{cardId} AND assignment.delete_status=0

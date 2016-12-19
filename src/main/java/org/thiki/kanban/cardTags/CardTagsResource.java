@@ -2,6 +2,7 @@ package org.thiki.kanban.cardTags;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.board.BoardsController;
@@ -29,6 +30,7 @@ public class CardTagsResource extends RestResource {
     @Resource
     private CardTagResource cardTagResourceService;
 
+    @Cacheable(value = "card-tag", key = "#userName+'card-tags'+#boardId+#procedureId+#cardId")
     public Object toResource(List<CardTag> cardTags, String boardId, String procedureId, String cardId, String userName) throws Exception {
         logger.info("build cards tag resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         CardsResource cardsResource = new CardsResource();

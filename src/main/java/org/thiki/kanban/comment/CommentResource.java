@@ -1,5 +1,6 @@
 package org.thiki.kanban.comment;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
@@ -22,6 +23,7 @@ public class CommentResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "comment", key = "'comment'+#comment.id+#boardId+#procedureId+#cardId+#userName")
     public Object toResource(Comment comment, String boardId, String procedureId, String cardId, String userName) throws Exception {
         CommentResource commentResource = new CommentResource();
         commentResource.domainObject = comment;
@@ -41,6 +43,7 @@ public class CommentResource extends RestResource {
         return commentResource.getResource();
     }
 
+    @Cacheable(value = "comment", key = "'comment'+#comment.id+#boardId+#procedureId+#cardId+#userName")
     public Object toResource(String boardId, String procedureId, String cardId, String userName) throws Exception {
         CommentResource commentResource = new CommentResource();
 

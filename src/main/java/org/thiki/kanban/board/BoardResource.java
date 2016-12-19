@@ -2,6 +2,7 @@ package org.thiki.kanban.board;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.board.overall.BoardsOverallController;
@@ -25,6 +26,7 @@ public class BoardResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "board")
     public Object toResource(String userName) throws Exception {
         logger.info("build board resource.userName:{}", userName);
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
@@ -33,6 +35,7 @@ public class BoardResource extends RestResource {
         return getResource();
     }
 
+    @Cacheable(value = "board", key = "#board.id+#userName")
     public Object toResource(Board board, String userName) throws Exception {
         logger.info("build board resource.board:{},userName:{}", board, userName);
         this.domainObject = board;

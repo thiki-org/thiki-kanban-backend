@@ -1,5 +1,6 @@
 package org.thiki.kanban.acceptanceCriteria;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
@@ -23,6 +24,7 @@ public class AcceptanceCriteriasResource extends RestResource {
     @Resource
     private AcceptanceCriteriaResource acceptanceCriteriaResourceService;
 
+    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriterias'+#boardId+#procedureId+#cardId+#userName")
     public Object toResource(List<AcceptanceCriteria> acceptanceCriterias, String boardId, String procedureId, String cardId, String userName) throws Exception {
         AcceptanceCriteriasResource acceptanceCriteriasResource = new AcceptanceCriteriasResource();
         List<Object> acceptanceCriteriaResources = new ArrayList<>();

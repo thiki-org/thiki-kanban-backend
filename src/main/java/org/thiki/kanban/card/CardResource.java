@@ -2,6 +2,7 @@ package org.thiki.kanban.card;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaController;
@@ -30,6 +31,7 @@ public class CardResource extends RestResource {
     @Resource
     private TLink tLink;
 
+    @Cacheable(value = "card", key = "#userName+#boardId+#procedureId+#card.id")
     public Object toResource(Card card, String boardId, String procedureId, String userName) throws Exception {
         logger.info("build card resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         CardResource cardResource = new CardResource();
@@ -59,6 +61,7 @@ public class CardResource extends RestResource {
         return cardResource.getResource();
     }
 
+    @Cacheable(value = "card", key = "#userName+#boardId+#procedureId")
     public Object toResource(String boardId, String procedureId, String userName) throws Exception {
         logger.info("build card resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         CardResource cardResource = new CardResource();
