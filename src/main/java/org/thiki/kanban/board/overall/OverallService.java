@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
@@ -59,8 +60,7 @@ public class OverallService {
     @Resource
     private CardTagsResource cardTagsResource;
 
-    private Object result;
-
+    @Cacheable(value = "board", key = "'board-overall'+#boardId+#userName")
     public Object loadAllByBoard(String boardId, String userName) throws Exception {
         logger.info("load overall.");
         Board board = boardsService.findById(boardId);
