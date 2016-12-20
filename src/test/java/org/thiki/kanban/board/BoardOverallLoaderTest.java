@@ -1,5 +1,6 @@
 package org.thiki.kanban.board;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,10 +20,9 @@ import static org.hamcrest.core.StringEndsWith.endsWith;
 @Domain(order = DomainOrder.BOARD, name = "看板")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BoardOverallLoaderTest extends TestBase {
-
-    @Scenario("获取指定用户所拥有的board")
-    @Test
-    public void should_return_all_the_board_data() {
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
         dbPreparation.table("kb_board")
                 .names("id,name,owner,author")
                 .values("boardId", "board-name", "someone", "someone").exec();
@@ -38,7 +38,11 @@ public class BoardOverallLoaderTest extends TestBase {
         dbPreparation.table("kb_card_assignment")
                 .names("id,card_id,assignee,assigner,author")
                 .values("fooId", "card-fooId", "assigneeId-foo", "assignerId-foo", "authorId-foo").exec();
+    }
 
+    @Scenario("获取指定用户所拥有的board")
+    @Test
+    public void should_return_all_the_board_data() {
         given().header("userName", "someone")
                 .log().all()
                 .when()
