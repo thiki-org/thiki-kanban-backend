@@ -19,7 +19,6 @@ import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan
-
 @MapperScan("org.thiki")
 public class DatabaseConfig {
     @Value("${jdbc.driver}")
