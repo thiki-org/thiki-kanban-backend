@@ -22,6 +22,7 @@ security:
     - "http://127.0.0.1:8008"
     - "http://23.234.54.252:8089"
     - "http://www.thiki.org"
+    - "http://localhost:8008"
 
 
 
