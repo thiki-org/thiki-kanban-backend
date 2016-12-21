@@ -23,7 +23,7 @@ public class CommentController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/comments", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Comment comment, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws Exception {
-        Comment savedComment = commentService.addAcceptCriteria(userName, cardId, comment);
+        Comment savedComment = commentService.addComment(userName, cardId, comment);
 
         return Response.post(commentResource.toResource(savedComment, boardId, procedureId, cardId, userName));
     }

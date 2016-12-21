@@ -1,5 +1,6 @@
 package org.thiki.kanban.comment;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,8 +15,8 @@ public class CommentService {
     @Resource
     private CommentPersistence commentPersistence;
 
-    public Comment addAcceptCriteria(String userName, String cardId, Comment comment) {
-
+    @CacheEvict(value = "comment", key = "contains('#cardId')", allEntries = true)
+    public Comment addComment(String userName, String cardId, Comment comment) {
         commentPersistence.addComment(userName, cardId, comment);
         return commentPersistence.findById(comment.getId());
     }
@@ -29,6 +30,7 @@ public class CommentService {
         return commentPersistence.findById(commentId);
     }
 
+    @CacheEvict(value = "comment", key = "contains('#commentId')", allEntries = true)
     public Integer removeComment(String commentId) {
         return commentPersistence.deleteComment(commentId);
     }

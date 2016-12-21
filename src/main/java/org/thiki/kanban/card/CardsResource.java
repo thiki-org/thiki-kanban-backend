@@ -24,7 +24,7 @@ public class CardsResource extends RestResource {
     @Resource
     private CardResource cardResourceService;
 
-    @Cacheable(value = "card", key = "#userName+'cards'+#boardId+#procedureId")
+    @Cacheable(value = "card", key = "#userName+#boardId+#procedureId+'cards'")
     public Object toResource(List<Card> cardList, String boardId, String procedureId, String userName) throws Exception {
         logger.info("build cards resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
         CardsResource cardsResource = new CardsResource();

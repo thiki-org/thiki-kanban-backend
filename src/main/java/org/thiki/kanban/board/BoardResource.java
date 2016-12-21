@@ -26,7 +26,7 @@ public class BoardResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "board")
+    @Cacheable(value = "board", key = "#userName")
     public Object toResource(String userName) throws Exception {
         logger.info("build board resource.userName:{}", userName);
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");

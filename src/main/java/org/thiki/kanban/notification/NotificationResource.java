@@ -1,5 +1,6 @@
 package org.thiki.kanban.notification;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -19,6 +20,7 @@ public class NotificationResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "notification", key = "#userName+#notification.id")
     public Object toResource(String userName, Notification notification) throws Exception {
         NotificationResource notificationResource = new NotificationResource();
         notificationResource.domainObject = notification;

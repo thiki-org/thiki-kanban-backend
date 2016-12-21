@@ -1,5 +1,7 @@
 package org.thiki.kanban.teams.teamMembers;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
@@ -22,6 +24,7 @@ public class TeamMembersService {
     @Resource
     private TeamsService teamsService;
 
+    @CacheEvict(value = "team", key = "contains('teams'+#userName)", allEntries = true)
     public TeamMember joinTeam(String teamId, final TeamMember teamMember, String userName) {
         Team targetTeam = teamsService.findById(teamId);
         if (targetTeam == null) {
@@ -39,6 +42,7 @@ public class TeamMembersService {
         return teamMembersPersistence.findById(teamMember.getId());
     }
 
+    @CacheEvict(value = "team", key = "contains('teams'+#teamId)", allEntries = true)
     public TeamMember joinTeam(String userName, String teamId) {
         boolean isAlreadyJoinTeam = teamMembersPersistence.isAMemberOfTheTeam(userName, teamId);
         if (isAlreadyJoinTeam) {
@@ -52,8 +56,8 @@ public class TeamMembersService {
         return teamMembersPersistence.findById(teamMember.getId());
     }
 
+    @Cacheable(value = "team", key = "'service-members'+#teamId")
     public List<Member> loadMembersByTeamId(String userName, String teamId) {
-
         boolean isTeamExist = teamsService.isTeamExist(teamId);
         if (!isTeamExist) {
             throw new BusinessException(TeamsCodes.TEAM_IS_NOT_EXISTS);
@@ -69,14 +73,15 @@ public class TeamMembersService {
     }
 
     public boolean isMember(String teamId, String userName) {
-
         return teamMembersPersistence.isAMemberOfTheTeam(userName, teamId);
     }
 
+    @CacheEvict(value = "team", key = "contains('teams'+#memberName)", allEntries = true)
     public void leaveTeam(String teamId, String memberName) {
         teamMembersPersistence.leaveTeam(teamId, memberName);
     }
 
+    @Cacheable(value = "team", key = "'service-teams'+#userName")
     public List<Team> loadTeamsByUserName(String userName) {
         return teamMembersPersistence.findTeams(userName);
     }

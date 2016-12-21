@@ -2,6 +2,7 @@ package org.thiki.kanban.card;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.foundation.exception.BusinessException;
@@ -23,6 +24,7 @@ public class CardsService {
     @Resource
     private ProceduresPersistence proceduresPersistence;
 
+    @CacheEvict(value = "card", key = "contains('#procedureId')", allEntries = true)
     public Card create(String userName, String procedureId, Card card) {
         card.setProcedureId(procedureId);
         Procedure procedure = proceduresPersistence.findById(procedureId);
@@ -34,6 +36,7 @@ public class CardsService {
         return cardsPersistence.findById(newCard.getId());
     }
 
+    @CacheEvict(value = "card", key = "contains('#cardId')", allEntries = true)
     public Card update(String cardId, Card card) {
         loadAndValidateCard(cardId);
         if (card.getCode() != null) {
@@ -46,6 +49,7 @@ public class CardsService {
         return cardsPersistence.findById(cardId);
     }
 
+    @CacheEvict(value = "card", key = "contains('#cardId')", allEntries = true)
     public int deleteById(String cardId) {
         loadAndValidateCard(cardId);
         return cardsPersistence.deleteById(cardId);

@@ -2,6 +2,8 @@ package org.thiki.kanban.tag;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 
@@ -17,6 +19,7 @@ public class TagsService {
     @Resource
     private TagPersistence tagPersistence;
 
+    @CacheEvict(value = "tag", key = "contains('#boardId')", allEntries = true)
     public Tag createTag(String boardId, Tag tag) {
         checkUnique(boardId, tag);
 
@@ -24,6 +27,7 @@ public class TagsService {
         return tagPersistence.findById(tag.getId());
     }
 
+    @Cacheable(value = "tag", key = "#boardId+tags")
     public List<Tag> loadTagsByBoard(String boardId) {
         logger.info("Loading tags of the board [{}]", boardId);
         List<Tag> tags = tagPersistence.loadTagsByBoard(boardId);
@@ -31,6 +35,7 @@ public class TagsService {
         return tags;
     }
 
+    @CacheEvict(value = "tag", key = "contains('#tagId')", allEntries = true)
     public Tag updateTag(String boardId, String tagId, Tag tag) {
         checkUnique(boardId, tag);
         tagPersistence.updateTag(tagId, tag);
@@ -49,6 +54,7 @@ public class TagsService {
         }
     }
 
+    @CacheEvict(value = "tag", key = "contains('#tagId')", allEntries = true)
     public Integer deleteTag(String boardId, String tagId) {
         return tagPersistence.deleteTag(tagId);
     }

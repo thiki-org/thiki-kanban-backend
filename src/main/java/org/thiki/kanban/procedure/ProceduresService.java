@@ -2,6 +2,7 @@ package org.thiki.kanban.procedure;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 
@@ -18,6 +19,7 @@ public class ProceduresService {
     @Resource
     private ProceduresPersistence proceduresPersistence;
 
+    @CacheEvict(value = "procedure", key = "contains('#boardId')", allEntries = true)
     public Procedure create(String userName, String boardId, final Procedure procedure) {
         boolean isExists = proceduresPersistence.uniqueTitle(boardId, procedure.getTitle());
         if (isExists) {
@@ -38,6 +40,7 @@ public class ProceduresService {
         return procedures;
     }
 
+    @CacheEvict(value = "procedure", key = "contains('#procedure.id')", allEntries = true)
     public Procedure update(Procedure procedure) {
         checkingWhetherProcedureIsExists(procedure.getId());
         proceduresPersistence.update(procedure);
@@ -52,9 +55,10 @@ public class ProceduresService {
         return foundProcedure;
     }
 
-    public int deleteById(String id) {
-        checkingWhetherProcedureIsExists(id);
-        return proceduresPersistence.deleteById(id);
+    @CacheEvict(value = "procedure", key = "contains('#procedureId')", allEntries = true)
+    public int deleteById(String procedureId) {
+        checkingWhetherProcedureIsExists(procedureId);
+        return proceduresPersistence.deleteById(procedureId);
     }
 
     public List<Procedure> resortProcedures(List<Procedure> procedures, String boardId) {

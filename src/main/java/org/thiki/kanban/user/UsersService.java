@@ -3,6 +3,8 @@ package org.thiki.kanban.user;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
@@ -61,6 +63,7 @@ public class UsersService {
         return usersPersistence.isEmailExist(email);
     }
 
+    @CacheEvict(value = "avatar", key = "contains(#userName)", allEntries = true)
     public String uploadAvatar(String userName, MultipartFile multipartFile) throws IOException {
         if (multipartFile == null) {
             throw new BusinessException(UsersCodes.AVATAR_IS_EMPTY);
@@ -78,12 +81,14 @@ public class UsersService {
         return avatarName;
     }
 
+    @Cacheable(value = "avatar", key = "#userName")
     public File loadAvatar(String userName) throws IOException {
         logger.info("load avatar by userName:{}", userName);
         UserProfile userProfile = usersPersistence.findProfile(userName);
         return avatarStorage.loadAvatarByName(userProfile.getAvatar());
     }
 
+    @Cacheable(value = "profile", key = "#userName")
     public UserProfile loadProfileByUserName(String userName) {
         UserProfile userProfile = usersPersistence.findProfile(userName);
         if (userProfile == null) {
@@ -92,6 +97,7 @@ public class UsersService {
         return usersPersistence.findProfile(userName);
     }
 
+    @CacheEvict(value = "profile", key = "contains(#userName)", allEntries = true)
     public UserProfile updateProfile(UserProfile userProfile, String userName) {
         usersPersistence.updateProfile(userName, userProfile);
         return usersPersistence.findProfile(userName);

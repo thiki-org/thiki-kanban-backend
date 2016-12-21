@@ -1,5 +1,6 @@
 package org.thiki.kanban.publickey;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -20,6 +21,7 @@ public class PublicKeyResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "publicKey", key = "publicKey")
     public Object toResource(PublicKey publicPublicKey) throws Exception {
         PublicKeyResource publicKeyResource = new PublicKeyResource();
         publicKeyResource.domainObject = publicPublicKey;

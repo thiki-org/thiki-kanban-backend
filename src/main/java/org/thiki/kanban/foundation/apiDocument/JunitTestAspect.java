@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
 @Component
 public class JunitTestAspect {
 
-    @Before("@annotation(org.junit.Test)")
     public void validateQueryParams(JoinPoint joinPoint) throws Throwable {
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
         Scenario scenario = method.getDeclaredAnnotation(Scenario.class);

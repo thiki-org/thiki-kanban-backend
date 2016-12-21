@@ -1,5 +1,6 @@
 package org.thiki.kanban.tag;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -23,6 +24,7 @@ public class TagsResource extends RestResource {
     @Resource
     private TagResource tagResourceService;
 
+    @Cacheable(value = "tag", key = "#userName+#boardId+#tags")
     public Object toResource(List<Tag> tags, String boardId, String userName) throws IOException {
         TagsResource tagsResource = new TagsResource();
         List<Object> tagResources = new ArrayList<>();
@@ -40,6 +42,7 @@ public class TagsResource extends RestResource {
         return tagsResource.getResource();
     }
 
+    @Cacheable(value = "tag", key = "#userName+#boardId")
     public Object toResource(String boardId, String userName) throws IOException {
         TagsResource tagsResource = new TagsResource();
         Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(boardId, userName)).withRel("tags");

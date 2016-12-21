@@ -1,5 +1,6 @@
 package org.thiki.kanban.board;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
@@ -21,6 +22,7 @@ public class BoardsService {
     @Resource
     private TeamMembersService teamMembersService;
 
+    @CacheEvict(value = "board", key = "startsWith('#userName + boards')", allEntries = true)
     public Board create(String userName, final Board board) {
         boolean isExists = boardsPersistence.unique(board.getId(), board.getName(), userName);
         if (isExists) {
@@ -55,6 +57,7 @@ public class BoardsService {
         return teamsBoards;
     }
 
+    @CacheEvict(value = "board", key = "contains('#board.id')", allEntries = true)
     public Board update(String userName, Board board) {
         Board boardToDelete = boardsPersistence.findById(board.getId());
         if (boardToDelete == null) {
@@ -68,6 +71,7 @@ public class BoardsService {
         return boardsPersistence.findById(board.getId());
     }
 
+    @CacheEvict(value = "board", key = "contains('#board.id')", allEntries = true)
     public int deleteById(String boardId, String userName) {
         Board boardToDelete = boardsPersistence.findById(boardId);
         if (boardToDelete == null || !boardToDelete.isOwner(userName)) {

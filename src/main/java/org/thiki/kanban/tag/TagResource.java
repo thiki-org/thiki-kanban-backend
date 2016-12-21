@@ -1,5 +1,6 @@
 package org.thiki.kanban.tag;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -19,6 +20,7 @@ public class TagResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "tag", key = "#userName+#boardId+#tag.id")
     public Object toResource(Tag tag, String boardId, String userName) throws IOException {
         TagResource tagResource = new TagResource();
         tagResource.domainObject = tag;

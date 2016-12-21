@@ -19,7 +19,7 @@ public class TeamsResource extends RestResource {
     @Resource
     private TeamResource teamResourceService;
 
-    @Cacheable(value = "team", key = "'teams'+#userName")
+    @Cacheable(value = "team", key = "'resource-teams'+#userName")
     public Object toResource(String userName, List<Team> teamList) throws Exception {
         TeamsResource teamsResource = new TeamsResource();
         teamsResource.domainObject = teamList;

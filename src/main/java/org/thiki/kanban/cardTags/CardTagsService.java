@@ -1,5 +1,6 @@
 package org.thiki.kanban.cardTags;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,6 +15,7 @@ public class CardTagsService {
     @Resource
     private CardTagPersistence cardTagPersistence;
 
+    @CacheEvict(value = "card-tag", key = "contains('#cardId')", allEntries = true)
     public List<CardTag> stickTags(List<CardTag> cardTags, String cardId, String userName) {
         cardTagPersistence.removeTagsByCardId(cardId);
         for (CardTag cardTag : cardTags) {

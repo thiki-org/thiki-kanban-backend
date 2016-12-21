@@ -1,5 +1,6 @@
 package org.thiki.kanban.notification;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -18,6 +19,7 @@ public class UnreadNotificationsResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "notification", key = "#userName+unreadNotificationTotal")
     public Object toResource(String userName, Integer unreadNotificationTotal) throws Exception {
         UnreadNotificationsResource unreadNotificationsResource = new UnreadNotificationsResource();
         unreadNotificationsResource.buildDataObject("unreadNotificationsTotal", unreadNotificationTotal);

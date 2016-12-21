@@ -1,6 +1,7 @@
 package org.thiki.kanban.entrance;
 
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
@@ -21,6 +22,7 @@ public class EntranceResource extends RestResource {
     @Resource
     private TLink tlink;
 
+    @Cacheable(value = "entrance", key = "entrance")
     public Object toResource() throws Exception {
         EntranceResource entranceResource = new EntranceResource();
         entranceResource.domainObject = new JSONObject() {{
