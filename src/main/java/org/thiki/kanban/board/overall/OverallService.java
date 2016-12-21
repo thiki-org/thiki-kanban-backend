@@ -69,6 +69,7 @@ public class OverallService {
     }
 
     private JSONObject loadBoard(String boardId, String userName) throws Exception {
+        logger.info("load board tags.");
         Board board = boardsService.findById(boardId);
         JSONObject boardJSON = (JSONObject) boardResource.toResource(board, userName);
 
@@ -78,10 +79,12 @@ public class OverallService {
         JSONArray newProceduresArray = loadCards(boardId, userName, proceduresArray);
         proceduresJSON.put("procedures", newProceduresArray);
         boardJSON.put("procedures", proceduresJSON);
+        logger.info("board loading completed.");
         return boardJSON;
     }
 
     private JSONArray loadCards(String boardId, String userName, JSONArray proceduresArray) throws Exception {
+        logger.info("load cards tags.");
         JSONArray newProceduresArray = new JSONArray();
         for (int i = 0; i < proceduresArray.size(); i++) {
             JSONObject procedureJSON = proceduresArray.getJSONObject(i);
@@ -95,6 +98,7 @@ public class OverallService {
             procedureJSON.put("cards", cardsJSON);
             newProceduresArray.add(procedureJSON);
         }
+        logger.info("card loading completed.");
         return newProceduresArray;
     }
 
@@ -112,20 +116,26 @@ public class OverallService {
     }
 
     private void loadCardTags(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+        logger.info("load card tags.");
         List<CardTag> stickCardTags = cardTagsService.loadTags(cardId);
         JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName);
         cardJSON.put("tags", tagsJSON);
+        logger.info("card tags loading completed.");
     }
 
     private void loadAcceptanceCriterias(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+        logger.info("load acceptanceCriterias tags.");
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
         JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName);
         cardJSON.put("acceptanceCriterias", acceptanceCriteriasJSON);
+        logger.info("acceptanceCriterias loading completed.");
     }
 
     private void loadComments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+        logger.info("load assignments tags.");
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
         JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
         cardJSON.put("assignments", assignmentsJSON);
+        logger.info("assignments loading completed.");
     }
 }
