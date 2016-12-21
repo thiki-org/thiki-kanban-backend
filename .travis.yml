@@ -1,5 +1,5 @@
 language: java
-script: mvn clean cobertura:cobertura jacoco:report coveralls:report
+script: ./gradlew clean test
 notifications:
   slack:
     on_success: always
