@@ -1,44 +1,192 @@
 
-# 零、入口 #
+# 三、看板 #
 
-## 初次访问系统时入口 ##
+## 获取指定用户所拥有的board ##
 
 **用例名称**
-enter_shouldReturnEntranceSuccessfully
+should_return_all_the_board_data
 
 **URL_TEMPLATE**
-http://localhost:9120/kanban/entrance
+http://localhost:9120/kanban/someone/boards/boardId/overall
 
 **响应体**
 ```
 {
+	"owner":"someone",
+	"creationTime":"2016-12-18 21:20:21.469000",
 	"_links":{
+		"all":{
+			"href":"http://localhost:9120/kanban/someone/boards",
+			"actions":{}
+		},
+		"procedures":{
+			"href":"http://localhost:9120/kanban/boards/boardId/procedures",
+			"actions":{}
+		},
 		"self":{
-			"href":"http://localhost:9120/kanban/entrance",
+			"href":"http://localhost:9120/kanban/someone/boards/boardId",
 			"actions":{
+				"modify":{
+					"isAllowed":true
+				},
 				"read":{
+					"isAllowed":true
+				},
+				"create":{
+					"isAllowed":true
+				},
+				"delete":{
 					"isAllowed":true
 				}
 			}
 		},
-		"publicKey":{
-			"href":"http://localhost:9120/kanban/publicKey",
-			"actions":{
-				"read":{
-					"isAllowed":true
-				}
-			}
-		},
-		"passwordRetrievalApplication":{
-			"href":"http://localhost:9120/kanban/passwordRetrievalApplication",
-			"actions":{
-				"read":{
-					"isAllowed":true
-				}
-			}
+		"tags":{
+			"href":"http://localhost:9120/kanban/boards/boardId/tags",
+			"actions":{}
 		}
 	},
-	"description":"Welcome!"
+	"author":"someone",
+	"modificationTime":"2016-12-18 21:20:21.469000",
+	"procedures":{
+		"_links":{
+			"self":{
+				"href":"http://localhost:9120/kanban/boards/boardId/procedures",
+				"actions":{}
+			},
+			"sortNumbers":{
+				"href":"http://localhost:9120/kanban/boards/boardId/procedures/sortNumbers",
+				"actions":{}
+			}
+		},
+		"procedures":[
+			{
+				"cards":{
+					"cards":[
+						{
+							"summary":"card-summary.",
+							"assignments":{
+								"assignments":[
+									{
+										"_links":{
+											"all":{
+												"href":"http://localhost:9120/kanban/boards/procedure-fooId/procedures",
+												"actions":{}
+											},
+											"assignments":{
+												"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/assignments",
+												"actions":{}
+											},
+											"assigneeProfile":{
+												"href":"http://localhost:9120/kanban/users/assigneeId-foo/profile",
+												"actions":{}
+											},
+											"self":{
+												"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/assignments/fooId",
+												"actions":{}
+											},
+											"card":{
+												"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId",
+												"actions":{}
+											},
+											"assigneeAvatar":{
+												"href":"http://localhost:9120/kanban/users/assigneeId-foo/avatar",
+												"actions":{}
+											}
+										},
+										"author":"authorId-foo",
+										"cardId":"card-fooId",
+										"assigner":"assignerId-foo",
+										"assignee":"assigneeId-foo",
+										"id":"fooId"
+									}
+								],
+								"_links":{
+									"self":{
+										"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/assignments",
+										"actions":{}
+									},
+									"card":{
+										"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId",
+										"actions":{}
+									}
+								}
+							},
+							"creationTime":"2016-12-18 21:20:21.473000",
+							"_links":{
+								"assignments":{
+									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/assignments",
+									"actions":{}
+								},
+								"acceptanceCriterias":{
+									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/acceptanceCriterias",
+									"actions":{}
+								},
+								"comments":{
+									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/comments",
+									"actions":{}
+								},
+								"cards":{
+									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards",
+									"actions":{}
+								},
+								"self":{
+									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId",
+									"actions":{}
+								},
+								"cardTags":{
+									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/tags",
+									"actions":{}
+								},
+								"tags":{
+									"href":"http://localhost:9120/kanban/boards/boardId/tags",
+									"actions":{}
+								}
+							},
+							"author":"someone",
+							"modificationTime":"2016-12-18 21:20:21.473000",
+							"sortNumber":0,
+							"id":"card-fooId",
+							"procedureId":"procedure-fooId",
+							"content":"play badminton"
+						}
+					],
+					"_links":{
+						"self":{
+							"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards",
+							"actions":{}
+						},
+						"sortNumbers":{
+							"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/sortNumbers",
+							"actions":{}
+						}
+					}
+				},
+				"creationTime":"2016-12-18 21:20:21.472000",
+				"_links":{
+					"all":{
+						"href":"http://localhost:9120/kanban/boards/boardId/procedures",
+						"actions":{}
+					},
+					"cards":{
+						"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards",
+						"actions":{}
+					},
+					"self":{
+						"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId",
+						"actions":{}
+					}
+				},
+				"author":"someone",
+				"modificationTime":"2016-12-18 21:20:21.472000",
+				"sortNumber":0,
+				"boardId":"boardId",
+				"id":"procedure-fooId",
+				"title":"procedure-name"
+			}
+		]
+	},
+	"name":"board-name",
+	"id":"boardId"
 }
 ```
 
