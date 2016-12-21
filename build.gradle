@@ -2,6 +2,8 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: "jacoco"
 apply plugin: 'org.springframework.boot'
+apply plugin: 'cobertura'
+apply plugin: 'coveralls'
 
 group = 'org.thiki'
 version = '1.0-SNAPSHOT'
@@ -13,6 +15,8 @@ targetCompatibility = 1.8
 buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+        classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.3.1'
     }
 }
 
@@ -76,14 +80,15 @@ bootRun {
     addResources = true
 }
 
+cobertura.coverageFormats = ['html', 'xml']
 jacoco {
     toolVersion = "0.7.6.201602180812"
     reportsDir = file("$buildDir/$reportsDir")
 }
 jacocoTestReport {
     reports {
-        xml.enabled false
-        csv.enabled false
+        xml.enabled = true
+        html.enabled = true
         html.destination "${buildDir}/jacocoHtml"
     }
 }
