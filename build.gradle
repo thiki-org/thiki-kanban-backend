@@ -8,7 +8,6 @@ apply plugin: 'coveralls'
 group = 'org.thiki'
 version = '1.0-SNAPSHOT'
 
-
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -26,6 +25,7 @@ buildscript {
     }
 }
 repositories {
+    mavenCentral()
     maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
 }
 dependencies {
@@ -74,6 +74,10 @@ dependencies {
 
     testCompile 'com.jayway.jsonpath:json-path-assert:0.9.1'
     testCompile 'junit:junit:4.12'
+}
+
+springBoot {
+    executable = true
 }
 
 bootRun {
