@@ -1,5 +1,6 @@
 language: java
-script: ./gradlew clean test
+before_install:
+  - chmod +x gradlew
 notifications:
   slack:
     on_success: always
