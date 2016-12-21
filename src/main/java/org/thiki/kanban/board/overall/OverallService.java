@@ -63,12 +63,25 @@ public class OverallService {
     @Cacheable(value = "board", key = "'board-overall'+#boardId+#userName")
     public Object loadAllByBoard(String boardId, String userName) throws Exception {
         logger.info("load overall.");
+        JSONObject boardJSON = loadBoard(boardId, userName);
+        logger.info("overall loading completed.");
+        return boardJSON;
+    }
+
+    private JSONObject loadBoard(String boardId, String userName) throws Exception {
         Board board = boardsService.findById(boardId);
         JSONObject boardJSON = (JSONObject) boardResource.toResource(board, userName);
 
         List<Procedure> procedureList = proceduresService.loadByBoardId(boardId);
         JSONObject proceduresJSON = (JSONObject) proceduresResource.toResource(procedureList, boardId, userName);
         JSONArray proceduresArray = (JSONArray) proceduresJSON.get("procedures");
+        JSONArray newProceduresArray = loadCards(boardId, userName, proceduresArray);
+        proceduresJSON.put("procedures", newProceduresArray);
+        boardJSON.put("procedures", proceduresJSON);
+        return boardJSON;
+    }
+
+    private JSONArray loadCards(String boardId, String userName, JSONArray proceduresArray) throws Exception {
         JSONArray newProceduresArray = new JSONArray();
         for (int i = 0; i < proceduresArray.size(); i++) {
             JSONObject procedureJSON = proceduresArray.getJSONObject(i);
@@ -77,31 +90,42 @@ public class OverallService {
             JSONObject cardsJSON = (JSONObject) cardsResource.toResource(cardList, boardId, procedureId, userName);
             JSONArray cardsArray = (JSONArray) cardsJSON.get("cards");
 
-            JSONArray newCardsArray = new JSONArray();
-            for (int j = 0; j < cardsArray.size(); j++) {
-                JSONObject cardJSON = cardsArray.getJSONObject(j);
-                String cardId = cardJSON.getString("id");
-                List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
-                JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
-                cardJSON.put("assignments", assignmentsJSON);
-
-                List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
-                JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName);
-                cardJSON.put("acceptanceCriterias", acceptanceCriteriasJSON);
-
-                List<CardTag> stickCardTags = cardTagsService.loadTags(cardId);
-                JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName);
-                cardJSON.put("tags", tagsJSON);
-
-                newCardsArray.add(cardJSON);
-            }
+            JSONArray newCardsArray = loadOthersByCard(boardId, userName, procedureId, cardsArray);
             cardsJSON.put("cards", newCardsArray);
             procedureJSON.put("cards", cardsJSON);
             newProceduresArray.add(procedureJSON);
         }
-        proceduresJSON.put("procedures", newProceduresArray);
-        boardJSON.put("procedures", proceduresJSON);
-        logger.info("overall loading completed.");
-        return boardJSON;
+        return newProceduresArray;
+    }
+
+    private JSONArray loadOthersByCard(String boardId, String userName, String procedureId, JSONArray cardsArray) throws Exception {
+        JSONArray newCardsArray = new JSONArray();
+        for (int j = 0; j < cardsArray.size(); j++) {
+            JSONObject cardJSON = cardsArray.getJSONObject(j);
+            String cardId = cardJSON.getString("id");
+            loadComments(boardId, userName, procedureId, cardJSON, cardId);
+            loadAcceptanceCriterias(boardId, userName, procedureId, cardJSON, cardId);
+            loadCardTags(boardId, userName, procedureId, cardJSON, cardId);
+            newCardsArray.add(cardJSON);
+        }
+        return newCardsArray;
+    }
+
+    private void loadCardTags(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId);
+        JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName);
+        cardJSON.put("tags", tagsJSON);
+    }
+
+    private void loadAcceptanceCriterias(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+        List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
+        JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName);
+        cardJSON.put("acceptanceCriterias", acceptanceCriteriasJSON);
+    }
+
+    private void loadComments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+        List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
+        JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
+        cardJSON.put("assignments", assignmentsJSON);
     }
 }
