@@ -21,7 +21,7 @@ public class PublicKeyResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "publicKey", key = "publicKey")
+    @Cacheable(value = "publicKey", key = "'publicKey-'+#root.methodName")
     public Object toResource(PublicKey publicPublicKey) throws Exception {
         PublicKeyResource publicKeyResource = new PublicKeyResource();
         publicKeyResource.domainObject = publicPublicKey;

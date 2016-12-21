@@ -24,7 +24,7 @@ public class TagsResource extends RestResource {
     @Resource
     private TagResource tagResourceService;
 
-    @Cacheable(value = "tag", key = "#userName+#boardId+#tags")
+    @Cacheable(value = "tag", key = "#userName+#boardId+'-tags'")
     public Object toResource(List<Tag> tags, String boardId, String userName) throws IOException {
         TagsResource tagsResource = new TagsResource();
         List<Object> tagResources = new ArrayList<>();

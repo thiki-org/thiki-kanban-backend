@@ -36,8 +36,9 @@ public class CardsService {
         return cardsPersistence.findById(newCard.getId());
     }
 
-    @CacheEvict(value = "card", key = "contains('#cardId')", allEntries = true)
+    @CacheEvict(value = "card", key = "contains(#card.procedureId)", allEntries = true)
     public Card update(String cardId, Card card) {
+        logger.info("update card:{}", card);
         loadAndValidateCard(cardId);
         if (card.getCode() != null) {
             boolean isCoedAlreadyExist = cardsPersistence.isCodeAlreadyExist(cardId, card.getCode(), card.getProcedureId());

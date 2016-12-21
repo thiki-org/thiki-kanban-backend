@@ -22,12 +22,11 @@ public class TagsService {
     @CacheEvict(value = "tag", key = "contains('#boardId')", allEntries = true)
     public Tag createTag(String boardId, Tag tag) {
         checkUnique(boardId, tag);
-
         tagPersistence.addTag(boardId, tag);
         return tagPersistence.findById(tag.getId());
     }
 
-    @Cacheable(value = "tag", key = "#boardId+tags")
+    @Cacheable(value = "tag", key = "'service-tags'+#boardId")
     public List<Tag> loadTagsByBoard(String boardId) {
         logger.info("Loading tags of the board [{}]", boardId);
         List<Tag> tags = tagPersistence.loadTagsByBoard(boardId);

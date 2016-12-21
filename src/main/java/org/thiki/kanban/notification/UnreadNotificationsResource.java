@@ -19,7 +19,7 @@ public class UnreadNotificationsResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "notification", key = "#userName+unreadNotificationTotal")
+    @Cacheable(value = "notification", key = "#userName+'unreadNotificationTotal'")
     public Object toResource(String userName, Integer unreadNotificationTotal) throws Exception {
         UnreadNotificationsResource unreadNotificationsResource = new UnreadNotificationsResource();
         unreadNotificationsResource.buildDataObject("unreadNotificationsTotal", unreadNotificationTotal);

@@ -22,7 +22,7 @@ public class EntranceResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "entrance", key = "entrance")
+    @Cacheable(value = "entrance-desc", key = "#root.methodName")
     public Object toResource() throws Exception {
         EntranceResource entranceResource = new EntranceResource();
         entranceResource.domainObject = new JSONObject() {{
