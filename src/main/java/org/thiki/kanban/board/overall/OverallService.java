@@ -60,6 +60,7 @@ public class OverallService {
     @Resource
     private CardTagsResource cardTagsResource;
 
+    @Cacheable(value = "board", key = "'board-overall'+#boardId+#userName")
     public Object loadAllByBoard(String boardId, String userName) throws Exception {
         logger.info("load overall.");
         JSONObject boardJSON = loadBoard(boardId, userName);
