@@ -1,33 +1,21 @@
-#!/bin/sh
-set -e
-artifacts_path=$1
+#!/usr/bin/env bash
+server_host=$1
 server_dir=$2
-echo "artifacts_path:$1"
-echo "server_dir:$2"
 
-echo "remove old scripts..."
+echo "-> upload artifact to remote server"
+scp /Users/xubt/Documents/products/thiki-kanban-backend/build/libs/kanban-1.0-SNAPSHOT.jar $server_host:$server_dir
+scp killServer.sh $server_host:$server_dir
+
+echo "-> login remote server"
+ssh server <<'ENDSSH'
 cd $server_dir
-rm -rf killServer.sh
-rm -rf deploy.sh
 
-echo "copy new scripts..."
-mv $artifacts_path/src/main/resources/scripts/killServer.sh  $server_dir
-
-echo "chmod new scripts..."
-chmod 777 killServer.sh
-
-echo "stop server..."
+echo "-> stop server"
 sh killServer.sh
 
-echo "remove old jar..."
-rm -rf *.jar
+echo "-> start server"
+nohup java -jar kanban-1.0-SNAPSHOT.jar
+echo "-> everything is done."
 
-echo "copy new artifact from server directory..."
-mv $artifacts_path/target/*.jar $server_dir
-
-echo "start server ..."
-cd $server_dir
-
-java -jar *.jar 1>> log.log 2>&1&
-
-echo "deploy done."
+exit.
+ENDSSH
