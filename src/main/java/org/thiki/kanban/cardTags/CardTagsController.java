@@ -20,7 +20,7 @@ public class CardTagsController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/tags", method = RequestMethod.POST)
     public HttpEntity stick(@RequestBody List<CardTag> cardTags, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        List<CardTag> stickCardTags = cardTagsService.stickTags(cardTags, cardId, userName);
+        List<CardTag> stickCardTags = cardTagsService.stickTags(cardTags, cardId, boardId, userName);
 
         return Response.post(cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName));
     }
