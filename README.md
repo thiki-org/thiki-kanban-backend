@@ -11,25 +11,47 @@ thiki(思奇)是一个充满活力、具有技术追求并热爱创造的团队�
 
 thiki-kanban是一个精益看板系统,以看板方法为核心,内嵌精益思想,研发过程中覆盖了丰富的技术实践。
 
-系统在设计上使用RESTful的架构风格,服务端与客户端独立演进。
+系统在设计上服务端与客户端独立演进。
 
 基础技术点:
-* spring-hateoas
+
 * spring-boot
+* spring-hateoas
 * mybatis+mysql
 * HSQL
-* RestAssured
 * RSA
-* MD5
+* Gradle
 
+DevOps技术点：
 
-**Note**:thiki-kanban-backend仅提供了RESTful服务端,客户端我们提供了[thiki-kanban-web](https://github.com/thiki-org/thiki-kanban-web),你需要两边配合使用。当然,你也可以自行开发适合自己的客户端。
+* HAProxy
+* nginx
+* KeepAlived
+* ELK
+* Shell
+
+缓存：
+
+* Redis
+
+自动化测试技术点：
+
+* RESTAssured
+* Gauge
+
+架构与设计
+
+* RESTful
+* DDD
+
+**Note**:thiki-kanban-backend仅提供了RESTful服务端,客户端我们提供了[thiki-kanban-web](https://github.com/thiki-org/thiki-kanban-web),你需要两边配合使用。
 
 ##安装方法 
 
 在安装前,请检查你的机器是否已经具备以下环境:  
-* java 1.8;  
-* maven 3.2.x or higher version.
+
+* java 1.8;
+* Gradle 3.2.x或更高版本.
 
 
 ### 1、配置数据库
@@ -40,23 +62,21 @@ hsql是内存数据库,仅在集成测试中使用。所以,test目录下的测�
 
 **Mysql**
 
-如果你想通过`Application.java`启动系统,并在浏览器中访问,请首先在你的机器上安装Mysql.然后,在`resources/profiles`中添加你本地的配置,具体配置方法请参考已经存在的`local_tao`|`local_zz`.
+如果你想通过`Application.java`启动系统,并在浏览器中访问,请首先在你的机器上安装Mysql.然后,在`resources/config`中添加你本地的配置,具体配置方法请参考已经存在的`local_tao`|`local_zz`.
 
-配置文件添加完成后,在`pom`的`profiles`节点中配置你的`profile`,参考如下:
+### 2、如何构建
+通过gradle构建可独立运行的jar包：
+```
+./gradlew clean build
+```
+
+如过需要在构建时跳过测试，运行：
 
 ```
- <profiles>
-     <profile>
-         <id>local_zz</id>
-         <activation>
-              <activeByDefault>true</activeByDefault>
-          </activation>
-          <properties>
-              <prop.dir.name>local_zz</prop.dir.name>
-          </properties>
-     </profile>
- </profiles>
+ ./gradlew clean build -x test
 ```
+
+通过`./gradlew` 构建时，gradle会默认从官网下载。而由于众所周知的原因，下载会非常慢。为了加快构建速度，你可以先将gradle包下载到本地，并将`gradle/wrapper/gradle-wrapper.properties`中的`distributionUrl`指向你本地的gradle.
 
 ### 2、启动系统
 
@@ -64,38 +84,63 @@ hsql是内存数据库,仅在集成测试中使用。所以,test目录下的测�
 
 * 从Application.java直接运行
 * 打成 jar后运行
-* 通过maven运行
+* 通过gradle运行
 
-如果你是一个开发者,建议通过maven运行:
-
-```
- mvn clean install exec:java -P local_tao
-```
-如需在启动时跳过测试，运行：
+通过gradle运行:
 
 ```
- clean install exec:java -P local_tao -Dmaven.test.skip=true
+ ./gradlew bootRun
 ```
-注意:运行时请把 `local_tao`修改成你的`profile` id.
 
+需要注意的是，`./gradlew bootRun`运行时的默认配置文件是`resources/config/application-local.properties`，你可以通过 `--spring.profiles.active`指定你的配置文件。通过`Application`的`main`函数运行时也同样需要指定配置文件。
+
+另外，在通过`./gradlew clean build`构建的jar中并没有配置文件，这是出于生产环境的安全考虑，避免在代码库中暴露生产环境信息。当你在生产环境部署时，你需要把配置文件放在jar包所在的目录下，系统启动时会自动读取。
 
 ### 3、访问Web APIs
 
 ```
-http://localhost:8080/entrance
+http://localhost:8096/kanban/entrance
  
 {
-  "description": "Welcome!",
   "_links": {
     "self": {
-      "href": "http://localhost:8080/entrance"
+      "href": "http://localhost:8096/kanban/entrance",
+      "actions": {
+        "read": {
+          "isAllowed": true
+        }
+      }
     },
-    "procedures": {
-      "href": "http://localhost:8080/procedures"
+    "publicKey": {
+      "href": "http://localhost:8096/kanban/publicKey",
+      "actions": {
+        "read": {
+          "isAllowed": true
+        }
+      }
+    },
+    "passwordRetrievalApplication": {
+      "href": "http://localhost:8096/kanban/passwordRetrievalApplication",
+      "actions": {
+        "read": {
+          "isAllowed": true
+        }
+      }
     }
-  }
+  },
+  "description": "Welcome!"
 }
 ```
+
+一般情况下，通过RESTAssured在开发时便已经满足对系统访问的需求。如果需要在系统之外访问，可以使用一些REST Client工具。谷歌和火狐浏览器都提供了类似插件。
+
+### 4、Redis相关
+
+为提高系统运行速度，我们使用了Redis作为缓存服务器。在现有的配置中，集成测试运行时已通过`redis.enabled=false`跳过Redis.如果你在运行系统时，而你的机器没有安装Redis或者纯粹想跳过它，你也可以在配置文件添加该属性跳过。
+
+### 5、部署相关
+
+当前项目已经在生产环境部署，点击访问[思奇精益看板](http://www.thiki.org)。当然，众多特性仍没有上线，我们仍在开发中，并通过[Go CD](https://www.go.cd)每日部署。
 
 ## API文档
 
