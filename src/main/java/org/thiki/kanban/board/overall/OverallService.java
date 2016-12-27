@@ -124,7 +124,7 @@ public class OverallService {
     }
 
     private void loadAcceptanceCriterias(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
-        logger.info("load acceptanceCriterias tags.");
+        logger.info("load acceptanceCriterias.");
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
         JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName);
         cardJSON.put("acceptanceCriterias", acceptanceCriteriasJSON);
@@ -132,7 +132,7 @@ public class OverallService {
     }
 
     private void loadComments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
-        logger.info("load assignments tags.");
+        logger.info("load assignments.");
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
         JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
         cardJSON.put("assignments", assignmentsJSON);
