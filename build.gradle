@@ -80,11 +80,11 @@ dependencies {
 springBoot {
     executable = true
 }
-def profile = 'local-tao'
+def defaultProfile = 'local'
 
 bootRun {
     addResources = true
-    args = ["--spring.profiles.active=" + profile]
+    args = ["--spring.profiles.active=" + defaultProfile]
 }
 
 cobertura.coverageFormats = ['html', 'xml']
