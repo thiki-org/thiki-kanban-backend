@@ -60,7 +60,7 @@ public class ProceduresService {
         checkingWhetherProcedureIsExists(procedureId);
         return proceduresPersistence.deleteById(procedureId);
     }
-
+    @CacheEvict(value = "procedure", key = "contains('#boardId')", allEntries = true)
     public List<Procedure> resortProcedures(List<Procedure> procedures, String boardId) {
         for (Procedure procedure : procedures) {
             proceduresPersistence.resort(procedure);
