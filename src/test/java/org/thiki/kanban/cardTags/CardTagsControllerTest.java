@@ -54,8 +54,8 @@ public class CardTagsControllerTest extends TestBase {
                 .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
                 .body("_links.board.href", endsWith("/someone/boards/boardId-foo"));
 
-        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE card_id='card-fooId' AND delete_status=0").size());
-        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE id='foo-cards-tags' AND delete_status=0").size());
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE card_id='card-fooId' AND id='foo-cards-tags'" +
+                "AND delete_status=0").size());
     }
 
     @Scenario("获取卡片标签>用户给卡片贴完标签后,可以获取卡片所贴标签")
