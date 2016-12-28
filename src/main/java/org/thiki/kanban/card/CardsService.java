@@ -78,7 +78,7 @@ public class CardsService {
         }
         return foundCard;
     }
-
+    @CacheEvict(value = "card", key = "contains(#procedureId)", allEntries = true)
     public List<Card> resortCards(List<Card> cards, String procedureId) {
         for (Card card : cards) {
             cardsPersistence.resort(card);
