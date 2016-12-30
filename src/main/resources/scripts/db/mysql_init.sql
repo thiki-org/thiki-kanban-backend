@@ -63,6 +63,7 @@ CREATE TABLE kb_procedure (
   id                VARCHAR(40) NOT NULL,
   title             VARCHAR(50) NOT NULL,
   author            VARCHAR(40) NOT NULL,
+  description      VARCHAR(100) NOT NULL,
   delete_status     INT(2)               DEFAULT 0,
   sort_number       INT(2)      NOT NULL DEFAULT 0,
   board_id          VARCHAR(40) NOT NULL,

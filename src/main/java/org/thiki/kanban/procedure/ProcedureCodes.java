@@ -7,11 +7,12 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  */
 public enum ProcedureCodes {
     TITLE_IS_ALREADY_EXISTS("001", "该名称已经被使用,请使用其它名称。"),
-
-    IS_NOT_CURRENT_TEAM_MEMBER("002", "当前团队并非团队成员"), PROCEDURE_IS_NOT_EXIST("003", "工序不存在");
+    IS_NOT_CURRENT_TEAM_MEMBER("002", "当前团队并非团队成员"),
+    PROCEDURE_IS_NOT_EXIST("003", "工序不存在");
 
     public static final String titleIsRequired = "工序名称不能为空。";
     public static final String titleIsInvalid = "工序名称长度超限,请保持在30个字符以内。";
+    public static final String descriptionIsInvalid = "工序描述长度超限,请保持在100个字符以内。";
     private String code;
     private String message;
 

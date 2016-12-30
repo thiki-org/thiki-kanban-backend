@@ -6,7 +6,7 @@
 
     <insert id="create" parameterType="org.thiki.kanban.procedure.Procedure">
         INSERT INTO
-        kb_procedure(id,title, author,board_id,sort_number) VALUES (#{procedure.id},#{procedure.title},
+        kb_procedure(id,title,description,author,board_id,sort_number) VALUES (#{procedure.id},#{procedure.title},#{procedure.description},
         #{userName},#{boardId},(SELECT
         max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
         max_sort_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ))
@@ -15,6 +15,7 @@
     <update id="update" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
         UPDATE kb_procedure SET
         title=#{title},
+        description=#{description},
         sort_number=#{sortNumber}
         WHERE id=#{id} AND delete_status=0
     </update>

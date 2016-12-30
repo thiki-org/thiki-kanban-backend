@@ -28,13 +28,14 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldReturn201WhenCreateProcedureSuccessfully() {
         given().header("userName", userName)
-                .body("{\"title\":\"this is the procedure title.\"}")
+                .body("{\"title\":\"this is the procedure title.\",\"description\":\"description.\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/procedures")
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("this is the procedure title."))
+                .body("description", equalTo("description."))
                 .body("author", equalTo(userName))
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", endsWith("/boards/feeId/procedures"))

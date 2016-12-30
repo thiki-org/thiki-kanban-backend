@@ -18,6 +18,8 @@ public class Procedure {
     @Length(max = 30, message = ProcedureCodes.titleIsInvalid)
     private String title;
 
+    @Length(max = 100, message = ProcedureCodes.descriptionIsInvalid)
+    private String description;
     private String author;
     private String boardId;
     private Integer sortNumber;
@@ -103,5 +105,13 @@ public class Procedure {
                 ", creationTime='" + creationTime + '\'' +
                 ", modificationTime='" + modificationTime + '\'' +
                 '}';
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
