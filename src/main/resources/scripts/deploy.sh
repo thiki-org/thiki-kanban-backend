@@ -8,7 +8,7 @@ scp $artifact $server_host:$server_dir
 scp killServer.sh $server_host:$server_dir
 
 echo "-> login remote server"
-ssh server <<'ENDSSH'
+ssh -t -t $server_host <<'ENDSSH'
 cd $server_dir
 
 echo "-> stop server"
