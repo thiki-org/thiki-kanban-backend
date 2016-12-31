@@ -18,5 +18,5 @@ echo "-> start server"
 nohup java -jar kanban-1.0-SNAPSHOT.jar
 echo "-> everything is done."
 
-exit.
+exit
 ENDSSH
