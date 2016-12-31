@@ -21,7 +21,7 @@ CREATE TABLE kb_procedure (
   id                VARCHAR(40) NOT NULL PRIMARY KEY,
   title             VARCHAR(50) NOT NULL,
   author            VARCHAR(40) NOT NULL,
-  description      VARCHAR(100) NOT NULL,
+  description      VARCHAR(100) DEFAULT '',
   board_id          VARCHAR(40) NOT NULL,
   sort_number       INT      DEFAULT 0,
   creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
