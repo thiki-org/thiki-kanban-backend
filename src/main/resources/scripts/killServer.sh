@@ -36,7 +36,7 @@ check_if_pid_file_exists
       if check_if_process_is_running
       then
         echo -ne "."
-        sleep 1
+        sleep 5
       else
         NOT_KILLED=0
       fi
