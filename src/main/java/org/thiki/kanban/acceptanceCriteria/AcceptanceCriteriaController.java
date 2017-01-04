@@ -29,7 +29,7 @@ public class AcceptanceCriteriaController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.PUT)
     public HttpEntity updateAcceptCriteria(@RequestBody AcceptanceCriteria acceptanceCriteria, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
-        AcceptanceCriteria savedAcceptanceCriteria = acceptanceCriteriaService.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
+        AcceptanceCriteria savedAcceptanceCriteria = acceptanceCriteriaService.updateAcceptCriteria(cardId,acceptanceCriteriaId, acceptanceCriteria);
 
         return Response.build(acceptanceCriteriaResource.toResource(savedAcceptanceCriteria, boardId, procedureId, cardId, userName));
     }

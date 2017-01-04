@@ -35,7 +35,7 @@ public class AcceptanceCriteriaService {
     }
 
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
-    public AcceptanceCriteria updateAcceptCriteria(String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria) {
+    public AcceptanceCriteria updateAcceptCriteria(String cardId, String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria) {
         acceptanceCriteriaPersistence.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
         return acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
     }
