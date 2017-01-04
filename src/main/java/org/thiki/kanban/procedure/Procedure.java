@@ -23,6 +23,7 @@ public class Procedure {
     private String author;
     private String boardId;
     private Integer sortNumber;
+    private Integer status;
 
     private String creationTime;
     private String modificationTime;
@@ -113,5 +114,13 @@ public class Procedure {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

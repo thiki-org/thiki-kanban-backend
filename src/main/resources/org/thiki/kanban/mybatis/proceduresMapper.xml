@@ -16,7 +16,8 @@
         UPDATE kb_procedure SET
         title=#{title},
         description=#{description},
-        sort_number=#{sortNumber}
+        sort_number=#{sortNumber},
+        status=#{status}
         WHERE id=#{id} AND delete_status=0
     </update>
 
