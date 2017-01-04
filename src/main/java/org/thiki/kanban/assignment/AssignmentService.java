@@ -2,6 +2,7 @@ package org.thiki.kanban.assignment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsCodes;
@@ -24,7 +25,7 @@ public class AssignmentService {
     private AssignmentPersistence assignmentPersistence;
     @Resource
     private CardsPersistence cardsPersistence;
-
+    @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
     public Assignment assign(final Assignment assignment, String cardId, String authorUserId) {
         boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
         if (isAlreadyAssigned) {
@@ -51,7 +52,8 @@ public class AssignmentService {
         return assignments;
     }
 
-    public int deleteById(String id) {
+    @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
+    public int deleteById(String id, String cardId) {
         Assignment assignmentToDelete = assignmentPersistence.findById(id);
         if (assignmentToDelete == null) {
             throw new ResourceNotFoundException("assignment[" + id + "] is not found.");

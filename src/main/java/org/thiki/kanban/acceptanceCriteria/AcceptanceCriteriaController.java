@@ -42,8 +42,8 @@ public class AcceptanceCriteriaController {
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.DELETE)
-    public HttpEntity removeAcceptanceCriteria(@PathVariable("") String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
-        acceptanceCriteriaService.removeAcceptanceCriteria(acceptanceCriteriaId);
+    public HttpEntity removeAcceptanceCriteria(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
+        acceptanceCriteriaService.removeAcceptanceCriteria(acceptanceCriteriaId,cardId);
         return Response.build(acceptanceCriteriaResource.toResource(boardId, procedureId, cardId, userName));
     }
 

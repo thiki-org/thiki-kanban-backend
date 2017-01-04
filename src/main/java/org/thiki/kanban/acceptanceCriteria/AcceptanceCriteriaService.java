@@ -2,6 +2,7 @@ package org.thiki.kanban.acceptanceCriteria;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ public class AcceptanceCriteriaService {
     @Resource
     private AcceptanceCriteriaPersistence acceptanceCriteriaPersistence;
 
+    @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
     public AcceptanceCriteria addAcceptCriteria(String userName, String cardId, AcceptanceCriteria acceptanceCriteria) {
         logger.info("User {} adds a acceptance criteria in card [{}],the acceptanceCriteria is:{}", userName, cardId, acceptanceCriteria);
         acceptanceCriteriaPersistence.addAcceptCriteria(userName, cardId, acceptanceCriteria);
@@ -32,12 +34,14 @@ public class AcceptanceCriteriaService {
         return acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
     }
 
+    @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
     public AcceptanceCriteria updateAcceptCriteria(String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria) {
         acceptanceCriteriaPersistence.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
         return acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
     }
 
-    public Integer removeAcceptanceCriteria(String acceptanceCriteriaId) {
+    @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
+    public Integer removeAcceptanceCriteria(String acceptanceCriteriaId,String cardId) {
         return acceptanceCriteriaPersistence.deleteAcceptanceCriteria(acceptanceCriteriaId);
     }
 
