@@ -122,12 +122,13 @@ public class ProceduresControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\"}")
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"status\":\"1\"}")
                 .when()
                 .put("/boards/feeId/procedures/fooId")
                 .then()
                 .statusCode(200)
                 .body("title", equalTo("newTitle"))
+                .body("status", equalTo(1))
                 .body("_links.all.href", endsWith("/boards/feeId/procedures"))
                 .body("_links.self.href", endsWith("/boards/feeId/procedures/fooId"));
         assertEquals("newTitle", jdbcTemplate.queryForObject("select title from kb_procedure where id='fooId'", String.class));
