@@ -179,6 +179,21 @@ public class ProceduresControllerTest extends TestBase {
                 .body("message", equalTo(ProcedureCodes.DONE_PROCEDURE_IS_ALREADY_EXIST.message()));
     }
 
+    @Scenario("设置工序类别,不允许直接将工序设置为已经归档")
+    @Test
+    public void shouldFailedWhenSettingProcedureToArchiveDirectly() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type) VALUES ('fooId',' ','someone','board-feeId',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId-other',' ','someone','board-feeId',1,2)");
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"type\":\"9\"}")
+                .when()
+                .put("/boards/board-feeId/procedures/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.NOT_ALLOW_SET_PROCEDURE_TO_ARCHIVE_DIRECTLY.code()))
+                .body("message", equalTo(ProcedureCodes.NOT_ALLOW_SET_PROCEDURE_TO_ARCHIVE_DIRECTLY.message()));
+    }
 
     @Scenario("重新排序>用户创建工序后,可以调整其顺序")
     @Test

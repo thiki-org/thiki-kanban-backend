@@ -143,4 +143,8 @@ public class Procedure {
     public boolean isDone() {
         return ProcedureCodes.PROCEDURE_DONE.equals(this.status);
     }
+
+    public boolean isArchived() {
+        return ProcedureCodes.PROCEDURE_TYPE_ARCHIVE.equals(this.type);
+    }
 }

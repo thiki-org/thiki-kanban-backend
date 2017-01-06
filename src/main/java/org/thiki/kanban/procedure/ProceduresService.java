@@ -48,6 +48,9 @@ public class ProceduresService {
     public Procedure modifyProcedure(String procedureId, Procedure newProcedure, String boardId) {
         logger.info("Updating procedure{},procedureId{},boardId{}", newProcedure, procedureId, boardId);
         Procedure originProcedure = checkingWhetherProcedureIsExists(procedureId);
+        if (isModifyToArchive(newProcedure, originProcedure)) {
+            throw new BusinessException(ProcedureCodes.NOT_ALLOW_SET_PROCEDURE_TO_ARCHIVE_DIRECTLY);
+        }
         if (isModifiedToDoneProcedure(newProcedure, originProcedure)) {
             logger.info("Checking whether the procedure  status is in sprint");
             if (isNotSprintProcedure(newProcedure, originProcedure)) {
@@ -63,6 +66,10 @@ public class ProceduresService {
         Procedure updatedProcedure = proceduresPersistence.findById(procedureId);
         logger.info("Updated procedure is {}", updatedProcedure);
         return updatedProcedure;
+    }
+
+    private boolean isModifyToArchive(Procedure newProcedure, Procedure originProcedure) {
+        return newProcedure.isArchived() && !originProcedure.isArchived();
     }
 
     private boolean isNotSprintProcedure(Procedure newProcedure, Procedure originProcedure) {
