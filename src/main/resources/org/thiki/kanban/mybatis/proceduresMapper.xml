@@ -14,11 +14,11 @@
 
     <update id="update" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
         UPDATE kb_procedure SET
-        title=#{title},
-        description=#{description},
-        sort_number=#{sortNumber},
-        status=#{status}
-        WHERE id=#{id} AND delete_status=0
+        title=#{procedure.title},
+        description=#{procedure.description},
+        sort_number=#{procedure.sortNumber},
+        status=#{procedure.status}
+        WHERE id=#{procedureId} AND delete_status=0
     </update>
 
     <update id="resort" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
@@ -40,4 +40,8 @@
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_procedure SET delete_status=1 WHERE id=#{id}
     </delete>
+
+    <select id="isDoneProcedureAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND id!=#{procedureId} AND status=2 AND type =1
+    </select>
 </mapper>

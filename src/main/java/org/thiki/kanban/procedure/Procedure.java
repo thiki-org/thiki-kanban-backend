@@ -23,10 +23,15 @@ public class Procedure {
     private String author;
     private String boardId;
     private Integer sortNumber;
+    private Integer type;
     private Integer status;
-
     private String creationTime;
+
     private String modificationTime;
+
+    public Integer getType() {
+        return type;
+    }
 
     public String getCreationTime() {
         return creationTime;
@@ -100,9 +105,12 @@ public class Procedure {
         return "Procedure{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
                 ", author='" + author + '\'' +
                 ", boardId='" + boardId + '\'' +
                 ", sortNumber=" + sortNumber +
+                ", type=" + type +
+                ", status=" + status +
                 ", creationTime='" + creationTime + '\'' +
                 ", modificationTime='" + modificationTime + '\'' +
                 '}';
@@ -122,5 +130,13 @@ public class Procedure {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public boolean isInSprint() {
+        return ProcedureCodes.PROCEDURE_TYPE_IN_PLAN.equals(this.type);
     }
 }

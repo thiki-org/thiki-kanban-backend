@@ -148,6 +148,38 @@ public class ProceduresControllerTest extends TestBase {
                 .body("message", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_EXIST.message()));
     }
 
+    @Scenario("设置工序状态属性->在将工序设置为完成工序时,如果当前工序非迭代中的工序,则不允许设置")
+    @Test
+    public void shouldFailedWhenTheDoneProcedureIsNotInSprint() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId',' ','someone','board-feeId',0,2)");
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"status\":\"2\"}")
+                .when()
+                .put("/boards/feeId/procedures/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.PROCEDURE_TYPE_IS_NOT_IN_SPRINT.code()))
+                .body("message", equalTo(ProcedureCodes.PROCEDURE_TYPE_IS_NOT_IN_SPRINT.message()));
+    }
+
+    @Scenario("设置工序状态属性,如果目标工序是迭代工序,且已经存在完成列，则不允许再设置")
+    @Test
+    public void shouldFailedWhenTheDoneProcedureIsAlreadyExist() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type) VALUES ('fooId',' ','someone','board-feeId',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId-other',' ','someone','board-feeId',1,2)");
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"status\":\"2\"}")
+                .when()
+                .put("/boards/board-feeId/procedures/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.DONE_PROCEDURE_IS_ALREADY_EXIST.code()))
+                .body("message", equalTo(ProcedureCodes.DONE_PROCEDURE_IS_ALREADY_EXIST.message()));
+    }
+
+
     @Scenario("重新排序>用户创建工序后,可以调整其顺序")
     @Test
     public void resortProcedure() {

@@ -17,11 +17,13 @@ public interface ProceduresPersistence {
 
     List<Procedure> loadByBoardId(String boardId);
 
-    Integer update(Procedure procedure);
+    Integer update(@Param("procedureId") String procedureId, @Param("procedure") Procedure procedure);
 
     Integer deleteById(@Param("id") String id);
 
     Integer resort(Procedure procedure);
 
     boolean uniqueTitle(@Param("boardId") String boardId, @Param("title") String title);
+
+    boolean isDoneProcedureAlreadyExist(@Param("procedureId") String procedureId, @Param("boardId") String boardId);
 }
