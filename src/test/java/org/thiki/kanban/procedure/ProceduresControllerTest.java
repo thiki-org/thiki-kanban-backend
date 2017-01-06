@@ -22,8 +22,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ProceduresControllerTest extends TestBase {
 
-    private String userName = "fooName";
-
     @Scenario("创建一个新的procedure后,返回自身及links信息")
     @Test
     public void shouldReturn201WhenCreateProcedureSuccessfully() {
@@ -154,7 +152,7 @@ public class ProceduresControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId',' ','someone','board-feeId',0,1)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"status\":\"2\"}")
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"status\":\"9\"}")
                 .when()
                 .put("/boards/feeId/procedures/fooId")
                 .then()
@@ -167,10 +165,10 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldFailedWhenTheDoneProcedureIsAlreadyExist() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type) VALUES ('fooId',' ','someone','board-feeId',1)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId-other',' ','someone','board-feeId',1,2)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId-other',' ','someone','board-feeId',1,9)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
-                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"status\":\"2\"}")
+                .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"status\":\"9\"}")
                 .when()
                 .put("/boards/board-feeId/procedures/fooId")
                 .then()
@@ -183,7 +181,7 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldFailedWhenSettingProcedureToArchiveDirectly() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type) VALUES ('fooId',' ','someone','board-feeId',1)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId-other',' ','someone','board-feeId',1,2)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId-other',' ','someone','board-feeId',1,9)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"type\":\"9\"}")
@@ -242,7 +240,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("通过boardId获取所有的procedure")
     @Test
     public void shouldReturnAllEntriesSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','this is the first procedure.','tao','feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId','this is the first procedure.','tao','feeId',1,9)");
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('randomId','this is the first procedure.','tao','feeId2')");
         given().header("userName", userName)
                 .when()
@@ -254,8 +252,35 @@ public class ProceduresControllerTest extends TestBase {
                 .body("procedures[0].creationTime", notNullValue())
                 .body("procedures[0]._links.all.href", endsWith("/boards/feeId/procedures"))
                 .body("procedures[0]._links.self.href", endsWith("/boards/feeId/procedures/fooId"))
+                .body("procedures[0]._links.archive.href", endsWith("/boards/feeId/procedures/fooId/archive"))
                 .body("procedures[0]._links.cards.href", endsWith("/boards/feeId/procedures/fooId/cards"))
                 .body("_links.self.href", endsWith("/boards/feeId/procedures"))
                 .body("_links.sortNumbers.href", endsWith("/boards/feeId/procedures/sortNumbers"));
+    }
+
+    @Scenario("归档->当工序为迭代中的完成列时,可以进行归档操作")
+    @Test
+    public void shouldReturn201WhenArchiveSuccessfully() {
+        dbPreparation.table("kb_procedure")
+                .names("id,title,author,board_id,type,status")
+                .values("procedure_fooId", "title", "someone", "board-feeId", ProcedureCodes.PROCEDURE_TYPE_IN_PLAN, ProcedureCodes.PROCEDURE_STATUS_DONE).exec();
+
+        given().header("userName", userName)
+                .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/board-feeId/procedures/procedure_fooId/archive")
+                .then()
+                .statusCode(201)
+                .body("title", equalTo("this is the archive title."))
+                .body("description", equalTo("description."))
+                .body("type", equalTo(ProcedureCodes.PROCEDURE_TYPE_ARCHIVE))
+                .body("status", equalTo(ProcedureCodes.PROCEDURE_STATUS_DONE))
+                .body("creationTime", notNullValue())
+                .body("_links.all.href", endsWith("/boards/board-feeId/procedures"))
+                .body("_links.cards.href", endsWith("/boards/board-feeId/procedures/fooId/cards"))
+                .body("_links.self.href", endsWith("/boards/board-feeId/procedures/fooId"));
+
+        assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_procedure WHERE status=9 AND type=9").size());
     }
 }

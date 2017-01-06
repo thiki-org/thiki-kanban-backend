@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.card.Card;
+import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 
 import javax.annotation.Resource;
@@ -18,6 +20,9 @@ public class ProceduresService {
 
     @Resource
     private ProceduresPersistence proceduresPersistence;
+
+    @Resource
+    private CardsService cardsService;
 
     @CacheEvict(value = "procedure", key = "contains('#boardId')", allEntries = true)
     public Procedure create(String userName, String boardId, final Procedure procedure) {
@@ -44,7 +49,7 @@ public class ProceduresService {
         return procedures;
     }
 
-    @CacheEvict(value = "procedure", key = "contains('#procedure.id')", allEntries = true)
+    @CacheEvict(value = "procedure", key = "contains('#procedureId')", allEntries = true)
     public Procedure modifyProcedure(String procedureId, Procedure newProcedure, String boardId) {
         logger.info("Updating procedure{},procedureId{},boardId{}", newProcedure, procedureId, boardId);
         Procedure originProcedure = checkingWhetherProcedureIsExists(procedureId);
@@ -99,9 +104,28 @@ public class ProceduresService {
 
     @CacheEvict(value = "procedure", key = "contains('#boardId')", allEntries = true)
     public List<Procedure> resortProcedures(List<Procedure> procedures, String boardId) {
+        logger.info("Resort procedures:{}", procedures);
         for (Procedure procedure : procedures) {
             proceduresPersistence.resort(procedure);
         }
-        return loadByBoardId(boardId);
+        List<Procedure> resortedProcedures = loadByBoardId(boardId);
+        logger.info("Resorted procedures:{}", resortedProcedures);
+        return resortedProcedures;
+    }
+
+    @CacheEvict(value = "procedure", key = "contains('#procedureId')", allEntries = true)
+    public Procedure archive(String procedureId, Procedure procedure, String boardId, String userName) {
+        logger.info("Archiving procedure.procedureId:{},procedure:{},boardId:{}", procedureId, procedure, boardId);
+        procedure.setType(ProcedureCodes.PROCEDURE_TYPE_ARCHIVE);
+        procedure.setStatus(ProcedureCodes.PROCEDURE_STATUS_DONE);
+        Procedure archivedProcedure = create(userName, boardId, procedure);
+        logger.info("Transfer the cards of the origin procedure to archived procedure.");
+        List<Card> cards = cardsService.findByProcedureId(procedureId);
+        for (Card card : cards) {
+            card.setProcedureId(archivedProcedure.getId());
+            cardsService.update(card.getId(), card);
+        }
+        logger.info("Archived procedure.procedure:{}", procedure);
+        return archivedProcedure;
     }
 }

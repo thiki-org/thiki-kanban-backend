@@ -141,7 +141,7 @@ public class Procedure {
     }
 
     public boolean isDone() {
-        return ProcedureCodes.PROCEDURE_DONE.equals(this.status);
+        return ProcedureCodes.PROCEDURE_STATUS_DONE.equals(this.status);
     }
 
     public boolean isArchived() {

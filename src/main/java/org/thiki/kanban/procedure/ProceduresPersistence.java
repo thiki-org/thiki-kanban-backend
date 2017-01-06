@@ -13,13 +13,13 @@ import java.util.List;
 public interface ProceduresPersistence {
     Integer create(@Param("procedure") Procedure procedure, @Param("userName") String userName, @Param("boardId") String boardId);
 
-    Procedure findById(@Param("id") String id);
+    Procedure findById(@Param("procedureId") String procedureId);
 
     List<Procedure> loadByBoardId(String boardId);
 
     Integer update(@Param("procedureId") String procedureId, @Param("procedure") Procedure procedure);
 
-    Integer deleteById(@Param("id") String id);
+    Integer deleteById(@Param("procedureId") String procedureId);
 
     Integer resort(Procedure procedure);
 

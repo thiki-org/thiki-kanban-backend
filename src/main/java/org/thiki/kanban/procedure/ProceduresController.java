@@ -60,4 +60,10 @@ public class ProceduresController {
         List<Procedure> procedureList = proceduresService.resortProcedures(procedures, boardId);
         return Response.build(resortProceduresResource.toResource(procedureList, boardId, userName));
     }
+    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/archive", method = RequestMethod.POST)
+    public HttpEntity archive(@RequestBody Procedure procedure, @PathVariable String boardId, @PathVariable String procedureId, @RequestHeader String userName) throws Exception {
+        Procedure archivedProcedure = proceduresService.archive(procedureId, procedure, boardId, userName);
+
+        return Response.post(procedureResource.toResource(archivedProcedure, boardId, userName));
+    }
 }

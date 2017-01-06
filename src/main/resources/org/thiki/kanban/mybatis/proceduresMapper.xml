@@ -6,8 +6,8 @@
 
     <insert id="create" parameterType="org.thiki.kanban.procedure.Procedure">
         INSERT INTO
-        kb_procedure(id,title,description,author,board_id,sort_number) VALUES (#{procedure.id},#{procedure.title},#{procedure.description},
-        #{userName},#{boardId},(SELECT
+        kb_procedure(id,title,description,author,board_id,type,status,sort_number) VALUES (#{procedure.id},#{procedure.title},#{procedure.description},
+        #{userName},#{boardId},#{procedure.type},#{procedure.status},(SELECT
         max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
         max_sort_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ))
     </insert>
@@ -35,14 +35,14 @@
     </select>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">
-        SELECT * FROM kb_procedure WHERE delete_status=0 and id= #{id}
+        SELECT * FROM kb_procedure WHERE delete_status=0 and id= #{procedureId}
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_procedure SET delete_status=1 WHERE id=#{id}
+        UPDATE kb_procedure SET delete_status=1 WHERE id=#{procedureId}
     </delete>
 
     <select id="isDoneProcedureAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND id!=#{procedureId} AND status=2 AND type =1
+        SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND id!=#{procedureId} AND status=9 AND type =1
     </select>
 </mapper>

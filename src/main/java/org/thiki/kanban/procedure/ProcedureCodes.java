@@ -16,7 +16,7 @@ public enum ProcedureCodes {
     public static final String titleIsRequired = "工序名称不能为空。";
     public static final String titleIsInvalid = "工序名称长度超限,请保持在30个字符以内。";
     public static final String descriptionIsInvalid = "工序描述长度超限,请保持在100个字符以内。";
-    public static final Integer PROCEDURE_DONE = 2;
+    public static final Integer PROCEDURE_STATUS_DONE = 9;
     public static final Integer PROCEDURE_TYPE_IN_PLAN = 1;
     public static final Integer PROCEDURE_TYPE_ARCHIVE = 9;
     private String code;

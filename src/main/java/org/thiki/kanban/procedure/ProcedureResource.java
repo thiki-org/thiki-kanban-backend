@@ -35,11 +35,14 @@ public class ProcedureResource extends RestResource {
             Link cardsLink = linkTo(methodOn(CardsController.class).create(null, null, boardId, procedure.getId())).withRel("cards");
             procedureResource.add(tlink.from(cardsLink).build(userName));
         }
+        if (procedure.isDone() && !procedure.isArchived()) {
+            Link archiveLink = linkTo(methodOn(ProceduresController.class).archive(procedure, boardId, procedure.getId(), userName)).withRel("archive");
+            procedureResource.add(tlink.from(archiveLink).build(userName));
+        }
         Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, userName)).withRel("all");
         procedureResource.add(tlink.from(allLink).build(userName));
         logger.info("procedure resource building completed.board:{},userName:{}", boardId, userName);
         return procedureResource.getResource();
-
     }
 
     @Cacheable(value = "procedure", key = "#userName+'procedure'+#boardId")
