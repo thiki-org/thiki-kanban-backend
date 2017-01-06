@@ -17,7 +17,8 @@
         title=#{procedure.title},
         description=#{procedure.description},
         sort_number=#{procedure.sortNumber},
-        status=#{procedure.status}
+        status=#{procedure.status},
+        type=#{procedure.type}
         WHERE id=#{procedureId} AND delete_status=0
     </update>
 
