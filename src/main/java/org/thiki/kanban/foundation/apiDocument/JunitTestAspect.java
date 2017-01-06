@@ -2,7 +2,6 @@ package org.thiki.kanban.foundation.apiDocument;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.stereotype.Component;
 import org.thiki.kanban.foundation.annotations.Domain;

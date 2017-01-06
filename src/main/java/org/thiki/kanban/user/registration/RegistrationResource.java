@@ -19,6 +19,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class RegistrationResource extends RestResource {
     @Resource
     private TLink tlink;
+
     public Object toResource(User registeredUser) throws Exception {
         RegistrationResource registrationResource = new RegistrationResource();
         registrationResource.domainObject = registeredUser;

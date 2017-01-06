@@ -9,19 +9,19 @@ public class MatchResult {
     private String roleName;
     private Map pathValues;
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
     public String getRoleName() {
         return roleName;
     }
 
-    public void setPathValues(Map pathValues) {
-        this.pathValues = pathValues;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     public Map getPathValues() {
         return pathValues;
+    }
+
+    public void setPathValues(Map pathValues) {
+        this.pathValues = pathValues;
     }
 }

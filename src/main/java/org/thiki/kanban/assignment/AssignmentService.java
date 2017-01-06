@@ -25,6 +25,7 @@ public class AssignmentService {
     private AssignmentPersistence assignmentPersistence;
     @Resource
     private CardsPersistence cardsPersistence;
+
     @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
     public Assignment assign(final Assignment assignment, String cardId, String authorUserId) {
         boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);

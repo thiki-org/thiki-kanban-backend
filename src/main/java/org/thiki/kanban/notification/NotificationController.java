@@ -18,9 +18,9 @@ public class NotificationController {
     @Resource
     public NotificationService notificationService;
     @Resource
-    private NotificationResource notificationResource;
-    @Resource
     NotificationsResource notificationsResource;
+    @Resource
+    private NotificationResource notificationResource;
     @Resource
     private UnreadNotificationsResource unreadNotificationsResource;
 

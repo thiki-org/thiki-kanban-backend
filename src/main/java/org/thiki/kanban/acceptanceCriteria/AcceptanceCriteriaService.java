@@ -41,7 +41,7 @@ public class AcceptanceCriteriaService {
     }
 
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
-    public Integer removeAcceptanceCriteria(String acceptanceCriteriaId,String cardId) {
+    public Integer removeAcceptanceCriteria(String acceptanceCriteriaId, String cardId) {
         return acceptanceCriteriaPersistence.deleteAcceptanceCriteria(acceptanceCriteriaId);
     }
 

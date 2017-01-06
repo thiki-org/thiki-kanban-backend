@@ -33,6 +33,10 @@ public class Procedure {
         return type;
     }
 
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
     public String getCreationTime() {
         return creationTime;
     }
@@ -130,10 +134,6 @@ public class Procedure {
 
     public void setStatus(Integer status) {
         this.status = status;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public boolean isInSprint() {

@@ -151,7 +151,7 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("设置工序状态属性->在将工序设置为完成工序时,如果当前工序非迭代中的工序,则不允许设置")
     @Test
     public void shouldFailedWhenTheDoneProcedureIsNotInSprint() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId',' ','someone','board-feeId',0,2)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId',' ','someone','board-feeId',0,1)");
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
                 .body("{\"title\":\"newTitle\",\"orderNumber\":\"0\",\"status\":\"2\"}")

@@ -29,6 +29,7 @@ public class NotificationService {
         List<Notification> notificationList = notificationPersistence.loadNotificationsByUserName(userName);
         return notificationList;
     }
+
     @CacheEvict(value = "notification", key = "{'notifications'+#notification.receiver,#userName+unreadNotificationTotal}", allEntries = true)
     public Notification findNotificationById(String id) {
         Notification notification = notificationPersistence.read(id);
