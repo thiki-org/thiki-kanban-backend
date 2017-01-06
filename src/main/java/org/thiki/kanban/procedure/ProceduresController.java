@@ -36,7 +36,7 @@ public class ProceduresController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}", method = RequestMethod.PUT)
     public HttpEntity<ProcedureResource> update(@RequestBody Procedure procedure, @PathVariable String procedureId, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
-        Procedure updatedProcedure = proceduresService.update(procedureId, procedure, boardId);
+        Procedure updatedProcedure = proceduresService.modifyProcedure(procedureId, procedure, boardId);
 
         return Response.build(procedureResource.toResource(updatedProcedure, boardId, userName));
     }

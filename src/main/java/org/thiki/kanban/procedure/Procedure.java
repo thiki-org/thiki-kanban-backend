@@ -139,4 +139,8 @@ public class Procedure {
     public boolean isInSprint() {
         return ProcedureCodes.PROCEDURE_TYPE_IN_PLAN.equals(this.type);
     }
+
+    public boolean isDone() {
+        return ProcedureCodes.PROCEDURE_DONE.equals(this.status);
+    }
 }

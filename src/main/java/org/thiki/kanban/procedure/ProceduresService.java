@@ -21,12 +21,16 @@ public class ProceduresService {
 
     @CacheEvict(value = "procedure", key = "contains('#boardId')", allEntries = true)
     public Procedure create(String userName, String boardId, final Procedure procedure) {
+        logger.info("Checking whether title is already exist before creating new procedure.procedure:{}", procedure);
         boolean isExists = proceduresPersistence.uniqueTitle(boardId, procedure.getTitle());
         if (isExists) {
+            logger.info("The title is already exist.");
             throw new BusinessException(ProcedureCodes.TITLE_IS_ALREADY_EXISTS);
         }
         proceduresPersistence.create(procedure, userName, boardId);
-        return proceduresPersistence.findById(procedure.getId());
+        Procedure createdProcedure = proceduresPersistence.findById(procedure.getId());
+        logger.info("Created procedure:{}", createdProcedure);
+        return createdProcedure;
     }
 
     public Procedure findById(String id) {
@@ -41,12 +45,12 @@ public class ProceduresService {
     }
 
     @CacheEvict(value = "procedure", key = "contains('#procedure.id')", allEntries = true)
-    public Procedure update(String procedureId, Procedure procedure, String boardId) {
-        logger.info("Updating procedure{},procedureId{},boardId{}", procedure, procedureId, boardId);
-        Procedure foundProcedure = checkingWhetherProcedureIsExists(procedureId);
-        if (ProcedureCodes.PROCEDURE_DONE.equals(procedure.getStatus())) {
+    public Procedure modifyProcedure(String procedureId, Procedure newProcedure, String boardId) {
+        logger.info("Updating procedure{},procedureId{},boardId{}", newProcedure, procedureId, boardId);
+        Procedure originProcedure = checkingWhetherProcedureIsExists(procedureId);
+        if (isModifiedToDoneProcedure(newProcedure, originProcedure)) {
             logger.info("Checking whether the procedure  status is in sprint");
-            if (!foundProcedure.isInSprint() && (!procedure.isInSprint())) {
+            if (isNotSprintProcedure(newProcedure, originProcedure)) {
                 throw new BusinessException(ProcedureCodes.PROCEDURE_TYPE_IS_NOT_IN_SPRINT);
             }
             boolean isDoneProcedureAlreadyExist = proceduresPersistence.isDoneProcedureAlreadyExist(procedureId, boardId);
@@ -55,10 +59,18 @@ public class ProceduresService {
                 throw new BusinessException(ProcedureCodes.DONE_PROCEDURE_IS_ALREADY_EXIST);
             }
         }
-        proceduresPersistence.update(procedureId, procedure);
+        proceduresPersistence.update(procedureId, newProcedure);
         Procedure updatedProcedure = proceduresPersistence.findById(procedureId);
         logger.info("Updated procedure is {}", updatedProcedure);
         return updatedProcedure;
+    }
+
+    private boolean isNotSprintProcedure(Procedure newProcedure, Procedure originProcedure) {
+        return !originProcedure.isInSprint() && !newProcedure.isInSprint();
+    }
+
+    private boolean isModifiedToDoneProcedure(Procedure procedure, Procedure foundProcedure) {
+        return procedure.isDone() && !foundProcedure.isDone();
     }
 
     private Procedure checkingWhetherProcedureIsExists(String procedureId) {
