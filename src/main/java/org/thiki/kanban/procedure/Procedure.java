@@ -140,7 +140,7 @@ public class Procedure {
         return ProcedureCodes.PROCEDURE_TYPE_IN_PLAN.equals(this.type);
     }
 
-    public boolean isDone() {
+    public boolean isInDoneStatus() {
         return ProcedureCodes.PROCEDURE_STATUS_DONE.equals(this.status);
     }
 

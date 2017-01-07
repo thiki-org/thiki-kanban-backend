@@ -11,11 +11,13 @@ public enum ProcedureCodes {
     PROCEDURE_IS_NOT_EXIST("003", "你正在操作的工序不存在。"),
     DONE_PROCEDURE_IS_ALREADY_EXIST("004", "完成工序已经存在。"),
     PROCEDURE_TYPE_IS_NOT_IN_SPRINT("005", "当前工序非迭代中的工序，不可以设置完成列。"),
-    NOT_ALLOW_SET_PROCEDURE_TO_ARCHIVE_DIRECTLY("006", "不允许直接将工序设置为归档状态。");
+    NOT_ALLOW_SET_PROCEDURE_TO_ARCHIVE_DIRECTLY("006", "不允许直接将工序设置为归档状态。"),
+    PROCEDURE_IS_NOT_IN_DONE_STATUS("007", "当前工序并非处于完成状态，不允许归档。");
 
     public static final String titleIsRequired = "工序名称不能为空。";
     public static final String titleIsInvalid = "工序名称长度超限,请保持在30个字符以内。";
     public static final String descriptionIsInvalid = "工序描述长度超限,请保持在100个字符以内。";
+    public static final Integer PROCEDURE_STATUS_DOING = 1;
     public static final Integer PROCEDURE_STATUS_DONE = 9;
     public static final Integer PROCEDURE_TYPE_IN_PLAN = 1;
     public static final Integer PROCEDURE_TYPE_ARCHIVE = 9;

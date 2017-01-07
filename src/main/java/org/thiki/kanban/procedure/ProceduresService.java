@@ -82,7 +82,7 @@ public class ProceduresService {
     }
 
     private boolean isModifiedToDoneProcedure(Procedure procedure, Procedure foundProcedure) {
-        return procedure.isDone() && !foundProcedure.isDone();
+        return procedure.isInDoneStatus() && !foundProcedure.isInDoneStatus();
     }
 
     private Procedure checkingWhetherProcedureIsExists(String procedureId) {
@@ -116,6 +116,10 @@ public class ProceduresService {
     @CacheEvict(value = "procedure", key = "contains('#procedureId')", allEntries = true)
     public Procedure archive(String procedureId, Procedure procedure, String boardId, String userName) {
         logger.info("Archiving procedure.procedureId:{},procedure:{},boardId:{}", procedureId, procedure, boardId);
+        Procedure originProcedure = checkingWhetherProcedureIsExists(procedureId);
+        if (!originProcedure.isInDoneStatus()) {
+            throw new BusinessException(ProcedureCodes.PROCEDURE_IS_NOT_IN_DONE_STATUS);
+        }
         procedure.setType(ProcedureCodes.PROCEDURE_TYPE_ARCHIVE);
         procedure.setStatus(ProcedureCodes.PROCEDURE_STATUS_DONE);
         Procedure archivedProcedure = create(userName, boardId, procedure);

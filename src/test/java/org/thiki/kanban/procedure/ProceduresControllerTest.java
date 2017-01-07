@@ -283,4 +283,22 @@ public class ProceduresControllerTest extends TestBase {
 
         assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_procedure WHERE status=9 AND type=9").size());
     }
+
+    @Scenario("归档->当工序为迭代中的完成列时,如果当前工序并非处于完成状态，则不允许归档")
+    @Test
+    public void shouldFailedIfTheProcedureIsNotInDoneStatus() {
+        dbPreparation.table("kb_procedure")
+                .names("id,title,author,board_id,type,status")
+                .values("procedure_fooId", "title", "someone", "board-feeId", ProcedureCodes.PROCEDURE_TYPE_IN_PLAN, ProcedureCodes.PROCEDURE_STATUS_DOING).exec();
+
+        given().header("userName", userName)
+                .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/board-feeId/procedures/procedure_fooId/archive")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_IN_DONE_STATUS.code()))
+                .body("message", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_IN_DONE_STATUS.message()));
+    }
 }

@@ -35,7 +35,7 @@ public class ProcedureResource extends RestResource {
             Link cardsLink = linkTo(methodOn(CardsController.class).create(null, null, boardId, procedure.getId())).withRel("cards");
             procedureResource.add(tlink.from(cardsLink).build(userName));
         }
-        if (procedure.isDone() && !procedure.isArchived()) {
+        if (procedure.isInDoneStatus() && !procedure.isArchived()) {
             Link archiveLink = linkTo(methodOn(ProceduresController.class).archive(procedure, boardId, procedure.getId(), userName)).withRel("archive");
             procedureResource.add(tlink.from(archiveLink).build(userName));
         }
