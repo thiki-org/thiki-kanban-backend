@@ -117,7 +117,7 @@ public class OverallService {
 
     private void loadCardTags(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
         logger.info("load card tags.");
-        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId);
+        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, procedureId);
         JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName);
         cardJSON.put("tags", tagsJSON);
         logger.info("card tags loading completed.");

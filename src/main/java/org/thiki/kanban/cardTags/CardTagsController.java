@@ -27,7 +27,7 @@ public class CardTagsController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/tags", method = RequestMethod.GET)
     public HttpEntity loadTags(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId);
+        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, procedureId);
 
         return Response.build(cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName));
     }
