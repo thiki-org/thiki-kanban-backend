@@ -30,7 +30,7 @@ public class Procedure {
     private String modificationTime;
 
     public Integer getType() {
-        return type;
+        return type == null ? 0 : type;
     }
 
     public void setType(Integer type) {
@@ -129,7 +129,7 @@ public class Procedure {
     }
 
     public Integer getStatus() {
-        return status;
+        return status == null ? 0 : status;
     }
 
     public void setStatus(Integer status) {
