@@ -32,6 +32,6 @@ public class CardTagsService {
 
     public List<CardTag> loadTags(String cardId, String boardId, String procedureId) {
         logger.info("Loading card tags.cardId:{},boardId:{},procedureId{}", cardId, boardId, procedureId);
-        return cardTagPersistence.findByCardId(procedureId);
+        return cardTagPersistence.findByCardId(cardId);
     }
 }
