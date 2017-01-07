@@ -16,7 +16,7 @@ public class CardTagsService {
     private CardTagPersistence cardTagPersistence;
 
     @CacheEvict(value = "card-tag", key = "contains('#boardId')", allEntries = true)
-    public List<CardTag> stickTags(List<CardTag> cardTags, String boardId, String cardId, String userName) {
+    public List<CardTag> stickTags(List<CardTag> cardTags, String cardId, String boardId, String userName) {
         cardTagPersistence.removeTagsByCardId(cardId);
         for (CardTag cardTag : cardTags) {
             cardTagPersistence.stick(cardId, cardTag, userName);
