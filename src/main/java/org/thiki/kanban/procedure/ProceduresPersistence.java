@@ -28,4 +28,6 @@ public interface ProceduresPersistence {
     boolean isDoneProcedureAlreadyExist(@Param("procedureId") String procedureId, @Param("boardId") String boardId);
 
     Procedure findDoneProcedure(@Param("boardId") String boardId);
+
+    boolean hasNewArchivedProcedureExist(Procedure archivedProcedure);
 }

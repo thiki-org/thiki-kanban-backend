@@ -343,4 +343,26 @@ public class ProceduresControllerTest extends TestBase {
                 .body("code", equalTo(ProcedureCodes.NO_DONE_PROCEDURE_WAS_FOUND.code()))
                 .body("message", equalTo(ProcedureCodes.NO_DONE_PROCEDURE_WAS_FOUND.message()));
     }
+
+    @Scenario("撤销归档->撤销归档时，存在较新的归档时，则不允许归档")
+    @Test
+    public void notAllowedIfNewArchivedProcedureWasFound() {
+        dbPreparation.table("kb_procedure")
+                .names("id,title,author,board_id,type,status")
+                .values("archived_procedure_fooId", "title", "someone", "board-feeId", ProcedureCodes.PROCEDURE_TYPE_ARCHIVE, ProcedureCodes.PROCEDURE_STATUS_DONE).exec();
+
+        dbPreparation.table("kb_procedure")
+                .names("id,title,author,board_id,type,status")
+                .values("new_archived_procedure_fooId", "title", "someone", "board-feeId", ProcedureCodes.PROCEDURE_TYPE_ARCHIVE, ProcedureCodes.PROCEDURE_STATUS_DONE).exec();
+
+        given().header("userName", userName)
+                .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .delete("/boards/board-feeId/archives/archived_procedure_fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.NEW_ARCHIVED_PROCEDURE_WAS_FOUND.code()))
+                .body("message", equalTo(ProcedureCodes.NEW_ARCHIVED_PROCEDURE_WAS_FOUND.message()));
+    }
 }
