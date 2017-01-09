@@ -315,7 +315,6 @@ public class ProceduresControllerTest extends TestBase {
 
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('card_fooId','this is the card summary.','play badminton','someone','archived_procedure_fooId')");
 
-
         given().header("userName", userName)
                 .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
                 .contentType(ContentType.JSON)
@@ -325,5 +324,23 @@ public class ProceduresControllerTest extends TestBase {
                 .statusCode(200);
 
         assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_card WHERE  procedure_id='done_procedure_fooId'").size());
+    }
+
+    @Scenario("撤销归档->如果当前看板不存在完成列，则不允许归档")
+    @Test
+    public void notAllowedIfNoDoneProcedureWasFound() {
+        dbPreparation.table("kb_procedure")
+                .names("id,title,author,board_id,type,status")
+                .values("archived_procedure_fooId", "title", "someone", "board-feeId", ProcedureCodes.PROCEDURE_TYPE_ARCHIVE, ProcedureCodes.PROCEDURE_STATUS_DONE).exec();
+
+        given().header("userName", userName)
+                .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .delete("/boards/board-feeId/archives/archived_procedure_fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(ProcedureCodes.NO_DONE_PROCEDURE_WAS_FOUND.code()))
+                .body("message", equalTo(ProcedureCodes.NO_DONE_PROCEDURE_WAS_FOUND.message()));
     }
 }

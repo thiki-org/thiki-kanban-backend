@@ -137,6 +137,10 @@ public class ProceduresService {
     public void undoArchive(String archivedProcedureId, String boardId) {
         logger.info("Undo archiving.archivedProcedureId:{}", archivedProcedureId);
         Procedure doneProcedure = proceduresPersistence.findDoneProcedure(boardId);
+        if (doneProcedure == null) {
+            logger.info("No done procedure was found in board:{}", boardId);
+            throw new BusinessException(ProcedureCodes.NO_DONE_PROCEDURE_WAS_FOUND);
+        }
         logger.info("Transfer the cards of the archived procedure to done procedure.");
         List<Card> cards = cardsService.findByProcedureId(archivedProcedureId);
         for (Card card : cards) {

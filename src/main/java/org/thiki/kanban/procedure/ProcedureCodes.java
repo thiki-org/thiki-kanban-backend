@@ -12,7 +12,8 @@ public enum ProcedureCodes {
     DONE_PROCEDURE_IS_ALREADY_EXIST("004", "完成工序已经存在。"),
     PROCEDURE_TYPE_IS_NOT_IN_SPRINT("005", "当前工序非迭代中的工序，不可以设置完成列。"),
     NOT_ALLOW_SET_PROCEDURE_TO_ARCHIVE_DIRECTLY("006", "不允许直接将工序设置为归档状态。"),
-    PROCEDURE_IS_NOT_IN_DONE_STATUS("007", "当前工序并非处于完成状态，不允许归档。");
+    PROCEDURE_IS_NOT_IN_DONE_STATUS("007", "当前工序并非处于完成状态，不允许归档。"),
+    NO_DONE_PROCEDURE_WAS_FOUND("008", "当前看板尚未设置完成列，不允许归档。");
 
     public static final String titleIsRequired = "工序名称不能为空。";
     public static final String titleIsInvalid = "工序名称长度超限,请保持在30个字符以内。";
