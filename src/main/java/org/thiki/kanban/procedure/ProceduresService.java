@@ -137,6 +137,10 @@ public class ProceduresService {
     public void undoArchive(String archivedProcedureId, String boardId) {
         logger.info("Undo archiving.archivedProcedureId:{}", archivedProcedureId);
         Procedure archivedProcedure = proceduresPersistence.findById(archivedProcedureId);
+        if (archivedProcedure == null) {
+            logger.info("No specified archived procedure was found in board:{},archivedProcedureId:{}", boardId, archivedProcedureId);
+            throw new BusinessException(ProcedureCodes.NO_ARCHIVED_PROCEDURE_WAS_FOUND);
+        }
 
         boolean isNewArchivedProcedureExist = proceduresPersistence.hasNewArchivedProcedureExist(archivedProcedure);
         if (isNewArchivedProcedureExist) {
