@@ -252,7 +252,7 @@ public class ProceduresControllerTest extends TestBase {
                 .body("procedures[0].creationTime", notNullValue())
                 .body("procedures[0]._links.all.href", endsWith("/boards/feeId/procedures"))
                 .body("procedures[0]._links.self.href", endsWith("/boards/feeId/procedures/fooId"))
-                .body("procedures[0]._links.archive.href", endsWith("/boards/feeId/procedures/fooId/archive"))
+                .body("procedures[0]._links.archives.href", endsWith("/boards/feeId/archives?procedureId=fooId"))
                 .body("procedures[0]._links.cards.href", endsWith("/boards/feeId/procedures/fooId/cards"))
                 .body("_links.self.href", endsWith("/boards/feeId/procedures"))
                 .body("_links.sortNumbers.href", endsWith("/boards/feeId/procedures/sortNumbers"));
@@ -268,8 +268,9 @@ public class ProceduresControllerTest extends TestBase {
         given().header("userName", userName)
                 .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
                 .contentType(ContentType.JSON)
+                .queryParam("procedureId", "procedure_fooId")
                 .when()
-                .post("/boards/board-feeId/procedures/procedure_fooId/archive")
+                .post("/boards/board-feeId/archives")
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("this is the archive title."))
@@ -279,7 +280,7 @@ public class ProceduresControllerTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", endsWith("/boards/board-feeId/procedures"))
                 .body("_links.cards.href", endsWith("/boards/board-feeId/procedures/fooId/cards"))
-                .body("_links.self.href", endsWith("/boards/board-feeId/procedures/fooId"));
+                .body("_links.self.href", endsWith("/boards/board-feeId/archives/fooId"));
 
         assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_procedure WHERE status=9 AND type=9").size());
     }
@@ -294,8 +295,9 @@ public class ProceduresControllerTest extends TestBase {
         given().header("userName", userName)
                 .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
                 .contentType(ContentType.JSON)
+                .queryParam("procedureId", "procedure_fooId")
                 .when()
-                .post("/boards/board-feeId/procedures/procedure_fooId/archive")
+                .post("/boards/board-feeId/archives")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_IN_DONE_STATUS.code()))

@@ -114,22 +114,22 @@ public class ProceduresService {
     }
 
     @CacheEvict(value = "procedure", key = "contains('#procedureId')", allEntries = true)
-    public Procedure archive(String procedureId, Procedure procedure, String boardId, String userName) {
-        logger.info("Archiving procedure.procedureId:{},procedure:{},boardId:{}", procedureId, procedure, boardId);
+    public Procedure archive(String procedureId, Procedure archive, String boardId, String userName) {
+        logger.info("Archiving procedure.procedureId:{},procedure:{},boardId:{}", procedureId, archive, boardId);
         Procedure originProcedure = checkingWhetherProcedureIsExists(procedureId);
         if (!originProcedure.isInDoneStatus()) {
             throw new BusinessException(ProcedureCodes.PROCEDURE_IS_NOT_IN_DONE_STATUS);
         }
-        procedure.setType(ProcedureCodes.PROCEDURE_TYPE_ARCHIVE);
-        procedure.setStatus(ProcedureCodes.PROCEDURE_STATUS_DONE);
-        Procedure archivedProcedure = create(userName, boardId, procedure);
+        archive.setType(ProcedureCodes.PROCEDURE_TYPE_ARCHIVE);
+        archive.setStatus(ProcedureCodes.PROCEDURE_STATUS_DONE);
+        Procedure archivedProcedure = create(userName, boardId, archive);
         logger.info("Transfer the cards of the origin procedure to archived procedure.");
         List<Card> cards = cardsService.findByProcedureId(procedureId);
         for (Card card : cards) {
             card.setProcedureId(archivedProcedure.getId());
             cardsService.update(card.getId(), card);
         }
-        logger.info("Archived procedure.procedure:{}", procedure);
+        logger.info("Archived procedure.procedure:{}", archive);
         return archivedProcedure;
     }
 
