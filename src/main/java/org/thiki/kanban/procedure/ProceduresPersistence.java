@@ -26,4 +26,6 @@ public interface ProceduresPersistence {
     boolean uniqueTitle(@Param("boardId") String boardId, @Param("title") String title);
 
     boolean isDoneProcedureAlreadyExist(@Param("procedureId") String procedureId, @Param("boardId") String boardId);
+
+    Procedure findDoneProcedure(@Param("boardId") String boardId);
 }

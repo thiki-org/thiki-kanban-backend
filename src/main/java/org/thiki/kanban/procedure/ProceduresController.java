@@ -45,7 +45,6 @@ public class ProceduresController {
     public HttpEntity deleteById(@PathVariable String id, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
         proceduresService.deleteById(id);
         return Response.build(procedureResource.toResource(boardId, userName));
-
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures", method = RequestMethod.POST)
@@ -60,10 +59,17 @@ public class ProceduresController {
         List<Procedure> procedureList = proceduresService.resortProcedures(procedures, boardId);
         return Response.build(resortProceduresResource.toResource(procedureList, boardId, userName));
     }
+
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/archive", method = RequestMethod.POST)
     public HttpEntity archive(@RequestBody Procedure procedure, @PathVariable String boardId, @PathVariable String procedureId, @RequestHeader String userName) throws Exception {
         Procedure archivedProcedure = proceduresService.archive(procedureId, procedure, boardId, userName);
 
         return Response.post(procedureResource.toResource(archivedProcedure, boardId, userName));
+    }
+
+    @RequestMapping(value = "/boards/{boardId}/archives/{archiveId}", method = RequestMethod.DELETE)
+    public HttpEntity undoArchive(@PathVariable String archiveId, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
+        proceduresService.undoArchive(archiveId, boardId);
+        return Response.build(procedureResource.toResource(boardId, userName));
     }
 }

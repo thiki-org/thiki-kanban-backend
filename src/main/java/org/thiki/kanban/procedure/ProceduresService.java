@@ -132,4 +132,18 @@ public class ProceduresService {
         logger.info("Archived procedure.procedure:{}", procedure);
         return archivedProcedure;
     }
+
+    @CacheEvict(value = "procedure", key = "contains('#archivedProcedureId')", allEntries = true)
+    public void undoArchive(String archivedProcedureId, String boardId) {
+        logger.info("Undo archiving.archivedProcedureId:{}", archivedProcedureId);
+        Procedure doneProcedure = proceduresPersistence.findDoneProcedure(boardId);
+        logger.info("Transfer the cards of the archived procedure to done procedure.");
+        List<Card> cards = cardsService.findByProcedureId(archivedProcedureId);
+        for (Card card : cards) {
+            card.setProcedureId(doneProcedure.getId());
+            cardsService.update(card.getId(), card);
+        }
+        logger.info("Deleting the archived procedure.");
+        proceduresPersistence.deleteById(archivedProcedureId);
+    }
 }

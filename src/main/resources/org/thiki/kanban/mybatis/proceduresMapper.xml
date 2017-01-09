@@ -45,4 +45,8 @@
     <select id="isDoneProcedureAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
         SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND id!=#{procedureId} AND status=9 AND type =1
     </select>
+
+    <select id="findDoneProcedure" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">
+        SELECT * FROM kb_procedure WHERE delete_status=0 and board_id= #{boardId} AND status=9 AND type =1
+     </select>
 </mapper>
