@@ -27,7 +27,7 @@ public class AvatarStorage {
         }
         String avatarName = avatar.getName();
         String avatarType = avatarName.substring(avatarName.lastIndexOf(".") + 1);
-        avatarType = avatarType.equals("blob") ? "jpg" : avatarType;
+        avatarType = "blob".equals(avatarType) ? "jpg" : avatarType;
         String userAvatarName = userName + "." + avatarType;
         Files.write(Files.toByteArray(avatar), new File(AVATAR_FILES_LOCATION + userAvatarName));
         return userAvatarName;

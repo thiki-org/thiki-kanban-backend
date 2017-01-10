@@ -59,16 +59,16 @@ public class ResourceTemplate {
         this.template = template;
     }
 
-    boolean match(String url, String method, String contextPath) {
+    public boolean match(String url, String method, String contextPath) {
+        String fullPath = "";
+        String resourcePath = "";
         try {
-            if (isUrl(url)) {
-                url = new URL(url).getPath();
-            }
-            url = url.replace(contextPath, "");
+            fullPath = isUrl(url) ? new URL(url).getPath() : url;
+            resourcePath = fullPath.replace(contextPath, "");
             UriTemplate uriTemplate = new UriTemplate(template);
-            return uriTemplate.matches(url) && isMethodAllowed(method);
+            return uriTemplate.matches(resourcePath) && isMethodAllowed(method);
         } catch (MalformedURLException e) {
-            throw new RuntimeException("提取Path出错。URL_TEMPLATE:" + url);
+            throw new RuntimeException("提取Path出错。URL_TEMPLATE:" + resourcePath);
         }
     }
 

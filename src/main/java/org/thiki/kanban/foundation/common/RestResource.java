@@ -39,15 +39,16 @@ public class RestResource extends ResourceSupport {
 
     public void buildDataObject(String key, Object value) {
         JSONArray domainResources;
-        if (value instanceof List) {
+        Object domainResourcesValue = value;
+        if (domainResourcesValue instanceof List) {
             domainResources = new JSONArray();
-            for (int i = 0; i < ((List) value).size(); i++) {
-                domainResources.add(((List) value).get(i));
+            for (int i = 0; i < ((List) domainResourcesValue).size(); i++) {
+                domainResources.add(((List) domainResourcesValue).get(i));
             }
-            value = domainResources;
+            domainResourcesValue = domainResources;
         }
         JSONObject dataObject = new JSONObject();
-        dataObject.put(key, value);
+        dataObject.put(key, domainResourcesValue);
         this.domainObject = dataObject;
     }
 }

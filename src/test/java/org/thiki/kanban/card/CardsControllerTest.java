@@ -260,6 +260,5 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(400)
                 .body("code", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.code()))
                 .body("message", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.message()));
-        ;
     }
 }

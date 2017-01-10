@@ -58,11 +58,10 @@ public class APIDocument {
     }
 
     private static String buildMDContent(Map<String, List> themes) {
-
-        themes = MapUtil.sortMapByKey(themes);
+        Map<String, List> sortedThemes = MapUtil.sortMapByKey(themes);
         String content = "";
 
-        for (Map.Entry<String, List> entry : themes.entrySet()) {
+        for (Map.Entry<String, List> entry : sortedThemes.entrySet()) {
             NumberFormatter numberFormatter = new NumberFormatter(entry.getKey());
             content += "\n# " + numberFormatter.getCnString() + " #\n";
             List<Map> testCases = entry.getValue();
