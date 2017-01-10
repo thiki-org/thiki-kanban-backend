@@ -47,7 +47,7 @@ public class ExceptionController implements ErrorController {
     @ResponseBody
     public ResponseEntity<Map<String, Object>> error404(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
-        HttpStatus status = getStatus(request, isIncludeStackTrace(request));
+        HttpStatus status = getStatus(request);
         return new ResponseEntity<>(body, status);
     }
 
@@ -55,7 +55,7 @@ public class ExceptionController implements ErrorController {
     @ResponseBody
     public ResponseEntity<Map<String, Object>> businessException(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
-        HttpStatus status = getStatus(request, isIncludeStackTrace(request));
+        HttpStatus status = getStatus(request);
         return new ResponseEntity<>(body, status);
     }
 
@@ -81,7 +81,7 @@ public class ExceptionController implements ErrorController {
         if (body.get("message").equals("No message available")) {
             body.put("message", body.get("exception"));
         }
-        HttpStatus status = getStatus(request, isIncludeStackTrace(request));
+        HttpStatus status = getStatus(request);
         return new ResponseEntity<>(body, status);
     }
 
@@ -125,10 +125,9 @@ public class ExceptionController implements ErrorController {
      * 获取错误编码
      *
      * @param request
-     * @param includeStackTrace
      * @return
      */
-    private HttpStatus getStatus(HttpServletRequest request, boolean includeStackTrace) {
+    private HttpStatus getStatus(HttpServletRequest request) {
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
         if (this.errorAttributes.getError(requestAttributes) instanceof BusinessException) {
             return ((BusinessException) this.errorAttributes.getError(requestAttributes)).getStatus();

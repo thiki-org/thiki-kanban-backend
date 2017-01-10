@@ -17,7 +17,8 @@ public class MapUtil {
         }
         Map<String, List> sortedMap = new TreeMap<>(new Comparator<String>() {
             public int compare(String key1, String key2) {
-                int intKey1 = 0, intKey2 = 0;
+                int intKey1,
+                        intKey2;
                 try {
                     intKey1 = getInt(key1);
                     intKey2 = getInt(key2);

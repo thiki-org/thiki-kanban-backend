@@ -15,7 +15,7 @@ import java.util.Map;
 public class APIDocument {
     public static final String API_DOCUMENT_FILE_PATH = "src/test/resources/APIDocument.md";
 
-    public static Map<String, List> themes = new HashMap<>();
+    public static Map<String, List> testThemes = new HashMap<>();
 
     public static boolean isJunitTestModel = false;
     public static String url;
@@ -46,14 +46,14 @@ public class APIDocument {
         testCase.put("request", JSONObject.toJSONString(request, true));
         testCase.put("response", JSONObject.toJSONString(response, true));
 
-        List<Map<String, Object>> testCases = themes.get(domainName);
+        List<Map<String, Object>> testCases = testThemes.get(domainName);
         if (testCases == null) {
             testCases = new ArrayList();
         }
         testCases.add(testCase);
-        themes.put(domainName, testCases);
+        testThemes.put(domainName, testCases);
 
-        FileUtil.saveFile(API_DOCUMENT_FILE_PATH, buildMDContent(themes));
+        FileUtil.saveFile(API_DOCUMENT_FILE_PATH, buildMDContent(testThemes));
         isJunitTestModel = false;
     }
 

@@ -3,7 +3,6 @@ package org.thiki.kanban.teams.team;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
-import org.thiki.kanban.foundation.hateoas.TLink;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -14,8 +13,6 @@ import java.util.List;
  */
 @Service
 public class TeamsResource extends RestResource {
-    @Resource
-    private TLink tlink;
     @Resource
     private TeamResource teamResourceService;
 

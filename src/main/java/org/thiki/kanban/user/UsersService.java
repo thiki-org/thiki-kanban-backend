@@ -10,28 +10,20 @@ import org.thiki.kanban.foundation.aspect.ValidateParams;
 import org.thiki.kanban.foundation.common.FileUtil;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.user.profile.AvatarStorage;
-import org.thiki.kanban.user.profile.StorageProperties;
 
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 @Service
 public class UsersService {
     public static final int AVATAR_MAX_SIZE = 102400;
     public static Logger logger = LoggerFactory.getLogger(UsersService.class);
     private static String avatarFileTempPath = "files/avatars/temp/";
-    private final Path rootLocation;
     @Resource
     private UsersPersistence usersPersistence;
     @Resource
     private AvatarStorage avatarStorage;
-
-    public UsersService() {
-        this.rootLocation = Paths.get(new StorageProperties().getLocation());
-    }
 
     public User findByName(String userName) {
         return usersPersistence.findByName(userName);

@@ -102,13 +102,9 @@ public class FileUtil {
                 throw new IOException(message);
             }
         } else {
-            if (!directory.mkdirs()) {
-                // Double-check that some other thread or process hasn't made
-                // the directory in the background
-                if (!directory.isDirectory()) {
-                    String message = "Unable from addComment directory " + directory;
-                    throw new IOException(message);
-                }
+            if (!directory.mkdirs() && !directory.isDirectory()) {
+                String message = "Unable from addComment directory " + directory;
+                throw new IOException(message);
             }
         }
     }
