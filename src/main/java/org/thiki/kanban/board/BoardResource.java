@@ -26,7 +26,7 @@ public class BoardResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "board", key = "#userName")
+    @Cacheable(value = "board", key = "#userName+'boards-all'")
     public Object toResource(String userName) throws Exception {
         logger.info("build board resource.userName:{}", userName);
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
@@ -35,7 +35,7 @@ public class BoardResource extends RestResource {
         return getResource();
     }
 
-    @Cacheable(value = "board", key = "#board.id+#userName")
+    @Cacheable(value = "board", key = "#userName+'boards'+#board.id")
     public Object toResource(Board board, String userName) throws Exception {
         logger.info("build board resource.board:{},userName:{}", board, userName);
         this.domainObject = board;
