@@ -2,6 +2,7 @@ package org.thiki.kanban.teams.teamMembers;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
@@ -42,7 +43,7 @@ public class TeamMembersService {
         return teamMembersPersistence.findById(teamMember.getId());
     }
 
-    @CacheEvict(value = "team", key = "contains('teams'+#teamId)", allEntries = true)
+    @Caching(evict = {@CacheEvict(value = "team", key = "contains('teams'+#teamId)", allEntries = true), @CacheEvict(value = "board", key = "startsWith('#userName + boards')", allEntries = true)})
     public TeamMember joinTeam(String userName, String teamId) {
         boolean isAlreadyJoinTeam = teamMembersPersistence.isAMemberOfTheTeam(userName, teamId);
         if (isAlreadyJoinTeam) {
