@@ -12,7 +12,7 @@
         max_sort_number FROM kb_card WHERE procedure_id=#{card.procedureId} ) as t ), #{userName}, #{card.procedureId})
     </insert>
 
-    <update id="update" parameterType="org.thiki.kanban.card.Card" flushCache="true">
+    <update id="modify" parameterType="org.thiki.kanban.card.Card" flushCache="true">
         UPDATE kb_card SET
         summary = #{card.summary},
         content = #{card.content},

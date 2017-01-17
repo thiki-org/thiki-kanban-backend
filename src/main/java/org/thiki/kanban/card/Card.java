@@ -1,5 +1,6 @@
 package org.thiki.kanban.card;
 
+import com.alibaba.fastjson.JSON;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.procedure.Procedure;
@@ -119,16 +120,6 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card{" +
-                "id='" + id + '\'' +
-                ", summary='" + summary + '\'' +
-                ", code='" + code + '\'' +
-                ", content='" + content + '\'' +
-                ", author='" + author + '\'' +
-                ", sortNumber=" + sortNumber +
-                ", creationTime='" + creationTime + '\'' +
-                ", modificationTime='" + modificationTime + '\'' +
-                ", procedureId='" + procedureId + '\'' +
-                '}';
+        return JSON.toJSONString(this);
     }
 }

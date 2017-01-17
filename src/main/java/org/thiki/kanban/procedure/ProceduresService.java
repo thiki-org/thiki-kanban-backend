@@ -127,14 +127,14 @@ public class ProceduresService {
         List<Card> cards = cardsService.findByProcedureId(procedureId);
         for (Card card : cards) {
             card.setProcedureId(archivedProcedure.getId());
-            cardsService.update(card.getId(), card);
+            cardsService.modify(card.getId(), card, procedureId, userName);
         }
         logger.info("Archived procedure.procedure:{}", archive);
         return archivedProcedure;
     }
 
     @CacheEvict(value = "procedure", key = "contains('#archivedProcedureId')", allEntries = true)
-    public void undoArchive(String archivedProcedureId, String boardId) {
+    public void undoArchive(String archivedProcedureId, String boardId, String userName) {
         logger.info("Undo archiving.archivedProcedureId:{}", archivedProcedureId);
         Procedure archivedProcedure = proceduresPersistence.findById(archivedProcedureId);
         if (archivedProcedure == null) {
@@ -159,7 +159,7 @@ public class ProceduresService {
         List<Card> cards = cardsService.findByProcedureId(archivedProcedureId);
         for (Card card : cards) {
             card.setProcedureId(doneProcedure.getId());
-            cardsService.update(card.getId(), card);
+            cardsService.modify(card.getId(), card, archivedProcedureId, userName);
         }
         logger.info("Deleting the archived procedure.");
         proceduresPersistence.deleteById(archivedProcedureId);

@@ -21,14 +21,14 @@ CREATE TABLE kb_procedure (
   id                VARCHAR(40) NOT NULL PRIMARY KEY,
   title             VARCHAR(50) NOT NULL,
   author            VARCHAR(40) NOT NULL,
-  description      VARCHAR(100) DEFAULT '',
+  description       VARCHAR(100) DEFAULT '',
   board_id          VARCHAR(40) NOT NULL,
-  status       INT      DEFAULT 0,
-  type       INT      DEFAULT 0,
-  sort_number       INT      DEFAULT 0,
-  creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
-  modification_time DATETIME DEFAULT CURRENT_TIMESTAMP,
-  delete_status     INT      DEFAULT 0
+  status            INT          DEFAULT 0,
+  type              INT          DEFAULT 0,
+  sort_number       INT          DEFAULT 0,
+  creation_time     DATETIME     DEFAULT CURRENT_TIMESTAMP,
+  modification_time DATETIME     DEFAULT CURRENT_TIMESTAMP,
+  delete_status     INT          DEFAULT 0
 );
 
 -- ----------------------------
@@ -248,4 +248,24 @@ CREATE TABLE kb_cards_tags (
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time DATETIME    DEFAULT CURRENT_TIMESTAMP,
   delete_status     INT         DEFAULT 0
+);
+
+-- ----------------------------
+-- Table structure for kb_activity
+-- ----------------------------
+DROP TABLE IF EXISTS kb_activity;
+
+CREATE TABLE kb_activity (
+  id                  VARCHAR(40) NOT NULL PRIMARY KEY,
+  card_id             VARCHAR(40)  DEFAULT NULL,
+  prev_procedure_id   VARCHAR(40)  DEFAULT NULL,
+  procedure_id        VARCHAR(40)  DEFAULT NULL,
+  operation_type_code VARCHAR(40)  DEFAULT NULL,
+  operation_type_name VARCHAR(40)  DEFAULT NULL,
+  summary             VARCHAR(500) DEFAULT NULL,
+  detail              VARCHAR(5000),
+  userName            VARCHAR(40)  DEFAULT NULL,
+  creation_time       DATETIME     DEFAULT CURRENT_TIMESTAMP,
+  modification_time   DATETIME     DEFAULT CURRENT_TIMESTAMP,
+  delete_status       INT          DEFAULT 0
 );

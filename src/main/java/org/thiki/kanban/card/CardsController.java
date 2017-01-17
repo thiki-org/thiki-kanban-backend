@@ -42,7 +42,7 @@ public class CardsController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.PUT)
     public HttpEntity update(@RequestBody Card card, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        Card updatedCard = cardsService.update(cardId, card);
+        Card updatedCard = cardsService.modify(cardId, card, procedureId, userName);
         return Response.build(cardResource.toResource(updatedCard, boardId, procedureId, userName));
     }
 

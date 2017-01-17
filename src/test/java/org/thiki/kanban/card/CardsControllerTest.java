@@ -47,6 +47,7 @@ public class CardsControllerTest extends TestBase {
                 .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/acceptanceCriterias"))
                 .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/assignments"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
 
     @Scenario("当创建一个卡片时,如果卡片概述为空,则创建失败")
@@ -181,6 +182,7 @@ public class CardsControllerTest extends TestBase {
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
                 .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
         assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_card WHERE id='fooId'", String.class));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
 
     @Scenario("当一个卡片从某个procedure移动到另一个procedure时,不仅需要重新排序目标procedure,也要对原始procedure排序")

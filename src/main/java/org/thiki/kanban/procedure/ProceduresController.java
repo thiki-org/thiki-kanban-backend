@@ -69,7 +69,7 @@ public class ProceduresController {
 
     @RequestMapping(value = "/boards/{boardId}/archives/{archiveId}", method = RequestMethod.DELETE)
     public HttpEntity undoArchive(@PathVariable String archiveId, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
-        proceduresService.undoArchive(archiveId, boardId);
+        proceduresService.undoArchive(archiveId, boardId, userName);
         return Response.build(procedureResource.toResource(boardId, userName));
     }
 }

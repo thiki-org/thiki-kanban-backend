@@ -12,7 +12,7 @@ public interface CardsPersistence {
 
     Card findById(String cardId);
 
-    void update(@Param("id") String cardId, @Param("card") Card card);
+    void modify(@Param("id") String cardId, @Param("card") Card card);
 
     List<Card> findByProcedureId(String procedureId);
 
