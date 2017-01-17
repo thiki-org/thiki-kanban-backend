@@ -18,7 +18,7 @@ public enum CommentCodes {
     }
 
     public int code() {
-        return Integer.parseInt(DomainOrder.CARD + "" + code);
+        return Integer.parseInt(DomainOrder.COMMENT + "" + code);
     }
 
     public String message() {
