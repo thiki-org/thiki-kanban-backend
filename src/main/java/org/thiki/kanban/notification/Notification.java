@@ -102,4 +102,21 @@ public class Notification implements Serializable {
     public String getTypeName() {
         return NotificationType.getNameByType(this.type);
     }
+
+    @Override
+    public String toString() {
+        return "Notification{" +
+                "id='" + id + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", sender='" + sender + '\'' +
+                ", content='" + content + '\'' +
+                ", link='" + link + '\'' +
+                ", isRead=" + isRead +
+                ", creationTime='" + creationTime + '\'' +
+                ", displayTime='" + displayTime + '\'' +
+                ", type='" + type + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", modificationTime='" + modificationTime + '\'' +
+                '}';
+    }
 }
