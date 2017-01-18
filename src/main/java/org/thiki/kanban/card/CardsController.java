@@ -61,7 +61,7 @@ public class CardsController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/sortNumbers", method = RequestMethod.PUT)
     public HttpEntity resortCards(@RequestBody List<Card> cards, @PathVariable String boardId, @PathVariable String procedureId, @RequestHeader String userName) throws Exception {
-        List<Card> sortedCards = cardsService.resortCards(cards, procedureId, boardId);
+        List<Card> sortedCards = cardsService.resortCards(cards, procedureId, boardId, userName);
 
         return Response.build(cardsResource.toResource(sortedCards, boardId, procedureId, userName));
     }

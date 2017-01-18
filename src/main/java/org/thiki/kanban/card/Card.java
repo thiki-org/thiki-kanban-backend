@@ -1,6 +1,8 @@
 package org.thiki.kanban.card;
 
 import com.alibaba.fastjson.JSON;
+import de.danielbechler.diff.ObjectDifferBuilder;
+import de.danielbechler.diff.node.DiffNode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.procedure.Procedure;
@@ -121,5 +123,10 @@ public class Card {
     @Override
     public String toString() {
         return JSON.toJSONString(this);
+    }
+
+    public String diff(Card originCard) {
+        DiffNode diff = ObjectDifferBuilder.buildDefault().compare(this, originCard);
+        return diff.toString();
     }
 }

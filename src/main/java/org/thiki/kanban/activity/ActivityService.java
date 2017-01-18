@@ -23,27 +23,45 @@ public class ActivityService {
         activityPersistence.record(activity);
     }
 
-    public void record(ActivityType activityType, Card card, String userName) {
+    public void recordCardCreation(Card newCard, String userName) {
         Activity activity = new Activity();
-        activity.setProcedureId(card.getProcedureId());
-        activity.setCardId(card.getId());
-        activity.setSummary(card.toString());
-        activity.setDetail(card.toString());
+        activity.setProcedureId(newCard.getProcedureId());
+        activity.setCardId(newCard.getId());
+        activity.setSummary(newCard.toString());
+        activity.setDetail(newCard.toString());
         activity.setUserName(userName);
-        activity.setOperationTypeCode(activityType.code());
-        activity.setOperationTypeName(activityType.name());
+        activity.setOperationTypeCode(ActivityType.CARD_CREATION.code());
+        activity.setOperationTypeName(ActivityType.CARD_CREATION.name());
         record(activity);
     }
 
-    public void record(ActivityType activityType, Card card, Card originCard, String procedureId, String userName) {
+    public void recordCardModification(Card modifiedCard, Card originCard, String userName) {
         Activity activity = new Activity();
-        activity.setProcedureId(procedureId);
-        activity.setCardId(card.getId());
-        activity.setSummary(card.toString());
-        activity.setDetail("Origin card:" + originCard.toString() + "\nNew card:" + card.toString());
+        activity.setPrevProcedureId(originCard.getProcedureId());
+        activity.setProcedureId(modifiedCard.getProcedureId());
+        activity.setCardId(modifiedCard.getId());
+        activity.setSummary(modifiedCard.diff(originCard));
+        activity.setDetail(modifiedCard.diff(originCard));
         activity.setUserName(userName);
-        activity.setOperationTypeCode(activityType.code());
-        activity.setOperationTypeName(activityType.name());
+        activity.setOperationTypeCode(ActivityType.CARD_CREATION.code());
+        activity.setOperationTypeName(ActivityType.CARD_CREATION.name());
+        if (!modifiedCard.getProcedureId().equals(originCard.getProcedureId())) {
+            activity.setOperationTypeCode(ActivityType.CARD_MOVING.code());
+            activity.setOperationTypeName(ActivityType.CARD_MOVING.name());
+        }
+        record(activity);
+    }
+
+    public void recordCardArchive(Card foundCard, String procedureId, String userName) {
+        Activity activity = new Activity();
+        activity.setPrevProcedureId(foundCard.getProcedureId());
+        activity.setProcedureId(procedureId);
+        activity.setCardId(foundCard.getId());
+        activity.setSummary(foundCard.toString());
+        activity.setDetail(foundCard.toString());
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.CARD_ARCHIVED.code());
+        activity.setOperationTypeName(ActivityType.CARD_ARCHIVED.name());
         record(activity);
     }
 }

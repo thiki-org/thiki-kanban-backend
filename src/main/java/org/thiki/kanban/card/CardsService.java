@@ -6,7 +6,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.activity.ActivityService;
-import org.thiki.kanban.activity.ActivityType;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.procedure.Procedure;
@@ -39,7 +38,7 @@ public class CardsService {
         cardsPersistence.create(userName, newCard);
         Card savedCard = cardsPersistence.findById(newCard.getId());
         logger.info("Created card:{}", savedCard);
-        activityService.record(ActivityType.CARD_CREATION, savedCard, userName);
+        activityService.recordCardCreation(savedCard, userName);
         return savedCard;
     }
 
@@ -56,13 +55,14 @@ public class CardsService {
         cardsPersistence.modify(cardId, card);
         Card savedCard = cardsPersistence.findById(cardId);
         logger.info("Modified card:{}", savedCard);
-        activityService.record(ActivityType.CARD_MODIFYING, savedCard, originCard, procedureId, userName);
+        activityService.recordCardModification(savedCard, originCard, userName);
         return savedCard;
     }
 
     @CacheEvict(value = "card", key = "contains('#cardId')", allEntries = true)
     public int deleteById(String cardId) {
         loadAndValidateCard(cardId);
+        logger.info("Deleting card.cardId:{}", cardId);
         return cardsPersistence.deleteById(cardId);
     }
 
@@ -90,9 +90,11 @@ public class CardsService {
     }
 
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
-    public List<Card> resortCards(List<Card> cards, String procedureId, String boardId) {
+    public List<Card> resortCards(List<Card> cards, String procedureId, String boardId, String userName) {
         for (Card card : cards) {
+            Card foundCard = cardsPersistence.findById(card.getId());
             cardsPersistence.resort(card);
+            activityService.recordCardArchive(foundCard, procedureId, userName);
         }
         return findByProcedureId(procedureId);
     }
