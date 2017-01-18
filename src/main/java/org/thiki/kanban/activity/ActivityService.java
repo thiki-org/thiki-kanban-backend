@@ -4,9 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
 import org.thiki.kanban.card.Card;
+import org.thiki.kanban.foundation.common.SequenceNumber;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by xubt on 16/01/2017.
@@ -20,6 +23,7 @@ public class ActivityService {
     @CacheEvict(value = "activity", key = "{'activity'+#activity.cardId}", allEntries = true)
     public void record(final Activity activity) {
         logger.info("Recording operation:{}", activity);
+        activity.setId(SequenceNumber.random());
         activityPersistence.record(activity);
     }
 
@@ -62,6 +66,50 @@ public class ActivityService {
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.CARD_ARCHIVED.code());
         activity.setOperationTypeName(ActivityType.CARD_ARCHIVED.name());
+        record(activity);
+    }
+
+    public void recordAcceptanceCriteriaCreation(AcceptanceCriteria acceptanceCriteria, String cardId, String userName) {
+        Activity activity = new Activity();
+        activity.setCardId(cardId);
+        activity.setSummary(acceptanceCriteria.getSummary());
+        activity.setDetail(acceptanceCriteria.toString());
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_CREATION.code());
+        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_CREATION.name());
+        record(activity);
+    }
+
+    public void recordAcceptanceCriteriaModification(AcceptanceCriteria acceptanceCriteria, AcceptanceCriteria updatedAcceptanceCriteria, String cardId, String userName) {
+        Activity activity = new Activity();
+        activity.setCardId(cardId);
+        activity.setSummary(updatedAcceptanceCriteria.diff(acceptanceCriteria));
+        activity.setDetail(updatedAcceptanceCriteria.diff(acceptanceCriteria));
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_MODIFYING.code());
+        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_MODIFYING.name());
+        record(activity);
+    }
+
+    public void recordAcceptanceCriteriaRemoving(String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria, String cardId, String userName) {
+        Activity activity = new Activity();
+        activity.setCardId(cardId);
+        activity.setSummary(acceptanceCriteria.getSummary());
+        activity.setDetail(acceptanceCriteria.getSummary());
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_DELETING.code());
+        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_MODIFYING.name());
+        record(activity);
+    }
+
+    public void recordAcceptanceCriteriaResorting(List<AcceptanceCriteria> acceptanceCriterias, List<AcceptanceCriteria> resortedAcceptanceCriterias, String cardId, String userName) {
+        Activity activity = new Activity();
+        activity.setCardId(cardId);
+        activity.setSummary(resortedAcceptanceCriterias.toString());
+        activity.setDetail(resortedAcceptanceCriterias.toString() + "|" + acceptanceCriterias.toString());
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_RESORTING.code());
+        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_RESORTING.name());
         record(activity);
     }
 }

@@ -6,7 +6,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  * Created by xubt on 10/17/16.
  */
 public enum AcceptanceCriteriaCodes {
-    SUMMARY_IS_EMPTY("001", "验收标准的概述不能为空。");
+    SUMMARY_IS_EMPTY("001", "验收标准的概述不能为空。"), ACCEPTANCE_CRITERIA_IS_NOT_FOUND("002", "验收标准不存在。");
     public static final String summaryIsRequired = "验收标准的概述不能为空。";
     public static final String summaryIsInvalid = "卡片概述长度超限,请保持在200个字符以内。";
     private String code;

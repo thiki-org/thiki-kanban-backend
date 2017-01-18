@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.activity.ActivityService;
+import org.thiki.kanban.foundation.exception.BusinessException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,12 +20,16 @@ public class AcceptanceCriteriaService {
     @Resource
     private AcceptanceCriteriaPersistence acceptanceCriteriaPersistence;
 
+    @Resource
+    private ActivityService activityService;
+
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
     public AcceptanceCriteria addAcceptCriteria(String userName, String cardId, AcceptanceCriteria acceptanceCriteria) {
         logger.info("User {} adds a acceptance criteria in card [{}],the acceptanceCriteria is:{}", userName, cardId, acceptanceCriteria);
         acceptanceCriteriaPersistence.addAcceptCriteria(userName, cardId, acceptanceCriteria);
         AcceptanceCriteria savedAcceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteria.getId());
         logger.info("Saved acceptanceCriteria:{}", savedAcceptanceCriteria);
+        activityService.recordAcceptanceCriteriaCreation(acceptanceCriteria, cardId, userName);
         return savedAcceptanceCriteria;
     }
 
@@ -42,28 +48,35 @@ public class AcceptanceCriteriaService {
     }
 
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
-    public AcceptanceCriteria updateAcceptCriteria(String cardId, String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria) {
+    public AcceptanceCriteria updateAcceptCriteria(String cardId, String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria, String userName) {
         logger.info("Update acceptanceCriteria.acceptanceCriteriaId:{},acceptanceCriteria:{},cardId:{}", acceptanceCriteriaId, acceptanceCriteria, cardId);
         acceptanceCriteriaPersistence.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
         AcceptanceCriteria updatedAcceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
         logger.info("Updated acceptanceCriteria:{}", updatedAcceptanceCriteria);
+        activityService.recordAcceptanceCriteriaModification(acceptanceCriteria, updatedAcceptanceCriteria, cardId, userName);
         return updatedAcceptanceCriteria;
     }
 
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
-    public Integer removeAcceptanceCriteria(String acceptanceCriteriaId, String cardId) {
+    public Integer removeAcceptanceCriteria(String acceptanceCriteriaId, String cardId, String userName) {
         logger.info("Remove acceptanceCriteria.acceptanceCriteriaId:{},cardId:{}", acceptanceCriteriaId, cardId);
+        AcceptanceCriteria acceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
+        if (acceptanceCriteria == null) {
+            throw new BusinessException(AcceptanceCriteriaCodes.ACCEPTANCE_CRITERIA_IS_NOT_FOUND);
+        }
+        activityService.recordAcceptanceCriteriaRemoving(acceptanceCriteriaId, acceptanceCriteria, cardId, userName);
         return acceptanceCriteriaPersistence.deleteAcceptanceCriteria(acceptanceCriteriaId);
     }
 
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
-    public List<AcceptanceCriteria> resortAcceptCriterias(String cardId, List<AcceptanceCriteria> acceptanceCriterias) {
+    public List<AcceptanceCriteria> resortAcceptCriterias(String cardId, List<AcceptanceCriteria> acceptanceCriterias, String userName) {
         logger.info("Resorting acceptanceCriterias.acceptanceCriterias:{},cardId:{}", acceptanceCriterias, cardId);
         for (AcceptanceCriteria acceptanceCriteria : acceptanceCriterias) {
             acceptanceCriteriaPersistence.resort(acceptanceCriteria);
         }
         List<AcceptanceCriteria> resortedAcceptanceCriterias = acceptanceCriteriaPersistence.loadAcceptanceCriteriasByCardId(cardId);
         logger.info("Resorted acceptanceCriterias:{}", resortedAcceptanceCriterias);
+        activityService.recordAcceptanceCriteriaResorting(acceptanceCriterias, resortedAcceptanceCriterias, cardId, userName);
         return resortedAcceptanceCriterias;
     }
 }
