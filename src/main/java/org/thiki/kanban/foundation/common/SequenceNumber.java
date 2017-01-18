@@ -10,6 +10,10 @@ import java.util.UUID;
 @Service("sequenceNumber")
 public class SequenceNumber {
     public String generate() {
+        return random();
+    }
+
+    public static String random() {
         TimeBasedGenerator gen = Generators.timeBasedGenerator(EthernetAddress.fromInterface());
         UUID uuid = gen.generate();
         return uuid.toString();
