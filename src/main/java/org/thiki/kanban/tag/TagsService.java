@@ -65,6 +65,7 @@ public class TagsService {
             if (existingTags.contains(tag)) {
                 continue;
             }
+            tag.setId(null);
             tagPersistence.addTag(boardId, tag);
         }
     }
