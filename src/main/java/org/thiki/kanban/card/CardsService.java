@@ -23,6 +23,7 @@ public class CardsService {
 
     @Resource
     private ProceduresPersistence proceduresPersistence;
+
     @Resource
     private ActivityService activityService;
 
