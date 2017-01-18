@@ -301,7 +301,7 @@ CREATE TABLE kb_cards_tags (
 DROP TABLE IF EXISTS kb_activity;
 
 CREATE TABLE kb_activity (
-  id                  VARCHAR(40) NOT NULL PRIMARY KEY,
+  id                  VARCHAR(40) NOT NULL,
   card_id             VARCHAR(40)  DEFAULT NULL,
   prev_procedure_id   VARCHAR(40)  DEFAULT NULL,
   procedure_id        VARCHAR(40)  DEFAULT NULL,
