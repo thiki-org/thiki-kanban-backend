@@ -1,5 +1,6 @@
 package org.thiki.kanban.acceptanceCriteria;
 
+import com.alibaba.fastjson.JSON;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -83,14 +84,6 @@ public class AcceptanceCriteria {
 
     @Override
     public String toString() {
-        return "AcceptanceCriteria{" +
-                "id='" + id + '\'' +
-                ", summary='" + summary + '\'' +
-                ", finished=" + finished +
-                ", author='" + author + '\'' +
-                ", sortNumber=" + sortNumber +
-                ", creationTime='" + creationTime + '\'' +
-                ", modificationTime='" + modificationTime + '\'' +
-                '}';
+        return JSON.toJSONString(this);
     }
 }
