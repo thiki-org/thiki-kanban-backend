@@ -25,8 +25,8 @@ public class DBInterceptor implements Interceptor {
     @Resource
     private SequenceNumber sequenceNumber;
 
-    public static boolean isJavaClass(Class<?> clz) {
-        return clz != null && clz.getClassLoader() == null;
+    public static boolean isJavaClass(Class<?> clazz) {
+        return clazz != null && clazz.getClassLoader() == null;
     }
 
     public Object intercept(Invocation invocation) throws Throwable {
@@ -36,10 +36,14 @@ public class DBInterceptor implements Interceptor {
         if (stmt.getSqlCommandType().equals(SqlCommandType.INSERT)) {
             if (entityToSave instanceof Map) {
                 ((Map) entityToSave).values().stream().filter(param -> !isJavaClass(param.getClass())).forEach(param -> {
-                    ReflectionTestUtils.setField(param, "id", sequenceNumber.generate());
+                    if (ReflectionTestUtils.getField(param, "id") == null) {
+                        ReflectionTestUtils.setField(param, "id", sequenceNumber.generate());
+                    }
                 });
             } else {
-                ReflectionTestUtils.setField(entityToSave, "id", sequenceNumber.generate());
+                if (ReflectionTestUtils.getField(entityToSave, "id") == null) {
+                    ReflectionTestUtils.setField(entityToSave, "id", sequenceNumber.generate());
+                }
             }
         }
         return invocation.proceed();
