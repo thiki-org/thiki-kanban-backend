@@ -63,8 +63,8 @@ CREATE TABLE kb_procedure (
   id                VARCHAR(40) NOT NULL,
   title             VARCHAR(50) NOT NULL,
   author            VARCHAR(40) NOT NULL,
-  description      VARCHAR(100) DEFAULT '',
-  type            INT(2)               DEFAULT 0,
+  description       VARCHAR(100)         DEFAULT '',
+  type              INT(2)               DEFAULT 0,
   status            INT(2)               DEFAULT 0,
   delete_status     INT(2)               DEFAULT 0,
   sort_number       INT(2)      NOT NULL DEFAULT 0,
@@ -308,11 +308,11 @@ CREATE TABLE kb_activity (
   operation_type_code VARCHAR(40)  DEFAULT NULL,
   operation_type_name VARCHAR(40)  DEFAULT NULL,
   summary             VARCHAR(500) DEFAULT NULL,
-  detail              VARCHAR(5000),
+  detail              TEXT         DEFAULT NULL,
   userName            VARCHAR(40)  DEFAULT NULL,
-  creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
-  modification_time DATETIME ON UPDATE CURRENT_TIMESTAMP,
-  delete_status     INT(2)      DEFAULT 0,
+  creation_time       DATETIME     DEFAULT CURRENT_TIMESTAMP,
+  modification_time   DATETIME ON UPDATE CURRENT_TIMESTAMP,
+  delete_status       INT(2)       DEFAULT 0,
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB

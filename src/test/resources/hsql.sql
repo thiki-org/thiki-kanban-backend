@@ -257,15 +257,15 @@ DROP TABLE IF EXISTS kb_activity;
 
 CREATE TABLE kb_activity (
   id                  VARCHAR(40) NOT NULL PRIMARY KEY,
-  card_id             VARCHAR(40)  DEFAULT NULL,
-  prev_procedure_id   VARCHAR(40)  DEFAULT NULL,
-  procedure_id        VARCHAR(40)  DEFAULT NULL,
-  operation_type_code VARCHAR(40)  DEFAULT NULL,
-  operation_type_name VARCHAR(40)  DEFAULT NULL,
-  summary             VARCHAR(500) DEFAULT NULL,
-  detail              VARCHAR(5000),
-  userName            VARCHAR(40)  DEFAULT NULL,
-  creation_time       DATETIME     DEFAULT CURRENT_TIMESTAMP,
-  modification_time   DATETIME     DEFAULT CURRENT_TIMESTAMP,
-  delete_status       INT          DEFAULT 0
+  card_id             VARCHAR(40)   DEFAULT NULL,
+  prev_procedure_id   VARCHAR(40)   DEFAULT NULL,
+  procedure_id        VARCHAR(40)   DEFAULT NULL,
+  operation_type_code VARCHAR(40)   DEFAULT NULL,
+  operation_type_name VARCHAR(40)   DEFAULT NULL,
+  summary             VARCHAR(500)  DEFAULT NULL,
+  detail              VARCHAR(5000) DEFAULT NULL,
+  userName            VARCHAR(40)   DEFAULT NULL,
+  creation_time       DATETIME      DEFAULT CURRENT_TIMESTAMP,
+  modification_time   DATETIME      DEFAULT CURRENT_TIMESTAMP,
+  delete_status       INT           DEFAULT 0
 );
