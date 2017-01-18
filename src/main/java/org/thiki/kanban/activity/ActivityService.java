@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.cardTags.CardTag;
+import org.thiki.kanban.comment.Comment;
 import org.thiki.kanban.foundation.common.SequenceNumber;
 
 import javax.annotation.Resource;
@@ -122,6 +123,17 @@ public class ActivityService {
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.TAG_MODIFYING.code());
         activity.setOperationTypeName(ActivityType.TAG_MODIFYING.name());
+        record(activity);
+    }
+
+    public void recordComment(Comment comment, String cardId, String userName) {
+        Activity activity = new Activity();
+        activity.setCardId(cardId);
+        activity.setSummary(comment.toString());
+        activity.setDetail(comment.toString());
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.COMMENT_CREATION.code());
+        activity.setOperationTypeName(ActivityType.COMMENT_CREATION.name());
         record(activity);
     }
 }

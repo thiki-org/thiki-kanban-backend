@@ -1,5 +1,6 @@
 package org.thiki.kanban.comment;
 
+import com.alibaba.fastjson.JSON;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.foundation.common.date.DateUtil;
@@ -82,5 +83,10 @@ public class Comment {
 
     public String getPublishTime() {
         return DateUtil.showTime(creationTime);
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }
