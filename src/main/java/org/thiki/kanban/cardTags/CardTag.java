@@ -1,5 +1,7 @@
 package org.thiki.kanban.cardTags;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * Created by xubt on 11/14/16.
  */
@@ -76,5 +78,10 @@ public class CardTag {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

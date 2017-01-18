@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
 import org.thiki.kanban.card.Card;
+import org.thiki.kanban.cardTags.CardTag;
 import org.thiki.kanban.foundation.common.SequenceNumber;
 
 import javax.annotation.Resource;
@@ -110,6 +111,17 @@ public class ActivityService {
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_RESORTING.code());
         activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_RESORTING.name());
+        record(activity);
+    }
+
+    public void recordTags(List<CardTag> tags, String cardId, String userName) {
+        Activity activity = new Activity();
+        activity.setCardId(cardId);
+        activity.setSummary(tags.toString());
+        activity.setDetail(tags.toString());
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.TAG_MODIFYING.code());
+        activity.setOperationTypeName(ActivityType.TAG_MODIFYING.name());
         record(activity);
     }
 }

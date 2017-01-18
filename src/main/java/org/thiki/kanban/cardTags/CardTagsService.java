@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.activity.ActivityService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,6 +19,9 @@ public class CardTagsService {
     @Resource
     private CardTagPersistence cardTagPersistence;
 
+    @Resource
+    private ActivityService activityService;
+
     @CacheEvict(value = "card-tag", key = "contains('#boardId')", allEntries = true)
     public List<CardTag> stickTags(List<CardTag> cardTags, String cardId, String boardId, String userName) {
         logger.info("Stick tags to card.tags:{},cardId:{},boardId:{}", cardTags, cardId, boardId);
@@ -27,6 +31,7 @@ public class CardTagsService {
         }
         List<CardTag> tags = cardTagPersistence.findByCardId(cardId);
         logger.info("Stick tags:{}", tags);
+        activityService.recordTags(tags, cardId, userName);
         return tags;
     }
 
