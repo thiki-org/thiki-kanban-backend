@@ -302,17 +302,17 @@ DROP TABLE IF EXISTS kb_activity;
 
 CREATE TABLE kb_activity (
   id                  VARCHAR(40) NOT NULL,
-  card_id             VARCHAR(40)  DEFAULT NULL,
-  prev_procedure_id   VARCHAR(40)  DEFAULT NULL,
-  procedure_id        VARCHAR(40)  DEFAULT NULL,
-  operation_type_code VARCHAR(40)  DEFAULT NULL,
-  operation_type_name VARCHAR(40)  DEFAULT NULL,
-  summary             VARCHAR(500) DEFAULT NULL,
-  detail              TEXT         DEFAULT NULL,
-  userName            VARCHAR(40)  DEFAULT NULL,
-  creation_time       DATETIME     DEFAULT CURRENT_TIMESTAMP,
+  card_id             VARCHAR(40) DEFAULT NULL,
+  prev_procedure_id   VARCHAR(40) DEFAULT NULL,
+  procedure_id        VARCHAR(40) DEFAULT NULL,
+  operation_type_code VARCHAR(40) DEFAULT NULL,
+  operation_type_name VARCHAR(40) DEFAULT NULL,
+  summary             TEXT        DEFAULT NULL,
+  detail              TEXT        DEFAULT NULL,
+  userName            VARCHAR(40) DEFAULT NULL,
+  creation_time       DATETIME    DEFAULT CURRENT_TIMESTAMP,
   modification_time   DATETIME ON UPDATE CURRENT_TIMESTAMP,
-  delete_status       INT(2)       DEFAULT 0,
+  delete_status       INT(2)      DEFAULT 0,
   PRIMARY KEY (id)
 )
   ENGINE = InnoDB
