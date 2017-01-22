@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
+import org.thiki.kanban.assignment.Assignment;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.cardTags.CardTag;
 import org.thiki.kanban.comment.Comment;
@@ -134,6 +135,28 @@ public class ActivityService {
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.COMMENT_CREATION.code());
         activity.setOperationTypeName(ActivityType.COMMENT_CREATION.name());
+        record(activity);
+    }
+
+    public void recordAssignment(Assignment savedAssignment) {
+        Activity activity = new Activity();
+        activity.setCardId(savedAssignment.getCardId());
+        activity.setSummary(savedAssignment.toString());
+        activity.setDetail(savedAssignment.toString());
+        activity.setUserName(savedAssignment.getAssigner());
+        activity.setOperationTypeCode(ActivityType.ASSIGNMENT.code());
+        activity.setOperationTypeName(ActivityType.ASSIGNMENT.name());
+        record(activity);
+    }
+
+    public void recordUndoAssignment(Assignment assignment, String cardId, String userName) {
+        Activity activity = new Activity();
+        activity.setCardId(cardId);
+        activity.setSummary(assignment.toString());
+        activity.setDetail(assignment.toString());
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.UNDO_ASSIGNMENT.code());
+        activity.setOperationTypeName(ActivityType.UNDO_ASSIGNMENT.name());
         record(activity);
     }
 }

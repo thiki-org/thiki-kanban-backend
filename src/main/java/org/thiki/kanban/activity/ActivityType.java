@@ -13,7 +13,13 @@ public enum ActivityType {
     TAG_MODIFYING("007", "更新标签"),
     COMMENT_CREATION("008", "创建评论"),
     CARD_ARCHIVED("009", "卡片归档"),
-    CARD_UNDO_ARCHIVED("010", "卡片撤销归档"), CARD_RESORT("011", "卡片排序"), CARD_MOVING("012", "卡片挪动"), ACCEPTANCE_CRITERIA_RESORTING("013", "重新排序验收标准");
+    CARD_UNDO_ARCHIVED("010", "卡片撤销归档"),
+    CARD_RESORT("011", "卡片排序"),
+    CARD_MOVING("012", "卡片挪动"),
+    ACCEPTANCE_CRITERIA_RESORTING("013", "重新排序验收标准"),
+    ASSIGNMENT("014", "认领卡片"),
+    UNDO_ASSIGNMENT("015", "离开卡片"),
+    ACCEPTANCE_FINISHED("016", "卡片任务全部完成");
     private String code;
     private String type;
 

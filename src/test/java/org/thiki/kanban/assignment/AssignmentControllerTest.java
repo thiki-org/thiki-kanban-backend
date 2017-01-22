@@ -11,6 +11,7 @@ import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 
@@ -38,6 +39,7 @@ public class AssignmentControllerTest extends TestBase {
                 .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
                 .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments/fooId"));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
 
     @Scenario("当用户根据ID查找分配记录时,如果该记录存在则将其返回")
@@ -132,6 +134,7 @@ public class AssignmentControllerTest extends TestBase {
                 .statusCode(200)
                 .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
                 .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
 
     @Scenario("当用户想取消某个分配时,如果指定的分配记录并不存在,则返回404客户端错误")

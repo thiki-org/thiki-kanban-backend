@@ -1,5 +1,7 @@
 package org.thiki.kanban.assignment;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * Created by xubitao on 6/16/16.
  */
@@ -86,15 +88,6 @@ public class Assignment {
 
     @Override
     public String toString() {
-        return "Assignment{" +
-                "id='" + id + '\'' +
-                ", cardId='" + cardId + '\'' +
-                ", assignee='" + assignee + '\'' +
-                ", assigner='" + assigner + '\'' +
-                ", name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", creationTime='" + creationTime + '\'' +
-                ", modificationTime='" + modificationTime + '\'' +
-                '}';
+        return JSON.toJSONString(this);
     }
 }

@@ -46,7 +46,7 @@ public class AssignmentController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.DELETE)
     public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String assignmentId, @RequestHeader String userName) throws Exception {
-        assignmentService.deleteById(assignmentId, cardId);
+        assignmentService.leaveCard(assignmentId, cardId, userName);
         return Response.build(assignmentResource.toResource(boardId, procedureId, cardId, userName));
     }
 }

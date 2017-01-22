@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsCodes;
 import org.thiki.kanban.card.CardsPersistence;
@@ -25,17 +26,23 @@ public class AssignmentService {
     private AssignmentPersistence assignmentPersistence;
     @Resource
     private CardsPersistence cardsPersistence;
+    @Resource
+    private ActivityService activityService;
 
     @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
-    public Assignment assign(final Assignment assignment, String cardId, String authorUserId) {
+    public Assignment assign(final Assignment assignment, String cardId, String userName) {
+        logger.info("Assigning card.assignment:{},cardId:{},userName:{}", assignment, cardId, userName);
         boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
         if (isAlreadyAssigned) {
             throw new BusinessException(AssignmentCodes.ALREADY_ASSIGNED);
         }
         assignment.setCardId(cardId);
-        assignment.setAuthor(authorUserId);
+        assignment.setAuthor(userName);
         assignmentPersistence.create(assignment);
-        return assignmentPersistence.findById(assignment.getId());
+        Assignment savedAssignment = assignmentPersistence.findById(assignment.getId());
+        logger.info("Assigned card successfully.savedAssignment:{}", savedAssignment);
+        activityService.recordAssignment(savedAssignment);
+        return savedAssignment;
     }
 
     public Assignment findById(String id) {
@@ -54,11 +61,14 @@ public class AssignmentService {
     }
 
     @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
-    public int deleteById(String id, String cardId) {
+    public int leaveCard(String id, String cardId, String userName) {
+        logger.info("Leaving card.assignmentId:{},cardId:{},userName:{}", id, cardId, userName);
         Assignment assignmentToDelete = assignmentPersistence.findById(id);
         if (assignmentToDelete == null) {
             throw new ResourceNotFoundException("assignment[" + id + "] is not found.");
         }
+        logger.info("Assignment:{},", assignmentToDelete);
+        activityService.recordUndoAssignment(assignmentToDelete, cardId, userName);
         return assignmentPersistence.deleteById(id);
     }
 }
