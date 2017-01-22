@@ -21,4 +21,6 @@ public interface AcceptanceCriteriaPersistence {
     Integer deleteAcceptanceCriteria(String acceptanceCriteriaId);
 
     Integer resort(@Param("acceptanceCriteria") AcceptanceCriteria acceptanceCriteria);
+
+    boolean isHasUnFinishedAcceptanceCriterias(@Param("cardId") String cardId);
 }

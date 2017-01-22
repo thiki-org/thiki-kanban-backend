@@ -38,7 +38,7 @@ public class ActivityService {
         activity.setDetail(newCard.toString());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.CARD_CREATION.code());
-        activity.setOperationTypeName(ActivityType.CARD_CREATION.name());
+        activity.setOperationTypeName(ActivityType.CARD_CREATION.type());
         record(activity);
     }
 
@@ -51,10 +51,10 @@ public class ActivityService {
         activity.setDetail(modifiedCard.diff(originCard));
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.CARD_CREATION.code());
-        activity.setOperationTypeName(ActivityType.CARD_CREATION.name());
+        activity.setOperationTypeName(ActivityType.CARD_CREATION.type());
         if (!modifiedCard.getProcedureId().equals(originCard.getProcedureId())) {
             activity.setOperationTypeCode(ActivityType.CARD_MOVING.code());
-            activity.setOperationTypeName(ActivityType.CARD_MOVING.name());
+            activity.setOperationTypeName(ActivityType.CARD_MOVING.type());
         }
         record(activity);
     }
@@ -68,7 +68,7 @@ public class ActivityService {
         activity.setDetail(foundCard.toString());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.CARD_ARCHIVED.code());
-        activity.setOperationTypeName(ActivityType.CARD_ARCHIVED.name());
+        activity.setOperationTypeName(ActivityType.CARD_ARCHIVED.type());
         record(activity);
     }
 
@@ -79,19 +79,25 @@ public class ActivityService {
         activity.setDetail(acceptanceCriteria.toString());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_CREATION.code());
-        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_CREATION.name());
+        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_CREATION.type());
         record(activity);
     }
 
-    public void recordAcceptanceCriteriaModification(AcceptanceCriteria acceptanceCriteria, AcceptanceCriteria updatedAcceptanceCriteria, String cardId, String userName) {
+    public void recordAcceptanceCriteriaModification(AcceptanceCriteria acceptanceCriteria, AcceptanceCriteria updatedAcceptanceCriteria, String cardId, boolean isHasUnFinishedAcceptanceCriterias, String userName) {
         Activity activity = new Activity();
         activity.setCardId(cardId);
         activity.setSummary(updatedAcceptanceCriteria.diff(acceptanceCriteria));
         activity.setDetail(updatedAcceptanceCriteria.diff(acceptanceCriteria));
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_MODIFYING.code());
-        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_MODIFYING.name());
+        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_MODIFYING.type());
         record(activity);
+
+        if (!isHasUnFinishedAcceptanceCriterias) {
+            activity.setOperationTypeCode(ActivityType.CARD_ALL_ACCEPTANCE_CRITERIAS_ARE_FINISHED.code());
+            activity.setOperationTypeName(ActivityType.CARD_ALL_ACCEPTANCE_CRITERIAS_ARE_FINISHED.type());
+            record(activity);
+        }
     }
 
     public void recordAcceptanceCriteriaRemoving(String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria, String cardId, String userName) {
@@ -101,7 +107,7 @@ public class ActivityService {
         activity.setDetail(acceptanceCriteria.getSummary());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_DELETING.code());
-        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_MODIFYING.name());
+        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_MODIFYING.type());
         record(activity);
     }
 
@@ -112,7 +118,7 @@ public class ActivityService {
         activity.setDetail(resortedAcceptanceCriterias.toString() + "|" + acceptanceCriterias.toString());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.ACCEPTANCE_CRITERIA_RESORTING.code());
-        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_RESORTING.name());
+        activity.setOperationTypeName(ActivityType.ACCEPTANCE_CRITERIA_RESORTING.type());
         record(activity);
     }
 
@@ -123,7 +129,7 @@ public class ActivityService {
         activity.setDetail(tags.toString());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.TAG_MODIFYING.code());
-        activity.setOperationTypeName(ActivityType.TAG_MODIFYING.name());
+        activity.setOperationTypeName(ActivityType.TAG_MODIFYING.type());
         record(activity);
     }
 
@@ -134,7 +140,7 @@ public class ActivityService {
         activity.setDetail(comment.toString());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.COMMENT_CREATION.code());
-        activity.setOperationTypeName(ActivityType.COMMENT_CREATION.name());
+        activity.setOperationTypeName(ActivityType.COMMENT_CREATION.type());
         record(activity);
     }
 
@@ -145,7 +151,7 @@ public class ActivityService {
         activity.setDetail(savedAssignment.toString());
         activity.setUserName(savedAssignment.getAssigner());
         activity.setOperationTypeCode(ActivityType.ASSIGNMENT.code());
-        activity.setOperationTypeName(ActivityType.ASSIGNMENT.name());
+        activity.setOperationTypeName(ActivityType.ASSIGNMENT.type());
         record(activity);
     }
 
@@ -156,7 +162,7 @@ public class ActivityService {
         activity.setDetail(assignment.toString());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.UNDO_ASSIGNMENT.code());
-        activity.setOperationTypeName(ActivityType.UNDO_ASSIGNMENT.name());
+        activity.setOperationTypeName(ActivityType.UNDO_ASSIGNMENT.type());
         record(activity);
     }
 }

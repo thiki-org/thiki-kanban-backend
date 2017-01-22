@@ -19,7 +19,7 @@ public enum ActivityType {
     ACCEPTANCE_CRITERIA_RESORTING("013", "重新排序验收标准"),
     ASSIGNMENT("014", "认领卡片"),
     UNDO_ASSIGNMENT("015", "离开卡片"),
-    ACCEPTANCE_FINISHED("016", "卡片任务全部完成");
+    CARD_ALL_ACCEPTANCE_CRITERIAS_ARE_FINISHED("016", "卡片任务全部完成");
     private String code;
     private String type;
 

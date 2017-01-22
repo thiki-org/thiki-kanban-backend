@@ -11,6 +11,7 @@ import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
 
 import static com.jayway.restassured.RestAssured.given;
+import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 
@@ -123,6 +124,8 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
                 .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
                 .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/acceptanceCriterias"));
+
+        assertEquals(2, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='card-fooId'").size());
     }
 
     @Scenario("删除指定的验收标准>用户为卡片创建验收标准后,可以删除指定的验收标准")

@@ -53,7 +53,10 @@ public class AcceptanceCriteriaService {
         acceptanceCriteriaPersistence.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
         AcceptanceCriteria updatedAcceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
         logger.info("Updated acceptanceCriteria:{}", updatedAcceptanceCriteria);
-        activityService.recordAcceptanceCriteriaModification(acceptanceCriteria, updatedAcceptanceCriteria, cardId, userName);
+
+        boolean isHasUnFinishedAcceptanceCriterias = acceptanceCriteriaPersistence.isHasUnFinishedAcceptanceCriterias(cardId);
+        activityService.recordAcceptanceCriteriaModification(acceptanceCriteria, updatedAcceptanceCriteria, cardId, isHasUnFinishedAcceptanceCriterias, userName);
+
         return updatedAcceptanceCriteria;
     }
 

@@ -27,9 +27,15 @@
         SELECT * FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0
     </select>
 
+    <select id="isHasUnFinishedAcceptanceCriterias" parameterType="java.lang.String"
+            resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0 AND finished=0
+    </select>
+
     <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_acceptance_criterias SET delete_status=1 WHERE id=#{acceptanceCriteriaId}
     </delete>
+
     <update id="resort" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria"
             flushCache="true">
         UPDATE kb_acceptance_criterias SET
