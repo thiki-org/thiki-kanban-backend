@@ -29,36 +29,39 @@ public class BoardResource extends RestResource {
     @Cacheable(value = "board", key = "#userName+'boards-all'")
     public Object toResource(String userName) throws Exception {
         logger.info("build board resource.userName:{}", userName);
+        BoardResource boardResource = new BoardResource();
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
-        this.add(tlink.from(allLink));
+        boardResource.add(tlink.from(allLink));
         logger.info("board resource building complete.userName:{}", userName);
-        return getResource();
+        return boardResource.getResource();
     }
 
     @Cacheable(value = "board", key = "#userName+'boards'+#board.id")
     public Object toResource(Board board, String userName) throws Exception {
         logger.info("build board resource.board:{},userName:{}", board, userName);
+        BoardResource boardResource = new BoardResource();
+        boardResource.domainObject = board;
         this.domainObject = board;
         if (board != null) {
             Link selfLink = linkTo(methodOn(BoardsController.class).findById(board.getId(), userName)).withSelfRel();
-            this.add(tlink.from(selfLink).build());
+            boardResource.add(tlink.from(selfLink).build());
 
             Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), userName)).withRel("procedures");
-            this.add(tlink.from(proceduresLink).build());
+            boardResource.add(tlink.from(proceduresLink).build());
             if (board.getTeamId() != null) {
                 Link teamLink = linkTo(methodOn(TeamsController.class).findById(board.getTeamId(), userName)).withRel("team");
-                this.add(tlink.from(teamLink).build());
+                boardResource.add(tlink.from(teamLink).build());
             }
 
             Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(board.getId(), userName)).withRel("tags");
-            this.add(tlink.from(tagsLink).build());
+            boardResource.add(tlink.from(tagsLink).build());
 
             Link overAllLink = linkTo(methodOn(BoardsOverallController.class).load(board.getId(), userName)).withRel("overall");
-            this.add(tlink.from(overAllLink).build(userName));
+            boardResource.add(tlink.from(overAllLink).build(userName));
         }
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
-        this.add(tlink.from(allLink).build());
+        boardResource.add(tlink.from(allLink).build());
         logger.info("board resource building complete.board:{},userName:{}", board, userName);
-        return getResource();
+        return boardResource.getResource();
     }
 }
