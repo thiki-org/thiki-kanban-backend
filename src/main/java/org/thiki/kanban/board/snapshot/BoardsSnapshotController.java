@@ -1,4 +1,4 @@
-package org.thiki.kanban.board.overall;
+package org.thiki.kanban.board.snapshot;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,13 +13,13 @@ import javax.annotation.Resource;
  * Created by xubitao on 05/26/16.
  */
 @RestController
-public class BoardsOverallController {
+public class BoardsSnapshotController {
     @Resource
-    private OverallService overallService;
+    private SnapshotService snapshotService;
 
-    @RequestMapping(value = "/{userName}/boards/{boardId}/overall", method = RequestMethod.GET)
+    @RequestMapping(value = "/{userName}/boards/{boardId}/snapshot", method = RequestMethod.GET)
     public HttpEntity load(@PathVariable String boardId, @PathVariable String userName) throws Exception {
-        Object board = overallService.loadAllByBoard(boardId, userName);
+        Object board = snapshotService.loadAllByBoard(boardId, userName);
         return Response.build(board);
     }
 }

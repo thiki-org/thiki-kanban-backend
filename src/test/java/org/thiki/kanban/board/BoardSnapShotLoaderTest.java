@@ -19,7 +19,7 @@ import static org.hamcrest.core.StringEndsWith.endsWith;
  */
 @Domain(order = DomainOrder.BOARD, name = "看板")
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BoardOverallLoaderTest extends TestBase {
+public class BoardSnapShotLoaderTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
@@ -46,7 +46,7 @@ public class BoardOverallLoaderTest extends TestBase {
         given().header("userName", "someone")
                 .log().all()
                 .when()
-                .get("/someone/boards/boardId/overall")
+                .get("/someone/boards/boardId/snapshot")
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("board-name"))

@@ -1,4 +1,4 @@
-package org.thiki.kanban.board.overall;
+package org.thiki.kanban.board.snapshot;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -32,8 +32,8 @@ import java.util.List;
  * Created by xubitao on 05/26/16.
  */
 @Service
-public class OverallService {
-    public static Logger logger = LoggerFactory.getLogger(OverallService.class);
+public class SnapshotService {
+    public static Logger logger = LoggerFactory.getLogger(SnapshotService.class);
 
     @Resource
     private BoardsService boardsService;
@@ -60,11 +60,11 @@ public class OverallService {
     @Resource
     private CardTagsResource cardTagsResource;
 
-    @Cacheable(value = "board", key = "'board-overall'+#boardId+#userName")
+    @Cacheable(value = "board", key = "snapshot+#boardId+#userName")
     public Object loadAllByBoard(String boardId, String userName) throws Exception {
-        logger.info("load overall.");
+        logger.info("load snapshot.");
         JSONObject boardJSON = loadBoard(boardId, userName);
-        logger.info("overall loading completed.");
+        logger.info("snapshot loading completed.");
         return boardJSON;
     }
 

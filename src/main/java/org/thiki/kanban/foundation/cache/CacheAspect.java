@@ -47,8 +47,8 @@ public class CacheAspect {
             return;
         }
         String boardId = template.match(uri).get("boardId").split("/")[0];
-        logger.info("board overall cache was removed.boardId:{}", boardId);
-        String keyPattern = String.format("board-overall%s*", boardId);
+        logger.info("board snapshot cache was removed.boardId:{}", boardId);
+        String keyPattern = String.format("board-snapshot%s*", boardId);
         Set<byte[]> keys = redisTemplate.getConnectionFactory().getConnection().keys(keyPattern.getBytes());
         for (byte[] key : keys) {
             redisTemplate.delete(new String(key, 0, key.length));

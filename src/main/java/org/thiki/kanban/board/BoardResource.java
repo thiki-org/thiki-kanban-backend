@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.board.overall.BoardsOverallController;
+import org.thiki.kanban.board.snapshot.BoardsSnapshotController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.procedure.ProceduresController;
@@ -56,7 +56,7 @@ public class BoardResource extends RestResource {
             Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(board.getId(), userName)).withRel("tags");
             boardResource.add(tlink.from(tagsLink).build());
 
-            Link overAllLink = linkTo(methodOn(BoardsOverallController.class).load(board.getId(), userName)).withRel("overall");
+            Link overAllLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), userName)).withRel("snapshot");
             boardResource.add(tlink.from(overAllLink).build(userName));
         }
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
