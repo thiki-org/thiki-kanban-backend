@@ -44,8 +44,8 @@ public class SnapshotService {
     @Resource
     private SnapshotExecutor snapshotExecutor;
 
-    @Cacheable(value = "board", key = "'snapshot'+#boardId+#userName")
-    public Object loadAllByBoard(String boardId, String userName) throws Exception {
+    @Cacheable(value = "board", key = "'board-snapshot'+#boardId+#userName")
+    public Object loadSnapshotByBoard(String boardId, String userName) throws Exception {
         logger.info("load snapshot.");
         JSONObject boardJSON = loadBoard(boardId, userName);
         logger.info("snapshot loading completed.");

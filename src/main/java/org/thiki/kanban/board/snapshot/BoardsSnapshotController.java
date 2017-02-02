@@ -19,7 +19,7 @@ public class BoardsSnapshotController {
 
     @RequestMapping(value = "/{userName}/boards/{boardId}/snapshot", method = RequestMethod.GET)
     public HttpEntity load(@PathVariable String boardId, @PathVariable String userName) throws Exception {
-        Object board = snapshotService.loadAllByBoard(boardId, userName);
+        Object board = snapshotService.loadSnapshotByBoard(boardId, userName);
         return Response.build(board);
     }
 }
