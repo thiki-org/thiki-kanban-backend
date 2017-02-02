@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriasResource;
-import org.thiki.kanban.assignment.Assignment;
 import org.thiki.kanban.assignment.AssignmentService;
 import org.thiki.kanban.assignment.AssignmentsResource;
 import org.thiki.kanban.board.Board;
@@ -18,7 +18,6 @@ import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsResource;
 import org.thiki.kanban.card.CardsService;
-import org.thiki.kanban.cardTags.CardTag;
 import org.thiki.kanban.cardTags.CardTagsResource;
 import org.thiki.kanban.cardTags.CardTagsService;
 import org.thiki.kanban.procedure.Procedure;
@@ -27,6 +26,7 @@ import org.thiki.kanban.procedure.ProceduresService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * Created by xubitao on 05/26/16.
@@ -59,6 +59,8 @@ public class SnapshotService {
     private CardTagsService cardTagsService;
     @Resource
     private CardTagsResource cardTagsResource;
+    @Resource
+    private SnapshotExecutor snapshotExecutor;
 
     @Cacheable(value = "board", key = "snapshot+#boardId+#userName")
     public Object loadAllByBoard(String boardId, String userName) throws Exception {
@@ -104,38 +106,33 @@ public class SnapshotService {
 
     private JSONArray loadOthersByCard(String boardId, String userName, String procedureId, JSONArray cardsArray) throws Exception {
         JSONArray newCardsArray = new JSONArray();
+        Integer nThreads = cardsArray == null ? 0 : cardsArray.size();
+        if (nThreads == 0) {
+            return new JSONArray();
+        }
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(nThreads);
+        RequestAttributes currentRequestAttributes = RequestContextHolder.getRequestAttributes();
+        RequestContextHolder.setRequestAttributes(currentRequestAttributes, Boolean.TRUE);
+        CompletionService<JSONObject> completionService = new ExecutorCompletionService<>(fixedThreadPool);
         for (int j = 0; j < cardsArray.size(); j++) {
-            JSONObject cardJSON = cardsArray.getJSONObject(j);
-            String cardId = cardJSON.getString("id");
-            loadComments(boardId, userName, procedureId, cardJSON, cardId);
-            loadAcceptanceCriterias(boardId, userName, procedureId, cardJSON, cardId);
-            loadCardTags(boardId, userName, procedureId, cardJSON, cardId);
-            newCardsArray.add(cardJSON);
+            int finalJ = j;
+            Callable<JSONObject> callable = new Callable<JSONObject>() {
+                @Override
+                public JSONObject call() throws Exception {
+                    JSONObject cardJSON = cardsArray.getJSONObject(finalJ);
+                    String cardId = cardJSON.getString("id");
+                    snapshotExecutor.loadComments(boardId, userName, procedureId, cardJSON, cardId);
+                    snapshotExecutor.loadAcceptanceCriterias(boardId, userName, procedureId, cardJSON, cardId);
+                    snapshotExecutor.loadCardTags(boardId, userName, procedureId, cardJSON, cardId);
+                    return cardJSON;
+                }
+            };
+            completionService.submit(callable);
+        }
+        for (int j = 0; j < cardsArray.size(); j++) {
+            JSONObject card = completionService.take().get();
+            newCardsArray.add(card);
         }
         return newCardsArray;
-    }
-
-    private void loadCardTags(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
-        logger.info("load card tags.");
-        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, procedureId);
-        JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName);
-        cardJSON.put("tags", tagsJSON);
-        logger.info("card tags loading completed.");
-    }
-
-    private void loadAcceptanceCriterias(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
-        logger.info("load acceptanceCriterias.");
-        List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
-        JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName);
-        cardJSON.put("acceptanceCriterias", acceptanceCriteriasJSON);
-        logger.info("acceptanceCriterias loading completed.");
-    }
-
-    private void loadComments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
-        logger.info("load assignments.");
-        List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
-        JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
-        cardJSON.put("assignments", assignmentsJSON);
-        logger.info("assignments loading completed.");
     }
 }
