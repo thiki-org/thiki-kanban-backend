@@ -10,8 +10,6 @@ import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriasResource;
 import org.thiki.kanban.assignment.Assignment;
 import org.thiki.kanban.assignment.AssignmentService;
 import org.thiki.kanban.assignment.AssignmentsResource;
-import org.thiki.kanban.card.CardsResource;
-import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.cardTags.CardTag;
 import org.thiki.kanban.cardTags.CardTagsResource;
 import org.thiki.kanban.cardTags.CardTagsService;
@@ -25,10 +23,6 @@ import java.util.List;
 @Service
 public class SnapshotExecutor {
     public static Logger logger = LoggerFactory.getLogger(SnapshotService.class);
-    @Resource
-    private CardsService cardsService;
-    @Resource
-    private CardsResource cardsResource;
     @Resource
     private AssignmentService assignmentService;
     @Resource

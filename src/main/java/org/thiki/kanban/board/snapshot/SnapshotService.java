@@ -8,18 +8,12 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
-import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
-import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriasResource;
-import org.thiki.kanban.assignment.AssignmentService;
-import org.thiki.kanban.assignment.AssignmentsResource;
 import org.thiki.kanban.board.Board;
 import org.thiki.kanban.board.BoardResource;
 import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsResource;
 import org.thiki.kanban.card.CardsService;
-import org.thiki.kanban.cardTags.CardTagsResource;
-import org.thiki.kanban.cardTags.CardTagsService;
 import org.thiki.kanban.procedure.Procedure;
 import org.thiki.kanban.procedure.ProceduresResource;
 import org.thiki.kanban.procedure.ProceduresService;
@@ -47,18 +41,6 @@ public class SnapshotService {
     private CardsService cardsService;
     @Resource
     private CardsResource cardsResource;
-    @Resource
-    private AssignmentService assignmentService;
-    @Resource
-    private AssignmentsResource assignmentsResource;
-    @Resource
-    private AcceptanceCriteriaService acceptanceCriteriaService;
-    @Resource
-    private AcceptanceCriteriasResource acceptanceCriteriasResource;
-    @Resource
-    private CardTagsService cardTagsService;
-    @Resource
-    private CardTagsResource cardTagsResource;
     @Resource
     private SnapshotExecutor snapshotExecutor;
 
