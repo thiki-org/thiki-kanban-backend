@@ -22,5 +22,5 @@ public interface CardsPersistence {
 
     boolean isCodeAlreadyExist(@Param("cardId") String cardId, @Param("code") String code, @Param("procedureId") String procedureId);
 
-    int totalCardsIncludingDeleted(String procedureId);
+    int totalCardsIncludingDeleted(String boardId);
 }

@@ -49,6 +49,6 @@
     </delete>
 
     <select id="totalCardsIncludingDeleted" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT count(*) FROM kb_card WHERE procedure_id= #{procedure_id}
+      SELECT count(*) FROM kb_card WHERE  procedure_id IN (SELECT id from kb_procedure WHERE board_id=#{boardId}) AND code IS NOT NULL
     </select>
 </mapper>

@@ -101,7 +101,7 @@ public class Board implements Serializable {
     }
 
     public String getCodePrefix() {
-        return codePrefix;
+        return codePrefix == null ? "" : codePrefix;
     }
 
     public void setCodePrefix(String codePrefix) {

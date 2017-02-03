@@ -43,7 +43,7 @@ public class CardsService {
         if (procedure == null) {
             throw new ResourceNotFoundException("procedure[" + procedureId + "] is not found.");
         }
-        String code = generateCode(boardId, procedureId);
+        String code = generateCode(boardId);
         card.setCode(code);
         cardsPersistence.create(userName, card);
         Card savedCard = cardsPersistence.findById(card.getId());
@@ -52,23 +52,21 @@ public class CardsService {
         return savedCard;
     }
 
-    private String generateCode(String boardId, String procedureId) {
+    private String generateCode(String boardId) {
         Board board = boardsService.findById(boardId);
-        int cardsTotal = cardsPersistence.totalCardsIncludingDeleted(procedureId);
-        if (cardsTotal == 0) {
-            return board.getCodePrefix() + dateService.simpleDate() + "01";
-        }
+        int cardsTotal = cardsPersistence.totalCardsIncludingDeleted(boardId);
+        int current = cardsTotal + 1;
         if (cardsTotal < 10) {
-            return board.getCodePrefix() + dateService.simpleDate() + "0" + cardsTotal;
+            return board.getCodePrefix() + dateService.simpleDate() + "0" + current;
         }
-        return board.getCodePrefix() + dateService.simpleDate() + cardsTotal;
+        return board.getCodePrefix() + dateService.simpleDate() + current;
     }
 
     @CacheEvict(value = "card", key = "contains(#card.procedureId)", allEntries = true)
     public Card modify(String cardId, Card card, String procedureId, String boardId, String userName) {
         logger.info("modify card:{}", card);
         Card originCard = loadAndValidateCard(cardId);
-        card.setCode(originCard.stillNoCode() ? generateCode(boardId, procedureId) : originCard.getCode());
+        card.setCode(originCard.stillNoCode() ? generateCode(boardId) : originCard.getCode());
 
         cardsPersistence.modify(cardId, card);
         Card savedCard = cardsPersistence.findById(cardId);
