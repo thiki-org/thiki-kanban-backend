@@ -65,15 +65,11 @@ public class CardsService {
     }
 
     @CacheEvict(value = "card", key = "contains(#card.procedureId)", allEntries = true)
-    public Card modify(String cardId, Card card, String procedureId, String userName) {
+    public Card modify(String cardId, Card card, String procedureId, String boardId, String userName) {
         logger.info("modify card:{}", card);
         Card originCard = loadAndValidateCard(cardId);
-        if (card.getCode() != null) {
-            boolean isCoedAlreadyExist = cardsPersistence.isCodeAlreadyExist(cardId, card.getCode(), card.getProcedureId());
-            if (isCoedAlreadyExist) {
-                throw new BusinessException(CardsCodes.CODE_IS_ALREADY_EXISTS);
-            }
-        }
+        card.setCode(originCard.stillNoCode() ? generateCode(boardId, procedureId) : originCard.getCode());
+
         cardsPersistence.modify(cardId, card);
         Card savedCard = cardsPersistence.findById(cardId);
         logger.info("Modified card:{}", savedCard);
