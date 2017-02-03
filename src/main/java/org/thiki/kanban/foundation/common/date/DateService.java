@@ -741,4 +741,14 @@ public class DateService {
         }
         return num;
     }
+
+    public String simpleDate() {
+        int year = getYear(new Date());
+        String splitYear = String.valueOf(year).substring(2, 4);
+        int month = getMonth(new Date());
+        if (month < 10) {
+            return splitYear + "0" + month;
+        }
+        return splitYear + String.valueOf(month);
+    }
 }

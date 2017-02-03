@@ -6,6 +6,9 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.activity.ActivityService;
+import org.thiki.kanban.board.Board;
+import org.thiki.kanban.board.BoardsService;
+import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.procedure.Procedure;
@@ -27,20 +30,38 @@ public class CardsService {
     @Resource
     private ActivityService activityService;
 
+    @Resource
+    private BoardsService boardsService;
+    @Resource
+    private DateService dateService;
+
     @CacheEvict(value = "card", key = "contains('#procedureId')", allEntries = true)
-    public Card create(String userName, String procedureId, Card card) {
+    public Card create(String userName, String boardId, String procedureId, Card card) {
         logger.info("Creating new card:{},procedure:{}", card, procedureId);
         card.setProcedureId(procedureId);
         Procedure procedure = proceduresPersistence.findById(procedureId);
         if (procedure == null) {
             throw new ResourceNotFoundException("procedure[" + procedureId + "] is not found.");
         }
-        Card newCard = procedure.addCard(card);
-        cardsPersistence.create(userName, newCard);
-        Card savedCard = cardsPersistence.findById(newCard.getId());
+        String code = generateCode(boardId, procedureId);
+        card.setCode(code);
+        cardsPersistence.create(userName, card);
+        Card savedCard = cardsPersistence.findById(card.getId());
         logger.info("Created card:{}", savedCard);
         activityService.recordCardCreation(savedCard, userName);
         return savedCard;
+    }
+
+    private String generateCode(String boardId, String procedureId) {
+        Board board = boardsService.findById(boardId);
+        int cardsTotal = cardsPersistence.totalCardsIncludingDeleted(procedureId);
+        if (cardsTotal == 0) {
+            return board.getCodePrefix() + dateService.simpleDate() + "01";
+        }
+        if (cardsTotal < 10) {
+            return board.getCodePrefix() + dateService.simpleDate() + "0" + cardsTotal;
+        }
+        return board.getCodePrefix() + dateService.simpleDate() + cardsTotal;
     }
 
     @CacheEvict(value = "card", key = "contains(#card.procedureId)", allEntries = true)

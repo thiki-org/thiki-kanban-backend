@@ -9,6 +9,9 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
+import org.thiki.kanban.foundation.common.date.DateService;
+
+import javax.annotation.Resource;
 
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
@@ -23,6 +26,9 @@ import static org.hamcrest.core.StringEndsWith.endsWith;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CardsControllerTest extends TestBase {
 
+    @Resource
+    private DateService dateService;
+
     @Before
     public void setUp() throws Exception {
         super.setUp();
@@ -33,6 +39,9 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void create_shouldReturn201WhenCreateCardSuccessfully() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
+        String codePrefix = "H";
+        dbPreparation.table("kb_board").names("id,name,author,code_prefix").values("boardId-foo", "board-name", "someone", codePrefix).exec();
+        String expectedCode = codePrefix + dateService.simpleDate() + "01";
         given().body("{\"summary\":\"summary\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -42,6 +51,7 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
                 .body("author", equalTo(userName))
+                .body("code", equalTo(expectedCode))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))
                 .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/acceptanceCriterias"))

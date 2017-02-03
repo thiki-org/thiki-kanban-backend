@@ -54,7 +54,7 @@ public class CardsController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Card card, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String procedureId) throws Exception {
-        Card savedCard = cardsService.create(userName, procedureId, card);
+        Card savedCard = cardsService.create(userName, boardId, procedureId, card);
 
         return Response.post(cardResource.toResource(savedCard, boardId, procedureId, userName));
     }

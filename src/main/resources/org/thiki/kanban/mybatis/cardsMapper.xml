@@ -6,8 +6,8 @@
 
     <insert id="create" parameterType="org.thiki.kanban.card.Card">
         INSERT INTO
-        kb_card(id,summary, content, sort_number, author, procedure_id) VALUES (#{card.id},#{card.summary},
-        #{card.content}, (SELECT
+        kb_card(id,summary, content,code, sort_number, author, procedure_id) VALUES (#{card.id},#{card.summary},
+        #{card.content},#{card.code}, (SELECT
         max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
         max_sort_number FROM kb_card WHERE procedure_id=#{card.procedureId} ) as t ), #{userName}, #{card.procedureId})
     </insert>
@@ -47,4 +47,8 @@
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_card SET delete_status=1 WHERE id=#{id}
     </delete>
+
+    <select id="totalCardsIncludingDeleted" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) FROM kb_card WHERE procedure_id= #{procedure_id}
+    </select>
 </mapper>
