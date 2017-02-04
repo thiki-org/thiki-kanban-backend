@@ -14,8 +14,8 @@
         name=#{name},
         <if test="projectId!=null">
             owner=#{projectId},
+            project_id=#{projectId}
         </if>
-        project_id=#{projectId}
         WHERE id=#{id} AND delete_status=0
     </update>
     <select id="unique" parameterType="java.lang.String" resultType="java.lang.Boolean">
