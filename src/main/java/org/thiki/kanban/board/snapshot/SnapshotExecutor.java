@@ -13,6 +13,9 @@ import org.thiki.kanban.assignment.AssignmentsResource;
 import org.thiki.kanban.cardTags.CardTag;
 import org.thiki.kanban.cardTags.CardTagsResource;
 import org.thiki.kanban.cardTags.CardTagsService;
+import org.thiki.kanban.comment.Comment;
+import org.thiki.kanban.comment.CommentService;
+import org.thiki.kanban.comment.CommentsResource;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,6 +38,10 @@ public class SnapshotExecutor {
     private CardTagsService cardTagsService;
     @Resource
     private CardTagsResource cardTagsResource;
+    @Resource
+    private CommentService commentService;
+    @Resource
+    private CommentsResource commentsResource;
 
     public synchronized void loadCardTags(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
         logger.info("load card tags.");
@@ -58,5 +65,13 @@ public class SnapshotExecutor {
         JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
         cardJSON.put("assignments", assignmentsJSON);
         logger.info("assignments loading completed.");
+    }
+
+    public synchronized void loadComments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+        logger.info("load comments.");
+        List<Comment> commentList = commentService.loadCommentsByCardId(cardId);
+        JSONObject commentsJSON = (JSONObject) commentsResource.toResource(commentList, boardId, procedureId, cardId, userName);
+        cardJSON.put("comments", commentsJSON);
+        logger.info("comments loading completed.");
     }
 }

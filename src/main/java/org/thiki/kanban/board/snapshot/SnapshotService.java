@@ -106,6 +106,7 @@ public class SnapshotService {
                     snapshotExecutor.loadAssignments(boardId, userName, procedureId, cardJSON, cardId);
                     snapshotExecutor.loadAcceptanceCriterias(boardId, userName, procedureId, cardJSON, cardId);
                     snapshotExecutor.loadCardTags(boardId, userName, procedureId, cardJSON, cardId);
+                    snapshotExecutor.loadComments(boardId, userName, procedureId, cardJSON, cardId);
                     return cardJSON;
                 }
             };
