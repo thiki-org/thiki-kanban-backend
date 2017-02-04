@@ -52,7 +52,7 @@ public class SnapshotExecutor {
         logger.info("acceptanceCriterias loading completed.");
     }
 
-    public synchronized void loadComments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+    public synchronized void loadAssignments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
         logger.info("load assignments.");
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
         JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
