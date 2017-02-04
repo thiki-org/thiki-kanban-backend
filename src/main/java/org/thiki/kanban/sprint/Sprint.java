@@ -1,11 +1,15 @@
 package org.thiki.kanban.sprint;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 /**
  * Created by xubt on 04/02/2017.
  */
 public class Sprint {
     private String id;
+    @NotEmpty(message = SprintCodes.startTimeIsRequired)
     private String startTime;
+    @NotEmpty(message = SprintCodes.endTimeIsRequired)
     private String endTime;
     private int status;
     private String creationTime;

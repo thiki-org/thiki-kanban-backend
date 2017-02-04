@@ -5,4 +5,6 @@ package org.thiki.kanban.sprint;
  */
 public class SprintCodes {
     public static final int IN_PROGRESS = 1;
+    public static final String startTimeIsRequired = "迭代开始时间不可以为空。";
+    public static final String endTimeIsRequired = "迭代结束时间不可以为空。";
 }
