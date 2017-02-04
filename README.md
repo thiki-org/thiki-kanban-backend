@@ -6,6 +6,8 @@
 [![CocoaPods](https://img.shields.io/badge/博客-blog-ff69b4.svg?style=flat-square)](http://blog.thiki.org/)
 [![CocoaPods](https://img.shields.io/badge/%E5%AE%98%E7%BD%91-WebSite-ff69b4.svg?style=flat-square)](http://www.thiki.org/)
 
+	@FindBy(css="")
+	private WebElement webElement;
 thiki(思奇)是一个充满活力、具有技术追求并热爱创造的团队。我们希望在锤炼工程技艺、尝试软件创新、提升个人能力的同时,打造一款卓越的开源软件,以助力互联网研发团队提高研发效率,并将过程中的技术积累沉淀下来,帮助他人进步。
 
 ## thiki-kanban
@@ -22,6 +24,7 @@ thiki-kanban是一个精益看板系统,以看板方法为核心,内嵌精益思
 * HSQL
 * RSA
 * Gradle
+* Liquibase
 
 DevOps技术点：
 
@@ -96,6 +99,10 @@ hsql是内存数据库,仅在集成测试中使用。所以,test目录下的测�
 需要注意的是，`./gradlew bootRun`运行时的默认配置文件是`resources/config/application-local.properties`，你可以通过 `--spring.profiles.active`指定你的配置文件。通过`Application`的`main`函数运行时也同样需要指定配置文件。
 
 另外，在通过`./gradlew clean build`构建的jar中并没有配置文件，这是出于生产环境的安全考虑，避免在代码库中暴露生产环境信息。当你在生产环境部署时，你需要把配置文件放在jar包所在的目录下，系统启动时会自动读取。
+
+数据库升级，但又bug存在，执行一面后再执行，会出现异常错误。
+
+./gradlew  update -PrunList=main
 
 ### 3、访问Web APIs
 

@@ -270,3 +270,20 @@ CREATE TABLE kb_activity (
   modification_time   DATETIME      DEFAULT CURRENT_TIMESTAMP,
   delete_status       INT           DEFAULT 0
 );
+
+-- ----------------------------
+-- Table structure for kb_sprint
+-- ----------------------------
+DROP TABLE IF EXISTS kb_sprint;
+
+CREATE TABLE kb_sprint (
+  id                  VARCHAR(40) NOT NULL PRIMARY KEY,
+  start_time          DATETIME   DEFAULT NULL,
+  end_time            DATETIME   DEFAULT NULL,
+  status              INT   DEFAULT 1,
+  board_id            VARCHAR(40)   DEFAULT NULL,
+  author              VARCHAR(40) DEFAULT NULL,
+  creation_time       DATETIME      DEFAULT CURRENT_TIMESTAMP,
+  modification_time   DATETIME      DEFAULT CURRENT_TIMESTAMP,
+  delete_status       INT           DEFAULT 0
+);

@@ -222,6 +222,30 @@ public class CardsControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
 
+
+    @Scenario("更新卡片生成编号时，编号总数总本月开始算起")
+    @Test
+    public void shouldOnlyCountCurrentMonthWhenUpdateCard() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,code) VALUES ('other-fooId','this is the card summary.','play badminton',1,1,'H170101')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        String expectedCode = generateExpectedCode();
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/procedures/1/cards/fooId")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("newSummary"))
+                .body("code", equalTo(expectedCode))
+                .body("sortNumber", equalTo(3))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
+        assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_card WHERE id='fooId'", String.class));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
+    }
+
     @Scenario("当一个卡片从某个procedure移动到另一个procedure时,不仅需要重新排序目标procedure,也要对原始procedure排序")
     @Test
     public void update_shouldResortSuccessfullyWhenCardIsFromAntherProcedure() throws Exception {

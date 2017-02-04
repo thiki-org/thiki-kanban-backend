@@ -8,7 +8,7 @@ security:
     - "/{userName}/passwordResetApplication"
     - "/{userName}/password"
     - "/unauthorised"
-    - "/error"
+    - "/error/{}"
     - "/index.html"
     - "/favicon.ico"
     - "/js/{}"
