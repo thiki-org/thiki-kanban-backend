@@ -6,6 +6,8 @@
 [![CocoaPods](https://img.shields.io/badge/博客-blog-ff69b4.svg?style=flat-square)](http://blog.thiki.org/)
 [![CocoaPods](https://img.shields.io/badge/%E5%AE%98%E7%BD%91-WebSite-ff69b4.svg?style=flat-square)](http://www.thiki.org/)
 
+	@FindBy(css="")
+	private WebElement webElement;
 thiki(思奇)是一个充满活力、具有技术追求并热爱创造的团队。我们希望在锤炼工程技艺、尝试软件创新、提升个人能力的同时,打造一款卓越的开源软件,以助力互联网研发团队提高研发效率,并将过程中的技术积累沉淀下来,帮助他人进步。
 
 ## thiki-kanban
@@ -22,6 +24,7 @@ thiki-kanban是一个精益看板系统,以看板方法为核心,内嵌精益思
 * HSQL
 * RSA
 * Gradle
+* Liquibase
 
 DevOps技术点：
 

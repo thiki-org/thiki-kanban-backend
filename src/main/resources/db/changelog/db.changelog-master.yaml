@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: winie
+      changes:
+        - addColumn:
+            tableName: kb_procedure
+            columns:
+              - column:
+                  name: wip_num
+                  type: int
