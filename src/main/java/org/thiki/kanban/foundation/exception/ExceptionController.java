@@ -25,22 +25,22 @@ import java.util.Map;
 @RequestMapping(value = "/error")
 @EnableConfigurationProperties({ServerProperties.class})
 public class ExceptionController implements ErrorController {
-
     private ErrorAttributes errorAttributes;
 
     @Autowired
     private ServerProperties serverProperties;
 
-
-    /**
-     * 初始化ExceptionController
-     *
-     * @param errorAttributes
-     */
     @Autowired
     public ExceptionController(ErrorAttributes errorAttributes) {
         Assert.notNull(errorAttributes, "ErrorAttributes must not be null");
         this.errorAttributes = errorAttributes;
+    }
+
+    @RequestMapping(value = "401")
+    @ResponseBody
+    public ResponseEntity<Map<String, Object>> error401(HttpServletRequest request) {
+        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 
     @RequestMapping(value = "404")
@@ -57,13 +57,6 @@ public class ExceptionController implements ErrorController {
         Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
         HttpStatus status = getStatus(request);
         return new ResponseEntity<>(body, status);
-    }
-
-    @RequestMapping(value = "401")
-    @ResponseBody
-    public ResponseEntity<Map<String, Object>> error401(HttpServletRequest request) {
-        Map<String, Object> body = getErrorAttributes(request, isIncludeStackTrace(request));
-        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 
     @RequestMapping(value = "invalidParamsException")

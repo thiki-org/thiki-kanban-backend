@@ -1,5 +1,6 @@
 package org.thiki.kanban.foundation.configuration;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -10,6 +11,8 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thiki.kanban.foundation.logback.SessionInterceptor;
+import org.thiki.kanban.foundation.security.authentication.AuthenticationInterceptor;
+import org.thiki.kanban.foundation.security.identification.filter.SecurityInterceptor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,9 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+
+    @Value("${server.contextPath}")
+    protected String contextPath;
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -52,5 +58,7 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionInterceptor());
+        registry.addInterceptor(new SecurityInterceptor(contextPath));
+        registry.addInterceptor(new AuthenticationInterceptor());
     }
 }

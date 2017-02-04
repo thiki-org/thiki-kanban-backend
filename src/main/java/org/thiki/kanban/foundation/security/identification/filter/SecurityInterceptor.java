@@ -1,44 +1,34 @@
 package org.thiki.kanban.foundation.security.identification.filter;
 
-import org.apache.catalina.connector.RequestFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UriTemplate;
+import org.thiki.kanban.foundation.configuration.ApplicationContextProvider;
+import org.thiki.kanban.foundation.configuration.ApplicationProperties;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.UnauthorisedException;
 import org.thiki.kanban.foundation.security.Constants;
 import org.thiki.kanban.foundation.security.identification.token.IdentityResult;
 import org.thiki.kanban.foundation.security.identification.token.TokenService;
 
-import javax.annotation.Resource;
-import javax.servlet.*;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Created by xubt on 7/10/16.
+ * Created by xubt on 03/02/2017.
  */
-@Service
-@ConfigurationProperties(prefix = "security")
-public class SecurityFilter implements Filter {
-    private static Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
-    @Value("${server.contextPath}")
+public class SecurityInterceptor extends HandlerInterceptorAdapter {
+    private static Logger logger = LoggerFactory.getLogger(SecurityInterceptor.class);
     protected String contextPath;
-    @Resource
-    private TokenService tokenService;
-    private List<String> whiteList = new ArrayList<>();
 
-    public List<String> getWhiteList() {
-        return whiteList;
+    public SecurityInterceptor(String contextPath) {
+        this.contextPath = contextPath;
     }
 
     private boolean isFreeSecurity(String uri) {
-        for (String freeSecurityUrl : whiteList) {
+        ApplicationProperties applicationProperties = ApplicationContextProvider.getApplicationContext().getBean(ApplicationProperties.class);
+        for (String freeSecurityUrl : applicationProperties.getWhiteList()) {
             UriTemplate uriTemplate = new UriTemplate(contextPath + freeSecurityUrl);
             if (uriTemplate.matches(uri)) {
                 return true;
@@ -48,31 +38,26 @@ public class SecurityFilter implements Filter {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        String userName = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_USER_NAME);
-        String uri = ((RequestFacade) servletRequest).getRequestURI();
+    public boolean preHandle(HttpServletRequest servletRequest, HttpServletResponse servletResponse, Object handler) throws Exception {
+        String userName = servletRequest.getHeader(Constants.HEADER_PARAMS_USER_NAME);
+        String uri = servletRequest.getRequestURI();
         logger.info("identification start.userName:{},uri:{}", userName, uri);
         String localAddress = servletRequest.getLocalAddr();
-        String authentication = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_IDENTIFICATION);
+        String authentication = servletRequest.getHeader(Constants.HEADER_PARAMS_IDENTIFICATION);
 
         if (isFreeSecurity(uri)) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
+            return true;
         }
         if (isLocalTestEnvironmentAndFreeAuthentication(localAddress, authentication)) {
-            filterChain.doFilter(servletRequest, servletResponse);
-            return;
+            return true;
         }
         String updatedToken;
+
+        TokenService tokenService = ApplicationContextProvider.getApplicationContext().getBean(TokenService.class);
         try {
-            String token = ((RequestFacade) servletRequest).getHeader(Constants.HEADER_PARAMS_TOKEN);
-            if (!isPassedSecurityVerify(token, userName)) {
-                return;
+            String token = servletRequest.getHeader(Constants.HEADER_PARAMS_TOKEN);
+            if (!isPassedSecurityVerify(token, userName, tokenService)) {
+                return true;
             }
             updatedToken = tokenService.updateToken(token);
         } catch (BusinessException businessException) {
@@ -83,20 +68,16 @@ public class SecurityFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         response.setHeader(Constants.HEADER_PARAMS_TOKEN, updatedToken);
         response.setHeader(Constants.ACCESS_CONTROL_EXPOSE_HEADERS, Constants.HEADER_PARAMS_TOKEN);
-        filterChain.doFilter(servletRequest, servletResponse);
         logger.info("identification end.");
+
+        return true;
     }
 
     private boolean isLocalTestEnvironmentAndFreeAuthentication(String localAddress, String authentication) {
         return Constants.LOCAL_ADDRESS.equals(localAddress) && Constants.FREE_IDENTIFICATION.equals(authentication);
     }
 
-    @Override
-    public void destroy() {
-
-    }
-
-    private boolean isPassedSecurityVerify(String token, String userName) throws Exception {
+    private boolean isPassedSecurityVerify(String token, String userName, TokenService tokenService) throws Exception {
         IdentityResult identityResult = tokenService.identify(token, userName);
         if (identityResult.getErrorCode() == (Constants.SECURITY_IDENTIFY_PASSED_CODE)) {
             return true;

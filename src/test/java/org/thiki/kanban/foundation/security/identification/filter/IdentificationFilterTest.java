@@ -42,7 +42,7 @@ public class IdentificationFilterTest extends IdentificationTestBase {
     @Test
     public void shouldReturn401WhenAuthIsRequired() throws Exception {
         given().when()
-                .get("/resource")
+                .get("/someone/boards")
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN_CODE))
@@ -56,7 +56,7 @@ public class IdentificationFilterTest extends IdentificationTestBase {
         String expiredToken = buildToken(userName, new Date(), -5);
         given().header("token", expiredToken)
                 .when()
-                .get("/resource")
+                .get("/someone/boards")
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE_CODE))
@@ -76,11 +76,12 @@ public class IdentificationFilterTest extends IdentificationTestBase {
 
         given().header("userName", name)
                 .header("token", currentToken)
-                .body("{\"summary\":\"newSummary\"}")
+                .body("{\"name\":\"newSummary\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/procedures/1/cards/fooId")
-                .then().header("token", notNullValue());
+                .post("/someone/boards")
+                .then()
+                .header("token", notNullValue());
     }
 
     @Scenario("当token中的用户名与header中携带的用户名不一致时,告知客户端认证未通过")
@@ -92,7 +93,7 @@ public class IdentificationFilterTest extends IdentificationTestBase {
         given().header("userName", tamperedUserName)
                 .header("token", expiredToken)
                 .when()
-                .get("/resource")
+                .get("/someone/boards")
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT_CODE))

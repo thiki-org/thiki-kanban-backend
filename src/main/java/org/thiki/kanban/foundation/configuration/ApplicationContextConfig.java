@@ -83,7 +83,6 @@ public class ApplicationContextConfig implements ApplicationContextAware {
     @Bean
     public EmbeddedServletContainerCustomizer containerCustomizer() {
         return container -> {
-            container.addErrorPages(new ErrorPage(UnauthorisedException.class, "/error/businessException"));
             container.addErrorPages(new ErrorPage(AuthenticationException.class, "/error/401"));
             container.addErrorPages(new ErrorPage(HttpStatus.UNAUTHORIZED, "/error/401"));
             container.addErrorPages(new ErrorPage(HttpStatus.BAD_REQUEST, "/error/invalidParamsException"));
