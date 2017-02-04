@@ -54,12 +54,13 @@ public class CardsService {
 
     private String generateCode(String boardId) {
         Board board = boardsService.findById(boardId);
-        int cardsTotal = cardsPersistence.totalCardsIncludingDeleted(boardId);
+        String currentMonth = dateService.simpleDate();
+        int cardsTotal = cardsPersistence.totalCardsIncludingDeleted(boardId, currentMonth);
         int current = cardsTotal + 1;
         if (cardsTotal < 10) {
-            return board.getCodePrefix() + dateService.simpleDate() + "0" + current;
+            return board.getCodePrefix() + currentMonth + "0" + current;
         }
-        return board.getCodePrefix() + dateService.simpleDate() + current;
+        return board.getCodePrefix() + currentMonth + current;
     }
 
     @CacheEvict(value = "card", key = "contains(#card.procedureId)", allEntries = true)
