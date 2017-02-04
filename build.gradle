@@ -18,6 +18,8 @@ buildscript {
         classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.3.1'
 		classpath "gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1"
+        classpath 'mysql:mysql-connector-java:5.1.38'
+        classpath 'org.yaml:snakeyaml:1.17'
     }
 }
 
@@ -113,22 +115,21 @@ test {
     }
 }
 
-liquibase {
-    activities {
-        main {
-            changeLogFile "src/main/resources/db/changelog/db.changelog-master.yaml"
-            url "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8"
-            username "root"
-            password "yourpass"
-        }
-        test {
-            main {
-                changeLogFile "src/main/resources/db/changelog/db.changelog-master.yaml"
-                url "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8"
-                username "root"
-                password "yourpass"
-            }
-        }
-        runList = project.ext.runList
-    }
-}
+//
+//liquibase {
+//    def pFile = file("src/main/resources/config/application-local.properties")
+//    Properties p = new Properties()
+//    pFile.withInputStream { stream->
+//        p.load(stream)
+//    }
+//
+//    activities {
+//        main {
+//            changeLogFile "src/main/resources/db/changelog/db.changelog-master.yaml"
+//            url  p.getProperty("jdbc.url")
+//            username p.getProperty("jdbc.username")
+//            password  p.getProperty("jdbc.password")
+//        }
+//        runList = project.ext.runList
+//    }
+//}
