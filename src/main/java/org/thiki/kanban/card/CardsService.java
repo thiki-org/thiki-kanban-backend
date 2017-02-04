@@ -3,6 +3,7 @@ package org.thiki.kanban.card;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.activity.ActivityService;
@@ -83,6 +84,7 @@ public class CardsService {
         return cardsPersistence.deleteById(cardId);
     }
 
+    @Cacheable(value = "card", key = "'cards'+#procedureId")
     public List<Card> findByProcedureId(String procedureId) {
         logger.info("Loading cards by procedureId:{}", procedureId);
         Procedure procedure = proceduresPersistence.findById(procedureId);

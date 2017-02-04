@@ -3,6 +3,7 @@ package org.thiki.kanban.assignment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.card.Card;
@@ -49,6 +50,7 @@ public class AssignmentService {
         return assignmentPersistence.findById(id);
     }
 
+    @Cacheable(value = "assignment", key = "'assignments'+#cardId")
     public List<Assignment> findByCardId(String cardId) {
         logger.info("Loading assignments of the card:{}", cardId);
         Card card = cardsPersistence.findById(cardId);

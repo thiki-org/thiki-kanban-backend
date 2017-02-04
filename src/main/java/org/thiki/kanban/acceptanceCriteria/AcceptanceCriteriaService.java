@@ -3,6 +3,7 @@ package org.thiki.kanban.acceptanceCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.foundation.exception.BusinessException;
@@ -33,6 +34,7 @@ public class AcceptanceCriteriaService {
         return savedAcceptanceCriteria;
     }
 
+    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriterias'+#cardId")
     public List<AcceptanceCriteria> loadAcceptanceCriteriasByCardId(String cardId) {
         logger.info("Loading acceptanceCriterias by cardId.cardId:{}", cardId);
         List<AcceptanceCriteria> acceptanceCriterias = acceptanceCriteriaPersistence.loadAcceptanceCriteriasByCardId(cardId);

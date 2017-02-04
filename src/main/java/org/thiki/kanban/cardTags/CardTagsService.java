@@ -3,6 +3,7 @@ package org.thiki.kanban.cardTags;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.activity.ActivityService;
 
@@ -35,6 +36,7 @@ public class CardTagsService {
         return tags;
     }
 
+    @Cacheable(value = "card-tag", key = "'card-tags'+#cardId")
     public List<CardTag> loadTags(String cardId, String boardId, String procedureId) {
         logger.info("Loading card tags.cardId:{},boardId:{},procedureId{}", cardId, boardId, procedureId);
         List<CardTag> cardTags = cardTagPersistence.findByCardId(cardId);

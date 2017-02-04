@@ -3,6 +3,7 @@ package org.thiki.kanban.comment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.activity.ActivityService;
 
@@ -32,6 +33,7 @@ public class CommentService {
         return savedComment;
     }
 
+    @Cacheable(value = "comment", key = "'comments'+#cardId")
     public List<Comment> loadCommentsByCardId(String cardId) {
         List<Comment> comments = commentPersistence.loadCommentsByCardId(cardId);
         return comments;
