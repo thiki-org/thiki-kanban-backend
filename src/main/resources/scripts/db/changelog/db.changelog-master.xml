@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet id="1" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+              <tableExists tableName="kb_user_profile"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_user_profile">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar(200)"/>
+            <column name="user_name" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nick_name" type="varchar(40)"/>
+            <column name="phone" type="varchar(40)"/>
+            <column name="avatar" type="varchar(200)"/>
+            <column name="delete_status" type="int"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="modification_time" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+        <!--<modifySql dbms="mysql">-->
+            <!--<regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>-->
+            <!--<append value=" engine innodb" />-->
+        <!--</modifySql>-->
+    </changeSet>
+</databaseChangeLog>
