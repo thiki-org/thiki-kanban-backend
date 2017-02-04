@@ -66,7 +66,7 @@ hsql是内存数据库,仅在集成测试中使用。所以,test目录下的测�
 
 **Mysql**
 
-如果你想通过`Application.java`启动系统,并在浏览器中访问,请首先在你的机器上安装Mysql.然后,在`resources/config`中添加你本地的配置,具体配置方法请参考已经存在的`local_tao`|`local_zz`.
+数据库初始化脚本位于`resources/scripts/db`目录下。如果你想通过`Application.java`启动系统,并在浏览器中访问,请首先在你的机器上安装Mysql.然后,在`resources/config`中添加你本地的配置,具体配置方法请参考已经存在的`local_tao`|`local_zz`.
 
 ### 2、如何构建
 通过gradle构建可独立运行的jar包：

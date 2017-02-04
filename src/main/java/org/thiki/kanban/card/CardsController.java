@@ -42,7 +42,7 @@ public class CardsController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.PUT)
     public HttpEntity update(@RequestBody Card card, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        Card updatedCard = cardsService.modify(cardId, card, procedureId, userName);
+        Card updatedCard = cardsService.modify(cardId, card, procedureId, boardId, userName);
         return Response.build(cardResource.toResource(updatedCard, boardId, procedureId, userName));
     }
 
@@ -54,7 +54,7 @@ public class CardsController {
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Card card, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String procedureId) throws Exception {
-        Card savedCard = cardsService.create(userName, procedureId, card);
+        Card savedCard = cardsService.create(userName, boardId, procedureId, card);
 
         return Response.post(cardResource.toResource(savedCard, boardId, procedureId, userName));
     }

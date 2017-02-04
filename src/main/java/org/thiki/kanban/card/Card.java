@@ -129,4 +129,8 @@ public class Card {
         DiffNode diff = ObjectDifferBuilder.buildDefault().compare(this, originCard);
         return diff.toString();
     }
+
+    public boolean stillNoCode() {
+        return getCode() == null;
+    }
 }

@@ -9,6 +9,9 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
+import org.thiki.kanban.foundation.common.date.DateService;
+
+import javax.annotation.Resource;
 
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
@@ -23,6 +26,9 @@ import static org.hamcrest.core.StringEndsWith.endsWith;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class CardsControllerTest extends TestBase {
 
+    @Resource
+    private DateService dateService;
+
     @Before
     public void setUp() throws Exception {
         super.setUp();
@@ -33,6 +39,7 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void create_shouldReturn201WhenCreateCardSuccessfully() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
+        String expectedCode = generateExpectedCode();
         given().body("{\"summary\":\"summary\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -42,12 +49,19 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
                 .body("author", equalTo(userName))
+                .body("code", equalTo(expectedCode))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))
                 .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/acceptanceCriterias"))
                 .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/assignments"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
+    }
+
+    private String generateExpectedCode() {
+        String codePrefix = "H";
+        dbPreparation.table("kb_board").names("id,name,author,code_prefix").values("boardId-foo", "board-name", "someone", codePrefix).exec();
+        return codePrefix + dateService.simpleDate() + "01";
     }
 
     @Scenario("当创建一个卡片时,如果卡片概述为空,则创建失败")
@@ -169,6 +183,7 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void update_shouldReturn200WhenUpdateCardSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        dbPreparation.table("kb_board").names("id,name,author,code_prefix").values("boardId-foo", "board-name", "someone", "H").exec();
         given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -185,12 +200,35 @@ public class CardsControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
 
+    @Scenario("更新卡片时，如果卡片的编号为空，则自动生成编号")
+    @Test
+    public void shouldAutoGenerateCodeIfCodeWasNullWhenUpdateCard() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        String expectedCode = generateExpectedCode();
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/procedures/1/cards/fooId")
+                .then()
+                .statusCode(200)
+                .body("summary", equalTo("newSummary"))
+                .body("code", equalTo(expectedCode))
+                .body("sortNumber", equalTo(3))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
+        assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_card WHERE id='fooId'", String.class));
+        assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
+    }
+
     @Scenario("当一个卡片从某个procedure移动到另一个procedure时,不仅需要重新排序目标procedure,也要对原始procedure排序")
     @Test
     public void update_shouldResortSuccessfullyWhenCardIsFromAntherProcedure() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number) VALUES ('fooId1','summary1','play badminton',1,'procedure-fooId',0)");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number) VALUES ('fooId2','summary2','play badminton',1,'procedure-fooId',1)");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number) VALUES ('fooId6','this is the card summary.','play badminton',1,2,3)");
+        String expectedCode = generateExpectedCode();
 
         given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1,\"code\":\"code-foo\"}")
                 .header("userName", userName)
@@ -201,7 +239,7 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("sortNumber", equalTo(3))
-                .body("code", equalTo("code-foo"))
+                .body("code", equalTo(expectedCode))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId6"))
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
                 .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId6/assignments"));
@@ -219,25 +257,6 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(400)
                 .body("code", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.code()))
                 .body("message", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.message()));
-    }
-
-    @Scenario("编号检查>当更新一个卡片时,如果当前看版中已经存在相同编号,则不予许更新")
-    @Test
-    public void notAllowedIfCodeIsAlreadyExist() throws Exception {
-
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number,code) VALUES ('fooId1','summary1','play badminton',1,'procedure-fooId',0,'code1')");
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number,code) VALUES ('fooId2','summary2','play badminton',1,'procedure-fooId',1,'code2')");
-
-        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":\"procedure-fooId\",\"code\":\"code2\"}")
-
-                .header("userName", userName)
-                .contentType(ContentType.JSON)
-                .when()
-                .put("/boards/boardId-foo/procedures/1/cards/fooId1")
-                .then()
-                .statusCode(400)
-                .body("code", equalTo(CardsCodes.CODE_IS_ALREADY_EXISTS.code()))
-                .body("message", equalTo(CardsCodes.CODE_IS_ALREADY_EXISTS.message()));
     }
 
     @Scenario("当删除一个卡片时,如果卡片存在,则删除成功")

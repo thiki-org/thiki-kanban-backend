@@ -127,7 +127,7 @@ public class ProceduresService {
         List<Card> cards = cardsService.findByProcedureId(procedureId);
         for (Card card : cards) {
             card.setProcedureId(archivedProcedure.getId());
-            cardsService.modify(card.getId(), card, procedureId, userName);
+            cardsService.modify(card.getId(), card, procedureId, boardId, userName);
         }
         logger.info("Archived procedure.procedure:{}", archive);
         return archivedProcedure;
@@ -159,7 +159,7 @@ public class ProceduresService {
         List<Card> cards = cardsService.findByProcedureId(archivedProcedureId);
         for (Card card : cards) {
             card.setProcedureId(doneProcedure.getId());
-            cardsService.modify(card.getId(), card, archivedProcedureId, userName);
+            cardsService.modify(card.getId(), card, archivedProcedureId, boardId, userName);
         }
         logger.info("Deleting the archived procedure.");
         proceduresPersistence.deleteById(archivedProcedureId);

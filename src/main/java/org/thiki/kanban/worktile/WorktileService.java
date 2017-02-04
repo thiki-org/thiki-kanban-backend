@@ -75,7 +75,7 @@ public class WorktileService {
 
         Board savedBoard = buildNewBoard(userName);
         List<Procedure> savedProcedures = importEntries(userName, tasks, savedBoard);
-        List<Card> savedCards = importTasks(userName, tasks, savedProcedures);
+        List<Card> savedCards = importTasks(userName, tasks, savedProcedures, savedBoard.getId());
         importTodos(userName, tasks, savedCards);
         return savedBoard;
     }
@@ -95,7 +95,7 @@ public class WorktileService {
         }
     }
 
-    private List<Card> importTasks(String userName, List<Task> tasks, List<Procedure> savedProcedures) {
+    private List<Card> importTasks(String userName, List<Task> tasks, List<Procedure> savedProcedures, String boardId) {
         List<Card> savedCards = new ArrayList<>();
         for (Task task : tasks) {
             Card card = new Card();
@@ -105,7 +105,7 @@ public class WorktileService {
                     .filter(procedure -> procedure.getTitle().equals(task.getEntry().getName()))
                     .forEach(procedure -> {
                         card.setProcedureId(procedure.getId());
-                        Card savedCard = cardsService.create(userName, procedure.getId(), card);
+                        Card savedCard = cardsService.create(userName, boardId, procedure.getId(), card);
                         savedCards.add(savedCard);
                     });
         }

@@ -21,4 +21,6 @@ public interface CardsPersistence {
     Integer resort(Card card);
 
     boolean isCodeAlreadyExist(@Param("cardId") String cardId, @Param("code") String code, @Param("procedureId") String procedureId);
+
+    int totalCardsIncludingDeleted(String boardId);
 }

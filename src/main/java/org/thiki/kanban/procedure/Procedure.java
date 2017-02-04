@@ -2,7 +2,6 @@ package org.thiki.kanban.procedure;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.thiki.kanban.card.Card;
 
 import javax.validation.constraints.NotNull;
 
@@ -75,17 +74,6 @@ public class Procedure {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    /**
-     * 在procedure内添加一个card
-     *
-     * @param card
-     * @return
-     */
-    public Card addCard(Card card) {
-        // card.setProcedureId(this.id);
-        return card;
     }
 
     public Integer getSortNumber() {

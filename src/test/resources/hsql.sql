@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS kb_board;
 CREATE TABLE kb_board (
   id                VARCHAR(40) NOT NULL PRIMARY KEY,
   name              VARCHAR(50),
+  code_prefix       VARCHAR(50),
   team_id           VARCHAR(50),
   author            VARCHAR(40) NOT NULL,
   owner             VARCHAR(40),

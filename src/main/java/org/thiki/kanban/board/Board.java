@@ -17,6 +17,8 @@ public class Board implements Serializable {
 
     private String teamId;
 
+    private String codePrefix;
+
     private String author;
 
     private String owner;
@@ -96,5 +98,13 @@ public class Board implements Serializable {
                 ", creationTime='" + creationTime + '\'' +
                 ", modificationTime='" + modificationTime + '\'' +
                 '}';
+    }
+
+    public String getCodePrefix() {
+        return codePrefix == null ? "" : codePrefix;
+    }
+
+    public void setCodePrefix(String codePrefix) {
+        this.codePrefix = codePrefix;
     }
 }
