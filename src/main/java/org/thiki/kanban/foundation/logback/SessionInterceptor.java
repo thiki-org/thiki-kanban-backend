@@ -18,6 +18,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
     private static Logger logger = LoggerFactory.getLogger(SessionInterceptor.class);
 
     private final static String SESSION_KEY = "sessionId";
+    private final static String IP_KEY = "ip";
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -34,7 +35,9 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         SequenceNumber sequenceNumber = new SequenceNumber();
         String sessionId = sequenceNumber.generate();
+        String ip = request.getRemoteHost();
         MDC.put(SESSION_KEY, sessionId);
+        MDC.put(IP_KEY, ip);
         logger.info("init session:{}", sessionId);
         return true;
     }
