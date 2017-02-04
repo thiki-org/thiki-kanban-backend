@@ -43,7 +43,7 @@ DROP TABLE IF EXISTS kb_board;
 CREATE TABLE kb_board (
   id                VARCHAR(40) NOT NULL,
   name              VARCHAR(50),
-  team_id           VARCHAR(50),
+  project_id           VARCHAR(50),
   owner             VARCHAR(40),
   author            VARCHAR(40) NOT NULL,
   delete_status     INT(2)               DEFAULT 0,
@@ -115,10 +115,10 @@ CREATE TABLE kb_card_assignment (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 -- ----------------------------
--- Table structure for kb_team
+-- Table structure for kb_project
 -- ----------------------------
-DROP TABLE IF EXISTS kb_team;
-CREATE TABLE kb_team (
+DROP TABLE IF EXISTS kb_project;
+CREATE TABLE kb_project (
   id                VARCHAR(40) NOT NULL,
   name              VARCHAR(50) NOT NULL,
   author            VARCHAR(40) DEFAULT NULL,
@@ -130,13 +130,13 @@ CREATE TABLE kb_team (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 -- ----------------------------
--- Table structure for kb_team_members
+-- Table structure for kb_project_members
 -- ----------------------------
-DROP TABLE IF EXISTS kb_team_members;
+DROP TABLE IF EXISTS kb_project_members;
 
-CREATE TABLE kb_team_members (
+CREATE TABLE kb_project_members (
   id                VARCHAR(40) NOT NULL,
-  team_id           VARCHAR(50) NOT NULL,
+  project_id           VARCHAR(50) NOT NULL,
   member            VARCHAR(50) NOT NULL,
   author            VARCHAR(40) DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
@@ -184,11 +184,11 @@ CREATE TABLE kb_password_reset (
 -- ----------------------------
 -- Table structure for kb_member_invitation
 -- ----------------------------
-DROP TABLE IF EXISTS kb_team_member_invitation;
+DROP TABLE IF EXISTS kb_project_member_invitation;
 
-CREATE TABLE kb_team_member_invitation (
+CREATE TABLE kb_project_member_invitation (
   id                VARCHAR(40) NOT NULL,
-  team_id           VARCHAR(50) NOT NULL,
+  project_id           VARCHAR(50) NOT NULL,
   inviter           VARCHAR(50) NOT NULL,
   invitee           VARCHAR(50) NOT NULL,
   is_accepted       INT      DEFAULT 0,

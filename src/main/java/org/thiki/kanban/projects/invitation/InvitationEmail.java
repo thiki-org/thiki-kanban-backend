@@ -1,4 +1,4 @@
-package org.thiki.kanban.teams.invitation;
+package org.thiki.kanban.projects.invitation;
 
 import org.thiki.kanban.foundation.mail.MailEntity;
 
@@ -8,7 +8,7 @@ import org.thiki.kanban.foundation.mail.MailEntity;
 public class InvitationEmail extends MailEntity {
     private String inviter;
     private String invitee;
-    private String teamName;
+    private String projectName;
     private String invitationLink;
 
     @Override
@@ -33,11 +33,11 @@ public class InvitationEmail extends MailEntity {
     }
 
     public String getTeamName() {
-        return teamName;
+        return projectName;
     }
 
-    public void setTeamName(String teamName) {
-        this.teamName = teamName;
+    public void setTeamName(String projectName) {
+        this.projectName = projectName;
     }
 
     public String getInvitationLink() {

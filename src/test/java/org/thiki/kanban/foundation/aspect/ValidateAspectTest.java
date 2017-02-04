@@ -20,10 +20,10 @@ public class ValidateAspectTest extends TestBase {
     @Test
     public void throwExceptionIfUserNameInHeaderIsNotEqualWithItInPath() throws Exception {
         given().header("userName", "someone")
-                .body("{\"name\":\"teamName\"}")
+                .body("{\"name\":\"projectName\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/thief/teams")
+                .post("/thief/projects")
                 .then()
                 .statusCode(400)
                 .body("message", equalTo(Constants.SECURITY_USERNAME_IN_HEADER_IS_NOT_CONSISTENT_WITH_PATH));

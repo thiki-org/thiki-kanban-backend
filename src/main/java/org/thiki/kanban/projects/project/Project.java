@@ -1,13 +1,20 @@
-package org.thiki.kanban.teams.teamMembers;
+package org.thiki.kanban.projects.project;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
 
 /**
- * Created by 濤 on 7/26/16.
+ * Created by bogehu on 7/11/16.
  */
 
-public class TeamMember {
+public class Project {
     private String id;
-    private String teamId;
-    private String member;
+    @NotEmpty(message = ProjectCodes.nameIsRequired)
+    @NotNull(message = ProjectCodes.nameIsRequired)
+    @Length(max = 20, message = ProjectCodes.nameIsInvalid)
+    private String name;
     private String author;
     private String creationTime;
     private String modificationTime;
@@ -20,12 +27,12 @@ public class TeamMember {
         this.id = id;
     }
 
-    public String getMember() {
-        return member;
+    public String getName() {
+        return name;
     }
 
-    public void setMember(String member) {
-        this.member = member;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAuthor() {
@@ -50,13 +57,5 @@ public class TeamMember {
 
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
-    }
-
-    public String getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
     }
 }

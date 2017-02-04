@@ -10,7 +10,7 @@ import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.procedure.ProceduresController;
 import org.thiki.kanban.tag.TagsController;
-import org.thiki.kanban.teams.team.TeamsController;
+import org.thiki.kanban.projects.project.ProjectsController;
 
 import javax.annotation.Resource;
 
@@ -48,9 +48,9 @@ public class BoardResource extends RestResource {
 
             Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), userName)).withRel("procedures");
             boardResource.add(tlink.from(proceduresLink).build());
-            if (board.getTeamId() != null) {
-                Link teamLink = linkTo(methodOn(TeamsController.class).findById(board.getTeamId(), userName)).withRel("team");
-                boardResource.add(tlink.from(teamLink).build());
+            if (board.getProjectId() != null) {
+                Link projectLink = linkTo(methodOn(ProjectsController.class).findById(board.getProjectId(), userName)).withRel("project");
+                boardResource.add(tlink.from(projectLink).build());
             }
 
             Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(board.getId(), userName)).withRel("tags");

@@ -1,4 +1,4 @@
-package org.thiki.kanban.teams.invitation;
+package org.thiki.kanban.projects.invitation;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -14,7 +14,7 @@ public class Invitation {
     @NotNull(message = InvitationCodes.InviteeIsRequired)
     private String invitee;
     private String inviter;
-    private String teamId;
+    private String projectId;
     private Integer isAccepted;
     private String creationTime;
     private String modificationTime;
@@ -52,11 +52,11 @@ public class Invitation {
     }
 
     public String getTeamId() {
-        return teamId;
+        return projectId;
     }
 
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
+    public void setTeamId(String projectId) {
+        this.projectId = projectId;
     }
 
     public String getInvitee() {

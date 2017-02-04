@@ -15,7 +15,7 @@ public class Board implements Serializable {
     @Length(max = 30, message = BoardCodes.nameIsInvalid)
     private String name;
 
-    private String teamId;
+    private String projectId;
 
     private String codePrefix;
 
@@ -67,12 +67,12 @@ public class Board implements Serializable {
         this.name = name;
     }
 
-    public String getTeamId() {
-        return teamId;
+    public String getProjectId() {
+        return projectId;
     }
 
-    public void setTeamId(String teamId) {
-        this.teamId = teamId;
+    public void setProjectId(String projectId) {
+        this.projectId = projectId;
     }
 
     public String getOwner() {
@@ -92,7 +92,7 @@ public class Board implements Serializable {
         return "Board{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", teamId='" + teamId + '\'' +
+                ", projectId='" + projectId + '\'' +
                 ", author='" + author + '\'' +
                 ", owner='" + owner + '\'' +
                 ", creationTime='" + creationTime + '\'' +

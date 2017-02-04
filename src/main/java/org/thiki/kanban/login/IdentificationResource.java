@@ -6,7 +6,7 @@ import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.notification.NotificationController;
-import org.thiki.kanban.teams.team.TeamsController;
+import org.thiki.kanban.projects.project.ProjectsController;
 import org.thiki.kanban.user.UsersController;
 
 import javax.annotation.Resource;
@@ -28,8 +28,8 @@ public class IdentificationResource extends RestResource {
         Link boardsLink = linkTo(methodOn(BoardsController.class).loadByUserName(identification.getUserName())).withRel("boards");
         identificationResource.add(tlink.from(boardsLink).build());
 
-        Link teamsLink = linkTo(methodOn(TeamsController.class).findByUserName(identification.getUserName())).withRel("teams");
-        identificationResource.add(tlink.from(teamsLink).build());
+        Link projectsLink = linkTo(methodOn(ProjectsController.class).findByUserName(identification.getUserName())).withRel("projects");
+        identificationResource.add(tlink.from(projectsLink).build());
 
         Link notificationsLink = linkTo(methodOn(NotificationController.class).loadUnreadNotificationsTotal(identification.getUserName())).withRel("unreadNotificationsTotal");
         identificationResource.add(tlink.from(notificationsLink).build());

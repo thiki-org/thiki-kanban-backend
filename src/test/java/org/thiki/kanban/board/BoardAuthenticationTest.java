@@ -21,8 +21,8 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
     @Scenario("看板权限管控>当用户为看板所属团队成员时,但并非团队看板,则只允许读取,不允许其他操作")
     @Test
     public void allowReadOnlyIfTheUserIsNotTheTeamAndTheBoardOwner() throws Exception {
-        dbPreparation.table("kb_board").names("id,name,author,owner,team_id").values("fooId", "board-name", "others", "others", "teamId-foo").exec();
-        dbPreparation.table("kb_team_members").names("id,team_id,member").values("fooId", "teamId-foo", "someone").exec();
+        dbPreparation.table("kb_board").names("id,name,author,owner,project_id").values("fooId", "board-name", "others", "others", "projectId-foo").exec();
+        dbPreparation.table("kb_project_members").names("id,project_id,member").values("fooId", "projectId-foo", "someone").exec();
 
         given().header("userName", "someone").log().all()
                 .when()

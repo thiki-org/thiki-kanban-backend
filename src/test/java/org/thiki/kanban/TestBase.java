@@ -68,14 +68,14 @@ public class TestBase {
         jdbcTemplate.execute("TRUNCATE TABLE kb_board");
         jdbcTemplate.execute("TRUNCATE TABLE kb_procedure");
         jdbcTemplate.execute("TRUNCATE TABLE kb_card");
-        jdbcTemplate.execute("TRUNCATE TABLE kb_team");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_project");
         jdbcTemplate.execute("TRUNCATE TABLE kb_user_profile");
         jdbcTemplate.execute("TRUNCATE TABLE kb_user_registration");
         jdbcTemplate.execute("TRUNCATE TABLE kb_card_assignment");
-        jdbcTemplate.execute("TRUNCATE TABLE kb_team_members");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_project_members");
         jdbcTemplate.execute("TRUNCATE TABLE kb_password_retrieval");
         jdbcTemplate.execute("TRUNCATE TABLE kb_password_reset");
-        jdbcTemplate.execute("TRUNCATE TABLE kb_team_member_invitation");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_project_member_invitation");
         jdbcTemplate.execute("TRUNCATE TABLE kb_notification");
         jdbcTemplate.execute("TRUNCATE TABLE kb_acceptance_criterias");
         jdbcTemplate.execute("TRUNCATE TABLE kb_comment");

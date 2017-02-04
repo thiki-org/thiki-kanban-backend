@@ -66,7 +66,7 @@ public class BoardControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author) VALUES ('fooId','board-name','someone')");
         given().header("userName", "someone")
                 .contentType(ContentType.JSON)
-                .body("{\"name\":\"new-name\",\"teamId\":\"teamId-foo\"}")
+                .body("{\"name\":\"new-name\",\"projectId\":\"projectId-foo\"}")
                 .when()
                 .put("/someone/boards/fooId")
                 .then()
@@ -75,9 +75,9 @@ public class BoardControllerTest extends TestBase {
                 .body("author", equalTo("someone"))
                 .body("_links.all.href", endsWith("/someone/boards"))
                 .body("_links.self.href", endsWith("/someone/boards/fooId"))
-                .body("_links.team.href", endsWith("/teams/teamId-foo"));
+                .body("_links.project.href", endsWith("/projects/projectId-foo"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
-        assertEquals("teamId-foo", jdbcTemplate.queryForObject("select team_id from kb_board where id='fooId'", String.class));
+        assertEquals("projectId-foo", jdbcTemplate.queryForObject("select project_id from kb_board where id='fooId'", String.class));
     }
 
     @Scenario("当看板不存在时,则不允许更新")

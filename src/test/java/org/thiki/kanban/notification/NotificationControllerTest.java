@@ -43,7 +43,7 @@ public class NotificationControllerTest extends TestBase {
     public void loadAllNotifications() throws Exception {
         dbPreparation.table("kb_notification")
                 .names("id,receiver,sender,content,type,link")
-                .values("foo-notification-id", "someone", "sender@gmail.com", "content", NotificationType.TEAM_MEMBER_INVITATION.type(), "http://hello.com").exec();
+                .values("foo-notification-id", "someone", "sender@gmail.com", "content", NotificationType.PROJECT_MEMBER_INVITATION.type(), "http://hello.com").exec();
 
         given().header("userName", userName)
                 .when()
@@ -54,8 +54,8 @@ public class NotificationControllerTest extends TestBase {
                 .body("notifications[0].content", equalTo("content"))
                 .body("notifications[0].link", equalTo("http://hello.com"))
                 .body("notifications[0].isRead", equalTo(false))
-                .body("notifications[0].type", equalTo(NotificationType.TEAM_MEMBER_INVITATION.type()))
-                .body("notifications[0].typeName", equalTo(NotificationType.TEAM_MEMBER_INVITATION.typeName()))
+                .body("notifications[0].type", equalTo(NotificationType.PROJECT_MEMBER_INVITATION.type()))
+                .body("notifications[0].typeName", equalTo(NotificationType.PROJECT_MEMBER_INVITATION.typeName()))
                 .body("notifications[0]._links.self.href", endsWith("/someone/notifications/foo-notification-id"))
                 .body("notifications[0]._links.notifications.href", endsWith("/someone/notifications"))
                 .body("_links.self.href", endsWith("/someone/notifications"));

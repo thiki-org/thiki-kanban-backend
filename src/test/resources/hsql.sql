@@ -6,7 +6,7 @@ CREATE TABLE kb_board (
   id                VARCHAR(40) NOT NULL PRIMARY KEY,
   name              VARCHAR(50),
   code_prefix       VARCHAR(50),
-  team_id           VARCHAR(50),
+  project_id           VARCHAR(50),
   author            VARCHAR(40) NOT NULL,
   owner             VARCHAR(40),
   creation_time     DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -98,11 +98,11 @@ CREATE TABLE kb_card_assignment (
   delete_status     INT         DEFAULT 0
 );
 -- ----------------------------
--- Table structure for kb_team
+-- Table structure for kb_project
 -- ----------------------------
-DROP TABLE IF EXISTS kb_team;
+DROP TABLE IF EXISTS kb_project;
 
-CREATE TABLE kb_team (
+CREATE TABLE kb_project (
   id                VARCHAR(40) NOT NULL PRIMARY KEY,
   name              VARCHAR(50) NOT NULL,
   author            VARCHAR(40) DEFAULT NULL,
@@ -112,13 +112,13 @@ CREATE TABLE kb_team (
 );
 
 -- ----------------------------
--- Table structure for kb_team_members
+-- Table structure for kb_project_members
 -- ----------------------------
-DROP TABLE IF EXISTS kb_team_members;
+DROP TABLE IF EXISTS kb_project_members;
 
-CREATE TABLE kb_team_members (
+CREATE TABLE kb_project_members (
   id                VARCHAR(40) NOT NULL PRIMARY KEY,
-  team_id           VARCHAR(50) NOT NULL,
+  project_id           VARCHAR(50) NOT NULL,
   member            VARCHAR(50) NOT NULL,
   author            VARCHAR(40) DEFAULT NULL,
   creation_time     DATETIME    DEFAULT CURRENT_TIMESTAMP,
@@ -160,9 +160,9 @@ CREATE TABLE kb_password_reset (
 -- ----------------------------
 DROP TABLE IF EXISTS kb_member_invitation;
 
-CREATE TABLE kb_team_member_invitation (
+CREATE TABLE kb_project_member_invitation (
   id                VARCHAR(40) NOT NULL PRIMARY KEY,
-  team_id           VARCHAR(50) NOT NULL,
+  project_id           VARCHAR(50) NOT NULL,
   inviter           VARCHAR(50) NOT NULL,
   invitee           VARCHAR(50) NOT NULL,
   is_accepted       INT      DEFAULT 0,

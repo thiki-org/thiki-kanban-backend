@@ -12,10 +12,10 @@
     <update id="update" parameterType="org.thiki.kanban.board.Board" flushCache="true">
         UPDATE kb_board SET
         name=#{name},
-        <if test="teamId!=null">
-            owner=#{teamId},
+        <if test="projectId!=null">
+            owner=#{projectId},
         </if>
-        team_id=#{teamId}
+        project_id=#{projectId}
         WHERE id=#{id} AND delete_status=0
     </update>
     <select id="unique" parameterType="java.lang.String" resultType="java.lang.Boolean">
@@ -41,6 +41,6 @@
     </select>
 
     <select id="findTeamsBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
-        SELECT * FROM kb_board WHERE delete_status=0 and team_id= #{teamId}
+        SELECT * FROM kb_board WHERE delete_status=0 and project_id= #{projectId}
     </select>
 </mapper>

@@ -1,11 +1,11 @@
-package org.thiki.kanban.teams.teamMembers;
+package org.thiki.kanban.projects.projectMembers;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
-import org.thiki.kanban.teams.invitation.InvitationController;
+import org.thiki.kanban.projects.invitation.InvitationController;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -25,21 +25,21 @@ public class MembersResource extends RestResource {
     @Resource
     private MemberResource memberResourceService;
 
-    @Cacheable(value = "team", key = "'members'+#teamId+#userName")
-    public Object toResource(String teamId, List<Member> members, String userName) throws Exception {
+    @Cacheable(value = "project", key = "'members'+#projectId+#userName")
+    public Object toResource(String projectId, List<Member> members, String userName) throws Exception {
         MembersResource membersResource = new MembersResource();
         List<Object> memberResources = new ArrayList<>();
         for (Member member : members) {
-            Object memberResource = memberResourceService.toResource(teamId, member, userName);
+            Object memberResource = memberResourceService.toResource(projectId, member, userName);
             memberResources.add(memberResource);
         }
 
         membersResource.buildDataObject("members", memberResources);
 
-        Link invitationLink = linkTo(methodOn(InvitationController.class).invite(null, teamId, userName)).withRel("invitation");
+        Link invitationLink = linkTo(methodOn(InvitationController.class).invite(null, projectId, userName)).withRel("invitation");
         membersResource.add(tlink.from(invitationLink).build(userName));
 
-        Link memberLink = linkTo(methodOn(TeamMembersController.class).getMember(teamId, userName)).withRel("member");
+        Link memberLink = linkTo(methodOn(ProjectMembersController.class).getMember(projectId, userName)).withRel("member");
         membersResource.add(tlink.from(memberLink).build(userName));
 
         return membersResource.getResource();

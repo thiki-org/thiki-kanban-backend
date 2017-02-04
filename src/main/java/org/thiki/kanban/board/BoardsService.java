@@ -4,8 +4,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
-import org.thiki.kanban.teams.team.Team;
-import org.thiki.kanban.teams.teamMembers.TeamMembersService;
+import org.thiki.kanban.projects.project.Project;
+import org.thiki.kanban.projects.projectMembers.ProjectMembersService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ public class BoardsService {
     @Resource
     private BoardsPersistence boardsPersistence;
     @Resource
-    private TeamMembersService teamMembersService;
+    private ProjectMembersService projectMembersService;
 
     @CacheEvict(value = "board", key = "startsWith('#userName + boards')", allEntries = true)
     public Board create(String userName, final Board board) {
@@ -39,22 +39,22 @@ public class BoardsService {
 
     public List<Board> loadBoards(String userName) {
         List<Board> personalBoards = boardsPersistence.findPersonalBoards(userName);
-        List<Board> teamsBoards = loadTeamsBoards(userName);
+        List<Board> projectsBoards = loadTeamsBoards(userName);
 
         List<Board> boards = new ArrayList<>();
         boards.addAll(personalBoards);
-        boards.addAll(teamsBoards);
+        boards.addAll(projectsBoards);
         return boards;
     }
 
     private List<Board> loadTeamsBoards(String userName) {
-        List<Board> teamsBoards = new ArrayList<>();
-        List<Team> teams = teamMembersService.loadTeamsByUserName(userName);
-        for (Team team : teams) {
-            List<Board> teamBoards = boardsPersistence.findTeamsBoards(team.getId());
-            teamsBoards.addAll(teamBoards);
+        List<Board> projectsBoards = new ArrayList<>();
+        List<Project> projects = projectMembersService.loadTeamsByUserName(userName);
+        for (Project project : projects) {
+            List<Board> projectBoards = boardsPersistence.findTeamsBoards(project.getId());
+            projectsBoards.addAll(projectBoards);
         }
-        return teamsBoards;
+        return projectsBoards;
     }
 
     @CacheEvict(value = "board", key = "contains('#board.id')", allEntries = true)
@@ -88,7 +88,7 @@ public class BoardsService {
         if (board.isOwner(userName)) {
             return true;
         }
-        boolean isTeamMember = teamMembersService.isMember(board.getTeamId(), userName);
+        boolean isTeamMember = projectMembersService.isMember(board.getProjectId(), userName);
         return isTeamMember && board.getOwner().equals(userName);
     }
 }

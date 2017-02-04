@@ -1,10 +1,10 @@
-package org.thiki.kanban.teams.teamMembers;
+package org.thiki.kanban.projects.projectMembers;
 
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
-import org.thiki.kanban.teams.team.TeamsController;
+import org.thiki.kanban.projects.project.ProjectsController;
 import org.thiki.kanban.user.UsersController;
 
 import javax.annotation.Resource;
@@ -20,7 +20,7 @@ public class MemberResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    public Object toResource(String teamId, Member member, String userName) throws Exception {
+    public Object toResource(String projectId, Member member, String userName) throws Exception {
         MemberResource memberResource = new MemberResource();
         memberResource.domainObject = member;
         Link profileLink = linkTo(methodOn(UsersController.class).loadProfile(member.getUserName())).withRel("profile");
@@ -29,18 +29,18 @@ public class MemberResource extends RestResource {
         Link avatarLink = linkTo(methodOn(UsersController.class).loadAvatar(member.getUserName())).withRel("avatar");
         memberResource.add(tlink.from(avatarLink).build(userName));
 
-        Link selfLink = linkTo(methodOn(TeamMembersController.class).getMember(teamId, member.getUserName())).withSelfRel();
+        Link selfLink = linkTo(methodOn(ProjectMembersController.class).getMember(projectId, member.getUserName())).withSelfRel();
         memberResource.add(tlink.from(selfLink).build(userName));
         return memberResource.getResource();
     }
 
-    public Object toResource(String teamId, String memberName, String userName) throws Exception {
+    public Object toResource(String projectId, String memberName, String userName) throws Exception {
         MemberResource memberResource = new MemberResource();
-        Link selfLink = linkTo(methodOn(TeamMembersController.class).getMember(teamId, memberName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(ProjectMembersController.class).getMember(projectId, memberName)).withSelfRel();
         memberResource.add(tlink.from(selfLink).build(userName));
 
-        Link teamLink = linkTo(methodOn(TeamsController.class).findByUserName(memberName)).withRel("teams");
-        memberResource.add(tlink.from(teamLink).build(userName));
+        Link projectLink = linkTo(methodOn(ProjectsController.class).findByUserName(memberName)).withRel("projects");
+        memberResource.add(tlink.from(projectLink).build(userName));
         return memberResource.getResource();
     }
 }
