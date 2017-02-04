@@ -41,7 +41,7 @@
     </select>
 
     <select id="findByProcedureId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card WHERE procedure_id= #{procedure_id} AND delete_status=0 ORDER BY sort_number
+        SELECT * FROM kb_card WHERE procedure_id= #{procedure_id} AND delete_status=0 ORDER BY sort_number ASC
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
