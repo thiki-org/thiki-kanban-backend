@@ -4,6 +4,7 @@ apply plugin: "jacoco"
 apply plugin: 'org.springframework.boot'
 apply plugin: 'cobertura'
 apply plugin: 'coveralls'
+apply plugin: "org.liquibase.gradle"
 
 group = 'org.thiki'
 version = '1.0-SNAPSHOT'
@@ -16,6 +17,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
         classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.3.1'
+		classpath "gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1"
     }
 }
 
@@ -66,6 +68,7 @@ dependencies {
     compile 'org.freemarker:freemarker:2.3.23'
     compile 'org.springframework.hateoas:spring-hateoas:0.21.0.RELEASE'
     compile 'com.mchange:c3p0:0.9.5.2'
+    compile 'org.liquibase:liquibase-core:3.4.2'
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-redis', version: '1.4.2.RELEASE') {
         exclude(module: 'spring-beans')
     }
@@ -76,6 +79,8 @@ dependencies {
 
     testCompile 'com.jayway.jsonpath:json-path-assert:0.9.1'
     testCompile 'junit:junit:4.12'
+
+    
 }
 
 springBoot {
@@ -105,5 +110,25 @@ test {
         append = false
         destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
         classDumpFile = file("$buildDir/jacoco/classpathdumps")
+    }
+}
+
+liquibase {
+    activities {
+        main {
+            changeLogFile "src/main/resources/db/changelog/db.changelog-master.yaml"
+            url "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8"
+            username "root"
+            password "yourpass"
+        }
+        test {
+            main {
+                changeLogFile "src/main/resources/db/changelog/db.changelog-master.yaml"
+                url "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&amp;characterEncoding=utf-8"
+                username "root"
+                password "yourpass"
+            }
+        }
+        runList = project.ext.runList
     }
 }
