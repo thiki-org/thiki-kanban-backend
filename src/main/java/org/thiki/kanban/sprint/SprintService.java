@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.exception.BusinessException;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,13 @@ public class SprintService {
     @CacheEvict(value = "sprint", key = "contains('#boardId')", allEntries = true)
     public Sprint createSprint(Sprint sprint, String boardId, String userName) {
         logger.info("Creating sprint.sprint:{},boardId:{},userName", sprint, boardId, userName);
+        if (sprint.isStartTimeAfterEndTime()) {
+            throw new BusinessException(SprintCodes.START_TIME_IS_AFTER_END_TIME);
+        }
+        boolean isExistUnArchivedSprint = sprintPersistence.isExistUnArchivedSprint(boardId);
+        if (isExistUnArchivedSprint) {
+            throw new BusinessException(SprintCodes.UNARCHIVE_SPRINT_EXIST);
+        }
         sprintPersistence.create(sprint, userName, boardId);
         Sprint createdSprint = sprintPersistence.findById(sprint.getId());
         logger.info("Created sprint:{}", createdSprint);

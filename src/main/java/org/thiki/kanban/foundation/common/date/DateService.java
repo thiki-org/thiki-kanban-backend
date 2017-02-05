@@ -208,6 +208,9 @@ public class DateService {
      * @return 日期
      */
     public Date StringToDate(String date) {
+        if (date != null && date.endsWith(".000000")) {
+            date = date.replace(".000000", "");
+        }
         DateStyle dateStyle = getDateStyle(date);
         return StringToDate(date, dateStyle);
     }
@@ -750,5 +753,11 @@ public class DateService {
             return splitYear + "0" + month;
         }
         return splitYear + String.valueOf(month);
+    }
+
+    public boolean isAfter(String startTimeStr, String endTimeStr) {
+        Date startTime = this.StringToDate(startTimeStr);
+        Date endTime = this.StringToDate(endTimeStr);
+        return startTime.after(endTime);
     }
 }
