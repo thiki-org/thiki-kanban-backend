@@ -130,9 +130,7 @@
             <column name="type" type="TINYINT" defaultValue="0"/>
             <column name="status" type="TINYINT" defaultValue="0"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
-            <column name="sort_number" type="int" defaultValue="0">
-                <constraints nullable="false"/>
-            </column>
+            <column name="sort_number" type="int" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
             <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
 
@@ -161,9 +159,7 @@
             <column name="procedure_id" type="varchar(40)">
                 <constraints nullable="false"/>
             </column>
-            <column name="author" type="varchar(40)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="author" type="varchar(40)"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="sort_number" type="int" defaultValue="0">
                 <constraints nullable="false"/>
