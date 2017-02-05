@@ -524,4 +524,29 @@
         </modifySql>
 
     </changeSet>
+    <changeSet id="18" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_sprint"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_sprint">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="start_time" type="DATETIME"/>
+            <column name="end_time" type="DATETIME"/>
+            <column name="board_id" type="varchar(40)"/>
+            <column name="author" type="varchar(40)"/>
+            <column name="status" type="TINYINT" defaultValue="0"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
 </databaseChangeLog>
