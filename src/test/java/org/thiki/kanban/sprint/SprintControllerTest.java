@@ -53,4 +53,19 @@ public class SprintControllerTest extends TestBase {
                 .body("message", equalTo(SprintCodes.START_TIME_IS_AFTER_END_TIME.message()))
                 .body("code", equalTo(SprintCodes.START_TIME_IS_AFTER_END_TIME.code()));
     }
+
+    @Scenario("当创建一个迭代时,如果存在尚未归档的迭代,则不允许创建")
+    @Test
+    public void notAllowedIfUnArchivedSprintExist() {
+        dbPreparation.table("kb_sprint").names("id,board_id,status").values("fooId", "board-fooId", 1).exec();
+        given().header("userName", "someone")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/board-fooId/sprints")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo(SprintCodes.UNARCHIVE_SPRINT_EXIST.message()))
+                .body("code", equalTo(SprintCodes.UNARCHIVE_SPRINT_EXIST.code()));
+    }
 }

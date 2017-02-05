@@ -24,6 +24,10 @@ public class SprintService {
         if (sprint.isStartTimeAfterEndTime()) {
             throw new BusinessException(SprintCodes.START_TIME_IS_AFTER_END_TIME);
         }
+        boolean isExistUnArchivedSprint = sprintPersistence.isExistUnArchivedSprint(boardId);
+        if (isExistUnArchivedSprint) {
+            throw new BusinessException(SprintCodes.UNARCHIVE_SPRINT_EXIST);
+        }
         sprintPersistence.create(sprint, userName, boardId);
         Sprint createdSprint = sprintPersistence.findById(sprint.getId());
         logger.info("Created sprint:{}", createdSprint);

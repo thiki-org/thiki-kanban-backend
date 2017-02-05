@@ -12,4 +12,8 @@
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.sprint.Sprint">
         SELECT * FROM kb_sprint WHERE delete_status=0 and id= #{id}
     </select>
+
+    <select id="isExistUnArchivedSprint" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_sprint WHERE delete_status=0 and board_id= #{boardId} AND status=1
+    </select>
 </mapper>
