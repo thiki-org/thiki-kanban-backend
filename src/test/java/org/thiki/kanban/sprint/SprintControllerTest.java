@@ -39,4 +39,18 @@ public class SprintControllerTest extends TestBase {
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
     }
+
+    @Scenario("当创建一个迭代时,如果开始日期晚于结束日期,则不允许创建")
+    @Test
+    public void notAllowedIfStartTimeAfterEndTime() {
+        given().header("userName", "someone")
+                .body("{\"startTime\":\"2017-02-06 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/board-fooId/sprints")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo(SprintCodes.START_TIME_IS_AFTER_END_TIME.message()))
+                .body("code", equalTo(SprintCodes.START_TIME_IS_AFTER_END_TIME.code()));
+    }
 }

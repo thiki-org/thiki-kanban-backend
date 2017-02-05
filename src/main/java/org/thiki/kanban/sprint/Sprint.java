@@ -1,6 +1,8 @@
 package org.thiki.kanban.sprint;
 
+import com.alibaba.fastjson.JSON;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.thiki.kanban.foundation.common.date.DateService;
 
 /**
  * Created by xubt on 04/02/2017.
@@ -61,5 +63,15 @@ public class Sprint {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isStartTimeAfterEndTime() {
+        DateService dateService = new DateService();
+        return dateService.isAfter(this.startTime, this.endTime);
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }
