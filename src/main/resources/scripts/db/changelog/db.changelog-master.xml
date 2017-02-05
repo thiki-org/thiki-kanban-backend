@@ -7,6 +7,16 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
+
+    <property name="text.type" value="TEXT" dbms="mysql,h2"></property>
+    <property name="text.type" value="CLOB" dbms="hsqldb"></property>
+    <property name="time.default" value="'CURRENT_TIMESTAMP'" dbms="mysql"></property>
+    <property name="time.default" value="CURRENT_TIMESTAMP" dbms="hsqldb,h2"></property>
+
+    <preConditions>
+        <dbms type="mysql,h2,hsqldb" />
+    </preConditions>
+
     <changeSet id="1" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -24,18 +34,494 @@
             <column name="nick_name" type="varchar(40)"/>
             <column name="phone" type="varchar(40)"/>
             <column name="avatar" type="varchar(200)"/>
-            <column name="delete_status" type="int"/>
-            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP">
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+    </changeSet>
+
+    <changeSet id="2" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_user_registration"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_user_registration">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="password" type="varchar(400)">
                 <constraints nullable="false"/>
             </column>
-            <column name="modification_time" type="TIMESTAMP">
+            <column name="name" type="varchar(200)">
                 <constraints nullable="false"/>
             </column>
+            <column name="email" type="varchar(127)"/>
+            <column name="salt" type="varchar(40)"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
 
         </createTable>
-        <!--<modifySql dbms="mysql">-->
-            <!--<regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>-->
-            <!--<append value=" engine innodb" />-->
-        <!--</modifySql>-->
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+    </changeSet>
+
+    <changeSet id="3" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_board"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_board">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="project_id" type="varchar(50)"/>
+            <column name="owner" type="varchar(40)"/>
+            <column name="code_prefix" type="varchar(50)"/>
+            <column name="author" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="sort_number" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+
+    <changeSet id="4" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_procedure"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_procedure">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="board_id" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="varchar(100)"/>
+            <column name="type" type="TINYINT" defaultValue="0"/>
+            <column name="status" type="TINYINT" defaultValue="0"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="sort_number" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="5" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_card"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_card">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="summary" type="varchar(200)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="code" type="varchar(40)"/>
+            <column name="content" type="${text.type}"/>
+            <column name="procedure_id" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="sort_number" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+
+    <changeSet id="6" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_card_assignment"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_card_assignment">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_id" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assigner" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="assignee" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+
+    <changeSet id="7" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_project"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_project">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(50)"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="8" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_project_members"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_project_members">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="project_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="member" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(50)"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+    </changeSet>
+    <changeSet id="9" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_password_retrieval"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_password_retrieval">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="verification_code" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_verify_passed" type="TINYINT" defaultValue="0"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="10" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_password_reset"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_password_reset">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_reset" type="TINYINT" defaultValue="0"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="11" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_project_member_invitation"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_project_member_invitation">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="project_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inviter" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="invitee" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_accepted" type="TINYINT" defaultValue="0"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="12" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_notification"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_notification">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="receiver" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sender" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="link" type="varchar(500)"/>
+            <column name="is_read" type="TINYINT" defaultValue="0"/>
+            <column name="type" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="13" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_acceptance_criterias"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_acceptance_criterias">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="summary" type="varchar(200)"/>
+            <column name="card_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="finished" type="TINYINT" defaultValue="0"/>
+            <column name="author" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sort_number" type="int" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="14" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_comment"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_comment">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="summary" type="varchar(200)"/>
+            <column name="card_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="15" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_tag"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_tag">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)"/>
+            <column name="color" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="board_id" type="varchar(40)"/>
+            <column name="author" type="varchar(40)"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="16" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_cards_tags"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_cards_tags">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_id" type="varchar(40)"/>
+            <column name="tag_id" type="varchar(40)"/>
+            <column name="author" type="varchar(40)"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
+    </changeSet>
+    <changeSet id="17" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_activity"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_activity">
+            <column name="id" type="VARCHAR(40)" >
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="card_id" type="varchar(40)"/>
+            <column name="prev_procedure_id" type="varchar(40)"/>
+            <column name="procedure_id" type="varchar(40)"/>
+            <column name="operation_type_code" type="varchar(40)"/>
+            <column name="operation_type_name" type="varchar(40)"/>
+            <column name="summary" type="${text.type}"/>
+            <column name="detail" type="${text.type}"/>
+            <column name="userName" type="varchar(40)"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+
     </changeSet>
 </databaseChangeLog>

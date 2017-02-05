@@ -19,13 +19,13 @@ import static org.mockito.Mockito.mock;
  * Created by xubt on 5/11/16.
  */
 public class TestContextConfiguration {
-    @Bean
-    public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.HSQL)
-                .addScript("classpath:hsql.sql")
-                .build();
-    }
+//    @Bean
+//    public DataSource dataSource() {
+//        return new EmbeddedDatabaseBuilder()
+//                .setType(EmbeddedDatabaseType.HSQL)
+//                .addScript("classpath:hsql.sql")
+//                .build();
+//    }
 
     @Bean
     public MailService mailService() throws TemplateException, IOException, MessagingException {
