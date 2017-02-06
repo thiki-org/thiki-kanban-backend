@@ -4,7 +4,7 @@ apply plugin: "jacoco"
 apply plugin: 'org.springframework.boot'
 apply plugin: 'cobertura'
 apply plugin: 'coveralls'
-apply plugin: "org.liquibase.gradle"
+
 
 group = 'org.thiki'
 version = '1.0-SNAPSHOT'
@@ -17,7 +17,7 @@ buildscript {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
         classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.3.1'
-		classpath "gradle.plugin.org.liquibase:liquibase-gradle-plugin:1.2.1"
+		classpath 'org.liquibase:liquibase-core:3.4.2'
         classpath 'mysql:mysql-connector-java:5.1.38'
         classpath 'org.yaml:snakeyaml:1.17'
     }
@@ -114,22 +114,3 @@ test {
         classDumpFile = file("$buildDir/jacoco/classpathdumps")
     }
 }
-
-//
-//liquibase {
-//    def pFile = file("src/main/resources/config/application-local.properties")
-//    Properties p = new Properties()
-//    pFile.withInputStream { stream->
-//        p.load(stream)
-//    }
-//
-//    activities {
-//        main {
-//            changeLogFile "src/main/resources/db/changelog/db.changelog-master.yaml"
-//            url  p.getProperty("jdbc.url")
-//            username p.getProperty("jdbc.username")
-//            password  p.getProperty("jdbc.password")
-//        }
-//        runList = project.ext.runList
-//    }
-//}
