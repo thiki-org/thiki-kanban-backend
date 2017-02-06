@@ -16,4 +16,11 @@
     <select id="isExistUnArchivedSprint" parameterType="java.lang.String" resultType="java.lang.Boolean">
         SELECT count(*) FROM kb_sprint WHERE delete_status=0 and board_id= #{boardId} AND status=1
     </select>
+
+    <update id="update" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_sprint SET
+        start_time = #{sprint.startTime},
+        end_time = #{sprint.endTime}
+        WHERE id=#{sprintId} AND board_id=#{boardId} AND delete_status=0
+    </update>
 </mapper>

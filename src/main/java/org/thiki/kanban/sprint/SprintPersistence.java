@@ -14,4 +14,6 @@ public interface SprintPersistence {
     Sprint findById(String id);
 
     boolean isExistUnArchivedSprint(String boardId);
+
+    Integer update(@Param("sprintId") String sprintId, @Param("sprint") Sprint sprint, @Param("boardId") String boardId);
 }

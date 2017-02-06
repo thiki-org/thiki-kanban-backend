@@ -28,4 +28,11 @@ public class SprintController {
 
         return Response.post(sprintResource.toResource(savedSprint, boardId, userName));
     }
+
+    @RequestMapping(value = "/boards/{boardId}/sprints/{sprintId}", method = RequestMethod.PUT)
+    public HttpEntity updateSprint(@RequestBody Sprint sprint, @PathVariable String sprintId, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
+        Sprint savedSprint = sprintService.updateSprint(sprintId, sprint, boardId, userName);
+
+        return Response.build(sprintResource.toResource(savedSprint, boardId, userName));
+    }
 }

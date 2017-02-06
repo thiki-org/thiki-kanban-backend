@@ -33,4 +33,16 @@ public class SprintService {
         logger.info("Created sprint:{}", createdSprint);
         return createdSprint;
     }
+
+    @CacheEvict(value = "sprint", key = "contains('#boardId')", allEntries = true)
+    public Sprint updateSprint(String sprintId, Sprint sprint, String boardId, String userName) {
+        logger.info("Updating sprint.sprintId:{},sprint:{},boardId:{},userName", sprintId, sprint, boardId, userName);
+        if (sprint.isStartTimeAfterEndTime()) {
+            throw new BusinessException(SprintCodes.START_TIME_IS_AFTER_END_TIME);
+        }
+        sprintPersistence.update(sprintId, sprint, boardId);
+        Sprint savedSprint = sprintPersistence.findById(sprintId);
+        logger.info("Saved sprint:{}", savedSprint);
+        return savedSprint;
+    }
 }
