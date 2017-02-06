@@ -23,7 +23,7 @@ public class SprintControllerTest extends TestBase {
 
     @Scenario("当创建一个迭代时,如果参数合法,则创建成功并返回创建后的迭代信息")
     @Test
-    public void shouldReturn201WhenCreateBoardSuccessfully() {
+    public void shouldReturn201WhenCreateSprintSuccessfully() {
         given().header("userName", "someone")
                 .body("{\"startTime\":\"2017-02-04 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
                 .contentType(ContentType.JSON)

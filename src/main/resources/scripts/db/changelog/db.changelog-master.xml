@@ -3,25 +3,23 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
-        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <property name="time.default" value="'CURRENT_TIMESTAMP'" dbms="mysql"></property>
     <property name="time.default" value="CURRENT_TIMESTAMP" dbms="hsqldb,h2"></property>
 
     <preConditions>
-        <dbms type="mysql,h2,hsqldb" />
+        <dbms type="mysql,h2,hsqldb"/>
     </preConditions>
 
     <changeSet id="1" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-              <tableExists tableName="kb_user_profile"/>
+                <tableExists tableName="kb_user_profile"/>
             </not>
         </preConditions>
         <createTable tableName="kb_user_profile">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="email" type="varchar(200)"/>
@@ -37,7 +35,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
     </changeSet>
 
@@ -48,7 +46,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_user_registration">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="password" type="varchar(400)">
@@ -57,15 +55,17 @@
             <column name="name" type="varchar(200)">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="varchar(127)"/>
-            <column name="salt" type="varchar(40)"/>
+            <column name="email" type="varchar(127)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salt" type="varchar(40)" defaultValue=""/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
             <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
     </changeSet>
 
@@ -76,7 +76,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_board">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(50)">
@@ -98,7 +98,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -110,7 +110,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_procedure">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="title" type="varchar(50)">
@@ -133,7 +133,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -144,7 +144,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_card">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="summary" type="varchar(200)">
@@ -166,7 +166,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -178,7 +178,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_card_assignment">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="card_id" type="varchar(40)">
@@ -200,7 +200,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -212,7 +212,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_project">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(40)">
@@ -226,7 +226,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -237,7 +237,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_project_members">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="project_id" type="varchar(50)">
@@ -254,7 +254,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
     </changeSet>
     <changeSet id="9" author="winie" runOnChange="true">
@@ -264,7 +264,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_password_retrieval">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="user_name" type="varchar(50)">
@@ -281,7 +281,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -292,7 +292,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_password_reset">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="user_name" type="varchar(50)">
@@ -306,7 +306,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -317,7 +317,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_project_member_invitation">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="project_id" type="varchar(50)">
@@ -337,7 +337,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -348,7 +348,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_notification">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="receiver" type="varchar(50)">
@@ -372,7 +372,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -383,14 +383,14 @@
             </not>
         </preConditions>
         <createTable tableName="kb_acceptance_criterias">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="summary" type="varchar(200)"/>
             <column name="card_id" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="finished" type="TINYINT" defaultValue="0"/>
+            <column name="finished" type="Boolean" defaultValue="false"/>
             <column name="author" type="varchar(40)">
                 <constraints nullable="false"/>
             </column>
@@ -404,7 +404,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -415,7 +415,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_comment">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="summary" type="varchar(200)"/>
@@ -432,7 +432,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -443,7 +443,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_tag">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(50)"/>
@@ -459,7 +459,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -470,7 +470,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_cards_tags">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="card_id" type="varchar(40)"/>
@@ -483,7 +483,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -494,7 +494,7 @@
             </not>
         </preConditions>
         <createTable tableName="kb_activity">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="card_id" type="varchar(40)"/>
@@ -512,7 +512,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -523,21 +523,21 @@
             </not>
         </preConditions>
         <createTable tableName="kb_sprint">
-            <column name="id" type="VARCHAR(40)" >
+            <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="start_time" type="DATETIME"/>
             <column name="end_time" type="DATETIME"/>
             <column name="board_id" type="varchar(40)"/>
             <column name="author" type="varchar(40)"/>
-            <column name="status" type="TINYINT" defaultValue="0"/>
+            <column name="status" type="TINYINT" defaultValue="1"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
             <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
 
     </changeSet>
@@ -560,14 +560,14 @@
             </not>
         </preConditions>
         <createTable tableName="kb_page" remarks="看板-页面">
-            <column name="id" type="VARCHAR(40)"  remarks="主键">
+            <column name="id" type="VARCHAR(40)" remarks="主键">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="summary" type="varchar(200)"  remarks="概况">
+            <column name="summary" type="varchar(200)" remarks="概况">
                 <constraints nullable="false"/>
             </column>
-            <column name="content" type="CLOB"  remarks="内容"/>
-            <column name="board_id" type="varchar(40)"  remarks="看板id">
+            <column name="content" type="CLOB" remarks="内容"/>
+            <column name="board_id" type="varchar(40)" remarks="看板id">
                 <constraints nullable="false"/>
             </column>
             <column name="author" type="varchar(40)" remarks="作者"/>
@@ -577,8 +577,14 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb" />
+            <append value=" engine innodb"/>
         </modifySql>
+    </changeSet>
+    <changeSet id="21" author="skytao">
+        <addDefaultValue columnDataType="int"
+                         columnName="sort_number"
+                         defaultValue="9999"
+                         tableName="kb_acceptance_criterias"/>
     </changeSet>
 
 </databaseChangeLog>
