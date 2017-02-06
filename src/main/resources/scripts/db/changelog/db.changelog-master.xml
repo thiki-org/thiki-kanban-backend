@@ -7,9 +7,6 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-
-    <property name="text.type" value="TEXT" dbms="mysql,h2"></property>
-    <property name="text.type" value="CLOB" dbms="hsqldb"></property>
     <property name="time.default" value="'CURRENT_TIMESTAMP'" dbms="mysql"></property>
     <property name="time.default" value="CURRENT_TIMESTAMP" dbms="hsqldb,h2"></property>
 
@@ -36,7 +33,7 @@
             <column name="avatar" type="varchar(200)"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
@@ -64,8 +61,7 @@
             <column name="salt" type="varchar(40)"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
-
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
@@ -97,7 +93,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -132,7 +128,7 @@
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="sort_number" type="int" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -155,7 +151,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="code" type="varchar(40)"/>
-            <column name="content" type="${text.type}"/>
+            <column name="content" type="CLOB"/>
             <column name="procedure_id" type="varchar(40)">
                 <constraints nullable="false"/>
             </column>
@@ -165,7 +161,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -199,7 +195,7 @@
             </column>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -225,7 +221,7 @@
             <column name="author" type="varchar(50)"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -253,7 +249,7 @@
             <column name="author" type="varchar(50)"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -280,7 +276,7 @@
             <column name="is_verify_passed" type="TINYINT" defaultValue="0"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -305,7 +301,7 @@
             <column name="is_reset" type="TINYINT" defaultValue="0"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -336,7 +332,7 @@
             <column name="is_accepted" type="TINYINT" defaultValue="0"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -371,7 +367,7 @@
             </column>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -403,7 +399,7 @@
             </column>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -431,7 +427,7 @@
             </column>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -458,7 +454,7 @@
             <column name="author" type="varchar(40)"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -482,7 +478,7 @@
             <column name="author" type="varchar(40)"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -506,12 +502,12 @@
             <column name="procedure_id" type="varchar(40)"/>
             <column name="operation_type_code" type="varchar(40)"/>
             <column name="operation_type_name" type="varchar(40)"/>
-            <column name="summary" type="${text.type}"/>
-            <column name="detail" type="${text.type}"/>
+            <column name="summary" type="CLOB"/>
+            <column name="detail" type="CLOB"/>
             <column name="userName" type="varchar(40)"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
 
         </createTable>
         <modifySql dbms="mysql">
@@ -537,7 +533,7 @@
             <column name="status" type="TINYINT" defaultValue="0"/>
             <column name="delete_status" type="TINYINT" defaultValue="0"/>
             <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
-            <column name="modification_time" type="TIMESTAMP" defaultValueDate="${time.default}"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
@@ -556,4 +552,33 @@
             <column name="wip_num" type="int" defaultValue="-1"/>
         </addColumn>
     </changeSet>
+
+    <changeSet id="20" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_page"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_page" remarks="看板-页面">
+            <column name="id" type="VARCHAR(40)"  remarks="主键">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="summary" type="varchar(200)"  remarks="概况">
+                <constraints nullable="false"/>
+            </column>
+            <column name="content" type="CLOB"  remarks="内容"/>
+            <column name="board_id" type="varchar(40)"  remarks="看板id">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(40)" remarks="作者"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0" remarks="是否删除"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP" remarks="创建时间"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}" remarks="修改时间"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb" />
+        </modifySql>
+    </changeSet>
+
 </databaseChangeLog>

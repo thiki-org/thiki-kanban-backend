@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.card.CardsPersistence">
+
+    <insert id="create" parameterType="org.thiki.kanban.page.Page">
+        INSERT INTO
+        kb_page(id,summary, content,code, author, board_id) VALUES (#{card.id},#{page.summary},
+        #{page.content},#{page.code}, #{userName}, #{page.boardId})
+    </insert>
+
+    <update id="modify" parameterType="org.thiki.kanban.page.Page" flushCache="true">
+        UPDATE kb_page SET
+        summary = #{page.summary},
+        content = #{page.content},
+        author = #{page.author},
+        board_id = #{page.boardId}
+        WHERE id=#{id}
+    </update>
+
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
+        SELECT * FROM kb_page WHERE id= #{id}
+    </select>
+
+    <select id="findByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
+        SELECT * FROM kb_page WHERE board_id= #{board_id} AND delete_status=0 ORDER BY modification_time DESC
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_page SET delete_status=1 WHERE id=#{id}
+    </delete>
+
+</mapper>
