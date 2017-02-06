@@ -35,4 +35,9 @@ public class SprintController {
 
         return Response.build(sprintResource.toResource(savedSprint, boardId, userName));
     }
+
+    @RequestMapping(value = "/boards/{boardId}/sprints/activeSprint", method = RequestMethod.GET)
+    public HttpEntity loadActiveSprint(@PathVariable String boardId, @RequestHeader String userName) throws Exception {
+        return null;
+    }
 }

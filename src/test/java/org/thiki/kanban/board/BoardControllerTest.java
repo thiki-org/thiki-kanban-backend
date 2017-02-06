@@ -38,6 +38,8 @@ public class BoardControllerTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", endsWith("/someone/boards"))
                 .body("_links.tags.href", endsWith("/boards/fooId/tags"))
+                .body("_links.sprints.href", endsWith("/boards/fooId/sprints"))
+                .body("_links.activeSprint.href", endsWith("/boards/fooId/sprints/activeSprint"))
                 .body("_links.self.href", endsWith("/someone/boards/fooId"));
     }
 
