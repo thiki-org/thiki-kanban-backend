@@ -545,4 +545,15 @@
         </modifySql>
 
     </changeSet>
+
+    <changeSet id="19" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_procedure" columnName="wip_num"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_procedure">
+            <column name="wip_num" type="int" defaultValue="-1"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

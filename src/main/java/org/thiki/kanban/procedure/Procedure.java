@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * 卡片工序
  * Created by xubitao on 04/26/16.
+ * Modifed by winie   on  2/6/17   添加在控数量设置
  */
 public class Procedure {
 
@@ -25,8 +26,8 @@ public class Procedure {
     private Integer type;
     private Integer status;
     private String creationTime;
-
     private String modificationTime;
+    private Integer wipNum;
 
     public Integer getType() {
         return type == null ? 0 : type;
@@ -105,6 +106,7 @@ public class Procedure {
                 ", status=" + status +
                 ", creationTime='" + creationTime + '\'' +
                 ", modificationTime='" + modificationTime + '\'' +
+                ", wipNum='" + wipNum + '\'' +
                 '}';
     }
 
@@ -134,5 +136,13 @@ public class Procedure {
 
     public boolean isArchived() {
         return ProcedureCodes.PROCEDURE_TYPE_ARCHIVE.equals(this.type);
+    }
+
+    public Integer getWipNum() {
+        return wipNum;
+    }
+
+    public void setWipNum(Integer wipNum) {
+        this.wipNum = wipNum;
     }
 }

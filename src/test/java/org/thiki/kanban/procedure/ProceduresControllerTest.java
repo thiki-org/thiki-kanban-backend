@@ -26,7 +26,7 @@ public class ProceduresControllerTest extends TestBase {
     @Test
     public void shouldReturn201WhenCreateProcedureSuccessfully() {
         given().header("userName", userName)
-                .body("{\"title\":\"this is the procedure title.\",\"description\":\"description.\"}")
+                .body("{\"title\":\"this is the procedure title.\",\"description\":\"description.\",\"wipNum\":\"20\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/procedures")
@@ -36,10 +36,12 @@ public class ProceduresControllerTest extends TestBase {
                 .body("description", equalTo("description."))
                 .body("author", equalTo(userName))
                 .body("creationTime", notNullValue())
+                .body("wipNum", equalTo(20))
                 .body("_links.all.href", endsWith("/boards/feeId/procedures"))
                 .body("_links.cards.href", endsWith("/boards/feeId/procedures/fooId/cards"))
                 .body("_links.self.href", endsWith("/boards/feeId/procedures/fooId"));
     }
+
 
     @Scenario("创建新的procedure时,如果名称为空,则不允许创建并返回客户端400错误")
     @Test
@@ -130,6 +132,21 @@ public class ProceduresControllerTest extends TestBase {
                 .body("_links.all.href", endsWith("/boards/feeId/procedures"))
                 .body("_links.self.href", endsWith("/boards/feeId/procedures/fooId"));
         assertEquals("newTitle", jdbcTemplate.queryForObject("select title from kb_procedure where id='fooId'", String.class));
+    }
+    @Scenario("更新procedure时,修改在制品数量")
+    @Test
+    public void shouldUpdateWipSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id) VALUES ('fooId','this is the first procedure.',1,'feeId')");
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"this is the first procedure.\",\"wipNum\":\"20\"}")
+                .when()
+                .put("/boards/feeId/procedures/fooId")
+                .then()
+                .statusCode(200)
+                .body("wipNum", equalTo(20))
+                .body("_links.all.href", endsWith("/boards/feeId/procedures"))
+                .body("_links.self.href", endsWith("/boards/feeId/procedures/fooId"));
     }
 
     @Scenario("更新procedure时,如果参数合法但待更新的procedure不存在,则更新失败")
