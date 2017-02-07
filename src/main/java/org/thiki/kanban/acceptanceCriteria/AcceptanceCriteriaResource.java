@@ -6,7 +6,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
-import org.thiki.kanban.cardTags.CardTagsResource;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 
@@ -20,7 +19,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @Service
 public class AcceptanceCriteriaResource extends RestResource {
-    public static Logger logger = LoggerFactory.getLogger(CardTagsResource.class);
+    public static Logger logger = LoggerFactory.getLogger(AcceptanceCriteriaResource.class);
     @Resource
     private TLink tlink;
 

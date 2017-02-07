@@ -1,5 +1,7 @@
 package org.thiki.kanban.acceptanceCriteria;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,8 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @Service
 public class AcceptanceCriteriasResource extends RestResource {
+    public static Logger logger = LoggerFactory.getLogger(AcceptanceCriteriasResource.class);
+
     @Resource
     private TLink tlink;
     @Resource
@@ -26,6 +30,7 @@ public class AcceptanceCriteriasResource extends RestResource {
 
     @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriterias'+#boardId+#procedureId+#cardId+#userName")
     public Object toResource(List<AcceptanceCriteria> acceptanceCriterias, String boardId, String procedureId, String cardId, String userName) throws Exception {
+        logger.info("build acceptanceCriterias resource.acceptanceCriterias:{},boardId:{},procedureId:{},cardId:{},userName:{}", acceptanceCriterias, boardId, procedureId, cardId, userName);
         AcceptanceCriteriasResource acceptanceCriteriasResource = new AcceptanceCriteriasResource();
         List<Object> acceptanceCriteriaResources = new ArrayList<>();
         for (AcceptanceCriteria acceptanceCriteria : acceptanceCriterias) {
@@ -42,6 +47,7 @@ public class AcceptanceCriteriasResource extends RestResource {
 
         Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
         acceptanceCriteriasResource.add(tlink.from(cardLink).build(userName));
+        logger.info("acceptanceCriterias resource build completed.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
         return acceptanceCriteriasResource.getResource();
     }
 }
