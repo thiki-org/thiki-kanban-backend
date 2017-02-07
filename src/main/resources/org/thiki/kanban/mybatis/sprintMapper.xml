@@ -23,4 +23,8 @@
         end_time = #{sprint.endTime}
         WHERE id=#{sprintId} AND board_id=#{boardId} AND delete_status=0
     </update>
+
+    <select id="loadActiveSprint" parameterType="java.lang.String" resultType="org.thiki.kanban.sprint.Sprint">
+        SELECT * FROM kb_sprint WHERE delete_status=0 and board_id= #{boardId}
+    </select>
 </mapper>

@@ -756,6 +756,9 @@ public class DateService {
     }
 
     public boolean isAfter(String startTimeStr, String endTimeStr) {
+        if (startTimeStr == null || endTimeStr == null) {
+            return false;
+        }
         Date startTime = this.StringToDate(startTimeStr);
         Date endTime = this.StringToDate(endTimeStr);
         return startTime.after(endTime);

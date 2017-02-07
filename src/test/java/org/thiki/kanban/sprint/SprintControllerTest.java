@@ -100,4 +100,21 @@ public class SprintControllerTest extends TestBase {
                 .body("message", equalTo(SprintCodes.START_TIME_IS_AFTER_END_TIME.message()))
                 .body("code", equalTo(SprintCodes.START_TIME_IS_AFTER_END_TIME.code()));
     }
+
+    @Scenario("获取看板的当前迭代")
+    @Test
+    public void loadActiveSprint() {
+        dbPreparation.table("kb_sprint").names("id,start_time,end_time,board_id,status").values("fooId", "2017-02-04 12:11:44", "2017-02-05 12:11:44", "board-fooId", 1).exec();
+        given().header("userName", "someone")
+                .when()
+                .get("/boards/board-fooId/sprints/activeSprint")
+                .then()
+                .body("id", equalTo("fooId"))
+                .body("startTime", equalTo("2017-02-04 12:11:44.000000"))
+                .body("endTime", equalTo("2017-02-05 12:11:44.000000"))
+                .body("status", equalTo(SprintCodes.IN_PROGRESS))
+                .body("creationTime", notNullValue())
+                .body("_links.board.href", endsWith("/boards/board-fooId"))
+                .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
+    }
 }
