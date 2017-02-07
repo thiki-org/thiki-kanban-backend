@@ -3,6 +3,7 @@ package org.thiki.kanban.sprint;
 import com.jayway.restassured.http.ContentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
@@ -116,5 +117,17 @@ public class SprintControllerTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
+    }
+
+    @Scenario("获取看板的当前迭代时，如果不存在激活的迭代，则告知客户端错误")
+    @Test
+    public void should_throw_404_exception_if_active_sprint_is_not_exist() {
+        given().header("userName", "someone")
+                .when()
+                .get("/boards/board-fooId/sprints/activeSprint")
+                .then()
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .body("message", equalTo(SprintCodes.ACTIVE_SPRINT_IS_NOT_FOUND.message()))
+                .body("code", equalTo(SprintCodes.ACTIVE_SPRINT_IS_NOT_FOUND.code()));
     }
 }

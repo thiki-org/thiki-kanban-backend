@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
+import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 
@@ -51,6 +52,10 @@ public class SprintService {
     public Sprint loadActiveSprint(String boardId, String userName) {
         logger.info("Loading active sprint.boardId:{},userName", boardId, userName);
         Sprint activeSprint = sprintPersistence.loadActiveSprint(boardId);
+        if (activeSprint == null) {
+            logger.info("No active sprint was found.boardId:{}", boardId);
+            throw new ResourceNotFoundException(SprintCodes.ACTIVE_SPRINT_IS_NOT_FOUND);
+        }
         logger.info("Active sprint:{}", activeSprint);
         return activeSprint;
     }
