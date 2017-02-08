@@ -9,6 +9,7 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
+import org.thiki.kanban.foundation.common.date.DateService;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -117,6 +118,27 @@ public class SprintControllerTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
+    }
+
+    @Scenario("获取看板的当前迭代时，计算出相应的天数")
+    @Test
+    public void calculateRemainDaysWhenLoadingActiveSprint() {
+
+        int wentDays = 2;
+        int timeBox = 15;
+        String currentTime = DateService.instance().getNow_EN();
+        String startTime = DateService.instance().addDay(currentTime, -wentDays);
+        String endTime = DateService.instance().addDay(startTime, timeBox);
+
+        dbPreparation.table("kb_sprint").names("id,start_time,end_time,board_id,status").values("fooId", startTime, endTime, "board-fooId", 1).exec();
+        given().header("userName", "someone")
+                .when()
+                .get("/boards/board-fooId/sprints/activeSprint")
+                .then()
+                .body("status", equalTo(SprintCodes.IN_PROGRESS))
+                .body("remainingDays", equalTo(timeBox - wentDays - 1))
+                .body("totalDays", equalTo(timeBox))
+                .body("wentDays", equalTo(wentDays));
     }
 
     @Scenario("获取看板的当前迭代时，如果不存在激活的迭代，则告知客户端错误")

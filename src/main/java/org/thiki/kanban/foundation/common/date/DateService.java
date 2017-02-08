@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by 濤 on 2016/1/12.
@@ -15,6 +16,10 @@ public class DateService {
     private final ThreadLocal<SimpleDateFormat> threadLocal = new ThreadLocal<SimpleDateFormat>();
 
     private final Object object = new Object();
+
+    public static DateService instance() {
+        return new DateService();
+    }
 
     /**
      * 获取SimpleDateFormat
@@ -661,6 +666,10 @@ public class DateService {
         return DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS_CN);
     }
 
+    public String getNow_EN() {
+        return DateToString(new Date(), DateStyle.YYYY_MM_DD_HH_MM_SS);
+    }
+
     public Date now() {
         return new Date();
     }
@@ -762,5 +771,26 @@ public class DateService {
         Date startTime = this.StringToDate(startTimeStr);
         Date endTime = this.StringToDate(endTimeStr);
         return startTime.after(endTime);
+    }
+
+    public int daysBetween(Date date1, Date date2) {
+        long diff = date2.getTime() - date1.getTime();
+        return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
+
+    public int daysBetween(Date date1, String date2) {
+        Date date = StringToDate(date2);
+        return daysBetween(date1, date);
+    }
+
+    public int daysBetween(String date1, Date date2) {
+        Date date = StringToDate(date1);
+        return daysBetween(date, date2);
+    }
+
+    public int daysBetween(String dateStr1, String dateStr2) {
+        Date date1 = StringToDate(dateStr1);
+        Date date2 = StringToDate(dateStr2);
+        return daysBetween(date1, date2);
     }
 }

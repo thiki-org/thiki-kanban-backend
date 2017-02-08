@@ -76,6 +76,7 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: 'r05'
     compile group: 'org.springframework', name: 'spring-beans', version: '4.3.2.RELEASE'
     compile 'de.danielbechler:java-object-diff:0.94'
+    compile group: 'joda-time', name: 'joda-time', version: '2.9.7'
 
     testCompile 'com.jayway.jsonpath:json-path-assert:0.9.1'
     testCompile 'junit:junit:4.12'

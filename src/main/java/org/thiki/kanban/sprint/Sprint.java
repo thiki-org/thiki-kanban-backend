@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.foundation.common.date.DateService;
 
+import java.util.Date;
+
 /**
  * Created by xubt on 04/02/2017.
  */
@@ -16,6 +18,9 @@ public class Sprint {
     private int status;
     private String creationTime;
     private String modificationTime;
+    private int remainingDays;
+    private int totalDays;
+    private int wentDays;
 
     public String getStartTime() {
         return startTime;
@@ -73,5 +78,17 @@ public class Sprint {
     @Override
     public String toString() {
         return JSON.toJSONString(this);
+    }
+
+    public int getRemainingDays() {
+        return DateService.instance().daysBetween(new Date(), this.endTime);
+    }
+
+    public int getWentDays() {
+        return DateService.instance().daysBetween(this.startTime, new Date());
+    }
+
+    public int getTotalDays() {
+        return DateService.instance().daysBetween(this.startTime, this.endTime);
     }
 }
