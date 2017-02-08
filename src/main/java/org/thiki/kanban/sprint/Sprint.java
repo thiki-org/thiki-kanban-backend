@@ -1,6 +1,7 @@
 package org.thiki.kanban.sprint;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.foundation.common.date.DateService;
 
@@ -70,6 +71,7 @@ public class Sprint {
         this.id = id;
     }
 
+    @JsonIgnore
     public boolean isStartTimeAfterEndTime() {
         DateService dateService = new DateService();
         return dateService.isAfter(this.startTime, this.endTime);
