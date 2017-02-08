@@ -208,8 +208,8 @@ public class DateService {
      * @return 日期
      */
     public Date StringToDate(String date) {
-        if (date != null && date.endsWith(".000000")) {
-            date = date.replace(".000000", "");
+        if (date != null && date.indexOf(".") > -1) {
+            date = date.split("\\.")[0];
         }
         DateStyle dateStyle = getDateStyle(date);
         return StringToDate(date, dateStyle);

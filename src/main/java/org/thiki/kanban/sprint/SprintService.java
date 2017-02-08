@@ -30,7 +30,7 @@ public class SprintService {
         if (isExistUnArchivedSprint) {
             throw new BusinessException(SprintCodes.UNARCHIVE_SPRINT_EXIST);
         }
-        sprintPersistence.create(sprint, userName, boardId);
+        sprintPersistence.create(sprint, boardId, userName);
         Sprint createdSprint = sprintPersistence.findById(sprint.getId());
         logger.info("Created sprint:{}", createdSprint);
         return createdSprint;
