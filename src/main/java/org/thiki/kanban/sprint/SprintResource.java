@@ -2,7 +2,6 @@ package org.thiki.kanban.sprint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.board.BoardsController;
@@ -23,7 +22,6 @@ public class SprintResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "sprint", key = "#userName+'sprint'+#boardId+#sprint.id")
     public Object toResource(Sprint sprint, String boardId, String userName) throws Exception {
         logger.info("build sprint resource.board:{},userName:{}", boardId, userName);
         SprintResource sprintResource = new SprintResource();
