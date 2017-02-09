@@ -15,6 +15,7 @@ public enum SprintCodes {
     public static final Integer SPRINT_COMPLETED = 2;
     public static final String startTimeIsRequired = "迭代开始时间不可以为空。";
     public static final String endTimeIsRequired = "迭代结束时间不可以为空。";
+    public static final String sprintNameIsRequired = "迭代名称不可以为空。";
     private String code;
 
     private String message;

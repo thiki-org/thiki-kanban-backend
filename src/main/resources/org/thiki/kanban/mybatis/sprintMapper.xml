@@ -6,7 +6,8 @@
 
     <insert id="create" parameterType="org.thiki.kanban.sprint.Sprint">
         INSERT INTO
-        kb_sprint(id,start_time,end_time,board_id,author) VALUES (#{sprint.id},#{sprint.startTime}, #{sprint.endTime},#{boardId}, #{userName})
+        kb_sprint(id,start_time,end_time,sprint_name,board_id,author) VALUES (#{sprint.id},#{sprint.startTime},
+        #{sprint.endTime},#{sprint.sprintName},#{boardId}, #{userName})
     </insert>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.sprint.Sprint">
@@ -20,7 +21,8 @@
     <update id="update" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_sprint SET
         start_time = #{sprint.startTime},
-        end_time = #{sprint.endTime}
+        end_time = #{sprint.endTime},
+        sprint_name = #{sprint.sprintName}
         <if test="sprint.competedTime!=null">
             ,status = #{sprint.status}
             ,competedTime = #{sprint.competedTime}
@@ -30,6 +32,6 @@
     </update>
 
     <select id="loadActiveSprint" parameterType="java.lang.String" resultType="org.thiki.kanban.sprint.Sprint">
-        SELECT * FROM kb_sprint WHERE delete_status=0 and board_id= #{boardId}
+        SELECT * FROM kb_sprint WHERE delete_status=0 and board_id= #{boardId} AND status=1
     </select>
 </mapper>

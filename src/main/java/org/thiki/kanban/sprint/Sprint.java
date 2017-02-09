@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class Sprint {
     private String id;
+    @NotEmpty(message = SprintCodes.sprintNameIsRequired)
     private String sprintName;
     @NotEmpty(message = SprintCodes.startTimeIsRequired)
     private String startTime;
@@ -99,6 +100,7 @@ public class Sprint {
         return DateService.instance().daysBetween(this.startTime, this.endTime);
     }
 
+    @JsonIgnore
     public boolean isCompleted() {
         return SprintCodes.SPRINT_COMPLETED.equals(status);
     }
