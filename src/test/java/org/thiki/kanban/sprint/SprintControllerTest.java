@@ -36,7 +36,7 @@ public class SprintControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("startTime", equalTo("2017-02-04 12:11:44.000000"))
                 .body("endTime", equalTo("2017-02-05 12:11:44.000000"))
-                .body("status", equalTo(SprintCodes.IN_PROGRESS))
+                .body("status", equalTo(SprintCodes.SPRINT_IN_PROGRESS))
                 .body("creationTime", notNullValue())
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
@@ -114,7 +114,7 @@ public class SprintControllerTest extends TestBase {
                 .body("id", equalTo("fooId"))
                 .body("startTime", equalTo("2017-02-04 12:11:44.000000"))
                 .body("endTime", equalTo("2017-02-05 12:11:44.000000"))
-                .body("status", equalTo(SprintCodes.IN_PROGRESS))
+                .body("status", equalTo(SprintCodes.SPRINT_IN_PROGRESS))
                 .body("creationTime", notNullValue())
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
@@ -135,7 +135,7 @@ public class SprintControllerTest extends TestBase {
                 .when()
                 .get("/boards/board-fooId/sprints/activeSprint")
                 .then()
-                .body("status", equalTo(SprintCodes.IN_PROGRESS))
+                .body("status", equalTo(SprintCodes.SPRINT_IN_PROGRESS))
                 .body("remainingDays", equalTo(timeBox - wentDays - 1))
                 .body("totalDays", equalTo(timeBox))
                 .body("wentDays", equalTo(wentDays));
@@ -151,5 +151,21 @@ public class SprintControllerTest extends TestBase {
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body("message", equalTo(SprintCodes.ACTIVE_SPRINT_IS_NOT_FOUND.message()))
                 .body("code", equalTo(SprintCodes.ACTIVE_SPRINT_IS_NOT_FOUND.code()));
+    }
+
+    @Scenario("完成迭代")
+    @Test
+    public void completeSprint() {
+        dbPreparation.table("kb_sprint").names("id,board_id,status").values("fooId", "board-fooId", 1).exec();
+        given().header("userName", "someone")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"status\":\"2\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/board-fooId/sprints/fooId")
+                .then()
+                .statusCode(200)
+                .body("status", equalTo(SprintCodes.SPRINT_COMPLETED))
+                .body("_links.board.href", endsWith("/boards/board-fooId"))
+                .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
     }
 }

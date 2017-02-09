@@ -3,6 +3,7 @@ package org.thiki.kanban.sprint;
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 import org.thiki.kanban.foundation.common.date.DateService;
 
 import java.util.Date;
@@ -16,6 +17,7 @@ public class Sprint {
     private String startTime;
     @NotEmpty(message = SprintCodes.endTimeIsRequired)
     private String endTime;
+    @Range(min = 1, max = 2)
     private int status;
     private String creationTime;
     private String modificationTime;
