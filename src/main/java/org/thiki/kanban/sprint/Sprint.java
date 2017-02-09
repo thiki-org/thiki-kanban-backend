@@ -18,7 +18,7 @@ public class Sprint {
     @NotEmpty(message = SprintCodes.endTimeIsRequired)
     private String endTime;
     @Range(min = 1, max = 2)
-    private int status;
+    private Integer status;
     private String creationTime;
     private String modificationTime;
     private int remainingDays;
@@ -41,11 +41,11 @@ public class Sprint {
         this.endTime = endTime;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

@@ -103,6 +103,20 @@ public class SprintControllerTest extends TestBase {
                 .body("code", equalTo(SprintCodes.START_TIME_IS_AFTER_END_TIME.code()));
     }
 
+    @Scenario("更新一个迭代时，如果迭代不存在,则不允许操作")
+    @Test
+    public void notAllowedIfSprintDoesNotExistWhenUpdating() {
+        given().header("userName", "someone")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/board-fooId/sprints/fooId")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo(SprintCodes.SPRINT_IS_NOT_EXIST.message()))
+                .body("code", equalTo(SprintCodes.SPRINT_IS_NOT_EXIST.code()));
+    }
+
     @Scenario("获取看板的当前迭代")
     @Test
     public void loadActiveSprint() {

@@ -10,7 +10,7 @@
     </insert>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.sprint.Sprint">
-        SELECT * FROM kb_sprint WHERE delete_status=0 and id= #{id}
+        SELECT * FROM kb_sprint WHERE delete_status=0 and id= #{sprintId}
     </select>
 
     <select id="isExistUnArchivedSprint" parameterType="java.lang.String" resultType="java.lang.Boolean">

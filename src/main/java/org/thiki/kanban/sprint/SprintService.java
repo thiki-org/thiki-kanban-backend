@@ -40,7 +40,13 @@ public class SprintService {
     public Sprint updateSprint(String sprintId, Sprint sprint, String boardId, String userName) {
         logger.info("Updating sprint.sprintId:{},sprint:{},boardId:{},userName", sprintId, sprint, boardId, userName);
         if (sprint.isStartTimeAfterEndTime()) {
+            logger.info("Sprint startTime is after endTime.startTime:{},endTime:{}", sprint.getStartTime(), sprint.getEndTime());
             throw new BusinessException(SprintCodes.START_TIME_IS_AFTER_END_TIME);
+        }
+        Sprint originSprint = sprintPersistence.findById(sprintId);
+        if (originSprint == null) {
+            logger.info("No specified sprint was found.sprintId:{}", sprintId);
+            throw new BusinessException(SprintCodes.SPRINT_IS_NOT_EXIST);
         }
         sprintPersistence.update(sprintId, sprint, boardId);
         Sprint savedSprint = sprintPersistence.findById(sprintId);
