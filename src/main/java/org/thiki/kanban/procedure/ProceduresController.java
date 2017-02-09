@@ -59,17 +59,4 @@ public class ProceduresController {
         List<Procedure> procedureList = proceduresService.resortProcedures(procedures, boardId);
         return Response.build(resortProceduresResource.toResource(procedureList, boardId, userName));
     }
-
-    @RequestMapping(value = "/boards/{boardId}/archives", method = RequestMethod.POST)
-    public HttpEntity archive(@RequestBody Procedure archive, @PathVariable String boardId, @RequestParam String procedureId, @RequestHeader String userName) throws Exception {
-        Procedure archivedProcedure = proceduresService.archive(procedureId, archive, boardId, userName);
-
-        return Response.post(procedureResource.toResource(archivedProcedure, boardId, userName));
-    }
-
-    @RequestMapping(value = "/boards/{boardId}/archives/{archiveId}", method = RequestMethod.DELETE)
-    public HttpEntity undoArchive(@PathVariable String archiveId, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
-        proceduresService.undoArchive(archiveId, boardId, userName);
-        return Response.build(procedureResource.toResource(boardId, userName));
-    }
 }

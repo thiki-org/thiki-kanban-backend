@@ -597,4 +597,24 @@
         </addColumn>
     </changeSet>
 
+    <changeSet id="23" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_sprint" columnName="sprint_name"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_sprint">
+            <column name="sprint_name" type="varchar(40)" defaultValue=""/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="24" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_sprint" columnName="archive_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_sprint">
+            <column name="archive_id" type="varchar(40)" defaultValue=""/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

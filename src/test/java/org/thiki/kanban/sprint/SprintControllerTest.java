@@ -10,11 +10,13 @@ import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.foundation.common.date.DateService;
+import org.thiki.kanban.procedure.ProcedureCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.StringEndsWith.endsWith;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by xubt on 02/04/17.
@@ -167,23 +169,6 @@ public class SprintControllerTest extends TestBase {
                 .body("code", equalTo(SprintCodes.ACTIVE_SPRINT_IS_NOT_FOUND.code()));
     }
 
-    @Scenario("完成迭代")
-    @Test
-    public void completeSprint() {
-        dbPreparation.table("kb_sprint").names("id,board_id,status").values("fooId", "board-fooId", 1).exec();
-        given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"status\":\"2\"}")
-                .contentType(ContentType.JSON)
-                .when()
-                .put("/boards/board-fooId/sprints/fooId")
-                .then()
-                .statusCode(200)
-                .body("status", equalTo(SprintCodes.SPRINT_COMPLETED))
-                .body("competedTime", notNullValue())
-                .body("_links.board.href", endsWith("/boards/board-fooId"))
-                .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
-    }
-
     @Scenario("迭代完成时，如果当前迭代已经处于归档状态，则不允许操作")
     @Test
     public void notAllowedIfSprintWasAlreadyArchivedWhenCompletingSprint() {
@@ -196,5 +181,34 @@ public class SprintControllerTest extends TestBase {
                 .then()
                 .body("code", equalTo(SprintCodes.SPRINT_ALREADY_ARCHIVED.code()))
                 .body("message", equalTo(SprintCodes.SPRINT_ALREADY_ARCHIVED.message()));
+    }
+
+    @Scenario("迭代归档->迭代完成时将现有的完成列中的卡片进行归档")
+    @Test
+    public void shouldReturn201WhenArchiveSuccessfully() {
+        dbPreparation.table("kb_procedure")
+                .names("id,title,author,board_id,type,status")
+                .values("procedure_fooId", "title", "someone", "board-fooId", ProcedureCodes.PROCEDURE_TYPE_IN_PLAN, ProcedureCodes.PROCEDURE_STATUS_DONE)
+                .exec();
+
+        dbPreparation.table("kb_sprint")
+                .names("id,sprint_name,start_time,end_time,board_id,status")
+                .values("fooId", "sprint_name", "2017-02-04 12:11:44", "2017-02-05 12:11:44", "board-fooId", 1)
+                .exec();
+
+        given().header("userName", "someone")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"status\":\"2\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/board-fooId/sprints/fooId")
+                .then()
+                .statusCode(200)
+                .body("status", equalTo(SprintCodes.SPRINT_COMPLETED))
+                .body("competedTime", notNullValue())
+                .body("archiveId", equalTo("fooId"))
+                .body("_links.board.href", endsWith("/boards/board-fooId"))
+                .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
+
+        assertEquals("sprint_name归档", jdbcTemplate.queryForObject("select title FROM kb_procedure WHERE status=9 AND type=9", String.class));
     }
 }

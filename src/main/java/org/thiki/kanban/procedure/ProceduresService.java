@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.foundation.exception.BusinessException;
+import org.thiki.kanban.sprint.Sprint;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
  */
 @Service
 public class ProceduresService {
+    public static final String ARCHIVE_SUFFIX = "归档";
     public static Logger logger = LoggerFactory.getLogger(ProceduresService.class);
 
     @Resource
@@ -113,23 +115,27 @@ public class ProceduresService {
         return resortedProcedures;
     }
 
-    @CacheEvict(value = "procedure", key = "contains('#procedureId')", allEntries = true)
-    public Procedure archive(String procedureId, Procedure archive, String boardId, String userName) {
-        logger.info("Archiving procedure.procedureId:{},procedure:{},boardId:{}", procedureId, archive, boardId);
-        Procedure originProcedure = checkingWhetherProcedureIsExists(procedureId);
-        if (!originProcedure.isInDoneStatus()) {
-            throw new BusinessException(ProcedureCodes.PROCEDURE_IS_NOT_IN_DONE_STATUS);
+    @CacheEvict(value = "procedure", key = "contains('#boardId')", allEntries = true)
+    public Procedure archive(Sprint sprint, String boardId, String userName) {
+        logger.info("Archiving procedure.boardId:{}", boardId);
+        Procedure doneProcedure = findProcedureByStatus(boardId, ProcedureCodes.PROCEDURE_STATUS_DONE);
+        if (doneProcedure == null) {
+            throw new BusinessException(ProcedureCodes.DONE_PROCEDURE_IS_NOT_EXIST);
         }
-        archive.setType(ProcedureCodes.PROCEDURE_TYPE_ARCHIVE);
-        archive.setStatus(ProcedureCodes.PROCEDURE_STATUS_DONE);
-        Procedure archivedProcedure = create(userName, boardId, archive);
+        Procedure archiveProcedure = new Procedure();
+        archiveProcedure.setBoardId(boardId);
+        archiveProcedure.setTitle(sprint.getSprintName() + ARCHIVE_SUFFIX);
+        archiveProcedure.setType(ProcedureCodes.PROCEDURE_TYPE_ARCHIVE);
+        archiveProcedure.setStatus(ProcedureCodes.PROCEDURE_STATUS_DONE);
+        archiveProcedure.setAuthor(userName);
+        Procedure archivedProcedure = create(userName, boardId, archiveProcedure);
         logger.info("Transfer the cards of the origin procedure to archived procedure.");
-        List<Card> cards = cardsService.findByProcedureId(procedureId);
+        List<Card> cards = cardsService.findByProcedureId(doneProcedure.getId());
         for (Card card : cards) {
             card.setProcedureId(archivedProcedure.getId());
-            cardsService.modify(card.getId(), card, procedureId, boardId, userName);
+            cardsService.modify(card.getId(), card, doneProcedure.getId(), boardId, userName);
         }
-        logger.info("Archived procedure.procedure:{}", archive);
+        logger.info("Archived procedure.procedure:{}", archiveProcedure);
         return archivedProcedure;
     }
 
@@ -163,5 +169,9 @@ public class ProceduresService {
         }
         logger.info("Deleting the archived procedure.");
         proceduresPersistence.deleteById(archivedProcedureId);
+    }
+
+    public Procedure findProcedureByStatus(String boardId, Integer status) {
+        return proceduresPersistence.findProcedureByStatus(boardId, status);
     }
 }

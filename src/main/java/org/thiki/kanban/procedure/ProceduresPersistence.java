@@ -30,4 +30,6 @@ public interface ProceduresPersistence {
     Procedure findDoneProcedure(@Param("boardId") String boardId);
 
     boolean hasNewArchivedProcedureExist(Procedure archivedProcedure);
+
+    Procedure findProcedureByStatus(@Param("boardId") String boardId, @Param("status") Integer status);
 }

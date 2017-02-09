@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
+import org.thiki.kanban.procedure.Procedure;
+import org.thiki.kanban.procedure.ProceduresService;
 
 import javax.annotation.Resource;
 
@@ -20,6 +22,9 @@ public class SprintService {
 
     @Resource
     private SprintPersistence sprintPersistence;
+
+    @Resource
+    private ProceduresService proceduresService;
 
     @CacheEvict(value = "sprint", key = "contains('#boardId')", allEntries = true)
     public Sprint createSprint(Sprint sprint, String boardId, String userName) {
@@ -55,6 +60,8 @@ public class SprintService {
                 throw new BusinessException(SprintCodes.SPRINT_ALREADY_ARCHIVED);
             }
             sprint.setCompetedTime(DateService.instance().getNow_EN());
+            Procedure archivedProcedure = proceduresService.archive(originSprint, boardId, userName);
+            sprint.setArchiveId(archivedProcedure.getId());
         }
         sprintPersistence.update(sprintId, sprint, boardId);
         Sprint savedSprint = sprintPersistence.findById(sprintId);

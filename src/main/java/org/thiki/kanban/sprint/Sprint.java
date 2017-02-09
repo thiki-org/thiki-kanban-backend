@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class Sprint {
     private String id;
+    private String sprintName;
     @NotEmpty(message = SprintCodes.startTimeIsRequired)
     private String startTime;
     @NotEmpty(message = SprintCodes.endTimeIsRequired)
@@ -20,6 +21,7 @@ public class Sprint {
     @Range(min = 1, max = 2)
     private Integer status;
     private String competedTime;
+    private String archiveId;
     private String creationTime;
     private String modificationTime;
     private int remainingDays;
@@ -107,5 +109,21 @@ public class Sprint {
 
     public void setCompetedTime(String competedTime) {
         this.competedTime = competedTime;
+    }
+
+    public String getSprintName() {
+        return sprintName;
+    }
+
+    public void setSprintName(String sprintName) {
+        this.sprintName = sprintName;
+    }
+
+    public String getArchiveId() {
+        return archiveId;
+    }
+
+    public void setArchiveId(String archiveId) {
+        this.archiveId = archiveId;
     }
 }

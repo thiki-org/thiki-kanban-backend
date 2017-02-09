@@ -269,87 +269,8 @@ public class ProceduresControllerTest extends TestBase {
                 .body("procedures[0].creationTime", notNullValue())
                 .body("procedures[0]._links.all.href", endsWith("/boards/feeId/procedures"))
                 .body("procedures[0]._links.self.href", endsWith("/boards/feeId/procedures/fooId"))
-                .body("procedures[0]._links.archives.href", endsWith("/boards/feeId/archives?procedureId=fooId"))
                 .body("procedures[0]._links.cards.href", endsWith("/boards/feeId/procedures/fooId/cards"))
                 .body("_links.self.href", endsWith("/boards/feeId/procedures"))
                 .body("_links.sortNumbers.href", endsWith("/boards/feeId/procedures/sortNumbers"));
-    }
-
-    @Scenario("归档->当工序为迭代中的完成列时,可以进行归档操作")
-    @Test
-    public void shouldReturn201WhenArchiveSuccessfully() {
-        dbPreparation.table("kb_procedure")
-                .names("id,title,author,board_id,type,status")
-                .values("procedure_fooId", "title", "someone", "board-feeId", ProcedureCodes.PROCEDURE_TYPE_IN_PLAN, ProcedureCodes.PROCEDURE_STATUS_DONE).exec();
-
-        given().header("userName", userName)
-                .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
-                .contentType(ContentType.JSON)
-                .queryParam("procedureId", "procedure_fooId")
-                .when()
-                .post("/boards/board-feeId/archives")
-                .then()
-                .statusCode(201)
-                .body("title", equalTo("this is the archive title."))
-                .body("description", equalTo("description."))
-                .body("type", equalTo(ProcedureCodes.PROCEDURE_TYPE_ARCHIVE))
-                .body("status", equalTo(ProcedureCodes.PROCEDURE_STATUS_DONE))
-                .body("creationTime", notNullValue())
-                .body("_links.all.href", endsWith("/boards/board-feeId/procedures"))
-                .body("_links.cards.href", endsWith("/boards/board-feeId/procedures/fooId/cards"))
-                .body("_links.self.href", endsWith("/boards/board-feeId/archives/fooId"));
-
-        assertEquals(1, jdbcTemplate.queryForList("select * FROM kb_procedure WHERE status=9 AND type=9").size());
-    }
-
-    @Scenario("归档->当工序为迭代中的完成列时,如果当前工序并非处于完成状态，则不允许归档")
-    @Test
-    public void shouldFailedIfTheProcedureIsNotInDoneStatus() {
-        dbPreparation.table("kb_procedure")
-                .names("id,title,author,board_id,type,status")
-                .values("procedure_fooId", "title", "someone", "board-feeId", ProcedureCodes.PROCEDURE_TYPE_IN_PLAN, ProcedureCodes.PROCEDURE_STATUS_DOING).exec();
-
-        given().header("userName", userName)
-                .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
-                .contentType(ContentType.JSON)
-                .queryParam("procedureId", "procedure_fooId")
-                .when()
-                .post("/boards/board-feeId/archives")
-                .then()
-                .statusCode(400)
-                .body("code", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_IN_DONE_STATUS.code()))
-                .body("message", equalTo(ProcedureCodes.PROCEDURE_IS_NOT_IN_DONE_STATUS.message()));
-    }
-
-    @Scenario("撤销归档->如果当前看板不存在完成列，则不允许归档")
-    @Test
-    public void notAllowedIfNoDoneProcedureWasFound() {
-        dbPreparation.table("kb_procedure")
-                .names("id,title,author,board_id,type,status")
-                .values("archived_procedure_fooId", "title", "someone", "board-feeId", ProcedureCodes.PROCEDURE_TYPE_ARCHIVE, ProcedureCodes.PROCEDURE_STATUS_DONE).exec();
-
-        given().header("userName", userName)
-                .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
-                .contentType(ContentType.JSON)
-                .when()
-                .delete("/boards/board-feeId/archives/archived_procedure_fooId")
-                .then()
-                .statusCode(400)
-                .body("code", equalTo(ProcedureCodes.NO_DONE_PROCEDURE_WAS_FOUND.code()))
-                .body("message", equalTo(ProcedureCodes.NO_DONE_PROCEDURE_WAS_FOUND.message()));
-    }
-
-    @Scenario("撤销归档->撤销归档时，如果归档不存在时，则不允许归档")
-    @Test
-    public void notAllowedIfNewArchivedProcedureWasFound() {
-        given().header("userName", userName)
-                .body("{\"title\":\"this is the archive title.\",\"description\":\"description.\"}")
-                .contentType(ContentType.JSON)
-                .when()
-                .delete("/boards/board-feeId/archives/archived_procedure_fooId")
-                .then()
-                .statusCode(400)
-                .body("code", equalTo(ProcedureCodes.NO_ARCHIVED_PROCEDURE_WAS_FOUND.code()))
-                .body("message", equalTo(ProcedureCodes.NO_ARCHIVED_PROCEDURE_WAS_FOUND.message()));
     }
 }
