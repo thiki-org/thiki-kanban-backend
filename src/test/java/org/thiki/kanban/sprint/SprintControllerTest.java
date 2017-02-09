@@ -29,7 +29,7 @@ public class SprintControllerTest extends TestBase {
     @Test
     public void shouldReturn201WhenCreateSprintSuccessfully() {
         given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-04 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .body("{\"startTime\":\"2017-02-04 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"sprintName\":\"sprintName-foo\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/board-fooId/sprints")
@@ -48,7 +48,7 @@ public class SprintControllerTest extends TestBase {
     @Test
     public void notAllowedIfStartTimeAfterEndTime() {
         given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-06 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .body("{\"startTime\":\"2017-02-06 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"sprintName\":\"sprintName-foo\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/board-fooId/sprints")
@@ -63,7 +63,7 @@ public class SprintControllerTest extends TestBase {
     public void notAllowedIfUnArchivedSprintExist() {
         dbPreparation.table("kb_sprint").names("id,board_id,status").values("fooId", "board-fooId", 1).exec();
         given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"sprintName\":\"sprintName-foo\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/board-fooId/sprints")
@@ -78,7 +78,7 @@ public class SprintControllerTest extends TestBase {
     public void updateSprint() {
         dbPreparation.table("kb_sprint").names("id,board_id,status").values("fooId", "board-fooId", 1).exec();
         given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"sprintName\":\"sprintName-foo\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/boards/board-fooId/sprints/fooId")
@@ -95,7 +95,7 @@ public class SprintControllerTest extends TestBase {
     public void notAllowedIfStartTimeAfterEndTimeWhenUpdating() {
         dbPreparation.table("kb_sprint").names("id,board_id,status").values("fooId", "board-fooId", 1).exec();
         given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-06 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .body("{\"startTime\":\"2017-02-06 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"sprintName\":\"sprintName-foo\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/boards/board-fooId/sprints/fooId")
@@ -109,7 +109,7 @@ public class SprintControllerTest extends TestBase {
     @Test
     public void notAllowedIfSprintDoesNotExistWhenUpdating() {
         given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\"}")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"sprintName\":\"sprintName-foo\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/boards/board-fooId/sprints/fooId")
@@ -174,7 +174,7 @@ public class SprintControllerTest extends TestBase {
     public void notAllowedIfSprintWasAlreadyArchivedWhenCompletingSprint() {
         dbPreparation.table("kb_sprint").names("id,start_time,end_time,board_id,status").values("fooId", "2017-02-04 12:11:44", "2017-02-05 12:11:44", "board-fooId", 2).exec();
         given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"status\":\"2\"}")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"status\":\"2\",\"sprintName\":\"sprintName-foo\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/boards/board-fooId/sprints/fooId")
@@ -197,7 +197,7 @@ public class SprintControllerTest extends TestBase {
                 .exec();
 
         given().header("userName", "someone")
-                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"status\":\"2\"}")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"sprintName\":\"sprintName-foo\",\"status\":\"2\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/boards/board-fooId/sprints/fooId")
