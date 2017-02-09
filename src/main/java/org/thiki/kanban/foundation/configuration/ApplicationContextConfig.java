@@ -21,7 +21,6 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thiki.kanban.foundation.exception.AuthenticationException;
-import org.thiki.kanban.foundation.exception.UnauthorisedException;
 
 import java.util.concurrent.TimeUnit;
 

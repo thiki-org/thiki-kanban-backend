@@ -11,7 +11,6 @@ import org.thiki.kanban.board.BoardsPersistence;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
-
 import javax.annotation.Resource;
 import java.text.MessageFormat;
 import java.util.List;
@@ -40,7 +39,7 @@ public class PagesService {
     }
 
     @CacheEvict(value = "page", key = "contains('#boardId')", allEntries = true)
-    public Page modify(String pageId, Page page,  String boardId, String userName) {
+    public Page modify(String pageId, Page page, String boardId, String userName) {
         logger.info("modify page:{}", page);
         pagesPersistence.modify(pageId, page);
         Page savedPage = pagesPersistence.findById(pageId);
@@ -57,6 +56,7 @@ public class PagesService {
         logger.info("Deleting page.pageId:{}", pageId);
         return pagesPersistence.deleteById(pageId);
     }
+
     @Cacheable(value = "page", key = "'pages'+#boardId")
     public List<Page> findByBoardId(String boardId) {
         logger.info("Loading pages by boardId:{}", boardId);

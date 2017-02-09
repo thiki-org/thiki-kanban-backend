@@ -133,6 +133,7 @@ public class ProceduresControllerTest extends TestBase {
                 .body("_links.self.href", endsWith("/boards/feeId/procedures/fooId"));
         assertEquals("newTitle", jdbcTemplate.queryForObject("select title from kb_procedure where id='fooId'", String.class));
     }
+
     @Scenario("更新procedure时,修改在制品数量")
     @Test
     public void shouldUpdateWipSuccessfully() {

@@ -15,10 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SessionInterceptor extends HandlerInterceptorAdapter {
-    private static Logger logger = LoggerFactory.getLogger(SessionInterceptor.class);
-
     private final static String SESSION_KEY = "sessionId";
     private final static String IP_KEY = "ip";
+    private static Logger logger = LoggerFactory.getLogger(SessionInterceptor.class);
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse arg1, Object arg2, Exception arg3)

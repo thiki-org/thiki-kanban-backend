@@ -22,13 +22,13 @@ import java.util.List;
  */
 @Configuration
 public class WebSpringConfig extends WebMvcConfigurerAdapter {
+    @Value("${server.contextPath}")
+    protected String contextPath;
+
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
-
-    @Value("${server.contextPath}")
-    protected String contextPath;
 
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {

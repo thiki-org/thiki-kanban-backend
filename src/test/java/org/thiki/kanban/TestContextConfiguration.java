@@ -2,12 +2,9 @@ package org.thiki.kanban;
 
 import freemarker.template.TemplateException;
 import org.springframework.context.annotation.Bean;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.thiki.kanban.foundation.mail.MailService;
 
 import javax.mail.MessagingException;
-import javax.sql.DataSource;
 import java.io.IOException;
 
 import static org.mockito.Matchers.any;
