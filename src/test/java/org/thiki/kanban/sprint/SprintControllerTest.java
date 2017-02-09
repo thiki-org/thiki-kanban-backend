@@ -179,6 +179,7 @@ public class SprintControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("status", equalTo(SprintCodes.SPRINT_COMPLETED))
+                .body("competedTime", notNullValue())
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
     }

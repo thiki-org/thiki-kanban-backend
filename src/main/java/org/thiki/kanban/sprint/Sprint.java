@@ -19,6 +19,7 @@ public class Sprint {
     private String endTime;
     @Range(min = 1, max = 2)
     private Integer status;
+    private String competedTime;
     private String creationTime;
     private String modificationTime;
     private int remainingDays;
@@ -98,5 +99,13 @@ public class Sprint {
 
     public boolean isCompleted() {
         return SprintCodes.SPRINT_COMPLETED.equals(status);
+    }
+
+    public String getCompetedTime() {
+        return competedTime;
+    }
+
+    public void setCompetedTime(String competedTime) {
+        this.competedTime = competedTime;
     }
 }

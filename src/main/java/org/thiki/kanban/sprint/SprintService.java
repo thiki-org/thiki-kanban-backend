@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
@@ -53,6 +54,7 @@ public class SprintService {
                 logger.info("Sprint was already archived.sprintId:{}", sprintId);
                 throw new BusinessException(SprintCodes.SPRINT_ALREADY_ARCHIVED);
             }
+            sprint.setCompetedTime(DateService.instance().getNow_EN());
         }
         sprintPersistence.update(sprintId, sprint, boardId);
         Sprint savedSprint = sprintPersistence.findById(sprintId);
