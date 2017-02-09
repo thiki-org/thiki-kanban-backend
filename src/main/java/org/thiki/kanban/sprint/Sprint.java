@@ -95,4 +95,8 @@ public class Sprint {
     public int getTotalDays() {
         return DateService.instance().daysBetween(this.startTime, this.endTime);
     }
+
+    public boolean isCompleted() {
+        return SprintCodes.SPRINT_COMPLETED.equals(status);
+    }
 }

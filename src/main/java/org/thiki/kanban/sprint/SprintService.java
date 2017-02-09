@@ -48,6 +48,12 @@ public class SprintService {
             logger.info("No specified sprint was found.sprintId:{}", sprintId);
             throw new BusinessException(SprintCodes.SPRINT_IS_NOT_EXIST);
         }
+        if (sprint.isCompleted()) {
+            if (originSprint.isCompleted()) {
+                logger.info("Sprint was already archived.sprintId:{}", sprintId);
+                throw new BusinessException(SprintCodes.SPRINT_ALREADY_ARCHIVED);
+            }
+        }
         sprintPersistence.update(sprintId, sprint, boardId);
         Sprint savedSprint = sprintPersistence.findById(sprintId);
         logger.info("Saved sprint:{}", savedSprint);

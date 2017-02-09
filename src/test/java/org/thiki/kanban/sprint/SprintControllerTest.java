@@ -182,4 +182,18 @@ public class SprintControllerTest extends TestBase {
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
     }
+
+    @Scenario("迭代完成时，如果当前迭代已经处于归档状态，则不允许操作")
+    @Test
+    public void notAllowedIfSprintWasAlreadyArchivedWhenCompletingSprint() {
+        dbPreparation.table("kb_sprint").names("id,start_time,end_time,board_id,status").values("fooId", "2017-02-04 12:11:44", "2017-02-05 12:11:44", "board-fooId", 2).exec();
+        given().header("userName", "someone")
+                .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"status\":\"2\"}")
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/board-fooId/sprints/fooId")
+                .then()
+                .body("code", equalTo(SprintCodes.SPRINT_ALREADY_ARCHIVED.code()))
+                .body("message", equalTo(SprintCodes.SPRINT_ALREADY_ARCHIVED.message()));
+    }
 }
