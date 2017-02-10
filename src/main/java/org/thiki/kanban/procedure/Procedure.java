@@ -1,5 +1,6 @@
 package org.thiki.kanban.procedure;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -126,14 +127,17 @@ public class Procedure {
         this.status = status;
     }
 
+    @JsonIgnore
     public boolean isInSprint() {
         return ProcedureCodes.PROCEDURE_TYPE_IN_PLAN.equals(this.type);
     }
 
+    @JsonIgnore
     public boolean isInDoneStatus() {
         return ProcedureCodes.PROCEDURE_STATUS_DONE.equals(this.status);
     }
 
+    @JsonIgnore
     public boolean isArchived() {
         return ProcedureCodes.PROCEDURE_TYPE_ARCHIVE.equals(this.type);
     }
