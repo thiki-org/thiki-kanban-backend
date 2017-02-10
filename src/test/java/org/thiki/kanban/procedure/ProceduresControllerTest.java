@@ -275,6 +275,20 @@ public class ProceduresControllerTest extends TestBase {
                 .body("_links.sortNumbers.href", endsWith("/boards/feeId/procedures/sortNumbers"));
     }
 
+    @Scenario("通过指定状态的procedure-默认为迭代视图")
+    @Test
+    public void shouldReturnDefaultSprintProceduresSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId1','this is the first procedure.','tao','feeId',1,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId2','this is the first procedure.','tao','feeId',3,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first procedure.','tao','feeId',1,9)");
+        given().header("userName", userName)
+                .when()
+                .get("/boards/feeId/procedures")
+                .then()
+                .statusCode(200)
+                .body("procedures.size()", equalTo(2));
+    }
+
     @Scenario("通过指定状态的procedure-迭代视图")
     @Test
     public void shouldReturnSprintProceduresSuccessfully() {
@@ -288,6 +302,7 @@ public class ProceduresControllerTest extends TestBase {
                 .statusCode(200)
                 .body("procedures.size()", equalTo(2));
     }
+
 
     @Scenario("通过指定状态的procedure-全景视图")
     @Test

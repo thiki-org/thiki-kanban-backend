@@ -55,7 +55,7 @@
     <select id="loadByBoardIdAndType" parameterType="java.lang.String"
             resultType="org.thiki.kanban.procedure.Procedure">
         SELECT * FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId}
-        <if test="viewType=='sprint'">
+        <if test="viewType=='sprint'|| viewType == null">
             AND type=1
         </if>
 
