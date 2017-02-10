@@ -55,8 +55,20 @@
     <select id="loadByBoardIdAndType" parameterType="java.lang.String"
             resultType="org.thiki.kanban.procedure.Procedure">
         SELECT * FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId}
-        <if test="type>-1">
-            AND type=#{type}
+        <if test="viewType=='sprint'">
+            AND type=1
+        </if>
+
+        <if test="viewType=='fullView'">
+            AND 1=1
+        </if>
+
+        <if test="viewType=='archive'">
+            AND type=9
+        </if>
+
+        <if test="viewType=='roadMap'">
+            AND status =9 AND (TYPE !=1 AND status=0)
         </if>
         ORDER BY sort_number
     </select>

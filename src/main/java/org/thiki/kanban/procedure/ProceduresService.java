@@ -47,7 +47,7 @@ public class ProceduresService {
     public List<Procedure> loadByBoardId(String boardId, String viewType) {
         logger.info("Loading the procedures of the board [{}]", boardId);
 
-        List<Procedure> procedures = proceduresPersistence.loadByBoardIdAndType(boardId, ViewType.value(viewType).value());
+        List<Procedure> procedures = proceduresPersistence.loadByBoardIdAndType(boardId, viewType);
         logger.info("The procedures of the board are {}", procedures);
         return procedures;
     }
@@ -111,7 +111,7 @@ public class ProceduresService {
         for (Procedure procedure : procedures) {
             proceduresPersistence.resort(procedure);
         }
-        List<Procedure> resortedProcedures = loadByBoardId(boardId, ViewType.VIEW_TYPE_SPRINT.type());
+        List<Procedure> resortedProcedures = loadByBoardId(boardId, ProcedureCodes.VIEW_TYPE_SPRINT);
         logger.info("Resorted procedures:{}", resortedProcedures);
         return resortedProcedures;
     }
