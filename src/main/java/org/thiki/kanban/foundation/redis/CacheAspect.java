@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.cache;
+package org.thiki.kanban.foundation.redis;
 
 import org.apache.catalina.connector.RequestFacade;
 import org.aspectj.lang.annotation.After;

@@ -59,7 +59,7 @@ public class SnapshotService {
         JSONObject boardJSON = (JSONObject) boardResource.toResource(board, userName);
 
         List<Procedure> procedureList = proceduresService.loadByBoardId(boardId, viewType);
-        JSONObject proceduresJSON = (JSONObject) proceduresResource.toResource(procedureList, boardId, null, userName);
+        JSONObject proceduresJSON = (JSONObject) proceduresResource.toResource(procedureList, boardId, viewType, userName);
         JSONArray proceduresArray = (JSONArray) proceduresJSON.get("procedures");
         JSONArray newProceduresArray = loadCards(boardId, userName, proceduresArray);
         proceduresJSON.put("procedures", newProceduresArray);

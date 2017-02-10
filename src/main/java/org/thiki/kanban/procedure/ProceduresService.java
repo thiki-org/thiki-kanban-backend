@@ -3,6 +3,7 @@ package org.thiki.kanban.procedure;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsService;
@@ -44,6 +45,7 @@ public class ProceduresService {
         return proceduresPersistence.findById(id);
     }
 
+    @Cacheable(value = "procedure", key = "'procedures'+#boardId+#viewType")
     public List<Procedure> loadByBoardId(String boardId, String viewType) {
         logger.info("Loading the procedures of the board [{}]", boardId);
 

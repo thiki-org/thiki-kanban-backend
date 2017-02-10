@@ -1,4 +1,4 @@
-package org.thiki.kanban.foundation.configuration;
+package org.thiki.kanban.foundation.redis;
 
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;

@@ -27,9 +27,9 @@ public class ProceduresResource extends RestResource {
     @Resource
     private ProcedureResource procedureResourceService;
 
-    @Cacheable(value = "procedure", key = "#userName+'procedures'+#boardId")
+    @Cacheable(value = "procedure", key = "#userName+'procedures'+#boardId+#viewType")
     public Object toResource(List<Procedure> procedureList, String boardId, String viewType, String userName) throws Exception {
-        logger.info("build procedures resource.board:{},userName:{}", boardId, userName);
+        logger.info("build procedures resource.board:{},viewType:{},userName:{}", boardId, viewType, userName);
         ProceduresResource proceduresResource = new ProceduresResource();
         List<Object> procedureResources = new ArrayList<>();
         for (Procedure procedure : procedureList) {
