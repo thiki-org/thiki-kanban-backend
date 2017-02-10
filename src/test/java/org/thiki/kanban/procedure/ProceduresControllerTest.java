@@ -277,15 +277,29 @@ public class ProceduresControllerTest extends TestBase {
 
     @Scenario("通过指定状态的procedure-迭代视图")
     @Test
-    public void shouldReturnSpecifiedStatusProceduresSuccessfully() {
+    public void shouldReturnSprintProceduresSuccessfully() {
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId1','this is the first procedure.','tao','feeId',1,9)");
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId2','this is the first procedure.','tao','feeId',3,9)");
         jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first procedure.','tao','feeId',1,9)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/procedures?status=" + ProcedureCodes.VIEW_TYPE_SPRINT)
+                .get("/boards/feeId/procedures?viewType=" + ViewType.VIEW_TYPE_SPRINT.type())
                 .then()
                 .statusCode(200)
                 .body("procedures.size()", equalTo(2));
+    }
+
+    @Scenario("通过指定状态的procedure-全景视图")
+    @Test
+    public void shouldReturnAllProceduresSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId1','this is the first procedure.','tao','feeId',1,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId2','this is the first procedure.','tao','feeId',3,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first procedure.','tao','feeId',1,9)");
+        given().header("userName", userName)
+                .when()
+                .get("/boards/feeId/procedures?viewType=" + ViewType.VIEW_TYPE_FULL_VIEW.type())
+                .then()
+                .statusCode(200)
+                .body("procedures.size()", equalTo(3));
     }
 }
