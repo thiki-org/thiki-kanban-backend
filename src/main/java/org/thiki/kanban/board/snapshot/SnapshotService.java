@@ -15,7 +15,6 @@ import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsResource;
 import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.procedure.Procedure;
-import org.thiki.kanban.procedure.ProcedureCodes;
 import org.thiki.kanban.procedure.ProceduresResource;
 import org.thiki.kanban.procedure.ProceduresService;
 
@@ -46,19 +45,19 @@ public class SnapshotService {
     private SnapshotExecutor snapshotExecutor;
 
     @Cacheable(value = "board", key = "'board-snapshot'+#boardId+#userName")
-    public Object loadSnapshotByBoard(String boardId, String userName) throws Exception {
+    public Object loadSnapshotByBoard(String boardId, String viewType, String userName) throws Exception {
         logger.info("load snapshot.");
-        JSONObject boardJSON = loadBoard(boardId, userName);
+        JSONObject boardJSON = loadBoard(boardId, viewType, userName);
         logger.info("snapshot loading completed.");
         return boardJSON;
     }
 
-    private JSONObject loadBoard(String boardId, String userName) throws Exception {
+    private JSONObject loadBoard(String boardId, String viewType, String userName) throws Exception {
         logger.info("load board tags.");
         Board board = boardsService.findById(boardId);
         JSONObject boardJSON = (JSONObject) boardResource.toResource(board, userName);
 
-        List<Procedure> procedureList = proceduresService.loadByBoardId(boardId, ProcedureCodes.VIEW_TYPE_SPRINT);
+        List<Procedure> procedureList = proceduresService.loadByBoardId(boardId, viewType);
         JSONObject proceduresJSON = (JSONObject) proceduresResource.toResource(procedureList, boardId, null, userName);
         JSONArray proceduresArray = (JSONArray) proceduresJSON.get("procedures");
         JSONArray newProceduresArray = loadCards(boardId, userName, proceduresArray);

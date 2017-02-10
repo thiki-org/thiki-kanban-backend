@@ -71,8 +71,20 @@ public class BoardResource extends RestResource {
             Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(board.getId(), userName)).withRel("tags");
             boardResource.add(tlink.from(tagsLink).build());
 
-            Link snapshotAllLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), userName)).withRel("snapshot");
-            boardResource.add(tlink.from(snapshotAllLink).build(userName));
+            Link snapshotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), null, userName)).withRel("snapshot");
+            boardResource.add(tlink.from(snapshotLink).build(userName));
+
+            Link sprintViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), ProcedureCodes.VIEW_TYPE_SPRINT, userName)).withRel(ProcedureCodes.VIEW_TYPE_SPRINT + "Snapshot");
+            boardResource.add(tlink.from(sprintViewSnapShotLink).build(userName));
+
+            Link fullViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), ProcedureCodes.VIEW_TYPE_FULL_VIEW, userName)).withRel(ProcedureCodes.VIEW_TYPE_FULL_VIEW + "Snapshot");
+            boardResource.add(tlink.from(fullViewSnapShotLink).build(userName));
+
+            Link roadMapViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), ProcedureCodes.VIEW_TYPE_ROAD_MAP, userName)).withRel(ProcedureCodes.VIEW_TYPE_ROAD_MAP + "Snapshot");
+            boardResource.add(tlink.from(roadMapViewSnapShotLink).build(userName));
+
+            Link archiveViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), ProcedureCodes.VIEW_TYPE_ARCHIVE, userName)).withRel(ProcedureCodes.VIEW_TYPE_ARCHIVE + "Snapshot");
+            boardResource.add(tlink.from(archiveViewSnapShotLink).build(userName));
 
             Link sprintsLink = linkTo(methodOn(SprintController.class).createSprint(null, board.getId(), userName)).withRel("sprints");
             boardResource.add(tlink.from(sprintsLink).build(userName));

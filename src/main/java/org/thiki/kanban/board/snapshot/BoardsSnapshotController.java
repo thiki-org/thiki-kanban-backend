@@ -1,10 +1,7 @@
 package org.thiki.kanban.board.snapshot;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
@@ -18,8 +15,8 @@ public class BoardsSnapshotController {
     private SnapshotService snapshotService;
 
     @RequestMapping(value = "/{userName}/boards/{boardId}/snapshot", method = RequestMethod.GET)
-    public HttpEntity load(@PathVariable String boardId, @PathVariable String userName) throws Exception {
-        Object board = snapshotService.loadSnapshotByBoard(boardId, userName);
+    public HttpEntity load(@PathVariable String boardId, @RequestParam(required = false) String viewType, @PathVariable String userName) throws Exception {
+        Object board = snapshotService.loadSnapshotByBoard(boardId, viewType, userName);
         return Response.build(board);
     }
 }
