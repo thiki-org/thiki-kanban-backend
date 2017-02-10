@@ -332,4 +332,20 @@ public class ProceduresControllerTest extends TestBase {
                 .statusCode(200)
                 .body("procedures.size()", equalTo(2));
     }
+
+
+    @Scenario("通过指定状态的procedure-产品路线视图")
+    @Test
+    public void shouldReturnRoadMapProceduresSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId1','this is the first procedure.','tao','feeId',1,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId2','this is the first procedure.','tao','feeId',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first procedure.','tao','feeId',9,0)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId4','this is the first procedure.','tao','feeId',9,0)");
+        given().header("userName", userName)
+                .when()
+                .get("/boards/feeId/procedures?viewType=" + ProcedureCodes.VIEW_TYPE_ROAD_MAP)
+                .then()
+                .statusCode(200)
+                .body("procedures.size()", equalTo(3));
+    }
 }
