@@ -68,7 +68,7 @@
         </if>
 
         <if test="viewType=='roadMapView'">
-            AND status =9 OR (TYPE !=1 AND status=0)
+            AND (status =9 OR (TYPE !=1 AND status=0))
         </if>
         ORDER BY sort_number
     </select>

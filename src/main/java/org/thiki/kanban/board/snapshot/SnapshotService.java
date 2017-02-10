@@ -27,6 +27,7 @@ import java.util.concurrent.*;
  */
 @Service
 public class SnapshotService {
+    public static final int MAX_THREAD = 8;
     public static Logger logger = LoggerFactory.getLogger(SnapshotService.class);
 
     @Resource
@@ -88,11 +89,10 @@ public class SnapshotService {
 
     private JSONArray loadOthersByCard(String boardId, String userName, String procedureId, JSONArray cardsArray) throws Exception {
         JSONArray newCardsArray = new JSONArray();
-        Integer nThreads = cardsArray == null ? 0 : cardsArray.size();
-        if (nThreads == 0) {
+        if (cardsArray == null || cardsArray.size() == 0) {
             return new JSONArray();
         }
-        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(nThreads);
+        ExecutorService fixedThreadPool = Executors.newFixedThreadPool(MAX_THREAD);
         RequestAttributes currentRequestAttributes = RequestContextHolder.getRequestAttributes();
         RequestContextHolder.setRequestAttributes(currentRequestAttributes, Boolean.TRUE);
         CompletionService<JSONObject> completionService = new ExecutorCompletionService<>(fixedThreadPool);
