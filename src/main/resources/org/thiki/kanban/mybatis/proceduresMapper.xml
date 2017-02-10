@@ -52,8 +52,13 @@
         SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND kb_procedure.title=#{title}
     </select>
 
-    <select id="loadByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">
-        SELECT * FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} ORDER BY sort_number
+    <select id="loadByBoardIdAndType" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.procedure.Procedure">
+        SELECT * FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId}
+        <if test="type>-1">
+            AND type=#{type}
+        </if>
+        ORDER BY sort_number
     </select>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">

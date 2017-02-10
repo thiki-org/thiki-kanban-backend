@@ -35,7 +35,7 @@ public class ProcedureResource extends RestResource {
             Link cardsLink = linkTo(methodOn(CardsController.class).create(null, null, boardId, procedure.getId())).withRel("cards");
             procedureResource.add(tlink.from(cardsLink).build(userName));
         }
-        Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, userName)).withRel("all");
+        Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, null, userName)).withRel("all");
         procedureResource.add(tlink.from(allLink).build(userName));
         logger.info("procedure resource building completed.board:{},userName:{}", boardId, userName);
         return procedureResource.getResource();
@@ -45,7 +45,7 @@ public class ProcedureResource extends RestResource {
     public Object toResource(String boardId, String userName) throws Exception {
         logger.info("build procedure resource.board:{},userName:{}", boardId, userName);
         ProcedureResource procedureResource = new ProcedureResource();
-        Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, userName)).withRel("all");
+        Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, null, userName)).withRel("all");
         procedureResource.add(tlink.from(allLink).build(userName));
         logger.info("procedure resource building completed.board:{},userName:{}", boardId, userName);
         return procedureResource.getResource();

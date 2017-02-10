@@ -28,8 +28,8 @@ public class BoardSnapShotLoaderTest extends TestBase {
                 .values("boardId", "board-name", "someone", "someone").exec();
 
         dbPreparation.table("kb_procedure")
-                .names("id,title,author,board_id")
-                .values("procedure-fooId", "procedure-name", userName, "boardId").exec();
+                .names("id,title,author,board_id,type")
+                .values("procedure-fooId", "procedure-name", userName, "boardId", 1).exec();
 
         dbPreparation.table("kb_card")
                 .names("id,summary,content,author,procedure_id")

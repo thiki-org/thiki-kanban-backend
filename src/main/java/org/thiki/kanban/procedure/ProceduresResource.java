@@ -28,7 +28,7 @@ public class ProceduresResource extends RestResource {
     private ProcedureResource procedureResourceService;
 
     @Cacheable(value = "procedure", key = "#userName+'procedures'+#boardId")
-    public Object toResource(List<Procedure> procedureList, String boardId, String userName) throws Exception {
+    public Object toResource(List<Procedure> procedureList, String boardId, String viewType, String userName) throws Exception {
         logger.info("build procedures resource.board:{},userName:{}", boardId, userName);
         ProceduresResource proceduresResource = new ProceduresResource();
         List<Object> procedureResources = new ArrayList<>();
@@ -38,7 +38,7 @@ public class ProceduresResource extends RestResource {
         }
 
         proceduresResource.buildDataObject("procedures", procedureResources);
-        Link selfLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, userName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, viewType, userName)).withSelfRel();
         proceduresResource.add(tlink.from(selfLink).build(userName));
 
         Link sortNumbersLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId, userName)).withRel("sortNumbers");

@@ -17,6 +17,7 @@ import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.procedure.Procedure;
 import org.thiki.kanban.procedure.ProceduresResource;
 import org.thiki.kanban.procedure.ProceduresService;
+import org.thiki.kanban.procedure.ViewType;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -57,8 +58,8 @@ public class SnapshotService {
         Board board = boardsService.findById(boardId);
         JSONObject boardJSON = (JSONObject) boardResource.toResource(board, userName);
 
-        List<Procedure> procedureList = proceduresService.loadByBoardId(boardId);
-        JSONObject proceduresJSON = (JSONObject) proceduresResource.toResource(procedureList, boardId, userName);
+        List<Procedure> procedureList = proceduresService.loadByBoardId(boardId, ViewType.VIEW_TYPE_SPRINT.type());
+        JSONObject proceduresJSON = (JSONObject) proceduresResource.toResource(procedureList, boardId, null, userName);
         JSONArray proceduresArray = (JSONArray) proceduresJSON.get("procedures");
         JSONArray newProceduresArray = loadCards(boardId, userName, proceduresArray);
         proceduresJSON.put("procedures", newProceduresArray);

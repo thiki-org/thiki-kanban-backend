@@ -15,7 +15,7 @@ public interface ProceduresPersistence {
 
     Procedure findById(@Param("procedureId") String procedureId);
 
-    List<Procedure> loadByBoardId(String boardId);
+    List<Procedure> loadByBoardIdAndType(@Param("boardId") String boardId, @Param("type") Integer type);
 
     Integer update(@Param("procedureId") String procedureId, @Param("procedure") Procedure procedure);
 

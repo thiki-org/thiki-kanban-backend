@@ -23,9 +23,9 @@ public class ProceduresController {
     private ResortProceduresResource resortProceduresResource;
 
     @RequestMapping(value = "/boards/{boardId}/procedures", method = RequestMethod.GET)
-    public HttpEntity loadAll(@PathVariable String boardId, @RequestHeader String userName) throws Exception {
-        List<Procedure> procedureList = proceduresService.loadByBoardId(boardId);
-        return Response.build(proceduresResource.toResource(procedureList, boardId, userName));
+    public HttpEntity loadAll(@PathVariable String boardId, @RequestParam(required = false) String viewType, @RequestHeader String userName) throws Exception {
+        List<Procedure> procedureList = proceduresService.loadByBoardId(boardId, viewType);
+        return Response.build(proceduresResource.toResource(procedureList, boardId, viewType, userName));
     }
 
     @RequestMapping(value = "/boards/{boardId}/procedures/{id}", method = RequestMethod.GET)
@@ -57,6 +57,6 @@ public class ProceduresController {
     @RequestMapping(value = "/boards/{boardId}/procedures/sortNumbers", method = RequestMethod.PUT)
     public HttpEntity resort(@RequestBody List<Procedure> procedures, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
         List<Procedure> procedureList = proceduresService.resortProcedures(procedures, boardId);
-        return Response.build(resortProceduresResource.toResource(procedureList, boardId, userName));
+        return Response.build(resortProceduresResource.toResource(procedureList, boardId, null, userName));
     }
 }

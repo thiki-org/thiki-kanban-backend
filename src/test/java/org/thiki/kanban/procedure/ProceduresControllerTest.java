@@ -214,8 +214,8 @@ public class ProceduresControllerTest extends TestBase {
     @Scenario("重新排序>用户创建工序后,可以调整其顺序")
     @Test
     public void resortProcedure() {
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('procedure-fooId1','procedureTitle1',1,'feeId',0)");
-        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number) VALUES ('procedure-fooId2','procedureTitle2',1,'feeId',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number,type) VALUES ('procedure-fooId1','procedureTitle1',1,'feeId',0,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,sort_number,type) VALUES ('procedure-fooId2','procedureTitle2',1,'feeId',1,1)");
 
         given().header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -273,5 +273,19 @@ public class ProceduresControllerTest extends TestBase {
                 .body("procedures[0]._links.cards.href", endsWith("/boards/feeId/procedures/fooId/cards"))
                 .body("_links.self.href", endsWith("/boards/feeId/procedures"))
                 .body("_links.sortNumbers.href", endsWith("/boards/feeId/procedures/sortNumbers"));
+    }
+
+    @Scenario("通过指定状态的procedure-迭代视图")
+    @Test
+    public void shouldReturnSpecifiedStatusProceduresSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId1','this is the first procedure.','tao','feeId',1,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId2','this is the first procedure.','tao','feeId',3,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first procedure.','tao','feeId',1,9)");
+        given().header("userName", userName)
+                .when()
+                .get("/boards/feeId/procedures?status=" + ProcedureCodes.VIEW_TYPE_SPRINT)
+                .then()
+                .statusCode(200)
+                .body("procedures.size()", equalTo(2));
     }
 }

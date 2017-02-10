@@ -24,7 +24,7 @@ public class ResortProceduresResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    public Object toResource(List<Procedure> procedureList, String boardId, String userName) throws Exception {
+    public Object toResource(List<Procedure> procedureList, String boardId, String viewType, String userName) throws Exception {
         ResortProceduresResource resortProceduresResource = new ResortProceduresResource();
         List<Object> procedureResources = new ArrayList<>();
         for (Procedure procedure : procedureList) {
@@ -33,7 +33,7 @@ public class ResortProceduresResource extends RestResource {
         }
 
         resortProceduresResource.buildDataObject("procedures", procedureResources);
-        Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, userName)).withRel("procedures");
+        Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(boardId, viewType, userName)).withRel("procedures");
         resortProceduresResource.add(tlink.from(proceduresLink).build(userName));
 
         Link selfLink = linkTo(methodOn(ProceduresController.class).resort(procedureList, boardId, userName)).withSelfRel();
