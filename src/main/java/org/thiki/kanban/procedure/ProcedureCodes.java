@@ -26,10 +26,10 @@ public enum ProcedureCodes {
     public static final Integer PROCEDURE_TYPE_IN_PLAN = 1;
     public static final Integer PROCEDURE_TYPE_ARCHIVE = 9;
 
-    public static final String VIEW_TYPE_SPRINT = "sprint";
+    public static final String VIEW_TYPE_SPRINT = "sprintView";
     public static final String VIEW_TYPE_FULL_VIEW = "fullView";
-    public static final String VIEW_TYPE_ROAD_MAP = "roadMap";
-    public static final String VIEW_TYPE_ARCHIVE = "archive";
+    public static final String VIEW_TYPE_ROAD_MAP = "roadMapView";
+    public static final String VIEW_TYPE_ARCHIVE = "archiveView";
     private String code;
     private String message;
 

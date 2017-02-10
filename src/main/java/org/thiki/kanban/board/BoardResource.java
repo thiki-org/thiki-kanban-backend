@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.board.snapshot.BoardsSnapshotController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
+import org.thiki.kanban.procedure.ProcedureCodes;
 import org.thiki.kanban.procedure.ProceduresController;
 import org.thiki.kanban.projects.project.ProjectsController;
 import org.thiki.kanban.sprint.SprintController;
@@ -49,6 +50,19 @@ public class BoardResource extends RestResource {
 
             Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), null, userName)).withRel("procedures");
             boardResource.add(tlink.from(proceduresLink).build());
+
+            Link sprintViewLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), ProcedureCodes.VIEW_TYPE_SPRINT, userName)).withRel(ProcedureCodes.VIEW_TYPE_SPRINT);
+            boardResource.add(tlink.from(sprintViewLink).build());
+
+            Link fullViewLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), ProcedureCodes.VIEW_TYPE_FULL_VIEW, userName)).withRel(ProcedureCodes.VIEW_TYPE_FULL_VIEW);
+            boardResource.add(tlink.from(fullViewLink).build());
+
+            Link roadMapViewLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), ProcedureCodes.VIEW_TYPE_ROAD_MAP, userName)).withRel(ProcedureCodes.VIEW_TYPE_ROAD_MAP);
+            boardResource.add(tlink.from(roadMapViewLink).build());
+
+            Link archiveViewLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), ProcedureCodes.VIEW_TYPE_ARCHIVE, userName)).withRel(ProcedureCodes.VIEW_TYPE_ARCHIVE);
+            boardResource.add(tlink.from(archiveViewLink).build());
+
             if (board.getProjectId() != null) {
                 Link projectLink = linkTo(methodOn(ProjectsController.class).findById(board.getProjectId(), userName)).withRel("project");
                 boardResource.add(tlink.from(projectLink).build());
