@@ -100,7 +100,7 @@ public class PageControllerTest extends TestBase {
                 .body("message", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.message()));
     }
 
-    @Scenario("获取指定文章>用户从文章后，可以从文库中获取指定文章")
+    @Scenario("获取指定文章>用户创建文章后，可以从文库中获取指定文章")
     @Test
     public void loadPageById() throws Exception {
         dbPreparation.table("kb_page")
@@ -130,5 +130,24 @@ public class PageControllerTest extends TestBase {
                 .statusCode(404)
                 .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))
                 .body("message", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.message()));
+    }
+
+    @Scenario("根据看板获取文章>用户创建文章后，可以从文库中获取指定文章集")
+    @Test
+    public void loadPages() throws Exception {
+        dbPreparation.table("kb_page")
+                .names("id,title,content,board_id,author")
+                .values("fooId", "page-title", "page-content", "boardId-foo", userName).exec();
+
+        given().header("userName", userName)
+                .when()
+                .get("/boards/boardId-foo/pages")
+                .then()
+                .statusCode(200)
+                .body("pages[0].title", equalTo("page-title"))
+                .body("pages[0].content", equalTo("page-content"))
+                .body("pages[0].author", equalTo(userName))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/pages"))
+                .body("_links.board.href", endsWith("/boards/boardId-foo"));
     }
 }

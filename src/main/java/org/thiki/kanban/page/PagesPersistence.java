@@ -19,4 +19,6 @@ public interface PagesPersistence {
     Integer deleteById(@Param("id") String id);
 
     Integer removePage(@Param("pageId") String pageId, @Param("boardId") String boardId);
+
+    List<Page> findByBoard(@Param("boardId") String boardId);
 }

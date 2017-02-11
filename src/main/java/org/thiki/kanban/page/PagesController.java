@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by winie on 2017/2/6.
@@ -17,6 +18,9 @@ public class PagesController {
     private PagesService pagesService;
     @Resource
     private PageResource pageResource;
+
+    @Resource
+    private PagesResource pagesResource;
 
     @RequestMapping(value = "/boards/{boardId}/pages", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Page page, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
@@ -37,8 +41,9 @@ public class PagesController {
     }
 
     @RequestMapping(value = "/boards/{boardId}/pages", method = RequestMethod.GET)
-    public HttpEntity findByBoard(@PathVariable String boardId, @RequestHeader String userName) {
-        return null;
+    public HttpEntity findByBoard(@PathVariable String boardId, @RequestHeader String userName) throws Exception {
+        List<Page> pages = pagesService.loadPages(boardId, userName);
+        return Response.build(pagesResource.toResource(pages, boardId, userName));
     }
 
     @RequestMapping(value = "/boards/{boardId}/pages/{pageId}", method = RequestMethod.PUT)

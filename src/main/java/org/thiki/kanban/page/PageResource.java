@@ -15,9 +15,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 /**
- * 页面资源
- *
- * @author joeaniu
+ * Created by xubt on 02/11/17.
  */
 
 @Service

@@ -8,6 +8,7 @@ import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @Service
@@ -60,5 +61,12 @@ public class PagesService {
         }
         logger.info("Loaded page:{}", page);
         return page;
+    }
+
+    public List<Page> loadPages(String boardId, String userName) {
+        logger.info("Loading boardId:{},userName:{}", boardId, userName);
+        List<Page> pages = pagesPersistence.findByBoard(boardId);
+        logger.info("Loaded page:{}", pages);
+        return pages;
     }
 }

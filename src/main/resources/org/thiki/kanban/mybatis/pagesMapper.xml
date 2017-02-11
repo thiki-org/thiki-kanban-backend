@@ -21,6 +21,10 @@
         SELECT * FROM kb_page WHERE delete_status=0 AND id= #{pageId} AND board_id=#{boardId}
     </select>
 
+    <select id="findByBoard" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
+        SELECT * FROM kb_page WHERE delete_status=0 AND board_id=#{boardId}
+    </select>
+
     <select id="findByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
         SELECT * FROM kb_page WHERE board_id= #{board_id} AND delete_status=0 ORDER BY modification_time DESC
     </select>
@@ -28,5 +32,4 @@
     <delete id="removePage" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_page SET delete_status=1 WHERE id=#{pageId} AND board_id=#{boardId} AND delete_status=0
     </delete>
-
 </mapper>
