@@ -1,12 +1,11 @@
 package org.thiki.kanban.page;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
+import org.thiki.kanban.foundation.common.Response;
 
-import java.util.List;
+import javax.annotation.Resource;
 
 /**
  * Created by winie on 2017/2/6.
@@ -14,18 +13,24 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "")
 public class PagesController {
-    private static Logger logger = LoggerFactory.getLogger(PagesController.class);
-
     @Autowired
     private PagesService pagesService;
+    @Resource
+    private PageResource pageResource;
 
+    @RequestMapping(value = "/boards/{boardId}/pages", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Page page, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
+        Page savedPage = pagesService.addPage(page, boardId, userName);
+        return Response.post(pageResource.toResource(savedPage, boardId, userName));
+    }
 
-    @RequestMapping(value = "/boards/{boardId}/pages", method = RequestMethod.GET)
-    public HttpEntity findByBoardId(@PathVariable String boardId, @RequestHeader String userName) throws Exception {
-        logger.info("Loading pages by boardId [{}]", boardId);
-        List<Page> pageList = pagesService.findByBoardId(boardId);
-        //return Response.build(cardsResource.toResource(pageList, boardId, userName));
+    @RequestMapping(value = "/boards/{boardId}/pages/{pageId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String pageId, @RequestHeader String userName) throws Exception {
         return null;
     }
 
+    @RequestMapping(value = "/boards/{boardId}/pages", method = RequestMethod.GET)
+    public HttpEntity findByBoard(@PathVariable String boardId, @RequestHeader String userName) {
+        return null;
+    }
 }

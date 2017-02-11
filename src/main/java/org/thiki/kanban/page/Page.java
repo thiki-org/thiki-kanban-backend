@@ -7,17 +7,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * 页面
- *
- * @author winie
+ * Created by xubt on 02/11/17.
  */
 public class Page {
     private String id;
 
-    @NotNull(message = PageCodes.summaryIsRequired)
-    @NotEmpty(message = PageCodes.summaryIsRequired)
-    @Length(max = 200, message = PageCodes.summaryIsInvalid)
-    private String summary;
+    @NotNull(message = PageCodes.titleIsRequired)
+    @NotEmpty(message = PageCodes.titleIsRequired)
+    @Length(max = 40, message = PageCodes.titleIsInvalid)
+    private String title;
     private String content;
     private String boardId;
 
@@ -57,12 +55,12 @@ public class Page {
         this.id = id;
     }
 
-    public String getSummary() {
-        return summary;
+    public String getTitle() {
+        return title;
     }
 
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {

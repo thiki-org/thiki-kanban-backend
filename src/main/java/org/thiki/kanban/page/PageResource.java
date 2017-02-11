@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 
@@ -23,14 +24,22 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class PageResource extends RestResource {
     public static Logger logger = LoggerFactory.getLogger(PageResource.class);
     @Resource
-    private TLink tLink;
+    private TLink tlink;
 
     @Cacheable(value = "page", key = "#userName+#boardId")
-    public Object toResource(String boardId, String userName) throws Exception {
+    public Object toResource(Page page, String boardId, String userName) throws Exception {
         logger.info("build page resource.board:{},,userName:{}", boardId, userName);
         PageResource pageResource = new PageResource();
-        Link pageLink = linkTo(methodOn(PagesController.class).findByBoardId(boardId, userName)).withRel("pages");
-        pageResource.add(tLink.from(pageLink).build(userName));
+        pageResource.domainObject = page;
+        if (page != null) {
+            Link selfLink = linkTo(methodOn(PagesController.class).findById(boardId, page.getId(), userName)).withSelfRel();
+            pageResource.add(tlink.from(selfLink).build(userName));
+
+            Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
+            pageResource.add(tlink.from(boardLink).build(userName));
+        }
+        Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, userName)).withRel("pages");
+        pageResource.add(tlink.from(pagesLink).build(userName));
         logger.info("page resource building completed.board:{},userName:{}", boardId, userName);
         return pageResource.getResource();
     }

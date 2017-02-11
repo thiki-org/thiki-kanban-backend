@@ -2,17 +2,17 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="oorg.thiki.kanban.page.PagesPersistence">
+<mapper namespace="org.thiki.kanban.page.PagesPersistence">
 
-    <insert id="create" parameterType="org.thiki.kanban.page.Page">
+    <insert id="addPage" parameterType="org.thiki.kanban.page.Page">
         INSERT INTO
-        kb_page(id,summary, content,code, author, board_id) VALUES (#{card.id},#{page.summary},
-        #{page.content},#{page.code}, #{userName}, #{page.boardId})
+        kb_page(id,title, content, board_id,author) VALUES (#{page.id},#{page.title},
+        #{page.content}, #{boardId}, #{userName})
     </insert>
 
     <update id="modify" parameterType="org.thiki.kanban.page.Page" flushCache="true">
         UPDATE kb_page SET
-        summary = #{page.summary},
+        title = #{page.title},
         content = #{page.content},
         author = #{page.author},
         board_id = #{page.boardId}
@@ -20,7 +20,7 @@
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
-        SELECT * FROM kb_page WHERE id= #{id}
+        SELECT * FROM kb_page WHERE delete_status=0 AND id= #{pageId}
     </select>
 
     <select id="findByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">

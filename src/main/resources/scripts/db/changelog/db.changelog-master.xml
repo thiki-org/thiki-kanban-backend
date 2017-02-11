@@ -617,4 +617,24 @@
             <column name="archive_id" type="varchar(40)" defaultValue=""/>
         </addColumn>
     </changeSet>
+
+    <changeSet id="25" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_page" columnName="title"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_page">
+            <column name="title" type="varchar(40)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="26" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="kb_page" columnName="summary"/>
+        </preConditions>
+        <dropColumn columnName="summary" tableName="kb_page" schemaName="public"/>
+    </changeSet>
 </databaseChangeLog>
