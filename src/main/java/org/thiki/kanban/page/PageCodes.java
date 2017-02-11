@@ -7,9 +7,9 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  */
 public enum PageCodes {
 
-    PAGE_IS_NOT_EXISTS("001", "页面未找到。");
-    public static final String titleIsRequired = "页面标题不能为空。";
-    public static final String titleIsInvalid = "页面标题长度超限,请保持在40个字符以内。";
+    PAGE_IS_NOT_EXISTS("001", "文章未找到。");
+    public static final String titleIsRequired = "文章标题不能为空。";
+    public static final String titleIsInvalid = "文章标题长度超限,请保持在40个字符以内。";
     private String code;
     private String message;
 

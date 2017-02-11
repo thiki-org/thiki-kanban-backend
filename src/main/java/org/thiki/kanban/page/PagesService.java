@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
+import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 
@@ -33,6 +34,10 @@ public class PagesService {
     @CacheEvict(value = "page", key = "contains('#{boardId}')", allEntries = true)
     public Page modifyPage(Page page, String pageId, String boardId, String userName) {
         logger.info("Modifying pageId:{},boardId:{},page:{},userName:{}", pageId, boardId, page, userName);
+        Page originPage = pagesPersistence.findById(pageId, boardId);
+        if (originPage == null) {
+            throw new ResourceNotFoundException(PageCodes.PAGE_IS_NOT_EXISTS);
+        }
         pagesPersistence.modify(pageId, boardId, page);
         Page savedPage = pagesPersistence.findById(pageId, boardId);
         logger.info("Modified page:{}", savedPage);

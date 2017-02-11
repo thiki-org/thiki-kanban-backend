@@ -60,4 +60,18 @@ public class PageControllerTest extends TestBase {
                 .body("_links.board.href", endsWith("/boards/boardId-foo"))
                 .body("_links.pages.href", endsWith("/boards/boardId-foo/pages"));
     }
+
+    @Scenario("更新文章>当文章不存在时，不允许更新")
+    @Test
+    public void notAllowedIfPageWasNotFoundWhenModifyingPage() throws Exception {
+        given().body("{\"title\":\"page-title-new\",\"content\":\"page-content-new\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/pages/fooId")
+                .then()
+                .statusCode(404)
+                .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.message()));
+    }
 }
