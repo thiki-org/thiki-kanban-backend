@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.board.snapshot.BoardsSnapshotController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
+import org.thiki.kanban.page.PagesController;
 import org.thiki.kanban.procedure.ProcedureCodes;
 import org.thiki.kanban.procedure.ProceduresController;
 import org.thiki.kanban.projects.project.ProjectsController;
@@ -91,6 +92,9 @@ public class BoardResource extends RestResource {
 
             Link activeSprintLink = linkTo(methodOn(SprintController.class).loadActiveSprint(board.getId(), userName)).withRel("activeSprint");
             boardResource.add(tlink.from(activeSprintLink).build(userName));
+
+            Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(board.getId(), userName)).withRel("pages");
+            boardResource.add(tlink.from(pagesLink).build(userName));
         }
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
         boardResource.add(tlink.from(allLink).build());
