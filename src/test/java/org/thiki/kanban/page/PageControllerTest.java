@@ -88,7 +88,7 @@ public class PageControllerTest extends TestBase {
                 .statusCode(200);
     }
 
-    @Scenario("删除文章>删除文章时，如果文章不存，告知客户端错误")
+    @Scenario("删除文章>删除文章时，如果文章不存在，告知客户端错误")
     @Test
     public void notAllowedIfPageWasNotFoundWhenRemovingPage() throws Exception {
         given().header("userName", userName)
@@ -118,5 +118,17 @@ public class PageControllerTest extends TestBase {
                 .body("_links.self.href", endsWith("/boards/boardId-foo/pages/fooId"))
                 .body("_links.board.href", endsWith("/boards/boardId-foo"))
                 .body("_links.pages.href", endsWith("/boards/boardId-foo/pages"));
+    }
+
+    @Scenario("获取指定文章>如果文章不存在，告知客户端错误")
+    @Test
+    public void notAllowedIfPageWasNotFoundWhenLoadingPage() throws Exception {
+        given().header("userName", userName)
+                .when()
+                .get("/boards/boardId-foo/pages/fooId")
+                .then()
+                .statusCode(404)
+                .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.message()));
     }
 }
