@@ -14,7 +14,7 @@
         UPDATE kb_page SET
         title = #{page.title},
         content = #{page.content}
-        WHERE id=#{pageId} AND board_id=#{boardId}
+        WHERE id=#{pageId} AND board_id=#{boardId} AND delete_status=0
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
@@ -25,8 +25,8 @@
         SELECT * FROM kb_page WHERE board_id= #{board_id} AND delete_status=0 ORDER BY modification_time DESC
     </select>
 
-    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_page SET delete_status=1 WHERE id=#{id}
+    <delete id="removePage" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_page SET delete_status=1 WHERE id=#{pageId} AND board_id=#{boardId} AND delete_status=0
     </delete>
 
 </mapper>

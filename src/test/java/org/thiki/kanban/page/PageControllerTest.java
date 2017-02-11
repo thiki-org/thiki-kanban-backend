@@ -61,7 +61,7 @@ public class PageControllerTest extends TestBase {
                 .body("_links.pages.href", endsWith("/boards/boardId-foo/pages"));
     }
 
-    @Scenario("更新文章>当文章不存在时，不允许更新")
+    @Scenario("更新文章>当文章不存在时，告知客户端错误")
     @Test
     public void notAllowedIfPageWasNotFoundWhenModifyingPage() throws Exception {
         given().body("{\"title\":\"page-title-new\",\"content\":\"page-content-new\"}")
@@ -69,6 +69,31 @@ public class PageControllerTest extends TestBase {
                 .contentType(ContentType.JSON)
                 .when()
                 .put("/boards/boardId-foo/pages/fooId")
+                .then()
+                .statusCode(404)
+                .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))
+                .body("message", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.message()));
+    }
+
+    @Scenario("删除文章>用户创建文章后，可以删除")
+    @Test
+    public void removePage() throws Exception {
+        dbPreparation.table("kb_page")
+                .names("id,title,content,board_id,author")
+                .values("fooId", "page-title", "page-summary", "boardId-foo", userName).exec();
+        given().header("userName", userName)
+                .when()
+                .delete("/boards/boardId-foo/pages/fooId")
+                .then()
+                .statusCode(200);
+    }
+
+    @Scenario("删除文章>删除文章时，如果文章不存，告知客户端错误")
+    @Test
+    public void notAllowedIfPageWasNotFoundWhenRemovingPage() throws Exception {
+        given().header("userName", userName)
+                .when()
+                .delete("/boards/boardId-foo/pages/fooId")
                 .then()
                 .statusCode(404)
                 .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))

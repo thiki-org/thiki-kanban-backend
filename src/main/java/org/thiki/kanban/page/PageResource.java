@@ -26,7 +26,7 @@ public class PageResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "page", key = "#userName+#boardId")
+    @Cacheable(value = "page", key = "#userName+#boardId+#page.id")
     public Object toResource(Page page, String boardId, String userName) throws Exception {
         logger.info("build page resource.board:{},,userName:{}", boardId, userName);
         PageResource pageResource = new PageResource();
@@ -34,10 +34,23 @@ public class PageResource extends RestResource {
         if (page != null) {
             Link selfLink = linkTo(methodOn(PagesController.class).findById(boardId, page.getId(), userName)).withSelfRel();
             pageResource.add(tlink.from(selfLink).build(userName));
-
-            Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
-            pageResource.add(tlink.from(boardLink).build(userName));
         }
+        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
+        pageResource.add(tlink.from(boardLink).build(userName));
+
+        Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, userName)).withRel("pages");
+        pageResource.add(tlink.from(pagesLink).build(userName));
+        logger.info("page resource building completed.board:{},userName:{}", boardId, userName);
+        return pageResource.getResource();
+    }
+
+    public Object toResource(String boardId, String userName) throws Exception {
+        logger.info("build page resource.board:{},,userName:{}", boardId, userName);
+        PageResource pageResource = new PageResource();
+
+        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
+        pageResource.add(tlink.from(boardLink).build(userName));
+
         Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, userName)).withRel("pages");
         pageResource.add(tlink.from(pagesLink).build(userName));
         logger.info("page resource building completed.board:{},userName:{}", boardId, userName);

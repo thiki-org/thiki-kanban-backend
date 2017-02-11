@@ -25,22 +25,29 @@ public class PagesService {
         return savedPage;
     }
 
-    @CacheEvict(value = "page", key = "contains('#pageId')", allEntries = true)
-    public int deleteById(String pageId) {
-
-        return pagesPersistence.deleteById(pageId);
-    }
-
     @CacheEvict(value = "page", key = "contains('#{boardId}')", allEntries = true)
     public Page modifyPage(Page page, String pageId, String boardId, String userName) {
         logger.info("Modifying pageId:{},boardId:{},page:{},userName:{}", pageId, boardId, page, userName);
         Page originPage = pagesPersistence.findById(pageId, boardId);
         if (originPage == null) {
+            logger.info("No page was found.");
             throw new ResourceNotFoundException(PageCodes.PAGE_IS_NOT_EXISTS);
         }
         pagesPersistence.modify(pageId, boardId, page);
         Page savedPage = pagesPersistence.findById(pageId, boardId);
         logger.info("Modified page:{}", savedPage);
         return savedPage;
+    }
+
+    @CacheEvict(value = "page", key = "contains('#{boardId}')", allEntries = true)
+    public void removePage(String pageId, String boardId, String userName) {
+        logger.info("Removing pageId:{},boardId:{},page:{},userName:{}", pageId, boardId, userName);
+        Page originPage = pagesPersistence.findById(pageId, boardId);
+        if (originPage == null) {
+            logger.info("No page was found.");
+            throw new ResourceNotFoundException(PageCodes.PAGE_IS_NOT_EXISTS);
+        }
+        pagesPersistence.removePage(pageId, boardId);
+        logger.info("Page:{} was removed successfully.", pageId);
     }
 }

@@ -29,6 +29,12 @@ public class PagesController {
         return null;
     }
 
+    @RequestMapping(value = "/boards/{boardId}/pages/{pageId}", method = RequestMethod.DELETE)
+    public HttpEntity removePage(@PathVariable String boardId, @PathVariable String pageId, @RequestHeader String userName) throws Exception {
+        pagesService.removePage(pageId, boardId, userName);
+        return Response.build(pageResource.toResource(boardId, userName));
+    }
+
     @RequestMapping(value = "/boards/{boardId}/pages", method = RequestMethod.GET)
     public HttpEntity findByBoard(@PathVariable String boardId, @RequestHeader String userName) {
         return null;
