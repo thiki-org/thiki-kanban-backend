@@ -44,7 +44,7 @@ public class PageControllerTest extends TestBase {
     public void modifyPage() throws Exception {
         dbPreparation.table("kb_page")
                 .names("id,title,content,board_id,author")
-                .values("fooId", "page-title", "page-summary", "boardId-foo", userName).exec();
+                .values("fooId", "page-title", "page-content", "boardId-foo", userName).exec();
 
         given().body("{\"title\":\"page-title-new\",\"content\":\"page-content-new\"}")
                 .header("userName", userName)
@@ -80,7 +80,7 @@ public class PageControllerTest extends TestBase {
     public void removePage() throws Exception {
         dbPreparation.table("kb_page")
                 .names("id,title,content,board_id,author")
-                .values("fooId", "page-title", "page-summary", "boardId-foo", userName).exec();
+                .values("fooId", "page-title", "page-content", "boardId-foo", userName).exec();
         given().header("userName", userName)
                 .when()
                 .delete("/boards/boardId-foo/pages/fooId")
@@ -98,5 +98,25 @@ public class PageControllerTest extends TestBase {
                 .statusCode(404)
                 .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))
                 .body("message", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.message()));
+    }
+
+    @Scenario("获取指定文章>用户从文章后，可以从文库中获取指定文章")
+    @Test
+    public void loadPageById() throws Exception {
+        dbPreparation.table("kb_page")
+                .names("id,title,content,board_id,author")
+                .values("fooId", "page-title", "page-content", "boardId-foo", userName).exec();
+
+        given().header("userName", userName)
+                .when()
+                .get("/boards/boardId-foo/pages/fooId")
+                .then()
+                .statusCode(200)
+                .body("title", equalTo("page-title"))
+                .body("content", equalTo("page-content"))
+                .body("author", equalTo(userName))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/pages/fooId"))
+                .body("_links.board.href", endsWith("/boards/boardId-foo"))
+                .body("_links.pages.href", endsWith("/boards/boardId-foo/pages"));
     }
 }

@@ -26,7 +26,8 @@ public class PagesController {
 
     @RequestMapping(value = "/boards/{boardId}/pages/{pageId}", method = RequestMethod.GET)
     public HttpEntity findById(@PathVariable String boardId, @PathVariable String pageId, @RequestHeader String userName) throws Exception {
-        return null;
+        Page page = pagesService.loadPage(pageId, boardId, userName);
+        return Response.build(pageResource.toResource(page, boardId, userName));
     }
 
     @RequestMapping(value = "/boards/{boardId}/pages/{pageId}", method = RequestMethod.DELETE)

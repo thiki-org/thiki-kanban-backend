@@ -50,4 +50,15 @@ public class PagesService {
         pagesPersistence.removePage(pageId, boardId);
         logger.info("Page:{} was removed successfully.", pageId);
     }
+
+    public Page loadPage(String pageId, String boardId, String userName) {
+        logger.info("Loading pageId:{},boardId:{},userName:{}", pageId, boardId, userName);
+        Page page = pagesPersistence.findById(pageId, boardId);
+        if (page == null) {
+            logger.info("No page was found.");
+            throw new ResourceNotFoundException(PageCodes.PAGE_IS_NOT_EXISTS);
+        }
+        logger.info("Loaded page:{}", page);
+        return page;
+    }
 }
