@@ -33,4 +33,10 @@ public class PagesController {
     public HttpEntity findByBoard(@PathVariable String boardId, @RequestHeader String userName) {
         return null;
     }
+
+    @RequestMapping(value = "/boards/{boardId}/pages/{pageId}", method = RequestMethod.PUT)
+    public HttpEntity modify(@RequestBody Page page, @PathVariable String pageId, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
+        Page savedPage = pagesService.modifyPage(page, pageId, boardId, userName);
+        return Response.build(pageResource.toResource(savedPage, boardId, userName));
+    }
 }

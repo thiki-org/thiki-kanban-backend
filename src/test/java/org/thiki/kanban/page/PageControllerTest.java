@@ -38,4 +38,26 @@ public class PageControllerTest extends TestBase {
                 .body("_links.board.href", endsWith("/boards/boardId-foo"))
                 .body("_links.pages.href", endsWith("/boards/boardId-foo/pages"));
     }
+
+    @Scenario("更新文章>用户可以为更新已经存在的文章")
+    @Test
+    public void modifyPage() throws Exception {
+        dbPreparation.table("kb_page")
+                .names("id,title,content,board_id,author")
+                .values("fooId", "page-title", "page-summary", "boardId-foo", userName).exec();
+
+        given().body("{\"title\":\"page-title-new\",\"content\":\"page-content-new\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/pages/fooId")
+                .then()
+                .statusCode(200)
+                .body("title", equalTo("page-title-new"))
+                .body("content", equalTo("page-content-new"))
+                .body("author", equalTo(userName))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/pages/fooId"))
+                .body("_links.board.href", endsWith("/boards/boardId-foo"))
+                .body("_links.pages.href", endsWith("/boards/boardId-foo/pages"));
+    }
 }

@@ -13,14 +13,12 @@
     <update id="modify" parameterType="org.thiki.kanban.page.Page" flushCache="true">
         UPDATE kb_page SET
         title = #{page.title},
-        content = #{page.content},
-        author = #{page.author},
-        board_id = #{page.boardId}
-        WHERE id=#{id}
+        content = #{page.content}
+        WHERE id=#{pageId} AND board_id=#{boardId}
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
-        SELECT * FROM kb_page WHERE delete_status=0 AND id= #{pageId}
+        SELECT * FROM kb_page WHERE delete_status=0 AND id= #{pageId} AND board_id=#{boardId}
     </select>
 
     <select id="findByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">

@@ -8,11 +8,11 @@ import java.util.List;
 @Repository
 public interface PagesPersistence {
 
-    void addPage(@Param("page") Page page, @Param("boardId") String boardId, @Param("userName") String userName);
+    Integer addPage(@Param("page") Page page, @Param("boardId") String boardId, @Param("userName") String userName);
 
-    Page findById(@Param("pageId") String pageId);
+    Page findById(@Param("pageId") String pageId, @Param("boardId") String boardId);
 
-    void modify(@Param("id") String pageId, @Param("page") Page page);
+    Integer modify(@Param("pageId") String pageId, @Param("boardId") String boardId, @Param("page") Page page);
 
     List<Page> findByBoardId(String boardId);
 
