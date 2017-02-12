@@ -635,6 +635,6 @@
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_page" columnName="summary"/>
         </preConditions>
-        <dropColumn columnName="summary" tableName="kb_page" schemaName="public"/>
+        <dropColumn columnName="summary" tableName="kb_page"/>
     </changeSet>
 </databaseChangeLog>

@@ -22,7 +22,7 @@
     </select>
 
     <select id="findByBoard" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
-        SELECT * FROM kb_page WHERE delete_status=0 AND board_id=#{boardId}
+        SELECT * FROM kb_page WHERE delete_status=0 AND board_id=#{boardId} ORDER BY creation_time DESC
     </select>
 
     <select id="findByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.page.Page">
