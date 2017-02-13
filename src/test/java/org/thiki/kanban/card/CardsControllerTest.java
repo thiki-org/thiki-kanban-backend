@@ -192,9 +192,9 @@ public class CardsControllerTest extends TestBase {
     @Scenario("更新卡片成功")
     @Test
     public void update_shouldReturn200WhenUpdateCardSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,deadline,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton','2017-02-13 12:54:22',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,deadline,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton','2017-02-13',1,1)");
         dbPreparation.table("kb_board").names("id,name,author,code_prefix").values("boardId-foo", "board-name", "someone", "H").exec();
-        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1,\"deadline\":\"2017-02-13 12:54:49\"}")
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1,\"deadline\":\"2017-02-15\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -203,7 +203,7 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("sortNumber", equalTo(3))
-                .body("deadline", equalTo("2017-02-13 12:54:49"))
+                .body("deadline", equalTo("2017-02-15"))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
                 .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"));

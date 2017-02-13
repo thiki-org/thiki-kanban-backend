@@ -649,4 +649,13 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="28" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="kb_card" columnName="deadline"/>
+        </preConditions>
+        <modifyDataType
+                columnName="deadline"
+                newDataType="VARCHAR(40)"
+                tableName="kb_card"/>
+    </changeSet>
 </databaseChangeLog>

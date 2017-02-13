@@ -125,7 +125,7 @@ public class Card {
     }
 
     public String getDeadline() {
-        return DateService.instance().suffixCrop(this.deadline);
+        return deadline;
     }
 
     public void setDeadline(String deadline) {
