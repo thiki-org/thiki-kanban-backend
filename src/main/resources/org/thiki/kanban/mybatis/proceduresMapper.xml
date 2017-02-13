@@ -59,10 +59,6 @@
             AND type=1
         </if>
 
-        <if test="viewType=='fullView'">
-            AND 1=1
-        </if>
-
         <if test="viewType=='archiveView'">
             AND type=9
         </if>
