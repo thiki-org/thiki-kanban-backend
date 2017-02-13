@@ -73,10 +73,9 @@ public class UsersService {
         return avatarName;
     }
 
-    @Cacheable(value = "avatar", key = "#userName")
     public File loadAvatar(String userName) throws IOException {
         logger.info("load avatar by userName:{}", userName);
-        UserProfile userProfile = usersPersistence.findProfile(userName);
+        UserProfile userProfile = loadProfileByUserName(userName);
         return avatarStorage.loadAvatarByName(userProfile.getAvatar());
     }
 
