@@ -25,11 +25,11 @@ buildscript {
 
 buildscript {
     repositories {
-        mavenCentral()
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
     }
 }
 repositories {
-    mavenCentral()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
 }
 dependencies {
     compile 'org.springframework:spring-web:4.3.2.RELEASE'
@@ -82,7 +82,7 @@ dependencies {
     testCompile 'com.jayway.jsonpath:json-path-assert:0.9.1'
     testCompile 'junit:junit:4.12'
 
-    
+
 }
 
 springBoot {
