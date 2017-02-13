@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.aspect.ValidateParams;
@@ -72,12 +73,14 @@ public class UsersService {
         return avatarName;
     }
 
+    @Cacheable(value = "avatar", key = "'avatar'+#userName")
     public File loadAvatar(String userName) throws IOException {
         logger.info("load avatar by userName:{}", userName);
         UserProfile userProfile = usersPersistence.findProfile(userName);
         return avatarStorage.loadAvatarByName(userProfile.getAvatar());
     }
 
+    @Cacheable(value = "profile", key = "'profile'+#userName")
     public UserProfile loadProfileByUserName(String userName) {
         UserProfile userProfile = usersPersistence.findProfile(userName);
         if (userProfile == null) {

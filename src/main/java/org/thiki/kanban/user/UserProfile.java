@@ -1,5 +1,7 @@
 package org.thiki.kanban.user;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * Created by xubt on 28/09/2016.
  */
@@ -52,5 +54,10 @@ public class UserProfile {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }
