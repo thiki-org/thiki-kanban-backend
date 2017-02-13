@@ -6,8 +6,9 @@
 
     <insert id="create" parameterType="org.thiki.kanban.card.Card">
         INSERT INTO
-        kb_card(id,summary, content,code, sort_number, author, procedure_id) VALUES (#{card.id},#{card.summary},
-        #{card.content},#{card.code}, (SELECT
+        kb_card(id,summary, content,code,deadline, sort_number, author, procedure_id) VALUES
+        (#{card.id},#{card.summary},
+        #{card.content},#{card.code},#{card.deadline}, (SELECT
         max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
         max_sort_number FROM kb_card WHERE procedure_id=#{card.procedureId} ) as t ), #{userName}, #{card.procedureId})
     </insert>
@@ -17,6 +18,9 @@
         summary = #{card.summary},
         content = #{card.content},
         code = #{card.code},
+        <if test="card.deadline!=null">
+            deadline = #{card.deadline},
+        </if>
         sort_number = #{card.sortNumber},
         author = #{card.author},
         procedure_id = #{card.procedureId}

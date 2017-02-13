@@ -778,7 +778,10 @@ public class DateService {
         return (int) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
-    public int daysBetween(Date date1, String date2) {
+    public Integer daysBetween(Date date1, String date2) {
+        if (date1 == null || date2 == null) {
+            return null;
+        }
         Date date = StringToDate(date2);
         return daysBetween(date1, date);
     }
@@ -792,5 +795,12 @@ public class DateService {
         Date date1 = StringToDate(dateStr1);
         Date date2 = StringToDate(dateStr2);
         return daysBetween(date1, date2);
+    }
+
+    public String suffixCrop(String deadline) {
+        if (deadline != null && deadline.indexOf(".") > -1) {
+            deadline = deadline.split("\\.")[0];
+        }
+        return deadline;
     }
 }

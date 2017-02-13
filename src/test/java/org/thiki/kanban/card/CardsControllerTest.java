@@ -12,6 +12,8 @@ import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.foundation.common.date.DateService;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
@@ -40,7 +42,13 @@ public class CardsControllerTest extends TestBase {
     public void create_shouldReturn201WhenCreateCardSuccessfully() throws Exception {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
         String expectedCode = generateExpectedCode();
-        given().body("{\"summary\":\"summary\"}")
+        int expireDays = 5;
+        String currentTime = DateService.instance().getNow_EN();
+        String deadline = DateService.instance().addDay(currentTime, expireDays);
+        Map newCard = new HashMap();
+        newCard.put("summary", "summary");
+        newCard.put("deadline", deadline);
+        given().body(newCard)
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -50,6 +58,8 @@ public class CardsControllerTest extends TestBase {
                 .body("summary", equalTo("summary"))
                 .body("author", equalTo(userName))
                 .body("code", equalTo(expectedCode))
+                .body("deadline", equalTo(deadline))
+                .body("restDays", equalTo(expireDays - 1))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))
                 .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/acceptanceCriterias"))
@@ -182,9 +192,9 @@ public class CardsControllerTest extends TestBase {
     @Scenario("更新卡片成功")
     @Test
     public void update_shouldReturn200WhenUpdateCardSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,deadline,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton','2017-02-13',1,1)");
         dbPreparation.table("kb_board").names("id,name,author,code_prefix").values("boardId-foo", "board-name", "someone", "H").exec();
-        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1}")
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1,\"deadline\":\"2017-02-15\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -193,6 +203,7 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("sortNumber", equalTo(3))
+                .body("deadline", equalTo("2017-02-15"))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId"))
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
                 .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId/assignments"));
