@@ -69,6 +69,7 @@ dependencies {
     compile 'org.springframework.hateoas:spring-hateoas:0.21.0.RELEASE'
     compile 'com.mchange:c3p0:0.9.5.2'
     compile 'org.liquibase:liquibase-core:3.4.2'
+    compile 'com.alibaba:druid:1.0.9'
     compile(group: 'org.springframework.boot', name: 'spring-boot-starter-redis', version: '1.4.2.RELEASE') {
         exclude(module: 'spring-beans')
     }
