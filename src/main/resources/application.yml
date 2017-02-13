@@ -23,6 +23,6 @@ security:
     - "http://23.234.54.252:8089"
     - "http://www.thiki.org"
     - "http://localhost:8008"
-
+    - "http://localhost:8096/druid/index.html"
 
 
