@@ -1,13 +1,16 @@
 package org.thiki.kanban.card;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.danielbechler.diff.ObjectDifferBuilder;
 import de.danielbechler.diff.node.DiffNode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.procedure.Procedure;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 /**
  * 卡片：任何有指定负责人的有特定目标的事项，可以是用户故事，技术卡片，一次会议等等
@@ -15,31 +18,18 @@ import javax.validation.constraints.NotNull;
  * @author joeaniu
  */
 public class Card {
-    /**
-     * id
-     */
     private String id;
-    /**
-     * 简述， 出现在卡片上
-     */
     @NotNull(message = CardsCodes.summaryIsRequired)
     @NotEmpty(message = CardsCodes.summaryIsRequired)
     @Length(max = 200, message = CardsCodes.summaryIsInvalid)
     private String summary;
-
     @Length(max = 50, message = CardsCodes.codeIsInvalid)
     private String code;
-    /**
-     * 卡片内容
-     */
     private String content;
-    /**
-     * 创建者
-     */
+    private String deadline;
+
     private String author;
-    /**
-     * 排序号
-     */
+
     private Integer sortNumber;
     private String creationTime;
     private String modificationTime;
@@ -132,5 +122,18 @@ public class Card {
 
     public boolean stillNoCode() {
         return getCode() == null;
+    }
+
+    public String getDeadline() {
+        return DateService.instance().suffixCrop(this.deadline);
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
+    }
+
+    @JsonIgnore
+    public Integer getRestDays() {
+        return DateService.instance().daysBetween(new Date(), this.deadline);
     }
 }

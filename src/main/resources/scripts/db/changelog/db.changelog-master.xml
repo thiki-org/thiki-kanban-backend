@@ -637,4 +637,16 @@
         </preConditions>
         <dropColumn columnName="summary" tableName="kb_page"/>
     </changeSet>
+    <changeSet id="27" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_card" columnName="deadline"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_card">
+            <column name="deadline" type="DATETIME">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
