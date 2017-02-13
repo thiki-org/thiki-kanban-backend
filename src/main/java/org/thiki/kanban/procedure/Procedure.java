@@ -138,6 +138,11 @@ public class Procedure {
     }
 
     @JsonIgnore
+    public boolean isInProcess() {
+        return ProcedureCodes.PROCEDURE_STATUS_DOING.equals(this.status);
+    }
+
+    @JsonIgnore
     public boolean isArchived() {
         return ProcedureCodes.PROCEDURE_TYPE_ARCHIVE.equals(this.type);
     }
