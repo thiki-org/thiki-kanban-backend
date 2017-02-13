@@ -42,6 +42,7 @@ public class AcceptanceCriteriaService {
         return acceptanceCriterias;
     }
 
+    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriterias'+#acceptanceCriteriaId")
     public AcceptanceCriteria loadAcceptanceCriteriaById(String acceptanceCriteriaId) {
         logger.info("Loading acceptanceCriteria by Id:{}", acceptanceCriteriaId);
         AcceptanceCriteria acceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
