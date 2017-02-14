@@ -666,6 +666,7 @@
         <renameColumn
                 newColumnName="wip_limit"
                 oldColumnName="wip_num"
+                columnDataType="int"
                 tableName="kb_procedure"/>
     </changeSet>
 </databaseChangeLog>

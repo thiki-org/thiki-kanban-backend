@@ -95,4 +95,8 @@
         SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND creation_time >
         #{creationTime} AND status=9 AND type =9
     </select>
+
+    <select id="countCardsNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(*) FROM kb_card WHERE delete_status=0 AND procedure_id=#{procedureId}
+    </select>
 </mapper>

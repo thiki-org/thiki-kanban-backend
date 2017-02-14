@@ -177,4 +177,13 @@ public class ProceduresService {
     public Procedure findProcedureByStatus(String boardId, Integer status) {
         return proceduresPersistence.findProcedureByStatus(boardId, status);
     }
+
+    public boolean isReachedWipLimit(String procedureId) {
+        Procedure procedure = findById(procedureId);
+        if (procedure == null) {
+            throw new BusinessException(ProcedureCodes.PROCEDURE_IS_NOT_EXIST);
+        }
+        Integer currentCardsNumbers = proceduresPersistence.countCardsNumber(procedureId);
+        return procedure.isReachedWipLimit(currentCardsNumbers);
+    }
 }

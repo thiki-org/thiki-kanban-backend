@@ -32,4 +32,6 @@ public interface ProceduresPersistence {
     boolean hasNewArchivedProcedureExist(Procedure archivedProcedure);
 
     Procedure findProcedureByStatus(@Param("boardId") String boardId, @Param("status") Integer status);
+
+    Integer countCardsNumber(@Param("procedureId") String procedureId);
 }

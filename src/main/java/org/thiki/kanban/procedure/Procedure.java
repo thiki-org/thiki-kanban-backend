@@ -143,4 +143,12 @@ public class Procedure {
     public void setWipLimit(Integer wipLimit) {
         this.wipLimit = wipLimit;
     }
+
+    @JsonIgnore
+    public boolean isReachedWipLimit(Integer currentCardsNumbers) {
+        if (this.wipLimit == null || currentCardsNumbers == null) {
+            return false;
+        }
+        return this.wipLimit.equals(currentCardsNumbers);
+    }
 }

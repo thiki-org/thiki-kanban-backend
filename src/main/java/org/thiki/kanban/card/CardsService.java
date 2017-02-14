@@ -14,6 +14,7 @@ import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.procedure.Procedure;
 import org.thiki.kanban.procedure.ProceduresPersistence;
+import org.thiki.kanban.procedure.ProceduresService;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
@@ -36,6 +37,9 @@ public class CardsService {
     @Resource
     private DateService dateService;
 
+    @Resource
+    private ProceduresService proceduresService;
+
     @CacheEvict(value = "card", key = "contains('#procedureId')", allEntries = true)
     public Card create(String userName, String boardId, String procedureId, Card card) {
         logger.info("Creating new card:{},procedure:{}", card, procedureId);
@@ -46,6 +50,9 @@ public class CardsService {
         }
         String code = generateCode(boardId);
         card.setCode(code);
+        if (proceduresService.isReachedWipLimit(procedureId)) {
+            throw new BusinessException(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT);
+        }
         cardsPersistence.create(userName, card);
         Card savedCard = cardsPersistence.findById(card.getId());
         logger.info("Created card:{}", savedCard);
@@ -68,6 +75,11 @@ public class CardsService {
     public Card modify(String cardId, Card card, String procedureId, String boardId, String userName) {
         logger.info("modify card:{}", card);
         Card originCard = loadAndValidateCard(cardId);
+        if (card.isMoveToOtherProcedure(originCard)) {
+            if (proceduresService.isReachedWipLimit(card.getProcedureId())) {
+                throw new BusinessException(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT);
+            }
+        }
         card.setCode(originCard.stillNoCode() ? generateCode(boardId) : originCard.getCode());
 
         cardsPersistence.modify(cardId, card);
@@ -112,6 +124,11 @@ public class CardsService {
     public List<Card> resortCards(List<Card> cards, String procedureId, String boardId, String userName) {
         for (Card card : cards) {
             Card foundCard = cardsPersistence.findById(card.getId());
+            if (card.isMoveToOtherProcedure(foundCard)) {
+                if (proceduresService.isReachedWipLimit(card.getProcedureId())) {
+                    throw new BusinessException(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT);
+                }
+            }
             cardsPersistence.resort(card);
             activityService.recordCardArchive(foundCard, procedureId, userName);
         }

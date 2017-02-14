@@ -140,4 +140,9 @@ public class Card {
         }
         return restDays;
     }
+
+    @JsonIgnore
+    public boolean isMoveToOtherProcedure(Card originCard) {
+        return !originCard.procedureId.equals(this.procedureId);
+    }
 }

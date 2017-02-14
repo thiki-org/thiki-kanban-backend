@@ -265,19 +265,19 @@ public class CardsControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id,sort_number) VALUES ('fooId6','this is the card summary.','play badminton',1,2,3)");
         String expectedCode = generateExpectedCode();
 
-        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":1,\"code\":\"code-foo\"}")
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"procedureId\":\"fooId\",\"code\":\"code-foo\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/boards/boardId-foo/procedures/1/cards/fooId6")
+                .put("/boards/boardId-foo/procedures/fooId/cards/fooId6")
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("sortNumber", equalTo(3))
                 .body("code", equalTo(expectedCode))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId6"))
-                .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/1/cards"))
-                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/1/cards/fooId6/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId6"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId6/assignments"));
     }
 
     @Scenario("当更新一个卡片时,如果待更新的卡片不存在,则抛出资源不存在的错误")
@@ -292,6 +292,23 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(400)
                 .body("code", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.code()))
                 .body("message", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.message()));
+    }
+
+    @Scenario("挪动卡片到某列时,如果该列已经超额，则不允许挪动")
+    @Test
+    public void movingWasNotAllowedIfProcedureExceededTheWipLimit() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_procedure (id,title,author,board_id,wip_limit) VALUES ('procedure-fooId','this is the first procedure.','someone','board-id-foo',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('fooId','this is the card summary.','play badminton',1,'procedure-fooId-other')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES ('fooId-other','this is the card summary.','play badminton',1,'procedure-fooId')");
+        given().body("{\"summary\":\"newSummary\",\"procedureId\":\"procedure-fooId\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/procedures/1/cards/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT.code()))
+                .body("message", equalTo(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT.message()));
     }
 
     @Scenario("当删除一个卡片时,如果卡片存在,则删除成功")
