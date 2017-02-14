@@ -1,5 +1,6 @@
 package org.thiki.kanban.procedure;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -28,7 +29,7 @@ public class Procedure {
     private Integer status;
     private String creationTime;
     private String modificationTime;
-    private Integer wipNum;
+    private Integer wipLimit;
 
     public Integer getType() {
         return type == null ? 0 : type;
@@ -96,19 +97,7 @@ public class Procedure {
 
     @Override
     public String toString() {
-        return "Procedure{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", author='" + author + '\'' +
-                ", boardId='" + boardId + '\'' +
-                ", sortNumber=" + sortNumber +
-                ", type=" + type +
-                ", status=" + status +
-                ", creationTime='" + creationTime + '\'' +
-                ", modificationTime='" + modificationTime + '\'' +
-                ", wipNum='" + wipNum + '\'' +
-                '}';
+        return JSON.toJSONString(this);
     }
 
     public String getDescription() {
@@ -147,11 +136,11 @@ public class Procedure {
         return ProcedureCodes.PROCEDURE_TYPE_ARCHIVE.equals(this.type);
     }
 
-    public Integer getWipNum() {
-        return wipNum;
+    public Integer getWipLimit() {
+        return wipLimit;
     }
 
-    public void setWipNum(Integer wipNum) {
-        this.wipNum = wipNum;
+    public void setWipLimit(Integer wipLimit) {
+        this.wipLimit = wipLimit;
     }
 }

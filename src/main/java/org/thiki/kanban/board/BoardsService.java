@@ -1,6 +1,7 @@
 package org.thiki.kanban.board;
 
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
@@ -37,6 +38,7 @@ public class BoardsService {
         return boardsPersistence.findById(id);
     }
 
+    @Cacheable(value = "board", key = "#userName+'boards-personal'")
     public List<Board> loadBoards(String userName) {
         List<Board> personalBoards = boardsPersistence.findPersonalBoards(userName);
         List<Board> projectsBoards = loadTeamsBoards(userName);
@@ -47,6 +49,7 @@ public class BoardsService {
         return boards;
     }
 
+    @Cacheable(value = "board", key = "#userName+'boards-teams'")
     private List<Board> loadTeamsBoards(String userName) {
         List<Board> projectsBoards = new ArrayList<>();
         List<Project> projects = projectMembersService.loadTeamsByUserName(userName);
@@ -57,7 +60,7 @@ public class BoardsService {
         return projectsBoards;
     }
 
-    @CacheEvict(value = "board", key = "contains('#board.id')", allEntries = true)
+    @CacheEvict(value = "board", key = "contains(#userName)", allEntries = true)
     public Board update(String userName, Board board) {
         Board boardToDelete = boardsPersistence.findById(board.getId());
         if (boardToDelete == null) {

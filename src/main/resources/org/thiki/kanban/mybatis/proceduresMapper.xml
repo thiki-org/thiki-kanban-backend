@@ -6,11 +6,11 @@
 
     <insert id="create" parameterType="org.thiki.kanban.procedure.Procedure">
         INSERT INTO
-        kb_procedure(id,title,description,author,board_id,type,status,sort_number,wip_num) VALUES
+        kb_procedure(id,title,description,author,board_id,type,status,sort_number,wip_limit) VALUES
         (#{procedure.id},#{procedure.title},#{procedure.description},
         #{userName},#{boardId},#{procedure.type},#{procedure.status},(SELECT
         max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
-        max_sort_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ), #{procedure.wipNum}
+        max_sort_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ), #{procedure.wipLimit}
         )
     </insert>
 
@@ -31,16 +31,16 @@
         <if test="procedure.type!=null">
             type=#{procedure.type},
         </if>
-        <if test="procedure.wipNum!=null">
-            wip_num=#{procedure.wipNum},
+        <if test="procedure.wipLimit!=null">
+            wip_limit=#{procedure.wipLimit},
         </if>
         delete_status=delete_status
 
         WHERE id=#{procedureId} AND delete_status=0
     </update>
 
-    <update id="rewipnum" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
-        UPDATE kb_procedure SET wip_num=#{procedure.wipNum}
+    <update id="rewipLimit" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
+        UPDATE kb_procedure SET wip_limit=#{procedure.wipLimit}
         WHERE id=#{procedureId} AND delete_status=0
     </update>
 

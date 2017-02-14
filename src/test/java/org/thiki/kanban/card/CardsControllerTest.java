@@ -59,7 +59,7 @@ public class CardsControllerTest extends TestBase {
                 .body("author", equalTo(userName))
                 .body("code", equalTo(expectedCode))
                 .body("deadline", equalTo(deadline))
-                .body("restDays", equalTo(expireDays - 1))
+                .body("restDays", equalTo(expireDays))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))
                 .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId/acceptanceCriterias"))

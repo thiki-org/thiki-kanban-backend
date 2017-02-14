@@ -658,4 +658,14 @@
                 newDataType="VARCHAR(40)"
                 tableName="kb_card"/>
     </changeSet>
+
+    <changeSet id="29" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="kb_procedure" columnName="wip_num"/>
+        </preConditions>
+        <renameColumn
+                newColumnName="wip_limit"
+                oldColumnName="wip_num"
+                tableName="kb_procedure"/>
+    </changeSet>
 </databaseChangeLog>
