@@ -134,6 +134,10 @@ public class Card {
 
     @JsonIgnore
     public Integer getRestDays() {
-        return DateService.instance().daysBetween(new Date(), this.deadline);
+        Integer restDays = DateService.instance().daysBetween(new Date(), this.deadline);
+        if (restDays != null) {
+            restDays++;
+        }
+        return restDays;
     }
 }
