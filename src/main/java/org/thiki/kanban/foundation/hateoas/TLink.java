@@ -23,6 +23,10 @@ public class TLink extends Link {
     private AuthenticationProviderFactory authenticationProviderFactory;
     private List<Action> actions;
 
+    public TLink() {
+        super("/resource", "this constructor is just used to avoid schedule error on the Application startup.");
+    }
+
     public TLink from(Link link) {
         TLink tlink = new TLink();
         tlink.setRolesResources(rolesResources);
