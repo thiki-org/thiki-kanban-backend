@@ -108,6 +108,7 @@ public class CardsService {
         return cards;
     }
 
+    @Cacheable(value = "card", key = "'card'+#cardId")
     public Card findById(String cardId) {
         return loadAndValidateCard(cardId);
     }

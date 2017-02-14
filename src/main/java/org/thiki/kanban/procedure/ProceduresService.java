@@ -41,8 +41,9 @@ public class ProceduresService {
         return createdProcedure;
     }
 
-    public Procedure findById(String id) {
-        return proceduresPersistence.findById(id);
+    @Cacheable(value = "procedure", key = "'procedure'+#procedureId")
+    public Procedure findById(String procedureId) {
+        return proceduresPersistence.findById(procedureId);
     }
 
     @Cacheable(value = "procedure", key = "'procedures'+#boardId+#viewType")
