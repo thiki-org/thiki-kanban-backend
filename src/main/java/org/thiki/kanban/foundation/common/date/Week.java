@@ -40,4 +40,8 @@ public enum Week {
     public int getNumber() {
         return number;
     }
+
+    public boolean isWeekend() {
+        return this.number == 6 || this.number == 7;
+    }
 }
