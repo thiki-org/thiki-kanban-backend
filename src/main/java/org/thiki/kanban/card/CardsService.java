@@ -77,7 +77,7 @@ public class CardsService {
         Card savedCard = cardsPersistence.findById(cardId);
         logger.info("Modified card:{}", savedCard);
         Procedure procedure = proceduresService.findById(procedureId);
-        activityService.recordCardModification(savedCard, procedure, originCard, userName);
+        activityService.recordCardModification(savedCard, procedure, null, originCard, userName);
         return savedCard;
     }
 
@@ -112,17 +112,17 @@ public class CardsService {
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
     public List<Card> resortCards(List<Card> cards, String procedureId, String boardId, String userName) {
         for (Card card : cards) {
-            Card foundCard = cardsPersistence.findById(card.getId());
+            Card originCard = cardsPersistence.findById(card.getId());
             Procedure preProcedure = null, currentProcedure = null;
-            if (card.isMoveToOtherProcedure(foundCard)) {
-                preProcedure = proceduresService.findById(foundCard.getProcedureId());
+            if (card.isMoveToOtherProcedure(originCard)) {
+                preProcedure = proceduresService.findById(originCard.getProcedureId());
                 currentProcedure = proceduresService.findById(card.getProcedureId());
                 if (proceduresService.isReachedWipLimit(card.getProcedureId())) {
                     throw new BusinessException(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT);
                 }
             }
             cardsPersistence.resort(card);
-            activityService.recordCardArchive(foundCard, procedureId, preProcedure, currentProcedure, userName);
+            activityService.recordCardModification(card, currentProcedure, preProcedure, originCard, userName);
         }
         return findByProcedureId(procedureId);
     }

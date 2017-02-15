@@ -15,6 +15,7 @@
     </insert>
 
     <select id="loadActivitiesByCard" parameterType="java.lang.String" resultType="org.thiki.kanban.activity.Activity">
-        SELECT * FROM kb_activity WHERE delete_status=0 and card_id= #{cardId}
+        SELECT * FROM kb_activity WHERE delete_status=0 AND operation_type_code=#{operationTypeCode} AND card_id=
+        #{cardId} ORDER by creation_time ASC
     </select>
 </mapper>

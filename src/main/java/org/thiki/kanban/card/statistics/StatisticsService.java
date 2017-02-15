@@ -4,6 +4,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.activity.Activity;
 import org.thiki.kanban.activity.ActivityService;
+import org.thiki.kanban.activity.ActivityType;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsPersistence;
 import org.thiki.kanban.foundation.common.date.DateService;
@@ -22,11 +23,10 @@ public class StatisticsService {
     @Resource
     private ActivityService activityService;
 
-    @Scheduled(cron = "* * * * * *")
     public void analyse() {
         List<Card> cards = cardsPersistence.loadUnArchivedCards();
         for (Card card : cards) {
-            List<Activity> activities = activityService.loadActivitiesByCard(card.getId());
+            List<Activity> activities = activityService.loadActivitiesByCard(ActivityType.CARD_MOVING.code(), card.getId());
             double elapsedDays = calculateElapsedDays(activities);
             card.setElapsedDays(elapsedDays);
             cardsPersistence.modify(card.getId(), card);

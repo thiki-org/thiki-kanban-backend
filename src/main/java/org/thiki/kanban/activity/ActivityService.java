@@ -50,18 +50,19 @@ public class ActivityService {
         record(activity);
     }
 
-    public void recordCardModification(Card modifiedCard, Procedure procedure, Card originCard, String userName) {
+    public void recordCardModification(Card modifiedCard, Procedure procedure, Procedure prevProcedure, Card originCard, String userName) {
         Activity activity = new Activity();
         activity.setPrevProcedureId(originCard.getProcedureId());
         activity.setProcedureId(modifiedCard.getProcedureId());
         activity.setProcedureSnapShot(procedure == null ? "" : procedure.toString());
+        activity.setPrevProcedureSnapShot(prevProcedure == null ? "" : prevProcedure.toString());
         activity.setCardId(modifiedCard.getId());
-        activity.setSummary(modifiedCard.diff(originCard));
-        activity.setDetail(modifiedCard.diff(originCard));
+        activity.setSummary(originCard.toString());
+        activity.setDetail(originCard.toString());
         activity.setUserName(userName);
-        activity.setOperationTypeCode(ActivityType.CARD_CREATION.code());
-        activity.setOperationTypeName(ActivityType.CARD_CREATION.type());
-        if (!modifiedCard.getProcedureId().equals(originCard.getProcedureId())) {
+        activity.setOperationTypeCode(ActivityType.CARD_MODIFYING.code());
+        activity.setOperationTypeName(ActivityType.CARD_MODIFYING.type());
+        if (modifiedCard.isMoveToOtherProcedure(originCard)) {
             activity.setOperationTypeCode(ActivityType.CARD_MOVING.code());
             activity.setOperationTypeName(ActivityType.CARD_MOVING.type());
         }
@@ -188,7 +189,7 @@ public class ActivityService {
         return procedure != null && procedure.isInProcess();
     }
 
-    public List<Activity> loadActivitiesByCard(String cardId) {
-        return activityPersistence.loadActivitiesByCard(cardId);
+    public List<Activity> loadActivitiesByCard(String operationTypeCode, String cardId) {
+        return activityPersistence.loadActivitiesByCard(operationTypeCode, cardId);
     }
 }
