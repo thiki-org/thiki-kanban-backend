@@ -23,6 +23,7 @@ public class StatisticsService {
     @Resource
     private ActivityService activityService;
 
+    @Scheduled(cron = "0 * * * * *")
     public void analyse() {
         List<Card> cards = cardsPersistence.loadUnArchivedCards();
         for (Card card : cards) {
