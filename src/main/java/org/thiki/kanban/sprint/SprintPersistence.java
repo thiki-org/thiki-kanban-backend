@@ -18,4 +18,6 @@ public interface SprintPersistence {
     Integer update(@Param("sprintId") String sprintId, @Param("sprint") Sprint sprint, @Param("boardId") String boardId);
 
     Sprint loadActiveSprint(@Param("boardId") String boardId);
+
+    boolean isSprintNameAlreadyExist(@Param("boardId") String boardId, @Param("sprintName") String sprintName);
 }

@@ -10,7 +10,8 @@ public enum SprintCodes {
     UNARCHIVE_SPRINT_EXIST("002", "存在尚未归档的迭代，不允许创建新的迭代。"),
     ACTIVE_SPRINT_IS_NOT_FOUND("003", "当前不存在激活的迭代。"),
     SPRINT_IS_NOT_EXIST("004", "迭代不存在。"),
-    SPRINT_ALREADY_ARCHIVED("005", "迭代此前已经归档。");
+    SPRINT_ALREADY_ARCHIVED("005", "迭代此前已经归档。"),
+    SPRINT_NAME_ALREADY_EXISTS("006", "当前看板下，已经存在相同名称的迭代。");
     public static final Integer SPRINT_IN_PROGRESS = 1;
     public static final Integer SPRINT_COMPLETED = 2;
     public static final String startTimeIsRequired = "迭代开始时间不可以为空。";

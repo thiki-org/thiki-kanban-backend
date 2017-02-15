@@ -18,6 +18,10 @@
         SELECT count(*) FROM kb_sprint WHERE delete_status=0 and board_id= #{boardId} AND status=1
     </select>
 
+    <select id="isSprintNameAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_sprint WHERE delete_status=0 and board_id= #{boardId} AND sprint_name=#{sprintName}
+    </select>
+
     <update id="update" parameterType="java.lang.String" flushCache="true">
         UPDATE kb_sprint SET
         start_time = #{sprint.startTime},
