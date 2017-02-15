@@ -1,5 +1,7 @@
 package org.thiki.kanban.activity;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
@@ -11,6 +13,7 @@ import org.thiki.kanban.cardTags.CardTag;
 import org.thiki.kanban.comment.Comment;
 import org.thiki.kanban.foundation.common.SequenceNumber;
 import org.thiki.kanban.procedure.Procedure;
+import org.thiki.kanban.procedure.ProceduresService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,6 +26,9 @@ public class ActivityService {
     private final static Logger logger = LoggerFactory.getLogger(ActivityService.class);
     @Resource
     private ActivityPersistence activityPersistence;
+
+    @Resource
+    private ProceduresService proceduresService;
 
     @CacheEvict(value = "activity", key = "{'activity'+#activity.cardId}", allEntries = true)
     public void record(final Activity activity) {
@@ -170,5 +176,19 @@ public class ActivityService {
         activity.setOperationTypeCode(ActivityType.UNDO_ASSIGNMENT.code());
         activity.setOperationTypeName(ActivityType.UNDO_ASSIGNMENT.type());
         record(activity);
+    }
+
+    public boolean isMoveInProcess(Activity activity) {
+        if (activity.getProcedureSnapShot() != null && !activity.getProcedureSnapShot().equals("")) {
+            Procedure procedure = JSONObject.toJavaObject(JSON.parseObject(activity.getProcedureSnapShot()), Procedure.class);
+            return procedure.isInProcess();
+        }
+
+        Procedure procedure = proceduresService.findById(activity.getProcedureId());
+        return procedure != null && procedure.isInProcess();
+    }
+
+    public List<Activity> loadActivitiesByCard(String cardId) {
+        return activityPersistence.loadActivitiesByCard(cardId);
     }
 }

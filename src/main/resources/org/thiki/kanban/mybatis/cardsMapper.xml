@@ -23,6 +23,9 @@
         </if>
         sort_number = #{card.sortNumber},
         author = #{card.author},
+        <if test="card.elapsedDays!=null">
+            elapsed_days = #{card.elapsedDays},
+        </if>
         procedure_id = #{card.procedureId}
         WHERE id=#{cardId} AND delete_status=0
     </update>
@@ -51,4 +54,8 @@
         SELECT count(*) FROM kb_card WHERE procedure_id IN (SELECT id from kb_procedure WHERE board_id=#{boardId}) AND
         code like concat('%',#{currentMonth},'%')
     </select>
+
+    <select id="loadUnArchivedCards" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
+      SELECT * FROM kb_card LEFT JOIN kb_procedure ON kb_card.procedure_id=kb_procedure.id WHERE kb_procedure.type !=9
+</select>
 </mapper>

@@ -1,5 +1,7 @@
 package org.thiki.kanban.foundation.common.date;
 
+import org.joda.time.DateTime;
+import org.joda.time.Period;
 import org.springframework.stereotype.Service;
 
 import java.text.ParsePosition;
@@ -752,6 +754,13 @@ public class DateService {
             num = (int) (time / (24 * 60 * 60 * 1000));
         }
         return num;
+    }
+
+    public int getIntervalHours(Date startTime, Date endTime) {
+        DateTime startDateTime = new DateTime(startTime);
+        DateTime endDateTime = new DateTime(endTime);
+        Period period = new Period(startDateTime, endDateTime);
+        return period.getHours();
     }
 
     public String simpleDate() {

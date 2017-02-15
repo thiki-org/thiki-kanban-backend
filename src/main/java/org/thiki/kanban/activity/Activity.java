@@ -119,4 +119,26 @@ public class Activity {
     public void setPrevProcedureSnapShot(String prevProcedureSnapShot) {
         this.prevProcedureSnapShot = prevProcedureSnapShot;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Activity activity = (Activity) o;
+
+        return id != null ? id.equals(activity.id) : activity.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    public boolean isMoveOut(String procedureId) {
+        if (this.prevProcedureId == null || procedureId == null) {
+            return false;
+        }
+        return this.prevProcedureId.equals(procedureId);
+    }
 }

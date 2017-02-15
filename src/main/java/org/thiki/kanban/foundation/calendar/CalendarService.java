@@ -1,5 +1,6 @@
 package org.thiki.kanban.foundation.calendar;
 
+import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.common.date.Week;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 /**
  * Created by xubt on 15/02/2017.
  */
+@Service
 public class CalendarService {
     public int holidaysBetweenTwoDays(String startTime, String endTime) {
         int holidaysCount = 0;

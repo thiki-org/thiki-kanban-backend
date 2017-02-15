@@ -37,6 +37,7 @@ public class Card {
      * 工序Id @see {@link Procedure#getId()}
      */
     private String procedureId;
+    private double elapsedDays;
 
     public String getCreationTime() {
         return creationTime;
@@ -144,5 +145,13 @@ public class Card {
     @JsonIgnore
     public boolean isMoveToOtherProcedure(Card originCard) {
         return !originCard.procedureId.equals(this.procedureId);
+    }
+
+    public double getElapsedDays() {
+        return elapsedDays;
+    }
+
+    public void setElapsedDays(double elapsedDays) {
+        this.elapsedDays = elapsedDays;
     }
 }

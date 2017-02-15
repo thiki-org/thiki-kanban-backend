@@ -21,4 +21,6 @@ public interface CardsPersistence {
     Integer resort(Card card);
 
     int totalCardsIncludingDeleted(@Param("boardId") String boardId, @Param("currentMonth") String currentMonth);
+
+    List<Card> loadUnArchivedCards();
 }

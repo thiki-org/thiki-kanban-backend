@@ -693,4 +693,16 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="32" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_card" columnName="elapsed_days"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_card">
+            <column name="elapsed_days" type="double">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
