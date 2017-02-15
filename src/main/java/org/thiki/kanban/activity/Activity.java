@@ -16,6 +16,8 @@ public class Activity {
     private String summary;
     private String detail;
     private String creationTime;
+    private String procedureSnapShot;
+    private String prevProcedureSnapShot;
 
     public String getUserName() {
         return userName;
@@ -100,5 +102,21 @@ public class Activity {
 
     public void setOperationTypeName(String operationTypeName) {
         this.operationTypeName = operationTypeName;
+    }
+
+    public String getProcedureSnapShot() {
+        return procedureSnapShot;
+    }
+
+    public void setProcedureSnapShot(String procedureSnapShot) {
+        this.procedureSnapShot = procedureSnapShot;
+    }
+
+    public String getPrevProcedureSnapShot() {
+        return prevProcedureSnapShot;
+    }
+
+    public void setPrevProcedureSnapShot(String prevProcedureSnapShot) {
+        this.prevProcedureSnapShot = prevProcedureSnapShot;
     }
 }

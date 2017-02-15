@@ -11,13 +11,10 @@ import org.thiki.kanban.board.Board;
 import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.exception.BusinessException;
-import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.procedure.Procedure;
-import org.thiki.kanban.procedure.ProceduresPersistence;
 import org.thiki.kanban.procedure.ProceduresService;
 
 import javax.annotation.Resource;
-import java.text.MessageFormat;
 import java.util.List;
 
 @Service
@@ -25,9 +22,6 @@ public class CardsService {
     public static Logger logger = LoggerFactory.getLogger(AcceptanceCriteriaService.class);
     @Resource
     private CardsPersistence cardsPersistence;
-
-    @Resource
-    private ProceduresPersistence proceduresPersistence;
 
     @Resource
     private ActivityService activityService;
@@ -44,10 +38,6 @@ public class CardsService {
     public Card create(String userName, String boardId, String procedureId, Card card) {
         logger.info("Creating new card:{},procedure:{}", card, procedureId);
         card.setProcedureId(procedureId);
-        Procedure procedure = proceduresPersistence.findById(procedureId);
-        if (procedure == null) {
-            throw new ResourceNotFoundException("procedure[" + procedureId + "] is not found.");
-        }
         String code = generateCode(boardId);
         card.setCode(code);
         if (proceduresService.isReachedWipLimit(procedureId)) {
@@ -56,7 +46,8 @@ public class CardsService {
         cardsPersistence.create(userName, card);
         Card savedCard = cardsPersistence.findById(card.getId());
         logger.info("Created card:{}", savedCard);
-        activityService.recordCardCreation(savedCard, userName);
+        Procedure procedure = proceduresService.findById(procedureId);
+        activityService.recordCardCreation(savedCard, procedure, userName);
         return savedCard;
     }
 
@@ -85,7 +76,8 @@ public class CardsService {
         cardsPersistence.modify(cardId, card);
         Card savedCard = cardsPersistence.findById(cardId);
         logger.info("Modified card:{}", savedCard);
-        activityService.recordCardModification(savedCard, originCard, userName);
+        Procedure procedure = proceduresService.findById(procedureId);
+        activityService.recordCardModification(savedCard, procedure, originCard, userName);
         return savedCard;
     }
 
@@ -99,10 +91,6 @@ public class CardsService {
     @Cacheable(value = "card", key = "'cards'+#procedureId")
     public List<Card> findByProcedureId(String procedureId) {
         logger.info("Loading cards by procedureId:{}", procedureId);
-        Procedure procedure = proceduresPersistence.findById(procedureId);
-        if (procedure == null) {
-            throw new ResourceNotFoundException(MessageFormat.format("procedure[{0}] is not found.", procedureId));
-        }
         List<Card> cards = cardsPersistence.findByProcedureId(procedureId);
         logger.info("The cards belongs from the procedure {} are {}", procedureId, cards);
         return cards;
@@ -125,13 +113,16 @@ public class CardsService {
     public List<Card> resortCards(List<Card> cards, String procedureId, String boardId, String userName) {
         for (Card card : cards) {
             Card foundCard = cardsPersistence.findById(card.getId());
+            Procedure preProcedure = null, currentProcedure = null;
             if (card.isMoveToOtherProcedure(foundCard)) {
+                preProcedure = proceduresService.findById(foundCard.getProcedureId());
+                currentProcedure = proceduresService.findById(card.getProcedureId());
                 if (proceduresService.isReachedWipLimit(card.getProcedureId())) {
                     throw new BusinessException(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT);
                 }
             }
             cardsPersistence.resort(card);
-            activityService.recordCardArchive(foundCard, procedureId, userName);
+            activityService.recordCardArchive(foundCard, procedureId, preProcedure, currentProcedure, userName);
         }
         return findByProcedureId(procedureId);
     }

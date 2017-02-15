@@ -24,7 +24,7 @@
         sort_number = #{card.sortNumber},
         author = #{card.author},
         procedure_id = #{card.procedureId}
-        WHERE id=#{id}
+        WHERE id=#{cardId} AND delete_status=0
     </update>
 
     <update id="resort" parameterType="org.thiki.kanban.card.Card" flushCache="true">
@@ -36,20 +36,15 @@
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card WHERE id= #{id}
-    </select>
-
-    <select id="isCodeAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_card WHERE id!= #{cardId} AND code=#{code} AND procedure_id=#{procedureId} AND
-        delete_status=0
+        SELECT * FROM kb_card WHERE delete_status=0 AND id= #{cardId}
     </select>
 
     <select id="findByProcedureId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card WHERE procedure_id= #{procedure_id} AND delete_status=0 ORDER BY sort_number ASC
+        SELECT * FROM kb_card WHERE procedure_id= #{procedureId} AND delete_status=0 ORDER BY sort_number ASC
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_card SET delete_status=1 WHERE id=#{id}
+        UPDATE kb_card SET delete_status=1 WHERE id=#{cardId}
     </delete>
 
     <select id="totalCardsIncludingDeleted" parameterType="java.lang.String" resultType="java.lang.Integer">

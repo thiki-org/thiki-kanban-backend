@@ -106,22 +106,6 @@ public class CardsControllerTest extends TestBase {
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
     }
 
-    @Scenario("当创建一个卡片时,如果卡片所属的procedure并不存在,则创建失败")
-    @Test
-    public void create_shouldCreateFailedWhenProcedureIsNotFound() throws Exception {
-        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
-        given().body("{\"summary\":\"summary\"}")
-                .header("userName", userName)
-                .contentType(ContentType.JSON)
-                .when()
-                .post("/boards/boardId-foo/procedures/non-exists-procedureId/cards")
-                .then()
-                .statusCode(404)
-                .body("code", equalTo(404))
-                .body("message", equalTo("procedure[non-exists-procedureId] is not found."));
-        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
-    }
-
     @Scenario("当根据procedureId查找其下属的卡片时,可以返回其所有卡片")
     @Test
     public void shouldReturnCardsWhenFindCardsByProcedureIdSuccessfully() throws Exception {
@@ -174,19 +158,6 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(400)
                 .body("code", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.code()))
                 .body("message", equalTo(CardsCodes.CARD_IS_NOT_EXISTS.message()));
-    }
-
-    @Scenario("当根据procedureID查找卡片时,如果procedure不存在,则抛出404异常")
-    @Test
-    public void findCardsByProcedureId_shouldReturn404WhenProcedureIsNotFound() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,procedure_id) VALUES (1,'this is the card summary.','play badminton',1,1)");
-        given().header("userName", userName)
-                .when()
-                .get("/boards/boardId-foo/procedures/2/cards")
-                .then()
-                .statusCode(404)
-                .body("message", equalTo("procedure[2] is not found."))
-                .body("code", equalTo(404));
     }
 
     @Scenario("更新卡片成功")

@@ -669,4 +669,28 @@
                 columnDataType="int"
                 tableName="kb_procedure"/>
     </changeSet>
+    <changeSet id="30" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_activity" columnName="prev_procedure_snapShot"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_activity">
+            <column name="prev_procedure_snapShot" type="CLOB">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="31" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_activity">
+            <column name="procedure_snapShot" type="CLOB">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

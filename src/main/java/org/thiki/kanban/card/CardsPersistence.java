@@ -10,17 +10,15 @@ public interface CardsPersistence {
 
     void create(@Param("userName") String userName, @Param("card") Card card);
 
-    Card findById(String cardId);
+    Card findById(@Param("cardId") String cardId);
 
-    void modify(@Param("id") String cardId, @Param("card") Card card);
+    Integer modify(@Param("cardId") String cardId, @Param("card") Card card);
 
-    List<Card> findByProcedureId(String procedureId);
+    List<Card> findByProcedureId(@Param("procedureId") String procedureId);
 
-    Integer deleteById(@Param("id") String id);
+    Integer deleteById(@Param("cardId") String cardId);
 
     Integer resort(Card card);
-
-    boolean isCodeAlreadyExist(@Param("cardId") String cardId, @Param("code") String code, @Param("procedureId") String procedureId);
 
     int totalCardsIncludingDeleted(@Param("boardId") String boardId, @Param("currentMonth") String currentMonth);
 }

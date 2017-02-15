@@ -6,8 +6,11 @@
     <insert id="record" parameterType="org.thiki.kanban.activity.Activity">
         INSERT INTO
         kb_activity(id,card_id,
-        prev_procedure_id,procedure_id,operation_type_code,operation_type_name,summary,detail,userName) VALUES
-        (#{id},#{cardId}, #{prevProcedureId}, #{procedureId}, #{operationTypeCode}, #{operationTypeName}, #{summary},
+        prev_procedure_id,procedure_id,prev_procedure_snapShot,procedure_snapShot,operation_type_code,operation_type_name,summary,detail,userName)
+        VALUES
+        (#{id},#{cardId}, #{prevProcedureId},
+        #{procedureId},#{prevProcedureSnapShot},#{procedureSnapShot},#{operationTypeCode}, #{operationTypeName},
+        #{summary},
         #{detail}, #{userName})
     </insert>
 </mapper>

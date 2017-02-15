@@ -10,6 +10,7 @@ import org.thiki.kanban.card.Card;
 import org.thiki.kanban.cardTags.CardTag;
 import org.thiki.kanban.comment.Comment;
 import org.thiki.kanban.foundation.common.SequenceNumber;
+import org.thiki.kanban.procedure.Procedure;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -30,9 +31,10 @@ public class ActivityService {
         activityPersistence.record(activity);
     }
 
-    public void recordCardCreation(Card newCard, String userName) {
+    public void recordCardCreation(Card newCard, Procedure procedure, String userName) {
         Activity activity = new Activity();
         activity.setProcedureId(newCard.getProcedureId());
+        activity.setProcedureSnapShot(procedure.toString());
         activity.setCardId(newCard.getId());
         activity.setSummary(newCard.toString());
         activity.setDetail(newCard.toString());
@@ -42,10 +44,11 @@ public class ActivityService {
         record(activity);
     }
 
-    public void recordCardModification(Card modifiedCard, Card originCard, String userName) {
+    public void recordCardModification(Card modifiedCard, Procedure procedure, Card originCard, String userName) {
         Activity activity = new Activity();
         activity.setPrevProcedureId(originCard.getProcedureId());
         activity.setProcedureId(modifiedCard.getProcedureId());
+        activity.setProcedureSnapShot(procedure == null ? "" : procedure.toString());
         activity.setCardId(modifiedCard.getId());
         activity.setSummary(modifiedCard.diff(originCard));
         activity.setDetail(modifiedCard.diff(originCard));
@@ -59,10 +62,13 @@ public class ActivityService {
         record(activity);
     }
 
-    public void recordCardArchive(Card foundCard, String procedureId, String userName) {
+    public void recordCardArchive(Card foundCard, String procedureId, Procedure prevProcedure, Procedure currentProcedure, String userName) {
         Activity activity = new Activity();
         activity.setPrevProcedureId(foundCard.getProcedureId());
         activity.setProcedureId(procedureId);
+        activity.setPrevProcedureSnapShot(prevProcedure == null ? "" : prevProcedure.toString());
+        activity.setProcedureSnapShot(currentProcedure == null ? "" : currentProcedure.toString());
+
         activity.setCardId(foundCard.getId());
         activity.setSummary(foundCard.toString());
         activity.setDetail(foundCard.toString());
