@@ -37,8 +37,8 @@ public class CardTagsService {
     }
 
     @Cacheable(value = "card-tag", key = "'card-tags'+#cardId")
-    public List<CardTag> loadTags(String cardId, String boardId, String procedureId) {
-        logger.info("Loading card tags.cardId:{},boardId:{},procedureId{}", cardId, boardId, procedureId);
+    public List<CardTag> loadTags(String cardId, String boardId, String stageId) {
+        logger.info("Loading card tags.cardId:{},boardId:{},stageId{}", cardId, boardId, stageId);
         List<CardTag> cardTags = cardTagPersistence.findByCardId(cardId);
         logger.info("Loaded card tags:{}", cardTags);
         return cardTags;

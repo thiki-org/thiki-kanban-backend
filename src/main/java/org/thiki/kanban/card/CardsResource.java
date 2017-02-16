@@ -24,23 +24,23 @@ public class CardsResource extends RestResource {
     @Resource
     private CardResource cardResourceService;
 
-    @Cacheable(value = "card", key = "#userName+#boardId+#procedureId+'cards'")
-    public Object toResource(List<Card> cardList, String boardId, String procedureId, String userName) throws Exception {
-        logger.info("build cards resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+    @Cacheable(value = "card", key = "#userName+#boardId+#stageId+'cards'")
+    public Object toResource(List<Card> cardList, String boardId, String stageId, String userName) throws Exception {
+        logger.info("build cards resource.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         CardsResource cardsResource = new CardsResource();
         List<Object> cardResources = new ArrayList<>();
         for (Card card : cardList) {
-            Object cardResource = cardResourceService.toResource(card, boardId, procedureId, userName);
+            Object cardResource = cardResourceService.toResource(card, boardId, stageId, userName);
             cardResources.add(cardResource);
         }
 
         cardsResource.buildDataObject("cards", cardResources);
-        Link selfLink = linkTo(methodOn(CardsController.class).findByProcedureId(boardId, procedureId, userName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(CardsController.class).findByStageId(boardId, stageId, userName)).withSelfRel();
         cardsResource.add(tLink.from(selfLink).build(userName));
 
-        Link sortNumbersLink = linkTo(methodOn(CardsController.class).resortCards(cardList, boardId, procedureId, userName)).withRel("sortNumbers");
+        Link sortNumbersLink = linkTo(methodOn(CardsController.class).resortCards(cardList, boardId, stageId, userName)).withRel("sortNumbers");
         cardsResource.add(tLink.from(sortNumbersLink).build(userName));
-        logger.info("cards resource building completed.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+        logger.info("cards resource building completed.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         return cardsResource.getResource();
     }
 }

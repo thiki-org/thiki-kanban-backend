@@ -21,30 +21,30 @@ public class CommentController {
     @Resource
     private CommentsResource commentsResource;
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/comments", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Comment comment, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/comments", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Comment comment, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId) throws Exception {
         Comment savedComment = commentService.addComment(userName, cardId, comment);
 
-        return Response.post(commentResource.toResource(savedComment, boardId, procedureId, cardId, userName));
+        return Response.post(commentResource.toResource(savedComment, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/comments/{commentId}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String commentId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/comments/{commentId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String commentId, @RequestHeader String userName) throws Exception {
         Comment savedComment = commentService.loadCommentById(commentId);
 
-        return Response.build(commentResource.toResource(savedComment, boardId, procedureId, cardId, userName));
+        return Response.build(commentResource.toResource(savedComment, boardId, stageId, cardId, userName));
     }
 
     @RequestMapping(value = CommentResource.URL_TEMPLATE, method = RequestMethod.DELETE)
-    public HttpEntity removeComment(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String commentId, @RequestHeader String userName) throws Exception {
+    public HttpEntity removeComment(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String commentId, @RequestHeader String userName) throws Exception {
         commentService.removeComment(commentId);
 
-        return Response.build(commentResource.toResource(boardId, procedureId, cardId, userName));
+        return Response.build(commentResource.toResource(boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/comments", method = RequestMethod.GET)
-    public HttpEntity loadCommentsByCardId(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/comments", method = RequestMethod.GET)
+    public HttpEntity loadCommentsByCardId(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         List<Comment> commentList = commentService.loadCommentsByCardId(cardId);
-        return Response.build(commentsResource.toResource(commentList, boardId, procedureId, cardId, userName));
+        return Response.build(commentsResource.toResource(commentList, boardId, stageId, cardId, userName));
     }
 }

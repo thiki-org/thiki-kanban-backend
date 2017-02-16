@@ -14,9 +14,9 @@ import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsResource;
 import org.thiki.kanban.card.CardsService;
-import org.thiki.kanban.procedure.Procedure;
-import org.thiki.kanban.procedure.ProceduresResource;
-import org.thiki.kanban.procedure.ProceduresService;
+import org.thiki.kanban.stage.Stage;
+import org.thiki.kanban.stage.StagesResource;
+import org.thiki.kanban.stage.StagesService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,9 +35,9 @@ public class SnapshotService {
     @Resource
     private BoardResource boardResource;
     @Resource
-    private ProceduresService proceduresService;
+    private StagesService stagesService;
     @Resource
-    private ProceduresResource proceduresResource;
+    private StagesResource stagesResource;
     @Resource
     private CardsService cardsService;
     @Resource
@@ -58,36 +58,36 @@ public class SnapshotService {
         Board board = boardsService.findById(boardId);
         JSONObject boardJSON = (JSONObject) boardResource.toResource(board, userName);
 
-        List<Procedure> procedureList = proceduresService.loadByBoardId(boardId, viewType);
-        JSONObject proceduresJSON = (JSONObject) proceduresResource.toResource(procedureList, boardId, viewType, userName);
-        JSONArray proceduresArray = (JSONArray) proceduresJSON.get("procedures");
-        JSONArray newProceduresArray = loadCards(boardId, userName, proceduresArray);
-        proceduresJSON.put("procedures", newProceduresArray);
-        boardJSON.put("procedures", proceduresJSON);
+        List<Stage> stageList = stagesService.loadByBoardId(boardId, viewType);
+        JSONObject stagesJSON = (JSONObject) stagesResource.toResource(stageList, boardId, viewType, userName);
+        JSONArray stagesArray = (JSONArray) stagesJSON.get("stages");
+        JSONArray newStagesArray = loadCards(boardId, userName, stagesArray);
+        stagesJSON.put("stages", newStagesArray);
+        boardJSON.put("stages", stagesJSON);
         logger.info("board loading completed.");
         return boardJSON;
     }
 
-    private JSONArray loadCards(String boardId, String userName, JSONArray proceduresArray) throws Exception {
+    private JSONArray loadCards(String boardId, String userName, JSONArray stagesArray) throws Exception {
         logger.info("load cards tags.");
-        JSONArray newProceduresArray = new JSONArray();
-        for (int i = 0; i < proceduresArray.size(); i++) {
-            JSONObject procedureJSON = proceduresArray.getJSONObject(i);
-            String procedureId = procedureJSON.getString("id");
-            List<Card> cardList = cardsService.findByProcedureId(procedureId);
-            JSONObject cardsJSON = (JSONObject) cardsResource.toResource(cardList, boardId, procedureId, userName);
+        JSONArray newStagesArray = new JSONArray();
+        for (int i = 0; i < stagesArray.size(); i++) {
+            JSONObject stageJSON = stagesArray.getJSONObject(i);
+            String stageId = stageJSON.getString("id");
+            List<Card> cardList = cardsService.findByStageId(stageId);
+            JSONObject cardsJSON = (JSONObject) cardsResource.toResource(cardList, boardId, stageId, userName);
             JSONArray cardsArray = (JSONArray) cardsJSON.get("cards");
 
-            JSONArray newCardsArray = loadOthersByCard(boardId, userName, procedureId, cardsArray);
+            JSONArray newCardsArray = loadOthersByCard(boardId, userName, stageId, cardsArray);
             cardsJSON.put("cards", newCardsArray);
-            procedureJSON.put("cards", cardsJSON);
-            newProceduresArray.add(procedureJSON);
+            stageJSON.put("cards", cardsJSON);
+            newStagesArray.add(stageJSON);
         }
         logger.info("card loading completed.");
-        return newProceduresArray;
+        return newStagesArray;
     }
 
-    private JSONArray loadOthersByCard(String boardId, String userName, String procedureId, JSONArray cardsArray) throws Exception {
+    private JSONArray loadOthersByCard(String boardId, String userName, String stageId, JSONArray cardsArray) throws Exception {
         JSONArray newCardsArray = new JSONArray();
         if (cardsArray == null || cardsArray.size() == 0) {
             return new JSONArray();
@@ -103,10 +103,10 @@ public class SnapshotService {
                 public JSONObject call() throws Exception {
                     JSONObject cardJSON = cardsArray.getJSONObject(finalJ);
                     String cardId = cardJSON.getString("id");
-                    snapshotExecutor.loadAssignments(boardId, userName, procedureId, cardJSON, cardId);
-                    snapshotExecutor.loadAcceptanceCriterias(boardId, userName, procedureId, cardJSON, cardId);
-                    snapshotExecutor.loadCardTags(boardId, userName, procedureId, cardJSON, cardId);
-                    snapshotExecutor.loadComments(boardId, userName, procedureId, cardJSON, cardId);
+                    snapshotExecutor.loadAssignments(boardId, userName, stageId, cardJSON, cardId);
+                    snapshotExecutor.loadAcceptanceCriterias(boardId, userName, stageId, cardJSON, cardId);
+                    snapshotExecutor.loadCardTags(boardId, userName, stageId, cardJSON, cardId);
+                    snapshotExecutor.loadComments(boardId, userName, stageId, cardJSON, cardId);
                     return cardJSON;
                 }
             };

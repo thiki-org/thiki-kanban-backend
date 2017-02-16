@@ -11,8 +11,8 @@ import org.thiki.kanban.board.Board;
 import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.exception.BusinessException;
-import org.thiki.kanban.procedure.Procedure;
-import org.thiki.kanban.procedure.ProceduresService;
+import org.thiki.kanban.stage.Stage;
+import org.thiki.kanban.stage.StagesService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -32,22 +32,22 @@ public class CardsService {
     private DateService dateService;
 
     @Resource
-    private ProceduresService proceduresService;
+    private StagesService stagesService;
 
-    @CacheEvict(value = "card", key = "contains('#procedureId')", allEntries = true)
-    public Card create(String userName, String boardId, String procedureId, Card card) {
-        logger.info("Creating new card:{},procedure:{}", card, procedureId);
-        card.setProcedureId(procedureId);
+    @CacheEvict(value = "card", key = "contains('#stageId')", allEntries = true)
+    public Card create(String userName, String boardId, String stageId, Card card) {
+        logger.info("Creating new card:{},stage:{}", card, stageId);
+        card.setStageId(stageId);
         String code = generateCode(boardId);
         card.setCode(code);
-        if (proceduresService.isReachedWipLimit(procedureId)) {
-            throw new BusinessException(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT);
+        if (stagesService.isReachedWipLimit(stageId)) {
+            throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
         }
         cardsPersistence.create(userName, card);
         Card savedCard = cardsPersistence.findById(card.getId());
         logger.info("Created card:{}", savedCard);
-        Procedure procedure = proceduresService.findById(procedureId);
-        activityService.recordCardCreation(savedCard, procedure, userName);
+        Stage stage = stagesService.findById(stageId);
+        activityService.recordCardCreation(savedCard, stage, userName);
         return savedCard;
     }
 
@@ -62,13 +62,13 @@ public class CardsService {
         return board.getCodePrefix() + currentMonth + current;
     }
 
-    @CacheEvict(value = "card", key = "contains(#card.procedureId)", allEntries = true)
-    public Card modify(String cardId, Card card, String procedureId, String boardId, String userName) {
+    @CacheEvict(value = "card", key = "contains(#card.stageId)", allEntries = true)
+    public Card modify(String cardId, Card card, String stageId, String boardId, String userName) {
         logger.info("modify card:{}", card);
         Card originCard = loadAndValidateCard(cardId);
-        if (card.isMoveToOtherProcedure(originCard)) {
-            if (proceduresService.isReachedWipLimit(card.getProcedureId())) {
-                throw new BusinessException(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT);
+        if (card.isMoveToOtherStage(originCard)) {
+            if (stagesService.isReachedWipLimit(card.getStageId())) {
+                throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
             }
         }
         card.setCode(originCard.stillNoCode() ? generateCode(boardId) : originCard.getCode());
@@ -76,8 +76,8 @@ public class CardsService {
         cardsPersistence.modify(cardId, card);
         Card savedCard = cardsPersistence.findById(cardId);
         logger.info("Modified card:{}", savedCard);
-        Procedure procedure = proceduresService.findById(procedureId);
-        activityService.recordCardModification(savedCard, procedure, null, originCard, userName);
+        Stage stage = stagesService.findById(stageId);
+        activityService.recordCardModification(savedCard, stage, null, originCard, userName);
         return savedCard;
     }
 
@@ -88,11 +88,11 @@ public class CardsService {
         return cardsPersistence.deleteById(cardId);
     }
 
-    @Cacheable(value = "card", key = "'cards'+#procedureId")
-    public List<Card> findByProcedureId(String procedureId) {
-        logger.info("Loading cards by procedureId:{}", procedureId);
-        List<Card> cards = cardsPersistence.findByProcedureId(procedureId);
-        logger.info("The cards belongs from the procedure {} are {}", procedureId, cards);
+    @Cacheable(value = "card", key = "'cards'+#stageId")
+    public List<Card> findByStageId(String stageId) {
+        logger.info("Loading cards by stageId:{}", stageId);
+        List<Card> cards = cardsPersistence.findByStageId(stageId);
+        logger.info("The cards belongs from the stage {} are {}", stageId, cards);
         return cards;
     }
 
@@ -110,20 +110,20 @@ public class CardsService {
     }
 
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
-    public List<Card> resortCards(List<Card> cards, String procedureId, String boardId, String userName) {
+    public List<Card> resortCards(List<Card> cards, String stageId, String boardId, String userName) {
         for (Card card : cards) {
             Card originCard = cardsPersistence.findById(card.getId());
-            Procedure preProcedure = null, currentProcedure = null;
-            if (card.isMoveToOtherProcedure(originCard)) {
-                preProcedure = proceduresService.findById(originCard.getProcedureId());
-                currentProcedure = proceduresService.findById(card.getProcedureId());
-                if (proceduresService.isReachedWipLimit(card.getProcedureId())) {
-                    throw new BusinessException(CardsCodes.PROCEDURE_WIP_REACHED_LIMIT);
+            Stage preStage = null, currentStage = null;
+            if (card.isMoveToOtherStage(originCard)) {
+                preStage = stagesService.findById(originCard.getStageId());
+                currentStage = stagesService.findById(card.getStageId());
+                if (stagesService.isReachedWipLimit(card.getStageId())) {
+                    throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
                 }
             }
             cardsPersistence.resort(card);
-            activityService.recordCardModification(card, currentProcedure, preProcedure, originCard, userName);
+            activityService.recordCardModification(card, currentStage, preStage, originCard, userName);
         }
-        return findByProcedureId(procedureId);
+        return findByStageId(stageId);
     }
 }

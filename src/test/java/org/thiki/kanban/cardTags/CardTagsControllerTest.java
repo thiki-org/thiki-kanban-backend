@@ -43,15 +43,15 @@ public class CardTagsControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags")
+                .post("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/tags")
                 .then()
                 .statusCode(201)
                 .body("cardTags[0].name", equalTo("tag-name"))
                 .body("cardTags[0].color", equalTo("tag-color"))
-                .body("cardTags[0]._links.tags.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
-                .body("cardTags[0]._links.card.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
-                .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
+                .body("cardTags[0]._links.tags.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/tags"))
+                .body("cardTags[0]._links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/tags"))
+                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
                 .body("_links.board.href", endsWith("/someone/boards/boardId-foo"));
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE card_id='card-fooId' AND tag_id='foo-tagId1'" +
@@ -71,14 +71,14 @@ public class CardTagsControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags")
+                .get("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/tags")
                 .then()
                 .statusCode(200)
                 .body("cardTags[0].name", equalTo("tag-name"))
                 .body("cardTags[0].color", equalTo("tag-color"))
-                .body("cardTags[0]._links.tags.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
-                .body("cardTags[0]._links.card.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId/tags"))
-                .body("_links.card.href", endsWith("/boards/boardId-foo/procedures/procedures-fooId/cards/card-fooId"));
+                .body("cardTags[0]._links.tags.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/tags"))
+                .body("cardTags[0]._links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/tags"))
+                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"));
     }
 }

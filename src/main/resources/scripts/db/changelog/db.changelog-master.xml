@@ -106,10 +106,10 @@
     <changeSet id="4" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="kb_procedure"/>
+                <tableExists tableName="kb_stage"/>
             </not>
         </preConditions>
-        <createTable tableName="kb_procedure">
+        <createTable tableName="kb_stage">
             <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -152,7 +152,7 @@
             </column>
             <column name="code" type="varchar(40)"/>
             <column name="content" type="CLOB"/>
-            <column name="procedure_id" type="varchar(40)">
+            <column name="stage_id" type="varchar(40)">
                 <constraints nullable="false"/>
             </column>
             <column name="author" type="varchar(40)"/>
@@ -498,8 +498,8 @@
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="card_id" type="varchar(40)"/>
-            <column name="prev_procedure_id" type="varchar(40)"/>
-            <column name="procedure_id" type="varchar(40)"/>
+            <column name="prev_stage_id" type="varchar(40)"/>
+            <column name="stage_id" type="varchar(40)"/>
             <column name="operation_type_code" type="varchar(40)"/>
             <column name="operation_type_name" type="varchar(40)"/>
             <column name="summary" type="CLOB"/>
@@ -545,10 +545,10 @@
     <changeSet id="19" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists tableName="kb_procedure" columnName="wip_num"/>
+                <columnExists tableName="kb_stage" columnName="wip_num"/>
             </not>
         </preConditions>
-        <addColumn tableName="kb_procedure">
+        <addColumn tableName="kb_stage">
             <column name="wip_num" type="int" defaultValue="-1"/>
         </addColumn>
     </changeSet>
@@ -661,22 +661,22 @@
 
     <changeSet id="29" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <columnExists tableName="kb_procedure" columnName="wip_num"/>
+            <columnExists tableName="kb_stage" columnName="wip_num"/>
         </preConditions>
         <renameColumn
                 newColumnName="wip_limit"
                 oldColumnName="wip_num"
                 columnDataType="int"
-                tableName="kb_procedure"/>
+                tableName="kb_stage"/>
     </changeSet>
     <changeSet id="30" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists tableName="kb_activity" columnName="prev_procedure_snapShot"/>
+                <columnExists tableName="kb_activity" columnName="prev_stage_snapShot"/>
             </not>
         </preConditions>
         <addColumn tableName="kb_activity">
-            <column name="prev_procedure_snapShot" type="CLOB">
+            <column name="prev_stage_snapShot" type="CLOB">
                 <constraints nullable="true"/>
             </column>
         </addColumn>
@@ -684,11 +684,11 @@
     <changeSet id="31" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
+                <columnExists tableName="kb_activity" columnName="stage_snapShot"/>
             </not>
         </preConditions>
         <addColumn tableName="kb_activity">
-            <column name="procedure_snapShot" type="CLOB">
+            <column name="stage_snapShot" type="CLOB">
                 <constraints nullable="true"/>
             </column>
         </addColumn>

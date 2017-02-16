@@ -9,15 +9,15 @@ public class Activity {
     private String id;
     private String userName;
     private String cardId;
-    private String prevProcedureId;
-    private String procedureId;
+    private String prevStageId;
+    private String stageId;
     private String operationTypeCode;
     private String operationTypeName;
     private String summary;
     private String detail;
     private String creationTime;
-    private String procedureSnapShot;
-    private String prevProcedureSnapShot;
+    private String stageSnapShot;
+    private String prevStageSnapShot;
 
     public String getUserName() {
         return userName;
@@ -59,20 +59,20 @@ public class Activity {
         this.id = id;
     }
 
-    public String getPrevProcedureId() {
-        return prevProcedureId;
+    public String getPrevStageId() {
+        return prevStageId;
     }
 
-    public void setPrevProcedureId(String prevProcedureId) {
-        this.prevProcedureId = prevProcedureId;
+    public void setPrevStageId(String prevStageId) {
+        this.prevStageId = prevStageId;
     }
 
-    public String getProcedureId() {
-        return procedureId;
+    public String getStageId() {
+        return stageId;
     }
 
-    public void setProcedureId(String procedureId) {
-        this.procedureId = procedureId;
+    public void setStageId(String stageId) {
+        this.stageId = stageId;
     }
 
     public String getCardId() {
@@ -104,20 +104,20 @@ public class Activity {
         this.operationTypeName = operationTypeName;
     }
 
-    public String getProcedureSnapShot() {
-        return procedureSnapShot;
+    public String getStageSnapShot() {
+        return stageSnapShot;
     }
 
-    public void setProcedureSnapShot(String procedureSnapShot) {
-        this.procedureSnapShot = procedureSnapShot;
+    public void setStageSnapShot(String stageSnapShot) {
+        this.stageSnapShot = stageSnapShot;
     }
 
-    public String getPrevProcedureSnapShot() {
-        return prevProcedureSnapShot;
+    public String getPrevStageSnapShot() {
+        return prevStageSnapShot;
     }
 
-    public void setPrevProcedureSnapShot(String prevProcedureSnapShot) {
-        this.prevProcedureSnapShot = prevProcedureSnapShot;
+    public void setPrevStageSnapShot(String prevStageSnapShot) {
+        this.prevStageSnapShot = prevStageSnapShot;
     }
 
     @Override
@@ -135,10 +135,10 @@ public class Activity {
         return id != null ? id.hashCode() : 0;
     }
 
-    public boolean isMoveOut(String procedureId) {
-        if (this.prevProcedureId == null || procedureId == null) {
+    public boolean isMoveOut(String stageId) {
+        if (this.prevStageId == null || stageId == null) {
             return false;
         }
-        return this.prevProcedureId.equals(procedureId);
+        return this.prevStageId.equals(stageId);
     }
 }

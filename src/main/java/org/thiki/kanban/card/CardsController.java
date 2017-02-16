@@ -26,43 +26,43 @@ public class CardsController {
     @Resource
     private CardsResource cardsResource;
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards", method = RequestMethod.GET)
-    public HttpEntity findByProcedureId(@PathVariable String boardId, @PathVariable String procedureId, @RequestHeader String userName) throws Exception {
-        logger.info("Loading cards by procedureId [{}]", procedureId);
-        List<Card> cardList = cardsService.findByProcedureId(procedureId);
-        return Response.build(cardsResource.toResource(cardList, boardId, procedureId, userName));
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards", method = RequestMethod.GET)
+    public HttpEntity findByStageId(@PathVariable String boardId, @PathVariable String stageId, @RequestHeader String userName) throws Exception {
+        logger.info("Loading cards by stageId [{}]", stageId);
+        List<Card> cardList = cardsService.findByStageId(stageId);
+        return Response.build(cardsResource.toResource(cardList, boardId, stageId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         Card foundCard = cardsService.findById(cardId);
 
-        return Response.build(cardResource.toResource(foundCard, boardId, procedureId, userName));
+        return Response.build(cardResource.toResource(foundCard, boardId, stageId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Card card, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        Card updatedCard = cardsService.modify(cardId, card, procedureId, boardId, userName);
-        return Response.build(cardResource.toResource(updatedCard, boardId, procedureId, userName));
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}", method = RequestMethod.PUT)
+    public HttpEntity update(@RequestBody Card card, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+        Card updatedCard = cardsService.modify(cardId, card, stageId, boardId, userName);
+        return Response.build(cardResource.toResource(updatedCard, boardId, stageId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         cardsService.deleteById(cardId);
-        return Response.build(cardResource.toResource(boardId, procedureId, userName));
+        return Response.build(cardResource.toResource(boardId, stageId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Card card, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String procedureId) throws Exception {
-        Card savedCard = cardsService.create(userName, boardId, procedureId, card);
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Card card, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String stageId) throws Exception {
+        Card savedCard = cardsService.create(userName, boardId, stageId, card);
 
-        return Response.post(cardResource.toResource(savedCard, boardId, procedureId, userName));
+        return Response.post(cardResource.toResource(savedCard, boardId, stageId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/sortNumbers", method = RequestMethod.PUT)
-    public HttpEntity resortCards(@RequestBody List<Card> cards, @PathVariable String boardId, @PathVariable String procedureId, @RequestHeader String userName) throws Exception {
-        List<Card> sortedCards = cardsService.resortCards(cards, procedureId, boardId, userName);
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/sortNumbers", method = RequestMethod.PUT)
+    public HttpEntity resortCards(@RequestBody List<Card> cards, @PathVariable String boardId, @PathVariable String stageId, @RequestHeader String userName) throws Exception {
+        List<Card> sortedCards = cardsService.resortCards(cards, stageId, boardId, userName);
 
-        return Response.build(cardsResource.toResource(sortedCards, boardId, procedureId, userName));
+        return Response.build(cardsResource.toResource(sortedCards, boardId, stageId, userName));
     }
 }

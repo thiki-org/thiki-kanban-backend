@@ -50,7 +50,7 @@ public class StatisticsService {
 
     private Date findMoveOutProcessTime(Activity moveInActivity, List<Activity> activities) {
         for (Activity activity : activities) {
-            if (activity.isMoveOut(moveInActivity.getProcedureId())) {
+            if (activity.isMoveOut(moveInActivity.getStageId())) {
                 return DateService.instance().StringToDate(activity.getCreationTime());
             }
         }

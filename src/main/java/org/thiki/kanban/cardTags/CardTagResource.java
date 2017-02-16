@@ -25,19 +25,19 @@ public class CardTagResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "card-tag", key = "#userName+'card-tag'+#boardId+#procedureId+#cardId+#cardTag.id")
-    public Object toResource(CardTag cardTag, String boardId, String procedureId, String cardId, String userName) throws Exception {
-        logger.info("build card tag resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+    @Cacheable(value = "card-tag", key = "#userName+'card-tag'+#boardId+#stageId+#cardId+#cardTag.id")
+    public Object toResource(CardTag cardTag, String boardId, String stageId, String cardId, String userName) throws Exception {
+        logger.info("build card tag resource.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         CardTagResource cardTagResource = new CardTagResource();
         cardTagResource.domainObject = cardTag;
         if (cardTag != null) {
-            Link tagsLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, procedureId, cardId, null)).withRel("tags");
+            Link tagsLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, stageId, cardId, null)).withRel("tags");
             cardTagResource.add(tlink.from(tagsLink).build(userName));
 
-            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
             cardTagResource.add(tlink.from(cardLink).build(userName));
         }
-        logger.info("card tag resource building completed.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+        logger.info("card tag resource building completed.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         return cardTagResource.getResource();
     }
 }

@@ -24,29 +24,29 @@ public class AssignmentController {
     @Resource
     private AssignmentsResource assignmentsResource;
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         Assignment savedAssignment = assignmentService.assign(assignment, cardId, userName);
-        return Response.post(assignmentResource.toResource(savedAssignment, boardId, procedureId, cardId, userName));
+        return Response.post(assignmentResource.toResource(savedAssignment, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String assignmentId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String assignmentId, @RequestHeader String userName) throws Exception {
         Assignment foundAssignment = assignmentService.findById(assignmentId);
 
-        return Response.build(assignmentResource.toResource(foundAssignment, boardId, procedureId, cardId, userName));
+        return Response.build(assignmentResource.toResource(foundAssignment, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments", method = RequestMethod.GET)
-    public HttpEntity findByCardId(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments", method = RequestMethod.GET)
+    public HttpEntity findByCardId(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         logger.info("Loading assignments by board [{}]", boardId);
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
-        return Response.build(assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName));
+        return Response.build(assignmentsResource.toResource(assignmentList, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String assignmentId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String assignmentId, @RequestHeader String userName) throws Exception {
         assignmentService.leaveCard(assignmentId, cardId, userName);
-        return Response.build(assignmentResource.toResource(boardId, procedureId, cardId, userName));
+        return Response.build(assignmentResource.toResource(boardId, stageId, cardId, userName));
     }
 }

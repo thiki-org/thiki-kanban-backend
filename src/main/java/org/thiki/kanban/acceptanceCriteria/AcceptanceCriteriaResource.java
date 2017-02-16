@@ -23,31 +23,31 @@ public class AcceptanceCriteriaResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriteria'+#acceptanceCriteria.id+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(AcceptanceCriteria acceptanceCriteria, String boardId, String procedureId, String cardId, String userName) throws Exception {
-        logger.info("build acceptanceCriterias resource.board:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriteria'+#acceptanceCriteria.id+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(AcceptanceCriteria acceptanceCriteria, String boardId, String stageId, String cardId, String userName) throws Exception {
+        logger.info("build acceptanceCriterias resource.board:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         AcceptanceCriteriaResource acceptanceCriteriaResource = new AcceptanceCriteriaResource();
         acceptanceCriteriaResource.domainObject = acceptanceCriteria;
         if (acceptanceCriteria != null) {
-            Link selfLink = linkTo(methodOn(AcceptanceCriteriaController.class).findById(boardId, procedureId, cardId, acceptanceCriteria.getId(), userName)).withSelfRel();
+            Link selfLink = linkTo(methodOn(AcceptanceCriteriaController.class).findById(boardId, stageId, cardId, acceptanceCriteria.getId(), userName)).withSelfRel();
             acceptanceCriteriaResource.add(tlink.from(selfLink).build(userName));
-            Link acceptanceCriteriasLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, procedureId, cardId, userName)).withRel("acceptanceCriterias");
+            Link acceptanceCriteriasLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, stageId, cardId, userName)).withRel("acceptanceCriterias");
             acceptanceCriteriaResource.add(tlink.from(acceptanceCriteriasLink).build(userName));
 
-            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
             acceptanceCriteriaResource.add(tlink.from(cardLink).build(userName));
         }
-        logger.info("acceptanceCriterias resource build completed.board:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+        logger.info("acceptanceCriterias resource build completed.board:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         return acceptanceCriteriaResource.getResource();
     }
 
-    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriteria'+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(String boardId, String procedureId, String cardId, String userName) throws Exception {
-        logger.info("build acceptanceCriterias resource.board:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriteria'+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(String boardId, String stageId, String cardId, String userName) throws Exception {
+        logger.info("build acceptanceCriterias resource.board:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         AcceptanceCriteriaResource acceptanceCriteriaResource = new AcceptanceCriteriaResource();
-        Link acceptanceCriteriasLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, procedureId, cardId, userName)).withRel("acceptanceCriterias");
+        Link acceptanceCriteriasLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, stageId, cardId, userName)).withRel("acceptanceCriterias");
         acceptanceCriteriaResource.add(tlink.from(acceptanceCriteriasLink).build(userName));
-        logger.info("acceptanceCriterias resource build completed.board:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+        logger.info("acceptanceCriterias resource build completed.board:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         return acceptanceCriteriaResource.getResource();
     }
 }

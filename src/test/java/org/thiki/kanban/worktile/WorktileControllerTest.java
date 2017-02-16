@@ -67,7 +67,7 @@ public class WorktileControllerTest extends TestBase {
                 .body("_links.all.href", endsWith("/someone/boards"))
                 .body("_links.self.href", endsWith("/someone/boards/fooId"));
 
-        assertEquals("Product Backlog", jdbcTemplate.queryForObject("select title from kb_procedure where board_id='fooId'", String.class));
+        assertEquals("Product Backlog", jdbcTemplate.queryForObject("select title from kb_stage where board_id='fooId'", String.class));
     }
 
     @Scenario("数据导入>新建board后,导入tasks")

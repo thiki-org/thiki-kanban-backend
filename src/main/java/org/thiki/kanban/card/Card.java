@@ -7,7 +7,7 @@ import de.danielbechler.diff.node.DiffNode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.foundation.common.date.DateService;
-import org.thiki.kanban.procedure.Procedure;
+import org.thiki.kanban.stage.Stage;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -35,9 +35,9 @@ public class Card {
     private String creationTime;
     private String modificationTime;
     /**
-     * 工序Id @see {@link Procedure#getId()}
+     * 工序Id @see {@link Stage#getId()}
      */
-    private String procedureId;
+    private String stageId;
     private double elapsedDays;
 
     public String getCreationTime() {
@@ -56,12 +56,12 @@ public class Card {
         this.modificationTime = modificationTime;
     }
 
-    public String getProcedureId() {
-        return procedureId;
+    public String getStageId() {
+        return stageId;
     }
 
-    public void setProcedureId(String procedureId) {
-        this.procedureId = procedureId;
+    public void setStageId(String stageId) {
+        this.stageId = stageId;
     }
 
     public String getAuthor() {
@@ -144,8 +144,8 @@ public class Card {
     }
 
     @JsonIgnore
-    public boolean isMoveToOtherProcedure(Card originCard) {
-        return !originCard.procedureId.equals(this.procedureId);
+    public boolean isMoveToOtherStage(Card originCard) {
+        return !originCard.stageId.equals(this.stageId);
     }
 
     public double getElapsedDays() {

@@ -30,27 +30,27 @@ public class CardTagsResource extends RestResource {
     @Resource
     private CardTagResource cardTagResourceService;
 
-    @Cacheable(value = "card-tag", key = "#userName+'card-tags'+#boardId+#procedureId+#cardId")
-    public Object toResource(List<CardTag> cardTags, String boardId, String procedureId, String cardId, String userName) throws Exception {
-        logger.info("build cards tag resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+    @Cacheable(value = "card-tag", key = "#userName+'card-tags'+#boardId+#stageId+#cardId")
+    public Object toResource(List<CardTag> cardTags, String boardId, String stageId, String cardId, String userName) throws Exception {
+        logger.info("build cards tag resource.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         CardsResource cardsResource = new CardsResource();
         List<Object> cardTagResources = new ArrayList<>();
         for (CardTag cardTag : cardTags) {
-            Object cardTagResource = cardTagResourceService.toResource(cardTag, boardId, procedureId, cardId, userName);
+            Object cardTagResource = cardTagResourceService.toResource(cardTag, boardId, stageId, cardId, userName);
             cardTagResources.add(cardTagResource);
         }
 
         cardsResource.buildDataObject("cardTags", cardTagResources);
 
-        Link selfLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, procedureId, cardId, null)).withSelfRel();
+        Link selfLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, stageId, cardId, null)).withSelfRel();
         cardsResource.add(tlink.from(selfLink).build(userName));
 
-        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
         cardsResource.add(tlink.from(cardLink).build(userName));
 
         Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
         cardsResource.add(tlink.from(boardLink).build(userName));
-        logger.info("cards tag resource building completed.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+        logger.info("cards tag resource building completed.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         return cardsResource.getResource();
     }
 }

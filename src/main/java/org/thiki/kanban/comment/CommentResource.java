@@ -18,23 +18,23 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @Service
 public class CommentResource extends RestResource {
-    public static final String URL_TEMPLATE = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/comments/{commentId}";
+    public static final String URL_TEMPLATE = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/comments/{commentId}";
 
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "comment", key = "'comment'+#comment.id+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(Comment comment, String boardId, String procedureId, String cardId, String userName) throws Exception {
+    @Cacheable(value = "comment", key = "'comment'+#comment.id+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(Comment comment, String boardId, String stageId, String cardId, String userName) throws Exception {
         CommentResource commentResource = new CommentResource();
         commentResource.domainObject = comment;
         if (comment != null) {
-            Link selfLink = linkTo(methodOn(CommentController.class).findById(boardId, procedureId, cardId, comment.getId(), userName)).withSelfRel();
+            Link selfLink = linkTo(methodOn(CommentController.class).findById(boardId, stageId, cardId, comment.getId(), userName)).withSelfRel();
             commentResource.add(tlink.from(selfLink).build(userName));
 
-            Link commentsLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, procedureId, cardId, userName)).withRel("comments");
+            Link commentsLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, stageId, cardId, userName)).withRel("comments");
             commentResource.add(tlink.from(commentsLink).build(userName));
 
-            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
             commentResource.add(tlink.from(cardLink).build(userName));
 
             Link avatarLink = linkTo(methodOn(UsersController.class).loadAvatar(comment.getAuthor())).withRel("avatar");
@@ -43,11 +43,11 @@ public class CommentResource extends RestResource {
         return commentResource.getResource();
     }
 
-    @Cacheable(value = "comment", key = "'comment'+#comment.id+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(String boardId, String procedureId, String cardId, String userName) throws Exception {
+    @Cacheable(value = "comment", key = "'comment'+#comment.id+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(String boardId, String stageId, String cardId, String userName) throws Exception {
         CommentResource commentResource = new CommentResource();
 
-        Link commentsLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, procedureId, cardId, userName)).withRel("comments");
+        Link commentsLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, stageId, cardId, userName)).withRel("comments");
         commentResource.add(tlink.from(commentsLink).build(userName));
         return commentResource.getResource();
     }

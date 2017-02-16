@@ -27,23 +27,23 @@ public class AssignmentsResource extends RestResource {
     @Resource
     private AssignmentResource assignmentResourceService;
 
-    @Cacheable(value = "assignment", key = "'assignments'+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(List<Assignment> assignmentList, String boardId, String procedureId, String cardId, String userName) throws Exception {
-        logger.info("build assignments resource.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+    @Cacheable(value = "assignment", key = "'assignments'+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(List<Assignment> assignmentList, String boardId, String stageId, String cardId, String userName) throws Exception {
+        logger.info("build assignments resource.boardId:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         AssignmentsResource assignmentsResource = new AssignmentsResource();
         List<Object> assignmentResources = new ArrayList<>();
         for (Assignment assignment : assignmentList) {
-            Object assignmentResource = assignmentResourceService.toResource(assignment, boardId, procedureId, cardId, userName);
+            Object assignmentResource = assignmentResourceService.toResource(assignment, boardId, stageId, cardId, userName);
             assignmentResources.add(assignmentResource);
         }
 
         assignmentsResource.buildDataObject("assignments", assignmentResources);
-        Link selfLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, procedureId, cardId, userName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, stageId, cardId, userName)).withSelfRel();
         assignmentsResource.add(tlink.from(selfLink).build(userName));
 
-        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
         assignmentsResource.add(tlink.from(cardLink).build(userName));
-        logger.info("assignments resource building completed.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+        logger.info("assignments resource building completed.boardId:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         return assignmentsResource.getResource();
     }
 }

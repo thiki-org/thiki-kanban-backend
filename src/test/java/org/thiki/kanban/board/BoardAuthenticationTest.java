@@ -33,7 +33,7 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
                 .body("name", equalTo("board-name"))
                 .body("author", equalTo("others"))
                 .body("_links.all.href", endsWith("/someone/boards"))
-                .body("_links.procedures.href", endsWith("/boards/fooId/procedures"))
+                .body("_links.stages.href", endsWith("/boards/fooId/stages"))
 
                 .body("_links.self.href", endsWith("/someone/boards/fooId"))
                 .body("_links.self.actions.read.isAllowed", equalTo(true))

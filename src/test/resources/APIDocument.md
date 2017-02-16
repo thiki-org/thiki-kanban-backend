@@ -19,8 +19,8 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 			"href":"http://localhost:9120/kanban/someone/boards",
 			"actions":{}
 		},
-		"procedures":{
-			"href":"http://localhost:9120/kanban/boards/boardId/procedures",
+		"stages":{
+			"href":"http://localhost:9120/kanban/boards/boardId/stages",
 			"actions":{}
 		},
 		"self":{
@@ -47,18 +47,18 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 	},
 	"author":"someone",
 	"modificationTime":"2016-12-18 21:20:21.469000",
-	"procedures":{
+	"stages":{
 		"_links":{
 			"self":{
-				"href":"http://localhost:9120/kanban/boards/boardId/procedures",
+				"href":"http://localhost:9120/kanban/boards/boardId/stages",
 				"actions":{}
 			},
 			"sortNumbers":{
-				"href":"http://localhost:9120/kanban/boards/boardId/procedures/sortNumbers",
+				"href":"http://localhost:9120/kanban/boards/boardId/stages/sortNumbers",
 				"actions":{}
 			}
 		},
-		"procedures":[
+		"stages":[
 			{
 				"cards":{
 					"cards":[
@@ -69,11 +69,11 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 									{
 										"_links":{
 											"all":{
-												"href":"http://localhost:9120/kanban/boards/procedure-fooId/procedures",
+												"href":"http://localhost:9120/kanban/boards/stage-fooId/stages",
 												"actions":{}
 											},
 											"assignments":{
-												"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/assignments",
+												"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId/assignments",
 												"actions":{}
 											},
 											"assigneeProfile":{
@@ -81,11 +81,11 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 												"actions":{}
 											},
 											"self":{
-												"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/assignments/fooId",
+												"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId/assignments/fooId",
 												"actions":{}
 											},
 											"card":{
-												"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId",
+												"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId",
 												"actions":{}
 											},
 											"assigneeAvatar":{
@@ -102,11 +102,11 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 								],
 								"_links":{
 									"self":{
-										"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/assignments",
+										"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId/assignments",
 										"actions":{}
 									},
 									"card":{
-										"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId",
+										"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId",
 										"actions":{}
 									}
 								}
@@ -114,27 +114,27 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 							"creationTime":"2016-12-18 21:20:21.473000",
 							"_links":{
 								"assignments":{
-									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/assignments",
+									"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId/assignments",
 									"actions":{}
 								},
 								"acceptanceCriterias":{
-									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/acceptanceCriterias",
+									"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId/acceptanceCriterias",
 									"actions":{}
 								},
 								"comments":{
-									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/comments",
+									"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId/comments",
 									"actions":{}
 								},
 								"cards":{
-									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards",
+									"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards",
 									"actions":{}
 								},
 								"self":{
-									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId",
+									"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId",
 									"actions":{}
 								},
 								"cardTags":{
-									"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/card-fooId/tags",
+									"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/card-fooId/tags",
 									"actions":{}
 								},
 								"tags":{
@@ -146,17 +146,17 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 							"modificationTime":"2016-12-18 21:20:21.473000",
 							"sortNumber":0,
 							"id":"card-fooId",
-							"procedureId":"procedure-fooId",
+							"stageId":"stage-fooId",
 							"content":"play badminton"
 						}
 					],
 					"_links":{
 						"self":{
-							"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards",
+							"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards",
 							"actions":{}
 						},
 						"sortNumbers":{
-							"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards/sortNumbers",
+							"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards/sortNumbers",
 							"actions":{}
 						}
 					}
@@ -164,15 +164,15 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 				"creationTime":"2016-12-18 21:20:21.472000",
 				"_links":{
 					"all":{
-						"href":"http://localhost:9120/kanban/boards/boardId/procedures",
+						"href":"http://localhost:9120/kanban/boards/boardId/stages",
 						"actions":{}
 					},
 					"cards":{
-						"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId/cards",
+						"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId/cards",
 						"actions":{}
 					},
 					"self":{
-						"href":"http://localhost:9120/kanban/boards/boardId/procedures/procedure-fooId",
+						"href":"http://localhost:9120/kanban/boards/boardId/stages/stage-fooId",
 						"actions":{}
 					}
 				},
@@ -180,8 +180,8 @@ http://localhost:9120/kanban/someone/boards/boardId/overall
 				"modificationTime":"2016-12-18 21:20:21.472000",
 				"sortNumber":0,
 				"boardId":"boardId",
-				"id":"procedure-fooId",
-				"title":"procedure-name"
+				"id":"stage-fooId",
+				"title":"stage-name"
 			}
 		]
 	},

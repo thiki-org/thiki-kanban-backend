@@ -14,7 +14,7 @@ public interface CardsPersistence {
 
     Integer modify(@Param("cardId") String cardId, @Param("card") Card card);
 
-    List<Card> findByProcedureId(@Param("procedureId") String procedureId);
+    List<Card> findByStageId(@Param("stageId") String stageId);
 
     Integer deleteById(@Param("cardId") String cardId);
 

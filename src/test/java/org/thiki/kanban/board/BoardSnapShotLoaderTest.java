@@ -27,13 +27,13 @@ public class BoardSnapShotLoaderTest extends TestBase {
                 .names("id,name,owner,author")
                 .values("boardId", "board-name", "someone", "someone").exec();
 
-        dbPreparation.table("kb_procedure")
+        dbPreparation.table("kb_stage")
                 .names("id,title,author,board_id,type")
-                .values("procedure-fooId", "procedure-name", userName, "boardId", 1).exec();
+                .values("stage-fooId", "stage-name", userName, "boardId", 1).exec();
 
         dbPreparation.table("kb_card")
-                .names("id,summary,content,author,procedure_id")
-                .values("card-fooId", "card-summary.", "play badminton", userName, "procedure-fooId").exec();
+                .names("id,summary,content,author,stage_id")
+                .values("card-fooId", "card-summary.", "play badminton", userName, "stage-fooId").exec();
 
         dbPreparation.table("kb_card_assignment")
                 .names("id,card_id,assignee,assigner,author")
@@ -54,9 +54,9 @@ public class BoardSnapShotLoaderTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", endsWith("/someone/boards"))
                 .body("_links.self.href", endsWith("/someone/boards/boardId"))
-                .body("_links.procedures.href", endsWith("/boards/boardId/procedures"))
-                .body("procedures", notNullValue())
-                .body("procedures.procedures[0].cards", notNullValue())
-                .body("procedures.procedures[0].cards.cards[0].assignments", notNullValue());
+                .body("_links.stages.href", endsWith("/boards/boardId/stages"))
+                .body("stages", notNullValue())
+                .body("stages.stages[0].cards", notNullValue())
+                .body("stages.stages[0].cards.cards[0].assignments", notNullValue());
     }
 }

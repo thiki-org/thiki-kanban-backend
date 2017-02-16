@@ -6,11 +6,11 @@
 
     <insert id="create" parameterType="org.thiki.kanban.card.Card">
         INSERT INTO
-        kb_card(id,summary, content,code,deadline,size, sort_number, author, procedure_id) VALUES
+        kb_card(id,summary, content,code,deadline,size, sort_number, author, stage_id) VALUES
         (#{card.id},#{card.summary},
         #{card.content},#{card.code},#{card.deadline},#{card.size}, (SELECT
         max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
-        max_sort_number FROM kb_card WHERE procedure_id=#{card.procedureId} ) as t ), #{userName}, #{card.procedureId})
+        max_sort_number FROM kb_card WHERE stage_id=#{card.stageId} ) as t ), #{userName}, #{card.stageId})
     </insert>
 
     <update id="modify" parameterType="org.thiki.kanban.card.Card" flushCache="true">
@@ -29,14 +29,14 @@
         <if test="card.elapsedDays!=null">
             size = #{card.size},
         </if>
-        procedure_id = #{card.procedureId}
+        stage_id = #{card.stageId}
         WHERE id=#{cardId} AND delete_status=0
     </update>
 
     <update id="resort" parameterType="org.thiki.kanban.card.Card" flushCache="true">
         UPDATE kb_card SET sort_number = #{sortNumber}
-        <if test="procedureId!=null">
-            ,procedure_id=#{procedureId}
+        <if test="stageId!=null">
+            ,stage_id=#{stageId}
         </if>
         WHERE id=#{id} AND delete_status=0
     </update>
@@ -45,8 +45,8 @@
         SELECT * FROM kb_card WHERE delete_status=0 AND id= #{cardId}
     </select>
 
-    <select id="findByProcedureId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card WHERE procedure_id= #{procedureId} AND delete_status=0 ORDER BY sort_number ASC
+    <select id="findByStageId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
+        SELECT * FROM kb_card WHERE stage_id= #{stageId} AND delete_status=0 ORDER BY sort_number ASC
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
@@ -54,11 +54,11 @@
     </delete>
 
     <select id="totalCardsIncludingDeleted" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT count(*) FROM kb_card WHERE procedure_id IN (SELECT id from kb_procedure WHERE board_id=#{boardId}) AND
+        SELECT count(*) FROM kb_card WHERE stage_id IN (SELECT id from kb_stage WHERE board_id=#{boardId}) AND
         code like concat('%',#{currentMonth},'%')
     </select>
 
     <select id="loadUnArchivedCards" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-      SELECT * FROM kb_card LEFT JOIN kb_procedure ON kb_card.procedure_id=kb_procedure.id WHERE kb_procedure.type !=9
+      SELECT * FROM kb_card LEFT JOIN kb_stage ON kb_card.stage_id=kb_stage.id WHERE kb_stage.type !=9
 </select>
 </mapper>

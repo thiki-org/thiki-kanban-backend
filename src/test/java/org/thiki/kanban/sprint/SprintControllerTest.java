@@ -10,7 +10,7 @@ import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.foundation.common.date.DateService;
-import org.thiki.kanban.procedure.ProcedureCodes;
+import org.thiki.kanban.stage.StageCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -217,9 +217,9 @@ public class SprintControllerTest extends TestBase {
     @Scenario("迭代归档->迭代完成时将现有的完成列中的卡片进行归档")
     @Test
     public void shouldReturn201WhenArchiveSuccessfully() {
-        dbPreparation.table("kb_procedure")
+        dbPreparation.table("kb_stage")
                 .names("id,title,author,board_id,type,status")
-                .values("procedure_fooId", "title", "someone", "board-fooId", ProcedureCodes.PROCEDURE_TYPE_IN_PLAN, ProcedureCodes.PROCEDURE_STATUS_DONE)
+                .values("stage_fooId", "title", "someone", "board-fooId", StageCodes.STAGE_TYPE_IN_PLAN, StageCodes.STAGE_STATUS_DONE)
                 .exec();
 
         dbPreparation.table("kb_sprint")
@@ -240,6 +240,6 @@ public class SprintControllerTest extends TestBase {
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
 
-        assertEquals("sprint_name归档", jdbcTemplate.queryForObject("select title FROM kb_procedure WHERE status=9 AND type=9", String.class));
+        assertEquals("sprint_name归档", jdbcTemplate.queryForObject("select title FROM kb_stage WHERE status=9 AND type=9", String.class));
     }
 }

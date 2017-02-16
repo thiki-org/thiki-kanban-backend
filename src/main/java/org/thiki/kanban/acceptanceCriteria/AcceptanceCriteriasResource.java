@@ -28,26 +28,26 @@ public class AcceptanceCriteriasResource extends RestResource {
     @Resource
     private AcceptanceCriteriaResource acceptanceCriteriaResourceService;
 
-    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriterias'+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(List<AcceptanceCriteria> acceptanceCriterias, String boardId, String procedureId, String cardId, String userName) throws Exception {
-        logger.info("build acceptanceCriterias resource.acceptanceCriterias:{},boardId:{},procedureId:{},cardId:{},userName:{}", acceptanceCriterias, boardId, procedureId, cardId, userName);
+    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriterias'+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(List<AcceptanceCriteria> acceptanceCriterias, String boardId, String stageId, String cardId, String userName) throws Exception {
+        logger.info("build acceptanceCriterias resource.acceptanceCriterias:{},boardId:{},stageId:{},cardId:{},userName:{}", acceptanceCriterias, boardId, stageId, cardId, userName);
         AcceptanceCriteriasResource acceptanceCriteriasResource = new AcceptanceCriteriasResource();
         List<Object> acceptanceCriteriaResources = new ArrayList<>();
         for (AcceptanceCriteria acceptanceCriteria : acceptanceCriterias) {
-            Object acceptanceCriteriaResource = acceptanceCriteriaResourceService.toResource(acceptanceCriteria, boardId, procedureId, cardId, userName);
+            Object acceptanceCriteriaResource = acceptanceCriteriaResourceService.toResource(acceptanceCriteria, boardId, stageId, cardId, userName);
             acceptanceCriteriaResources.add(acceptanceCriteriaResource);
         }
 
         acceptanceCriteriasResource.buildDataObject("acceptanceCriterias", acceptanceCriteriaResources);
-        Link selfLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, procedureId, cardId, userName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, stageId, cardId, userName)).withSelfRel();
         acceptanceCriteriasResource.add(tlink.from(selfLink).build(userName));
 
-        Link sortNumbersLink = linkTo(methodOn(AcceptanceCriteriaController.class).resortAcceptCriterias(null, boardId, procedureId, cardId, userName)).withRel("sortNumbers");
+        Link sortNumbersLink = linkTo(methodOn(AcceptanceCriteriaController.class).resortAcceptCriterias(null, boardId, stageId, cardId, userName)).withRel("sortNumbers");
         acceptanceCriteriasResource.add(tlink.from(sortNumbersLink).build(userName));
 
-        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
         acceptanceCriteriasResource.add(tlink.from(cardLink).build(userName));
-        logger.info("acceptanceCriterias resource build completed.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+        logger.info("acceptanceCriterias resource build completed.boardId:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         return acceptanceCriteriasResource.getResource();
     }
 }

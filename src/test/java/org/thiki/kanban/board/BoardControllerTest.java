@@ -38,11 +38,11 @@ public class BoardControllerTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("_links.all.href", endsWith("/someone/boards"))
                 .body("_links.tags.href", endsWith("/boards/fooId/tags"))
-                .body("_links.procedures.href", endsWith("/boards/fooId/procedures"))
-                .body("_links.sprintView.href", endsWith("/boards/fooId/procedures?viewType=sprintView"))
-                .body("_links.fullView.href", endsWith("/boards/fooId/procedures?viewType=fullView"))
-                .body("_links.roadMapView.href", endsWith("/boards/fooId/procedures?viewType=roadMapView"))
-                .body("_links.archiveView.href", endsWith("/boards/fooId/procedures?viewType=archiveView"))
+                .body("_links.stages.href", endsWith("/boards/fooId/stages"))
+                .body("_links.sprintView.href", endsWith("/boards/fooId/stages?viewType=sprintView"))
+                .body("_links.fullView.href", endsWith("/boards/fooId/stages?viewType=fullView"))
+                .body("_links.roadMapView.href", endsWith("/boards/fooId/stages?viewType=roadMapView"))
+                .body("_links.archiveView.href", endsWith("/boards/fooId/stages?viewType=archiveView"))
                 .body("_links.sprintViewSnapshot.href", endsWith("/boards/fooId/snapshot?viewType=sprintView"))
                 .body("_links.fullViewSnapshot.href", endsWith("/boards/fooId/snapshot?viewType=fullView"))
                 .body("_links.roadMapViewSnapshot.href", endsWith("/boards/fooId/snapshot?viewType=roadMapView"))
@@ -69,7 +69,7 @@ public class BoardControllerTest extends TestBase {
                 .body("name", equalTo("board-name"))
                 .body("author", equalTo("someone"))
                 .body("_links.all.href", endsWith("/someone/boards"))
-                .body("_links.procedures.href", endsWith("/boards/fooId/procedures"))
+                .body("_links.stages.href", endsWith("/boards/fooId/stages"))
                 .body("_links.self.href", endsWith("/someone/boards/fooId"));
     }
 
@@ -162,7 +162,7 @@ public class BoardControllerTest extends TestBase {
                 .body("boards[0].creationTime", notNullValue())
                 .body("boards[0]._links.all.href", endsWith("/someone/boards"))
                 .body("boards[0]._links.self.href", endsWith("/someone/boards/fooId"))
-                .body("boards[0]._links.procedures.href", endsWith("/boards/fooId/procedures"))
+                .body("boards[0]._links.stages.href", endsWith("/boards/fooId/stages"))
                 .body("_links.self.href", endsWith("/someone/boards"))
                 .body("_links.worktileTasks.href", endsWith("/someone/worktileTasks"));
 

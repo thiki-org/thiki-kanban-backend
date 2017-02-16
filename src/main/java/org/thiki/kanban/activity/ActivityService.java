@@ -12,8 +12,8 @@ import org.thiki.kanban.card.Card;
 import org.thiki.kanban.cardTags.CardTag;
 import org.thiki.kanban.comment.Comment;
 import org.thiki.kanban.foundation.common.SequenceNumber;
-import org.thiki.kanban.procedure.Procedure;
-import org.thiki.kanban.procedure.ProceduresService;
+import org.thiki.kanban.stage.Stage;
+import org.thiki.kanban.stage.StagesService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -28,7 +28,7 @@ public class ActivityService {
     private ActivityPersistence activityPersistence;
 
     @Resource
-    private ProceduresService proceduresService;
+    private StagesService stagesService;
 
     @CacheEvict(value = "activity", key = "{'activity'+#activity.cardId}", allEntries = true)
     public void record(final Activity activity) {
@@ -37,10 +37,10 @@ public class ActivityService {
         activityPersistence.record(activity);
     }
 
-    public void recordCardCreation(Card newCard, Procedure procedure, String userName) {
+    public void recordCardCreation(Card newCard, Stage stage, String userName) {
         Activity activity = new Activity();
-        activity.setProcedureId(newCard.getProcedureId());
-        activity.setProcedureSnapShot(procedure.toString());
+        activity.setStageId(newCard.getStageId());
+        activity.setStageSnapShot(stage.toString());
         activity.setCardId(newCard.getId());
         activity.setSummary(newCard.toString());
         activity.setDetail(newCard.toString());
@@ -50,31 +50,31 @@ public class ActivityService {
         record(activity);
     }
 
-    public void recordCardModification(Card modifiedCard, Procedure procedure, Procedure prevProcedure, Card originCard, String userName) {
+    public void recordCardModification(Card modifiedCard, Stage stage, Stage prevStage, Card originCard, String userName) {
         Activity activity = new Activity();
-        activity.setPrevProcedureId(originCard.getProcedureId());
-        activity.setProcedureId(modifiedCard.getProcedureId());
-        activity.setProcedureSnapShot(procedure == null ? "" : procedure.toString());
-        activity.setPrevProcedureSnapShot(prevProcedure == null ? "" : prevProcedure.toString());
+        activity.setPrevStageId(originCard.getStageId());
+        activity.setStageId(modifiedCard.getStageId());
+        activity.setStageSnapShot(stage == null ? "" : stage.toString());
+        activity.setPrevStageSnapShot(prevStage == null ? "" : prevStage.toString());
         activity.setCardId(modifiedCard.getId());
         activity.setSummary(originCard.toString());
         activity.setDetail(originCard.toString());
         activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.CARD_MODIFYING.code());
         activity.setOperationTypeName(ActivityType.CARD_MODIFYING.type());
-        if (modifiedCard.isMoveToOtherProcedure(originCard)) {
+        if (modifiedCard.isMoveToOtherStage(originCard)) {
             activity.setOperationTypeCode(ActivityType.CARD_MOVING.code());
             activity.setOperationTypeName(ActivityType.CARD_MOVING.type());
         }
         record(activity);
     }
 
-    public void recordCardArchive(Card foundCard, String procedureId, Procedure prevProcedure, Procedure currentProcedure, String userName) {
+    public void recordCardArchive(Card foundCard, String stageId, Stage prevStage, Stage currentStage, String userName) {
         Activity activity = new Activity();
-        activity.setPrevProcedureId(foundCard.getProcedureId());
-        activity.setProcedureId(procedureId);
-        activity.setPrevProcedureSnapShot(prevProcedure == null ? "" : prevProcedure.toString());
-        activity.setProcedureSnapShot(currentProcedure == null ? "" : currentProcedure.toString());
+        activity.setPrevStageId(foundCard.getStageId());
+        activity.setStageId(stageId);
+        activity.setPrevStageSnapShot(prevStage == null ? "" : prevStage.toString());
+        activity.setStageSnapShot(currentStage == null ? "" : currentStage.toString());
 
         activity.setCardId(foundCard.getId());
         activity.setSummary(foundCard.toString());
@@ -180,13 +180,13 @@ public class ActivityService {
     }
 
     public boolean isMoveInProcess(Activity activity) {
-        if (activity.getProcedureSnapShot() != null && !activity.getProcedureSnapShot().equals("")) {
-            Procedure procedure = JSONObject.toJavaObject(JSON.parseObject(activity.getProcedureSnapShot()), Procedure.class);
-            return procedure.isInProcess();
+        if (activity.getStageSnapShot() != null && !activity.getStageSnapShot().equals("")) {
+            Stage stage = JSONObject.toJavaObject(JSON.parseObject(activity.getStageSnapShot()), Stage.class);
+            return stage.isInProcess();
         }
 
-        Procedure procedure = proceduresService.findById(activity.getProcedureId());
-        return procedure != null && procedure.isInProcess();
+        Stage stage = stagesService.findById(activity.getStageId());
+        return stage != null && stage.isInProcess();
     }
 
     public List<Activity> loadActivitiesByCard(String operationTypeCode, String cardId) {

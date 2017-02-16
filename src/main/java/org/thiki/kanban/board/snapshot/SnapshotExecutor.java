@@ -43,34 +43,34 @@ public class SnapshotExecutor {
     @Resource
     private CommentsResource commentsResource;
 
-    public synchronized void loadCardTags(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+    public synchronized void loadCardTags(String boardId, String userName, String stageId, JSONObject cardJSON, String cardId) throws Exception {
         logger.info("load card tags.");
-        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, procedureId);
-        JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName);
+        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, stageId);
+        JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, stageId, cardId, userName);
         cardJSON.put("tags", tagsJSON);
         logger.info("card tags loading completed.");
     }
 
-    public synchronized void loadAcceptanceCriterias(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+    public synchronized void loadAcceptanceCriterias(String boardId, String userName, String stageId, JSONObject cardJSON, String cardId) throws Exception {
         logger.info("load acceptanceCriterias.");
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
-        JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName);
+        JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, stageId, cardId, userName);
         cardJSON.put("acceptanceCriterias", acceptanceCriteriasJSON);
         logger.info("acceptanceCriterias loading completed.");
     }
 
-    public synchronized void loadAssignments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+    public synchronized void loadAssignments(String boardId, String userName, String stageId, JSONObject cardJSON, String cardId) throws Exception {
         logger.info("load assignments.");
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
-        JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, procedureId, cardId, userName);
+        JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, stageId, cardId, userName);
         cardJSON.put("assignments", assignmentsJSON);
         logger.info("assignments loading completed.");
     }
 
-    public synchronized void loadComments(String boardId, String userName, String procedureId, JSONObject cardJSON, String cardId) throws Exception {
+    public synchronized void loadComments(String boardId, String userName, String stageId, JSONObject cardJSON, String cardId) throws Exception {
         logger.info("load comments.");
         List<Comment> commentList = commentService.loadCommentsByCardId(cardId);
-        JSONObject commentsJSON = (JSONObject) commentsResource.toResource(commentList, boardId, procedureId, cardId, userName);
+        JSONObject commentsJSON = (JSONObject) commentsResource.toResource(commentList, boardId, stageId, cardId, userName);
         cardJSON.put("comments", commentsJSON);
         logger.info("comments loading completed.");
     }

@@ -18,17 +18,17 @@ public class CardTagsController {
     @Resource
     private CardTagsResource cardTagsResource;
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/tags", method = RequestMethod.POST)
-    public HttpEntity stick(@RequestBody List<CardTag> cardTags, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/tags", method = RequestMethod.POST)
+    public HttpEntity stick(@RequestBody List<CardTag> cardTags, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         List<CardTag> stickCardTags = cardTagsService.stickTags(cardTags, cardId, boardId, userName);
 
-        return Response.post(cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName));
+        return Response.post(cardTagsResource.toResource(stickCardTags, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/tags", method = RequestMethod.GET)
-    public HttpEntity loadTags(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, procedureId);
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/tags", method = RequestMethod.GET)
+    public HttpEntity loadTags(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, stageId);
 
-        return Response.build(cardTagsResource.toResource(stickCardTags, boardId, procedureId, cardId, userName));
+        return Response.build(cardTagsResource.toResource(stickCardTags, boardId, stageId, cardId, userName));
     }
 }

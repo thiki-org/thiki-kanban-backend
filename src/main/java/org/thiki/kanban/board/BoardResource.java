@@ -9,8 +9,8 @@ import org.thiki.kanban.board.snapshot.BoardsSnapshotController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.page.PagesController;
-import org.thiki.kanban.procedure.ProcedureCodes;
-import org.thiki.kanban.procedure.ProceduresController;
+import org.thiki.kanban.stage.StageCodes;
+import org.thiki.kanban.stage.StagesController;
 import org.thiki.kanban.projects.project.ProjectsController;
 import org.thiki.kanban.sprint.SprintController;
 import org.thiki.kanban.tag.TagsController;
@@ -49,19 +49,19 @@ public class BoardResource extends RestResource {
             Link selfLink = linkTo(methodOn(BoardsController.class).findById(board.getId(), userName)).withSelfRel();
             boardResource.add(tlink.from(selfLink).build());
 
-            Link proceduresLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), null, userName)).withRel("procedures");
-            boardResource.add(tlink.from(proceduresLink).build());
+            Link stagesLink = linkTo(methodOn(StagesController.class).loadAll(board.getId(), null, userName)).withRel("stages");
+            boardResource.add(tlink.from(stagesLink).build());
 
-            Link sprintViewLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), ProcedureCodes.VIEW_TYPE_SPRINT, userName)).withRel(ProcedureCodes.VIEW_TYPE_SPRINT);
+            Link sprintViewLink = linkTo(methodOn(StagesController.class).loadAll(board.getId(), StageCodes.VIEW_TYPE_SPRINT, userName)).withRel(StageCodes.VIEW_TYPE_SPRINT);
             boardResource.add(tlink.from(sprintViewLink).build());
 
-            Link fullViewLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), ProcedureCodes.VIEW_TYPE_FULL_VIEW, userName)).withRel(ProcedureCodes.VIEW_TYPE_FULL_VIEW);
+            Link fullViewLink = linkTo(methodOn(StagesController.class).loadAll(board.getId(), StageCodes.VIEW_TYPE_FULL_VIEW, userName)).withRel(StageCodes.VIEW_TYPE_FULL_VIEW);
             boardResource.add(tlink.from(fullViewLink).build());
 
-            Link roadMapViewLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), ProcedureCodes.VIEW_TYPE_ROAD_MAP, userName)).withRel(ProcedureCodes.VIEW_TYPE_ROAD_MAP);
+            Link roadMapViewLink = linkTo(methodOn(StagesController.class).loadAll(board.getId(), StageCodes.VIEW_TYPE_ROAD_MAP, userName)).withRel(StageCodes.VIEW_TYPE_ROAD_MAP);
             boardResource.add(tlink.from(roadMapViewLink).build());
 
-            Link archiveViewLink = linkTo(methodOn(ProceduresController.class).loadAll(board.getId(), ProcedureCodes.VIEW_TYPE_ARCHIVE, userName)).withRel(ProcedureCodes.VIEW_TYPE_ARCHIVE);
+            Link archiveViewLink = linkTo(methodOn(StagesController.class).loadAll(board.getId(), StageCodes.VIEW_TYPE_ARCHIVE, userName)).withRel(StageCodes.VIEW_TYPE_ARCHIVE);
             boardResource.add(tlink.from(archiveViewLink).build());
 
             if (board.getProjectId() != null) {
@@ -75,16 +75,16 @@ public class BoardResource extends RestResource {
             Link snapshotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), null, userName)).withRel("snapshot");
             boardResource.add(tlink.from(snapshotLink).build(userName));
 
-            Link sprintViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), ProcedureCodes.VIEW_TYPE_SPRINT, userName)).withRel(ProcedureCodes.VIEW_TYPE_SPRINT + "Snapshot");
+            Link sprintViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), StageCodes.VIEW_TYPE_SPRINT, userName)).withRel(StageCodes.VIEW_TYPE_SPRINT + "Snapshot");
             boardResource.add(tlink.from(sprintViewSnapShotLink).build(userName));
 
-            Link fullViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), ProcedureCodes.VIEW_TYPE_FULL_VIEW, userName)).withRel(ProcedureCodes.VIEW_TYPE_FULL_VIEW + "Snapshot");
+            Link fullViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), StageCodes.VIEW_TYPE_FULL_VIEW, userName)).withRel(StageCodes.VIEW_TYPE_FULL_VIEW + "Snapshot");
             boardResource.add(tlink.from(fullViewSnapShotLink).build(userName));
 
-            Link roadMapViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), ProcedureCodes.VIEW_TYPE_ROAD_MAP, userName)).withRel(ProcedureCodes.VIEW_TYPE_ROAD_MAP + "Snapshot");
+            Link roadMapViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), StageCodes.VIEW_TYPE_ROAD_MAP, userName)).withRel(StageCodes.VIEW_TYPE_ROAD_MAP + "Snapshot");
             boardResource.add(tlink.from(roadMapViewSnapShotLink).build(userName));
 
-            Link archiveViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), ProcedureCodes.VIEW_TYPE_ARCHIVE, userName)).withRel(ProcedureCodes.VIEW_TYPE_ARCHIVE + "Snapshot");
+            Link archiveViewSnapShotLink = linkTo(methodOn(BoardsSnapshotController.class).load(board.getId(), StageCodes.VIEW_TYPE_ARCHIVE, userName)).withRel(StageCodes.VIEW_TYPE_ARCHIVE + "Snapshot");
             boardResource.add(tlink.from(archiveViewSnapShotLink).build(userName));
 
             Link sprintsLink = linkTo(methodOn(SprintController.class).createSprint(null, board.getId(), userName)).withRel("sprints");

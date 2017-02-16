@@ -24,20 +24,20 @@ public class CommentsResource extends RestResource {
     @Resource
     private CommentResource commentResourceService;
 
-    @Cacheable(value = "comment", key = "'comments'+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(List<Comment> comments, String boardId, String procedureId, String cardId, String userName) throws Exception {
+    @Cacheable(value = "comment", key = "'comments'+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(List<Comment> comments, String boardId, String stageId, String cardId, String userName) throws Exception {
         CommentsResource commentsResource = new CommentsResource();
         List<Object> commentResources = new ArrayList<>();
         for (Comment comment : comments) {
-            Object commentResource = commentResourceService.toResource(comment, boardId, procedureId, cardId, userName);
+            Object commentResource = commentResourceService.toResource(comment, boardId, stageId, cardId, userName);
             commentResources.add(commentResource);
         }
 
         commentsResource.buildDataObject("comments", commentResources);
-        Link selfLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, procedureId, cardId, userName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, stageId, cardId, userName)).withSelfRel();
         commentsResource.add(tlink.from(selfLink).build(userName));
 
-        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
         commentsResource.add(tlink.from(cardLink).build(userName));
         return commentsResource.getResource();
     }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
-import org.thiki.kanban.procedure.ProceduresController;
+import org.thiki.kanban.stage.StagesController;
 import org.thiki.kanban.user.UsersController;
 
 import javax.annotation.Resource;
@@ -25,19 +25,19 @@ public class AssignmentResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    @Cacheable(value = "assignment", key = "'assignment'+#assignment.id+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(Assignment assignment, String boardId, String procedureId, String cardId, String userName) throws Exception {
-        logger.info("build assignment resource.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+    @Cacheable(value = "assignment", key = "'assignment'+#assignment.id+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(Assignment assignment, String boardId, String stageId, String cardId, String userName) throws Exception {
+        logger.info("build assignment resource.boardId:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         AssignmentResource assignmentResource = new AssignmentResource();
         assignmentResource.domainObject = assignment;
         if (assignment != null) {
-            Link selfLink = linkTo(methodOn(AssignmentController.class).findById(boardId, procedureId, cardId, assignment.getId(), userName)).withSelfRel();
+            Link selfLink = linkTo(methodOn(AssignmentController.class).findById(boardId, stageId, cardId, assignment.getId(), userName)).withSelfRel();
             assignmentResource.add(tlink.from(selfLink).build(userName));
 
-            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, procedureId, cardId, userName)).withRel("assignments");
+            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, stageId, cardId, userName)).withRel("assignments");
             assignmentResource.add(tlink.from(assignmentsLink).build(userName));
 
-            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+            Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
             assignmentResource.add(tlink.from(cardLink).build(userName));
 
             Link AssigneeProfileLink = linkTo(methodOn(UsersController.class).loadProfile(assignment.getAssignee())).withRel("assigneeProfile");
@@ -46,23 +46,23 @@ public class AssignmentResource extends RestResource {
             Link AssigneeAvatarLink = linkTo(methodOn(UsersController.class).loadAvatar(assignment.getAssignee())).withRel("assigneeAvatar");
             assignmentResource.add(tlink.from(AssigneeAvatarLink).build(userName));
         }
-        Link allLink = linkTo(methodOn(ProceduresController.class).loadAll(procedureId, null, userName)).withRel("all");
+        Link allLink = linkTo(methodOn(StagesController.class).loadAll(stageId, null, userName)).withRel("all");
         assignmentResource.add(tlink.from(allLink).build(userName));
-        logger.info("assignment resource building completed.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+        logger.info("assignment resource building completed.boardId:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         return assignmentResource.getResource();
     }
 
-    @Cacheable(value = "assignment", key = "'assignment'+#boardId+#procedureId+#cardId+#userName")
-    public Object toResource(String boardId, String procedureId, String cardId, String userName) throws Exception {
-        logger.info("build assignment resource.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+    @Cacheable(value = "assignment", key = "'assignment'+#boardId+#stageId+#cardId+#userName")
+    public Object toResource(String boardId, String stageId, String cardId, String userName) throws Exception {
+        logger.info("build assignment resource.boardId:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         AssignmentResource assignmentResource = new AssignmentResource();
 
-        Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, procedureId, cardId, userName)).withRel("assignments");
+        Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, stageId, cardId, userName)).withRel("assignments");
         assignmentResource.add(tlink.from(assignmentsLink).build(userName));
 
-        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, cardId, userName)).withRel("card");
+        Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
         assignmentResource.add(tlink.from(cardLink).build(userName));
-        logger.info("assignment resource building completed.boardId:{},procedureId:{},cardId:{},userName:{}", boardId, procedureId, cardId, userName);
+        logger.info("assignment resource building completed.boardId:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         return assignmentResource.getResource();
     }
 }

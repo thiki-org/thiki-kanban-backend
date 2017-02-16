@@ -31,43 +31,43 @@ public class CardResource extends RestResource {
     @Resource
     private TLink tLink;
 
-    @Cacheable(value = "card", key = "#userName+#boardId+#procedureId+#card.id")
-    public Object toResource(Card card, String boardId, String procedureId, String userName) throws Exception {
-        logger.info("build card resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+    @Cacheable(value = "card", key = "#userName+#boardId+#stageId+#card.id")
+    public Object toResource(Card card, String boardId, String stageId, String userName) throws Exception {
+        logger.info("build card resource.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         CardResource cardResource = new CardResource();
         cardResource.domainObject = card;
         if (card != null) {
-            Link selfLink = linkTo(methodOn(CardsController.class).findById(boardId, procedureId, card.getId(), userName)).withSelfRel();
+            Link selfLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, card.getId(), userName)).withSelfRel();
             cardResource.add(tLink.from(selfLink).build(userName));
 
-            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, procedureId, card.getId(), userName)).withRel("assignments");
+            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, stageId, card.getId(), userName)).withRel("assignments");
             cardResource.add(tLink.from(assignmentsLink).build(userName));
 
-            Link acceptanceCriteriasLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, procedureId, card.getId(), userName)).withRel("acceptanceCriterias");
+            Link acceptanceCriteriasLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, stageId, card.getId(), userName)).withRel("acceptanceCriterias");
             cardResource.add(tLink.from(acceptanceCriteriasLink).build(userName));
 
-            Link commentsLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, procedureId, card.getId(), userName)).withRel("comments");
+            Link commentsLink = linkTo(methodOn(CommentController.class).loadCommentsByCardId(boardId, stageId, card.getId(), userName)).withRel("comments");
             cardResource.add(tLink.from(commentsLink).build(userName));
 
             Link tagsLink = linkTo(methodOn(TagsController.class).loadTagsByBoard(boardId, userName)).withRel("tags");
             cardResource.add(tLink.from(tagsLink).build(userName));
 
-            Link cardTagsLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, procedureId, card.getId(), null)).withRel("cardTags");
+            Link cardTagsLink = linkTo(methodOn(CardTagsController.class).stick(null, boardId, stageId, card.getId(), null)).withRel("cardTags");
             cardResource.add(tLink.from(cardTagsLink).build(userName));
         }
-        Link cardsLink = linkTo(methodOn(CardsController.class).findByProcedureId(boardId, procedureId, userName)).withRel("cards");
+        Link cardsLink = linkTo(methodOn(CardsController.class).findByStageId(boardId, stageId, userName)).withRel("cards");
         cardResource.add(tLink.from(cardsLink).build(userName));
-        logger.info("card resource building completed.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+        logger.info("card resource building completed.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         return cardResource.getResource();
     }
 
-    @Cacheable(value = "card", key = "#userName+#boardId+#procedureId")
-    public Object toResource(String boardId, String procedureId, String userName) throws Exception {
-        logger.info("build card resource.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+    @Cacheable(value = "card", key = "#userName+#boardId+#stageId")
+    public Object toResource(String boardId, String stageId, String userName) throws Exception {
+        logger.info("build card resource.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         CardResource cardResource = new CardResource();
-        Link cardsLink = linkTo(methodOn(CardsController.class).findByProcedureId(boardId, procedureId, userName)).withRel("cards");
+        Link cardsLink = linkTo(methodOn(CardsController.class).findByStageId(boardId, stageId, userName)).withRel("cards");
         cardResource.add(tLink.from(cardsLink).build(userName));
-        logger.info("card resource building completed.board:{},procedureId:{},userName:{}", boardId, procedureId, userName);
+        logger.info("card resource building completed.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         return cardResource.getResource();
     }
 }

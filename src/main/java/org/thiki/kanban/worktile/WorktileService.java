@@ -13,8 +13,8 @@ import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.foundation.common.date.DateStyle;
 import org.thiki.kanban.foundation.exception.BusinessException;
-import org.thiki.kanban.procedure.Procedure;
-import org.thiki.kanban.procedure.ProceduresService;
+import org.thiki.kanban.stage.Stage;
+import org.thiki.kanban.stage.StagesService;
 import org.thiki.kanban.worktile.domains.Entry;
 import org.thiki.kanban.worktile.domains.Task;
 import org.thiki.kanban.worktile.domains.Todo;
@@ -35,7 +35,7 @@ public class WorktileService {
     @Resource
     private BoardsService boardsService;
     @Resource
-    private ProceduresService proceduresService;
+    private StagesService stagesService;
     @Resource
     private CardsService cardsService;
     @Resource
@@ -74,8 +74,8 @@ public class WorktileService {
         List<Task> tasks = JSON.parseArray(tasksJSONString, Task.class);
 
         Board savedBoard = buildNewBoard(userName);
-        List<Procedure> savedProcedures = importEntries(userName, tasks, savedBoard);
-        List<Card> savedCards = importTasks(userName, tasks, savedProcedures, savedBoard.getId());
+        List<Stage> savedStages = importEntries(userName, tasks, savedBoard);
+        List<Card> savedCards = importTasks(userName, tasks, savedStages, savedBoard.getId());
         importTodos(userName, tasks, savedCards);
         return savedBoard;
     }
@@ -95,42 +95,42 @@ public class WorktileService {
         }
     }
 
-    private List<Card> importTasks(String userName, List<Task> tasks, List<Procedure> savedProcedures, String boardId) {
+    private List<Card> importTasks(String userName, List<Task> tasks, List<Stage> savedStages, String boardId) {
         List<Card> savedCards = new ArrayList<>();
         for (Task task : tasks) {
             Card card = new Card();
             card.setSummary(task.getName());
             card.setAuthor(userName);
-            savedProcedures.stream()
-                    .filter(procedure -> procedure.getTitle().equals(task.getEntry().getName()))
-                    .forEach(procedure -> {
-                        card.setProcedureId(procedure.getId());
-                        Card savedCard = cardsService.create(userName, boardId, procedure.getId(), card);
+            savedStages.stream()
+                    .filter(stage -> stage.getTitle().equals(task.getEntry().getName()))
+                    .forEach(stage -> {
+                        card.setStageId(stage.getId());
+                        Card savedCard = cardsService.create(userName, boardId, stage.getId(), card);
                         savedCards.add(savedCard);
                     });
         }
         return savedCards;
     }
 
-    private List<Procedure> importEntries(String userName, List<Task> tasks, Board savedBoard) {
-        List<Procedure> savedProcedures = new ArrayList<>();
+    private List<Stage> importEntries(String userName, List<Task> tasks, Board savedBoard) {
+        List<Stage> savedStages = new ArrayList<>();
         for (Task task : tasks) {
             Entry entry = task.getEntry();
-            if (isEntryAlreadySaved(savedProcedures, entry)) {
+            if (isEntryAlreadySaved(savedStages, entry)) {
                 continue;
             }
-            Procedure procedure = new Procedure();
-            procedure.setTitle(entry.getName());
-            procedure.setSortNumber(savedProcedures.size());
-            Procedure savedProcedure = proceduresService.create(userName, savedBoard.getId(), procedure);
-            savedProcedures.add(savedProcedure);
+            Stage stage = new Stage();
+            stage.setTitle(entry.getName());
+            stage.setSortNumber(savedStages.size());
+            Stage savedStage = stagesService.create(userName, savedBoard.getId(), stage);
+            savedStages.add(savedStage);
         }
-        return savedProcedures;
+        return savedStages;
     }
 
-    private boolean isEntryAlreadySaved(List<Procedure> savedProcedures, Entry entry) {
-        for (Procedure procedure : savedProcedures) {
-            if (entry.getName().equals(procedure.getTitle())) {
+    private boolean isEntryAlreadySaved(List<Stage> savedStages, Entry entry) {
+        for (Stage stage : savedStages) {
+            if (entry.getName().equals(stage.getTitle())) {
                 return true;
             }
         }

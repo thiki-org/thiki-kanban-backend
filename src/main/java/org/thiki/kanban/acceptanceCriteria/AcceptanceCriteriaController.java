@@ -20,39 +20,39 @@ public class AcceptanceCriteriaController {
     @Resource
     private AcceptanceCriteriaResource acceptanceCriteriaResource;
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody AcceptanceCriteria acceptanceCriteria, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody AcceptanceCriteria acceptanceCriteria, @RequestHeader String userName, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId) throws Exception {
         AcceptanceCriteria savedAcceptanceCriteria = acceptanceCriteriaService.addAcceptCriteria(userName, cardId, acceptanceCriteria);
-        return Response.post(acceptanceCriteriaResource.toResource(savedAcceptanceCriteria, boardId, procedureId, cardId, userName));
+        return Response.post(acceptanceCriteriaResource.toResource(savedAcceptanceCriteria, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.PUT)
-    public HttpEntity updateAcceptCriteria(@RequestBody AcceptanceCriteria acceptanceCriteria, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.PUT)
+    public HttpEntity updateAcceptCriteria(@RequestBody AcceptanceCriteria acceptanceCriteria, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
         AcceptanceCriteria savedAcceptanceCriteria = acceptanceCriteriaService.updateAcceptCriteria(cardId, acceptanceCriteriaId, acceptanceCriteria, userName);
-        return Response.build(acceptanceCriteriaResource.toResource(savedAcceptanceCriteria, boardId, procedureId, cardId, userName));
+        return Response.build(acceptanceCriteriaResource.toResource(savedAcceptanceCriteria, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
         AcceptanceCriteria savedAcceptanceCriteria = acceptanceCriteriaService.loadAcceptanceCriteriaById(acceptanceCriteriaId);
-        return Response.build(acceptanceCriteriaResource.toResource(savedAcceptanceCriteria, boardId, procedureId, cardId, userName));
+        return Response.build(acceptanceCriteriaResource.toResource(savedAcceptanceCriteria, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.DELETE)
-    public HttpEntity removeAcceptanceCriteria(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}", method = RequestMethod.DELETE)
+    public HttpEntity removeAcceptanceCriteria(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
         acceptanceCriteriaService.removeAcceptanceCriteria(acceptanceCriteriaId, cardId, userName);
-        return Response.build(acceptanceCriteriaResource.toResource(boardId, procedureId, cardId, userName));
+        return Response.build(acceptanceCriteriaResource.toResource(boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias", method = RequestMethod.GET)
-    public HttpEntity loadAcceptanceCriteriasByCardId(@PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias", method = RequestMethod.GET)
+    public HttpEntity loadAcceptanceCriteriasByCardId(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
-        return Response.build(acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName));
+        return Response.build(acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/procedures/{procedureId}/cards/{cardId}/acceptanceCriterias/sortNumbers", method = RequestMethod.PUT)
-    public HttpEntity resortAcceptCriterias(@RequestBody List<AcceptanceCriteria> acceptanceCriterias, @PathVariable String boardId, @PathVariable String procedureId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias/sortNumbers", method = RequestMethod.PUT)
+    public HttpEntity resortAcceptCriterias(@RequestBody List<AcceptanceCriteria> acceptanceCriterias, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.resortAcceptCriterias(cardId, acceptanceCriterias, userName);
-        return Response.build(acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, procedureId, cardId, userName));
+        return Response.build(acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, stageId, cardId, userName));
     }
 }

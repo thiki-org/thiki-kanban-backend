@@ -1,4 +1,4 @@
-package org.thiki.kanban.procedure;
+package org.thiki.kanban.stage;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -12,15 +12,15 @@ import javax.validation.constraints.NotNull;
  * Created by xubitao on 04/26/16.
  * Modifed by winie   on  2/6/17   添加在控数量设置
  */
-public class Procedure {
+public class Stage {
 
     private String id;
-    @NotEmpty(message = ProcedureCodes.titleIsRequired)
-    @NotNull(message = ProcedureCodes.titleIsRequired)
-    @Length(max = 30, message = ProcedureCodes.titleIsInvalid)
+    @NotEmpty(message = StageCodes.titleIsRequired)
+    @NotNull(message = StageCodes.titleIsRequired)
+    @Length(max = 30, message = StageCodes.titleIsInvalid)
     private String title;
 
-    @Length(max = 100, message = ProcedureCodes.descriptionIsInvalid)
+    @Length(max = 100, message = StageCodes.descriptionIsInvalid)
     private String description;
     private String author;
     private String boardId;
@@ -118,22 +118,22 @@ public class Procedure {
 
     @JsonIgnore
     public boolean isInSprint() {
-        return ProcedureCodes.PROCEDURE_TYPE_IN_PLAN.equals(this.type);
+        return StageCodes.STAGE_TYPE_IN_PLAN.equals(this.type);
     }
 
     @JsonIgnore
     public boolean isInDoneStatus() {
-        return ProcedureCodes.PROCEDURE_STATUS_DONE.equals(this.status);
+        return StageCodes.STAGE_STATUS_DONE.equals(this.status);
     }
 
     @JsonIgnore
     public boolean isInProcess() {
-        return ProcedureCodes.PROCEDURE_STATUS_DOING.equals(this.status);
+        return StageCodes.STAGE_STATUS_DOING.equals(this.status);
     }
 
     @JsonIgnore
     public boolean isArchived() {
-        return ProcedureCodes.PROCEDURE_TYPE_ARCHIVE.equals(this.type);
+        return StageCodes.STAGE_TYPE_ARCHIVE.equals(this.type);
     }
 
     public Integer getWipLimit() {

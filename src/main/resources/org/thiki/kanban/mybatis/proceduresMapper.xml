@@ -2,59 +2,59 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.thiki.kanban.procedure.ProceduresPersistence">
+<mapper namespace="org.thiki.kanban.stage.StagesPersistence">
 
-    <insert id="create" parameterType="org.thiki.kanban.procedure.Procedure">
+    <insert id="create" parameterType="org.thiki.kanban.stage.Stage">
         INSERT INTO
-        kb_procedure(id,title,description,author,board_id,type,status,sort_number,wip_limit) VALUES
-        (#{procedure.id},#{procedure.title},#{procedure.description},
-        #{userName},#{boardId},#{procedure.type},#{procedure.status},(SELECT
+        kb_stage(id,title,description,author,board_id,type,status,sort_number,wip_limit) VALUES
+        (#{stage.id},#{stage.title},#{stage.description},
+        #{userName},#{boardId},#{stage.type},#{stage.status},(SELECT
         max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
-        max_sort_number FROM kb_procedure WHERE board_id=#{boardId} ) as t ), #{procedure.wipLimit}
+        max_sort_number FROM kb_stage WHERE board_id=#{boardId} ) as t ), #{stage.wipLimit}
         )
     </insert>
 
-    <update id="update" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
-        UPDATE kb_procedure SET
-        <if test="procedure.title!=null">
-            title=#{procedure.title},
+    <update id="update" parameterType="org.thiki.kanban.stage.Stage" flushCache="true">
+        UPDATE kb_stage SET
+        <if test="stage.title!=null">
+            title=#{stage.title},
         </if>
-        <if test="procedure.description!=null">
-            description=#{procedure.description},
+        <if test="stage.description!=null">
+            description=#{stage.description},
         </if>
-        <if test="procedure.sortNumber!=null">
-            sort_number=#{procedure.sortNumber},
+        <if test="stage.sortNumber!=null">
+            sort_number=#{stage.sortNumber},
         </if>
-        <if test="procedure.status!=null">
-            status=#{procedure.status},
+        <if test="stage.status!=null">
+            status=#{stage.status},
         </if>
-        <if test="procedure.type!=null">
-            type=#{procedure.type},
+        <if test="stage.type!=null">
+            type=#{stage.type},
         </if>
-        <if test="procedure.wipLimit!=null">
-            wip_limit=#{procedure.wipLimit},
+        <if test="stage.wipLimit!=null">
+            wip_limit=#{stage.wipLimit},
         </if>
         delete_status=delete_status
 
-        WHERE id=#{procedureId} AND delete_status=0
+        WHERE id=#{stageId} AND delete_status=0
     </update>
 
-    <update id="rewipLimit" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
-        UPDATE kb_procedure SET wip_limit=#{procedure.wipLimit}
-        WHERE id=#{procedureId} AND delete_status=0
+    <update id="rewipLimit" parameterType="org.thiki.kanban.stage.Stage" flushCache="true">
+        UPDATE kb_stage SET wip_limit=#{stage.wipLimit}
+        WHERE id=#{stageId} AND delete_status=0
     </update>
 
-    <update id="resort" parameterType="org.thiki.kanban.procedure.Procedure" flushCache="true">
-        UPDATE kb_procedure SET sort_number = #{sortNumber} WHERE delete_status=0 AND id = #{id}
+    <update id="resort" parameterType="org.thiki.kanban.stage.Stage" flushCache="true">
+        UPDATE kb_stage SET sort_number = #{sortNumber} WHERE delete_status=0 AND id = #{id}
     </update>
 
     <select id="uniqueTitle" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND kb_procedure.title=#{title}
+        SELECT count(*) FROM kb_stage WHERE delete_status=0 AND board_id=#{boardId} AND kb_stage.title=#{title}
     </select>
 
     <select id="loadByBoardIdAndType" parameterType="java.lang.String"
-            resultType="org.thiki.kanban.procedure.Procedure">
-        SELECT * FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId}
+            resultType="org.thiki.kanban.stage.Stage">
+        SELECT * FROM kb_stage WHERE delete_status=0 AND board_id=#{boardId}
         <if test="viewType=='sprintView'|| viewType == null">
             AND type=1
         </if>
@@ -69,34 +69,34 @@
         ORDER BY sort_number
     </select>
 
-    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">
-        SELECT * FROM kb_procedure WHERE delete_status=0 and id= #{procedureId}
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.stage.Stage">
+        SELECT * FROM kb_stage WHERE delete_status=0 and id= #{stageId}
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_procedure SET delete_status=1 WHERE id=#{procedureId}
+        UPDATE kb_stage SET delete_status=1 WHERE id=#{stageId}
     </delete>
 
-    <select id="isDoneProcedureAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND id!=#{procedureId} AND
+    <select id="isDoneStageAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_stage WHERE delete_status=0 AND board_id=#{boardId} AND id!=#{stageId} AND
         status=9 AND type =1
     </select>
 
-    <select id="findDoneProcedure" parameterType="java.lang.String" resultType="org.thiki.kanban.procedure.Procedure">
-        SELECT * FROM kb_procedure WHERE delete_status=0 and board_id= #{boardId} AND status=9 AND type =1
+    <select id="findDoneStage" parameterType="java.lang.String" resultType="org.thiki.kanban.stage.Stage">
+        SELECT * FROM kb_stage WHERE delete_status=0 and board_id= #{boardId} AND status=9 AND type =1
     </select>
 
-    <select id="findProcedureByStatus" parameterType="java.lang.Object"
-            resultType="org.thiki.kanban.procedure.Procedure">
-        SELECT * FROM kb_procedure WHERE delete_status=0 and board_id= #{boardId} AND status=#{status} AND type =1
+    <select id="findStageByStatus" parameterType="java.lang.Object"
+            resultType="org.thiki.kanban.stage.Stage">
+        SELECT * FROM kb_stage WHERE delete_status=0 and board_id= #{boardId} AND status=#{status} AND type =1
     </select>
 
-    <select id="hasNewArchivedProcedureExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_procedure WHERE delete_status=0 AND board_id=#{boardId} AND creation_time >
+    <select id="hasNewArchivedStageExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_stage WHERE delete_status=0 AND board_id=#{boardId} AND creation_time >
         #{creationTime} AND status=9 AND type =9
     </select>
 
     <select id="countCardsNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT count(*) FROM kb_card WHERE delete_status=0 AND procedure_id=#{procedureId}
+        SELECT count(*) FROM kb_card WHERE delete_status=0 AND stage_id=#{stageId}
     </select>
 </mapper>

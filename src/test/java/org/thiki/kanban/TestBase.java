@@ -66,7 +66,7 @@ public class TestBase {
     @After
     public void resetDB() {
         jdbcTemplate.execute("TRUNCATE TABLE kb_board");
-        jdbcTemplate.execute("TRUNCATE TABLE kb_procedure");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_stage");
         jdbcTemplate.execute("TRUNCATE TABLE kb_card");
         jdbcTemplate.execute("TRUNCATE TABLE kb_project");
         jdbcTemplate.execute("TRUNCATE TABLE kb_user_profile");
