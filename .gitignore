@@ -21,3 +21,4 @@ README.html
 .settings/
 kanban.iml
 /src/main/resources/static/
+/src/main/resources/config/application-local.properties

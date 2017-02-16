@@ -48,6 +48,7 @@ public class CardsControllerTest extends TestBase {
         Map newCard = new HashMap();
         newCard.put("summary", "summary");
         newCard.put("deadline", deadline);
+        newCard.put("size", 5);
         given().body(newCard)
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
@@ -58,7 +59,8 @@ public class CardsControllerTest extends TestBase {
                 .body("summary", equalTo("summary"))
                 .body("author", equalTo(userName))
                 .body("code", equalTo(expectedCode))
-                .body("deadline", equalTo(deadline))
+                .body("code", equalTo(expectedCode))
+                .body("size", equalTo(5))
                 .body("restDays", equalTo(expireDays))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/procedures/fooId/cards/fooId"))
                 .body("_links.cards.href", endsWith("/boards/boardId-foo/procedures/fooId/cards"))

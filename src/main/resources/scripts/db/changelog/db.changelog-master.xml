@@ -705,4 +705,16 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="33" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_card" columnName="size"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_card">
+            <column name="size" type="int">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

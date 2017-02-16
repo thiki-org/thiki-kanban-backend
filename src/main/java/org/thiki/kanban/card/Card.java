@@ -27,6 +27,7 @@ public class Card {
     private String code;
     private String content;
     private String deadline;
+    private Integer size;
 
     private String author;
 
@@ -153,5 +154,13 @@ public class Card {
 
     public void setElapsedDays(double elapsedDays) {
         this.elapsedDays = elapsedDays;
+    }
+
+    public Integer getSize() {
+        return size;
+    }
+
+    public void setSize(Integer size) {
+        this.size = size;
     }
 }
