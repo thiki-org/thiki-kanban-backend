@@ -28,7 +28,7 @@ public class Card {
     private String content;
     private String deadline;
     private Integer size;
-
+    private String sizeName;
     private String author;
 
     private Integer sortNumber;
@@ -162,5 +162,9 @@ public class Card {
 
     public void setSize(Integer size) {
         this.size = size;
+    }
+
+    public String getSizeName() {
+        return CardsCodes.sizeName(this.size);
     }
 }
