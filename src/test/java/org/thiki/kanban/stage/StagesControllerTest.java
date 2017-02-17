@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by xubt on 5/14/16.
  */
-@Domain(order = DomainOrder.STAGE, name = "工序")
+@Domain(order = DomainOrder.STAGE, name = "环节")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class StagesControllerTest extends TestBase {
 
@@ -164,7 +164,7 @@ public class StagesControllerTest extends TestBase {
                 .body("message", equalTo(StageCodes.STAGE_IS_NOT_EXIST.message()));
     }
 
-    @Scenario("设置工序状态属性->在将工序设置为完成工序时,如果当前工序非迭代中的工序,则不允许设置")
+    @Scenario("设置环节状态属性->在将环节设置为完成环节时,如果当前环节非迭代中的环节,则不允许设置")
     @Test
     public void shouldFailedWhenTheDoneStageIsNotInSprint() {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId',' ','someone','board-feeId',0,1)");
@@ -179,7 +179,7 @@ public class StagesControllerTest extends TestBase {
                 .body("message", equalTo(StageCodes.STAGE_TYPE_IS_NOT_IN_SPRINT.message()));
     }
 
-    @Scenario("设置工序状态属性,如果目标工序是迭代工序,且已经存在完成列，则不允许再设置")
+    @Scenario("设置环节状态属性,如果目标环节是迭代环节,且已经存在完成列，则不允许再设置")
     @Test
     public void shouldFailedWhenTheDoneStageIsAlreadyExist() {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type) VALUES ('fooId',' ','someone','board-feeId',1)");
@@ -195,7 +195,7 @@ public class StagesControllerTest extends TestBase {
                 .body("message", equalTo(StageCodes.DONE_STAGE_IS_ALREADY_EXIST.message()));
     }
 
-    @Scenario("设置工序类别,不允许直接将工序设置为已经归档")
+    @Scenario("设置环节类别,不允许直接将环节设置为已经归档")
     @Test
     public void shouldFailedWhenSettingStageToArchiveDirectly() {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type) VALUES ('fooId',' ','someone','board-feeId',1)");
@@ -211,7 +211,7 @@ public class StagesControllerTest extends TestBase {
                 .body("message", equalTo(StageCodes.NOT_ALLOW_SET_STAGE_TO_ARCHIVE_DIRECTLY.message()));
     }
 
-    @Scenario("重新排序>用户创建工序后,可以调整其顺序")
+    @Scenario("重新排序>用户创建环节后,可以调整其顺序")
     @Test
     public void resortStage() {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,sort_number,type) VALUES ('stage-fooId1','stageTitle1',1,'feeId',0,1)");

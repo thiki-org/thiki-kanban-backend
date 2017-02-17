@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 /**
- * 卡片工序
+ * 卡片环节
  * Created by xubitao on 04/26/16.
  * Modifed by winie   on  2/6/17   添加在控数量设置
  */

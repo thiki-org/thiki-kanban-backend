@@ -35,7 +35,7 @@ public class Card {
     private String creationTime;
     private String modificationTime;
     /**
-     * 工序Id @see {@link Stage#getId()}
+     * 环节Id @see {@link Stage#getId()}
      */
     private String stageId;
     private double elapsedDays;
