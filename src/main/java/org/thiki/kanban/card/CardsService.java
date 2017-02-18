@@ -16,21 +16,19 @@ import org.thiki.kanban.stage.StagesService;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardsService {
     public static Logger logger = LoggerFactory.getLogger(AcceptanceCriteriaService.class);
     @Resource
     private CardsPersistence cardsPersistence;
-
     @Resource
     private ActivityService activityService;
-
     @Resource
     private BoardsService boardsService;
     @Resource
     private DateService dateService;
-
     @Resource
     private StagesService stagesService;
 
@@ -102,11 +100,11 @@ public class CardsService {
     }
 
     private Card loadAndValidateCard(String cardId) {
-        Card foundCard = cardsPersistence.findById(cardId);
-        if (foundCard == null) {
+        Optional<Card> originCard = Optional.ofNullable(cardsPersistence.findById(cardId));
+        if (!originCard.isPresent()) {
             throw new BusinessException(CardsCodes.CARD_IS_NOT_EXISTS);
         }
-        return foundCard;
+        return originCard.get();
     }
 
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
