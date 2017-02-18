@@ -9,10 +9,11 @@ import org.thiki.kanban.board.snapshot.BoardsSnapshotController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.page.PagesController;
+import org.thiki.kanban.projects.project.ProjectsController;
+import org.thiki.kanban.projects.projectMembers.ProjectMembersController;
+import org.thiki.kanban.sprint.SprintController;
 import org.thiki.kanban.stage.StageCodes;
 import org.thiki.kanban.stage.StagesController;
-import org.thiki.kanban.projects.project.ProjectsController;
-import org.thiki.kanban.sprint.SprintController;
 import org.thiki.kanban.tag.TagsController;
 
 import javax.annotation.Resource;
@@ -95,6 +96,11 @@ public class BoardResource extends RestResource {
 
             Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(board.getId(), userName)).withRel("pages");
             boardResource.add(tlink.from(pagesLink).build(userName));
+
+            if (board.getProjectId() != null) {
+                Link membersLink = linkTo(methodOn(ProjectMembersController.class).loadMembersByProjectId(board.getProjectId(), userName)).withRel("members");
+                boardResource.add(tlink.from(membersLink).build(userName));
+            }
         }
         Link allLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withRel("all");
         boardResource.add(tlink.from(allLink).build());

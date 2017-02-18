@@ -88,7 +88,8 @@ public class BoardControllerTest extends TestBase {
                 .body("author", equalTo("someone"))
                 .body("_links.all.href", endsWith("/someone/boards"))
                 .body("_links.self.href", endsWith("/someone/boards/fooId"))
-                .body("_links.project.href", endsWith("/projects/projectId-foo"));
+                .body("_links.project.href", endsWith("/projects/projectId-foo"))
+                .body("_links.members.href", endsWith("/projects/projectId-foo/members"));
         assertEquals("new-name", jdbcTemplate.queryForObject("select name from kb_board where id='fooId'", String.class));
         assertEquals("projectId-foo", jdbcTemplate.queryForObject("select project_id from kb_board where id='fooId'", String.class));
     }
