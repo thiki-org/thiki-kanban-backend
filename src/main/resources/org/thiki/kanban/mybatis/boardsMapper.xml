@@ -11,10 +11,10 @@
 
     <update id="update" parameterType="org.thiki.kanban.board.Board" flushCache="true">
         UPDATE kb_board SET
-        name=#{name},
+        name=#{name}
         <if test="projectId!=null">
-            owner=#{projectId},
-            project_id=#{projectId}
+            ,owner=#{projectId}
+            ,project_id=#{projectId}
         </if>
         WHERE id=#{id} AND delete_status=0
     </update>
