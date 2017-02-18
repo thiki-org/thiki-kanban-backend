@@ -28,7 +28,7 @@ public class StatisticsService {
     @Resource
     private ActivityService activityService;
 
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "00 2,9,12,15,20 * * * ")
     public void analyse() {
         logger.info("Starting statistics elapsed days.");
         List<Card> cards = cardsPersistence.loadUnArchivedCards();
