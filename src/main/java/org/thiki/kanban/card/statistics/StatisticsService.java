@@ -1,7 +1,10 @@
 package org.thiki.kanban.card.statistics;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.activity.Activity;
 import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.activity.ActivityType;
@@ -18,13 +21,16 @@ import java.util.List;
  */
 @Service
 public class StatisticsService {
+    public static Logger logger = LoggerFactory.getLogger(StatisticsService.class);
+
     @Resource
     private CardsPersistence cardsPersistence;
     @Resource
     private ActivityService activityService;
 
-    @Scheduled(cron = "0 * * * * *")
+    @Scheduled(cron = "* * * * * *")
     public void analyse() {
+        logger.info("Starting statistics elapsed days.");
         List<Card> cards = cardsPersistence.loadUnArchivedCards();
         for (Card card : cards) {
             List<Activity> activities = activityService.loadActivitiesByCard(ActivityType.CARD_MOVING.code(), card.getId());
@@ -32,6 +38,7 @@ public class StatisticsService {
             card.setElapsedDays(elapsedDays);
             cardsPersistence.modify(card.getId(), card);
         }
+        logger.info("Elapsed days statistics completed.");
     }
 
     public double calculateElapsedDays(List<Activity> activities) {
