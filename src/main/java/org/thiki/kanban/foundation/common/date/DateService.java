@@ -760,7 +760,7 @@ public class DateService {
         DateTime startDateTime = new DateTime(startTime);
         DateTime endDateTime = new DateTime(endTime);
         Period period = new Period(startDateTime, endDateTime);
-        return period.getHours();
+        return period.getHours() + period.getDays() * 24;
     }
 
     public String simpleDate() {
