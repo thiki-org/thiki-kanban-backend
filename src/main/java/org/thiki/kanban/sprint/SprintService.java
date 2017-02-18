@@ -37,7 +37,7 @@ public class SprintService {
             throw new BusinessException(SprintCodes.UNARCHIVE_SPRINT_EXIST);
         }
 
-        boolean isSprintNameAlreadyExist = sprintPersistence.isSprintNameAlreadyExist(boardId, sprint.getSprintName());
+        boolean isSprintNameAlreadyExist = sprintPersistence.isSprintNameAlreadyExist(null, boardId, sprint.getSprintName());
         if (isSprintNameAlreadyExist) {
             throw new BusinessException(SprintCodes.SPRINT_NAME_ALREADY_EXISTS);
         }
@@ -50,7 +50,7 @@ public class SprintService {
     @CacheEvict(value = "sprint", key = "contains('#boardId')", allEntries = true)
     public Sprint updateSprint(String sprintId, Sprint sprint, String boardId, String userName) {
         logger.info("Updating sprint.sprintId:{},sprint:{},boardId:{},userName", sprintId, sprint, boardId, userName);
-        boolean isSprintNameAlreadyExist = sprintPersistence.isSprintNameAlreadyExist(boardId, sprint.getSprintName());
+        boolean isSprintNameAlreadyExist = sprintPersistence.isSprintNameAlreadyExist(sprintId, boardId, sprint.getSprintName());
 
         if (isSprintNameAlreadyExist) {
             throw new BusinessException(SprintCodes.SPRINT_NAME_ALREADY_EXISTS);

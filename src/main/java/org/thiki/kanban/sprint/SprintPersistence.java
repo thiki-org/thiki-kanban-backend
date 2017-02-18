@@ -19,5 +19,5 @@ public interface SprintPersistence {
 
     Sprint loadActiveSprint(@Param("boardId") String boardId);
 
-    boolean isSprintNameAlreadyExist(@Param("boardId") String boardId, @Param("sprintName") String sprintName);
+    boolean isSprintNameAlreadyExist(@Param("sprintId") String sprintId, @Param("boardId") String boardId, @Param("sprintName") String sprintName);
 }
