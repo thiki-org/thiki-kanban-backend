@@ -20,10 +20,8 @@ import java.util.List;
 public class StagesService {
     public static final String ARCHIVE_SUFFIX = "归档";
     public static Logger logger = LoggerFactory.getLogger(StagesService.class);
-
     @Resource
     private StagesPersistence stagesPersistence;
-
     @Resource
     private CardsService cardsService;
 

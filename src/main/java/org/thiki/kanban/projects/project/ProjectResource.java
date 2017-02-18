@@ -28,7 +28,7 @@ public class ProjectResource extends RestResource {
             Link selfLink = linkTo(methodOn(ProjectsController.class).findById(project.getId(), userName)).withSelfRel();
             projectResource.add(tlink.from(selfLink).build(userName));
 
-            Link membersLink = linkTo(methodOn(ProjectMembersController.class).loadMembersByTeamId(project.getId(), userName)).withRel("members");
+            Link membersLink = linkTo(methodOn(ProjectMembersController.class).loadMembersByProjectId(project.getId(), userName)).withRel("members");
             projectResource.add(tlink.from(membersLink).build(userName));
         }
         return projectResource.getResource();

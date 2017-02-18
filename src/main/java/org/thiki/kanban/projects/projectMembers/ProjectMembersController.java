@@ -31,7 +31,7 @@ public class ProjectMembersController {
     }
 
     @RequestMapping(value = "/projects/{projectId}/members", method = RequestMethod.GET)
-    public HttpEntity loadMembersByTeamId(@PathVariable String projectId, @RequestHeader String userName) throws Exception {
+    public HttpEntity loadMembersByProjectId(@PathVariable String projectId, @RequestHeader String userName) throws Exception {
         List<Member> members = projectMembersService.loadMembersByTeamId(userName, projectId);
         return Response.build(membersResource.toResource(projectId, members, userName));
     }
