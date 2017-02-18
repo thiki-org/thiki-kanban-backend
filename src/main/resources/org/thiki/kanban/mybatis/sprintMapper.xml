@@ -20,6 +20,9 @@
 
     <select id="isSprintNameAlreadyExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
         SELECT count(*) FROM kb_sprint WHERE delete_status=0 and board_id= #{boardId} AND sprint_name=#{sprintName}
+        <if test="sprintId!=null">
+            AND id !=#{sprintId}
+        </if>
     </select>
 
     <update id="update" parameterType="java.lang.String" flushCache="true">
