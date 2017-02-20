@@ -720,7 +720,15 @@
 
     <changeSet id="34" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="kb_procedure"/>
+            <and>
+                <tableExists tableName="kb_procedure"/>
+            </and>
+            <and>
+                <not>
+                    <tableExists tableName="kb_stage"/>
+                </not>
+
+            </and>
         </preConditions>
         <renameTable newTableName="kb_stage" oldTableName="kb_procedure"/>
     </changeSet>
@@ -768,7 +776,15 @@
     </changeSet>
     <changeSet id="39" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
+            <and>
+                <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
+
+            </and>
+            <and>
+                <not>
+                    <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
+                </not>
+            </and>
         </preConditions>
         <renameColumn
                 newColumnName="stage_snapShot"
@@ -779,7 +795,14 @@
 
     <changeSet id="40" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <columnExists tableName="kb_activity" columnName="prev_procedure_snapShot"/>
+            <and>
+                <columnExists tableName="kb_activity" columnName="prev_procedure_snapShot"/>
+            </and>
+            <and>
+                <not>
+                    <columnExists tableName="kb_activity" columnName="prev_stage_snapShot"/>
+                </not>
+            </and>
         </preConditions>
         <renameColumn
                 newColumnName="prev_stage_snapShot"
@@ -787,4 +810,55 @@
                 columnDataType="CLOB"
                 tableName="kb_activity"/>
     </changeSet>
+
+    <changeSet id="41" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_kb_activity_comp"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="idx_kb_activity_comp"
+                     tableName="kb_activity">
+            <column name="card_id" type="varchar(40)"/>
+            <column name="operation_type_code" type="varchar(40)"/>
+            <column name="creation_time" type="datetime"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="42" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_kb_acceptance_criterias_card"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="idx_kb_acceptance_criterias_card"
+                     tableName="kb_acceptance_criterias">
+            <column name="card_id" type="varchar(40)"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="43" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_kb_comment_card"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="idx_kb_comment_card"
+                     tableName="kb_comment">
+            <column name="card_id" type="varchar(40)"/>
+            <column name="creation_time" type="datetime"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="44" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_kb_cards_tags"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="idx_kb_cards_tags"
+                     tableName="kb_cards_tags">
+            <column name="card_id" type="varchar(40)"/>
+            <column name="tag_id" type="varchar(40)"/>
+        </createIndex>
+    </changeSet>
+
 </databaseChangeLog>
