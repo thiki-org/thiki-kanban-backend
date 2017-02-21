@@ -25,11 +25,13 @@ buildscript {
 
 buildscript {
     repositories {
-        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        //maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+        mavenCentral()
     }
 }
 repositories {
-    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    //maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    mavenCentral()
 }
 dependencies {
     compile 'org.springframework:spring-web:4.3.2.RELEASE'
