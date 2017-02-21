@@ -782,7 +782,7 @@
             </and>
             <and>
                 <not>
-                    <columnExists tableName="kb_activity" columnName="stage_snapShot"/>
+                    <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
                 </not>
             </and>
         </preConditions>
@@ -814,11 +814,11 @@
     <changeSet id="41" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <indexExists indexName="idx_kb_activity_comp" />
+                <indexExists indexName="idx_kb_activity_comp"/>
             </not>
         </preConditions>
         <createIndex indexName="idx_kb_activity_comp"
-                     tableName="kb_activity" >
+                     tableName="kb_activity">
             <column name="card_id" type="varchar(40)"/>
             <column name="operation_type_code" type="varchar(40)"/>
             <column name="creation_time" type="datetime"/>
