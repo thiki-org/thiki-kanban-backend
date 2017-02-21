@@ -782,7 +782,7 @@
             </and>
             <and>
                 <not>
-                    <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
+                    <columnExists tableName="kb_activity" columnName="stage_snapShot"/>
                 </not>
             </and>
         </preConditions>
@@ -883,17 +883,6 @@
             <column name="user_name" type="varchar(40)"/>
         </createIndex>
     </changeSet>
-    <changeSet id="46" author="winie" runOnChange="true">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <indexExists indexName="idx_kb_user_profile_user_name"/>
-            </not>
-        </preConditions>
-        <createIndex indexName="idx_kb_user_profile_user_name"
-                     tableName="kb_user_profile">
-            <column name="user_name" type="varchar(40)"/>
-        </createIndex>
-    </changeSet>
     <changeSet id="47" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
@@ -923,6 +912,18 @@
             <column name="card_id" type="varchar(40)"/>
             <column name="operation_type_code" type="varchar(40)"/>
             <column name="creation_time" type="datetime"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="50" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_kb_card_stage"/>
+            </not>
+        </preConditions>
+        <createIndex indexName="idx_kb_card_stage"
+                     tableName="kb_card">
+            <column name="stage_id" type="varchar(40)"/>
+            <column name="sort_number" type="int"/>
         </createIndex>
     </changeSet>
 </databaseChangeLog>
