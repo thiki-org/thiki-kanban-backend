@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.activity.ActivityService;
@@ -108,6 +109,8 @@ public class CardsService {
     }
 
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
+    @Caching(evict = {@CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true), @CacheEvict(value = "card", key = "contains(#stageId)", allEntries = true)})
+
     public List<Card> resortCards(List<Card> cards, String stageId, String boardId, String userName) {
         for (Card card : cards) {
             Card originCard = cardsPersistence.findById(card.getId());
