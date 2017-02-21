@@ -29,6 +29,9 @@
         <if test="card.elapsedDays!=null">
             size = #{card.size},
         </if>
+        <if test="card.parentId!=null">
+            parent_id = #{card.parentId},
+        </if>
         stage_id = #{card.stageId}
         WHERE id=#{cardId} AND delete_status=0
     </update>

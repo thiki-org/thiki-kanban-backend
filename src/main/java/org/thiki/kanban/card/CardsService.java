@@ -70,6 +70,12 @@ public class CardsService {
                 throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
             }
         }
+        if (card.moveToParent(originCard)) {
+            Optional<Card> parentCard = Optional.ofNullable(cardsPersistence.findById(cardId));
+            if (!parentCard.isPresent()) {
+                throw new BusinessException(CardsCodes.PARENT_CARD_IS_NOT_FOUND);
+            }
+        }
         card.setCode(originCard.stillNoCode() ? generateCode(boardId) : originCard.getCode());
 
         cardsPersistence.modify(cardId, card);

@@ -11,6 +11,7 @@ import org.thiki.kanban.stage.Stage;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 卡片：任何有指定负责人的有特定目标的事项，可以是用户故事，技术卡片，一次会议等等
@@ -39,6 +40,7 @@ public class Card {
      */
     private String stageId;
     private double elapsedDays;
+    private String parentId;
 
     public String getCreationTime() {
         return creationTime;
@@ -166,5 +168,17 @@ public class Card {
 
     public String getSizeName() {
         return CardsCodes.sizeName(this.size);
+    }
+
+    public boolean moveToParent(Card originCard) {
+        return !Objects.equals(originCard.getParentId(), this.parentId) && !Objects.equals(this.parentId, "");
+    }
+
+    public String getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(String parentId) {
+        this.parentId = parentId;
     }
 }

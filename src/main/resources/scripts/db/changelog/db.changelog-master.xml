@@ -903,4 +903,16 @@
             <column name="sort_number" type="int"/>
         </createIndex>
     </changeSet>
+    <changeSet id="51" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_card" columnName="parent_id"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_card">
+            <column name="parent_id" type="varchar(40)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
