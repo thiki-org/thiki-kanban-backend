@@ -97,21 +97,9 @@ bootRun {
 }
 cobertura.coverageFormats = ['html', 'xml']
 
-jacoco {
-    toolVersion = "0.7.6.201602180812"
-    reportsDir = file("$buildDir/$reportsDir")
-}
-
 jacocoTestReport {
     reports {
         xml.enabled = true
         html.enabled = true
-    }
-}
-test {
-    jacoco {
-        append = false
-        destinationFile = file("$buildDir/jacoco/jacocoTest.exec")
-        classDumpFile = file("$buildDir/jacoco/classpathdumps")
     }
 }
