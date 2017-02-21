@@ -1,10 +1,27 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+        classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
+        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.3.1'
+        classpath 'org.liquibase:liquibase-core:3.4.2'
+        classpath 'mysql:mysql-connector-java:5.1.38'
+        classpath 'org.yaml:snakeyaml:1.17'
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'jacoco'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: "jacoco"
 apply plugin: 'org.springframework.boot'
 apply plugin: 'cobertura'
-apply plugin: 'coveralls'
-
 
 group = 'org.thiki'
 version = '1.0-SNAPSHOT'
@@ -12,25 +29,7 @@ version = '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-buildscript {
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
-        classpath 'net.saliman:gradle-cobertura-plugin:2.2.2'
-        classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:0.3.1'
-		classpath 'org.liquibase:liquibase-core:3.4.2'
-        classpath 'mysql:mysql-connector-java:5.1.38'
-        classpath 'org.yaml:snakeyaml:1.17'
-    }
-}
-
-buildscript {
-    repositories {
-        //maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
-        mavenCentral()
-    }
-}
 repositories {
-    //maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
     mavenCentral()
 }
 dependencies {
@@ -96,12 +95,13 @@ bootRun {
     addResources = true
     args = ["--spring.profiles.active=" + defaultProfile]
 }
-
 cobertura.coverageFormats = ['html', 'xml']
+
 jacoco {
     toolVersion = "0.7.6.201602180812"
     reportsDir = file("$buildDir/$reportsDir")
 }
+
 jacocoTestReport {
     reports {
         xml.enabled = true
