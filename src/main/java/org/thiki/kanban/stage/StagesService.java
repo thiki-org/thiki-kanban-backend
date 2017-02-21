@@ -141,38 +141,6 @@ public class StagesService {
         return archivedStage;
     }
 
-    @CacheEvict(value = "stage", key = "contains('#archivedStageId')", allEntries = true)
-    public void undoArchive(String archivedStageId, String boardId, String userName) {
-        logger.info("Undo archiving.archivedStageId:{}", archivedStageId);
-        Stage archivedStage = stagesPersistence.findById(archivedStageId);
-        if (archivedStage == null) {
-            logger.info("No specified archived stage was found in board:{},archivedStageId:{}", boardId, archivedStageId);
-            throw new BusinessException(StageCodes.NO_ARCHIVED_STAGE_WAS_FOUND);
-        }
-
-        boolean isNewArchivedStageExist = stagesPersistence.hasNewArchivedStageExist(archivedStage);
-        if (isNewArchivedStageExist) {
-            logger.info("New archived stage was found in board:{}", boardId);
-            throw new BusinessException(StageCodes.NEW_ARCHIVED_STAGE_WAS_FOUND);
-        }
-
-        Stage doneStage = stagesPersistence.findDoneStage(boardId);
-        if (doneStage == null) {
-            logger.info("No done stage was found in board:{}", boardId);
-            throw new BusinessException(StageCodes.NO_DONE_STAGE_WAS_FOUND);
-        }
-
-
-        logger.info("Transfer the cards of the archived stage to done stage.");
-        List<Card> cards = cardsService.findByStageId(archivedStageId);
-        for (Card card : cards) {
-            card.setStageId(doneStage.getId());
-            cardsService.modify(card.getId(), card, archivedStageId, boardId, userName);
-        }
-        logger.info("Deleting the archived stage.");
-        stagesPersistence.deleteById(archivedStageId);
-    }
-
     public Stage findStageByStatus(String boardId, Integer status) {
         return stagesPersistence.findStageByStatus(boardId, status);
     }
