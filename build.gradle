@@ -105,7 +105,7 @@ jacocoTestReport {
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
             fileTree(dir: it,
-                    exclude: ['org/thiki/kanban/foundation/**'])
+                    exclude: ['org/thiki/kanban/foundation/**','org/thiki/kanban/Application.java'])
         })
     }
 }
