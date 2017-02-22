@@ -61,7 +61,14 @@
         code like concat('%',#{currentMonth},'%')
     </select>
 
+    <select id="hasChild" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_card WHERE delete_status=0 AND parent_id=#{cardId}
+    </select>
+
     <select id="loadUnArchivedCards" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
       SELECT * FROM kb_card LEFT JOIN kb_stage ON kb_card.stage_id=kb_stage.id WHERE kb_stage.type !=9
-</select>
+    </select>
+    <select id="loadChildCards" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
+        SELECT * FROM kb_card WHERE delete_status=0 AND parent_id=#{cardId}
+    </select>
 </mapper>

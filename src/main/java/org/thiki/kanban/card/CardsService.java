@@ -137,4 +137,11 @@ public class CardsService {
         }
         return findByStageId(stageId);
     }
+
+    public List<Card> findByParentId(String cardId) {
+        logger.info("Loading child cards.{}", cardId);
+        List<Card> childCards = cardsPersistence.loadChildCards(cardId);
+        logger.info("Child cards loading completed.cards:{}", childCards);
+        return childCards;
+    }
 }

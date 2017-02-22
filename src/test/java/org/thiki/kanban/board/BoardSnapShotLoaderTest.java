@@ -59,4 +59,20 @@ public class BoardSnapShotLoaderTest extends TestBase {
                 .body("stages.stages[0].cards", notNullValue())
                 .body("stages.stages[0].cards.cards[0].assignments", notNullValue());
     }
+
+    @Scenario("当卡片具有子卡片时，将子卡片的数据包含在当前卡片下")
+    @Test
+    public void should_return_child_cards_in_the_data_structure() {
+        dbPreparation.table("kb_card")
+                .names("id,summary,content,author,stage_id,parent_id")
+                .values("card-child-fooId", "card-summary.", "play badminton", userName, "stage-fooId", "card-fooId").exec();
+
+        given().header("userName", "someone")
+                .log().all()
+                .when()
+                .get("/someone/boards/boardId/snapshot")
+                .then()
+                .statusCode(200)
+                .body("stages.stages[0].cards.cards[1].child.cards[0]", notNullValue());
+    }
 }

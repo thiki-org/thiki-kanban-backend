@@ -61,30 +61,36 @@ public class SnapshotService {
         List<Stage> stageList = stagesService.loadByBoardId(boardId, viewType);
         JSONObject stagesJSON = (JSONObject) stagesResource.toResource(stageList, boardId, viewType, userName);
         JSONArray stagesArray = (JSONArray) stagesJSON.get("stages");
-        JSONArray newStagesArray = loadCards(boardId, userName, stagesArray);
+        JSONArray newStagesArray = loadStageCards(boardId, userName, stagesArray);
         stagesJSON.put("stages", newStagesArray);
         boardJSON.put("stages", stagesJSON);
         logger.info("board loading completed.");
         return boardJSON;
     }
 
-    private JSONArray loadCards(String boardId, String userName, JSONArray stagesArray) throws Exception {
+    private JSONArray loadStageCards(String boardId, String userName, JSONArray stagesArray) throws Exception {
         logger.info("load cards tags.");
         JSONArray newStagesArray = new JSONArray();
         for (int i = 0; i < stagesArray.size(); i++) {
             JSONObject stageJSON = stagesArray.getJSONObject(i);
             String stageId = stageJSON.getString("id");
             List<Card> cardList = cardsService.findByStageId(stageId);
-            JSONObject cardsJSON = (JSONObject) cardsResource.toResource(cardList, boardId, stageId, userName);
-            JSONArray cardsArray = (JSONArray) cardsJSON.get("cards");
 
-            JSONArray newCardsArray = loadOthersByCard(boardId, userName, stageId, cardsArray);
-            cardsJSON.put("cards", newCardsArray);
+
+            JSONObject cardsJSON = buildCards(cardList, boardId, stageId, userName);
             stageJSON.put("cards", cardsJSON);
             newStagesArray.add(stageJSON);
         }
         logger.info("card loading completed.");
         return newStagesArray;
+    }
+
+    private JSONObject buildCards(List<Card> cardList, String boardId, String stageId, String userName) throws Exception {
+        JSONObject cardsJSON = (JSONObject) cardsResource.toResource(cardList, boardId, stageId, userName);
+        JSONArray cardsArray = (JSONArray) cardsJSON.get("cards");
+        JSONArray newCardsArray = loadOthersByCard(boardId, userName, stageId, cardsArray);
+        cardsJSON.put("cards", newCardsArray);
+        return cardsJSON;
     }
 
     private JSONArray loadOthersByCard(String boardId, String userName, String stageId, JSONArray cardsArray) throws Exception {
@@ -107,6 +113,11 @@ public class SnapshotService {
                     snapshotExecutor.loadAcceptanceCriterias(boardId, userName, stageId, cardJSON, cardId);
                     snapshotExecutor.loadCardTags(boardId, userName, stageId, cardJSON, cardId);
                     snapshotExecutor.loadComments(boardId, userName, stageId, cardJSON, cardId);
+                    List<Card> childCards = cardsService.findByParentId(cardId);
+                    if (childCards.size() > 0) {
+                        JSONObject childCardsJSON = buildCards(childCards, boardId, stageId, userName);
+                        cardJSON.put("child", childCardsJSON);
+                    }
                     return cardJSON;
                 }
             };
