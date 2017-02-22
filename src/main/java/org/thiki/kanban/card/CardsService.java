@@ -71,7 +71,7 @@ public class CardsService {
             }
         }
         if (card.moveToParent(originCard)) {
-            Optional<Card> parentCard = Optional.ofNullable(cardsPersistence.findById(cardId));
+            Optional<Card> parentCard = Optional.ofNullable(cardsPersistence.findById(card.getParentId()));
             if (!parentCard.isPresent()) {
                 throw new BusinessException(CardsCodes.PARENT_CARD_IS_NOT_FOUND);
             }

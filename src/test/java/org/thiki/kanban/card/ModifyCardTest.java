@@ -36,4 +36,19 @@ public class ModifyCardTest extends TestBase {
                 .statusCode(200)
                 .body("parentId", equalTo("card-parent-id"));
     }
+
+    @Scenario("将卡片置为子卡片时，如果父卡片不存在，则不予许设置")
+    @Test
+    public void should_not_allowed_if_parent_card_not_exist() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,code) VALUES ('fooId','this is the card summary.','play badminton','someone','fooId','code-fee')");
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":\"fooId\",\"parentId\":\"card-parent-id\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/stages/1/cards/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(CardsCodes.PARENT_CARD_IS_NOT_FOUND.code()))
+                .body("message", equalTo(CardsCodes.PARENT_CARD_IS_NOT_FOUND.message()));
+    }
 }
