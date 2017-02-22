@@ -16,7 +16,6 @@ import static org.mockito.Mockito.mock;
  * Created by xubt on 5/11/16.
  */
 public class TestContextConfiguration {
-
     @Bean
     public MailService mailService() throws TemplateException, IOException, MessagingException {
         MailService mailService = mock(MailService.class);
