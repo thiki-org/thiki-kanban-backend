@@ -75,6 +75,10 @@ public class CardsService {
             if (!parentCard.isPresent()) {
                 throw new BusinessException(CardsCodes.PARENT_CARD_IS_NOT_FOUND);
             }
+            boolean isHasChildCard = cardsPersistence.hasChild(cardId);
+            if (isHasChildCard) {
+                throw new BusinessException(CardsCodes.HAS_CHILD_CARD);
+            }
         }
         card.setCode(originCard.stillNoCode() ? generateCode(boardId) : originCard.getCode());
 

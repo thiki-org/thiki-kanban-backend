@@ -23,4 +23,6 @@ public interface CardsPersistence {
     int totalCardsIncludingDeleted(@Param("boardId") String boardId, @Param("currentMonth") String currentMonth);
 
     List<Card> loadUnArchivedCards();
+
+    boolean hasChild(String cardId);
 }

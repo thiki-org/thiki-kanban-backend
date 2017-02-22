@@ -51,4 +51,21 @@ public class ModifyCardTest extends TestBase {
                 .body("code", equalTo(CardsCodes.PARENT_CARD_IS_NOT_FOUND.code()))
                 .body("message", equalTo(CardsCodes.PARENT_CARD_IS_NOT_FOUND.message()));
     }
+
+    @Scenario("将卡片置为子卡片时，如果卡片存在子卡片，则不予许设置")
+    @Test
+    public void should_not_allowed_if_card_has_child_cards() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,code) VALUES ('card-parent-id','this is the card summary.','play badminton','someone','stage-fooId','code-foo')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,parent_id,code) VALUES ('card-child-id','this is the card summary.','play badminton','someone','stage-fooId','fooId','code-foo-fee')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,code) VALUES ('fooId','this is the card summary.','play badminton','someone','fooId','code-fee')");
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":\"fooId\",\"parentId\":\"card-parent-id\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/stages/1/cards/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(CardsCodes.HAS_CHILD_CARD.code()))
+                .body("message", equalTo(CardsCodes.HAS_CHILD_CARD.message()));
+    }
 }
