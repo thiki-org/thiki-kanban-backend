@@ -63,7 +63,7 @@ public class SnapshotService {
         JSONArray stagesArray = (JSONArray) stagesJSON.get("stages");
         JSONArray newStagesArray = loadStageCards(boardId, userName, stagesArray);
         stagesJSON.put("stages", newStagesArray);
-        boardJSON.put("stages", stagesJSON);
+        boardJSON.put("stagesNode", stagesJSON);
         logger.info("board loading completed.");
         return boardJSON;
     }
