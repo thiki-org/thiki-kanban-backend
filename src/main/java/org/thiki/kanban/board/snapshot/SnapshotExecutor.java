@@ -47,7 +47,7 @@ public class SnapshotExecutor {
         logger.info("load card tags.");
         List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, stageId);
         JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, stageId, cardId, userName);
-        cardJSON.put("tags", tagsJSON);
+        cardJSON.put("tagsNode", tagsJSON);
         logger.info("card tags loading completed.");
     }
 
@@ -55,7 +55,7 @@ public class SnapshotExecutor {
         logger.info("load acceptanceCriterias.");
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(cardId);
         JSONObject acceptanceCriteriasJSON = (JSONObject) acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, stageId, cardId, userName);
-        cardJSON.put("acceptanceCriterias", acceptanceCriteriasJSON);
+        cardJSON.put("acceptanceCriteriasNode", acceptanceCriteriasJSON);
         logger.info("acceptanceCriterias loading completed.");
     }
 
@@ -63,7 +63,7 @@ public class SnapshotExecutor {
         logger.info("load assignments.");
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
         JSONObject assignmentsJSON = (JSONObject) assignmentsResource.toResource(assignmentList, boardId, stageId, cardId, userName);
-        cardJSON.put("assignments", assignmentsJSON);
+        cardJSON.put("assignmentsNode", assignmentsJSON);
         logger.info("assignments loading completed.");
     }
 
@@ -71,7 +71,7 @@ public class SnapshotExecutor {
         logger.info("load comments.");
         List<Comment> commentList = commentService.loadCommentsByCardId(cardId);
         JSONObject commentsJSON = (JSONObject) commentsResource.toResource(commentList, boardId, stageId, cardId, userName);
-        cardJSON.put("comments", commentsJSON);
+        cardJSON.put("commentsNode", commentsJSON);
         logger.info("comments loading completed.");
     }
 }

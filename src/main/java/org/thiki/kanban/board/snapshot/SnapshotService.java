@@ -78,7 +78,7 @@ public class SnapshotService {
 
 
             JSONObject cardsJSON = buildCards(cardList, boardId, stageId, userName);
-            stageJSON.put("cards", cardsJSON);
+            stageJSON.put("cardsNode", cardsJSON);
             newStagesArray.add(stageJSON);
         }
         logger.info("card loading completed.");

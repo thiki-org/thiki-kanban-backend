@@ -56,8 +56,8 @@ public class BoardSnapShotLoaderTest extends TestBase {
                 .body("_links.self.href", endsWith("/someone/boards/boardId"))
                 .body("_links.stages.href", endsWith("/boards/boardId/stages"))
                 .body("stages", notNullValue())
-                .body("stages.stages[0].cards", notNullValue())
-                .body("stages.stages[0].cards.cards[0].assignments", notNullValue());
+                .body("stages.stages[0].cardsNode", notNullValue())
+                .body("stages.stages[0].cardsNode.cards[0].assignmentsNode", notNullValue());
     }
 
     @Scenario("当卡片具有子卡片时，将子卡片的数据包含在当前卡片下")
@@ -73,6 +73,6 @@ public class BoardSnapShotLoaderTest extends TestBase {
                 .get("/someone/boards/boardId/snapshot")
                 .then()
                 .statusCode(200)
-                .body("stages.stages[0].cards.cards[1].child.cards[0]", notNullValue());
+                .body("stages.stages[0].cardsNode.cards[1].child.cards[0]", notNullValue());
     }
 }
