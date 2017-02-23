@@ -119,11 +119,6 @@ public class Card {
         return JSON.toJSONString(this);
     }
 
-    public String diff(Card originCard) {
-        DiffNode diff = ObjectDifferBuilder.buildDefault().compare(this, originCard);
-        return diff.toString();
-    }
-
     public boolean stillNoCode() {
         return getCode() == null;
     }
