@@ -49,7 +49,7 @@
     </select>
 
     <select id="findByStageId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card WHERE stage_id= #{stageId} AND delete_status=0 ORDER BY sort_number ASC
+        SELECT * FROM kb_card WHERE stage_id= #{stageId} AND parent_id IS NULL AND delete_status=0 ORDER BY sort_number ASC
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
