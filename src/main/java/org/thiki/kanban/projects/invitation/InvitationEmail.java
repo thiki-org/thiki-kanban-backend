@@ -32,19 +32,19 @@ public class InvitationEmail extends MailEntity {
         this.invitee = invitee;
     }
 
-    public String getTeamName() {
-        return projectName;
-    }
-
-    public void setTeamName(String projectName) {
-        this.projectName = projectName;
-    }
-
     public String getInvitationLink() {
         return invitationLink;
     }
 
     public void setInvitationLink(String invitationLink) {
         this.invitationLink = invitationLink;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 }

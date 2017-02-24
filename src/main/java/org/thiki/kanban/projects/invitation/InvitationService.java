@@ -72,7 +72,7 @@ public class InvitationService {
         invitationEmail.setReceiver(inviteeUser.getEmail());
         invitationEmail.setInviter(userName);
         invitationEmail.setInvitee(inviteeUser.getName());
-        invitationEmail.setTeamName(project.getName());
+        invitationEmail.setProjectName(project.getName());
 
         Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(projectId, invitation.getId(), userName)).withRel("invitationLink");
         invitationEmail.setInvitationLink(invitationLink.getHref());

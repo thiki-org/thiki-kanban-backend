@@ -320,7 +320,7 @@
             <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="project_id" type="varchar(50)">
+            <column name="team_id" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
             <column name="inviter" type="varchar(50)">
@@ -914,5 +914,15 @@
                 <constraints nullable="true"/>
             </column>
         </addColumn>
+    </changeSet>
+    <changeSet id="52" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="kb_project_member_invitation" columnName="team_id"/>
+        </preConditions>
+        <renameColumn
+                newColumnName="project_id"
+                oldColumnName="team_id"
+                columnDataType="varchar(50)"
+                tableName="kb_project_member_invitation"/>
     </changeSet>
 </databaseChangeLog>
