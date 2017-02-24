@@ -73,6 +73,6 @@ public class BoardSnapShotLoaderTest extends TestBase {
                 .get("/someone/boards/boardId/snapshot")
                 .then()
                 .statusCode(200)
-                .body("stagesNode.stages[0].cardsNode.cards[1].child.cards[0]", notNullValue());
+                .body("stagesNode.stages[0].cardsNode.cards[0].child.cards[0]", notNullValue());
     }
 }
