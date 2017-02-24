@@ -15,6 +15,8 @@ buildscript {
 plugins {
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.6.3'
+    id "net.foragerr.jmeter" version "1.0.5-2.13"
+
 }
 
 apply plugin: 'java'
@@ -108,4 +110,10 @@ jacocoTestReport {
                     exclude: ['org/thiki/kanban/foundation/**','org/thiki/kanban/Application.java'])
         })
     }
+}
+
+jmeter {
+//    jmTestFiles = [file("src/test/jmeter/test2.jmx")] //if jmx file is not in the default location
+//    jmSystemPropertiesFiles= [file("src/test/jmeter/jmeter.properties")] //to add additional system properties
+    enableExtendedReports = true //produce Graphical and CSV reports
 }
