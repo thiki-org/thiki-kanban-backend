@@ -85,4 +85,8 @@ public class AcceptanceCriteriaService {
         activityService.recordAcceptanceCriteriaResorting(acceptanceCriterias, resortedAcceptanceCriterias, cardId, userName);
         return resortedAcceptanceCriterias;
     }
+
+    public boolean isAllAcceptanceCriteriasCompleted(String cardId) {
+        return !acceptanceCriteriaPersistence.isHasUnFinishedAcceptanceCriterias(cardId);
+    }
 }

@@ -2,8 +2,6 @@ package org.thiki.kanban.card;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import de.danielbechler.diff.ObjectDifferBuilder;
-import de.danielbechler.diff.node.DiffNode;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.thiki.kanban.foundation.common.date.DateService;
@@ -142,7 +140,7 @@ public class Card {
 
     @JsonIgnore
     public boolean isMoveToOtherStage(Card originCard) {
-        return !originCard.stageId.equals(this.stageId);
+        return originCard != null && !originCard.stageId.equals(this.stageId);
     }
 
     public double getElapsedDays() {

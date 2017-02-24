@@ -12,7 +12,8 @@ public enum CardsCodes {
     CARD_IS_NOT_EXISTS("001", "卡片未找到。"),
     CODE_IS_ALREADY_EXISTS("002", "当前看板下该编号已经存在,请使用其他编号。"),
     STAGE_WIP_REACHED_LIMIT("003", "在制品满额，不再接受卡片。"),
-    PARENT_CARD_IS_NOT_FOUND("004", "父卡片不存在。"), HAS_CHILD_CARD("005", "该卡片具有从属卡片，不允许挪到到其他卡片。");
+    PARENT_CARD_IS_NOT_FOUND("004", "父卡片不存在。"), HAS_CHILD_CARD("005", "该卡片具有从属卡片，不允许挪到到其他卡片。"),
+    ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED("006", "当前卡片尚有未完成的卡片，不可以认为卡片已经完成。");
     public static final String summaryIsRequired = "卡片概述不能为空。";
     public static final String summaryIsInvalid = "卡片概述长度超限,请保持在50个字符以内。";
     public static final String codeIsInvalid = "编号长度超长。";

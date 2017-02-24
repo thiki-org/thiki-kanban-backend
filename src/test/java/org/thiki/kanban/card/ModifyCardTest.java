@@ -68,4 +68,24 @@ public class ModifyCardTest extends TestBase {
                 .body("code", equalTo(CardsCodes.HAS_CHILD_CARD.code()))
                 .body("message", equalTo(CardsCodes.HAS_CHILD_CARD.message()));
     }
+
+    @Scenario("挪动卡片到完成列时，如果当前卡片的任务尚未完成，则不允许挪动")
+    @Test
+    public void should_not_allow_moving_to_done_stage_if_acceptance_criterias_is_not_completed() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('stage-fooId','this is the first stage.','someone','board-id-foo',1,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('card-fooId','this is the card summary.','play badminton',1,'stage-fooId-other')");
+        dbPreparation.table("kb_acceptance_criterias")
+                .names("id,summary,card_id,author")
+                .values("fooId", "AC-summary", "card-fooId", "someone").exec();
+
+        given().body("[{\"id\":\"card-fooId\",\"summary\":\"newSummary\",\"stageId\":\"stage-fooId\"}]")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/stages/1/cards/sortNumbers")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED.code()))
+                .body("message", equalTo(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED.message()));
+    }
 }

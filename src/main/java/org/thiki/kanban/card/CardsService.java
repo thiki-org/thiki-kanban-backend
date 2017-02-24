@@ -33,6 +33,9 @@ public class CardsService {
     @Resource
     private StagesService stagesService;
 
+    @Resource
+    private AcceptanceCriteriaService acceptanceCriteriaService;
+
     @CacheEvict(value = "card", key = "contains('#stageId')", allEntries = true)
     public Card create(String userName, String boardId, String stageId, Card card) {
         logger.info("Creating new card:{},stage:{}", card, stageId);
@@ -120,7 +123,6 @@ public class CardsService {
 
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
     @Caching(evict = {@CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true), @CacheEvict(value = "card", key = "contains(#stageId)", allEntries = true)})
-
     public List<Card> resortCards(List<Card> cards, String stageId, String boardId, String userName) {
         for (Card card : cards) {
             Card originCard = cardsPersistence.findById(card.getId());
@@ -130,6 +132,12 @@ public class CardsService {
                 currentStage = stagesService.findById(card.getStageId());
                 if (stagesService.isReachedWipLimit(card.getStageId())) {
                     throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
+                }
+                if (currentStage.isInDoneStatus()) {
+                    boolean isAllAcceptanceCriteriasCompleted = acceptanceCriteriaService.isAllAcceptanceCriteriasCompleted(card.getId());
+                    if (!isAllAcceptanceCriteriasCompleted) {
+                        throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED);
+                    }
                 }
             }
             cardsPersistence.resort(card);
