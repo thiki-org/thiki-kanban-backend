@@ -12,6 +12,7 @@ import org.thiki.kanban.stage.StagesController;
 import org.thiki.kanban.user.UsersController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -42,8 +43,7 @@ public class AssignmentResource extends RestResource {
 
             Link AssigneeProfileLink = linkTo(methodOn(UsersController.class).loadProfile(assignment.getAssignee())).withRel("assigneeProfile");
             assignmentResource.add(tlink.from(AssigneeProfileLink).build(userName));
-
-            Link AssigneeAvatarLink = linkTo(methodOn(UsersController.class).loadAvatar(assignment.getAssignee())).withRel("assigneeAvatar");
+            Link AssigneeAvatarLink = linkTo(UsersController.class, UsersController.class.getMethod("loadAvatar", String.class, HttpServletResponse.class), assignment.getAssignee()).withRel("assigneeAvatar");
             assignmentResource.add(tlink.from(AssigneeAvatarLink).build(userName));
         }
         Link allLink = linkTo(methodOn(StagesController.class).loadAll(stageId, null, userName)).withRel("all");

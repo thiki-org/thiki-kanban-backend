@@ -77,11 +77,14 @@ public class ValidateAspect {
         final Signature signature = thisJoinPoint.getStaticPart().getSignature();
 
         if (signature instanceof MethodSignature) {
-            final MethodSignature ms = (MethodSignature) signature;
-            Method method = ms.getMethod();
+            final MethodSignature methodSignature = (MethodSignature) signature;
+            Method method = methodSignature.getMethod();
             Annotation[][] annotations = method.getParameterAnnotations();
+            if (method.getName().indexOf("loadAvatar") > -1) {
+                int a = 0;
+            }
             for (int i = 0; i < annotations.length; i++) {
-                if (annotations[i][0] instanceof PathVariable) {
+                if (annotations[i].length > 0 && annotations[i][0] instanceof PathVariable) {
                     String paramName = ((PathVariable) annotations[i][0]).value();
                     if (paramName != null && paramName.equals("userName")) {
                         Object paramValue = thisJoinPoint.getArgs()[i];

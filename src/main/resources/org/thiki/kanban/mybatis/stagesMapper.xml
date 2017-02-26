@@ -97,6 +97,6 @@
     </select>
 
     <select id="countCardsNumber" parameterType="java.lang.String" resultType="java.lang.Integer">
-        SELECT count(*) FROM kb_card WHERE delete_status=0 AND stage_id=#{stageId}
+        SELECT count(*) FROM kb_card WHERE delete_status=0 AND stage_id=#{stageId} AND parent_id IS NULL
     </select>
 </mapper>

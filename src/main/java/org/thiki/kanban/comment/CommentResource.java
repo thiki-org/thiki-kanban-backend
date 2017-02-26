@@ -9,6 +9,7 @@ import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.user.UsersController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -37,7 +38,7 @@ public class CommentResource extends RestResource {
             Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
             commentResource.add(tlink.from(cardLink).build(userName));
 
-            Link avatarLink = linkTo(methodOn(UsersController.class).loadAvatar(comment.getAuthor())).withRel("avatar");
+            Link avatarLink = linkTo(UsersController.class, UsersController.class.getMethod("loadAvatar", String.class, HttpServletResponse.class), userName).withRel("avatar");
             commentResource.add(tlink.from(avatarLink).build(userName));
         }
         return commentResource.getResource();

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.FileUtil;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by xubt on 26/09/2016.
@@ -43,5 +45,17 @@ public class AvatarStorage {
             return FileUtil.loadFile(DEFAULT_AVATAR_FILES_LOCATION);
         }
         return avatar;
+    }
+
+    public InputStream loadAvatar(String avatarName) throws IOException {
+        logger.info("load avatar,avatarName:{}", avatarName);
+
+        String avatarPath = AVATAR_FILES_LOCATION + avatarName;
+        File avatar = new File(avatarPath);
+        if (!avatar.exists()) {
+            logger.info("no avatar was found,return default avatar.");
+            return this.getClass().getClassLoader().getResourceAsStream(DEFAULT_AVATAR_FILES_LOCATION);
+        }
+        return new FileInputStream(avatarPath);
     }
 }

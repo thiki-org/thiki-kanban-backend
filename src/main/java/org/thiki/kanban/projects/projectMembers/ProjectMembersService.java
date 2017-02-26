@@ -10,6 +10,7 @@ import org.thiki.kanban.foundation.exception.UnauthorisedException;
 import org.thiki.kanban.projects.project.Project;
 import org.thiki.kanban.projects.project.ProjectCodes;
 import org.thiki.kanban.projects.project.ProjectsService;
+import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
 import java.text.MessageFormat;
@@ -24,6 +25,8 @@ public class ProjectMembersService {
     private ProjectMembersPersistence projectMembersPersistence;
     @Resource
     private ProjectsService projectsService;
+    @Resource
+    private UsersService usersService;
 
     @CacheEvict(value = "project", key = "contains('projects'+#userName)", allEntries = true)
     public ProjectMember joinTeam(String projectId, final ProjectMember projectMember, String userName) {
@@ -69,7 +72,9 @@ public class ProjectMembersService {
             throw new UnauthorisedException(ProjectMembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_PROJECT);
         }
         List<Member> members = projectMembersPersistence.loadMembersByTeamId(projectId);
-
+        for (Member member : members) {
+            member.setProfile(usersService.loadProfileByUserName(member.getUserName()));
+        }
         return members;
     }
 

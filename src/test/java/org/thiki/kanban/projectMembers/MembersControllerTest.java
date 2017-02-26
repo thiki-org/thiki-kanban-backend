@@ -13,17 +13,18 @@ import org.thiki.kanban.projects.projectMembers.ProjectMembersCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**
  * Created by 濤 on 7/26/16.
  */
-@Domain(order = DomainOrder.PROJECT_MEMBER, name = "团队成员")
+@Domain(order = DomainOrder.PROJECT_MEMBER, name = "项目成员")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MembersControllerTest extends TestBase {
-    @Scenario("加入一个团队")
+    @Scenario("加入一个项目")
     @Test
-    public void joinTeam_shouldReturn201WhenJoinTeamSuccessfully() throws Exception {
+    public void joinProject_shouldReturn201WhenJoinProjectSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
         given().header("userName", "someone")
                 .body("{\"member\":\"someone\"}")
@@ -38,9 +39,9 @@ public class MembersControllerTest extends TestBase {
                 .body("_links.self.href", endsWith("/projects/foo-projectId/members"));
     }
 
-    @Scenario("退出团队>用户加入某个团队后,可以选择离开团队")
+    @Scenario("退出项目>用户加入某个项目后,可以选择离开项目")
     @Test
-    public void leaveTeam() throws Exception {
+    public void leaveProject() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
         jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
         given().header("userName", "someone")
@@ -52,9 +53,9 @@ public class MembersControllerTest extends TestBase {
                 .body("_links.self.href", endsWith("/projects/foo-projectId/members/someone"));
     }
 
-    @Scenario("加入团队时,如果该团队并不存在,则不允许加入")
+    @Scenario("加入项目时,如果该项目并不存在,则不允许加入")
     @Test
-    public void joinTeam_shouldReturnFailedIfTeamIsNotExist() throws Exception {
+    public void joinProject_shouldReturnFailedIfProjectIsNotExist() throws Exception {
         given().header("userName", "someone")
                 .body("{\"member\":\"someone\"}")
                 .contentType(ContentType.JSON)
@@ -66,9 +67,9 @@ public class MembersControllerTest extends TestBase {
                 .body("message", equalTo(ProjectCodes.PROJECT_IS_NOT_EXISTS.message()));
     }
 
-    @Scenario("加入团队时,如果待加入的成员已经在团队中,则不允许加入")
+    @Scenario("加入项目时,如果待加入的成员已经在项目中,则不允许加入")
     @Test
-    public void joinTeam_shouldReturnFailedIfMemberIsAlreadyIn() throws Exception {
+    public void joinProject_shouldReturnFailedIfMemberIsAlreadyIn() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
         jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
         given().header("userName", "someone")
@@ -82,9 +83,10 @@ public class MembersControllerTest extends TestBase {
                 .body("message", equalTo("Member named someone is already in the projects."));
     }
 
-    @Scenario("当用户加入一个团队后，可以获取该团队的所有成员")
+    @Scenario("当用户加入一个项目后，可以获取该项目的所有成员")
     @Test
-    public void loadTeamMembersByTeamId() throws Exception {
+    public void loadProjectMembersByProjectId() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,user_name,nick_name) VALUES ('foo-profile-id','someone','tao')");
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
         jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
         jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
@@ -98,6 +100,7 @@ public class MembersControllerTest extends TestBase {
                 .statusCode(200)
                 .body("members[0].userName", equalTo("someone"))
                 .body("members[0].email", equalTo("someone@gmail.com"))
+                .body("members[0].profile.nickName", equalTo("tao"))
                 .body("members[0]._links.self.href", endsWith("/projects/foo-projectId/members/someone"))
                 .body("members[0]._links.avatar.href", endsWith("/users/someone/avatar"))
                 .body("members[0]._links.profile.href", endsWith("/users/someone/profile"))
@@ -105,9 +108,9 @@ public class MembersControllerTest extends TestBase {
                 .body("_links.member.href", endsWith("/projects/foo-projectId/members/someone"));
     }
 
-    @Scenario("当用户加入一个团队后，可以获取该团队的所有成员。但是当团队不存在时,则不允许获取。")
+    @Scenario("当用户加入一个项目后，可以获取该项目的所有成员。但是当项目不存在时,则不允许获取。")
     @Test
-    public void NotAllowedIfTeamIsNotExitsWhenLoadingTeamMembersByTeamId() throws Exception {
+    public void NotAllowedIfProjectIsNotExitsWhenLoadingProjectMembersByProjectId() throws Exception {
         given().header("userName", "someone")
                 .contentType(ContentType.JSON)
                 .when()
@@ -118,9 +121,9 @@ public class MembersControllerTest extends TestBase {
                 .body("message", equalTo(ProjectCodes.PROJECT_IS_NOT_EXISTS.message()));
     }
 
-    @Scenario("若当前用户并非团队成员，则不允许获取")
+    @Scenario("若当前用户并非项目成员，则不允许获取")
     @Test
-    public void NotAllowedIfCurrentUserIsNotAMemberOfTheTeamWhenLoadingTeamMembersByTeamId() throws Exception {
+    public void NotAllowedIfCurrentUserIsNotAMemberOfTheProjectWhenLoadingProjectMembersByProjectId() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
         given().header("userName", "someone")
                 .contentType(ContentType.JSON)

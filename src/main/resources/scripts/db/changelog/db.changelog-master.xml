@@ -720,7 +720,7 @@
 
     <changeSet id="34" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-                <tableExists tableName="kb_procedure"/>
+            <tableExists tableName="kb_procedure"/>
         </preConditions>
         <renameTable newTableName="kb_stage" oldTableName="kb_procedure"/>
     </changeSet>
@@ -779,7 +779,7 @@
 
     <changeSet id="40" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-                <columnExists tableName="kb_activity" columnName="prev_procedure_snapShot"/>
+            <columnExists tableName="kb_activity" columnName="prev_procedure_snapShot"/>
         </preConditions>
         <renameColumn
                 newColumnName="prev_stage_snapShot"
@@ -874,18 +874,18 @@
     </changeSet>
     <changeSet id="48" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-                <indexExists indexName="idx_kb_activity_comp" />
+            <indexExists indexName="idx_kb_activity_comp"/>
         </preConditions>
         <dropIndex tableName="kb_activity" indexName="idx_kb_activity_comp"/>
     </changeSet>
     <changeSet id="49" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <indexExists indexName="idx_kb_activity_compound" />
+                <indexExists indexName="idx_kb_activity_compound"/>
             </not>
         </preConditions>
         <createIndex indexName="idx_kb_activity_compound"
-                     tableName="kb_activity" >
+                     tableName="kb_activity">
             <column name="card_id" type="varchar(40)"/>
             <column name="operation_type_code" type="varchar(40)"/>
             <column name="creation_time" type="datetime"/>

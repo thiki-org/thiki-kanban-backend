@@ -25,11 +25,11 @@ public interface UsersPersistence {
 
     boolean isEmailExist(String email);
 
-    UserProfile findProfile(String userName);
+    Profile findProfile(String userName);
 
-    Integer initProfile(UserProfile userProfile);
+    Integer initProfile(Profile profile);
 
     Integer updateAvatar(@Param("userName") String userName, @Param("avatarName") String avatarName);
 
-    Integer updateProfile(@Param("userName") String userName, @Param("userProfile") UserProfile userProfile);
+    Integer updateProfile(@Param("userName") String userName, @Param("profile") Profile profile);
 }

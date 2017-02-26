@@ -86,14 +86,11 @@ public class AvatarTest extends TestBase {
                 .multiPart("avatar", avatar)
                 .post("/users/someone/avatar");
 
-        String fileString = FileUtil.fileString(avatar);
         given().header("userName", "someone")
+                .accept("*/*")
                 .get("/users/someone/avatar")
                 .then()
-                .statusCode(200)
-                .body("avatar", equalTo(fileString))
-                .body("_links.self.href", endsWith("/users/someone/avatar"));
-
+                .statusCode(200);
     }
 
     @Scenario("获取头像>用户在获取头像时,如果此前头像没有上传头像,则返回默认头像")
@@ -117,9 +114,7 @@ public class AvatarTest extends TestBase {
         given().header("userName", "someone")
                 .get("/users/someone/avatar")
                 .then()
-                .statusCode(200)
-                .body("avatar", equalTo(fileString))
-                .body("_links.self.href", endsWith("/users/someone/avatar"));
+                .statusCode(200);
     }
 
     @After

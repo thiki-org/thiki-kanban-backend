@@ -1,13 +1,15 @@
 package org.thiki.kanban.user;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.common.Response;
 
 import javax.annotation.Resource;
-import java.io.File;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Created by xutao on 09/26/16.
@@ -22,26 +24,28 @@ public class UsersController {
     private ProfileResource profileResource;
 
     @RequestMapping(value = "/users/{userName}/avatar", method = RequestMethod.POST)
-    public HttpEntity uploadAvatar(@PathVariable("userName") String userName, @RequestParam(value = "avatar", required = false) Object avatar) throws IOException {
+    public HttpEntity uploadAvatar(@PathVariable("userName") String userName, @RequestParam(value = "avatar", required = false) Object avatar) throws Exception {
         usersService.uploadAvatar(userName, (MultipartFile) avatar);
         return Response.build(avatarResource.toResource(userName));
     }
 
     @RequestMapping(value = "/users/{user}/avatar", method = RequestMethod.GET)
-    public HttpEntity loadAvatar(@PathVariable("user") String userName) throws IOException {
-        File avatar = usersService.loadAvatar(userName);
-        return Response.build(avatarResource.toResource(userName, avatar));
+    public void loadAvatar(@PathVariable("user") String userName, HttpServletResponse response) throws IOException {
+        InputStream avatar = usersService.loadAvatar(userName);
+        org.apache.commons.io.IOUtils.copy(avatar, response.getOutputStream());
+        response.setContentType("image/*");
+        response.flushBuffer();
     }
 
     @RequestMapping(value = "/users/{user}/profile", method = RequestMethod.GET)
-    public HttpEntity loadProfile(@PathVariable("user") String userName) throws IOException {
-        UserProfile profile = usersService.loadProfileByUserName(userName);
+    public HttpEntity loadProfile(@PathVariable("user") String userName) throws Exception {
+        Profile profile = usersService.loadProfileByUserName(userName);
         return Response.build(profileResource.toResource(profile, userName));
     }
 
     @RequestMapping(value = "/users/{userName}/profile", method = RequestMethod.PUT)
-    public HttpEntity updateProfile(@RequestBody UserProfile userProfile, @PathVariable("userName") String userName) throws IOException {
-        UserProfile profile = usersService.updateProfile(userProfile, userName);
+    public HttpEntity updateProfile(@RequestBody Profile userProfile, @PathVariable("userName") String userName) throws Exception {
+        Profile profile = usersService.updateProfile(userProfile, userName);
         return Response.build(profileResource.toResource(profile, userName));
     }
 }

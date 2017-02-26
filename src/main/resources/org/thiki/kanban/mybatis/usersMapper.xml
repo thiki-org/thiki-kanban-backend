@@ -50,19 +50,19 @@
         AND kb_user_registration.password=#{password}
     </select>
 
-    <select id="findProfile" parameterType="java.lang.String" resultType="org.thiki.kanban.user.UserProfile">
+    <select id="findProfile" parameterType="java.lang.String" resultType="org.thiki.kanban.user.Profile">
         SELECT registration.name as userName,registration.email,profile.nick_name as nickName,profile.avatar as avatar
         FROM kb_user_profile profile LEFT JOIN kb_user_registration registration ON profile.user_name=registration.name
         WHERE profile.user_name=#{userName} AND registration.delete_status=0 AND profile.delete_status=0
     </select>
 
-    <update id="updateProfile" parameterType="org.thiki.kanban.user.UserProfile" flushCache="true">
+    <update id="updateProfile" parameterType="org.thiki.kanban.user.Profile" flushCache="true">
         UPDATE kb_user_profile SET
-        nick_name=#{userProfile.nickName}
+        nick_name=#{profile.nickName}
         WHERE user_name=#{userName} AND delete_status=0
     </update>
 
-    <insert id="initProfile" parameterType="org.thiki.kanban.user.UserProfile">
+    <insert id="initProfile" parameterType="org.thiki.kanban.user.Profile">
         INSERT INTO
         kb_user_profile(id, user_name) VALUES (#{id}, #{userName})
     </insert>

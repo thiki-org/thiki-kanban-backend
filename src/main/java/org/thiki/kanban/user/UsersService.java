@@ -15,6 +15,7 @@ import org.thiki.kanban.user.profile.AvatarStorage;
 import javax.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 @Service
 public class UsersService {
@@ -65,32 +66,32 @@ public class UsersService {
         }
         File avatar = FileUtil.convert(avatarFileTempPath, multipartFile);
         String avatarName = avatarStorage.store(userName, avatar);
-        UserProfile userProfile = usersPersistence.findProfile(userName);
-        if (userProfile == null) {
-            usersPersistence.initProfile(new UserProfile(userName));
+        Profile profile = usersPersistence.findProfile(userName);
+        if (profile == null) {
+            usersPersistence.initProfile(new Profile(userName));
         }
         usersPersistence.updateAvatar(userName, avatarName);
         return avatarName;
     }
 
-    public File loadAvatar(String userName) throws IOException {
+    public InputStream loadAvatar(String userName) throws IOException {
         logger.info("load avatar by userName:{}", userName);
-        UserProfile userProfile = loadProfileByUserName(userName);
-        return avatarStorage.loadAvatarByName(userProfile.getAvatar());
+        Profile profile = loadProfileByUserName(userName);
+        return avatarStorage.loadAvatar(profile.getAvatar());
     }
 
     @Cacheable(value = "profile", key = "#userName")
-    public UserProfile loadProfileByUserName(String userName) {
-        UserProfile userProfile = usersPersistence.findProfile(userName);
-        if (userProfile == null) {
-            usersPersistence.initProfile(new UserProfile(userName));
+    public Profile loadProfileByUserName(String userName) {
+        Profile profile = usersPersistence.findProfile(userName);
+        if (profile == null) {
+            usersPersistence.initProfile(new Profile(userName));
         }
         return usersPersistence.findProfile(userName);
     }
 
     @CacheEvict(value = "profile", key = "contains(#userName)", allEntries = true)
-    public UserProfile updateProfile(UserProfile userProfile, String userName) {
-        usersPersistence.updateProfile(userName, userProfile);
+    public Profile updateProfile(Profile profile, String userName) {
+        usersPersistence.updateProfile(userName, profile);
         return usersPersistence.findProfile(userName);
     }
 }

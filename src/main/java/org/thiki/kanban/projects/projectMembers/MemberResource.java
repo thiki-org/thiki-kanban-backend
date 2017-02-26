@@ -8,6 +8,7 @@ import org.thiki.kanban.projects.project.ProjectsController;
 import org.thiki.kanban.user.UsersController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -26,7 +27,7 @@ public class MemberResource extends RestResource {
         Link profileLink = linkTo(methodOn(UsersController.class).loadProfile(member.getUserName())).withRel("profile");
         memberResource.add(tlink.from(profileLink).build(userName));
 
-        Link avatarLink = linkTo(methodOn(UsersController.class).loadAvatar(member.getUserName())).withRel("avatar");
+        Link avatarLink = linkTo(UsersController.class, UsersController.class.getMethod("loadAvatar", String.class, HttpServletResponse.class), userName).withRel("avatar");
         memberResource.add(tlink.from(avatarLink).build(userName));
 
         Link selfLink = linkTo(methodOn(ProjectMembersController.class).getMember(projectId, member.getUserName())).withSelfRel();

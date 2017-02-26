@@ -130,7 +130,7 @@ public class CardsService {
             if (card.isMoveToOtherStage(originCard)) {
                 preStage = stagesService.findById(originCard.getStageId());
                 currentStage = stagesService.findById(card.getStageId());
-                if (stagesService.isReachedWipLimit(card.getStageId())) {
+                if (stagesService.isReachedWipLimit(currentStage.getId())) {
                     throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
                 }
                 if (currentStage.isInDoneStatus()) {

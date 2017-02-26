@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSON;
 /**
  * Created by xubt on 28/09/2016.
  */
-public class UserProfile {
+public class Profile {
 
     private String id;
     private String userName;
@@ -13,11 +13,11 @@ public class UserProfile {
     private String nickName;
     private String email;
 
-    public UserProfile(String userName) {
+    public Profile(String userName) {
         this.userName = userName;
     }
 
-    public UserProfile() {
+    public Profile() {
     }
 
     public String getId() {
@@ -41,7 +41,7 @@ public class UserProfile {
     }
 
     public String getNickName() {
-        return nickName;
+        return nickName == null ? userName : nickName;
     }
 
     public void setNickName(String nickName) {
