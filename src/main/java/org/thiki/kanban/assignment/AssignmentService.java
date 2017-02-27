@@ -9,6 +9,7 @@ import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsCodes;
 import org.thiki.kanban.card.CardsService;
+import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
 
 import javax.annotation.Resource;
@@ -31,6 +32,14 @@ public class AssignmentService {
     @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
     public List<Assignment> assign(final List<Assignment> assignments, String cardId, String userName) {
         logger.info("Assigning card.assignments:{},cardId:{},userName:{}", assignments, cardId, userName);
+        Card card = cardsService.findById(cardId);
+        if (card == null) {
+            throw new InvalidParamsException(CardsCodes.CARD_IS_NOT_EXISTS.code(), CardsCodes.CARD_IS_NOT_EXISTS.message());
+        }
+        boolean isArchived = cardsService.isArchived(cardId);
+        if (isArchived) {
+            throw new BusinessException(AssignmentCodes.CARD_IS_ALREADY_ARCHIVED);
+        }
         List<Assignment> originAssignments = findByCardId(cardId);
         for (Assignment assignment : assignments) {
             boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
@@ -55,10 +64,6 @@ public class AssignmentService {
     @Cacheable(value = "assignment", key = "'assignments'+#cardId")
     public List<Assignment> findByCardId(String cardId) {
         logger.info("Loading assignments of the card:{}", cardId);
-        Card card = cardsService.findById(cardId);
-        if (card == null) {
-            throw new InvalidParamsException(CardsCodes.CARD_IS_NOT_EXISTS.code(), CardsCodes.CARD_IS_NOT_EXISTS.message());
-        }
         List<Assignment> assignments = assignmentPersistence.findByCardId(cardId);
         logger.info("The assignments of the card [{}] are {}", cardId, assignments);
         return assignments;

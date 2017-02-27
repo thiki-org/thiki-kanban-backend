@@ -6,7 +6,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  * Created by xubt on 11/4/16.
  */
 public enum AssignmentCodes {
-    ALREADY_ASSIGNED("001", "你此前已经认领该任务,请勿重新认领。");
+    ALREADY_ASSIGNED("001", "你此前已经认领该任务,请勿重新认领。"), CARD_IS_ALREADY_ARCHIVED("002", "卡片已经归档，不允许再进行分配操作。");
     private String code;
     private String message;
 

@@ -24,6 +24,7 @@ public class AssignmentControllerTest extends TestBase {
     @Scenario("成功给指定卡片增加一条分配记录")
     @Test
     public void assign_shouldReturn201WhenAssigningSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('stage-fooId','this is the first stage.','tao','feeId',1,1)");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('card-fooId','this is the card summary.','play badminton','someone','stage-fooId')");
         given().header("userName", "someone")
                 .body("[{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}]")
@@ -48,7 +49,6 @@ public class AssignmentControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('cardId-foo','this is the card summary.','play badminton',1,'fooId')");
         jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
         given().header("userName", "authorId-foo")
-                .body("[{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}]")
                 .contentType(ContentType.JSON)
                 .when()
                 .get("/boards/boardId-foo/stages/1/cards/cardId-foo/assignments")
@@ -65,5 +65,22 @@ public class AssignmentControllerTest extends TestBase {
                 .body("assignments[0]._links.assigneeAvatar.href", endsWith("/users/assigneeId-foo/avatar"))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/stages/1/cards/cardId-foo/assignments"))
                 .body("_links.card.href", endsWith("/boards/boardId-foo/stages/1/cards/cardId-foo"));
+    }
+
+    @Scenario("当卡片已经归档时，不允许再进行分配操作")
+    @Test
+    public void should_not_allowed_if_card_is_archived() {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('stage-fooId','this is the first stage.','tao','feeId',9,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('card-fooId','this is the card summary.','play badminton','someone','stage-fooId')");
+        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','someone')");
+        given().header("userName", "authorId-foo")
+                .body("[{\"assignee\":\"assigneeId\",\"assigner\":\"assignerId\"}]")
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/assignments")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(AssignmentCodes.CARD_IS_ALREADY_ARCHIVED.code()))
+                .body("message", equalTo(AssignmentCodes.CARD_IS_ALREADY_ARCHIVED.message()));
     }
 }

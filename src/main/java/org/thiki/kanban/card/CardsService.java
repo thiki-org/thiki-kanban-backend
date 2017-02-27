@@ -152,4 +152,9 @@ public class CardsService {
         logger.info("Child cards loading completed.cards:{}", childCards);
         return childCards;
     }
+
+    @Cacheable(value = "card", key = "'card-archived'+#cardId")
+    public boolean isArchived(String cardId) {
+        return cardsPersistence.isArchived(cardId);
+    }
 }
