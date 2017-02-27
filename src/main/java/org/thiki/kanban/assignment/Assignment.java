@@ -90,4 +90,24 @@ public class Assignment {
     public String toString() {
         return JSON.toJSONString(this);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Assignment that = (Assignment) o;
+        if (id == that.id) return true;
+        if (cardId.equals(that.cardId) && assignee.equals(that.assignee)) return true;
+
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (cardId != null ? cardId.hashCode() : 0);
+        result = 31 * result + (assignee != null ? assignee.hashCode() : 0);
+        return result;
+    }
 }

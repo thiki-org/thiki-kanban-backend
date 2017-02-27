@@ -32,10 +32,7 @@ public class AssignmentResource extends RestResource {
         AssignmentResource assignmentResource = new AssignmentResource();
         assignmentResource.domainObject = assignment;
         if (assignment != null) {
-            Link selfLink = linkTo(methodOn(AssignmentController.class).findById(boardId, stageId, cardId, assignment.getId(), userName)).withSelfRel();
-            assignmentResource.add(tlink.from(selfLink).build(userName));
-
-            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, stageId, cardId, userName)).withRel("assignments");
+            Link assignmentsLink = linkTo(methodOn(AssignmentController.class).findByCardId(boardId, stageId, cardId, userName)).withSelfRel();
             assignmentResource.add(tlink.from(assignmentsLink).build(userName));
 
             Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");

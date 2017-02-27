@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsCodes;
-import org.thiki.kanban.card.CardsPersistence;
-import org.thiki.kanban.foundation.exception.BusinessException;
+import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.foundation.exception.InvalidParamsException;
-import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -26,51 +24,43 @@ public class AssignmentService {
     @Resource
     private AssignmentPersistence assignmentPersistence;
     @Resource
-    private CardsPersistence cardsPersistence;
+    private CardsService cardsService;
     @Resource
     private ActivityService activityService;
 
     @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
-    public Assignment assign(final Assignment assignment, String cardId, String userName) {
-        logger.info("Assigning card.assignment:{},cardId:{},userName:{}", assignment, cardId, userName);
-        boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
-        if (isAlreadyAssigned) {
-            throw new BusinessException(AssignmentCodes.ALREADY_ASSIGNED);
+    public List<Assignment> assign(final List<Assignment> assignments, String cardId, String userName) {
+        logger.info("Assigning card.assignments:{},cardId:{},userName:{}", assignments, cardId, userName);
+        List<Assignment> originAssignments = findByCardId(cardId);
+        for (Assignment assignment : assignments) {
+            boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
+            if (!isAlreadyAssigned) {
+                assignment.setCardId(cardId);
+                assignment.setAuthor(userName);
+                assignmentPersistence.create(assignment);
+                continue;
+            }
         }
-        assignment.setCardId(cardId);
-        assignment.setAuthor(userName);
-        assignmentPersistence.create(assignment);
-        Assignment savedAssignment = assignmentPersistence.findById(assignment.getId());
-        logger.info("Assigned card successfully.savedAssignment:{}", savedAssignment);
-        activityService.recordAssignment(savedAssignment);
-        return savedAssignment;
-    }
-
-    public Assignment findById(String id) {
-        return assignmentPersistence.findById(id);
+        for (Assignment originAssign : originAssignments) {
+            if (!assignments.contains(originAssign)) {
+                assignmentPersistence.deleteById(originAssign.getId());
+            }
+        }
+        List<Assignment> savedAssignments = assignmentPersistence.findByCardId(cardId);
+        logger.info("Assigned card successfully.savedAssignments:{}", savedAssignments);
+        activityService.recordAssignments(savedAssignments, cardId, userName);
+        return savedAssignments;
     }
 
     @Cacheable(value = "assignment", key = "'assignments'+#cardId")
     public List<Assignment> findByCardId(String cardId) {
         logger.info("Loading assignments of the card:{}", cardId);
-        Card card = cardsPersistence.findById(cardId);
+        Card card = cardsService.findById(cardId);
         if (card == null) {
             throw new InvalidParamsException(CardsCodes.CARD_IS_NOT_EXISTS.code(), CardsCodes.CARD_IS_NOT_EXISTS.message());
         }
         List<Assignment> assignments = assignmentPersistence.findByCardId(cardId);
         logger.info("The assignments of the card [{}] are {}", cardId, assignments);
         return assignments;
-    }
-
-    @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
-    public int leaveCard(String id, String cardId, String userName) {
-        logger.info("Leaving card.assignmentId:{},cardId:{},userName:{}", id, cardId, userName);
-        Assignment assignmentToDelete = assignmentPersistence.findById(id);
-        if (assignmentToDelete == null) {
-            throw new ResourceNotFoundException("assignment[" + id + "] is not found.");
-        }
-        logger.info("Assignment:{},", assignmentToDelete);
-        activityService.recordUndoAssignment(assignmentToDelete, cardId, userName);
-        return assignmentPersistence.deleteById(id);
     }
 }

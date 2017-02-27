@@ -18,23 +18,14 @@ public class AssignmentController {
     private static Logger logger = LoggerFactory.getLogger(AssignmentController.class);
     @Autowired
     private AssignmentService assignmentService;
-    @Resource
-    private AssignmentResource assignmentResource;
 
     @Resource
     private AssignmentsResource assignmentsResource;
 
     @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Assignment assignment, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        Assignment savedAssignment = assignmentService.assign(assignment, cardId, userName);
-        return Response.post(assignmentResource.toResource(savedAssignment, boardId, stageId, cardId, userName));
-    }
-
-    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String assignmentId, @RequestHeader String userName) throws Exception {
-        Assignment foundAssignment = assignmentService.findById(assignmentId);
-
-        return Response.build(assignmentResource.toResource(foundAssignment, boardId, stageId, cardId, userName));
+    public HttpEntity create(@RequestBody List<Assignment> assignments, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
+        List<Assignment> savedAssignments = assignmentService.assign(assignments, cardId, userName);
+        return Response.build(assignmentsResource.toResource(savedAssignments, boardId, stageId, cardId, userName));
     }
 
     @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments", method = RequestMethod.GET)
@@ -42,11 +33,5 @@ public class AssignmentController {
         logger.info("Loading assignments by board [{}]", boardId);
         List<Assignment> assignmentList = assignmentService.findByCardId(cardId);
         return Response.build(assignmentsResource.toResource(assignmentList, boardId, stageId, cardId, userName));
-    }
-
-    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments/{assignmentId}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String assignmentId, @RequestHeader String userName) throws Exception {
-        assignmentService.leaveCard(assignmentId, cardId, userName);
-        return Response.build(assignmentResource.toResource(boardId, stageId, cardId, userName));
     }
 }

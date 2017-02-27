@@ -27,7 +27,7 @@ public class MemberResource extends RestResource {
         Link profileLink = linkTo(methodOn(UsersController.class).loadProfile(member.getUserName())).withRel("profile");
         memberResource.add(tlink.from(profileLink).build(userName));
 
-        Link avatarLink = linkTo(UsersController.class, UsersController.class.getMethod("loadAvatar", String.class, HttpServletResponse.class), userName).withRel("avatar");
+        Link avatarLink = linkTo(UsersController.class, UsersController.class.getMethod("loadAvatar", String.class, HttpServletResponse.class), member.getUserName()).withRel("avatar");
         memberResource.add(tlink.from(avatarLink).build(userName));
 
         Link selfLink = linkTo(methodOn(ProjectMembersController.class).getMember(projectId, member.getUserName())).withSelfRel();

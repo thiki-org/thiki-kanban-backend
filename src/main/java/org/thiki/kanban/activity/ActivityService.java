@@ -157,12 +157,12 @@ public class ActivityService {
         record(activity);
     }
 
-    public void recordAssignment(Assignment savedAssignment) {
+    public void recordAssignments(List<Assignment> savedAssignment, String cardId, String userName) {
         Activity activity = new Activity();
-        activity.setCardId(savedAssignment.getCardId());
+        activity.setCardId(cardId);
         activity.setSummary(savedAssignment.toString());
         activity.setDetail(savedAssignment.toString());
-        activity.setUserName(savedAssignment.getAssigner());
+        activity.setUserName(userName);
         activity.setOperationTypeCode(ActivityType.ASSIGNMENT.code());
         activity.setOperationTypeName(ActivityType.ASSIGNMENT.type());
         record(activity);
