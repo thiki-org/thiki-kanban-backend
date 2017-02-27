@@ -1,6 +1,7 @@
 package org.thiki.kanban.sprint;
 
 import com.jayway.restassured.http.ContentType;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.http.HttpStatus;
@@ -167,6 +168,7 @@ public class SprintControllerTest extends TestBase {
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
     }
 
+    @Ignore
     @Scenario("获取看板的当前迭代时，计算出相应的天数")
     @Test
     public void calculateRemainDaysWhenLoadingActiveSprint() {
