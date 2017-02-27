@@ -13,7 +13,6 @@ import org.thiki.kanban.projects.projectMembers.ProjectMembersCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**

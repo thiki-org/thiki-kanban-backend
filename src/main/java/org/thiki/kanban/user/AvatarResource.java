@@ -9,7 +9,6 @@ import org.thiki.kanban.foundation.hateoas.TLink;
 
 import javax.annotation.Resource;
 import java.io.File;
-import java.io.IOException;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;

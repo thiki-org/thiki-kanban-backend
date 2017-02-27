@@ -12,7 +12,8 @@
 
     <select id="findByCardId" parameterType="java.lang.String"
             resultType="org.thiki.kanban.cardTags.CardTag">
-        SELECT cardsTags.id AS id,tags.name AS name,tags.color AS color,cardsTags.tag_id AS tagId FROM kb_cards_tags cardsTags LEFT JOIN kb_tag
+        SELECT cardsTags.id AS id,tags.name AS name,tags.color AS color,cardsTags.tag_id AS tagId FROM kb_cards_tags
+        cardsTags LEFT JOIN kb_tag
         tags ON cardsTags.tag_id=tags.id WHERE card_id= #{cardId} AND cardsTags.delete_status=0 AND tags.delete_status=0
         ORDER by tags.creation_time ASC
     </select>

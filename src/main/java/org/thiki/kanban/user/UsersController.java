@@ -1,7 +1,6 @@
 package org.thiki.kanban.user;
 
 import org.springframework.http.HttpEntity;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.thiki.kanban.foundation.common.Response;
