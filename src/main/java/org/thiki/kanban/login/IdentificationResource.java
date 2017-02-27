@@ -10,6 +10,7 @@ import org.thiki.kanban.projects.project.ProjectsController;
 import org.thiki.kanban.user.UsersController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
@@ -36,6 +37,9 @@ public class IdentificationResource extends RestResource {
 
         Link profileLink = linkTo(methodOn(UsersController.class).loadProfile(identification.getUserName())).withRel("profile");
         identificationResource.add(tlink.from(profileLink).build());
+        Link avatarLink = linkTo(UsersController.class, UsersController.class.getMethod("loadAvatar", String.class, HttpServletResponse.class), identification.getUserName()).withRel("avatar");
+        identificationResource.add(tlink.from(avatarLink).build(identification.getUserName()));
+
         return identificationResource.getResource();
     }
 }
