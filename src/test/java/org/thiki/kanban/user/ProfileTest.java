@@ -26,7 +26,7 @@ public class ProfileTest extends TestBase {
     @Test
     public void loadProfile() throws IOException {
         dbPreparation.table("kb_user_registration")
-                .names("id,email,name,password")
+                .names("id,email,user_name,password")
                 .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
 
         dbPreparation.table("kb_user_profile")
@@ -48,7 +48,7 @@ public class ProfileTest extends TestBase {
     @Test
     public void initProfileIfProfileIsNotExist() throws IOException {
         dbPreparation.table("kb_user_registration")
-                .names("id,email,name,password")
+                .names("id,email,user_name,password")
                 .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
         given().header("userName", "someone")
                 .get("/users/someone/profile")
@@ -64,7 +64,7 @@ public class ProfileTest extends TestBase {
     @Test
     public void updateProfile() throws IOException {
         dbPreparation.table("kb_user_registration")
-                .names("id,email,name,password")
+                .names("id,email,user_name,password")
                 .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
 
         dbPreparation.table("kb_user_profile")

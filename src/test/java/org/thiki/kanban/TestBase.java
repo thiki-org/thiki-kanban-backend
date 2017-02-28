@@ -72,7 +72,7 @@ public class TestBase {
         jdbcTemplate.execute("TRUNCATE TABLE kb_user_profile");
         jdbcTemplate.execute("TRUNCATE TABLE kb_user_registration");
         jdbcTemplate.execute("TRUNCATE TABLE kb_card_assignment");
-        jdbcTemplate.execute("TRUNCATE TABLE kb_project_members");
+        jdbcTemplate.execute("TRUNCATE TABLE kb_members");
         jdbcTemplate.execute("TRUNCATE TABLE kb_password_retrieval");
         jdbcTemplate.execute("TRUNCATE TABLE kb_password_reset");
         jdbcTemplate.execute("TRUNCATE TABLE kb_project_member_invitation");

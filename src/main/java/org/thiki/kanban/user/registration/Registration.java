@@ -13,7 +13,7 @@ public class Registration {
     @Email(message = "邮箱格式错误")
     private String email;
     @NotNull(message = "用户名不可以为空")
-    private String name;
+    private String userName;
     @NotNull(message = "密码不可以为空")
     private String password;
 
@@ -31,12 +31,12 @@ public class Registration {
         this.email = email;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {

@@ -1,4 +1,4 @@
-package org.thiki.kanban.projects.projectMembers;
+package org.thiki.kanban.projects.members;
 
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -20,44 +20,44 @@ import java.util.List;
  * Created by 濤 on 7/26/16.
  */
 @Service
-public class ProjectMembersService {
+public class MembersService {
     @Resource
-    private ProjectMembersPersistence projectMembersPersistence;
+    private MembersPersistence membersPersistence;
     @Resource
     private ProjectsService projectsService;
     @Resource
     private UsersService usersService;
 
     @CacheEvict(value = "project", key = "contains('projects'+#userName)", allEntries = true)
-    public ProjectMember joinTeam(String projectId, final ProjectMember projectMember, String userName) {
+    public Member joinTeam(String projectId, final Member member, String userName) {
         Project targetProject = projectsService.findById(projectId);
         if (targetProject == null) {
             throw new BusinessException(ProjectCodes.PROJECT_IS_NOT_EXISTS);
         }
 
-        ProjectMember foundMember = projectMembersPersistence.findMemberByTeamId(projectMember.getMember(), projectId);
+        Member foundMember = membersPersistence.findMember(member.getUserName(), projectId);
         if (foundMember != null) {
-            throw new InvalidParamsException(MessageFormat.format("Member named {0} is already in the projects.", projectMember.getMember()));
+            throw new InvalidParamsException(MessageFormat.format("Member named {0} is already in the projects.", member.getUserName()));
         }
 
-        projectMember.setAuthor(userName);
-        projectMember.setProjectId(projectId);
-        projectMembersPersistence.joinTeam(projectMember);
-        return projectMembersPersistence.findById(projectMember.getId());
+        member.setAuthor(userName);
+        member.setProjectId(projectId);
+        membersPersistence.joinTeam(member);
+        return membersPersistence.findById(member.getId());
     }
 
     @Caching(evict = {@CacheEvict(value = "project", key = "contains('projects'+#projectId)", allEntries = true), @CacheEvict(value = "board", key = "startsWith('#userName + boards')", allEntries = true)})
-    public ProjectMember joinTeam(String userName, String projectId) {
-        boolean isAlreadyJoinTeam = projectMembersPersistence.isAMemberOfTheTeam(userName, projectId);
+    public Member joinTeam(String userName, String projectId) {
+        boolean isAlreadyJoinTeam = membersPersistence.isAMemberOfTheTeam(userName, projectId);
         if (isAlreadyJoinTeam) {
-            throw new BusinessException(ProjectMembersCodes.USER_IS_ALREADY_A_MEMBER_OF_THE_PROJECT);
+            throw new BusinessException(MembersCodes.USER_IS_ALREADY_A_MEMBER_OF_THE_PROJECT);
         }
-        ProjectMember projectMember = new ProjectMember();
+        Member projectMember = new Member();
         projectMember.setProjectId(projectId);
-        projectMember.setMember(userName);
+        projectMember.setUserName(userName);
         projectMember.setAuthor(userName);
-        projectMembersPersistence.joinTeam(projectMember);
-        return projectMembersPersistence.findById(projectMember.getId());
+        membersPersistence.joinTeam(projectMember);
+        return membersPersistence.findById(projectMember.getId());
     }
 
     @Cacheable(value = "project", key = "'service-members'+#projectId")
@@ -67,11 +67,11 @@ public class ProjectMembersService {
             throw new BusinessException(ProjectCodes.PROJECT_IS_NOT_EXISTS);
         }
 
-        boolean isAMember = projectMembersPersistence.isAMemberOfTheTeam(userName, projectId);
+        boolean isAMember = membersPersistence.isAMemberOfTheTeam(userName, projectId);
         if (!isAMember) {
-            throw new UnauthorisedException(ProjectMembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_PROJECT);
+            throw new UnauthorisedException(MembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_PROJECT);
         }
-        List<Member> members = projectMembersPersistence.loadMembersByTeamId(projectId);
+        List<Member> members = membersPersistence.loadMembersByProject(projectId);
         for (Member member : members) {
             member.setProfile(usersService.loadProfileByUserName(member.getUserName()));
         }
@@ -79,16 +79,16 @@ public class ProjectMembersService {
     }
 
     public boolean isMember(String projectId, String userName) {
-        return projectMembersPersistence.isAMemberOfTheTeam(userName, projectId);
+        return membersPersistence.isAMemberOfTheTeam(userName, projectId);
     }
 
     @CacheEvict(value = "project", key = "contains('projects'+#memberName)", allEntries = true)
     public void leaveTeam(String projectId, String memberName) {
-        projectMembersPersistence.leaveTeam(projectId, memberName);
+        membersPersistence.leaveTeam(projectId, memberName);
     }
 
     @Cacheable(value = "project", key = "'service-projects'+#userName")
-    public List<Project> loadTeamsByUserName(String userName) {
-        return projectMembersPersistence.findTeams(userName);
+    public List<Project> loadProjectsByUserName(String userName) {
+        return membersPersistence.findTeams(userName);
     }
 }

@@ -233,10 +233,10 @@
     <changeSet id="8" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="kb_project_members"/>
+                <tableExists tableName="kb_members"/>
             </not>
         </preConditions>
-        <createTable tableName="kb_project_members">
+        <createTable tableName="kb_members">
             <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -924,5 +924,31 @@
                 oldColumnName="team_id"
                 columnDataType="varchar(50)"
                 tableName="kb_project_member_invitation"/>
+    </changeSet>
+    <changeSet id="53" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="kb_user_registration" columnName="name"/>
+        </preConditions>
+        <renameColumn
+                newColumnName="user_name"
+                oldColumnName="name"
+                columnDataType="varchar(50)"
+                tableName="kb_user_registration"/>
+    </changeSet>
+    <changeSet id="54" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="kb_procedure"/>
+        </preConditions>
+        <renameTable newTableName="kb_members" oldTableName="kb_members"/>
+    </changeSet>
+    <changeSet id="55" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="kb_members" columnName="member"/>
+        </preConditions>
+        <renameColumn
+                newColumnName="user_name"
+                oldColumnName="member"
+                columnDataType="varchar(50)"
+                tableName="kb_members"/>
     </changeSet>
 </databaseChangeLog>

@@ -1,4 +1,4 @@
-package org.thiki.kanban.projectMembers;
+package org.thiki.kanban.members;
 
 import com.jayway.restassured.http.ContentType;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
 import org.thiki.kanban.projects.project.ProjectCodes;
-import org.thiki.kanban.projects.projectMembers.ProjectMembersCodes;
+import org.thiki.kanban.projects.members.MembersCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -26,23 +26,25 @@ public class MembersControllerTest extends TestBase {
     public void joinProject_shouldReturn201WhenJoinProjectSuccessfully() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
         given().header("userName", "someone")
-                .body("{\"member\":\"someone\"}")
+                .body("{\"userName\":\"someone\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/projects/foo-projectId/members")
                 .then()
                 .statusCode(201)
                 .body("projectId", equalTo("foo-projectId"))
-                .body("member", equalTo("someone"))
+                .body("userName", equalTo("someone"))
                 .body("id", equalTo("fooId"))
-                .body("_links.self.href", endsWith("/projects/foo-projectId/members"));
+                .body("_links.self.href", endsWith("/projects/foo-projectId/members/someone"))
+                .body("_links.profile.href", endsWith("/users/someone/profile"))
+                .body("_links.avatar.href", endsWith("/users/someone/avatar"));
     }
 
     @Scenario("退出项目>用户加入某个项目后,可以选择离开项目")
     @Test
     public void leaveProject() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
         given().header("userName", "someone")
                 .when()
                 .delete("/projects/foo-projectId/members/someone")
@@ -70,9 +72,9 @@ public class MembersControllerTest extends TestBase {
     @Test
     public void joinProject_shouldReturnFailedIfMemberIsAlreadyIn() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
         given().header("userName", "someone")
-                .body("{\"member\":\"someone\"}")
+                .body("{\"userName\":\"someone\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/projects/foo-projectId/members")
@@ -87,8 +89,8 @@ public class MembersControllerTest extends TestBase {
     public void loadProjectMembersByProjectId() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_user_profile (id,user_name,nick_name) VALUES ('foo-profile-id','someone','tao')");
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-projectId','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-projectId','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','someone@gmail.com','someone','password')");
 
         given().header("userName", "someone")
@@ -130,7 +132,7 @@ public class MembersControllerTest extends TestBase {
                 .get("/projects/foo-projectId/members")
                 .then()
                 .statusCode(401)
-                .body("code", equalTo(ProjectMembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_PROJECT.code()))
-                .body("message", equalTo(ProjectMembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_PROJECT.message()));
+                .body("code", equalTo(MembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_PROJECT.code()))
+                .body("message", equalTo(MembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_PROJECT.message()));
     }
 }

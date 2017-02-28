@@ -1,4 +1,4 @@
-package org.thiki.kanban.projects.projectMembers;
+package org.thiki.kanban.projects.members;
 
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
@@ -39,7 +39,7 @@ public class MembersResource extends RestResource {
         Link invitationLink = linkTo(methodOn(InvitationController.class).invite(null, projectId, userName)).withRel("invitation");
         membersResource.add(tlink.from(invitationLink).build(userName));
 
-        Link memberLink = linkTo(methodOn(ProjectMembersController.class).getMember(projectId, userName)).withRel("member");
+        Link memberLink = linkTo(methodOn(MembersController.class).getMember(projectId, userName)).withRel("member");
         membersResource.add(tlink.from(memberLink).build(userName));
 
         return membersResource.getResource();

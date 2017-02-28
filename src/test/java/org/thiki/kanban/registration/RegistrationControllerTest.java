@@ -51,7 +51,7 @@ public class RegistrationControllerTest extends TestBase {
         String expectedMd5Password = "148412d9df986f739038ad22c77459f2";
 
         JSONObject body = new JSONObject();
-        body.put("name", "someone");
+        body.put("userName", "someone");
         body.put("email", "someone@gmail.com");
         body.put("password", rsaPassword);
         given().body(body)
@@ -60,7 +60,7 @@ public class RegistrationControllerTest extends TestBase {
                 .post("/registration")
                 .then()
                 .statusCode(201)
-                .body("name", equalTo("someone"))
+                .body("userName", equalTo("someone"))
                 .body("id", equalTo("fooId"))
                 .body("email", equalTo("someone@gmail.com"))
                 .body("_links.login.href", endsWith("/login"));
@@ -72,10 +72,10 @@ public class RegistrationControllerTest extends TestBase {
     @Scenario("不允许注册>如果用户名已经存在,则不允许注册")
     @Test
     public void registerNewUser_shouldRejectWithConflictWhenUserNameExists() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','someone@gmail.com','someone','password')");
 
-        given().body("{\"name\":\"someone\",\"email\":\"someone@gmail.com\"," +
+        given().body("{\"userName\":\"someone\",\"email\":\"someone@gmail.com\"," +
                 "\"password\":\"fee\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -89,10 +89,10 @@ public class RegistrationControllerTest extends TestBase {
     @Scenario("不允许注册>如果邮箱已经存在,则不允许注册")
     @Test
     public void registerNewUser_shouldRejectWithConflictWhenUserEmailExists() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','someone@gmail.com','someone','password')");
 
-        given().body("{\"name\":\"someoneElse\",\"email\":\"someone@gmail.com\"," +
+        given().body("{\"userName\":\"someoneElse\",\"email\":\"someone@gmail.com\"," +
                 "\"password\":\"fee\"}")
                 .contentType(ContentType.JSON)
                 .when()
@@ -108,7 +108,7 @@ public class RegistrationControllerTest extends TestBase {
     public void registerNewUser_shouldFailIfPasswordIsNotEncryptedWithPublicKey() throws Exception {
         String password = "foo";
         JSONObject body = new JSONObject();
-        body.put("name", "someone");
+        body.put("userName", "someone");
         body.put("email", "someone@gmail.com");
         body.put("password", password);
         given().body(body)

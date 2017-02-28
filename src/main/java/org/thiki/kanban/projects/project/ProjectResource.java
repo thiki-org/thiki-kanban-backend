@@ -5,7 +5,7 @@ import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
-import org.thiki.kanban.projects.projectMembers.ProjectMembersController;
+import org.thiki.kanban.projects.members.MembersController;
 
 import javax.annotation.Resource;
 
@@ -28,7 +28,7 @@ public class ProjectResource extends RestResource {
             Link selfLink = linkTo(methodOn(ProjectsController.class).findById(project.getId(), userName)).withSelfRel();
             projectResource.add(tlink.from(selfLink).build(userName));
 
-            Link membersLink = linkTo(methodOn(ProjectMembersController.class).loadMembersByProjectId(project.getId(), userName)).withRel("members");
+            Link membersLink = linkTo(methodOn(MembersController.class).loadMembersByProjectId(project.getId(), userName)).withRel("members");
             projectResource.add(tlink.from(membersLink).build(userName));
         }
         return projectResource.getResource();

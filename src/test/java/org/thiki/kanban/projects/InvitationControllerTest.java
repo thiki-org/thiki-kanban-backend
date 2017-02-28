@@ -28,10 +28,10 @@ public class InvitationControllerTest extends TestBase {
     @Test
     public void inviteOthersWithUserNameToJoinTeam() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-project-Id','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
 
         given().header("userName", userName)
@@ -51,10 +51,10 @@ public class InvitationControllerTest extends TestBase {
     @Test
     public void inviteOthersWithEmailToJoinTeam() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-project-Id','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('invitee-user-id','thiki2016@163.com','invitee-user','password')");
 
         given().header("userName", userName)
@@ -117,9 +117,9 @@ public class InvitationControllerTest extends TestBase {
     @Test
     public void NotAllowedIfInviterIsNotAMemberOfTheTeam() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-project-Id','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
 
         given().header("userName", userName)
@@ -137,12 +137,12 @@ public class InvitationControllerTest extends TestBase {
     @Test
     public void NotAllowedIfInviteeIsAlreadyAMemberOfTheTeam() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-project-Id','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-invitee-member-id','foo-project-Id','invitee-user','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-invitee-member-id','foo-project-Id','invitee-user','someone')");
 
         given().header("userName", userName)
                 .body("{\"invitee\":\"invitee-user\"}")
@@ -160,10 +160,10 @@ public class InvitationControllerTest extends TestBase {
     public void cancelPreviousInvitationBeforeSendingNewInvitation() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-project-Id','project-name','someone')");
         jdbcTemplate.execute("INSERT INTO  kb_project_member_invitation (id,project_id,inviter,invitee) VALUES ('foo-invitation-Id','foo-project-Id','someone','invitee-user')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
 
         given().header("userName", userName)
@@ -184,10 +184,10 @@ public class InvitationControllerTest extends TestBase {
     @Test
     public void addNotificationAfterSendingInvitation() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-project-Id','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
 
         given().header("userName", userName)
@@ -247,7 +247,7 @@ public class InvitationControllerTest extends TestBase {
                 .body("_links.self.href", endsWith("/projects/foo-project-id/members/invitation/invitation-id"))
                 .body("_links.project.href", endsWith("/projects/foo-project-id"));
 
-        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_project_members where project_id='foo-project-id' AND member='someone'").size());
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_members where project_id='foo-project-id' AND user_name='someone'").size());
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_project_member_invitation where project_id='fooId' AND invitee='someone' AND is_accepted=1").size());
     }
 
@@ -298,10 +298,10 @@ public class InvitationControllerTest extends TestBase {
 
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('foo-project-Id','project-name','someone')");
         jdbcTemplate.execute("INSERT INTO  kb_project_member_invitation (id,project_id,inviter,invitee) VALUES ('foo-invitation-Id','foo-project-Id','someone','invitee-user')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','foo-project-Id','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','someone','password')");
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('invitee-user-id','766191920@qq.com','invitee-user','password')");
 
         dbPreparation.table("kb_project_member_invitation")

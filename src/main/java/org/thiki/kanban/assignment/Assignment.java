@@ -14,7 +14,7 @@ public class Assignment {
 
     private String assigner;
 
-    private String name;
+    private String userName;
 
     private String author;
 
@@ -79,11 +79,11 @@ public class Assignment {
     }
 
     public String getName() {
-        return name;
+        return userName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.userName = name;
     }
 
     @Override

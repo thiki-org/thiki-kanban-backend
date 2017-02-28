@@ -35,7 +35,7 @@ public class ProjectControllerTest extends TestBase {
                 .body("name", equalTo("思奇团队讨论组"))
                 .body("id", equalTo("fooId"))
                 .body("_links.self.href", endsWith("/projects/fooId"));
-        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_project_members where project_id='fooId' AND member='someone'").size());
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_members where project_id='fooId' AND user_name='someone'").size());
     }
 
     @Scenario("创建团队时，如果团队名称为空，则不允许创建")
@@ -68,7 +68,7 @@ public class ProjectControllerTest extends TestBase {
     @Test
     public void creationIsNotAllowedIfTeamNameIsConflict() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('fooId','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','fooId','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','fooId','someone','someone')");
 
         given().header("userName", userName)
                 .body("{\"name\":\"project-name\"}")
@@ -98,7 +98,7 @@ public class ProjectControllerTest extends TestBase {
     @Test
     public void loadTheTeamsWhichTheUserIsIn() {
         jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('fooId','project-name','someone')");
-        jdbcTemplate.execute("INSERT INTO  kb_project_members (id,project_id,member,author) VALUES ('foo-project-member-id','fooId','someone','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_members (id,project_id,user_name,author) VALUES ('foo-project-member-id','fooId','someone','someone')");
 
         given().header("userName", "someone")
                 .contentType(ContentType.JSON)

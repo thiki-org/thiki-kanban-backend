@@ -22,7 +22,7 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
     @Test
     public void allowReadOnlyIfTheUserIsNotTheTeamAndTheBoardOwner() throws Exception {
         dbPreparation.table("kb_board").names("id,name,author,owner,project_id").values("fooId", "board-name", "others", "others", "projectId-foo").exec();
-        dbPreparation.table("kb_project_members").names("id,project_id,member").values("fooId", "projectId-foo", "someone").exec();
+        dbPreparation.table("kb_members").names("id,project_id,user_name").values("fooId", "projectId-foo", "someone").exec();
 
         given().header("userName", "someone").log().all()
                 .when()

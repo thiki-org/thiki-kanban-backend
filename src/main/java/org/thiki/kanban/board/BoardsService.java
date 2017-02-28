@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
 import org.thiki.kanban.projects.project.Project;
-import org.thiki.kanban.projects.projectMembers.ProjectMembersService;
+import org.thiki.kanban.projects.members.MembersService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class BoardsService {
     @Resource
     private BoardsPersistence boardsPersistence;
     @Resource
-    private ProjectMembersService projectMembersService;
+    private MembersService membersService;
 
     @CacheEvict(value = "board", key = "startsWith('#userName + boards')", allEntries = true)
     public Board create(String userName, final Board board) {
@@ -41,7 +41,7 @@ public class BoardsService {
     @Cacheable(value = "board", key = "#userName+'boards-personal'")
     public List<Board> loadBoards(String userName) {
         List<Board> personalBoards = boardsPersistence.findPersonalBoards(userName);
-        List<Board> projectsBoards = loadTeamsBoards(userName);
+        List<Board> projectsBoards = loadProjectBoards(userName);
 
         List<Board> boards = new ArrayList<>();
         boards.addAll(personalBoards);
@@ -50,11 +50,11 @@ public class BoardsService {
     }
 
     @Cacheable(value = "board", key = "#userName+'boards-teams'")
-    private List<Board> loadTeamsBoards(String userName) {
+    private List<Board> loadProjectBoards(String userName) {
         List<Board> projectsBoards = new ArrayList<>();
-        List<Project> projects = projectMembersService.loadTeamsByUserName(userName);
+        List<Project> projects = membersService.loadProjectsByUserName(userName);
         for (Project project : projects) {
-            List<Board> projectBoards = boardsPersistence.findTeamsBoards(project.getId());
+            List<Board> projectBoards = boardsPersistence.findProjectsBoards(project.getId());
             projectsBoards.addAll(projectBoards);
         }
         return projectsBoards;
@@ -91,7 +91,7 @@ public class BoardsService {
         if (board.isOwner(userName)) {
             return true;
         }
-        boolean isTeamMember = projectMembersService.isMember(board.getProjectId(), userName);
+        boolean isTeamMember = membersService.isMember(board.getProjectId(), userName);
         return isTeamMember && board.getOwner().equals(userName);
     }
 }

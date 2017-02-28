@@ -10,7 +10,7 @@ import org.thiki.kanban.notification.NotificationType;
 import org.thiki.kanban.projects.project.Project;
 import org.thiki.kanban.projects.project.ProjectCodes;
 import org.thiki.kanban.projects.project.ProjectsService;
-import org.thiki.kanban.projects.projectMembers.ProjectMembersService;
+import org.thiki.kanban.projects.members.MembersService;
 import org.thiki.kanban.user.User;
 import org.thiki.kanban.user.UsersService;
 
@@ -34,7 +34,7 @@ public class InvitationService {
     @Resource
     private UsersService usersService;
     @Resource
-    private ProjectMembersService membersService;
+    private MembersService membersService;
     @Resource
     private ProjectsService projectsService;
     @Resource
@@ -54,7 +54,7 @@ public class InvitationService {
             throw new BusinessException(InvitationCodes.INVITER_IS_NOT_A_MEMBER_OF_THE_PROJECT);
         }
 
-        boolean isInviteeAlreadyInTheTeam = membersService.isMember(projectId, inviteeUser.getName());
+        boolean isInviteeAlreadyInTheTeam = membersService.isMember(projectId, inviteeUser.getUserName());
         if (isInviteeAlreadyInTheTeam) {
             throw new BusinessException(InvitationCodes.INVITEE_IS_ALREADY_A_MEMBER_OF_THE_PROJECT);
         }
@@ -63,7 +63,7 @@ public class InvitationService {
         }
         invitation.setInviter(userName);
         invitation.setTeamId(projectId);
-        invitation.setInvitee(inviteeUser.getName());
+        invitation.setInvitee(inviteeUser.getUserName());
         invitationPersistence.cancelPreviousInvitation(invitation);
         invitationPersistence.invite(invitation);
 
@@ -71,13 +71,13 @@ public class InvitationService {
         InvitationEmail invitationEmail = new InvitationEmail();
         invitationEmail.setReceiver(inviteeUser.getEmail());
         invitationEmail.setInviter(userName);
-        invitationEmail.setInvitee(inviteeUser.getName());
+        invitationEmail.setInvitee(inviteeUser.getUserName());
         invitationEmail.setProjectName(project.getName());
 
         Link invitationLink = linkTo(methodOn(InvitationController.class).acceptInvitation(projectId, invitation.getId(), userName)).withRel("invitationLink");
         invitationEmail.setInvitationLink(invitationLink.getHref());
         Notification notification = new Notification();
-        notification.setReceiver(inviteeUser.getName());
+        notification.setReceiver(inviteeUser.getUserName());
         notification.setSender(userName);
         notification.setLink(invitationLink.getHref());
         notification.setContent(String.format(NOTIFICATION_CONTENT, userName, project.getName()));

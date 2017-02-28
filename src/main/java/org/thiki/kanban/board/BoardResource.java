@@ -10,7 +10,7 @@ import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.page.PagesController;
 import org.thiki.kanban.projects.project.ProjectsController;
-import org.thiki.kanban.projects.projectMembers.ProjectMembersController;
+import org.thiki.kanban.projects.members.MembersController;
 import org.thiki.kanban.sprint.SprintController;
 import org.thiki.kanban.stage.StageCodes;
 import org.thiki.kanban.stage.StagesController;
@@ -98,7 +98,7 @@ public class BoardResource extends RestResource {
             boardResource.add(tlink.from(pagesLink).build(userName));
 
             if (board.getProjectId() != null) {
-                Link membersLink = linkTo(methodOn(ProjectMembersController.class).loadMembersByProjectId(board.getProjectId(), userName)).withRel("members");
+                Link membersLink = linkTo(methodOn(MembersController.class).loadMembersByProjectId(board.getProjectId(), userName)).withRel("members");
                 boardResource.add(tlink.from(membersLink).build(userName));
             }
         }

@@ -1,4 +1,4 @@
-package org.thiki.kanban.projects.projectMembers;
+package org.thiki.kanban.projects.members;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
@@ -12,12 +12,10 @@ import java.util.List;
  * Created by 濤 on 7/26/16.
  */
 @RestController
-public class ProjectMembersController {
+public class MembersController {
     @Autowired
-    private ProjectMembersService projectMembersService;
+    private MembersService membersService;
 
-    @Resource
-    private ProjectMembersResource projectMembersResource;
     @Resource
     private MembersResource membersResource;
 
@@ -25,14 +23,14 @@ public class ProjectMembersController {
     private MemberResource memberResource;
 
     @RequestMapping(value = "/projects/{projectId}/members", method = RequestMethod.POST)
-    public HttpEntity joinTeam(@RequestBody ProjectMember projectMember, @PathVariable String projectId, @RequestHeader String userName) {
-        ProjectMember savedProjectMember = projectMembersService.joinTeam(projectId, projectMember, userName);
-        return Response.post(projectMembersResource.toResource(projectId, savedProjectMember, userName));
+    public HttpEntity joinTeam(@RequestBody Member member, @PathVariable String projectId, @RequestHeader String userName) throws Exception {
+        Member savedMember = membersService.joinTeam(projectId, member, userName);
+        return Response.post(memberResource.toResource(projectId, savedMember, userName));
     }
 
     @RequestMapping(value = "/projects/{projectId}/members", method = RequestMethod.GET)
     public HttpEntity loadMembersByProjectId(@PathVariable String projectId, @RequestHeader String userName) throws Exception {
-        List<Member> members = projectMembersService.loadMembersByTeamId(userName, projectId);
+        List<Member> members = membersService.loadMembersByTeamId(userName, projectId);
         return Response.build(membersResource.toResource(projectId, members, userName));
     }
 
@@ -43,7 +41,7 @@ public class ProjectMembersController {
 
     @RequestMapping(value = "/projects/{projectId}/members/{memberName}", method = RequestMethod.DELETE)
     public HttpEntity leaveTeam(@PathVariable String projectId, @PathVariable String memberName, @RequestHeader String userName) throws Exception {
-        projectMembersService.leaveTeam(projectId, memberName);
+        membersService.leaveTeam(projectId, memberName);
         return Response.build(memberResource.toResource(projectId, memberName, userName));
     }
 }

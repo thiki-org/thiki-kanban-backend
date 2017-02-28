@@ -44,13 +44,13 @@ public class PasswordService {
 
         passwordRetrievalApplication.setVerificationCode(verificationCode);
 
-        passwordPersistence.clearUnfinishedApplication(registeredUser.getName());
+        passwordPersistence.clearUnfinishedApplication(registeredUser.getUserName());
 
-        passwordRetrievalApplication.setUserName(registeredUser.getName());
+        passwordRetrievalApplication.setUserName(registeredUser.getUserName());
         passwordPersistence.createPasswordRetrievalApplication(passwordRetrievalApplication);
 
         sendVerificationCodeEmail(registeredUser, verificationCode);
-        return registeredUser.getName();
+        return registeredUser.getUserName();
     }
 
     public void applyReset(String userName, PasswordResetApplication passwordResetApplication) {
@@ -95,7 +95,7 @@ public class PasswordService {
     private void sendVerificationCodeEmail(User registeredUser, String verificationCode) throws TemplateException, IOException, MessagingException {
         VerificationCodeEmailData verificationCodeEmailData = new VerificationCodeEmailData();
         verificationCodeEmailData.setReceiver(registeredUser.getEmail());
-        verificationCodeEmailData.setUserName(registeredUser.getName());
+        verificationCodeEmailData.setUserName(registeredUser.getUserName());
         verificationCodeEmailData.setVerificationCode(verificationCode);
         mailService.sendMailByTemplate(verificationCodeEmailData, passwordRetrievalEmailTemplate);
     }
