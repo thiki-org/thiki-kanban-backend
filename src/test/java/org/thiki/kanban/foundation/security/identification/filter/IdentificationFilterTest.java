@@ -42,7 +42,7 @@ public class IdentificationFilterTest extends IdentificationTestBase {
     @Test
     public void shouldReturn401WhenAuthIsRequired() throws Exception {
         given().when()
-                .get("/someone/boards")
+                .get("/someone/projects/project-fooId/boards")
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_NO_AUTHENTICATION_TOKEN_CODE))
@@ -56,7 +56,7 @@ public class IdentificationFilterTest extends IdentificationTestBase {
         String expiredToken = buildToken(userName, new Date(), -5);
         given().header("token", expiredToken)
                 .when()
-                .get("/someone/boards")
+                .get("/someone/projects/project-fooId/boards")
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_AUTHENTICATION_TOKEN_HAS_EXPIRE_CODE))
@@ -79,7 +79,7 @@ public class IdentificationFilterTest extends IdentificationTestBase {
                 .body("{\"name\":\"newSummary\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/someone/boards")
+                .post("/someone/projects/project-fooId/boards")
                 .then()
                 .header("token", notNullValue());
     }
@@ -93,7 +93,7 @@ public class IdentificationFilterTest extends IdentificationTestBase {
         given().header("userName", tamperedUserName)
                 .header("token", expiredToken)
                 .when()
-                .get("/someone/boards")
+                .get("/someone/projects/project-fooId/boards")
                 .then()
                 .statusCode(401)
                 .body("code", equalTo(Constants.SECURITY_IDENTITY_USER_NAME_IS_NOT_CONSISTENT_CODE))

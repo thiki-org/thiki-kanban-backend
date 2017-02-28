@@ -51,8 +51,7 @@ public class CardTagsControllerTest extends TestBase {
                 .body("cardTags[0]._links.tags.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/tags"))
                 .body("cardTags[0]._links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/tags"))
-                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
-                .body("_links.board.href", endsWith("/someone/boards/boardId-foo"));
+                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"));
 
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_cards_tags WHERE card_id='card-fooId' AND tag_id='foo-tagId1'" +
                 "AND delete_status=0").size());

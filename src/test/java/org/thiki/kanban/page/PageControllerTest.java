@@ -28,7 +28,7 @@ public class PageControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/pages")
+                .post("/projects/project-fooId/boards/boardId-foo/pages")
                 .then()
                 .statusCode(201)
                 .body("title", equalTo("page-title"))
@@ -50,7 +50,7 @@ public class PageControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/boards/boardId-foo/pages/fooId")
+                .put("/projects/project-fooId/boards/boardId-foo/pages/fooId")
                 .then()
                 .statusCode(200)
                 .body("title", equalTo("page-title-new"))
@@ -68,7 +68,7 @@ public class PageControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/boards/boardId-foo/pages/fooId")
+                .put("/projects/project-fooId/boards/boardId-foo/pages/fooId")
                 .then()
                 .statusCode(404)
                 .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))
@@ -83,7 +83,7 @@ public class PageControllerTest extends TestBase {
                 .values("fooId", "page-title", "page-content", "boardId-foo", userName).exec();
         given().header("userName", userName)
                 .when()
-                .delete("/boards/boardId-foo/pages/fooId")
+                .delete("/projects/project-fooId/boards/boardId-foo/pages/fooId")
                 .then()
                 .statusCode(200);
     }
@@ -93,7 +93,7 @@ public class PageControllerTest extends TestBase {
     public void notAllowedIfPageWasNotFoundWhenRemovingPage() throws Exception {
         given().header("userName", userName)
                 .when()
-                .delete("/boards/boardId-foo/pages/fooId")
+                .delete("/projects/project-fooId/boards/boardId-foo/pages/fooId")
                 .then()
                 .statusCode(404)
                 .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))
@@ -109,7 +109,7 @@ public class PageControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/boards/boardId-foo/pages/fooId")
+                .get("/projects/project-fooId/boards/boardId-foo/pages/fooId")
                 .then()
                 .statusCode(200)
                 .body("title", equalTo("page-title"))
@@ -125,7 +125,7 @@ public class PageControllerTest extends TestBase {
     public void notAllowedIfPageWasNotFoundWhenLoadingPage() throws Exception {
         given().header("userName", userName)
                 .when()
-                .get("/boards/boardId-foo/pages/fooId")
+                .get("/projects/project-fooId/boards/boardId-foo/pages/fooId")
                 .then()
                 .statusCode(404)
                 .body("code", equalTo(PageCodes.PAGE_IS_NOT_EXISTS.code()))
@@ -141,7 +141,7 @@ public class PageControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/boards/boardId-foo/pages")
+                .get("/projects/project-fooId/boards/boardId-foo/pages")
                 .then()
                 .statusCode(200)
                 .body("pages[0].title", equalTo("page-title"))

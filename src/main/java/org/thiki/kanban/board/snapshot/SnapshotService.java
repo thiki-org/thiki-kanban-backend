@@ -46,17 +46,17 @@ public class SnapshotService {
     private SnapshotExecutor snapshotExecutor;
 
     @Cacheable(value = "board", key = "'board-snapshot'+#boardId+#userName+#viewType")
-    public Object loadSnapshotByBoard(String boardId, String viewType, String userName) throws Exception {
+    public Object loadSnapshotByBoard(String projectId, String boardId, String viewType, String userName) throws Exception {
         logger.info("load snapshot.");
-        JSONObject boardJSON = loadBoard(boardId, viewType, userName);
+        JSONObject boardJSON = loadBoard(projectId, boardId, viewType, userName);
         logger.info("snapshot loading completed.");
         return boardJSON;
     }
 
-    private JSONObject loadBoard(String boardId, String viewType, String userName) throws Exception {
+    private JSONObject loadBoard(String projectId, String boardId, String viewType, String userName) throws Exception {
         logger.info("load board tags.");
         Board board = boardsService.findById(boardId);
-        JSONObject boardJSON = (JSONObject) boardResource.toResource(board, userName);
+        JSONObject boardJSON = (JSONObject) boardResource.toResource(board, projectId, userName);
 
         List<Stage> stageList = stagesService.loadByBoardId(boardId, viewType);
         JSONObject stagesJSON = (JSONObject) stagesResource.toResource(stageList, boardId, viewType, userName);

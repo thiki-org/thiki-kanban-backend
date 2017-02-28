@@ -143,18 +143,18 @@ public class ProjectControllerTest extends TestBase {
     @Scenario("更新团队信息>用户创建一个团队后,可以更新该团队的信息")
     @Test
     public void updateTeam() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('projectId-foo','project-name','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_project (id,name,author) VALUES ('project-fooId','project-name','someone')");
         given().header("userName", userName)
                 .body("{\"name\":\"new-name\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/projects/projectId-foo")
+                .put("/projects/project-fooId")
                 .then()
                 .statusCode(200)
                 .body("name", equalTo("new-name"))
-                .body("id", equalTo("projectId-foo"))
-                .body("_links.self.href", endsWith("/projects/projectId-foo"));
-        assertEquals("new-name", jdbcTemplate.queryForObject("select NAME from kb_project where id='projectId-foo'", String.class));
+                .body("id", equalTo("project-fooId"))
+                .body("_links.self.href", endsWith("/projects/project-fooId"));
+        assertEquals("new-name", jdbcTemplate.queryForObject("select NAME from kb_project where id='project-fooId'", String.class));
     }
 
     @Scenario("更新团队信息>当团队不存在时,不允许更新")
@@ -164,7 +164,7 @@ public class ProjectControllerTest extends TestBase {
                 .body("{\"name\":\"new-name\"}")
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/projects/projectId-foo")
+                .put("/projects/project-fooId")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(ProjectCodes.PROJECT_IS_NOT_EXISTS.code()))

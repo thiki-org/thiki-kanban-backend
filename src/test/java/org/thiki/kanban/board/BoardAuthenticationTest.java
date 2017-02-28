@@ -21,21 +21,21 @@ public class BoardAuthenticationTest extends AuthenticationTestBase {
     @Scenario("看板权限管控>当用户为看板所属团队成员时,但并非团队看板,则只允许读取,不允许其他操作")
     @Test
     public void allowReadOnlyIfTheUserIsNotTheTeamAndTheBoardOwner() throws Exception {
-        dbPreparation.table("kb_board").names("id,name,author,owner,project_id").values("fooId", "board-name", "others", "others", "projectId-foo").exec();
-        dbPreparation.table("kb_members").names("id,project_id,user_name").values("fooId", "projectId-foo", "someone").exec();
+        dbPreparation.table("kb_board").names("id,name,author,owner,project_id").values("fooId", "board-name", "others", "others", "project-fooId").exec();
+        dbPreparation.table("kb_members").names("id,project_id,user_name").values("fooId", "project-fooId", "someone").exec();
 
         given().header("userName", "someone").log().all()
                 .when()
-                .get("/someone/boards/fooId")
+                .get("/someone/projects/project-fooId/boards/fooId")
                 .then()
                 .statusCode(200)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo("board-name"))
                 .body("author", equalTo("others"))
-                .body("_links.all.href", endsWith("/someone/boards"))
+                .body("_links.all.href", endsWith("/someone/projects/project-fooId/boards"))
                 .body("_links.stages.href", endsWith("/boards/fooId/stages"))
 
-                .body("_links.self.href", endsWith("/someone/boards/fooId"))
+                .body("_links.self.href", endsWith("/someone/projects/project-fooId/boards/fooId"))
                 .body("_links.self.actions.read.isAllowed", equalTo(true))
                 .body("_links.self.actions.modify.isAllowed", equalTo(true))
                 .body("_links.self.actions.delete.isAllowed", equalTo(true));

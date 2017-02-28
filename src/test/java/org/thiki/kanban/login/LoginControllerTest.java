@@ -60,7 +60,6 @@ public class LoginControllerTest extends TestBase {
                 .get("/login")
                 .then()
                 .statusCode(200)
-                .body("_links.boards.href", endsWith("/someone/boards"))
                 .body("_links.projects.href", endsWith("/someone/projects"))
                 .body("_links.profile.href", endsWith("/users/someone/profile"))
                 .body("_links.avatar.href", endsWith("/users/someone/avatar"))

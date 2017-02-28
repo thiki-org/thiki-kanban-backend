@@ -19,35 +19,35 @@ public class BoardsController {
     @Resource
     private BoardsResource boardsResource;
 
-    @RequestMapping(value = "/{userName}/boards", method = RequestMethod.POST)
-    public HttpEntity create(@RequestBody Board board, @PathVariable String userName) throws Exception {
-        Board savedBoard = boardsService.create(userName, board);
-        return Response.post(boardResource.toResource(savedBoard, userName));
+    @RequestMapping(value = "/{userName}/projects/{projectId}/boards", method = RequestMethod.POST)
+    public HttpEntity create(@RequestBody Board board, @PathVariable String projectId, @PathVariable String userName) throws Exception {
+        Board savedBoard = boardsService.create(userName, board, projectId);
+        return Response.post(boardResource.toResource(savedBoard, projectId, userName));
     }
 
-    @RequestMapping(value = "/{userName}/boards/{boardId}", method = RequestMethod.GET)
-    public HttpEntity findById(@PathVariable String boardId, @PathVariable String userName) throws Exception {
+    @RequestMapping(value = "/{userName}/projects/{projectId}/boards/{boardId}", method = RequestMethod.GET)
+    public HttpEntity findById(@PathVariable String boardId, @PathVariable String projectId, @PathVariable String userName) throws Exception {
         Board board = boardsService.findById(boardId);
-        return Response.build(boardResource.toResource(board, userName));
+        return Response.build(boardResource.toResource(board, projectId, userName));
     }
 
-    @RequestMapping(value = "/{userName}/boards/{boardId}", method = RequestMethod.PUT)
-    public HttpEntity update(@RequestBody Board board, @PathVariable String boardId, @PathVariable String userName) throws Exception {
+    @RequestMapping(value = "/{userName}/projects/{projectId}/boards/{boardId}", method = RequestMethod.PUT)
+    public HttpEntity update(@RequestBody Board board, @PathVariable String boardId, @PathVariable String projectId, @PathVariable String userName) throws Exception {
         board.setId(boardId);
-        Board updatedBoard = boardsService.update(userName, board);
-        return Response.build(boardResource.toResource(updatedBoard, userName));
+        Board updatedBoard = boardsService.update(userName, projectId, board);
+        return Response.build(boardResource.toResource(updatedBoard, projectId, userName));
 
     }
 
-    @RequestMapping(value = "/{userName}/boards/{boardId}", method = RequestMethod.DELETE)
-    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String userName) throws Exception {
+    @RequestMapping(value = "/{userName}/projects/{projectId}/boards/{boardId}", method = RequestMethod.DELETE)
+    public HttpEntity deleteById(@PathVariable String boardId, @PathVariable String projectId, @PathVariable String userName) throws Exception {
         boardsService.deleteById(boardId, userName);
-        return Response.build(boardResource.toResource(userName));
+        return Response.build(boardResource.toResource(projectId, userName));
     }
 
-    @RequestMapping(value = "/{userName}/boards", method = RequestMethod.GET)
-    public HttpEntity loadByUserName(@PathVariable String userName) throws Exception {
-        List<Board> boards = boardsService.loadBoards(userName);
-        return Response.build(boardsResource.toResource(boards, userName));
+    @RequestMapping(value = "/{userName}/projects/{projectId}/boards", method = RequestMethod.GET)
+    public HttpEntity loadByProject(@PathVariable String projectId, @PathVariable String userName) throws Exception {
+        List<Board> boards = boardsService.loadBoards(projectId, userName);
+        return Response.build(boardsResource.toResource(boards, projectId, userName));
     }
 }

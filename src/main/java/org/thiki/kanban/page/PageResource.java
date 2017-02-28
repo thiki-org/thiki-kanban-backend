@@ -25,31 +25,31 @@ public class PageResource extends RestResource {
     private TLink tlink;
 
     @Cacheable(value = "page", key = "#userName+#boardId+#page.id")
-    public Object toResource(Page page, String boardId, String userName) throws Exception {
+    public Object toResource(Page page, String boardId, String projectId, String userName) throws Exception {
         logger.info("build page resource.board:{},,userName:{}", boardId, userName);
         PageResource pageResource = new PageResource();
         pageResource.domainObject = page;
         if (page != null) {
-            Link selfLink = linkTo(methodOn(PagesController.class).findById(boardId, page.getId(), userName)).withSelfRel();
+            Link selfLink = linkTo(methodOn(PagesController.class).findById(boardId, page.getId(), projectId, userName)).withSelfRel();
             pageResource.add(tlink.from(selfLink).build(userName));
         }
-        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
+        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, projectId, userName)).withRel("board");
         pageResource.add(tlink.from(boardLink).build(userName));
 
-        Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, userName)).withRel("pages");
+        Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, projectId, userName)).withRel("pages");
         pageResource.add(tlink.from(pagesLink).build(userName));
         logger.info("page resource building completed.board:{},userName:{}", boardId, userName);
         return pageResource.getResource();
     }
 
-    public Object toResource(String boardId, String userName) throws Exception {
+    public Object toResource(String boardId, String projectId, String userName) throws Exception {
         logger.info("build page resource.board:{},,userName:{}", boardId, userName);
         PageResource pageResource = new PageResource();
 
-        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
+        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, projectId, userName)).withRel("board");
         pageResource.add(tlink.from(boardLink).build(userName));
 
-        Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, userName)).withRel("pages");
+        Link pagesLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, projectId, userName)).withRel("pages");
         pageResource.add(tlink.from(pagesLink).build(userName));
         logger.info("page resource building completed.board:{},userName:{}", boardId, userName);
         return pageResource.getResource();

@@ -19,9 +19,7 @@ public interface BoardsPersistence {
 
     Integer deleteById(@Param("id") String id, @Param("userName") String userName);
 
-    boolean unique(@Param("id") String id, @Param("name") String boardName, @Param("userName") String userName);
+    boolean unique(@Param("id") String id, @Param("name") String boardName, @Param("projectId") String projectId);
 
-    List<Board> findProjectsBoards(String projectId);
-
-    List<Board> findPersonalBoards(String TeamId);
+    List<Board> loadBoardsByProject(String projectId);
 }
