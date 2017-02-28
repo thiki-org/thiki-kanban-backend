@@ -34,7 +34,8 @@ public class ProjectControllerTest extends TestBase {
                 .statusCode(201)
                 .body("name", equalTo("思奇团队讨论组"))
                 .body("id", equalTo("fooId"))
-                .body("_links.self.href", endsWith("/projects/fooId"));
+                .body("_links.self.href", endsWith("/projects/fooId"))
+                .body("_links.boards.href", endsWith("/someone/projects/fooId/boards"));
         assertEquals(1, jdbcTemplate.queryForList("select count(*) from kb_members where project_id='fooId' AND user_name='someone'").size());
     }
 

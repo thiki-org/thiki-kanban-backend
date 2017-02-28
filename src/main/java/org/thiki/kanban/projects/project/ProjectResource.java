@@ -3,6 +3,7 @@ package org.thiki.kanban.projects.project;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.projects.members.MembersController;
@@ -30,6 +31,9 @@ public class ProjectResource extends RestResource {
 
             Link membersLink = linkTo(methodOn(MembersController.class).loadMembersByProjectId(project.getId(), userName)).withRel("members");
             projectResource.add(tlink.from(membersLink).build(userName));
+
+            Link boardsLink = linkTo(methodOn(BoardsController.class).loadByProject(project.getId(), userName)).withRel("boards");
+            projectResource.add(tlink.from(boardsLink).build(userName));
         }
         return projectResource.getResource();
     }
