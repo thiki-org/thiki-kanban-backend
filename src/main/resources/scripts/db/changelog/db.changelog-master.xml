@@ -581,6 +581,16 @@
         </modifySql>
     </changeSet>
     <changeSet id="21" author="skytao">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <sqlCheck expectedResult="0">
+                    SELECT count(*)
+                    FROM INFORMATION_SCHEMA.COLUMNS
+                    WHERE table_name='kb_acceptance_criterias'
+                    AND column_name='sort_number' AND column_default=9999
+                </sqlCheck>
+            </and>
+        </preConditions>
         <addDefaultValue columnDataType="int"
                          columnName="sort_number"
                          defaultValue="9999"
@@ -662,6 +672,9 @@
     <changeSet id="29" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_procedure" columnName="wip_num"/>
+            <not>
+                <columnExists tableName="kb_procedure" columnName="wip_limit"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="wip_limit"
@@ -720,7 +733,12 @@
 
     <changeSet id="34" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="kb_procedure"/>
+            <and>
+                <tableExists tableName="kb_procedure"/>
+            </and>
+            <not>
+                <tableExists tableName="kb_stage"/>
+            </not>
         </preConditions>
         <renameTable newTableName="kb_stage" oldTableName="kb_procedure"/>
     </changeSet>
@@ -769,6 +787,9 @@
     <changeSet id="39" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
+            <not>
+                <columnExists tableName="kb_activity" columnName="stage_snapShot"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="stage_snapShot"
@@ -780,6 +801,9 @@
     <changeSet id="40" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_activity" columnName="prev_procedure_snapShot"/>
+            <not>
+                <columnExists tableName="kb_activity" columnName="prev_stage_snapShot"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="prev_stage_snapShot"
@@ -918,6 +942,9 @@
     <changeSet id="52" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_project_member_invitation" columnName="team_id"/>
+            <not>
+                <columnExists tableName="kb_project_member_invitation" columnName="project_id"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="project_id"
@@ -928,6 +955,9 @@
     <changeSet id="53" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_user_registration" columnName="name"/>
+            <not>
+                <columnExists tableName="kb_user_registration" columnName="user_name"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="user_name"
@@ -937,13 +967,19 @@
     </changeSet>
     <changeSet id="54" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="kb_procedure"/>
+            <tableExists tableName="kb_project_members"/>
+            <not>
+                <tableExists tableName="kb_members"/>
+            </not>
         </preConditions>
-        <renameTable newTableName="kb_members" oldTableName="kb_members"/>
+        <renameTable newTableName="kb_members" oldTableName="kb_project_members"/>
     </changeSet>
     <changeSet id="55" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_members" columnName="member"/>
+            <not>
+                <columnExists tableName="kb_members" columnName="user_name"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="user_name"
