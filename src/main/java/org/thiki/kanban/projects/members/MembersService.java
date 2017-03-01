@@ -42,13 +42,13 @@ public class MembersService {
 
         member.setAuthor(userName);
         member.setProjectId(projectId);
-        membersPersistence.joinTeam(member);
+        membersPersistence.joinProject(member);
         return membersPersistence.findById(member.getId());
     }
 
     @Caching(evict = {@CacheEvict(value = "project", key = "contains('projects'+#projectId)", allEntries = true), @CacheEvict(value = "board", key = "startsWith('#userName + boards')", allEntries = true)})
     public Member joinTeam(String userName, String projectId) {
-        boolean isAlreadyJoinTeam = membersPersistence.isAMemberOfTheTeam(userName, projectId);
+        boolean isAlreadyJoinTeam = membersPersistence.isAMemberOfTheProject(userName, projectId);
         if (isAlreadyJoinTeam) {
             throw new BusinessException(MembersCodes.USER_IS_ALREADY_A_MEMBER_OF_THE_PROJECT);
         }
@@ -56,7 +56,7 @@ public class MembersService {
         projectMember.setProjectId(projectId);
         projectMember.setUserName(userName);
         projectMember.setAuthor(userName);
-        membersPersistence.joinTeam(projectMember);
+        membersPersistence.joinProject(projectMember);
         return membersPersistence.findById(projectMember.getId());
     }
 
@@ -67,7 +67,7 @@ public class MembersService {
             throw new BusinessException(ProjectCodes.PROJECT_IS_NOT_EXISTS);
         }
 
-        boolean isAMember = membersPersistence.isAMemberOfTheTeam(userName, projectId);
+        boolean isAMember = membersPersistence.isAMemberOfTheProject(userName, projectId);
         if (!isAMember) {
             throw new UnauthorisedException(MembersCodes.CURRENT_USER_IS_NOT_A_MEMBER_OF_THE_PROJECT);
         }
@@ -79,16 +79,16 @@ public class MembersService {
     }
 
     public boolean isMember(String projectId, String userName) {
-        return membersPersistence.isAMemberOfTheTeam(userName, projectId);
+        return membersPersistence.isAMemberOfTheProject(userName, projectId);
     }
 
     @CacheEvict(value = "project", key = "contains('projects'+#memberName)", allEntries = true)
     public void leaveTeam(String projectId, String memberName) {
-        membersPersistence.leaveTeam(projectId, memberName);
+        membersPersistence.leaveProject(projectId, memberName);
     }
 
     @Cacheable(value = "project", key = "'service-projects'+#userName")
     public List<Project> loadProjectsByUserName(String userName) {
-        return membersPersistence.findTeams(userName);
+        return membersPersistence.findProjects(userName);
     }
 }

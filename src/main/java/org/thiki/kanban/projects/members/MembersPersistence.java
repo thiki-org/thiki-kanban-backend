@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Repository
 public interface MembersPersistence {
-    void joinTeam(Member projectMember);
+    void joinProject(Member projectMember);
 
     Member findById(@Param("id") String id);
 
@@ -19,9 +19,9 @@ public interface MembersPersistence {
 
     List<Member> loadMembersByProject(String projectId);
 
-    boolean isAMemberOfTheTeam(@Param("userName") String userName, @Param("projectId") String projectId);
+    boolean isAMemberOfTheProject(@Param("userName") String userName, @Param("projectId") String projectId);
 
-    Integer leaveTeam(@Param("projectId") String projectId, @Param("userName") String userName);
+    Integer leaveProject(@Param("projectId") String projectId, @Param("userName") String userName);
 
-    List<Project> findTeams(String userName);
+    List<Project> findProjects(String userName);
 }
