@@ -175,4 +175,12 @@ public class MailService {
         mailEntity.setDateline(dateline);
         sendMailByTemplate(receiver, subject, mailEntity, templateName);
     }
+
+    public void sendMailByTemplate(MailEntity mailEntity) throws TemplateException, IOException, MessagingException {
+        String receiver = mailEntity.getReceiver();
+        String subject = mailEntity.getSubject();
+        String dateline = dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD_CN);
+        mailEntity.setDateline(dateline);
+        sendMailByTemplate(receiver, subject, mailEntity, mailEntity.getTemplateName());
+    }
 }

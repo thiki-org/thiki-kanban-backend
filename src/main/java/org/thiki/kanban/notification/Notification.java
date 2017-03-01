@@ -26,9 +26,7 @@ public class Notification implements Serializable {
     private String type;
     private String typeName;
     private String modificationTime;
-    private boolean sentEmail;
     private String title;
-    private String mailTemplateName;
 
     public String getType() {
         return type;
@@ -123,9 +121,6 @@ public class Notification implements Serializable {
                 '}';
     }
 
-    public void needSentEmail(boolean isSent) {
-        this.sentEmail = isSent;
-    }
 
     public String getTitle() {
         return title;
@@ -133,17 +128,5 @@ public class Notification implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public boolean isSentEmail() {
-        return sentEmail;
-    }
-
-    public String getMailTemplateName() {
-        return mailTemplateName;
-    }
-
-    public void setMailTemplateName(String mailTemplateName) {
-        this.mailTemplateName = mailTemplateName;
     }
 }

@@ -28,7 +28,12 @@ public class UsersService {
     private AvatarStorage avatarStorage;
 
     public User findByName(String userName) {
-        return usersPersistence.findByName(userName);
+        User user = usersPersistence.findByName(userName);
+        Profile profile = loadProfileByUserName(userName);
+        if (profile != null) {
+            user.setProfile(profile);
+        }
+        return user;
     }
 
     @ValidateParams

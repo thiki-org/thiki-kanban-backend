@@ -1,18 +1,13 @@
 package org.thiki.kanban.notification;
 
-import freemarker.template.TemplateException;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.thiki.kanban.assignment.AssignmentMail;
 import org.thiki.kanban.foundation.mail.MailService;
-import org.thiki.kanban.user.UsersService;
-
-import javax.mail.MessagingException;
-import java.io.IOException;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
@@ -27,22 +22,19 @@ public class NotificationServiceTest {
     @Mock
     private MailService mailService;
     @Mock
-    private UsersService usersService;
-    @Mock
     private NotificationPersistence notificationPersistence;
     @InjectMocks
     private NotificationService notificationService;
 
-    @Ignore
     @Test
-    public void should_send_email_if_notification_email_filed_is_set() throws TemplateException, IOException, MessagingException {
+    public void should_send_email_after_notifying() throws Exception {
         Notification notification = new Notification();
-        notification.needSentEmail(true);
         when(notificationPersistence.create(notification)).thenReturn(1);
         doNothing().when(mailService).sendMailByTemplate(any(), eq(notification.getTitle()));
+        AssignmentMail assignmentMail = new AssignmentMail();
+        assignmentMail.setNotificationType(NotificationType.ASSIGNMENT_INVITATION);
+        notificationService.sendEmailAfterNotifying(assignmentMail);
 
-        notificationService.notify(notification);
-
-        verify(mailService).sendMailByTemplate(any(), eq(notification.getTitle()));
+        verify(mailService).sendMailByTemplate(any());
     }
 }

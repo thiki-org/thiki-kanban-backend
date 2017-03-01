@@ -14,6 +14,7 @@ public class User {
     private String creationTime;
     private String modificationTime;
     private String salt;
+    private Profile profile;
 
     public String getAuthor() {
         return author;
@@ -77,6 +78,19 @@ public class User {
 
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+
+    public Profile getProfile() {
+        if (this.profile == null) {
+            this.profile = new Profile();
+            this.profile.setNickName(this.userName);
+            this.profile.setEmail(this.email);
+        }
+        return this.profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
     }
 
     @Override

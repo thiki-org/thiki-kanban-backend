@@ -110,4 +110,8 @@ public class Assignment {
         result = 31 * result + (assignee != null ? assignee.hashCode() : 0);
         return result;
     }
+
+    public boolean isSelfAssignment(String userName) {
+        return this.assignee.equals(userName);
+    }
 }
