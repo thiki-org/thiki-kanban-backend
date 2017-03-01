@@ -60,7 +60,6 @@ public class AssignmentControllerTest extends TestBase {
     @Scenario("当用户根据cardID获取分配记录时,如果指定的卡片存在,则返回分配记录集合")
     @Test
     public void findByCardId_shouldReturnAssignmentsSuccessfully() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,user_name,email,password) VALUES ('assigneeId-foo','徐濤','766191920@qq.com','password')");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('cardId-foo','this is the card summary.','play badminton',1,'fooId')");
         jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
         given().header("userName", "authorId-foo")
@@ -72,7 +71,6 @@ public class AssignmentControllerTest extends TestBase {
                 .body("assignments[0].id", equalTo("fooId"))
                 .body("assignments[0].assignee", equalTo("assigneeId-foo"))
                 .body("assignments[0].assigner", equalTo("assignerId-foo"))
-                .body("assignments[0].name", equalTo("徐濤"))
                 .body("assignments[0].author", equalTo("authorId-foo"))
                 .body("assignments[0]._links.card.href", endsWith("/boards/boardId-foo/stages/1/cards/cardId-foo"))
                 .body("assignments[0]._links.self.href", endsWith("/boards/boardId-foo/stages/1/cards/cardId-foo/assignments"))

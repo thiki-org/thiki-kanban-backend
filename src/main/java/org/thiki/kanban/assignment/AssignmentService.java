@@ -40,7 +40,7 @@ public class AssignmentService {
     @Resource
     private BoardsService boardsService;
 
-    @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true)
+    @CacheEvict(value = "assignment", key = "contains('#cardId')", allEntries = true, beforeInvocation = true)
     public List<Assignment> assign(final List<Assignment> assignments, String cardId, String boardId, String userName) throws Exception {
         logger.info("Assigning card.assignments:{},cardId:{},userName:{}", assignments, cardId, userName);
         Card card = cardsService.findById(cardId);
@@ -76,7 +76,7 @@ public class AssignmentService {
                 }
             }
         }
-        List<Assignment> savedAssignments = assignmentPersistence.findByCardId(cardId);
+        List<Assignment> savedAssignments = findByCardId(cardId);
         logger.info("Assigned card successfully.savedAssignments:{}", savedAssignments);
         activityService.recordAssignments(savedAssignments, cardId, userName);
         return savedAssignments;

@@ -14,8 +14,6 @@ public class Assignment {
 
     private String assigner;
 
-    private String userName;
-
     private String author;
 
     private String creationTime;
@@ -76,14 +74,6 @@ public class Assignment {
 
     public void setModificationTime(String modificationTime) {
         this.modificationTime = modificationTime;
-    }
-
-    public String getName() {
-        return userName;
-    }
-
-    public void setName(String name) {
-        this.userName = name;
     }
 
     @Override

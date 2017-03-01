@@ -10,25 +10,15 @@
     </insert>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
-        SELECT
-        assignment.id AS
-        id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.author,assignment.creation_time,assignment.modification_time,userRegistration.user_name
-        FROM kb_card_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
-        assignment.assignee=userRegistration.id WHERE assignment.id= #{id}
+        SELECT * FROM kb_card_assignment WHERE id= #{id}
     </select>
 
     <select id="findByCardId" parameterType="java.lang.String" resultType="org.thiki.kanban.assignment.Assignment">
-        SELECT
-        assignment.id AS
-        id,assignment.card_id,assignment.assignee,assignment.assigner,assignment.author,userRegistration.user_name
-        FROM kb_card_assignment assignment LEFT JOIN kb_user_registration userRegistration ON
-        assignment.assignee=userRegistration.id
-        WHERE assignment.card_id= #{cardId} AND assignment.delete_status=0
+        SELECT * FROM kb_card_assignment WHERE card_id= #{cardId} AND delete_status=0
     </select>
 
     <select id="isAlreadyAssigned" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_card_assignment
-        WHERE card_id= #{cardId} AND assignee=#{assignee} AND delete_status=0
+        SELECT count(*) FROM kb_card_assignment WHERE card_id= #{cardId} AND assignee=#{assignee} AND delete_status=0
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
