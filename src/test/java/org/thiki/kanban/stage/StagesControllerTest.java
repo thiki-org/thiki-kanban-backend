@@ -38,7 +38,7 @@ public class StagesControllerTest extends TestBase {
                 .body("creationTime", notNullValue())
                 .body("wipLimit", equalTo(20))
                 .body("_links.all.href", endsWith("/boards/feeId/stages"))
-                .body("_links.cards.href", endsWith("/boards/feeId/stages/fooId/cards"))
+                .body("_links.cards.href", endsWith("/boards/feeId/cards"))
                 .body("_links.self.href", endsWith("/boards/feeId/stages/fooId"));
     }
 
@@ -270,7 +270,7 @@ public class StagesControllerTest extends TestBase {
                 .body("stages[0].creationTime", notNullValue())
                 .body("stages[0]._links.all.href", endsWith("/boards/feeId/stages"))
                 .body("stages[0]._links.self.href", endsWith("/boards/feeId/stages/fooId"))
-                .body("stages[0]._links.cards.href", endsWith("/boards/feeId/stages/fooId/cards"))
+                .body("stages[0]._links.cards.href", endsWith("/boards/feeId/cards"))
                 .body("_links.self.href", endsWith("/boards/feeId/stages"))
                 .body("_links.sortNumbers.href", endsWith("/boards/feeId/stages/sortNumbers"));
     }

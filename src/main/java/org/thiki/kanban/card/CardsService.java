@@ -36,19 +36,21 @@ public class CardsService {
     @Resource
     private AcceptanceCriteriaService acceptanceCriteriaService;
 
-    @CacheEvict(value = "card", key = "contains('#stageId')", allEntries = true)
-    public Card create(String userName, String boardId, String stageId, Card card) {
-        logger.info("Creating new card:{},stage:{}", card, stageId);
-        card.setStageId(stageId);
+    @CacheEvict(value = "card", key = "contains('#card.stageId')", allEntries = true)
+    public Card saveCard(String userName, String boardId, Card card) {
+        logger.info("Creating new card:{}", card);
+        if (card.getStageId() == null) {
+            throw new BusinessException(CardsCodes.STAGE_IS_NOT_SPECIFIED);
+        }
         String code = generateCode(boardId);
         card.setCode(code);
-        if (stagesService.isReachedWipLimit(stageId)) {
+        if (stagesService.isReachedWipLimit(card.getStageId())) {
             throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
         }
         cardsPersistence.create(userName, card);
         Card savedCard = cardsPersistence.findById(card.getId());
         logger.info("Created card:{}", savedCard);
-        Stage stage = stagesService.findById(stageId);
+        Stage stage = stagesService.findById(card.getStageId());
         activityService.recordCardCreation(savedCard, stage, userName);
         return savedCard;
     }
