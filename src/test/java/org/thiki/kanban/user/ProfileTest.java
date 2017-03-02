@@ -18,7 +18,7 @@ import static org.hamcrest.core.StringEndsWith.endsWith;
 /**
  * Created by xubt on 26/09/2016.
  */
-@Domaxin(order = DomainOrder.USER, name = "用户")
+@Domain(order = DomainOrder.USER, name = "用户")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ProfileTest extends TestBase {
 
