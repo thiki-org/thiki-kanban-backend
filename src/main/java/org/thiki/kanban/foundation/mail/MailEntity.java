@@ -11,13 +11,15 @@ public class MailEntity {
     private String receiver;
     private String sender;
     private String subject;
+    private String content;
 
     private String dateline;
     private String templateName;
-    private String senderUserName;
-    private String receiverUserName;
+    private String senderNickName;
+    private String receiverNickName;
 
     private NotificationType notificationType;
+    private String receiverUserName;
 
     public String getReceiver() {
         return receiver;
@@ -59,28 +61,28 @@ public class MailEntity {
         this.templateName = templateName;
     }
 
-    public String getSenderUserName() {
-        return senderUserName;
+    public String getSenderNickName() {
+        return senderNickName;
     }
 
-    public void setSenderUserName(String senderUserName) {
-        this.senderUserName = senderUserName;
+    public void setSenderNickName(String senderUserName) {
+        this.senderNickName = senderUserName;
     }
 
-    public String getReceiverUserName() {
-        return receiverUserName;
+    public String getReceiverNickName() {
+        return receiverNickName;
     }
 
-    public void setReceiverUserName(String receiverUserName) {
-        this.receiverUserName = receiverUserName;
+    public void setReceiverNickName(String receiverUserName) {
+        this.receiverNickName = receiverUserName;
     }
 
     public Notification newNotification() {
         Notification notification = new Notification();
         notification.setTitle(this.getSubject());
         notification.setReceiver(this.receiverUserName);
-        notification.setSender(this.senderUserName);
-        notification.setContent("");
+        notification.setSender(this.sender);
+        notification.setContent(this.content);
         notification.setType(notificationType.type());
         return notification;
     }
@@ -95,5 +97,21 @@ public class MailEntity {
 
     public void setNotificationType(NotificationType notificationType) {
         this.notificationType = notificationType;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getReceiverUserName() {
+        return receiverUserName;
+    }
+
+    public void setReceiverUserName(String receiverUserName) {
+        this.receiverUserName = receiverUserName;
     }
 }

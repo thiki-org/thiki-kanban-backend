@@ -987,4 +987,16 @@
                 columnDataType="varchar(50)"
                 tableName="kb_members"/>
     </changeSet>
+    <changeSet id="56" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_notification" columnName="title"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_notification">
+            <column name="title" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

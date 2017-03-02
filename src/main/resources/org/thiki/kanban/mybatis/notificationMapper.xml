@@ -5,8 +5,8 @@
 <mapper namespace="org.thiki.kanban.notification.NotificationPersistence">
     <insert id="create" parameterType="org.thiki.kanban.notification.Notification">
         INSERT INTO
-        kb_notification(id,receiver,sender,content,link,type) VALUES
-        (#{id},#{receiver},#{sender},#{content},#{link},#{type})
+        kb_notification(id,receiver,sender,title,content,link,type) VALUES
+        (#{id},#{receiver},#{sender},#{title},#{content},#{link},#{type})
     </insert>
 
     <select id="read" parameterType="java.lang.String" resultType="org.thiki.kanban.notification.Notification">
