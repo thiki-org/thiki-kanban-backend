@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.risk.RiskPersistence">
+    <insert id="addRisk" parameterType="org.thiki.kanban.risk.Risk">
+        INSERT INTO
+        kb_risk(id, risk_reson,card_id,author)
+        VALUES
+        (#{risk.id},#{risk.risk_reson},#{cardId},#{userName})
+    </insert>
+
+    <select id="findRiskById" parameterType="java.lang.String" resultType="org.thiki.kanban.risk.Risk">
+
+        SELECT * FROM kb_risk WHERE id=#{id} AND delete_status =0
+
+    </select>
+</mapper>
