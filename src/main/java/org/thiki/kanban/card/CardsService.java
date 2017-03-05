@@ -42,15 +42,18 @@ public class CardsService {
         if (card.getStageId() == null) {
             throw new BusinessException(CardsCodes.STAGE_IS_NOT_SPECIFIED);
         }
-        String code = generateCode(boardId);
-        card.setCode(code);
+        Stage stage = stagesService.findById(card.getStageId());
+        if (!stage.isTodo()) {
+            throw new BusinessException(CardsCodes.STAGE_IS_NOT_TODO_STATUS);
+        }
         if (stagesService.isReachedWipLimit(card.getStageId())) {
             throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
         }
+        String code = generateCode(boardId);
+        card.setCode(code);
         cardsPersistence.create(userName, card);
         Card savedCard = cardsPersistence.findById(card.getId());
         logger.info("Created card:{}", savedCard);
-        Stage stage = stagesService.findById(card.getStageId());
         activityService.recordCardCreation(savedCard, stage, userName);
         return savedCard;
     }

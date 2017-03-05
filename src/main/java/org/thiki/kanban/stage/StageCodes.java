@@ -20,6 +20,7 @@ public enum StageCodes {
     public static final String titleIsRequired = "环节名称不能为空。";
     public static final String titleIsInvalid = "环节名称长度超限,请保持在30个字符以内。";
     public static final String descriptionIsInvalid = "环节描述长度超限,请保持在100个字符以内。";
+    public static final Integer STAGE_STATUS_TODO = 0;
     public static final Integer STAGE_STATUS_DOING = 1;
     public static final Integer STAGE_STATUS_DONE = 9;
     public static final Integer STAGE_TYPE_IN_PLAN = 1;
