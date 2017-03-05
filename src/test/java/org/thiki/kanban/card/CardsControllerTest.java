@@ -40,6 +40,8 @@ public class CardsControllerTest extends TestBase {
     @Scenario("创建一个新的卡片")
     @Test
     public void create_shouldReturn201WhenCreateCardSuccessfully() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId','this is the first stage.','someone','boardId-foo',1)");
+
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
         String expectedCode = generateExpectedCode();
         int expireDays = 5;
@@ -47,13 +49,14 @@ public class CardsControllerTest extends TestBase {
         String deadline = DateService.instance().addDay(currentTime, expireDays);
         Map newCard = new HashMap();
         newCard.put("summary", "summary");
+        newCard.put("stageId", "stage-fooId");
         newCard.put("deadline", deadline);
         newCard.put("size", 5);
         given().body(newCard)
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/stages/fooId/cards")
+                .post("/boards/boardId-foo/cards")
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
@@ -63,10 +66,10 @@ public class CardsControllerTest extends TestBase {
                 .body("size", equalTo(5))
                 .body("sizeName", equalTo(CardsCodes.sizeName(5)))
                 .body("restDays", equalTo(expireDays))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/fooId/cards/fooId"))
-                .body("_links.cards.href", endsWith("/boards/boardId-foo/stages/fooId/cards"))
-                .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/stages/fooId/cards/fooId/acceptanceCriterias"))
-                .body("_links.assignments.href", endsWith("/boards/boardId-foo/stages/fooId/cards/fooId/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards"))
+                .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId/acceptanceCriterias"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId/assignments"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
@@ -85,7 +88,7 @@ public class CardsControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/stages/fooId/cards")
+                .post("/boards/boardId-foo/cards")
                 .then()
                 .statusCode(400)
                 .body("message", equalTo(CardsCodes.summaryIsRequired));
@@ -101,7 +104,7 @@ public class CardsControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/stages/fooId/cards")
+                .post("/boards/boardId-foo/cards")
                 .then()
                 .statusCode(400)
                 .body("message", equalTo(CardsCodes.summaryIsInvalid));

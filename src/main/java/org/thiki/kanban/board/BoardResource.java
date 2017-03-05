@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.board.snapshot.BoardsSnapshotController;
+import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.page.PagesController;
@@ -97,6 +98,9 @@ public class BoardResource extends RestResource {
 
             Link membersLink = linkTo(methodOn(MembersController.class).loadMembersByProjectId(projectId, userName)).withRel("members");
             boardResource.add(tlink.from(membersLink).build(userName));
+
+            Link cardsLink = linkTo(methodOn(CardsController.class).create(null, userName, board.getId())).withRel("cards");
+            boardResource.add(tlink.from(cardsLink).build(userName));
         }
         Link allLink = linkTo(methodOn(BoardsController.class).loadByProject(projectId, userName)).withRel("all");
         boardResource.add(tlink.from(allLink).build());

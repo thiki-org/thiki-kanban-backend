@@ -791,8 +791,12 @@ public class DateService {
         if (date1 == null || date2 == null) {
             return null;
         }
-        Date date = StringToDate(date2);
-        return daysBetween(date1, date);
+        try {
+            Date date = StringToDate(date2);
+            return daysBetween(date1, date);
+        } catch (Exception e) {
+            return 9999;
+        }
     }
 
     public int daysBetween(String date1, Date date2) {

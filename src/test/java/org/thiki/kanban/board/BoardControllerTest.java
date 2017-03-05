@@ -51,6 +51,7 @@ public class BoardControllerTest extends TestBase {
                 .body("_links.sprints.href", endsWith("/projects/project-fooId/boards/fooId/sprints"))
                 .body("_links.activeSprint.href", endsWith("/boards/fooId/sprints/activeSprint"))
                 .body("_links.pages.href", endsWith("/projects/project-fooId/boards/fooId/pages"))
+                .body("_links.cards.href", endsWith("/boards/fooId/cards"))
                 .body("_links.self.href", endsWith("/someone/projects/project-fooId/boards/fooId"));
     }
 
