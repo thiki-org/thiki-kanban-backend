@@ -302,6 +302,22 @@ public class CardsControllerTest extends TestBase {
                 .body("message", equalTo(CardsCodes.STAGE_WIP_REACHED_LIMIT.message()));
     }
 
+    @Test
+    public void should_failed_if_target_stage_is_in_process_and_card_deadline_is_not_set() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,status) VALUES ('stage-fooId','title','someone','board-id-foo',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,status) VALUES ('target-stage-fooId','title','someone','board-id-foo',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','title','play badminton',1,'stage-fooId')");
+        given().body("{\"summary\":\"newSummary\",\"stageId\":\"target-stage-fooId\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/stages/stage-fooId/cards/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(CardsCodes.DEADLINE_IS_NOT_SET.code()))
+                .body("message", equalTo(CardsCodes.DEADLINE_IS_NOT_SET.message()));
+    }
+
     @Scenario("当删除一个卡片时,如果卡片存在,则删除成功")
     @Test
     public void delete_shouldDeleteSuccessfullyWhenTheCardIsExist() {

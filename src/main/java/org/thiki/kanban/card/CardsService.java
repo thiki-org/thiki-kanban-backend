@@ -73,9 +73,13 @@ public class CardsService {
     public Card modify(String cardId, Card card, String stageId, String boardId, String userName) {
         logger.info("modify card:{}", card);
         Card originCard = loadAndValidateCard(cardId);
+        Stage targetStage = stagesService.findById(card.getStageId());
         if (card.isMoveToOtherStage(originCard)) {
             if (stagesService.isReachedWipLimit(card.getStageId())) {
                 throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
+            }
+            if (targetStage.isInProcess() && originCard.getDeadline() == null) {
+                throw new BusinessException(CardsCodes.DEADLINE_IS_NOT_SET);
             }
         }
         if (card.moveToParent(originCard)) {
@@ -93,8 +97,7 @@ public class CardsService {
         cardsPersistence.modify(cardId, card);
         Card savedCard = cardsPersistence.findById(cardId);
         logger.info("Modified card:{}", savedCard);
-        Stage stage = stagesService.findById(stageId);
-        activityService.recordCardModification(savedCard, stage, null, originCard, userName);
+        activityService.recordCardModification(savedCard, targetStage, null, originCard, userName);
         return savedCard;
     }
 
