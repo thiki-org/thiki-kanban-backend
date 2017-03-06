@@ -11,6 +11,7 @@ import org.thiki.kanban.foundation.exception.BusinessException;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by skytao on 03/06/17.
@@ -27,8 +28,11 @@ public class VerificationService {
     @CacheEvict(value = "verification", key = "contains('#acceptanceCriteriaId')", allEntries = true)
     public List<Verification> addVerification(Verification verification, String acceptanceCriteriaId, String userName) {
         logger.info("Verify acceptance criterias,verification:{},acceptanceCriteriaId:{},userName:{}", verification, acceptanceCriteriaId, userName);
-        AcceptanceCriteria acceptanceCriteria = acceptanceCriteriaService.loadAcceptanceCriteriaById(acceptanceCriteriaId);
-        if (!acceptanceCriteria.getFinished()) {
+        Optional<AcceptanceCriteria> acceptanceCriteria = Optional.ofNullable(acceptanceCriteriaService.loadAcceptanceCriteriaById(acceptanceCriteriaId));
+        if (!acceptanceCriteria.isPresent()) {
+            throw new BusinessException(VerificationCodes.ACCEPTANCE_CRITERIA_IS_NOT_FOUND);
+        }
+        if (!acceptanceCriteria.get().getFinished()) {
             throw new BusinessException(VerificationCodes.ACCEPTANCE_CRITERIA_IS_NOT_FINISHED);
         }
         verificationPersistence.addVerification(verification, acceptanceCriteriaId, userName);

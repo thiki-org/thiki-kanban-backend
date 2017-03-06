@@ -33,6 +33,23 @@ public class VerificationServiceTest {
     private String userName = "fee";
 
     @Test
+    public void should_failed_if_acceptance_criteria_is_not_found() {
+        expectedException.expect(BusinessException.class);
+        expectedException.expectMessage(VerificationCodes.ACCEPTANCE_CRITERIA_IS_NOT_FOUND.message());
+
+        AcceptanceCriteria expectedAcceptanceCriteria = new AcceptanceCriteria();
+        expectedAcceptanceCriteria.setId(acceptanceCriteriaId);
+        expectedAcceptanceCriteria.setFinished(false);
+
+        Verification verification = new Verification();
+        verification.setAcceptanceCriteriaId(acceptanceCriteriaId);
+
+        when(acceptanceCriteriaService.loadAcceptanceCriteriaById(eq(acceptanceCriteriaId))).thenReturn(null);
+
+        verificationService.addVerification(verification, acceptanceCriteriaId, userName);
+    }
+
+    @Test
     public void should_failed_if_acceptance_criteria_is_not_finished() {
         expectedException.expect(BusinessException.class);
         expectedException.expectMessage(VerificationCodes.ACCEPTANCE_CRITERIA_IS_NOT_FINISHED.message());
