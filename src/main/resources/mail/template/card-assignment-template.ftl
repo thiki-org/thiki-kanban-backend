@@ -20,7 +20,7 @@
                                                     style="font-family: Helvetica; color: rgb(69, 69, 69); line-height: normal;">&nbsp;</span><br/>
                                             </p>
                                             <p style="margin-top: 20px; margin-bottom: 0px; font-size: 13px; line-height: normal; font-family:Helvetica; color: rgb(69, 69, 69); text-align: left;">
-                                                <span style="line-height: normal; font-family: Helvetica;">&nbsp; &nbsp; &nbsp; &nbsp;</span>${senderNickName}邀请您参与协作处理看板【${boardName}】中的卡片：${cardCode}。请知悉。 
+                                                <span style="line-height: normal; font-family: Helvetica;">&nbsp; &nbsp; &nbsp; &nbsp;</span>${senderNickName}邀请您参与协作处理看板【${boardName}】中的卡片：${cardCode}。请知悉。
                                             </p>
                                             <p style="margin-top: 40px; margin-bottom: 0px; font-size: 13px; line-height: normal; font-family:Helvetica; color: rgb(69, 69, 69); text-align: left;">
                                                 <span style="line-height: normal; font-family: Helvetica;">&nbsp; &nbsp; &nbsp; &nbsp;</span>如果这不是您的邮件请忽略，很抱歉打扰，请原谅。<span

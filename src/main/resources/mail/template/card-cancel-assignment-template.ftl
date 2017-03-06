@@ -34,8 +34,7 @@
                                                 ------------&nbsp;
                                             </p>
                                             <p style="margin-top: 0px; margin-bottom: 0px; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(69, 69, 69); text-align: right;">
-                                                思奇看板团队
-                                            </p>
+                                                思奇看板团队 </p>
                                             <p style="margin-top: 0px; margin-bottom: 0px; font-size: 12px; line-height: normal; font-family: Helvetica; color: rgb(69, 69, 69); text-align: right;">
                                             ${dateline}
                                             </p>
