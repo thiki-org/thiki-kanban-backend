@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaPersistence">
+    <insert id="addAcceptCriteria" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria">
+        INSERT
+        INTO
+        kb_acceptance_criterias(id,summary,finished, card_id, author)
+        VALUES
+        (#{acceptanceCriteria.id},#{acceptanceCriteria.summary},#{acceptanceCriteria.finished},#{cardId},#{userName})
+    </insert>
+    <update id="updateAcceptCriteria" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria"
+            flushCache="true">
+        UPDATE kb_acceptance_criterias SET
+        summary=#{acceptanceCriteria.summary},
+        finished=#{acceptanceCriteria.finished}
+        WHERE id=#{acceptanceCriteriaId} AND delete_status=0
+    </update>
+    <select id="findById" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria">
+        SELECT * FROM kb_acceptance_criterias WHERE id= #{id} AND delete_status=0
+    </select>
+
+    <select id="loadAcceptanceCriteriasByCardId" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria">
+        SELECT * FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0
+    </select>
+
+    <select id="isHasUnFinishedAcceptanceCriterias" parameterType="java.lang.String"
+            resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0 AND finished=0
+    </select>
+
+    <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_acceptance_criterias SET delete_status=1 WHERE id=#{acceptanceCriteriaId}
+    </delete>
+
+    <update id="resort" parameterType="org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria"
+            flushCache="true">
+        UPDATE kb_acceptance_criterias SET
+        sort_number=#{acceptanceCriteria.sortNumber}
+        WHERE id=#{acceptanceCriteria.id} AND delete_status=0
+    </update>
+</mapper>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class org.thiki.kanban.worktile.WorktileControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class org.thiki.kanban.worktile.WorktileControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.thiki.kanban.worktile.html">org.thiki.kanban.worktile</a> &gt; WorktileControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">9</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.580s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">createNewBoard</td>
+<td>0.150s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">importCards</td>
+<td>0.086s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">importEntry</td>
+<td>0.081s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">importTodos</td>
+<td>0.088s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">throwExceptionIfFileContentFormatIsInvalid</td>
+<td>0.043s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">throwExceptionIfFileContentIsEmpty</td>
+<td>0.037s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">throwExceptionIfFileFormatIsInvalid</td>
+<td>0.033s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">throwExceptionIfNoExtensionNameWasFound</td>
+<td>0.034s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">throwExceptionIfNoFileWasUpload</td>
+<td>0.028s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2017-03-03 21:40:58.059  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:58.062  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:58.063  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@33ac428, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4d6d36f0, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@126d753f, org.springframework.test.context.support.DirtiesContextTestExecutionListener@69b16e55, org.springframework.test.context.transaction.TransactionalTestExecutionListener@3c7ffccf, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@18818706, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@61bcdda4, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@39dd400]
+21:40:58.079 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:08409fe2-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.079  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:08409fe2-0017-11e7-af8b-0014781bc25c
+21:40:58.079 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.079  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.079 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.079  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.107 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:58.107  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+21:40:58.112 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.110000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.110000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:58.112  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.110000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.110000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+21:40:58.116 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - Creating new card:{&quot;author&quot;:&quot;someone&quot;,&quot;elapsedDays&quot;:0.0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;},stage:fooId
+2017-03-03 21:40:58.116  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : Creating new card:{&quot;author&quot;:&quot;someone&quot;,&quot;elapsedDays&quot;:0.0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;},stage:fooId
+21:40:58.124 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - Created card:{&quot;author&quot;:&quot;someone&quot;,&quot;code&quot;:&quot;170301&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.123000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.123000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;}
+2017-03-03 21:40:58.124  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : Created card:{&quot;author&quot;:&quot;someone&quot;,&quot;code&quot;:&quot;170301&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.123000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.123000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;}
+21:40:58.126 [http-nio-9120-exec-10] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.123000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.123000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;001&quot;,&quot;operationTypeName&quot;:&quot;卡片创建&quot;,&quot;stageId&quot;:&quot;fooId&quot;,&quot;stageSnapShot&quot;:&quot;{\&quot;archived\&quot;:false,\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;boardId\&quot;:\&quot;fooId\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.110000\&quot;,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;inDoneStatus\&quot;:false,\&quot;inProcess\&quot;:false,\&quot;inSprint\&quot;:false,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.110000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;status\&quot;:0,\&quot;title\&quot;:\&quot;Product Backlog\&quot;,\&quot;type\&quot;:0}&quot;,&quot;summary&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.123000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.123000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:58.126  INFO 6131 --- [io-9120-exec-10] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.123000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.123000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;001&quot;,&quot;operationTypeName&quot;:&quot;卡片创建&quot;,&quot;stageId&quot;:&quot;fooId&quot;,&quot;stageSnapShot&quot;:&quot;{\&quot;archived\&quot;:false,\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;boardId\&quot;:\&quot;fooId\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.110000\&quot;,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;inDoneStatus\&quot;:false,\&quot;inProcess\&quot;:false,\&quot;inSprint\&quot;:false,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.110000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;status\&quot;:0,\&quot;title\&quot;:\&quot;Product Backlog\&quot;,\&quot;type\&quot;:0}&quot;,&quot;summary&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.123000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.123000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:58.134 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - User someone adds a acceptance criteria in card [fooId],the acceptanceCriteria is:{&quot;author&quot;:&quot;someone&quot;,&quot;finished&quot;:true,&quot;summary&quot;:&quot;todo&quot;}
+2017-03-03 21:40:58.134  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : User someone adds a acceptance criteria in card [fooId],the acceptanceCriteria is:{&quot;author&quot;:&quot;someone&quot;,&quot;finished&quot;:true,&quot;summary&quot;:&quot;todo&quot;}
+21:40:58.137 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.136000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.136000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;todo&quot;}
+2017-03-03 21:40:58.137  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.136000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.136000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;todo&quot;}
+21:40:58.138 [http-nio-9120-exec-10] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;finished\&quot;:true,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;todo\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;todo&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:58.138  INFO 6131 --- [io-9120-exec-10] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;finished\&quot;:true,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;todo\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;todo&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:58.143 [http-nio-9120-exec-10] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.106000', modificationTime='2017-03-03 21:40:58.106000'},userName:someone
+2017-03-03 21:40:58.143  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.106000', modificationTime='2017-03-03 21:40:58.106000'},userName:someone
+21:40:58.157 [http-nio-9120-exec-10] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.106000', modificationTime='2017-03-03 21:40:58.106000'},userName:someone
+2017-03-03 21:40:58.157  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.106000', modificationTime='2017-03-03 21:40:58.106000'},userName:someone
+21:40:58.160 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.160  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.231 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:0857d165-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.231  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:0857d165-0017-11e7-af8b-0014781bc25c
+21:40:58.231 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.231  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.231 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.231  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.234 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.234  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.236 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:085894b6-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.236  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:085894b6-0017-11e7-af8b-0014781bc25c
+21:40:58.236 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.236  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:58.236 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.236  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:58.237 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.237  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.267 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:085d4fa7-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.267  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:085d4fa7-0017-11e7-af8b-0014781bc25c
+21:40:58.267 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.267  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.268 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.268  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.269 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.269  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.272 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:085e12f8-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.272  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:085e12f8-0017-11e7-af8b-0014781bc25c
+21:40:58.272 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.272  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:58.272 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.272  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:58.273 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.273  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.305 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:08631c09-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.305  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:08631c09-0017-11e7-af8b-0014781bc25c
+21:40:58.305 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.305  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.306 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.306  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.307 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.307  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.309 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:0863b84a-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.309  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:0863b84a-0017-11e7-af8b-0014781bc25c
+21:40:58.309 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.309  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:58.309 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.309  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:58.310 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.310  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.338 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:0868251b-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.338  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:0868251b-0017-11e7-af8b-0014781bc25c
+21:40:58.339 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.339  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.340 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.340  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.342 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.342  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.344 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:08690f7c-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.344  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:08690f7c-0017-11e7-af8b-0014781bc25c
+21:40:58.345 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.345  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:58.346 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.346  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:58.348 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.348  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.380 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:086e8dbd-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.380  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:086e8dbd-0017-11e7-af8b-0014781bc25c
+21:40:58.380 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.380  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.381 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.381  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.385 [http-nio-9120-exec-3] INFO  org.thiki.kanban.stage.StagesService - Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:58.385  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.stage.StagesService     : Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+21:40:58.389 [http-nio-9120-exec-3] INFO  org.thiki.kanban.stage.StagesService - Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.388000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.388000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:58.389  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.stage.StagesService     : Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.388000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.388000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+21:40:58.389 [http-nio-9120-exec-3] INFO  o.t.k.a.AcceptanceCriteriaService - Creating new card:{&quot;author&quot;:&quot;someone&quot;,&quot;elapsedDays&quot;:0.0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;},stage:fooId
+2017-03-03 21:40:58.389  INFO 6131 --- [nio-9120-exec-3] o.t.k.a.AcceptanceCriteriaService        : Creating new card:{&quot;author&quot;:&quot;someone&quot;,&quot;elapsedDays&quot;:0.0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;},stage:fooId
+21:40:58.396 [http-nio-9120-exec-3] INFO  o.t.k.a.AcceptanceCriteriaService - Created card:{&quot;author&quot;:&quot;someone&quot;,&quot;code&quot;:&quot;170301&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.395000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.395000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;}
+2017-03-03 21:40:58.396  INFO 6131 --- [nio-9120-exec-3] o.t.k.a.AcceptanceCriteriaService        : Created card:{&quot;author&quot;:&quot;someone&quot;,&quot;code&quot;:&quot;170301&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.395000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.395000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;}
+21:40:58.398 [http-nio-9120-exec-3] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.395000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.395000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;001&quot;,&quot;operationTypeName&quot;:&quot;卡片创建&quot;,&quot;stageId&quot;:&quot;fooId&quot;,&quot;stageSnapShot&quot;:&quot;{\&quot;archived\&quot;:false,\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;boardId\&quot;:\&quot;fooId\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.388000\&quot;,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;inDoneStatus\&quot;:false,\&quot;inProcess\&quot;:false,\&quot;inSprint\&quot;:false,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.388000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;status\&quot;:0,\&quot;title\&quot;:\&quot;Product Backlog\&quot;,\&quot;type\&quot;:0}&quot;,&quot;summary&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.395000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.395000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:58.398  INFO 6131 --- [nio-9120-exec-3] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.395000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.395000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;001&quot;,&quot;operationTypeName&quot;:&quot;卡片创建&quot;,&quot;stageId&quot;:&quot;fooId&quot;,&quot;stageSnapShot&quot;:&quot;{\&quot;archived\&quot;:false,\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;boardId\&quot;:\&quot;fooId\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.388000\&quot;,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;inDoneStatus\&quot;:false,\&quot;inProcess\&quot;:false,\&quot;inSprint\&quot;:false,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.388000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;status\&quot;:0,\&quot;title\&quot;:\&quot;Product Backlog\&quot;,\&quot;type\&quot;:0}&quot;,&quot;summary&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.395000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.395000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:58.402 [http-nio-9120-exec-3] INFO  o.t.k.a.AcceptanceCriteriaService - User someone adds a acceptance criteria in card [fooId],the acceptanceCriteria is:{&quot;author&quot;:&quot;someone&quot;,&quot;finished&quot;:true,&quot;summary&quot;:&quot;todo&quot;}
+2017-03-03 21:40:58.402  INFO 6131 --- [nio-9120-exec-3] o.t.k.a.AcceptanceCriteriaService        : User someone adds a acceptance criteria in card [fooId],the acceptanceCriteria is:{&quot;author&quot;:&quot;someone&quot;,&quot;finished&quot;:true,&quot;summary&quot;:&quot;todo&quot;}
+21:40:58.405 [http-nio-9120-exec-3] INFO  o.t.k.a.AcceptanceCriteriaService - Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.404000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.404000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;todo&quot;}
+2017-03-03 21:40:58.405  INFO 6131 --- [nio-9120-exec-3] o.t.k.a.AcceptanceCriteriaService        : Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.404000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.404000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;todo&quot;}
+21:40:58.406 [http-nio-9120-exec-3] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;finished\&quot;:true,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;todo\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;todo&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:58.406  INFO 6131 --- [nio-9120-exec-3] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;finished\&quot;:true,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;todo\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;todo&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:58.408 [http-nio-9120-exec-3] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.384000', modificationTime='2017-03-03 21:40:58.384000'},userName:someone
+2017-03-03 21:40:58.408  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.384000', modificationTime='2017-03-03 21:40:58.384000'},userName:someone
+21:40:58.417 [http-nio-9120-exec-3] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.384000', modificationTime='2017-03-03 21:40:58.384000'},userName:someone
+2017-03-03 21:40:58.417  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.384000', modificationTime='2017-03-03 21:40:58.384000'},userName:someone
+21:40:58.419 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.419  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.465 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:087b8510-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.465  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:087b8510-0017-11e7-af8b-0014781bc25c
+21:40:58.466 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.466  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.466 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.466  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.471 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:58.471  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+21:40:58.474 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.473000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.473000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:58.474  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.473000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.473000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+21:40:58.475 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - Creating new card:{&quot;author&quot;:&quot;someone&quot;,&quot;elapsedDays&quot;:0.0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;},stage:fooId
+2017-03-03 21:40:58.475  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : Creating new card:{&quot;author&quot;:&quot;someone&quot;,&quot;elapsedDays&quot;:0.0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;},stage:fooId
+21:40:58.481 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - Created card:{&quot;author&quot;:&quot;someone&quot;,&quot;code&quot;:&quot;170301&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.480000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.480000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;}
+2017-03-03 21:40:58.481  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : Created card:{&quot;author&quot;:&quot;someone&quot;,&quot;code&quot;:&quot;170301&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.480000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.480000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;}
+21:40:58.482 [http-nio-9120-exec-4] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.480000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.480000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;001&quot;,&quot;operationTypeName&quot;:&quot;卡片创建&quot;,&quot;stageId&quot;:&quot;fooId&quot;,&quot;stageSnapShot&quot;:&quot;{\&quot;archived\&quot;:false,\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;boardId\&quot;:\&quot;fooId\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.473000\&quot;,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;inDoneStatus\&quot;:false,\&quot;inProcess\&quot;:false,\&quot;inSprint\&quot;:false,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.473000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;status\&quot;:0,\&quot;title\&quot;:\&quot;Product Backlog\&quot;,\&quot;type\&quot;:0}&quot;,&quot;summary&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.480000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.480000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:58.482  INFO 6131 --- [nio-9120-exec-4] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.480000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.480000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;001&quot;,&quot;operationTypeName&quot;:&quot;卡片创建&quot;,&quot;stageId&quot;:&quot;fooId&quot;,&quot;stageSnapShot&quot;:&quot;{\&quot;archived\&quot;:false,\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;boardId\&quot;:\&quot;fooId\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.473000\&quot;,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;inDoneStatus\&quot;:false,\&quot;inProcess\&quot;:false,\&quot;inSprint\&quot;:false,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.473000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;status\&quot;:0,\&quot;title\&quot;:\&quot;Product Backlog\&quot;,\&quot;type\&quot;:0}&quot;,&quot;summary&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.480000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.480000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:58.485 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - User someone adds a acceptance criteria in card [fooId],the acceptanceCriteria is:{&quot;author&quot;:&quot;someone&quot;,&quot;finished&quot;:true,&quot;summary&quot;:&quot;todo&quot;}
+2017-03-03 21:40:58.485  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : User someone adds a acceptance criteria in card [fooId],the acceptanceCriteria is:{&quot;author&quot;:&quot;someone&quot;,&quot;finished&quot;:true,&quot;summary&quot;:&quot;todo&quot;}
+21:40:58.488 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.486000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.486000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;todo&quot;}
+2017-03-03 21:40:58.488  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.486000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.486000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;todo&quot;}
+21:40:58.488 [http-nio-9120-exec-4] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;finished\&quot;:true,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;todo\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;todo&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:58.488  INFO 6131 --- [nio-9120-exec-4] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;finished\&quot;:true,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;todo\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;todo&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:58.490 [http-nio-9120-exec-4] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.469000', modificationTime='2017-03-03 21:40:58.469000'},userName:someone
+2017-03-03 21:40:58.490  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.469000', modificationTime='2017-03-03 21:40:58.469000'},userName:someone
+21:40:58.498 [http-nio-9120-exec-4] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.469000', modificationTime='2017-03-03 21:40:58.469000'},userName:someone
+2017-03-03 21:40:58.498  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.469000', modificationTime='2017-03-03 21:40:58.469000'},userName:someone
+21:40:58.501 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.501  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.548 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:08882f43-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.548  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:08882f43-0017-11e7-af8b-0014781bc25c
+21:40:58.548 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.548  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.548 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.548  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.553 [http-nio-9120-exec-2] INFO  org.thiki.kanban.stage.StagesService - Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:58.553  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.stage.StagesService     : Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+21:40:58.557 [http-nio-9120-exec-2] INFO  org.thiki.kanban.stage.StagesService - Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.556000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.556000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:58.557  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.stage.StagesService     : Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.556000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.556000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;Product Backlog&quot;,&quot;type&quot;:0}
+21:40:58.558 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Creating new card:{&quot;author&quot;:&quot;someone&quot;,&quot;elapsedDays&quot;:0.0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;},stage:fooId
+2017-03-03 21:40:58.558  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Creating new card:{&quot;author&quot;:&quot;someone&quot;,&quot;elapsedDays&quot;:0.0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;},stage:fooId
+21:40:58.566 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Created card:{&quot;author&quot;:&quot;someone&quot;,&quot;code&quot;:&quot;170301&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.564000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.564000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;}
+2017-03-03 21:40:58.566  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Created card:{&quot;author&quot;:&quot;someone&quot;,&quot;code&quot;:&quot;170301&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.564000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.564000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;fooId&quot;,&quot;summary&quot;:&quot;任务名称&quot;}
+21:40:58.568 [http-nio-9120-exec-2] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.564000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.564000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;001&quot;,&quot;operationTypeName&quot;:&quot;卡片创建&quot;,&quot;stageId&quot;:&quot;fooId&quot;,&quot;stageSnapShot&quot;:&quot;{\&quot;archived\&quot;:false,\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;boardId\&quot;:\&quot;fooId\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.556000\&quot;,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;inDoneStatus\&quot;:false,\&quot;inProcess\&quot;:false,\&quot;inSprint\&quot;:false,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.556000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;status\&quot;:0,\&quot;title\&quot;:\&quot;Product Backlog\&quot;,\&quot;type\&quot;:0}&quot;,&quot;summary&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.564000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.564000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:58.568  INFO 6131 --- [nio-9120-exec-2] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.564000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.564000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;001&quot;,&quot;operationTypeName&quot;:&quot;卡片创建&quot;,&quot;stageId&quot;:&quot;fooId&quot;,&quot;stageSnapShot&quot;:&quot;{\&quot;archived\&quot;:false,\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;boardId\&quot;:\&quot;fooId\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.556000\&quot;,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;inDoneStatus\&quot;:false,\&quot;inProcess\&quot;:false,\&quot;inSprint\&quot;:false,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.556000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;status\&quot;:0,\&quot;title\&quot;:\&quot;Product Backlog\&quot;,\&quot;type\&quot;:0}&quot;,&quot;summary&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;code\&quot;:\&quot;170301\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:58.564000\&quot;,\&quot;elapsedDays\&quot;:0.0,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:58.564000\&quot;,\&quot;sortNumber\&quot;:0,\&quot;stageId\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;任务名称\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:58.572 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - User someone adds a acceptance criteria in card [fooId],the acceptanceCriteria is:{&quot;author&quot;:&quot;someone&quot;,&quot;finished&quot;:true,&quot;summary&quot;:&quot;todo&quot;}
+2017-03-03 21:40:58.572  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : User someone adds a acceptance criteria in card [fooId],the acceptanceCriteria is:{&quot;author&quot;:&quot;someone&quot;,&quot;finished&quot;:true,&quot;summary&quot;:&quot;todo&quot;}
+21:40:58.574 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.573000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.573000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;todo&quot;}
+2017-03-03 21:40:58.574  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:58.573000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:58.573000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;todo&quot;}
+21:40:58.575 [http-nio-9120-exec-2] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;finished\&quot;:true,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;todo\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;todo&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:58.575  INFO 6131 --- [nio-9120-exec-2] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;fooId&quot;,&quot;detail&quot;:&quot;{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;finished\&quot;:true,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;todo\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;todo&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:58.578 [http-nio-9120-exec-2] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.552000', modificationTime='2017-03-03 21:40:58.552000'},userName:someone
+2017-03-03 21:40:58.578  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.552000', modificationTime='2017-03-03 21:40:58.552000'},userName:someone
+21:40:58.589 [http-nio-9120-exec-2] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.552000', modificationTime='2017-03-03 21:40:58.552000'},userName:someone
+2017-03-03 21:40:58.589  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='fooId', name='worktile2017-03-03', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:58.552000', modificationTime='2017-03-03 21:40:58.552000'},userName:someone
+21:40:58.592 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.592  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.635 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:089575b6-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.635  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:089575b6-0017-11e7-af8b-0014781bc25c
+21:40:58.635 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.635  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/worktileTasks
+21:40:58.635 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/worktileTasks
+2017-03-03 21:40:58.635  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/worktileTasks
+21:40:58.636 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.636  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:58.637 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:0895c3d7-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:58.637  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:0895c3d7-0017-11e7-af8b-0014781bc25c
+21:40:58.638 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.638  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:58.638 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:58.638  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:58.639 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:58.639  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+</div>
+</div>
+</body>
+</html>

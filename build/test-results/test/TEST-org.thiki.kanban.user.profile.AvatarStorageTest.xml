@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.thiki.kanban.user.profile.AvatarStorageTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2017-03-03T13:40:54" hostname="wisdom-HP" time="0.04">
+  <properties/>
+  <testcase name="overwriteAvatarIfItAlreadyExists" classname="org.thiki.kanban.user.profile.AvatarStorageTest" time="0.029"/>
+  <testcase name="loadDefaultAvatarIfNoAvatarWasFound" classname="org.thiki.kanban.user.profile.AvatarStorageTest" time="0.006"/>
+  <testcase name="renamingAvatarName" classname="org.thiki.kanban.user.profile.AvatarStorageTest" time="0.001"/>
+  <testcase name="createDirectoryIfItDoesNotExists" classname="org.thiki.kanban.user.profile.AvatarStorageTest" time="0.001"/>
+  <testcase name="NotOverwriteAvatarIfTypeIsNotSame" classname="org.thiki.kanban.user.profile.AvatarStorageTest" time="0.001"/>
+  <testcase name="loadDefaultAvatarIfAvatarNameWasNull" classname="org.thiki.kanban.user.profile.AvatarStorageTest" time="0.001"/>
+  <testcase name="loadAvatarByUserName" classname="org.thiki.kanban.user.profile.AvatarStorageTest" time="0.001"/>
+  <system-out><![CDATA[21:40:54.696 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:54.696  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:54.724 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:54.724  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:54.725 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:foo
+2017-03-03 21:40:54.725  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:foo
+21:40:54.725 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - no avatar was found,return default avatar.
+2017-03-03 21:40:54.725  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : no avatar was found,return default avatar.
+21:40:54.731 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:54.731  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:54.732 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:54.732  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:54.733 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:54.733  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:54.734 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:54.734  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:54.734 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:null
+2017-03-03 21:40:54.734  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:null
+21:40:54.735 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - no avatar was found,return default avatar.
+2017-03-03 21:40:54.735  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : no avatar was found,return default avatar.
+21:40:54.735 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:54.735  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:54.736 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:someone.jpg
+2017-03-03 21:40:54.736  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:someone.jpg
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

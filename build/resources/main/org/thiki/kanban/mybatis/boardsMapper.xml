@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.board.BoardsPersistence">
+
+    <insert id="create" parameterType="org.thiki.kanban.board.Board">
+        INSERT INTO
+        kb_board(id,name, author,owner) VALUES (#{id},#{name}, #{author}, #{author})
+    </insert>
+
+    <update id="update" parameterType="org.thiki.kanban.board.Board" flushCache="true">
+        UPDATE kb_board SET
+        name=#{name}
+        <if test="projectId!=null">
+            ,owner=#{projectId}
+            ,project_id=#{projectId}
+        </if>
+        WHERE id=#{id} AND delete_status=0
+    </update>
+    <select id="unique" parameterType="java.lang.String" resultType="java.lang.Boolean">
+
+        SELECT count(*) FROM kb_board WHERE delete_status=0 AND NAME=#{name} AND author=#{userName}
+        <if test="id!=null">
+            AND id !=#{id}
+        </if>
+
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0 and id= #{id}
+    </select>
+
+
+    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_board SET delete_status=1 WHERE id=#{id} AND owner= #{userName}
+    </delete>
+
+    <select id="findPersonalBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0 AND owner=#{userName}
+    </select>
+
+    <select id="findTeamsBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+        SELECT * FROM kb_board WHERE delete_status=0 and project_id= #{projectId}
+    </select>
+</mapper>

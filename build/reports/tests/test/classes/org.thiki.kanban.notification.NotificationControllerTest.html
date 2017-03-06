@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class org.thiki.kanban.notification.NotificationControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class org.thiki.kanban.notification.NotificationControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.thiki.kanban.notification.html">org.thiki.kanban.notification</a> &gt; NotificationControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">4</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.304s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">loadAllNotifications</td>
+<td>0.113s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">loadNotificationByID</td>
+<td>0.063s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">loadUnreadNotificationAfterLoading</td>
+<td>0.044s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notSetNotificationReadIfItHasAlreadyBeenReadAfterLoading</td>
+<td>0.084s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2017-03-03 21:40:55.147  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:55.150  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:55.151  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@ccf9fc9, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@10a1b2cf, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5f11bd50, org.springframework.test.context.support.DirtiesContextTestExecutionListener@25c2c73a, org.springframework.test.context.transaction.TransactionalTestExecutionListener@5503359c, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4829c239, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@1a000d51, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@2948f23c]
+21:40:55.168 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:068470bf-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.168  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:068470bf-0017-11e7-af8b-0014781bc25c
+21:40:55.168 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/notifications
+2017-03-03 21:40:55.168  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/notifications
+21:40:55.168 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/notifications
+2017-03-03 21:40:55.168  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/notifications
+21:40:55.180 [http-nio-9120-exec-7] INFO  o.t.k.n.NotificationService - Loading notifications by userName userName:someone
+2017-03-03 21:40:55.180  INFO 6131 --- [nio-9120-exec-7] o.t.k.notification.NotificationService   : Loading notifications by userName userName:someone
+21:40:55.182 [http-nio-9120-exec-7] INFO  o.t.k.n.NotificationService - Loaded notifications:[Notification{id='foo-notification-id', receiver='someone', sender='sender@gmail.com', content='content', link='http://hello.com', isRead=false, creationTime='2017-03-03 21:40:55.159000', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='2017-03-03 21:40:55.159000'}]
+2017-03-03 21:40:55.182  INFO 6131 --- [nio-9120-exec-7] o.t.k.notification.NotificationService   : Loaded notifications:[Notification{id='foo-notification-id', receiver='someone', sender='sender@gmail.com', content='content', link='http://hello.com', isRead=false, creationTime='2017-03-03 21:40:55.159000', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='2017-03-03 21:40:55.159000'}]
+21:40:55.197 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.197  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.279 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:069560b0-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.279  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:069560b0-0017-11e7-af8b-0014781bc25c
+21:40:55.279 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/notifications/foo-notification-id
+2017-03-03 21:40:55.279  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/notifications/foo-notification-id
+21:40:55.279 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/notifications/foo-notification-id
+2017-03-03 21:40:55.279  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/notifications/foo-notification-id
+21:40:55.280 [http-nio-9120-exec-1] INFO  o.t.k.n.NotificationService - Loading notification id:foo-notification-id
+2017-03-03 21:40:55.280  INFO 6131 --- [nio-9120-exec-1] o.t.k.notification.NotificationService   : Loading notification id:foo-notification-id
+21:40:55.283 [http-nio-9120-exec-1] INFO  o.t.k.n.NotificationService - Loaded notification notification:Notification{id='foo-notification-id', receiver='someone', sender='sender@gmail.com', content='content', link='http://hello.com', isRead=true, creationTime='2017-03-03 21:40:55.272000', displayTime='null', type='notificationType', typeName='null', modificationTime='2017-03-03 21:40:55.272000'}
+2017-03-03 21:40:55.283  INFO 6131 --- [nio-9120-exec-1] o.t.k.notification.NotificationService   : Loaded notification notification:Notification{id='foo-notification-id', receiver='someone', sender='sender@gmail.com', content='content', link='http://hello.com', isRead=true, creationTime='2017-03-03 21:40:55.272000', displayTime='null', type='notificationType', typeName='null', modificationTime='2017-03-03 21:40:55.272000'}
+21:40:55.287 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.287  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.344 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:069f4bc1-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.344  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:069f4bc1-0017-11e7-af8b-0014781bc25c
+21:40:55.345 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/notifications/unread/total
+2017-03-03 21:40:55.345  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/notifications/unread/total
+21:40:55.345 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/notifications/unread/total
+2017-03-03 21:40:55.345  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/notifications/unread/total
+21:40:55.345 [http-nio-9120-exec-10] INFO  o.t.k.n.NotificationService - Loading unread notification total.userName:someone
+2017-03-03 21:40:55.345  INFO 6131 --- [io-9120-exec-10] o.t.k.notification.NotificationService   : Loading unread notification total.userName:someone
+21:40:55.350 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.350  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.394 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:06a6ece2-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.394  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:06a6ece2-0017-11e7-af8b-0014781bc25c
+21:40:55.394 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/notifications/foo-notification-id
+2017-03-03 21:40:55.394  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/notifications/foo-notification-id
+21:40:55.395 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/notifications/foo-notification-id
+2017-03-03 21:40:55.395  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/notifications/foo-notification-id
+21:40:55.395 [http-nio-9120-exec-2] INFO  o.t.k.n.NotificationService - Loading notification id:foo-notification-id
+2017-03-03 21:40:55.395  INFO 6131 --- [nio-9120-exec-2] o.t.k.notification.NotificationService   : Loading notification id:foo-notification-id
+21:40:55.397 [http-nio-9120-exec-2] INFO  o.t.k.n.NotificationService - Loaded notification notification:Notification{id='foo-notification-id', receiver='someone', sender='sender@gmail.com', content='content', link='http://hello.com', isRead=true, creationTime='2017-03-03 21:40:55.384000', displayTime='null', type='notificationType', typeName='null', modificationTime='2017-03-03 21:40:55.384000'}
+2017-03-03 21:40:55.397  INFO 6131 --- [nio-9120-exec-2] o.t.k.notification.NotificationService   : Loaded notification notification:Notification{id='foo-notification-id', receiver='someone', sender='sender@gmail.com', content='content', link='http://hello.com', isRead=true, creationTime='2017-03-03 21:40:55.384000', displayTime='null', type='notificationType', typeName='null', modificationTime='2017-03-03 21:40:55.384000'}
+21:40:55.401 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.401  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+</div>
+</div>
+</body>
+</html>

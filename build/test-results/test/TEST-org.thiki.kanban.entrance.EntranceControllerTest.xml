@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.thiki.kanban.entrance.EntranceControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-03-03T13:40:55" hostname="wisdom-HP" time="0.095">
+  <properties/>
+  <testcase name="enter_shouldReturnEntranceSuccessfully" classname="org.thiki.kanban.entrance.EntranceControllerTest" time="0.095"/>
+  <system-out><![CDATA[2017-03-03 21:40:55.470  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:55.474  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:55.474  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@33e28b99, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3a6468e4, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@557c5fa5, org.springframework.test.context.support.DirtiesContextTestExecutionListener@20d7c2f0, org.springframework.test.context.transaction.TransactionalTestExecutionListener@74e3b30, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1ef45075, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@29c2b579, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@379c32f3]
+21:40:55.489 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:06b56bd3-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.489  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:06b56bd3-0017-11e7-af8b-0014781bc25c
+21:40:55.489 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/entrance
+2017-03-03 21:40:55.489  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/entrance
+21:40:55.490 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/entrance
+2017-03-03 21:40:55.490  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/entrance
+21:40:55.490 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication end.
+2017-03-03 21:40:55.490  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication end.
+21:40:55.497 [http-nio-9120-exec-3] WARN  o.t.k.entrance.EntranceController - entrance called!
+2017-03-03 21:40:55.497  WARN 6131 --- [nio-9120-exec-3] o.t.kanban.entrance.EntranceController   : entrance called!
+21:40:55.506 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.506  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,61 @@
+[
+  {
+    "tid": "fa2815d18b254a4abeb8b2f453148355",
+    "name": "任务名称",
+    "desc": "",
+    "pos": 1589228.75,
+    "expire_date": "",
+    "completed": 0,
+    "archived": 0,
+    "completed_at": "",
+    "create_at": "2016-06-21T00:54:13.501Z",
+    "create_by": {
+      "uid": "79572b3454a54d35980e7b8b8ca9d2c6",
+      "name": "xubitao",
+      "display_name": "徐必涛"
+    },
+    "update_at": "2016-08-05T15:39:27.390Z",
+    "update_by": {
+      "uid": "79572b3454a54d35980e7b8b8ca9d2c6",
+      "name": "xubitao",
+      "display_name": "徐必涛"
+    },
+    "project": {
+      "pid": "2187f189117544e8b1397613afac921c",
+      "name": "thiki-kanban product backlog"
+    },
+    "entry": {
+      "entry_id": "0eae9291d2ad4b029df3f798dbf820a9",
+      "name": "Product Backlog"
+    },
+    "labels": [
+      {
+        "name": "young_blue",
+        "desc": "用户故事",
+        "_id": "5774c5da3a70fd66302dcfd8"
+      }
+    ],
+    "assignee": [],
+    "watchers": [
+      {
+        "uid": "79572b3454a54d35980e7b8b8ca9d2c6",
+        "name": "xubitao",
+        "display_name": "徐必涛"
+      },
+      {
+        "uid": "bd636b0c317d400b870d5455f7e330a8",
+        "name": "zengzhu_hoolai",
+        "display_name": "曾著"
+      }
+    ],
+    "todos": [
+      {
+        "todo_id": "e17f667ec35e42ea85a314e0bb9af635",
+        "name": "todo",
+        "pos": 65535,
+        "checked": 1
+      }
+    ],
+    "attachments": []
+  }
+]

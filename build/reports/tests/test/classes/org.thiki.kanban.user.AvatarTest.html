@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class org.thiki.kanban.user.AvatarTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class org.thiki.kanban.user.AvatarTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.thiki.kanban.user.html">org.thiki.kanban.user</a> &gt; AvatarTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">5</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.390s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">loadAvatar</td>
+<td>0.157s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">loadDefaultAvatar</td>
+<td>0.071s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">nowAllowedIfAvatarWasNull</td>
+<td>0.044s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">nowAllowedIfAvatarWasTooBig</td>
+<td>0.063s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">uploadAvatar</td>
+<td>0.055s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2017-03-03 21:40:54.739  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:54.742  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:54.743  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@50b38917, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@65feb60a, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4c7ef51a, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6ce754a5, org.springframework.test.context.transaction.TransactionalTestExecutionListener@20d0831f, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@308e2fe9, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@be3dac7, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5d77f562]
+21:40:54.858 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:06552356-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.858  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:06552356-0017-11e7-af8b-0014781bc25c
+21:40:54.858 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/avatar
+2017-03-03 21:40:54.858  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/avatar
+21:40:54.858 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/avatar
+2017-03-03 21:40:54.858  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/avatar
+21:40:54.864 [http-nio-9120-exec-4] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:54.864  INFO 6131 --- [nio-9120-exec-4] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:54.872 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.872  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:54.888 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:0659b737-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.888  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:0659b737-0017-11e7-af8b-0014781bc25c
+21:40:54.889 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/avatar
+2017-03-03 21:40:54.889  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/avatar
+21:40:54.890 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/avatar
+2017-03-03 21:40:54.890  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/avatar
+21:40:54.891 [http-nio-9120-exec-12] INFO  org.thiki.kanban.user.UsersService - load avatar by userName:someone
+2017-03-03 21:40:54.891  INFO 6131 --- [io-9120-exec-12] org.thiki.kanban.user.UsersService       : load avatar by userName:someone
+21:40:54.894 [http-nio-9120-exec-12] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:someone.jpg
+2017-03-03 21:40:54.894  INFO 6131 --- [io-9120-exec-12] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:someone.jpg
+2017-03-03 21:40:54.896  WARN 6131 --- [    Test worker] SpecificationImpl$RestAssuredHttpBuilder : Could not parse content-type: Response does not have a content-type header
+21:40:54.896 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.896  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:54.939 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:06617f68-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.939  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:06617f68-0017-11e7-af8b-0014781bc25c
+21:40:54.939 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/avatar
+2017-03-03 21:40:54.939  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/avatar
+21:40:54.939 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/avatar
+2017-03-03 21:40:54.939  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/avatar
+21:40:54.942 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.942  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:54.944 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:066242b9-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.944  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:066242b9-0017-11e7-af8b-0014781bc25c
+21:40:54.944 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:54.944  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:54.944 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:54.944  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:54.947 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.947  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:54.981 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:0667e80a-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.981  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:0667e80a-0017-11e7-af8b-0014781bc25c
+21:40:54.981 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/avatar
+2017-03-03 21:40:54.981  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/avatar
+21:40:54.982 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/avatar
+2017-03-03 21:40:54.982  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/avatar
+21:40:54.984 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.984  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:54.988 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:0668d26b-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.988  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:0668d26b-0017-11e7-af8b-0014781bc25c
+21:40:54.988 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:54.988  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:54.989 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:54.989  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:54.992 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.992  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.032 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:066fb03c-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.032  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:066fb03c-0017-11e7-af8b-0014781bc25c
+21:40:55.032 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/avatar
+2017-03-03 21:40:55.032  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/avatar
+21:40:55.033 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/avatar
+2017-03-03 21:40:55.033  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/avatar
+21:40:55.037 [http-nio-9120-exec-5] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:55.037  INFO 6131 --- [nio-9120-exec-5] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:55.052 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.052  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.076 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:067666fd-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.076  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:067666fd-0017-11e7-af8b-0014781bc25c
+21:40:55.076 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/avatar
+2017-03-03 21:40:55.076  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/avatar
+21:40:55.077 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/avatar
+2017-03-03 21:40:55.077  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/avatar
+21:40:55.077 [http-nio-9120-exec-8] INFO  org.thiki.kanban.user.UsersService - load avatar by userName:someone
+2017-03-03 21:40:55.077  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.user.UsersService       : load avatar by userName:someone
+21:40:55.079 [http-nio-9120-exec-8] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:someone.png
+2017-03-03 21:40:55.079  INFO 6131 --- [nio-9120-exec-8] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:someone.png
+21:40:55.080 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.080  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+2017-03-03 21:40:55.081  WARN 6131 --- [    Test worker] SpecificationImpl$RestAssuredHttpBuilder : Could not parse content-type: Response does not have a content-type header
+21:40:55.102 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:067a5e9e-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.102  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:067a5e9e-0017-11e7-af8b-0014781bc25c
+21:40:55.103 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/avatar
+2017-03-03 21:40:55.103  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/avatar
+21:40:55.103 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/avatar
+2017-03-03 21:40:55.103  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/avatar
+21:40:55.105 [http-nio-9120-exec-6] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-03 21:40:55.105  INFO 6131 --- [nio-9120-exec-6] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+21:40:55.114 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.114  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.thiki.kanban.acceptanceCriteria.html">org.thiki.kanban.acceptanceCriteria</a> &gt; AcceptanceCriteriaControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">7</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.690s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">create_shouldReturn201WhenCreateACSuccessfully</td>
+<td>0.116s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">deleteAC</td>
+<td>0.041s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">loadACById</td>
+<td>0.077s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">loadAcceptanceCriterias</td>
+<td>0.102s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notAllowedIfSummaryIsEmpty</td>
+<td>0.041s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">resortAcceptanceCriterias</td>
+<td>0.167s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">updateAC</td>
+<td>0.146s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2017-03-03 21:40:52.044  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:52.048  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:52.049  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@521beeda, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@61356be, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@57b966b0, org.springframework.test.context.support.DirtiesContextTestExecutionListener@1bf6321, org.springframework.test.context.transaction.TransactionalTestExecutionListener@cdf20f2, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@10e53171, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@cf5593b, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@762985ef]
+21:40:52.067 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:04ab43a7-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:52.067  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:04ab43a7-0017-11e7-af8b-0014781bc25c
+21:40:52.068 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+2017-03-03 21:40:52.068  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+21:40:52.068 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+2017-03-03 21:40:52.068  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+21:40:52.088 [http-nio-9120-exec-9] INFO  o.t.k.a.AcceptanceCriteriaService - User someone adds a acceptance criteria in card [card-fooId],the acceptanceCriteria is:{&quot;finished&quot;:false,&quot;summary&quot;:&quot;AC-summary&quot;}
+2017-03-03 21:40:52.088  INFO 6131 --- [nio-9120-exec-9] o.t.k.a.AcceptanceCriteriaService        : User someone adds a acceptance criteria in card [card-fooId],the acceptanceCriteria is:{&quot;finished&quot;:false,&quot;summary&quot;:&quot;AC-summary&quot;}
+21:40:52.098 [http-nio-9120-exec-9] INFO  o.t.k.a.AcceptanceCriteriaService - Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.096000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.096000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;AC-summary&quot;}
+2017-03-03 21:40:52.098  INFO 6131 --- [nio-9120-exec-9] o.t.k.a.AcceptanceCriteriaService        : Saved acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.096000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.096000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;AC-summary&quot;}
+21:40:52.098 [http-nio-9120-exec-9] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;{\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;AC-summary\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;AC-summary&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:52.098  INFO 6131 --- [nio-9120-exec-9] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;{\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;summary\&quot;:\&quot;AC-summary\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;004&quot;,&quot;operationTypeName&quot;:&quot;增加验收标准&quot;,&quot;summary&quot;:&quot;AC-summary&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:52.102 [http-nio-9120-exec-9] INFO  o.t.k.a.AcceptanceCriteriaResource - build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.102  INFO 6131 --- [nio-9120-exec-9] o.t.k.a.AcceptanceCriteriaResource       : build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.107 [http-nio-9120-exec-9] INFO  o.t.k.a.AcceptanceCriteriaResource - acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.107  INFO 6131 --- [nio-9120-exec-9] o.t.k.a.AcceptanceCriteriaResource       : acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.111 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:52.111  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:52.187 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:04bd9329-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:52.187  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:04bd9329-0017-11e7-af8b-0014781bc25c
+21:40:52.187 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers
+2017-03-03 21:40:52.187  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers
+21:40:52.187 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers
+2017-03-03 21:40:52.187  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers
+21:40:52.202 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - Resorting acceptanceCriterias.acceptanceCriterias:[{&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id1&quot;,&quot;sortNumber&quot;:1}, {&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id2&quot;,&quot;sortNumber&quot;:2}],cardId:card-fooId
+2017-03-03 21:40:52.202  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : Resorting acceptanceCriterias.acceptanceCriterias:[{&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id1&quot;,&quot;sortNumber&quot;:1}, {&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id2&quot;,&quot;sortNumber&quot;:2}],cardId:card-fooId
+21:40:52.206 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - Resorted acceptanceCriterias:[{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id1&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;sortNumber&quot;:1,&quot;summary&quot;:&quot;AC-summary-1&quot;}, {&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id2&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;sortNumber&quot;:2,&quot;summary&quot;:&quot;AC-summary-2&quot;}]
+2017-03-03 21:40:52.206  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : Resorted acceptanceCriterias:[{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id1&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;sortNumber&quot;:1,&quot;summary&quot;:&quot;AC-summary-1&quot;}, {&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id2&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;sortNumber&quot;:2,&quot;summary&quot;:&quot;AC-summary-2&quot;}]
+21:40:52.207 [http-nio-9120-exec-10] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;[{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id1\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;sortNumber\&quot;:1,\&quot;summary\&quot;:\&quot;AC-summary-1\&quot;}, {\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id2\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;sortNumber\&quot;:2,\&quot;summary\&quot;:\&quot;AC-summary-2\&quot;}]|[{\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id1\&quot;,\&quot;sortNumber\&quot;:1}, {\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id2\&quot;,\&quot;sortNumber\&quot;:2}]&quot;,&quot;operationTypeCode&quot;:&quot;013&quot;,&quot;operationTypeName&quot;:&quot;重新排序验收标准&quot;,&quot;summary&quot;:&quot;[{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id1\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;sortNumber\&quot;:1,\&quot;summary\&quot;:\&quot;AC-summary-1\&quot;}, {\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id2\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;sortNumber\&quot;:2,\&quot;summary\&quot;:\&quot;AC-summary-2\&quot;}]&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:52.207  INFO 6131 --- [io-9120-exec-10] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;[{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id1\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;sortNumber\&quot;:1,\&quot;summary\&quot;:\&quot;AC-summary-1\&quot;}, {\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id2\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;sortNumber\&quot;:2,\&quot;summary\&quot;:\&quot;AC-summary-2\&quot;}]|[{\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id1\&quot;,\&quot;sortNumber\&quot;:1}, {\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id2\&quot;,\&quot;sortNumber\&quot;:2}]&quot;,&quot;operationTypeCode&quot;:&quot;013&quot;,&quot;operationTypeName&quot;:&quot;重新排序验收标准&quot;,&quot;summary&quot;:&quot;[{\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id1\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;sortNumber\&quot;:1,\&quot;summary\&quot;:\&quot;AC-summary-1\&quot;}, {\&quot;author\&quot;:\&quot;someone\&quot;,\&quot;creationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;finished\&quot;:false,\&quot;id\&quot;:\&quot;acceptanceCriteria-id2\&quot;,\&quot;modificationTime\&quot;:\&quot;2017-03-03 21:40:52.176000\&quot;,\&quot;sortNumber\&quot;:2,\&quot;summary\&quot;:\&quot;AC-summary-2\&quot;}]&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:52.210 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriasResource - build acceptanceCriterias resource.acceptanceCriterias:[{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id1&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;sortNumber&quot;:1,&quot;summary&quot;:&quot;AC-summary-1&quot;}, {&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id2&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;sortNumber&quot;:2,&quot;summary&quot;:&quot;AC-summary-2&quot;}],boardId:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.210  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriasResource      : build acceptanceCriterias resource.acceptanceCriterias:[{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id1&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;sortNumber&quot;:1,&quot;summary&quot;:&quot;AC-summary-1&quot;}, {&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;acceptanceCriteria-id2&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.176000&quot;,&quot;sortNumber&quot;:2,&quot;summary&quot;:&quot;AC-summary-2&quot;}],boardId:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.210 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaResource - build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.210  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaResource       : build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.214 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaResource - acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.214  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaResource       : acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.215 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaResource - build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.215  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaResource       : build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.219 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaResource - acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.219  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaResource       : acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.245 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriasResource - acceptanceCriterias resource build completed.boardId:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.245  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriasResource      : acceptanceCriterias resource build completed.boardId:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.254 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:52.254  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:52.354 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:04d70e9b-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:52.354  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:04d70e9b-0017-11e7-af8b-0014781bc25c
+21:40:52.354 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+2017-03-03 21:40:52.354  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+21:40:52.354 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+2017-03-03 21:40:52.354  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+21:40:52.356 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Loading acceptanceCriteria by Id:fooId
+2017-03-03 21:40:52.356  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Loading acceptanceCriteria by Id:fooId
+21:40:52.358 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Loaded acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.345000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.345000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;AC-summary&quot;}
+2017-03-03 21:40:52.358  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Loaded acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.345000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.345000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;AC-summary&quot;}
+21:40:52.359 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaResource - build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.359  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaResource       : build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.363 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaResource - acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.363  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaResource       : acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.366 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:52.366  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:52.430 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:04e2a75c-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:52.430  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:04e2a75c-0017-11e7-af8b-0014781bc25c
+21:40:52.430 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+2017-03-03 21:40:52.430  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+21:40:52.430 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+2017-03-03 21:40:52.430  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+21:40:52.440 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:52.440  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:52.441 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:04e4550d-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:52.441  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:04e4550d-0017-11e7-af8b-0014781bc25c
+21:40:52.442 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:52.442  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:52.442 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:52.442  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:52.445 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:52.445  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:52.474 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:04e95e1e-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:52.474  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:04e95e1e-0017-11e7-af8b-0014781bc25c
+21:40:52.474 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+2017-03-03 21:40:52.474  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+21:40:52.474 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+2017-03-03 21:40:52.474  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias
+21:40:52.475 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - Loading acceptanceCriterias by cardId.cardId:card-fooId
+2017-03-03 21:40:52.475  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : Loading acceptanceCriterias by cardId.cardId:card-fooId
+21:40:52.477 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - Loaded acceptanceCriterias:[{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.465000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.465000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;AC-summary&quot;}]
+2017-03-03 21:40:52.477  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : Loaded acceptanceCriterias:[{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.465000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.465000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;AC-summary&quot;}]
+21:40:52.477 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriasResource - build acceptanceCriterias resource.acceptanceCriterias:[{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.465000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.465000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;AC-summary&quot;}],boardId:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.477  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriasResource      : build acceptanceCriterias resource.acceptanceCriterias:[{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.465000&quot;,&quot;finished&quot;:false,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.465000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;AC-summary&quot;}],boardId:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.477 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaResource - build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.477  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaResource       : build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.480 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaResource - acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.480  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaResource       : acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.484 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriasResource - acceptanceCriterias resource build completed.boardId:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.484  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriasResource      : acceptanceCriterias resource build completed.boardId:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.489 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:52.489  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:52.575 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:04f8c76f-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:52.575  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:04f8c76f-0017-11e7-af8b-0014781bc25c
+21:40:52.575 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+2017-03-03 21:40:52.575  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+21:40:52.575 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+2017-03-03 21:40:52.575  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+21:40:52.577 [http-nio-9120-exec-12] INFO  o.t.k.a.AcceptanceCriteriaService - Remove acceptanceCriteria.acceptanceCriteriaId:fooId,cardId:card-fooId
+2017-03-03 21:40:52.577  INFO 6131 --- [io-9120-exec-12] o.t.k.a.AcceptanceCriteriaService        : Remove acceptanceCriteria.acceptanceCriteriaId:fooId,cardId:card-fooId
+21:40:52.578 [http-nio-9120-exec-12] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;AC-summary&quot;,&quot;operationTypeCode&quot;:&quot;006&quot;,&quot;operationTypeName&quot;:&quot;更新验收标准&quot;,&quot;summary&quot;:&quot;AC-summary&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:52.578  INFO 6131 --- [io-9120-exec-12] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;AC-summary&quot;,&quot;operationTypeCode&quot;:&quot;006&quot;,&quot;operationTypeName&quot;:&quot;更新验收标准&quot;,&quot;summary&quot;:&quot;AC-summary&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:52.582 [http-nio-9120-exec-12] INFO  o.t.k.a.AcceptanceCriteriaResource - build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.582  INFO 6131 --- [io-9120-exec-12] o.t.k.a.AcceptanceCriteriaResource       : build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.585 [http-nio-9120-exec-12] INFO  o.t.k.a.AcceptanceCriteriaResource - acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.585  INFO 6131 --- [io-9120-exec-12] o.t.k.a.AcceptanceCriteriaResource       : acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.591 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:52.591  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:52.618 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:04ff5721-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:52.618  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:04ff5721-0017-11e7-af8b-0014781bc25c
+21:40:52.618 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+2017-03-03 21:40:52.618  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+21:40:52.618 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+2017-03-03 21:40:52.618  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId
+21:40:52.625 [http-nio-9120-exec-11] INFO  o.t.k.a.AcceptanceCriteriaService - Update acceptanceCriteria.acceptanceCriteriaId:fooId,acceptanceCriteria:{&quot;finished&quot;:true,&quot;summary&quot;:&quot;new-AC-summary&quot;},cardId:card-fooId
+2017-03-03 21:40:52.625  INFO 6131 --- [io-9120-exec-11] o.t.k.a.AcceptanceCriteriaService        : Update acceptanceCriteria.acceptanceCriteriaId:fooId,acceptanceCriteria:{&quot;finished&quot;:true,&quot;summary&quot;:&quot;new-AC-summary&quot;},cardId:card-fooId
+21:40:52.628 [http-nio-9120-exec-11] INFO  o.t.k.a.AcceptanceCriteriaService - Updated acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.610000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.610000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;new-AC-summary&quot;}
+2017-03-03 21:40:52.628  INFO 6131 --- [io-9120-exec-11] o.t.k.a.AcceptanceCriteriaService        : Updated acceptanceCriteria:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:52.610000&quot;,&quot;finished&quot;:true,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:52.610000&quot;,&quot;sortNumber&quot;:9999,&quot;summary&quot;:&quot;new-AC-summary&quot;}
+21:40:52.684 [http-nio-9120-exec-11] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;DiffNode(state=CHANGED, type=org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria, 5 children, accessed via root element)&quot;,&quot;operationTypeCode&quot;:&quot;005&quot;,&quot;operationTypeName&quot;:&quot;更新验收标准&quot;,&quot;summary&quot;:&quot;DiffNode(state=CHANGED, type=org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria, 5 children, accessed via root element)&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:52.684  INFO 6131 --- [io-9120-exec-11] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;DiffNode(state=CHANGED, type=org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria, 5 children, accessed via root element)&quot;,&quot;operationTypeCode&quot;:&quot;005&quot;,&quot;operationTypeName&quot;:&quot;更新验收标准&quot;,&quot;summary&quot;:&quot;DiffNode(state=CHANGED, type=org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria, 5 children, accessed via root element)&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:52.687 [http-nio-9120-exec-11] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;DiffNode(state=CHANGED, type=org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria, 5 children, accessed via root element)&quot;,&quot;id&quot;:&quot;05096942-0017-11e7-af8b-0014781bc25c&quot;,&quot;operationTypeCode&quot;:&quot;016&quot;,&quot;operationTypeName&quot;:&quot;卡片任务全部完成&quot;,&quot;summary&quot;:&quot;DiffNode(state=CHANGED, type=org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria, 5 children, accessed via root element)&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-03 21:40:52.687  INFO 6131 --- [io-9120-exec-11] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;DiffNode(state=CHANGED, type=org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria, 5 children, accessed via root element)&quot;,&quot;id&quot;:&quot;05096942-0017-11e7-af8b-0014781bc25c&quot;,&quot;operationTypeCode&quot;:&quot;016&quot;,&quot;operationTypeName&quot;:&quot;卡片任务全部完成&quot;,&quot;summary&quot;:&quot;DiffNode(state=CHANGED, type=org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria, 5 children, accessed via root element)&quot;,&quot;userName&quot;:&quot;someone&quot;}
+21:40:52.690 [http-nio-9120-exec-11] INFO  o.t.k.a.AcceptanceCriteriaResource - build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.690  INFO 6131 --- [io-9120-exec-11] o.t.k.a.AcceptanceCriteriaResource       : build acceptanceCriterias resource.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.694 [http-nio-9120-exec-11] INFO  o.t.k.a.AcceptanceCriteriaResource - acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+2017-03-03 21:40:52.694  INFO 6131 --- [io-9120-exec-11] o.t.k.a.AcceptanceCriteriaResource       : acceptanceCriterias resource build completed.board:boardId-foo,stageId:stages-fooId,cardId:card-fooId,userName:someone
+21:40:52.699 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:52.699  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+</div>
+</div>
+</body>
+</html>

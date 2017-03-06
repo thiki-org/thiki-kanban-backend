@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.thiki.kanban.user.ProfileTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-03-03T13:40:54" hostname="wisdom-HP" time="0.191">
+  <properties/>
+  <testcase name="updateProfile" classname="org.thiki.kanban.user.ProfileTest" time="0.085"/>
+  <testcase name="loadProfile" classname="org.thiki.kanban.user.ProfileTest" time="0.05"/>
+  <testcase name="initProfileIfProfileIsNotExist" classname="org.thiki.kanban.user.ProfileTest" time="0.053"/>
+  <system-out><![CDATA[2017-03-03 21:40:54.493  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:54.498  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:54.498  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7bb49888, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@2826306f, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4733be95, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5d30d059, org.springframework.test.context.transaction.TransactionalTestExecutionListener@21f73af, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@1ba39ecb, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@41be4c3c, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@1ad7fe4a]
+21:40:54.515 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:0620cce3-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.515  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:0620cce3-0017-11e7-af8b-0014781bc25c
+21:40:54.515 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/profile
+2017-03-03 21:40:54.515  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/profile
+21:40:54.516 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/profile
+2017-03-03 21:40:54.516  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/profile
+21:40:54.541 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.541  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:54.598 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:062d7714-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.598  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:062d7714-0017-11e7-af8b-0014781bc25c
+21:40:54.599 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/profile
+2017-03-03 21:40:54.599  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/profile
+21:40:54.599 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/profile
+2017-03-03 21:40:54.599  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/profile
+21:40:54.604 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.604  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:54.651 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:06358d65-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:54.651  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:06358d65-0017-11e7-af8b-0014781bc25c
+21:40:54.652 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/users/someone/profile
+2017-03-03 21:40:54.652  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/users/someone/profile
+21:40:54.652 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/users/someone/profile
+2017-03-03 21:40:54.652  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/users/someone/profile
+21:40:54.658 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:54.658  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

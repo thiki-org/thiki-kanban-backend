@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.activity.ActivityPersistence">
+    <insert id="record" parameterType="org.thiki.kanban.activity.Activity">
+        INSERT INTO
+        kb_activity(id,card_id,
+        prev_stage_id,stage_id,prev_stage_snapShot,stage_snapShot,operation_type_code,operation_type_name,summary,detail,userName)
+        VALUES
+        (#{id},#{cardId}, #{prevStageId},
+        #{stageId},#{prevStageSnapShot},#{stageSnapShot},#{operationTypeCode}, #{operationTypeName},
+        #{summary},
+        #{detail}, #{userName})
+    </insert>
+
+    <select id="loadActivitiesByCard" parameterType="java.lang.String" resultType="org.thiki.kanban.activity.Activity">
+        SELECT * FROM kb_activity WHERE delete_status=0 AND operation_type_code=#{operationTypeCode} AND card_id=
+        #{cardId} ORDER by creation_time ASC
+    </select>
+</mapper>

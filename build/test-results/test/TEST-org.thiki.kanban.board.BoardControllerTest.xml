@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.thiki.kanban.board.BoardControllerTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2017-03-03T13:40:57" hostname="wisdom-HP" time="0.749">
+  <properties/>
+  <testcase name="shouldUpdateSuccessfully" classname="org.thiki.kanban.board.BoardControllerTest" time="0.114"/>
+  <testcase name="UpdateIsNotAllowedIfBoardWithSameNameIsAlreadyExists" classname="org.thiki.kanban.board.BoardControllerTest" time="0.042"/>
+  <testcase name="shouldReturnBoardWhenBoardIsExist" classname="org.thiki.kanban.board.BoardControllerTest" time="0.105"/>
+  <testcase name="NotAllowedIfBoardWithSameNameIsAlreadyExists" classname="org.thiki.kanban.board.BoardControllerTest" time="0.047"/>
+  <testcase name="findByUserName_shouldReturnAllBoardsSuccessfully" classname="org.thiki.kanban.board.BoardControllerTest" time="0.089"/>
+  <testcase name="shouldReturn201WhenCreateBoardSuccessfully" classname="org.thiki.kanban.board.BoardControllerTest" time="0.239"/>
+  <testcase name="shouldDeleteSuccessfullyWhenTheBoardIsExist" classname="org.thiki.kanban.board.BoardControllerTest" time="0.037"/>
+  <testcase name="shouldUpdateFailedWhenTheBoardIsNotExist" classname="org.thiki.kanban.board.BoardControllerTest" time="0.039"/>
+  <testcase name="shouldThrowResourceNotFoundExceptionWhenBoardToDeleteIsNotExist" classname="org.thiki.kanban.board.BoardControllerTest" time="0.029"/>
+  <system-out><![CDATA[2017-03-03 21:40:56.997  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:57.000  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:57.000  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@152b5c7c, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6ba9429a, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@3e8b9705, org.springframework.test.context.support.DirtiesContextTestExecutionListener@68f1e4ea, org.springframework.test.context.transaction.TransactionalTestExecutionListener@27f69d34, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@66aa6c2, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@643b3ab5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@30a446c]
+21:40:57.016 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:079e6c63-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.016  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:079e6c63-0017-11e7-af8b-0014781bc25c
+21:40:57.016 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.016  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards/fooId
+21:40:57.016 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.016  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards/fooId
+21:40:57.029 [http-nio-9120-exec-6] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='fooId', name='new-name', projectId='projectId-foo', author='someone', owner='projectId-foo', creationTime='2017-03-03 21:40:57.006000', modificationTime='2017-03-03 21:40:57.006000'},userName:someone
+2017-03-03 21:40:57.029  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='fooId', name='new-name', projectId='projectId-foo', author='someone', owner='projectId-foo', creationTime='2017-03-03 21:40:57.006000', modificationTime='2017-03-03 21:40:57.006000'},userName:someone
+21:40:57.044 [http-nio-9120-exec-6] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='fooId', name='new-name', projectId='projectId-foo', author='someone', owner='projectId-foo', creationTime='2017-03-03 21:40:57.006000', modificationTime='2017-03-03 21:40:57.006000'},userName:someone
+2017-03-03 21:40:57.044  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='fooId', name='new-name', projectId='projectId-foo', author='someone', owner='projectId-foo', creationTime='2017-03-03 21:40:57.006000', modificationTime='2017-03-03 21:40:57.006000'},userName:someone
+21:40:57.048 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.048  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.129 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:07afaa74-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.129  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:07afaa74-0017-11e7-af8b-0014781bc25c
+21:40:57.129 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards/fooId1
+2017-03-03 21:40:57.129  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards/fooId1
+21:40:57.130 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards/fooId1
+2017-03-03 21:40:57.130  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards/fooId1
+21:40:57.140 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.140  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.142 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:07b1a645-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.142  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:07b1a645-0017-11e7-af8b-0014781bc25c
+21:40:57.142 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:57.142  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:57.142 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:57.142  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:57.145 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.145  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+Request method:	GET
+Request path:	http://localhost:9120/kanban/someone/boards/fooId
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Multiparts:		<none>
+Headers:		identification=no
+				authentication=no
+				userName=someone
+				Accept=*/*
+Cookies:		<none>
+Body:			<none>
+21:40:57.176 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:07b6d666-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.176  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:07b6d666-0017-11e7-af8b-0014781bc25c
+21:40:57.176 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.176  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards/fooId
+21:40:57.177 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.177  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards/fooId
+21:40:57.179 [http-nio-9120-exec-7] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='null', creationTime='2017-03-03 21:40:57.166000', modificationTime='2017-03-03 21:40:57.166000'},userName:someone
+2017-03-03 21:40:57.179  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='null', creationTime='2017-03-03 21:40:57.166000', modificationTime='2017-03-03 21:40:57.166000'},userName:someone
+21:40:57.195 [http-nio-9120-exec-7] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='null', creationTime='2017-03-03 21:40:57.166000', modificationTime='2017-03-03 21:40:57.166000'},userName:someone
+2017-03-03 21:40:57.195  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='null', creationTime='2017-03-03 21:40:57.166000', modificationTime='2017-03-03 21:40:57.166000'},userName:someone
+21:40:57.198 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.198  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.279 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:07c68dd7-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.279  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:07c68dd7-0017-11e7-af8b-0014781bc25c
+21:40:57.279 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards
+2017-03-03 21:40:57.279  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards
+21:40:57.280 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards
+2017-03-03 21:40:57.280  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards
+21:40:57.290 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.290  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.292 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:07c889a8-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.292  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:07c889a8-0017-11e7-af8b-0014781bc25c
+21:40:57.293 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:57.293  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:57.293 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:57.293  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:57.295 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.295  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.325 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:07cd92b9-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.325  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:07cd92b9-0017-11e7-af8b-0014781bc25c
+21:40:57.325 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards
+2017-03-03 21:40:57.325  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards
+21:40:57.325 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards
+2017-03-03 21:40:57.325  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards
+21:40:57.328 [http-nio-9120-exec-3] INFO  o.thiki.kanban.board.BoardsResource - build boards resource.userName:someone
+2017-03-03 21:40:57.328  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.board.BoardsResource    : build boards resource.userName:someone
+21:40:57.329 [http-nio-9120-exec-3] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.320000', modificationTime='2017-03-03 21:40:57.320000'},userName:someone
+2017-03-03 21:40:57.329  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.320000', modificationTime='2017-03-03 21:40:57.320000'},userName:someone
+21:40:57.339 [http-nio-9120-exec-3] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.320000', modificationTime='2017-03-03 21:40:57.320000'},userName:someone
+2017-03-03 21:40:57.339  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.320000', modificationTime='2017-03-03 21:40:57.320000'},userName:someone
+21:40:57.345 [http-nio-9120-exec-3] INFO  o.thiki.kanban.board.BoardsResource - boards resource building complete.userName:someone
+2017-03-03 21:40:57.345  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.board.BoardsResource    : boards resource building complete.userName:someone
+21:40:57.348 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.348  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.416 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:07db756a-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.416  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:07db756a-0017-11e7-af8b-0014781bc25c
+21:40:57.416 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards
+2017-03-03 21:40:57.416  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards
+21:40:57.417 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards
+2017-03-03 21:40:57.417  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards
+21:40:57.427 [http-nio-9120-exec-4] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.426000', modificationTime='2017-03-03 21:40:57.426000'},userName:someone
+2017-03-03 21:40:57.427  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.426000', modificationTime='2017-03-03 21:40:57.426000'},userName:someone
+21:40:57.442 [http-nio-9120-exec-4] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.426000', modificationTime='2017-03-03 21:40:57.426000'},userName:someone
+2017-03-03 21:40:57.442  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='fooId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.426000', modificationTime='2017-03-03 21:40:57.426000'},userName:someone
+21:40:57.446 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.446  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.656 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:0800146b-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.656  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:0800146b-0017-11e7-af8b-0014781bc25c
+21:40:57.659 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.659  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards/fooId
+21:40:57.659 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.659  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards/fooId
+21:40:57.664 [http-nio-9120-exec-2] INFO  org.thiki.kanban.board.BoardResource - build board resource.userName:someone
+2017-03-03 21:40:57.664  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.board.BoardResource     : build board resource.userName:someone
+21:40:57.666 [http-nio-9120-exec-2] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.userName:someone
+2017-03-03 21:40:57.666  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.board.BoardResource     : board resource building complete.userName:someone
+21:40:57.670 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.670  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.694 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:0805e0cc-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.694  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:0805e0cc-0017-11e7-af8b-0014781bc25c
+21:40:57.694 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.694  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards/fooId
+21:40:57.694 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.694  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards/fooId
+21:40:57.702 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.702  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.704 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:0807676d-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.704  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:0807676d-0017-11e7-af8b-0014781bc25c
+21:40:57.704 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/404
+2017-03-03 21:40:57.704  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/404
+21:40:57.704 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/404
+2017-03-03 21:40:57.704  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/404
+21:40:57.706 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.706  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.734 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:080bfb4e-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.734  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:080bfb4e-0017-11e7-af8b-0014781bc25c
+21:40:57.734 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.734  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards/fooId
+21:40:57.734 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards/fooId
+2017-03-03 21:40:57.734  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards/fooId
+21:40:57.736 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.736  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:57.737 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:080c707f-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:57.737  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:080c707f-0017-11e7-af8b-0014781bc25c
+21:40:57.737 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/404
+2017-03-03 21:40:57.737  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/404
+21:40:57.737 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/404
+2017-03-03 21:40:57.737  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/404
+21:40:57.739 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:57.739  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

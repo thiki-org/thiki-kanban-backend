@@ -1,0 +1,21 @@
+roles:
+  - name: visitor
+    resources:
+      - template: /entrance
+        GET: true
+      - template: /publicKey
+        GET: true
+      - template: /passwordRetrievalApplication
+        GET: true
+
+  - name: personal
+    resources:
+      - template: /{userName}/boards/{boardId}
+        GET: true
+        POST: true
+        DELETE: true
+        PUT: true
+
+
+
+

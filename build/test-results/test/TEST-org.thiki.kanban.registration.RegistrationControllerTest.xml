@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.thiki.kanban.registration.RegistrationControllerTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-03-03T13:40:43" hostname="wisdom-HP" time="0.759">
+  <properties/>
+  <testcase name="registerNewUser_shouldRejectWithConflictWhenUserNameExists" classname="org.thiki.kanban.registration.RegistrationControllerTest" time="0.196"/>
+  <testcase name="registerNewUser_shouldFailIfPasswordIsNotEncryptedWithPublicKey" classname="org.thiki.kanban.registration.RegistrationControllerTest" time="0.313"/>
+  <testcase name="registerNewUser_shouldRejectWithConflictWhenUserEmailExists" classname="org.thiki.kanban.registration.RegistrationControllerTest" time="0.104"/>
+  <testcase name="registerNewUser_shouldReturn201WhenRegisterSuccessfully" classname="org.thiki.kanban.registration.RegistrationControllerTest" time="0.141"/>
+  <system-out><![CDATA[2017-03-03 21:40:43.859  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:43.864  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:43.865  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@3e8d4d48, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@318ee947, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@2af4f326, org.springframework.test.context.support.DirtiesContextTestExecutionListener@74fc259d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@204fd147, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@66cdd0d8, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6b2d62e4, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7ee872d1]
+21:40:43.908 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:ffce4d2d-0016-11e7-af8b-0014781bc25c
+2017-03-03 21:40:43.908  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:ffce4d2d-0016-11e7-af8b-0014781bc25c
+21:40:43.908 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/registration
+2017-03-03 21:40:43.908  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/registration
+21:40:43.909 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/registration
+2017-03-03 21:40:43.909  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/registration
+21:40:43.993 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:43.993  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:44.004 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:ffdcf32e-0016-11e7-af8b-0014781bc25c
+2017-03-03 21:40:44.004  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:ffdcf32e-0016-11e7-af8b-0014781bc25c
+21:40:44.004 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:44.004  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
+21:40:44.005 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:44.005  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:44.028 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:44.028  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:44.180 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:fff7ce2f-0016-11e7-af8b-0014781bc25c
+2017-03-03 21:40:44.180  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:fff7ce2f-0016-11e7-af8b-0014781bc25c
+21:40:44.180 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/registration
+2017-03-03 21:40:44.180  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/registration
+21:40:44.181 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/registration
+2017-03-03 21:40:44.181  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/registration
+21:40:44.336 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:44.336  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:44.341 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:00105f40-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:44.341  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:00105f40-0017-11e7-af8b-0014781bc25c
+21:40:44.342 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:44.342  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
+21:40:44.342 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:44.342  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:44.352 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:44.352  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:44.413 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:001b5bc1-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:44.413  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:001b5bc1-0017-11e7-af8b-0014781bc25c
+21:40:44.413 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/registration
+2017-03-03 21:40:44.413  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/registration
+21:40:44.414 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/registration
+2017-03-03 21:40:44.414  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/registration
+21:40:44.444 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:44.444  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:44.449 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:0020da02-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:44.449  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:0020da02-0017-11e7-af8b-0014781bc25c
+21:40:44.449 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:44.449  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
+21:40:44.450 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:44.450  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:44.456 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:44.456  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:44.524 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:002c4bb3-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:44.524  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:002c4bb3-0017-11e7-af8b-0014781bc25c
+21:40:44.524 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/registration
+2017-03-03 21:40:44.524  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/registration
+21:40:44.525 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/registration
+2017-03-03 21:40:44.525  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/registration
+21:40:44.574 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:44.574  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

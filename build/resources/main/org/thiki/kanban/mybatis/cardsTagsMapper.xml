@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.cardTags.CardTagPersistence">
+    <insert id="stick" parameterType="org.thiki.kanban.cardTags.CardTag">
+        INSERT INTO
+        kb_cards_tags(id,card_id,tag_id, author)
+        VALUES
+        (#{cardTag.id},#{cardId},#{cardTag.tagId},#{userName})
+    </insert>
+
+    <select id="findByCardId" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.cardTags.CardTag">
+        SELECT cardsTags.id AS id,tags.name AS name,tags.color AS color,cardsTags.tag_id AS tagId FROM kb_cards_tags
+        cardsTags LEFT JOIN kb_tag
+        tags ON cardsTags.tag_id=tags.id WHERE card_id= #{cardId} AND cardsTags.delete_status=0 AND tags.delete_status=0
+        ORDER by tags.creation_time ASC
+    </select>
+
+    <delete id="removeTagsByCardId" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_cards_tags SET delete_status=1 WHERE card_id=#{cardId} AND delete_status=0
+    </delete>
+</mapper>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class org.thiki.kanban.assignment.AssignmentServiceTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class org.thiki.kanban.assignment.AssignmentServiceTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.thiki.kanban.assignment.html">org.thiki.kanban.assignment</a> &gt; AssignmentServiceTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">2</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.086s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">should_remove_unSubmit_assignments</td>
+<td>0.004s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">should_return_all_the_assignments</td>
+<td>0.082s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>21:40:48.537 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}],cardId:cardId-foo,userName:someone
+2017-03-03 21:40:48.537  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}],cardId:cardId-foo,userName:someone
+21:40:48.541 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
+2017-03-03 21:40:48.541  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
+21:40:48.542 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+2017-03-03 21:40:48.542  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+21:40:48.543 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+2017-03-03 21:40:48.543  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+21:40:48.545 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}],cardId:cardId-foo,userName:someone
+2017-03-03 21:40:48.545  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}],cardId:cardId-foo,userName:someone
+21:40:48.546 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
+2017-03-03 21:40:48.546  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
+21:40:48.546 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+2017-03-03 21:40:48.546  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+21:40:48.547 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+2017-03-03 21:40:48.547  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+</div>
+</div>
+</body>
+</html>

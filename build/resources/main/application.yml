@@ -1,0 +1,30 @@
+security:
+  whiteList:
+    - "/entrance"
+    - "/publicKey"
+    - "/registration"
+    - "/login"
+    - "/passwordRetrievalApplication"
+    - "/{userName}/passwordResetApplication"
+    - "/{userName}/password"
+    - "/unauthorised"
+    - "/error/{}"
+    - "/index.html"
+    - "/favicon.ico"
+    - "/js/{}"
+    - "/css/{}"
+    - "/fonts/{}"
+    - "/img/{}"
+    - "/component/{}"
+    - "/foundation/{}"
+  allowedOrigins:
+    - "http://localhost:9120"
+    - "http://127.0.0.1:8008"
+    - "http://23.234.54.252:8089"
+    - "http://www.thiki.org"
+    - "http://localhost:8008"
+    - "http://localhost:8096/druid/index.html"
+    - "http://127.0.0.1:8096/kanban/health"
+    - "http://127.0.0.1:8096/kanban/#/"
+
+

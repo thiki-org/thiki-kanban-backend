@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.thiki.kanban.card.statistics.StatisticsServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-03-03T13:40:51" hostname="wisdom-HP" time="0.086">
+  <properties/>
+  <testcase name="shouldReturnHalfOfADay" classname="org.thiki.kanban.card.statistics.StatisticsServiceTest" time="0.084"/>
+  <testcase name="shouldReturn1_5Days" classname="org.thiki.kanban.card.statistics.StatisticsServiceTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

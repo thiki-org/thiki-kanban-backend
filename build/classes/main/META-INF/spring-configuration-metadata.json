@@ -1,0 +1,54 @@
+{
+  "groups": [
+    {
+      "name": "",
+      "type": "org.thiki.kanban.foundation.security.authentication.RolesResources",
+      "sourceType": "org.thiki.kanban.foundation.security.authentication.RolesResources"
+    },
+    {
+      "name": "security",
+      "type": "org.thiki.kanban.foundation.configuration.ApplicationContextConfig",
+      "sourceType": "org.thiki.kanban.foundation.configuration.ApplicationContextConfig"
+    },
+    {
+      "name": "security",
+      "type": "org.thiki.kanban.foundation.configuration.ApplicationProperties",
+      "sourceType": "org.thiki.kanban.foundation.configuration.ApplicationProperties"
+    },
+    {
+      "name": "security",
+      "type": "org.thiki.kanban.foundation.aspect.ValidateAspect",
+      "sourceType": "org.thiki.kanban.foundation.aspect.ValidateAspect"
+    },
+    {
+      "name": "storage",
+      "type": "org.thiki.kanban.user.profile.StorageProperties",
+      "sourceType": "org.thiki.kanban.user.profile.StorageProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "roles",
+      "type": "java.util.List<org.thiki.kanban.foundation.security.authentication.Role>",
+      "sourceType": "org.thiki.kanban.foundation.security.authentication.RolesResources"
+    },
+    {
+      "name": "security.white-list",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.thiki.kanban.foundation.configuration.ApplicationProperties"
+    },
+    {
+      "name": "security.white-list",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "org.thiki.kanban.foundation.aspect.ValidateAspect"
+    },
+    {
+      "name": "storage.location",
+      "type": "java.lang.String",
+      "description": "Folder AVATAR_FILES_LOCATION for storing files",
+      "sourceType": "org.thiki.kanban.user.profile.StorageProperties",
+      "defaultValue": "uploadFiles/avatars"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.projects.project.ProjectsPersistence">
+    <insert id="create" parameterType="org.thiki.kanban.projects.project.Project">
+        INSERT INTO
+        kb_project(id,name,author) VALUES (#{project.id},#{project.name},#{userName})
+    </insert>
+    <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.projects.project.Project">
+        SELECT * FROM kb_project WHERE id= #{id}
+    </select>
+    <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_project SET delete_status=1 WHERE id=#{id}
+    </delete>
+    <update id="update" parameterType="java.util.Map" flushCache="true">
+        UPDATE kb_project SET name=#{project.name} WHERE id=#{projectId} AND delete_status=0
+    </update>
+    <select id="findByUserId" parameterType="java.lang.String" resultType="org.thiki.kanban.projects.project.Project">
+        SELECT * FROM kb_project WHERE delete_status=0 AND author=#{userId}
+    </select>
+    <select id="findByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.projects.project.Project">
+        SELECT * FROM kb_project where id in (SELECT project_Id FROM kb_project_members WHERE
+        kb_project_members.member=#{userName}
+        AND kb_project_members.delete_status=0) and kb_project.delete_status=0
+    </select>
+
+    <select id="isTeamExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_project WHERE id= #{projectId}
+    </select>
+
+    <select id="isNameConflict" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_project project JOIN kb_project_members members ON project.id=members.project_id WHERE
+        project.name=#{projectName} AND members.member=#{userName} AND project.delete_status=0 AND
+        members.delete_status=0
+    </select>
+</mapper>

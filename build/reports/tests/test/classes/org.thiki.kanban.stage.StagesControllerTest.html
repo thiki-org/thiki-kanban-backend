@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class org.thiki.kanban.stage.StagesControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class org.thiki.kanban.stage.StagesControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.thiki.kanban.stage.html">org.thiki.kanban.stage</a> &gt; StagesControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">21</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">1.208s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">resortStage</td>
+<td>0.095s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldDeleteSuccessfullyWhenTheStageIsExist</td>
+<td>0.028s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldFailedIfStageTitleIsEmpty</td>
+<td>0.052s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldFailedWhenSettingStageToArchiveDirectly</td>
+<td>0.043s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldFailedWhenTheDoneStageIsAlreadyExist</td>
+<td>0.047s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldFailedWhenTheDoneStageIsNotInSprint</td>
+<td>0.043s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturn201WhenCreateStageSuccessfully</td>
+<td>0.105s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnAllEntriesSuccessfully</td>
+<td>0.101s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnAllStagesSuccessfully</td>
+<td>0.051s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnArchivedStagesSuccessfully</td>
+<td>0.040s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnBadRequestWhenStageTitleIsAlreadyExits</td>
+<td>0.036s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnBadRequestWhenStageTitleIsEmpty</td>
+<td>0.048s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnBadRequestWhenStageTitleIsTooLong</td>
+<td>0.048s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnDefaultSprintStagesSuccessfully</td>
+<td>0.066s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnRoadMapStagesSuccessfully</td>
+<td>0.057s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnSprintStagesSuccessfully</td>
+<td>0.048s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturnStageWhenFindStageById</td>
+<td>0.065s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldThrowResourceNotFoundExceptionWhenStageToDeleteIsNotExist</td>
+<td>0.036s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldUpdateSuccessfully</td>
+<td>0.073s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldUpdateWipSuccessfully</td>
+<td>0.078s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">update_shouldFailedWhenTheStageToUpdateIsNotExists</td>
+<td>0.048s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2017-03-03 21:40:55.581  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:55.584  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:55.584  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@1d5023e9, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4884d4ce, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@647d9df8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@4e6c0fca, org.springframework.test.context.transaction.TransactionalTestExecutionListener@52bf3285, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@3c73beb8, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@34e96693, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@1a553d9b]
+21:40:55.599 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:06c634b4-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.599  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:06c634b4-0017-11e7-af8b-0014781bc25c
+21:40:55.600 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:55.600  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+21:40:55.600 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:55.600  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+21:40:55.618 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:true,&quot;inSprint&quot;:false,&quot;status&quot;:1,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0},stageIdfooId,boardIdfeeId
+2017-03-03 21:40:55.618  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:true,&quot;inSprint&quot;:false,&quot;status&quot;:1,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0},stageIdfooId,boardIdfeeId
+21:40:55.618 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - Checking whether target stage is exist.stageId:fooId
+2017-03-03 21:40:55.618  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : Checking whether target stage is exist.stageId:fooId
+21:40:55.619 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.592000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.592000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+2017-03-03 21:40:55.619  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.592000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.592000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+21:40:55.625 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - Updated stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.592000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:true,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.592000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:1,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+2017-03-03 21:40:55.625  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : Updated stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.592000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:true,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.592000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:1,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+21:40:55.625 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.625  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.628 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.628  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.632 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.632  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.674 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:06d17f55-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.674  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:06d17f55-0017-11e7-af8b-0014781bc25c
+21:40:55.674 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:55.674  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:55.674 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:55.674  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:55.681 [http-nio-9120-exec-12] INFO  org.thiki.kanban.stage.StagesService - Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;stage&quot;,&quot;type&quot;:0}
+2017-03-03 21:40:55.681  INFO 6131 --- [io-9120-exec-12] org.thiki.kanban.stage.StagesService     : Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;stage&quot;,&quot;type&quot;:0}
+21:40:55.682 [http-nio-9120-exec-12] INFO  org.thiki.kanban.stage.StagesService - The title is already exist.
+2017-03-03 21:40:55.682  INFO 6131 --- [io-9120-exec-12] org.thiki.kanban.stage.StagesService     : The title is already exist.
+21:40:55.683 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.683  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.685 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:06d35416-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.685  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:06d35416-0017-11e7-af8b-0014781bc25c
+21:40:55.685 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:55.685  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:55.686 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:55.686  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:55.687 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.687  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.716 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:06d80f07-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.716  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:06d80f07-0017-11e7-af8b-0014781bc25c
+21:40:55.716 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:55.716  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:55.716 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:55.716  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:55.717 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [feeId]
+2017-03-03 21:40:55.717  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [feeId]
+21:40:55.721 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:true,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.704000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.704000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:9,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:true,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.704000&quot;,&quot;id&quot;:&quot;fooId4&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.704000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:9,&quot;wipLimit&quot;:-1}]
+2017-03-03 21:40:55.721  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:true,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.704000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.704000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:9,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:true,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.704000&quot;,&quot;id&quot;:&quot;fooId4&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.704000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:9,&quot;wipLimit&quot;:-1}]
+21:40:55.722 [http-nio-9120-exec-11] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:feeId,viewType:archiveView,userName:someone
+2017-03-03 21:40:55.722  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesResource    : build stages resource.board:feeId,viewType:archiveView,userName:someone
+21:40:55.722 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.722  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.724 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.724  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.724 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.724  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.726 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.726  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.728 [http-nio-9120-exec-11] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.728  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:feeId,userName:someone
+21:40:55.732 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.732  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.756 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:06de2988-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.756  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:06de2988-0017-11e7-af8b-0014781bc25c
+21:40:55.756 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages/sortNumbers
+2017-03-03 21:40:55.756  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages/sortNumbers
+21:40:55.756 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages/sortNumbers
+2017-03-03 21:40:55.756  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages/sortNumbers
+21:40:55.770 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - Resort stages:[{&quot;archived&quot;:false,&quot;id&quot;:&quot;stage-fooId1&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:2,&quot;status&quot;:0,&quot;type&quot;:0}, {&quot;archived&quot;:false,&quot;id&quot;:&quot;stage-fooId2&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:3,&quot;status&quot;:0,&quot;type&quot;:0}]
+2017-03-03 21:40:55.770  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : Resort stages:[{&quot;archived&quot;:false,&quot;id&quot;:&quot;stage-fooId1&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:2,&quot;status&quot;:0,&quot;type&quot;:0}, {&quot;archived&quot;:false,&quot;id&quot;:&quot;stage-fooId2&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;sortNumber&quot;:3,&quot;status&quot;:0,&quot;type&quot;:0}]
+21:40:55.773 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [feeId]
+2017-03-03 21:40:55.773  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [feeId]
+21:40:55.776 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.745000&quot;,&quot;id&quot;:&quot;stage-fooId1&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.745000&quot;,&quot;sortNumber&quot;:2,&quot;status&quot;:0,&quot;title&quot;:&quot;stageTitle1&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.746000&quot;,&quot;id&quot;:&quot;stage-fooId2&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.746000&quot;,&quot;sortNumber&quot;:3,&quot;status&quot;:0,&quot;title&quot;:&quot;stageTitle2&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+2017-03-03 21:40:55.776  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.745000&quot;,&quot;id&quot;:&quot;stage-fooId1&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.745000&quot;,&quot;sortNumber&quot;:2,&quot;status&quot;:0,&quot;title&quot;:&quot;stageTitle1&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.746000&quot;,&quot;id&quot;:&quot;stage-fooId2&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.746000&quot;,&quot;sortNumber&quot;:3,&quot;status&quot;:0,&quot;title&quot;:&quot;stageTitle2&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+21:40:55.776 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - Resorted stages:[{&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.745000&quot;,&quot;id&quot;:&quot;stage-fooId1&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.745000&quot;,&quot;sortNumber&quot;:2,&quot;status&quot;:0,&quot;title&quot;:&quot;stageTitle1&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.746000&quot;,&quot;id&quot;:&quot;stage-fooId2&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.746000&quot;,&quot;sortNumber&quot;:3,&quot;status&quot;:0,&quot;title&quot;:&quot;stageTitle2&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+2017-03-03 21:40:55.776  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : Resorted stages:[{&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.745000&quot;,&quot;id&quot;:&quot;stage-fooId1&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.745000&quot;,&quot;sortNumber&quot;:2,&quot;status&quot;:0,&quot;title&quot;:&quot;stageTitle1&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.746000&quot;,&quot;id&quot;:&quot;stage-fooId2&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.746000&quot;,&quot;sortNumber&quot;:3,&quot;status&quot;:0,&quot;title&quot;:&quot;stageTitle2&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+21:40:55.777 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.777  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.780 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.780  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.781 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.781  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.784 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.784  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.790 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.790  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.851 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:06eca879-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.851  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:06eca879-0017-11e7-af8b-0014781bc25c
+21:40:55.851 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:55.851  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+21:40:55.852 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:55.852  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+21:40:55.853 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - Checking whether target stage is exist.stageId:fooId
+2017-03-03 21:40:55.853  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : Checking whether target stage is exist.stageId:fooId
+21:40:55.856 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.842000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.842000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+2017-03-03 21:40:55.856  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.842000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.842000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+21:40:55.857 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.857  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.859 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.859  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.862 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.862  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.879 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:06f0ee3a-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.879  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:06f0ee3a-0017-11e7-af8b-0014781bc25c
+21:40:55.879 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:55.879  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:55.879 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:55.879  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:55.887 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.887  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.889 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:06f274db-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.889  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:06f274db-0017-11e7-af8b-0014781bc25c
+21:40:55.889 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:55.889  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:55.890 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:55.890  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:55.897 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.897  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:55.932 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:06f9048c-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:55.932  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:06f9048c-0017-11e7-af8b-0014781bc25c
+21:40:55.932 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:55.932  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:55.932 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:55.932  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:55.933 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [feeId]
+2017-03-03 21:40:55.933  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [feeId]
+21:40:55.936 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.922000&quot;,&quot;id&quot;:&quot;fooId1&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.922000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:true,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.923000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.923000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:9,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:true,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.923000&quot;,&quot;id&quot;:&quot;fooId4&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.923000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:9,&quot;wipLimit&quot;:-1}]
+2017-03-03 21:40:55.936  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.922000&quot;,&quot;id&quot;:&quot;fooId1&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.922000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:true,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.923000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.923000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:9,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:true,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.923000&quot;,&quot;id&quot;:&quot;fooId4&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.923000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:9,&quot;wipLimit&quot;:-1}]
+21:40:55.936 [http-nio-9120-exec-6] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:feeId,viewType:roadMapView,userName:someone
+2017-03-03 21:40:55.936  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StagesResource    : build stages resource.board:feeId,viewType:roadMapView,userName:someone
+21:40:55.936 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.936  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.940 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.940  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.940 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.940  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.943 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.943  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.944 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:55.944  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:55.947 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.947  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:55.949 [http-nio-9120-exec-6] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:55.949  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:feeId,userName:someone
+21:40:55.952 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:55.952  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.000 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:070364cd-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.000  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:070364cd-0017-11e7-af8b-0014781bc25c
+21:40:56.001 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.001  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:56.001 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.001  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:56.002 [http-nio-9120-exec-7] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [feeId]
+2017-03-03 21:40:56.002  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [feeId]
+21:40:56.004 [http-nio-9120-exec-7] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.985000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.985000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+2017-03-03 21:40:56.004  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:55.985000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:55.985000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+21:40:56.004 [http-nio-9120-exec-7] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:feeId,viewType:null,userName:someone
+2017-03-03 21:40:56.004  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.stage.StagesResource    : build stages resource.board:feeId,viewType:null,userName:someone
+21:40:56.005 [http-nio-9120-exec-7] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.005  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.008 [http-nio-9120-exec-7] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.008  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.010 [http-nio-9120-exec-7] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.010  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:feeId,userName:someone
+21:40:56.017 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.017  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.093 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:0711959e-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.093  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:0711959e-0017-11e7-af8b-0014781bc25c
+21:40:56.093 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.093  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+21:40:56.093 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.093  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+21:40:56.099 [http-nio-9120-exec-1] INFO  org.thiki.kanban.stage.StagesService - Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:9,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0},stageIdfooId,boardIdfeeId
+2017-03-03 21:40:56.099  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.stage.StagesService     : Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:9,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0},stageIdfooId,boardIdfeeId
+21:40:56.099 [http-nio-9120-exec-1] INFO  org.thiki.kanban.stage.StagesService - Checking whether target stage is exist.stageId:fooId
+2017-03-03 21:40:56.099  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.stage.StagesService     : Checking whether target stage is exist.stageId:fooId
+21:40:56.101 [http-nio-9120-exec-1] INFO  org.thiki.kanban.stage.StagesService - The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.086000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:true,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.086000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:1,&quot;title&quot;:&quot; &quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+2017-03-03 21:40:56.101  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.stage.StagesService     : The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.086000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:true,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.086000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:1,&quot;title&quot;:&quot; &quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+21:40:56.102 [http-nio-9120-exec-1] INFO  org.thiki.kanban.stage.StagesService - Checking whether the stage  status is in sprint
+2017-03-03 21:40:56.102  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.stage.StagesService     : Checking whether the stage  status is in sprint
+21:40:56.103 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.103  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.105 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:07136a5f-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.105  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:07136a5f-0017-11e7-af8b-0014781bc25c
+21:40:56.106 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.106  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:56.106 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.106  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:56.108 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.108  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.141 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:0718e8a0-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.141  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:0718e8a0-0017-11e7-af8b-0014781bc25c
+21:40:56.141 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-feeId/stages/fooId
+2017-03-03 21:40:56.141  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-feeId/stages/fooId
+21:40:56.142 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-feeId/stages/fooId
+2017-03-03 21:40:56.142  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-feeId/stages/fooId
+21:40:56.148 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:9,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0},stageIdfooId,boardIdboard-feeId
+2017-03-03 21:40:56.148  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:9,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0},stageIdfooId,boardIdboard-feeId
+21:40:56.149 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - Checking whether target stage is exist.stageId:fooId
+2017-03-03 21:40:56.149  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : Checking whether target stage is exist.stageId:fooId
+21:40:56.150 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.130000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.130000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot; &quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}
+2017-03-03 21:40:56.150  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.130000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.130000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot; &quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}
+21:40:56.150 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - Checking whether the stage  status is in sprint
+2017-03-03 21:40:56.150  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : Checking whether the stage  status is in sprint
+21:40:56.151 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - Checking whether the done stage is already exist:true
+2017-03-03 21:40:56.151  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : Checking whether the done stage is already exist:true
+21:40:56.152 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.152  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.154 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:071ae471-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.154  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:071ae471-0017-11e7-af8b-0014781bc25c
+21:40:56.154 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.154  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:56.154 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.154  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:56.157 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.157  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.186 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:071f9f62-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.186  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:071f9f62-0017-11e7-af8b-0014781bc25c
+21:40:56.186 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.186  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+21:40:56.186 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.186  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+21:40:56.187 [http-nio-9120-exec-2] INFO  org.thiki.kanban.stage.StagesService - Checking whether target stage is exist.stageId:fooId
+2017-03-03 21:40:56.187  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.stage.StagesService     : Checking whether target stage is exist.stageId:fooId
+21:40:56.188 [http-nio-9120-exec-2] INFO  org.thiki.kanban.stage.StagesService - No stage was found.
+2017-03-03 21:40:56.188  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.stage.StagesService     : No stage was found.
+21:40:56.189 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.189  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.191 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:072089c3-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.191  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:072089c3-0017-11e7-af8b-0014781bc25c
+21:40:56.191 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.191  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:56.191 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.191  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:56.192 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.192  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.224 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:072592d4-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.224  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:072592d4-0017-11e7-af8b-0014781bc25c
+21:40:56.224 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.224  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:56.224 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.224  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:56.233 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.233  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.235 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:07274085-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.235  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:07274085-0017-11e7-af8b-0014781bc25c
+21:40:56.236 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.236  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:56.236 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.236  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:56.239 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.239  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.277 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:072da926-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.277  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:072da926-0017-11e7-af8b-0014781bc25c
+21:40:56.278 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.278  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+21:40:56.278 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.278  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+21:40:56.285 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0},stageIdfooId,boardIdfeeId
+2017-03-03 21:40:56.285  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:0},stageIdfooId,boardIdfeeId
+21:40:56.286 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - Checking whether target stage is exist.stageId:fooId
+2017-03-03 21:40:56.286  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : Checking whether target stage is exist.stageId:fooId
+21:40:56.287 [http-nio-9120-exec-4] INFO  org.thiki.kanban.stage.StagesService - No stage was found.
+2017-03-03 21:40:56.287  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.stage.StagesService     : No stage was found.
+21:40:56.288 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.288  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.291 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:072fa4f7-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.291  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:072fa4f7-0017-11e7-af8b-0014781bc25c
+21:40:56.291 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.291  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:56.292 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.292  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:56.293 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.293  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.326 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:07352338-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.326  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:07352338-0017-11e7-af8b-0014781bc25c
+21:40:56.326 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-feeId/stages/fooId
+2017-03-03 21:40:56.326  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-feeId/stages/fooId
+21:40:56.326 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-feeId/stages/fooId
+2017-03-03 21:40:56.326  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-feeId/stages/fooId
+21:40:56.333 [http-nio-9120-exec-12] INFO  org.thiki.kanban.stage.StagesService - Updating stage{&quot;archived&quot;:true,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:9},stageIdfooId,boardIdboard-feeId
+2017-03-03 21:40:56.333  INFO 6131 --- [io-9120-exec-12] org.thiki.kanban.stage.StagesService     : Updating stage{&quot;archived&quot;:true,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;newTitle&quot;,&quot;type&quot;:9},stageIdfooId,boardIdboard-feeId
+21:40:56.334 [http-nio-9120-exec-12] INFO  org.thiki.kanban.stage.StagesService - Checking whether target stage is exist.stageId:fooId
+2017-03-03 21:40:56.334  INFO 6131 --- [io-9120-exec-12] org.thiki.kanban.stage.StagesService     : Checking whether target stage is exist.stageId:fooId
+21:40:56.335 [http-nio-9120-exec-12] INFO  org.thiki.kanban.stage.StagesService - The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.318000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.318000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot; &quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}
+2017-03-03 21:40:56.335  INFO 6131 --- [io-9120-exec-12] org.thiki.kanban.stage.StagesService     : The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.318000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.318000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot; &quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}
+21:40:56.336 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.336  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.337 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:0736d0e9-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.337  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:0736d0e9-0017-11e7-af8b-0014781bc25c
+21:40:56.337 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.337  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:56.338 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.338  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:56.340 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.340  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.378 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:073d127a-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.378  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:073d127a-0017-11e7-af8b-0014781bc25c
+21:40:56.378 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.378  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:56.378 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.378  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:56.379 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [feeId]
+2017-03-03 21:40:56.379  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [feeId]
+21:40:56.381 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.369000&quot;,&quot;id&quot;:&quot;fooId1&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.369000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.369000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.369000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+2017-03-03 21:40:56.381  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.369000&quot;,&quot;id&quot;:&quot;fooId1&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.369000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.369000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.369000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+21:40:56.382 [http-nio-9120-exec-11] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:feeId,viewType:sprintView,userName:someone
+2017-03-03 21:40:56.382  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesResource    : build stages resource.board:feeId,viewType:sprintView,userName:someone
+21:40:56.382 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.382  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.386 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.386  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.386 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.386  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.390 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.390  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.393 [http-nio-9120-exec-11] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.393  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:feeId,userName:someone
+21:40:56.399 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.399  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.427 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:07448c8b-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.427  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:07448c8b-0017-11e7-af8b-0014781bc25c
+21:40:56.427 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.427  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+21:40:56.428 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.428  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+21:40:56.435 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:20},stageIdfooId,boardIdfeeId
+2017-03-03 21:40:56.435  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : Updating stage{&quot;archived&quot;:false,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:20},stageIdfooId,boardIdfeeId
+21:40:56.436 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - Checking whether target stage is exist.stageId:fooId
+2017-03-03 21:40:56.436  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : Checking whether target stage is exist.stageId:fooId
+21:40:56.437 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.417000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.417000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+2017-03-03 21:40:56.437  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : The found stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.417000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.417000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:-1}
+21:40:56.441 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - Updated stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.417000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.417000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:20}
+2017-03-03 21:40:56.441  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : Updated stage is {&quot;archived&quot;:false,&quot;author&quot;:&quot;1&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.417000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.417000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:20}
+21:40:56.441 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.441  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.444 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.444  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.447 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.447  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.505 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:0750736c-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.505  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:0750736c-0017-11e7-af8b-0014781bc25c
+21:40:56.505 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.505  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:56.505 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.505  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:56.513 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;description&quot;:&quot;description.&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the stage title.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:20}
+2017-03-03 21:40:56.513  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:false,&quot;description&quot;:&quot;description.&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the stage title.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:20}
+21:40:56.518 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.516000&quot;,&quot;description&quot;:&quot;description.&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.516000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the stage title.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:20}
+2017-03-03 21:40:56.518  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : Created stage:{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.516000&quot;,&quot;description&quot;:&quot;description.&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.516000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;this is the stage title.&quot;,&quot;type&quot;:0,&quot;wipLimit&quot;:20}
+21:40:56.518 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.518  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.521 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.521  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.525 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.525  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.625 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:0762c2ed-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.625  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:0762c2ed-0017-11e7-af8b-0014781bc25c
+21:40:56.625 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.625  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:56.626 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.626  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:56.628 [http-nio-9120-exec-8] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [feeId]
+2017-03-03 21:40:56.628  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [feeId]
+21:40:56.630 [http-nio-9120-exec-8] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.600000&quot;,&quot;id&quot;:&quot;fooId1&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.600000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.600000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.600000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+2017-03-03 21:40:56.630  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.600000&quot;,&quot;id&quot;:&quot;fooId1&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.600000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.600000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.600000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+21:40:56.631 [http-nio-9120-exec-8] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:feeId,viewType:null,userName:someone
+2017-03-03 21:40:56.631  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.stage.StagesResource    : build stages resource.board:feeId,viewType:null,userName:someone
+21:40:56.631 [http-nio-9120-exec-8] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.631  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.643 [http-nio-9120-exec-8] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.643  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.644 [http-nio-9120-exec-8] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.644  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.647 [http-nio-9120-exec-8] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.647  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.649 [http-nio-9120-exec-8] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.649  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:feeId,userName:someone
+21:40:56.653 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.653  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.676 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:076a8b1e-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.676  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:076a8b1e-0017-11e7-af8b-0014781bc25c
+21:40:56.676 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.676  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages/fooId
+21:40:56.676 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+2017-03-03 21:40:56.676  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages/fooId
+21:40:56.679 [http-nio-9120-exec-12] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.679  INFO 6131 --- [io-9120-exec-12] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.683 [http-nio-9120-exec-12] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.683  INFO 6131 --- [io-9120-exec-12] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.688 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.688  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.741 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:0774762f-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.741  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:0774762f-0017-11e7-af8b-0014781bc25c
+21:40:56.741 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.741  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:56.742 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.742  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:56.750 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.750  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.752 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:077623e0-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.752  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:077623e0-0017-11e7-af8b-0014781bc25c
+21:40:56.753 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.753  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:56.753 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:56.753  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:56.755 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.755  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:56.798 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:077d01b1-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:56.798  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:077d01b1-0017-11e7-af8b-0014781bc25c
+21:40:56.798 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.798  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/feeId/stages
+21:40:56.798 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/feeId/stages
+2017-03-03 21:40:56.798  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/feeId/stages
+21:40:56.799 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [feeId]
+2017-03-03 21:40:56.799  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [feeId]
+21:40:56.801 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;id&quot;:&quot;fooId1&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;id&quot;:&quot;fooId2&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:3,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+2017-03-03 21:40:56.801  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;id&quot;:&quot;fooId1&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;id&quot;:&quot;fooId2&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:3,&quot;wipLimit&quot;:-1}, {&quot;archived&quot;:false,&quot;author&quot;:&quot;tao&quot;,&quot;boardId&quot;:&quot;feeId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;id&quot;:&quot;fooId3&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:56.784000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:9,&quot;title&quot;:&quot;this is the first stage.&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+21:40:56.802 [http-nio-9120-exec-9] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:feeId,viewType:fullView,userName:someone
+2017-03-03 21:40:56.802  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesResource    : build stages resource.board:feeId,viewType:fullView,userName:someone
+21:40:56.802 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.802  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.805 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.805  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.806 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.806  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.809 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.809  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.809 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:feeId,userName:someone
+2017-03-03 21:40:56.809  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : build stage resource.board:feeId,userName:someone
+21:40:56.811 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.811  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:feeId,userName:someone
+21:40:56.815 [http-nio-9120-exec-9] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:feeId,userName:someone
+2017-03-03 21:40:56.815  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:feeId,userName:someone
+21:40:56.818 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:56.818  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+</div>
+</div>
+</body>
+</html>

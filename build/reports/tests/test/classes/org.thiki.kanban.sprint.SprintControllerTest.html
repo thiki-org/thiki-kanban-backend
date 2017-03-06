@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class org.thiki.kanban.sprint.SprintControllerTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class org.thiki.kanban.sprint.SprintControllerTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/org.thiki.kanban.sprint.html">org.thiki.kanban.sprint</a> &gt; SprintControllerTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">13</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">1</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">1.293s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox skipped" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="skipped">calculateRemainDaysWhenLoadingActiveSprint</td>
+<td>-</td>
+<td class="skipped">ignored</td>
+</tr>
+<tr>
+<td class="success">loadActiveSprint</td>
+<td>0.115s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notAllowedIfSprintDoesNotExistWhenUpdating</td>
+<td>0.063s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notAllowedIfSprintNameAlreadyExist</td>
+<td>0.073s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notAllowedIfSprintNameAlreadyExistWhenUpdating</td>
+<td>0.089s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notAllowedIfSprintWasAlreadyArchivedWhenCompletingSprint</td>
+<td>0.067s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notAllowedIfStartTimeAfterEndTime</td>
+<td>0.070s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notAllowedIfStartTimeAfterEndTimeWhenUpdating</td>
+<td>0.153s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">notAllowedIfUnArchivedSprintExist</td>
+<td>0.119s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturn201WhenArchiveSuccessfully</td>
+<td>0.149s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">shouldReturn201WhenCreateSprintSuccessfully</td>
+<td>0.161s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">should_throw_404_exception_if_active_sprint_is_not_exist</td>
+<td>0.065s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">updateSprint</td>
+<td>0.169s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2017-03-03 21:40:45.207  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-03 21:40:45.213  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
+2017-03-03 21:40:45.215  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@696f656f, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@62fb5c37, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@6eabb6fb, org.springframework.test.context.support.DirtiesContextTestExecutionListener@464c92e8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@549ac353, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@6c382713, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@5f975801, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@7d6e4ac9]
+21:40:45.253 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:009b884b-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.253  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:009b884b-0017-11e7-af8b-0014781bc25c
+21:40:45.253 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints
+2017-03-03 21:40:45.253  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints
+21:40:45.254 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints
+2017-03-03 21:40:45.254  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints
+21:40:45.299 [http-nio-9120-exec-1] INFO  o.thiki.kanban.sprint.SprintService - Creating sprint.sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+2017-03-03 21:40:45.299  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.sprint.SprintService    : Creating sprint.sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+21:40:45.319 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.319  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.322 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:00a60f9c-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.322  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:00a60f9c-0017-11e7-af8b-0014781bc25c
+21:40:45.322 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:45.322  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:45.323 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:45.323  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:45.325 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.325  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.368 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:00ad147d-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.368  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:00ad147d-0017-11e7-af8b-0014781bc25c
+21:40:45.369 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/activeSprint
+2017-03-03 21:40:45.369  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/activeSprint
+21:40:45.369 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints/activeSprint
+2017-03-03 21:40:45.369  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints/activeSprint
+21:40:45.371 [http-nio-9120-exec-2] INFO  o.thiki.kanban.sprint.SprintService - Loading active sprint.boardId:board-fooId,userName
+2017-03-03 21:40:45.371  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.sprint.SprintService    : Loading active sprint.boardId:board-fooId,userName
+21:40:45.372 [http-nio-9120-exec-2] INFO  o.thiki.kanban.sprint.SprintService - No active sprint was found.boardId:board-fooId
+2017-03-03 21:40:45.372  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.sprint.SprintService    : No active sprint was found.boardId:board-fooId
+21:40:45.374 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.374  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.378 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:00ae9b1e-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.378  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:00ae9b1e-0017-11e7-af8b-0014781bc25c
+21:40:45.378 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/404
+2017-03-03 21:40:45.378  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/404
+21:40:45.378 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/404
+2017-03-03 21:40:45.378  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/404
+21:40:45.384 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.384  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.439 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:00b7e9ef-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.439  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:00b7e9ef-0017-11e7-af8b-0014781bc25c
+21:40:45.441 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:45.441  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+21:40:45.442 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:45.442  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+21:40:45.457 [http-nio-9120-exec-3] INFO  o.thiki.kanban.sprint.SprintService - Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-06 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:true,&quot;totalDays&quot;:-1,&quot;wentDays&quot;:25},boardId:board-fooId,userName
+2017-03-03 21:40:45.457  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.sprint.SprintService    : Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-06 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:true,&quot;totalDays&quot;:-1,&quot;wentDays&quot;:25},boardId:board-fooId,userName
+21:40:45.527 [http-nio-9120-exec-3] INFO  o.thiki.kanban.sprint.SprintService - Sprint startTime is after endTime.startTime:2017-02-06 12:11:44,endTime:2017-02-05 12:11:44
+2017-03-03 21:40:45.527  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.sprint.SprintService    : Sprint startTime is after endTime.startTime:2017-02-06 12:11:44,endTime:2017-02-05 12:11:44
+21:40:45.529 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.529  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.532 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:00c619c0-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.532  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:00c619c0-0017-11e7-af8b-0014781bc25c
+21:40:45.532 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:45.532  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:45.533 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:45.533  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:45.541 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.541  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.626 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:00d471a1-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.626  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:00d471a1-0017-11e7-af8b-0014781bc25c
+21:40:45.627 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:45.627  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+21:40:45.627 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:45.627  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+21:40:45.639 [http-nio-9120-exec-9] INFO  o.thiki.kanban.sprint.SprintService - Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+2017-03-03 21:40:45.639  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.sprint.SprintService    : Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+21:40:45.658 [http-nio-9120-exec-9] INFO  o.thiki.kanban.sprint.SprintService - Saved sprint:{&quot;archiveId&quot;:&quot;&quot;,&quot;completed&quot;:false,&quot;creationTime&quot;:&quot;2017-03-03 21:40:45.607000&quot;,&quot;endTime&quot;:&quot;2017-02-05 12:11:44.000000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:45.607000&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44.000000&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:1,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28}
+2017-03-03 21:40:45.658  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.sprint.SprintService    : Saved sprint:{&quot;archiveId&quot;:&quot;&quot;,&quot;completed&quot;:false,&quot;creationTime&quot;:&quot;2017-03-03 21:40:45.607000&quot;,&quot;endTime&quot;:&quot;2017-02-05 12:11:44.000000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:45.607000&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44.000000&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:1,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28}
+21:40:45.660 [http-nio-9120-exec-9] INFO  o.thiki.kanban.sprint.SprintResource - build sprint resource.board:board-fooId,userName:someone
+2017-03-03 21:40:45.660  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.sprint.SprintResource   : build sprint resource.board:board-fooId,userName:someone
+21:40:45.668 [http-nio-9120-exec-9] INFO  o.thiki.kanban.sprint.SprintResource - sprint resource building completed.board:board-fooId,userName:someone
+2017-03-03 21:40:45.668  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.sprint.SprintResource   : sprint resource building completed.board:board-fooId,userName:someone
+21:40:45.675 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.675  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.759 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:00e8bcf2-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.759  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:00e8bcf2-0017-11e7-af8b-0014781bc25c
+21:40:45.760 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints
+2017-03-03 21:40:45.760  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints
+21:40:45.760 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints
+2017-03-03 21:40:45.760  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints
+21:40:45.772 [http-nio-9120-exec-10] INFO  o.thiki.kanban.sprint.SprintService - Creating sprint.sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-06 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:true,&quot;totalDays&quot;:-1,&quot;wentDays&quot;:25},boardId:board-fooId,userName
+2017-03-03 21:40:45.772  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.sprint.SprintService    : Creating sprint.sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-06 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:true,&quot;totalDays&quot;:-1,&quot;wentDays&quot;:25},boardId:board-fooId,userName
+21:40:45.774 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.774  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.777 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:00eb7c13-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.777  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:00eb7c13-0017-11e7-af8b-0014781bc25c
+21:40:45.777 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:45.777  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:45.778 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:45.778  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:45.783 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.783  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.849 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:00f67894-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.849  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:00f67894-0017-11e7-af8b-0014781bc25c
+21:40:45.850 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:45.850  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+21:40:45.850 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:45.850  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+21:40:45.861 [http-nio-9120-exec-1] INFO  o.thiki.kanban.sprint.SprintService - Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-01 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:4,&quot;wentDays&quot;:30},boardId:board-fooId,userName
+2017-03-03 21:40:45.861  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.sprint.SprintService    : Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-01 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:4,&quot;wentDays&quot;:30},boardId:board-fooId,userName
+21:40:45.864 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.864  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.866 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:00f910a5-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.866  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:00f910a5-0017-11e7-af8b-0014781bc25c
+21:40:45.867 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:45.867  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:45.867 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:45.867  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:45.869 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.869  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:45.922 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:01019c26-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:45.922  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:01019c26-0017-11e7-af8b-0014781bc25c
+21:40:45.923 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints
+2017-03-03 21:40:45.923  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints
+21:40:45.923 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints
+2017-03-03 21:40:45.923  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints
+21:40:45.942 [http-nio-9120-exec-2] INFO  o.thiki.kanban.sprint.SprintService - Creating sprint.sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-04 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:1,&quot;wentDays&quot;:27},boardId:board-fooId,userName
+2017-03-03 21:40:45.942  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.sprint.SprintService    : Creating sprint.sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-04 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:1,&quot;wentDays&quot;:27},boardId:board-fooId,userName
+21:40:45.951 [http-nio-9120-exec-2] INFO  o.thiki.kanban.sprint.SprintService - Created sprint:{&quot;archiveId&quot;:&quot;&quot;,&quot;completed&quot;:false,&quot;creationTime&quot;:&quot;2017-03-03 21:40:45.949000&quot;,&quot;endTime&quot;:&quot;2017-02-05 12:11:44.000000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:45.949000&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-04 12:11:44.000000&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:1,&quot;totalDays&quot;:1,&quot;wentDays&quot;:27}
+2017-03-03 21:40:45.951  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.sprint.SprintService    : Created sprint:{&quot;archiveId&quot;:&quot;&quot;,&quot;completed&quot;:false,&quot;creationTime&quot;:&quot;2017-03-03 21:40:45.949000&quot;,&quot;endTime&quot;:&quot;2017-02-05 12:11:44.000000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:45.949000&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-04 12:11:44.000000&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:1,&quot;totalDays&quot;:1,&quot;wentDays&quot;:27}
+21:40:45.952 [http-nio-9120-exec-2] INFO  o.thiki.kanban.sprint.SprintResource - build sprint resource.board:board-fooId,userName:someone
+2017-03-03 21:40:45.952  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.sprint.SprintResource   : build sprint resource.board:board-fooId,userName:someone
+21:40:45.957 [http-nio-9120-exec-2] INFO  o.thiki.kanban.sprint.SprintResource - sprint resource building completed.board:board-fooId,userName:someone
+2017-03-03 21:40:45.957  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.sprint.SprintResource   : sprint resource building completed.board:board-fooId,userName:someone
+21:40:45.963 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:45.963  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:46.087 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:011ac977-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:46.087  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:011ac977-0017-11e7-af8b-0014781bc25c
+21:40:46.087 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints
+2017-03-03 21:40:46.087  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints
+21:40:46.088 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints
+2017-03-03 21:40:46.088  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints
+21:40:46.099 [http-nio-9120-exec-3] INFO  o.thiki.kanban.sprint.SprintService - Creating sprint.sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+2017-03-03 21:40:46.099  INFO 6131 --- [nio-9120-exec-3] org.thiki.kanban.sprint.SprintService    : Creating sprint.sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+21:40:46.103 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:46.103  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:46.106 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:011dafa8-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:46.106  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:011dafa8-0017-11e7-af8b-0014781bc25c
+21:40:46.106 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:46.106  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:46.106 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:46.106  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:46.111 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:46.111  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:46.162 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:01263b29-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:46.162  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:01263b29-0017-11e7-af8b-0014781bc25c
+21:40:46.162 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/activeSprint
+2017-03-03 21:40:46.162  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/activeSprint
+21:40:46.162 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints/activeSprint
+2017-03-03 21:40:46.162  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints/activeSprint
+21:40:46.163 [http-nio-9120-exec-4] INFO  o.thiki.kanban.sprint.SprintService - Loading active sprint.boardId:board-fooId,userName
+2017-03-03 21:40:46.163  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.sprint.SprintService    : Loading active sprint.boardId:board-fooId,userName
+21:40:46.165 [http-nio-9120-exec-4] INFO  o.thiki.kanban.sprint.SprintService - Active sprint:{&quot;archiveId&quot;:&quot;&quot;,&quot;completed&quot;:false,&quot;creationTime&quot;:&quot;2017-03-03 21:40:46.145000&quot;,&quot;endTime&quot;:&quot;2017-02-05 12:11:44.000000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:46.145000&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;&quot;,&quot;startTime&quot;:&quot;2017-02-04 12:11:44.000000&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:1,&quot;totalDays&quot;:1,&quot;wentDays&quot;:27}
+2017-03-03 21:40:46.165  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.sprint.SprintService    : Active sprint:{&quot;archiveId&quot;:&quot;&quot;,&quot;completed&quot;:false,&quot;creationTime&quot;:&quot;2017-03-03 21:40:46.145000&quot;,&quot;endTime&quot;:&quot;2017-02-05 12:11:44.000000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:46.145000&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;&quot;,&quot;startTime&quot;:&quot;2017-02-04 12:11:44.000000&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:1,&quot;totalDays&quot;:1,&quot;wentDays&quot;:27}
+21:40:46.167 [http-nio-9120-exec-4] INFO  o.thiki.kanban.sprint.SprintResource - build sprint resource.board:board-fooId,userName:someone
+2017-03-03 21:40:46.167  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.sprint.SprintResource   : build sprint resource.board:board-fooId,userName:someone
+21:40:46.170 [http-nio-9120-exec-4] INFO  o.thiki.kanban.sprint.SprintResource - sprint resource building completed.board:board-fooId,userName:someone
+2017-03-03 21:40:46.170  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.sprint.SprintResource   : sprint resource building completed.board:board-fooId,userName:someone
+21:40:46.179 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:46.179  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:46.279 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:0138157a-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:46.279  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:0138157a-0017-11e7-af8b-0014781bc25c
+21:40:46.279 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:46.279  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+21:40:46.280 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:46.280  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+21:40:46.296 [http-nio-9120-exec-5] INFO  o.thiki.kanban.sprint.SprintService - Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:true,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:2,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+2017-03-03 21:40:46.296  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.sprint.SprintService    : Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:true,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:2,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+21:40:46.302 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - Archiving stage.boardId:board-fooId
+2017-03-03 21:40:46.302  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : Archiving stage.boardId:board-fooId
+21:40:46.306 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:true,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-fooId&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:9,&quot;title&quot;:&quot;sprint_name归档&quot;,&quot;type&quot;:9}
+2017-03-03 21:40:46.306  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : Checking whether title is already exist before creating new stage.stage:{&quot;archived&quot;:true,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-fooId&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:9,&quot;title&quot;:&quot;sprint_name归档&quot;,&quot;type&quot;:9}
+21:40:46.327 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - Created stage:{&quot;archived&quot;:true,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:46.325000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:46.325000&quot;,&quot;sortNumber&quot;:1,&quot;status&quot;:9,&quot;title&quot;:&quot;sprint_name归档&quot;,&quot;type&quot;:9}
+2017-03-03 21:40:46.327  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : Created stage:{&quot;archived&quot;:true,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:46.325000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:46.325000&quot;,&quot;sortNumber&quot;:1,&quot;status&quot;:9,&quot;title&quot;:&quot;sprint_name归档&quot;,&quot;type&quot;:9}
+21:40:46.328 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - Transfer the cards of the origin stage to archived stage.
+2017-03-03 21:40:46.328  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : Transfer the cards of the origin stage to archived stage.
+21:40:46.329 [http-nio-9120-exec-5] INFO  o.t.k.a.AcceptanceCriteriaService - Loading cards by stageId:stage_fooId
+2017-03-03 21:40:46.329  INFO 6131 --- [nio-9120-exec-5] o.t.k.a.AcceptanceCriteriaService        : Loading cards by stageId:stage_fooId
+21:40:46.332 [http-nio-9120-exec-5] INFO  o.t.k.a.AcceptanceCriteriaService - The cards belongs from the stage stage_fooId are []
+2017-03-03 21:40:46.332  INFO 6131 --- [nio-9120-exec-5] o.t.k.a.AcceptanceCriteriaService        : The cards belongs from the stage stage_fooId are []
+21:40:46.333 [http-nio-9120-exec-5] INFO  org.thiki.kanban.stage.StagesService - Archived stage.stage:{&quot;archived&quot;:true,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-fooId&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:9,&quot;title&quot;:&quot;sprint_name归档&quot;,&quot;type&quot;:9}
+2017-03-03 21:40:46.333  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.stage.StagesService     : Archived stage.stage:{&quot;archived&quot;:true,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;board-fooId&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;inDoneStatus&quot;:true,&quot;inProcess&quot;:false,&quot;inSprint&quot;:false,&quot;status&quot;:9,&quot;title&quot;:&quot;sprint_name归档&quot;,&quot;type&quot;:9}
+21:40:46.341 [http-nio-9120-exec-5] INFO  o.thiki.kanban.sprint.SprintService - Saved sprint:{&quot;archiveId&quot;:&quot;fooId&quot;,&quot;competedTime&quot;:&quot;2017-03-03 21:40:46.000000&quot;,&quot;completed&quot;:true,&quot;creationTime&quot;:&quot;2017-03-03 21:40:46.264000&quot;,&quot;endTime&quot;:&quot;2017-02-05 12:11:44.000000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:46.264000&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44.000000&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:2,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28}
+2017-03-03 21:40:46.341  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.sprint.SprintService    : Saved sprint:{&quot;archiveId&quot;:&quot;fooId&quot;,&quot;competedTime&quot;:&quot;2017-03-03 21:40:46.000000&quot;,&quot;completed&quot;:true,&quot;creationTime&quot;:&quot;2017-03-03 21:40:46.264000&quot;,&quot;endTime&quot;:&quot;2017-02-05 12:11:44.000000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:46.264000&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44.000000&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:2,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28}
+21:40:46.343 [http-nio-9120-exec-5] INFO  o.thiki.kanban.sprint.SprintResource - build sprint resource.board:board-fooId,userName:someone
+2017-03-03 21:40:46.343  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.sprint.SprintResource   : build sprint resource.board:board-fooId,userName:someone
+21:40:46.346 [http-nio-9120-exec-5] INFO  o.thiki.kanban.sprint.SprintResource - sprint resource building completed.board:board-fooId,userName:someone
+2017-03-03 21:40:46.346  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.sprint.SprintResource   : sprint resource building completed.board:board-fooId,userName:someone
+21:40:46.353 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:46.353  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:46.424 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:014e358b-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:46.424  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:014e358b-0017-11e7-af8b-0014781bc25c
+21:40:46.424 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:46.424  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+21:40:46.424 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:46.424  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+21:40:46.436 [http-nio-9120-exec-6] INFO  o.thiki.kanban.sprint.SprintService - Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+2017-03-03 21:40:46.436  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.sprint.SprintService    : Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:false,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+21:40:46.441 [http-nio-9120-exec-6] INFO  o.thiki.kanban.sprint.SprintService - No specified sprint was found.sprintId:fooId
+2017-03-03 21:40:46.441  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.sprint.SprintService    : No specified sprint was found.sprintId:fooId
+21:40:46.442 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:46.442  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:46.444 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:015142cc-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:46.444  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:015142cc-0017-11e7-af8b-0014781bc25c
+21:40:46.445 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:46.445  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:46.446 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:46.446  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:46.449 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:46.449  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:46.490 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:015847ad-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:46.490  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:015847ad-0017-11e7-af8b-0014781bc25c
+21:40:46.491 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:46.491  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/board-fooId/sprints/fooId
+21:40:46.491 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+2017-03-03 21:40:46.491  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/board-fooId/sprints/fooId
+21:40:46.502 [http-nio-9120-exec-7] INFO  o.thiki.kanban.sprint.SprintService - Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:true,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:2,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+2017-03-03 21:40:46.502  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.sprint.SprintService    : Updating sprint.sprintId:fooId,sprint:{&quot;completed&quot;:true,&quot;endTime&quot;:&quot;2017-02-05 12:11:44&quot;,&quot;remainingDays&quot;:-26,&quot;sprintName&quot;:&quot;sprintName-foo&quot;,&quot;startTime&quot;:&quot;2017-02-03 12:11:44&quot;,&quot;startTimeAfterEndTime&quot;:false,&quot;status&quot;:2,&quot;totalDays&quot;:2,&quot;wentDays&quot;:28},boardId:board-fooId,userName
+21:40:46.508 [http-nio-9120-exec-7] INFO  o.thiki.kanban.sprint.SprintService - Sprint was already archived.sprintId:fooId
+2017-03-03 21:40:46.508  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.sprint.SprintService    : Sprint was already archived.sprintId:fooId
+21:40:46.510 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:46.510  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+21:40:46.512 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:015ba30e-0017-11e7-af8b-0014781bc25c
+2017-03-03 21:40:46.512  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:015ba30e-0017-11e7-af8b-0014781bc25c
+21:40:46.513 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-03 21:40:46.513  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+21:40:46.513 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-03 21:40:46.513  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+21:40:46.516 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-03 21:40:46.516  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+</div>
+</div>
+</body>
+</html>
