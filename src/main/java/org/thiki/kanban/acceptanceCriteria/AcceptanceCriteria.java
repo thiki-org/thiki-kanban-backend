@@ -24,6 +24,7 @@ public class AcceptanceCriteria {
     private Integer sortNumber;
     private String creationTime;
     private String modificationTime;
+    private String cardId;
 
     public String getCreationTime() {
         return creationTime;
@@ -92,5 +93,13 @@ public class AcceptanceCriteria {
     public String diff(AcceptanceCriteria acceptanceCriteria) {
         DiffNode diff = ObjectDifferBuilder.buildDefault().compare(this, acceptanceCriteria);
         return diff.toString();
+    }
+
+    public String getCardId() {
+        return cardId;
+    }
+
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
     }
 }

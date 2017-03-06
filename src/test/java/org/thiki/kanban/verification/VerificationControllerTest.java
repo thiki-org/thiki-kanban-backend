@@ -21,6 +21,8 @@ public class VerificationControllerTest extends TestBase {
 
     @Test
     public void should_return_verifications_after_creating() {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId','this is the first stage.','someone','boardId-foo',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,deadline,author,stage_id) VALUES ('card-fooId','this is the card summary.','play badminton','2017-02-13',1,'stage-fooId')");
         jdbcTemplate.execute("INSERT INTO  kb_acceptance_criterias (id,summary,card_id,finished,author) VALUES ('acceptanceCriteria-fooId','AC-summary','card-fooId',1,'someone')");
         given().header("userName", "someone")
                 .body("{\"isPassed\":\"1\",\"remark\":\"remark-content\",\"acceptanceCriteriaId\":\"acceptanceCriteria-fooId\"}")

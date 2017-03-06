@@ -65,4 +65,22 @@ public class VerificationServiceTest {
 
         verificationService.addVerification(verification, acceptanceCriteriaId, userName);
     }
+
+    @Test
+    public void should_failed_if_the_card_acceptance_criteria_belongs_to_has_been_archived_or_done() {
+        expectedException.expect(BusinessException.class);
+        expectedException.expectMessage(VerificationCodes.CARD_HAS_ALREADY_BEEN_ARCHIVED_OR_DONE.message());
+
+        AcceptanceCriteria expectedAcceptanceCriteria = new AcceptanceCriteria();
+        expectedAcceptanceCriteria.setId(acceptanceCriteriaId);
+        expectedAcceptanceCriteria.setFinished(true);
+
+        Verification verification = new Verification();
+        verification.setAcceptanceCriteriaId(acceptanceCriteriaId);
+
+        when(cardsService.isCardArchivedOrDone(expectedAcceptanceCriteria.getCardId())).thenReturn(true);
+        when(acceptanceCriteriaService.loadAcceptanceCriteriaById(eq(acceptanceCriteriaId))).thenReturn(expectedAcceptanceCriteria);
+
+        verificationService.addVerification(verification, acceptanceCriteriaId, userName);
+    }
 }

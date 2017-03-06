@@ -165,4 +165,14 @@ public class CardsService {
     public boolean isArchived(String cardId) {
         return cardsPersistence.isArchived(cardId);
     }
+
+    @Cacheable(value = "card", key = "'card-done'+#cardId")
+    public boolean isDone(String cardId) {
+        return cardsPersistence.isDone(cardId);
+    }
+
+    @Cacheable(value = "card", key = "'card-archived-done'+#cardId")
+    public boolean isCardArchivedOrDone(String cardId) {
+        return isDone(cardId) || isArchived(cardId);
+    }
 }

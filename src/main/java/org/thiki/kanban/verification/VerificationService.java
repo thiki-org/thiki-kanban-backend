@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
+import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.foundation.exception.BusinessException;
 
 import javax.annotation.Resource;
@@ -24,6 +25,8 @@ public class VerificationService {
     private VerificationPersistence verificationPersistence;
     @Resource
     private AcceptanceCriteriaService acceptanceCriteriaService;
+    @Resource
+    private CardsService cardsService;
 
     @CacheEvict(value = "verification", key = "contains('#acceptanceCriteriaId')", allEntries = true)
     public List<Verification> addVerification(Verification verification, String acceptanceCriteriaId, String userName) {
@@ -34,6 +37,10 @@ public class VerificationService {
         }
         if (!acceptanceCriteria.get().getFinished()) {
             throw new BusinessException(VerificationCodes.ACCEPTANCE_CRITERIA_IS_NOT_FINISHED);
+        }
+        boolean isCardArchivedOrDone = cardsService.isCardArchivedOrDone(acceptanceCriteria.get().getCardId());
+        if (isCardArchivedOrDone) {
+            throw new BusinessException(VerificationCodes.CARD_HAS_ALREADY_BEEN_ARCHIVED_OR_DONE);
         }
         verificationPersistence.addVerification(verification, acceptanceCriteriaId, userName);
         return loadVerificationsByAcceptanceCriteria(acceptanceCriteriaId);
