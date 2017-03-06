@@ -6,7 +6,7 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  * Created by skytao on 03/06/17.
  */
 public enum VerificationCodes {
-    SUMMARY_IS_EMPTY("001", "验收标准的概述不能为空。"), ACCEPTANCE_CRITERIA_IS_NOT_FOUND("002", "验收标准不存在。");
+    ACCEPTANCE_CRITERIA_IS_NOT_FINISHED("001", "验收标准尚未完成，不能核验。"), ACCEPTANCE_CRITERIA_IS_NOT_FOUND("002", "验收标准不存在。");
     public static final String IS_PASSED_NOT_VALID = "请指定核验是否已经通过。";
     public static final String REMARK_IS_NOT_VALID = "核验意见不能为空且不能超过100个字符。";
     public static final String ACCEPTANCE_CRITERIA_ID__IS_NOT_VALID = "待核验的验收标准未指定。";

@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
+import org.thiki.kanban.foundation.exception.BusinessException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -18,10 +21,16 @@ public class VerificationService {
 
     @Resource
     private VerificationPersistence verificationPersistence;
+    @Resource
+    private AcceptanceCriteriaService acceptanceCriteriaService;
 
     @CacheEvict(value = "verification", key = "contains('#acceptanceCriteriaId')", allEntries = true)
     public List<Verification> addVerification(Verification verification, String acceptanceCriteriaId, String userName) {
         logger.info("Verify acceptance criterias,verification:{},acceptanceCriteriaId:{},userName:{}", verification, acceptanceCriteriaId, userName);
+        AcceptanceCriteria acceptanceCriteria = acceptanceCriteriaService.loadAcceptanceCriteriaById(acceptanceCriteriaId);
+        if (!acceptanceCriteria.getFinished()) {
+            throw new BusinessException(VerificationCodes.ACCEPTANCE_CRITERIA_IS_NOT_FINISHED);
+        }
         verificationPersistence.addVerification(verification, acceptanceCriteriaId, userName);
         return loadVerificationsByAcceptanceCriteria(acceptanceCriteriaId);
     }

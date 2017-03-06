@@ -21,7 +21,7 @@ public class VerificationControllerTest extends TestBase {
 
     @Test
     public void should_return_verifications_after_creating() {
-        jdbcTemplate.execute("INSERT INTO  kb_card_assignment (id,card_id,assignee,assigner,author) VALUES ('fooId','cardId-foo','assigneeId-foo','assignerId-foo','authorId-foo')");
+        jdbcTemplate.execute("INSERT INTO  kb_acceptance_criterias (id,summary,card_id,finished,author) VALUES ('acceptanceCriteria-fooId','AC-summary','card-fooId',1,'someone')");
         given().header("userName", "someone")
                 .body("{\"isPassed\":\"1\",\"remark\":\"remark-content\",\"acceptanceCriteriaId\":\"acceptanceCriteria-fooId\"}")
                 .contentType(ContentType.JSON)
