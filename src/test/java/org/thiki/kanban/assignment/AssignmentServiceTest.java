@@ -23,8 +23,7 @@ import java.util.List;
 import static junit.framework.TestCase.assertEquals;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by xubt on 26/02/2017.
@@ -91,5 +90,18 @@ public class AssignmentServiceTest {
 
         List<Assignment> savedAssignments = assignmentService.assign(assignmentList, cardId, boardId, userName);
         assertEquals(expectedSize, savedAssignments.size());
+    }
+
+    @Test
+    public void should_not_send_email_and_notification_if_assign_to_oneself() throws Exception {
+        Assignment assignment1 = JSON.toJavaObject(JSON.parseObject("{\"assignee\":\"assigner-foo1\",\"assigner\":\"assigner-foo1\",\"cardId\":\"cardId-foo\"}"), Assignment.class);
+        List<Assignment> assignmentList = Arrays.asList(assignment1);
+
+        when(assignmentPersistence.isAlreadyAssigned(any(), any())).thenReturn(false);
+        when(assignmentPersistence.create(any())).thenReturn(1);
+        when(assignmentPersistence.findByCardId(eq(cardId))).thenReturn(assignmentList).thenReturn(assignmentList);
+
+        assignmentService.assign(assignmentList, cardId, boardId, userName);
+        verify(notificationService, times(0)).sendEmailAfterNotifying(any());
     }
 }

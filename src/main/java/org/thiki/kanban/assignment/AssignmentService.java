@@ -55,7 +55,7 @@ public class AssignmentService {
         List<Assignment> originAssignments = findByCardId(cardId);
         for (Assignment assignment : assignments) {
             boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
-            if (!isAlreadyAssigned) {
+            if (!isAlreadyAssigned && !assignment.isSelfAssignment()) {
                 assignment.setCardId(cardId);
                 assignment.setAuthor(userName);
                 assignmentPersistence.create(assignment);
@@ -68,7 +68,7 @@ public class AssignmentService {
         for (Assignment originAssignment : originAssignments) {
             if (!assignments.contains(originAssignment)) {
                 assignmentPersistence.deleteById(originAssignment.getId());
-                if (!originAssignment.isSelfAssignment(userName)) {
+                if (!originAssignment.isSelfAssignment()) {
                     User sender = usersService.findByName(originAssignment.getAssigner());
                     User receiver = usersService.findByName(originAssignment.getAssignee());
                     AssignmentMail assignmentMail = AssignmentMail.newMail(originAssignment, sender, receiver, card, board, true);

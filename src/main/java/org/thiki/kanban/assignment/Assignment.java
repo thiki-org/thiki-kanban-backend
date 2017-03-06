@@ -101,7 +101,7 @@ public class Assignment {
         return result;
     }
 
-    public boolean isSelfAssignment(String userName) {
-        return this.assignee.equals(userName);
+    public boolean isSelfAssignment() {
+        return this.assignee.equals(this.assigner);
     }
 }
