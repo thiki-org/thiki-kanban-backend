@@ -233,10 +233,10 @@
     <changeSet id="8" author="winie" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="kb_members"/>
+                <tableExists tableName="kb_project_members"/>
             </not>
         </preConditions>
-        <createTable tableName="kb_members">
+        <createTable tableName="kb_project_members">
             <column name="id" type="VARCHAR(40)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
