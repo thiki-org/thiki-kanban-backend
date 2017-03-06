@@ -43,7 +43,7 @@ public class CardsService {
             throw new BusinessException(CardsCodes.STAGE_IS_NOT_SPECIFIED);
         }
         Stage stage = stagesService.findById(card.getStageId());
-        if (!stage.isTodo()) {
+        if (!stage.todo()) {
             throw new BusinessException(CardsCodes.STAGE_IS_NOT_TODO_STATUS);
         }
         if (stagesService.isReachedWipLimit(card.getStageId())) {

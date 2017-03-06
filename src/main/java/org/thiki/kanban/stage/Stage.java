@@ -153,7 +153,7 @@ public class Stage {
     }
 
     @JsonIgnore
-    public boolean isTodo() {
+    public boolean todo() {
         return StageCodes.STAGE_STATUS_TODO.equals(this.status);
     }
 }
