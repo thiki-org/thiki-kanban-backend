@@ -999,4 +999,33 @@
             </column>
         </addColumn>
     </changeSet>
+    <changeSet id="57" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_verification"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_verification">
+            <column name="id" type="VARCHAR(40)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="remark" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="acceptance_criteria_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_passed" type="TINYINT" defaultValue="0"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb"/>
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>

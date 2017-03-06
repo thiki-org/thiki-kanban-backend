@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.verification.VerificationPersistence">
+    <insert id="addVerification" parameterType="java.util.Map">
+        INSERT INTO
+        kb_verification(id,is_passed,remark,acceptance_criteria_id,author)
+        VALUES
+        (#{verification.id},#{verification.isPassed},#{verification.remark},#{acceptanceCriteriaId},#{userName})
+    </insert>
+
+    <select id="loadVerificationsByAcceptanceCriteria" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.verification.Verification">
+        SELECT * FROM kb_verification WHERE acceptance_criteria_id= #{acceptanceCriteriaId} AND delete_status=0 ORDER BY creation_time DESC
+    </select>
+</mapper>
