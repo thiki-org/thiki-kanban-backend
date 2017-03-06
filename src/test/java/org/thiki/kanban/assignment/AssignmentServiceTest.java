@@ -102,6 +102,6 @@ public class AssignmentServiceTest {
         when(assignmentPersistence.findByCardId(eq(cardId))).thenReturn(assignmentList).thenReturn(assignmentList);
 
         assignmentService.assign(assignmentList, cardId, boardId, userName);
-        verify(notificationService, times(0)).sendEmailAfterNotifying(any());
+        verify(notificationService, never()).sendEmailAfterNotifying(any());
     }
 }
