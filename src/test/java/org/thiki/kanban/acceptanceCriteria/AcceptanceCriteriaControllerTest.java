@@ -44,6 +44,7 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("author", equalTo(userName))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
                 .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
+                .body("_links.verifications.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId/verifications"))
                 .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias"));
     }
 
