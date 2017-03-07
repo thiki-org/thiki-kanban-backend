@@ -26,7 +26,7 @@ public class VerificationController {
 
     @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias/{acceptanceCriteriaId}/verifications", method = RequestMethod.GET)
     public HttpEntity loadVerificationsByAcceptanceCriterias(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @PathVariable String acceptanceCriteriaId, @RequestHeader String userName) throws Exception {
-        List<Verification> verificationList = verificationService.loadVerificationsByAcceptanceCriteria(cardId);
+        List<Verification> verificationList = verificationService.loadVerificationsByAcceptanceCriteria(acceptanceCriteriaId);
         return Response.build(verificationsResource.toResource(verificationList, boardId, stageId, cardId, acceptanceCriteriaId, userName));
     }
 }

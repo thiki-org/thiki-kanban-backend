@@ -76,10 +76,10 @@ public class VerificationService {
         notificationService.sendEmailAfterNotifying(mailEntity, VerificationCodes.VERIFICATION_FAILED_EMAIL_TEMPLATE, assignees);
     }
 
-    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriterias'+#cardId")
-    public List<Verification> loadVerificationsByAcceptanceCriteria(String cardId) {
-        logger.info("Loading verifications by cardId.cardId:{}", cardId);
-        List<Verification> verifications = verificationPersistence.loadVerificationsByAcceptanceCriteria(cardId);
+    @Cacheable(value = "acceptanceCriteria", key = "'acceptanceCriterias'+#acceptanceCriteriaId")
+    public List<Verification> loadVerificationsByAcceptanceCriteria(String acceptanceCriteriaId) {
+        logger.info("Loading verifications by cardId.cardId:{}", acceptanceCriteriaId);
+        List<Verification> verifications = verificationPersistence.loadVerificationsByAcceptanceCriteria(acceptanceCriteriaId);
         logger.info("Loaded verifications:{}", verifications);
         return verifications;
     }
