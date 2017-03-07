@@ -6,6 +6,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.mail.MailEntity;
 import org.thiki.kanban.foundation.mail.MailService;
+import org.thiki.kanban.user.Profile;
+import org.thiki.kanban.user.UsersService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -20,6 +22,8 @@ public class NotificationService {
     private NotificationPersistence notificationPersistence;
     @Resource
     private MailService mailService;
+    @Resource
+    private UsersService usersService;
 
     @CacheEvict(value = "notification", key = "{'notifications'+#notification.receiver,#userName+unreadNotificationTotal}", allEntries = true)
     public Notification notify(final Notification notification) {
@@ -57,5 +61,19 @@ public class NotificationService {
         logger.info("Sending email after notifying notification:{},mailEntity:{}", notification, mailEntity);
         notify(notification);
         mailService.sendMailByTemplate(mailEntity);
+    }
+
+    public void sendEmailAfterNotifying(MailEntity mailEntity, String verificationFailedEmailTemplate, List<String> receiverUserNames) throws Exception {
+        Notification notification = mailEntity.newNotification();
+        logger.info("Sending email after notifying notification:{},mailEntity:{}", notification, mailEntity);
+        for (String receiverUserName : receiverUserNames) {
+            notification.setReceiver(receiverUserName);
+            notify(notification);
+            Profile receiver = usersService.loadProfileByUserName(receiverUserName);
+            mailEntity.setReceiverEmailAddress(receiver.getEmail());
+            mailEntity.setReceiverNickName(receiver.getNickName());
+            mailEntity.setTemplateName(verificationFailedEmailTemplate);
+            mailService.sendMailByTemplate(mailEntity);
+        }
     }
 }

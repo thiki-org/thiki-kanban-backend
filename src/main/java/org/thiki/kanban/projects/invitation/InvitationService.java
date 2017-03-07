@@ -69,7 +69,7 @@ public class InvitationService {
 
 
         InvitationEmail invitationEmail = new InvitationEmail();
-        invitationEmail.setReceiver(inviteeUser.getEmail());
+        invitationEmail.setReceiverEmailAddress(inviteeUser.getEmail());
         invitationEmail.setInviter(userName);
         invitationEmail.setInvitee(inviteeUser.getUserName());
         invitationEmail.setProjectName(project.getName());

@@ -12,6 +12,10 @@ public enum VerificationCodes {
     public static final String IS_PASSED_NOT_VALID = "请指定核验是否已经通过。";
     public static final String REMARK_IS_NOT_VALID = "核验意见不能为空且不能超过100个字符。";
     public static final String ACCEPTANCE_CRITERIA_ID__IS_NOT_VALID = "待核验的验收标准未指定。";
+    public static final Integer IS_NOT_PASSED = -1;
+    public static final Integer IS_PASSED = 1;
+    public static final String VERIFICATION_FAILED_EMAIL_TEMPLATE = "verification-template.ftl";
+
     private String code;
     private String message;
 

@@ -25,7 +25,7 @@ public class MailEntity {
         return receiver;
     }
 
-    public void setReceiver(String receiver) {
+    public void setReceiverEmailAddress(String receiver) {
         this.receiver = receiver;
     }
 
@@ -82,7 +82,7 @@ public class MailEntity {
         notification.setTitle(this.getSubject());
         notification.setReceiver(this.receiverUserName);
         notification.setSender(this.sender);
-        notification.setContent(this.content);
+        notification.setContent(this.getContent());
         notification.setType(notificationType.type());
         return notification;
     }

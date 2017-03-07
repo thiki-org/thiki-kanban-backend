@@ -7,7 +7,8 @@ public enum NotificationType {
     PROJECT_MEMBER_INVITATION("project-members-invitation", "团队邀请"),
 
     ASSIGNMENT_INVITATION("assignment", "卡片处理"),
-    CANCEL_ASSIGNMENT_INVITATION("cancel-assignment", "取消卡片处理");
+    CANCEL_ASSIGNMENT_INVITATION("cancel-assignment", "取消卡片处理"),
+    VERIFICATION_IS_NOT_PASSED("verification-is-not-passed", "取消卡片处理");
 
     private String type;
     private String name;
