@@ -15,8 +15,6 @@ buildscript {
 plugins {
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.6.3'
-    id "net.foragerr.jmeter" version "1.0.7-2.13"
-
 }
 
 apply plugin: 'java'
@@ -116,10 +114,4 @@ jacocoTestReport {
                     exclude: ['org/thiki/kanban/foundation/**', 'org/thiki/kanban/Application.java'])
         })
     }
-}
-
-
-jmeter {
-    enableReports = true
-    enableExtendedReports = false
 }
