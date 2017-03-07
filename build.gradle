@@ -15,9 +15,10 @@ buildscript {
 plugins {
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.6.3'
-    id "net.foragerr.jmeter" version "1.0.7-2.13"
-//    id "nebula.lint" version "6.8.0"
 
+//    id "net.foragerr.jmeter" version "1.0.7-2.13"
+//    id "nebula.lint" version "6.8.0"
+    
 }
 
 apply plugin: 'java'
@@ -123,11 +124,10 @@ jacocoTestReport {
     }
 }
 
-
-jmeter {
-    enableReports = true
-    enableExtendedReports = false
-}
+//jmeter {
+//    enableReports = true
+//    enableExtendedReports = false
+//}
 
 
 // Add checkstyle, findbugs, pmd and lint to the check task.
@@ -198,3 +198,4 @@ pmd {
     ignoreFailures = true
     pmdTest.enabled=false
 }
+
