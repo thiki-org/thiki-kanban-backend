@@ -1,6 +1,7 @@
 package org.thiki.kanban.assignment;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Created by xubitao on 6/16/16.
@@ -101,6 +102,7 @@ public class Assignment {
         return result;
     }
 
+    @JsonIgnore
     public boolean isSelfAssignment() {
         return this.assignee.equals(this.assigner);
     }
