@@ -58,7 +58,7 @@ public class WebSpringConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new SessionInterceptor());
-        registry.addInterceptor(new SecurityInterceptor(contextPath));
-        registry.addInterceptor(new AuthenticationInterceptor());
+//        registry.addInterceptor(new SecurityInterceptor(contextPath));
+//        registry.addInterceptor(new AuthenticationInterceptor());
     }
 }

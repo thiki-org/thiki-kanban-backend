@@ -18,7 +18,7 @@ plugins {
 
 //    id "net.foragerr.jmeter" version "1.0.7-2.13"
 //    id "nebula.lint" version "6.8.0"
-    
+
 }
 
 apply plugin: 'java'
