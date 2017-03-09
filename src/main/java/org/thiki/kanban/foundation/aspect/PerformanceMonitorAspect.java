@@ -16,22 +16,24 @@ import java.util.concurrent.ConcurrentHashMap;
 @Aspect
 @Component
 public class PerformanceMonitorAspect {
-    Logger logger = LoggerFactory.getLogger(PerformanceMonitorAspect.class.getName());
+    Logger logger = LoggerFactory.getLogger(getClass());
     private static ConcurrentHashMap<String, MethodStats> methodStats = new ConcurrentHashMap<String, MethodStats>();
     private static long statLogFrequency = 10;
     private static long methodWarningThreshold = 1000;
 
-    @Pointcut("execution(* org.thiki.*.*(..))")
+    @Pointcut("execution(*  org.thiki.kanban..*.*(..))")
     private void pointMethod() {
     }
 
     @Around("pointMethod()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
-        System.out.print("11111111111");
         long start = System.currentTimeMillis();
-        Object o = pjp.proceed();
-        updateStats(pjp.getTarget().getClass()+"."+pjp.getSignature().getName(),(System.currentTimeMillis() - start));
-        return o;
+        try {
+            return pjp.proceed();
+        }
+        finally{
+                updateStats(pjp.getTarget().getClass().getName() + "." + pjp.getSignature().getName(), (System.currentTimeMillis() - start));
+            }
     }
 
     private void updateStats(String methodName, long elapsedTime) {
@@ -54,10 +56,10 @@ public class PerformanceMonitorAspect {
             long avgTime = stats.totalTime / stats.count;
             long runningAvg = (stats.totalTime-stats.lastTotalTime) / statLogFrequency;
             logger.debug("method: " + methodName + "(), cnt = " + stats.count + ", lastTime = " + elapsedTime + ", avgTime = " + avgTime + ", runningAvg = " + runningAvg + ", maxTime = " + stats.maxTime);
-System.out.print("11111111111");
             //reset the last total time
             stats.lastTotalTime = stats.totalTime;
         }
+        System.out.println("method warning: " + methodName + "(), cnt = " + stats.count + ", lastTime = " + elapsedTime + ", maxTime = " + stats.maxTime);
     }
 
     class MethodStats {
