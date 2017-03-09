@@ -8,6 +8,8 @@ import org.thiki.kanban.foundation.hateoas.TLink;
 
 import javax.annotation.Resource;
 
+import java.util.Optional;
+
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
@@ -24,9 +26,11 @@ public class NotificationResource extends RestResource {
     public Object toResource(String userName, Notification notification) throws Exception {
         NotificationResource notificationResource = new NotificationResource();
         notificationResource.domainObject = notification;
-        Link selfLink = linkTo(methodOn(NotificationController.class).loadNotificationById(notification.getId(), userName)).withSelfRel();
-        notificationResource.add(tlink.from(selfLink).build(userName));
-
+        Optional notificationEmpty = Optional.ofNullable(notification);
+        if(notificationEmpty.isPresent()) {
+            Link selfLink = linkTo(methodOn(NotificationController.class).loadNotificationById(notification.getId(), userName)).withSelfRel();
+            notificationResource.add(tlink.from(selfLink).build(userName));
+        }
         Link notificationsLink = linkTo(methodOn(NotificationController.class).loadNotifications(userName)).withRel("notifications");
         notificationResource.add(tlink.from(notificationsLink).build(userName));
         return notificationResource.getResource();

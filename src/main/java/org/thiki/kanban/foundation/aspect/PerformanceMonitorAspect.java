@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Aspect
 @Component
 public class PerformanceMonitorAspect {
-    Logger logger = LoggerFactory.getLogger(getClass());
+    Logger logger = LoggerFactory.getLogger(PerformanceMonitorAspect.class);
     private static ConcurrentHashMap<String, MethodStats> methodStats = new ConcurrentHashMap<String, MethodStats>();
     private static long statLogFrequency = 10;
     private static long methodWarningThreshold = 1000;
@@ -59,7 +59,6 @@ public class PerformanceMonitorAspect {
             //reset the last total time
             stats.lastTotalTime = stats.totalTime;
         }
-        System.out.println("method warning: " + methodName + "(), cnt = " + stats.count + ", lastTime = " + elapsedTime + ", maxTime = " + stats.maxTime);
     }
 
     class MethodStats {
