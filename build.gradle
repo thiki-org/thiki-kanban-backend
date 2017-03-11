@@ -169,9 +169,9 @@ task findbugs(type: FindBugs) {
 }
 
 task pmd(type: Pmd) {
-    ruleSetFiles = files("${project.rootDir}/src/main/resources/quality/pmd/pmd-ruleset.xml")
-    ruleSets = []
-    pmdTest.enabled=true
+//    ruleSetFiles = files("${project.rootDir}/src/main/resources/quality/pmd/pmd-ruleset.xml")
+//    ruleSets = []
+    pmdTest.enabled=false
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
