@@ -15,6 +15,10 @@ buildscript {
 plugins {
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.6.3'
+
+//    id "net.foragerr.jmeter" version "1.0.7-2.13"
+//    id "nebula.lint" version "6.8.0"
+
 }
 
 apply plugin: 'java'
@@ -22,6 +26,10 @@ apply plugin: 'idea'
 apply plugin: "jacoco"
 apply plugin: 'org.springframework.boot'
 apply plugin: 'cobertura'
+//apply plugin: 'checkstyle'
+apply plugin: 'findbugs'
+apply plugin: 'pmd'
+
 
 group = 'org.thiki'
 version = '1.0-SNAPSHOT'
@@ -115,3 +123,79 @@ jacocoTestReport {
         })
     }
 }
+
+//jmeter {
+//    enableReports = true
+//    enableExtendedReports = false
+//}
+
+
+// Add checkstyle, findbugs, pmd and lint to the check task.
+check.dependsOn 'findbugs', 'pmd'
+
+//task checkstyle(type: Checkstyle) {
+//    ignoreFailures=true
+//    configFile file("${project.rootDir}/src/main/resources/quality/checkstyle/checkstyle.xml")
+//    configProperties.checkstyleSuppressionsPath = file("src/main/resources/quality/checkstyle/suppressions.xml").absolutePath
+//    source 'src'
+//    include '**/*.java'
+//    exclude '**/gen/**'
+//    classpath = files()
+//}
+
+
+task findbugs(type: FindBugs) {
+    effort = "max"
+    reportLevel = "high"
+    excludeFilter = new File("${project.rootDir}/src/main/resources/quality/findbugs/findbugs-filter.xml")
+    classes = files("${project.rootDir}/build/classes")
+    findbugsTest.enabled=true
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$project.buildDir/reports/findbugs/findbugs.xml"
+        }
+        html {
+            destination "$project.buildDir/reports/findbugs/findbugs.html"
+        }
+    }
+
+    classpath = files()
+}
+
+task pmd(type: Pmd) {
+//    ruleSetFiles = files("${project.rootDir}/src/main/resources/quality/pmd/pmd-ruleset.xml")
+//    ruleSets = []
+    pmdTest.enabled=false
+    source 'src'
+    include '**/*.java'
+    exclude '**/gen/**'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+        xml {
+            destination "$project.buildDir/reports/pmd/pmd.xml"
+        }
+        html {
+            destination "$project.buildDir/reports/pmd/pmd.html"
+        }
+    }
+}
+
+
+findbugs{
+    ignoreFailures=true
+    findbugsTest.enabled=false
+
+}
+pmd {
+    ignoreFailures = true
+    pmdTest.enabled=false
+}
+
