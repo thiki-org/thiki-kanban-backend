@@ -143,8 +143,8 @@ public class CardsService {
                     throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
                 }
                 if (currentStage.isInDoneStatus()) {
-                    List<AcceptanceCriteria> acceptanceCriterias = acceptanceCriteriaService.loadAcceptanceCriteriasByCardId(card.getId());
-                    if (acceptanceCriterias.size() == 0) {
+                    boolean isHasAcceptanceCriterias = acceptanceCriteriaService.isHasAcceptanceCriterias(card.getId());
+                    if (!isHasAcceptanceCriterias) {
                         throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_SET);
                     }
                     boolean isAllAcceptanceCriteriasCompleted = acceptanceCriteriaService.isAllAcceptanceCriteriasCompleted(card.getId());

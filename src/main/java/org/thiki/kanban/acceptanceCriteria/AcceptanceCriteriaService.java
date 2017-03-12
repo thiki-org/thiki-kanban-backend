@@ -89,4 +89,9 @@ public class AcceptanceCriteriaService {
     public boolean isAllAcceptanceCriteriasCompleted(String cardId) {
         return !acceptanceCriteriaPersistence.isHasUnFinishedAcceptanceCriterias(cardId);
     }
+
+    public boolean isHasAcceptanceCriterias(String cardId) {
+        List<AcceptanceCriteria> acceptanceCriterias = loadAcceptanceCriteriasByCardId(cardId);
+        return !acceptanceCriterias.isEmpty();
+    }
 }
