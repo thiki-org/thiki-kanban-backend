@@ -14,8 +14,6 @@ public class Assignment {
 
     private String assigner;
 
-    private String name;
-
     private String author;
 
     private String creationTime;
@@ -78,14 +76,6 @@ public class Assignment {
         this.modificationTime = modificationTime;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Override
     public String toString() {
         return JSON.toJSONString(this);
@@ -109,5 +99,9 @@ public class Assignment {
         result = 31 * result + (cardId != null ? cardId.hashCode() : 0);
         result = 31 * result + (assignee != null ? assignee.hashCode() : 0);
         return result;
+    }
+
+    public boolean isSelfAssignment() {
+        return this.assignee.equals(this.assigner);
     }
 }

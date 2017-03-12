@@ -73,5 +73,10 @@
         SELECT * FROM kb_card WHERE delete_status=0 AND parent_id=#{cardId}
     </select>
     <select id="isArchived" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT  CASE WHEN type=9 THEN 'True' ELSE 'False' END from kb_stage WHERE id=(SELECT stage_id from kb_card WHERE kb_card.delete_status=0 AND id=#{cardId})    </select>
+        SELECT CASE WHEN type=9 THEN 'True' ELSE 'False' END from kb_stage WHERE id=(SELECT stage_id from kb_card WHERE
+        kb_card.delete_status=0 AND id=#{cardId})
+    </select>
+    <select id="isDone" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT  CASE WHEN status=9 THEN 'True' ELSE 'False' END from kb_stage WHERE id=(SELECT stage_id from kb_card WHERE kb_card.delete_status=0 AND id=#{cardId})
+    </select>
 </mapper>

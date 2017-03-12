@@ -28,7 +28,12 @@ public class UsersService {
     private AvatarStorage avatarStorage;
 
     public User findByName(String userName) {
-        return usersPersistence.findByName(userName);
+        User user = usersPersistence.findByName(userName);
+        Profile profile = loadProfileByUserName(userName);
+        if (profile != null) {
+            user.setProfile(profile);
+        }
+        return user;
     }
 
     @ValidateParams
@@ -80,7 +85,7 @@ public class UsersService {
         return avatarStorage.loadAvatar(profile.getAvatar());
     }
 
-    @Cacheable(value = "profile", key = "#userName")
+    @Cacheable(value = "profile", key = "'profile'+#userName")
     public Profile loadProfileByUserName(String userName) {
         Profile profile = usersPersistence.findProfile(userName);
         if (profile == null) {

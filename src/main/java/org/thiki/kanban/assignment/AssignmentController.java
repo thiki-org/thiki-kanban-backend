@@ -24,7 +24,7 @@ public class AssignmentController {
 
     @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/assignments", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody List<Assignment> assignments, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        List<Assignment> savedAssignments = assignmentService.assign(assignments, cardId, userName);
+        List<Assignment> savedAssignments = assignmentService.assign(assignments, cardId, boardId, userName);
         return Response.build(assignmentsResource.toResource(savedAssignments, boardId, stageId, cardId, userName));
     }
 

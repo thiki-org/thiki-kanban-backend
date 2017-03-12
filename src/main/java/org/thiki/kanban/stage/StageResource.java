@@ -32,7 +32,7 @@ public class StageResource extends RestResource {
             Link selfLink = linkTo(methodOn(StagesController.class).findById(stage.getId(), boardId, userName)).withSelfRel();
             stageResource.add(tlink.from(selfLink).build(userName));
 
-            Link cardsLink = linkTo(methodOn(CardsController.class).create(null, null, boardId, stage.getId())).withRel("cards");
+            Link cardsLink = linkTo(methodOn(CardsController.class).create(null, null, boardId)).withRel("cards");
             stageResource.add(tlink.from(cardsLink).build(userName));
         }
         Link allLink = linkTo(methodOn(StagesController.class).loadAll(boardId, null, userName)).withRel("all");

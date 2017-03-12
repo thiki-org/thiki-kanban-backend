@@ -1,4 +1,4 @@
-package org.thiki.kanban.projects.projectMembers;
+package org.thiki.kanban.projects.members;
 
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
@@ -30,14 +30,14 @@ public class MemberResource extends RestResource {
         Link avatarLink = linkTo(UsersController.class, UsersController.class.getMethod("loadAvatar", String.class, HttpServletResponse.class), member.getUserName()).withRel("avatar");
         memberResource.add(tlink.from(avatarLink).build(userName));
 
-        Link selfLink = linkTo(methodOn(ProjectMembersController.class).getMember(projectId, member.getUserName())).withSelfRel();
+        Link selfLink = linkTo(methodOn(MembersController.class).getMember(projectId, member.getUserName())).withSelfRel();
         memberResource.add(tlink.from(selfLink).build(userName));
         return memberResource.getResource();
     }
 
     public Object toResource(String projectId, String memberName, String userName) throws Exception {
         MemberResource memberResource = new MemberResource();
-        Link selfLink = linkTo(methodOn(ProjectMembersController.class).getMember(projectId, memberName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(MembersController.class).getMember(projectId, memberName)).withSelfRel();
         memberResource.add(tlink.from(selfLink).build(userName));
 
         Link projectLink = linkTo(methodOn(ProjectsController.class).findByUserName(memberName)).withRel("projects");

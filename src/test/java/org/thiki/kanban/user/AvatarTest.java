@@ -29,7 +29,7 @@ public class AvatarTest extends TestBase {
     @Test
     public void uploadAvatar() {
         dbPreparation.table("kb_user_registration")
-                .names("id,email,name,password")
+                .names("id,email,user_name,password")
                 .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
         File avatar = new File("src/test/resources/avatars/thiki-upload-test-file.jpg");
 
@@ -73,7 +73,7 @@ public class AvatarTest extends TestBase {
     @Test
     public void loadAvatar() throws IOException {
         dbPreparation.table("kb_user_registration")
-                .names("id,email,name,password")
+                .names("id,email,user_name,password")
                 .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
 
         dbPreparation.table("kb_user_profile")
@@ -97,7 +97,7 @@ public class AvatarTest extends TestBase {
     @Test
     public void loadDefaultAvatar() throws IOException {
         dbPreparation.table("kb_user_registration")
-                .names("id,email,name,password")
+                .names("id,email,user_name,password")
                 .values("fooUserId", "someone@gmail.com", "someone", "password").exec();
 
         dbPreparation.table("kb_user_profile")

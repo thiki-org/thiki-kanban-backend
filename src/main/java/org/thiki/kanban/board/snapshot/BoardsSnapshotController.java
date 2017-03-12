@@ -14,9 +14,9 @@ public class BoardsSnapshotController {
     @Resource
     private SnapshotService snapshotService;
 
-    @RequestMapping(value = "/{userName}/boards/{boardId}/snapshot", method = RequestMethod.GET)
-    public HttpEntity load(@PathVariable String boardId, @RequestParam(required = false) String viewType, @PathVariable String userName) throws Exception {
-        Object board = snapshotService.loadSnapshotByBoard(boardId, viewType, userName);
+    @RequestMapping(value = "/{userName}/projects/{projectId}/boards/{boardId}/snapshot", method = RequestMethod.GET)
+    public HttpEntity load(@PathVariable String projectId, @PathVariable String boardId, @RequestParam(required = false) String viewType, @PathVariable String userName) throws Exception {
+        Object board = snapshotService.loadSnapshotByBoard(projectId, boardId, viewType, userName);
         return Response.build(board);
     }
 }

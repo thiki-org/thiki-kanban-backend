@@ -6,7 +6,7 @@
 
     <insert id="create" parameterType="org.thiki.kanban.board.Board">
         INSERT INTO
-        kb_board(id,name, author,owner) VALUES (#{id},#{name}, #{author}, #{author})
+        kb_board(id,name,project_id, author,owner) VALUES (#{id},#{name},#{projectId}, #{author}, #{author})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.board.Board" flushCache="true">
@@ -20,7 +20,7 @@
     </update>
     <select id="unique" parameterType="java.lang.String" resultType="java.lang.Boolean">
 
-        SELECT count(*) FROM kb_board WHERE delete_status=0 AND NAME=#{name} AND author=#{userName}
+        SELECT count(*) FROM kb_board WHERE delete_status=0 AND NAME=#{name} AND project_id=#{projectId}
         <if test="id!=null">
             AND id !=#{id}
         </if>
@@ -36,11 +36,7 @@
         UPDATE kb_board SET delete_status=1 WHERE id=#{id} AND owner= #{userName}
     </delete>
 
-    <select id="findPersonalBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
-        SELECT * FROM kb_board WHERE delete_status=0 AND owner=#{userName}
-    </select>
-
-    <select id="findTeamsBoards" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
+    <select id="loadBoardsByProject" parameterType="java.lang.String" resultType="org.thiki.kanban.board.Board">
         SELECT * FROM kb_board WHERE delete_status=0 and project_id= #{projectId}
     </select>
 </mapper>

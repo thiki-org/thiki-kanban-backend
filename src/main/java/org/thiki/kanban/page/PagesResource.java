@@ -30,22 +30,22 @@ public class PagesResource extends RestResource {
     private PageResource pageResourceService;
 
     @Cacheable(value = "page", key = "'pages'+#userName+#boardId")
-    public Object toResource(List<Page> pages, String boardId, String userName) throws Exception {
+    public Object toResource(List<Page> pages, String boardId, String projectId, String userName) throws Exception {
         logger.info("build pages resource.board:{},,userName:{}", boardId, userName);
         PagesResource pagesResource = new PagesResource();
         pagesResource.domainObject = pages;
 
         List<Object> pageResources = new ArrayList<>();
         for (Page page : pages) {
-            Object pageResource = pageResourceService.toResource(page, boardId, userName);
+            Object pageResource = pageResourceService.toResource(page, boardId, projectId, userName);
             pageResources.add(pageResource);
         }
         pagesResource.buildDataObject("pages", pageResources);
 
-        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
+        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, projectId, userName)).withRel("board");
         pagesResource.add(tlink.from(boardLink).build(userName));
 
-        Link selfLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, userName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(PagesController.class).findByBoard(boardId, projectId, userName)).withSelfRel();
         pagesResource.add(tlink.from(selfLink).build(userName));
         logger.info("pages resource building completed.board:{},userName:{}", boardId, userName);
         return pagesResource.getResource();

@@ -50,9 +50,9 @@ public class LoginService {
         }
 
         Identification identification = new Identification();
-        String token = tokenService.buildToken(matchedUser.getName());
+        String token = tokenService.buildToken(matchedUser.getUserName());
         identification.setToken(token);
-        identification.setUserName(matchedUser.getName());
+        identification.setUserName(matchedUser.getUserName());
         logger.info("Login successfully:" + identification);
         return identification;
     }

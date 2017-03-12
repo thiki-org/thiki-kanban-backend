@@ -85,7 +85,7 @@ public class PasswordControllerTest extends TestBase {
     @Scenario("邮箱通过格式校验且存在后，发送找回密码的验证码到邮箱")
     @Test
     public void sendVerificationCode() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','tao','password')");
         given().body("{\"email\":\"766191920@qq.com\"}")
                 .contentType(ContentType.JSON)
@@ -100,7 +100,7 @@ public class PasswordControllerTest extends TestBase {
     @Scenario("邮箱通过格式校验且存在后，创建密码找回申请记前,如果存在未完成的申请,则将其废弃")
     @Test
     public void discardingUnfinishedPasswordRetrievalApplication() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','tao','password')");
         jdbcTemplate.execute("INSERT INTO  kb_password_retrieval (id,user_name,verification_code) " +
                 "VALUES ('fooUserId','tao','000000')");
@@ -118,7 +118,7 @@ public class PasswordControllerTest extends TestBase {
     @Scenario("用户取得验证码后，和邮箱一起发送到服务端验证，如果验证码正确且未过期，则发送密码重置的链接")
     @Test
     public void verifyVerificationCode() {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','tao','password')");
         jdbcTemplate.execute("INSERT INTO  kb_password_retrieval (id,user_name,verification_code) " +
                 "VALUES ('fooUserId','tao','000000')");
@@ -141,7 +141,7 @@ public class PasswordControllerTest extends TestBase {
     @Scenario("用户通过验证码验证,重置密码成功。")
     @Test
     public void resetPassword() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','tao','password')");
         jdbcTemplate.execute("INSERT INTO  kb_password_reset(id,user_name) " +
                 "VALUES ('fooUserId','tao')");
@@ -163,14 +163,14 @@ public class PasswordControllerTest extends TestBase {
                 .then()
                 .statusCode(HttpStatus.CREATED.value())
                 .body("_links.login.href", endsWith("/login"));
-        assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration where name='tao'", String.class));
+        assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration where user_name='tao'", String.class));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where user_name='tao' and is_reset=1").size());
     }
 
     @Scenario("验证码超过五分钟后,验证失败")
     @Test
     public void verificationCodeTimeOut() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
                 "VALUES ('fooUserId','766191920@qq.com','tao','password')");
 
         String dateFiveMinutesAgo = dateService.DateToString(dateService.addMinute(new Date(), -6), DateStyle.YYYY_MM_DD_HH_MM_SS);

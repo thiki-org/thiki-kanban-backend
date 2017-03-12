@@ -4,13 +4,13 @@
 
     <insert id="create" parameterType="org.thiki.kanban.user.User">
         INSERT INTO
-        kb_user_registration(id, email,name) VALUES (#{id}, #{email}, #{name})
+        kb_user_registration(id, email,user_name) VALUES (#{id}, #{email}, #{userName})
     </insert>
 
     <update id="update" parameterType="org.thiki.kanban.user.User" flushCache="true">
         UPDATE kb_user_registration SET
         email=#{email},
-        name=#{name}
+        user_name=#{userName}
         WHERE id=#{id} AND delete_status=0
     </update>
 
@@ -23,13 +23,13 @@
     </select>
 
     <select id="findByName" parameterType="java.lang.String" resultType="org.thiki.kanban.user.User">
-        SELECT * FROM kb_user_registration WHERE delete_status=0 and name= #{name}
+        SELECT * FROM kb_user_registration WHERE delete_status=0 and user_name= #{userName}
     </select>
 
     <select id="findByIdentity" parameterType="java.lang.String"
             resultType="org.thiki.kanban.user.User">
-        SELECT id,email,NAME,salt FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or
-        name=#{identity})
+        SELECT id,email,user_name,salt FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or
+        user_name=#{identity})
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
@@ -37,7 +37,7 @@
     </delete>
 
     <select id="isNameExist" parameterType="java.lang.String" resultType="boolean">
-        SELECT count(*) FROM kb_user_registration WHERE name=#{email} AND delete_status=0
+        SELECT count(*) FROM kb_user_registration WHERE user_name=#{userName} AND delete_status=0
     </select>
 
     <select id="isEmailExist" parameterType="java.lang.String" resultType="boolean">
@@ -46,13 +46,16 @@
 
     <select id="findByCredential" parameterType="java.lang.String"
             resultType="org.thiki.kanban.user.User">
-        SELECT id,email,NAME FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or name=#{identity})
+        SELECT id,email,user_name FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or
+        user_name=#{identity})
         AND kb_user_registration.password=#{password}
     </select>
 
     <select id="findProfile" parameterType="java.lang.String" resultType="org.thiki.kanban.user.Profile">
-        SELECT registration.name as userName,registration.email,profile.nick_name as nickName,profile.avatar as avatar
-        FROM kb_user_profile profile LEFT JOIN kb_user_registration registration ON profile.user_name=registration.name
+        SELECT registration.user_name as userName,registration.email,profile.nick_name as nickName,profile.avatar as
+        avatar
+        FROM kb_user_profile profile LEFT JOIN kb_user_registration registration ON
+        profile.user_name=registration.user_name
         WHERE profile.user_name=#{userName} AND registration.delete_status=0 AND profile.delete_status=0
     </select>
 

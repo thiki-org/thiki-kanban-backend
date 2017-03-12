@@ -40,6 +40,8 @@ public class CardsControllerTest extends TestBase {
     @Scenario("创建一个新的卡片")
     @Test
     public void create_shouldReturn201WhenCreateCardSuccessfully() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId','this is the first stage.','someone','boardId-foo',1)");
+
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
         String expectedCode = generateExpectedCode();
         int expireDays = 5;
@@ -47,13 +49,14 @@ public class CardsControllerTest extends TestBase {
         String deadline = DateService.instance().addDay(currentTime, expireDays);
         Map newCard = new HashMap();
         newCard.put("summary", "summary");
+        newCard.put("stageId", "stage-fooId");
         newCard.put("deadline", deadline);
         newCard.put("size", 5);
         given().body(newCard)
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/stages/fooId/cards")
+                .post("/boards/boardId-foo/cards")
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("summary"))
@@ -63,10 +66,10 @@ public class CardsControllerTest extends TestBase {
                 .body("size", equalTo(5))
                 .body("sizeName", equalTo(CardsCodes.sizeName(5)))
                 .body("restDays", equalTo(expireDays))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/fooId/cards/fooId"))
-                .body("_links.cards.href", endsWith("/boards/boardId-foo/stages/fooId/cards"))
-                .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/stages/fooId/cards/fooId/acceptanceCriterias"))
-                .body("_links.assignments.href", endsWith("/boards/boardId-foo/stages/fooId/cards/fooId/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards"))
+                .body("_links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId/acceptanceCriterias"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId/assignments"));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
@@ -85,11 +88,25 @@ public class CardsControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/stages/fooId/cards")
+                .post("/boards/boardId-foo/cards")
                 .then()
                 .statusCode(400)
                 .body("message", equalTo(CardsCodes.summaryIsRequired));
         assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
+    }
+
+    @Test
+    public void should_failed_if_stage_is_not_todo_status() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,status) VALUES ('stage-fooId','this is the first stage.','someone','board-id-foo',1)");
+        assertEquals(0, jdbcTemplate.queryForList("SELECT * FROM kb_card").size());
+        given().body("{\"summary\":\"summary    \",\"stageId\":\"stage-fooId\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/boards/boardId-foo/cards")
+                .then()
+                .body("code", equalTo(CardsCodes.STAGE_IS_NOT_TODO_STATUS.code()))
+                .body("message", equalTo(CardsCodes.STAGE_IS_NOT_TODO_STATUS.message()));
     }
 
     @Scenario("当创建一个卡片时,如果卡片概述长度超过50,则创建失败")
@@ -101,7 +118,7 @@ public class CardsControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/stages/fooId/cards")
+                .post("/boards/boardId-foo/cards")
                 .then()
                 .statusCode(400)
                 .body("message", equalTo(CardsCodes.summaryIsInvalid));
@@ -283,6 +300,22 @@ public class CardsControllerTest extends TestBase {
                 .statusCode(400)
                 .body("code", equalTo(CardsCodes.STAGE_WIP_REACHED_LIMIT.code()))
                 .body("message", equalTo(CardsCodes.STAGE_WIP_REACHED_LIMIT.message()));
+    }
+
+    @Test
+    public void should_failed_if_target_stage_is_in_process_and_card_deadline_is_not_set() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,status) VALUES ('stage-fooId','title','someone','board-id-foo',0)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,status) VALUES ('target-stage-fooId','title','someone','board-id-foo',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','title','play badminton',1,'stage-fooId')");
+        given().body("{\"summary\":\"newSummary\",\"stageId\":\"target-stage-fooId\"}")
+                .header("userName", userName)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/boards/boardId-foo/stages/stage-fooId/cards/fooId")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(CardsCodes.DEADLINE_IS_NOT_SET.code()))
+                .body("message", equalTo(CardsCodes.DEADLINE_IS_NOT_SET.message()));
     }
 
     @Scenario("当删除一个卡片时,如果卡片存在,则删除成功")

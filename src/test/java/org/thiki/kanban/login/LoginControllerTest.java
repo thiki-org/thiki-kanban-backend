@@ -48,7 +48,7 @@ public class LoginControllerTest extends TestBase {
     @Scenario("登录成功>用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配,如果匹配通过则颁发token")
     @Test
     public void login_loginSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password,salt) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password,salt) " +
                 "VALUES ('fooUserId','someone@gmail.com','someone','148412d9df986f739038ad22c77459f2','fooId')");
         String publicKey = rsaService.loadKey(publicKeyFilePath);
         String password = "foo";
@@ -60,7 +60,6 @@ public class LoginControllerTest extends TestBase {
                 .get("/login")
                 .then()
                 .statusCode(200)
-                .body("_links.boards.href", endsWith("/someone/boards"))
                 .body("_links.projects.href", endsWith("/someone/projects"))
                 .body("_links.profile.href", endsWith("/users/someone/profile"))
                 .body("_links.avatar.href", endsWith("/users/someone/avatar"))
@@ -71,7 +70,7 @@ public class LoginControllerTest extends TestBase {
     @Scenario("密码错误>用户携带通过公钥加密的密码登录系统时,系统通过私钥对其解密,解密后再通过MD5加密与数据库现有系统匹配,如果匹配未通过则登录失败")
     @Test
     public void login_shouldLoginFailedIfUserNameOrPasswordIsIncorrect() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,name,password,salt) " +
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password,salt) " +
                 "VALUES ('fooUserId','someone@gmail.com','someone','148412d9df986f739038ad22c77459f2','fooId')");
         String publicKey = rsaService.loadKey(publicKeyFilePath);
         String password = "wrongPassword";

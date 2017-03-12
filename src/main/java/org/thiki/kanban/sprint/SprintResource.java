@@ -22,15 +22,15 @@ public class SprintResource extends RestResource {
     @Resource
     private TLink tlink;
 
-    public Object toResource(Sprint sprint, String boardId, String userName) throws Exception {
+    public Object toResource(Sprint sprint, String boardId, String projectId, String userName) throws Exception {
         logger.info("build sprint resource.board:{},userName:{}", boardId, userName);
         SprintResource sprintResource = new SprintResource();
         sprintResource.domainObject = sprint;
         if (sprint != null) {
-            Link selfLink = linkTo(methodOn(SprintController.class).findById(sprint.getId(), boardId, userName)).withSelfRel();
+            Link selfLink = linkTo(methodOn(SprintController.class).findById(sprint.getId(), boardId, projectId, userName)).withSelfRel();
             sprintResource.add(tlink.from(selfLink).build(userName));
 
-            Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
+            Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, projectId, userName)).withRel("board");
             sprintResource.add(tlink.from(boardLink).build(userName));
         }
         logger.info("sprint resource building completed.board:{},userName:{}", boardId, userName);

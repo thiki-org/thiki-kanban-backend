@@ -43,7 +43,7 @@ public class WorktileService {
     @Resource
     private AcceptanceCriteriaService acceptanceCriteriaService;
 
-    public Board importWorktileTasks(String userName, MultipartFile worktileTasksFile) throws IOException {
+    public Board importWorktileTasks(String projectId, String userName, MultipartFile worktileTasksFile) throws IOException {
         String tasksJSONString;
         if (null == worktileTasksFile) {
             throw new BusinessException(WorktileCodes.FILE_IS_UN_UPLOAD);
@@ -73,7 +73,7 @@ public class WorktileService {
         }
         List<Task> tasks = JSON.parseArray(tasksJSONString, Task.class);
 
-        Board savedBoard = buildNewBoard(userName);
+        Board savedBoard = buildNewBoard(projectId, userName);
         List<Stage> savedStages = importEntries(userName, tasks, savedBoard);
         List<Card> savedCards = importTasks(userName, tasks, savedStages, savedBoard.getId());
         importTodos(userName, tasks, savedCards);
@@ -105,7 +105,7 @@ public class WorktileService {
                     .filter(stage -> stage.getTitle().equals(task.getEntry().getName()))
                     .forEach(stage -> {
                         card.setStageId(stage.getId());
-                        Card savedCard = cardsService.create(userName, boardId, stage.getId(), card);
+                        Card savedCard = cardsService.saveCard(userName, boardId, card);
                         savedCards.add(savedCard);
                     });
         }
@@ -137,11 +137,12 @@ public class WorktileService {
         return false;
     }
 
-    private Board buildNewBoard(String userName) {
+    private Board buildNewBoard(String projectId, String userName) {
         Board board = new Board();
         board.setAuthor(userName);
+        board.setProjectId(projectId);
         board.setOwner(userName);
         board.setName("worktile" + dateService.DateToString(new Date(), DateStyle.YYYY_MM_DD));
-        return boardsService.create(userName, board);
+        return boardsService.create(userName, board, projectId);
     }
 }

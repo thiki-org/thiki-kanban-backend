@@ -5,11 +5,8 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
 import org.thiki.kanban.foundation.exception.ResourceNotFoundException;
-import org.thiki.kanban.projects.project.Project;
-import org.thiki.kanban.projects.projectMembers.ProjectMembersService;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,15 +14,12 @@ import java.util.List;
  */
 @Service
 public class BoardsService {
-
     @Resource
     private BoardsPersistence boardsPersistence;
-    @Resource
-    private ProjectMembersService projectMembersService;
 
     @CacheEvict(value = "board", key = "startsWith('#userName + boards')", allEntries = true)
-    public Board create(String userName, final Board board) {
-        boolean isExists = boardsPersistence.unique(board.getId(), board.getName(), userName);
+    public Board create(String userName, final Board board, String projectId) {
+        boolean isExists = boardsPersistence.unique(board.getId(), board.getName(), projectId);
         if (isExists) {
             throw new BusinessException(BoardCodes.BOARD_IS_ALREADY_EXISTS);
         }
@@ -38,35 +32,19 @@ public class BoardsService {
         return boardsPersistence.findById(id);
     }
 
-    @Cacheable(value = "board", key = "#userName+'boards-personal'")
-    public List<Board> loadBoards(String userName) {
-        List<Board> personalBoards = boardsPersistence.findPersonalBoards(userName);
-        List<Board> projectsBoards = loadTeamsBoards(userName);
-
-        List<Board> boards = new ArrayList<>();
-        boards.addAll(personalBoards);
-        boards.addAll(projectsBoards);
-        return boards;
-    }
-
-    @Cacheable(value = "board", key = "#userName+'boards-teams'")
-    private List<Board> loadTeamsBoards(String userName) {
-        List<Board> projectsBoards = new ArrayList<>();
-        List<Project> projects = projectMembersService.loadTeamsByUserName(userName);
-        for (Project project : projects) {
-            List<Board> projectBoards = boardsPersistence.findTeamsBoards(project.getId());
-            projectsBoards.addAll(projectBoards);
-        }
-        return projectsBoards;
+    @Cacheable(value = "board", key = "#projectId+'boards'")
+    public List<Board> loadBoards(String projectId, String userName) {
+        List<Board> projectBoards = boardsPersistence.loadBoardsByProject(projectId);
+        return projectBoards;
     }
 
     @CacheEvict(value = "board", key = "contains(#userName)", allEntries = true)
-    public Board update(String userName, Board board) {
+    public Board update(String userName, String projectId, Board board) {
         Board boardToDelete = boardsPersistence.findById(board.getId());
         if (boardToDelete == null) {
             throw new ResourceNotFoundException(BoardCodes.BOARD_IS_NOT_EXISTS);
         }
-        boolean isExists = boardsPersistence.unique(board.getId(), board.getName(), userName);
+        boolean isExists = boardsPersistence.unique(board.getId(), board.getName(), projectId);
         if (isExists) {
             throw new BusinessException(BoardCodes.BOARD_IS_ALREADY_EXISTS);
         }
@@ -81,17 +59,5 @@ public class BoardsService {
             throw new ResourceNotFoundException(BoardCodes.BOARD_IS_NOT_EXISTS);
         }
         return boardsPersistence.deleteById(boardId, userName);
-    }
-
-    public boolean isBoardOwner(String boardId, String userName) {
-        Board board = findById(boardId);
-        if (board == null) {
-            throw new BusinessException(BoardCodes.BOARD_IS_NOT_EXISTS);
-        }
-        if (board.isOwner(userName)) {
-            return true;
-        }
-        boolean isTeamMember = projectMembersService.isMember(board.getProjectId(), userName);
-        return isTeamMember && board.getOwner().equals(userName);
     }
 }

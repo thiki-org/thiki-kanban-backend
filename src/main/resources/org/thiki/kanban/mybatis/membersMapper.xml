@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.projects.members.MembersPersistence">
+    <insert id="joinProject" parameterType="org.thiki.kanban.projects.members.Member">
+        INSERT INTO
+        kb_members(id,project_id,user_name,author) VALUES (#{id},#{projectId},#{userName},#{author})
+    </insert>
+    <select id="findById" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.projects.members.Member">
+        SELECT * FROM kb_members WHERE id= #{id} AND delete_status=0
+    </select>
+    <select id="findMember" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.projects.members.Member">
+        SELECT * FROM kb_members WHERE project_id= #{projectId} AND user_name=#{userName} AND delete_status=0
+    </select>
+
+    <select id="isAMemberOfTheProject" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_members WHERE project_id= #{projectId} AND user_name=#{userName} AND
+        delete_status=0
+    </select>
+
+    <select id="loadMembersByProject" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.projects.members.Member">
+        SELECT user.user_name as userName,user.email as email FROM kb_members members LEFT JOIN kb_user_registration
+        user ON members.user_name=user.user_name WHERE project_id=#{projectId} AND members.delete_status=0 AND
+        user.delete_status=0
+    </select>
+
+    <select id="findProjects" parameterType="java.lang.String"
+            resultType="org.thiki.kanban.projects.project.Project">
+        SELECT project.id AS id,project.name AS name FROM kb_project project LEFT JOIN kb_members members ON
+        project.id=members.project_id WHERE members.user_name=#{userName} AND project.delete_status=0 AND
+        members.delete_status=0
+    </select>
+
+    <delete id="leaveProject" parameterType="java.util.Map" flushCache="true">
+        UPDATE kb_members SET delete_status=1 WHERE user_name=#{userName} AND project_id=#{projectId} AND
+        delete_status=0
+    </delete>
+</mapper>

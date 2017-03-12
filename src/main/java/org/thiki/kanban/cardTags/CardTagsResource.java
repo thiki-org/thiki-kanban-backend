@@ -48,8 +48,6 @@ public class CardTagsResource extends RestResource {
         Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
         cardsResource.add(tlink.from(cardLink).build(userName));
 
-        Link boardLink = linkTo(methodOn(BoardsController.class).findById(boardId, userName)).withRel("board");
-        cardsResource.add(tlink.from(boardLink).build(userName));
         logger.info("cards tag resource building completed.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         return cardsResource.getResource();
     }

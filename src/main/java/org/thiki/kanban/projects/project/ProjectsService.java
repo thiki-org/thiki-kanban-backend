@@ -4,7 +4,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.exception.BusinessException;
-import org.thiki.kanban.projects.projectMembers.ProjectMembersService;
+import org.thiki.kanban.projects.members.MembersService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,7 +17,7 @@ public class ProjectsService {
     @Resource
     private ProjectsPersistence projectsPersistence;
     @Resource
-    private ProjectMembersService projectMembersService;
+    private MembersService membersService;
 
     @CacheEvict(value = "project", key = "contains('projects'+#userName)", allEntries = true)
     public Project create(String userName, final Project project) {
@@ -27,7 +27,7 @@ public class ProjectsService {
         }
         projectsPersistence.create(userName, project);
 
-        projectMembersService.joinTeam(userName, project.getId());
+        membersService.joinTeam(userName, project.getId());
         return projectsPersistence.findById(project.getId());
     }
 

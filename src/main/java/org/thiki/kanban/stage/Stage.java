@@ -151,4 +151,9 @@ public class Stage {
         }
         return this.wipLimit.equals(currentCardsNumbers);
     }
+
+    @JsonIgnore
+    public boolean todo() {
+        return StageCodes.STAGE_STATUS_TODO.equals(this.status);
+    }
 }

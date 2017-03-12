@@ -11,11 +11,7 @@ public interface UsersPersistence {
 
     Integer deleteById(@Param("id") String id);
 
-    User findByEmail(String email);
-
     User findByName(String userName);
-
-    boolean existsUser(Registration registration);
 
     User findByIdentity(@Param("identity") String identity);
 

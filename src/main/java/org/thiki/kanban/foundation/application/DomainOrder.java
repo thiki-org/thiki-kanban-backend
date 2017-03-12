@@ -25,5 +25,9 @@ public class DomainOrder {
     public static final int CARD_TAGS = 17;
     public static final int SPRINT = 18;
     public static final int PAGE = 19;
+<<<<<<< HEAD
     public static final int RISK = 20;
+=======
+    public static final int VERIFICATION = 20;
+>>>>>>> 93f5381a9739454e3a46f705c7b6a9b0f3ba9c87
 }

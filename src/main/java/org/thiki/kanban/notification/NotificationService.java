@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.foundation.mail.MailEntity;
+import org.thiki.kanban.foundation.mail.MailService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,6 +18,8 @@ public class NotificationService {
     private final static Logger logger = LoggerFactory.getLogger(NotificationService.class);
     @Resource
     private NotificationPersistence notificationPersistence;
+    @Resource
+    private MailService mailService;
 
     @CacheEvict(value = "notification", key = "{'notifications'+#notification.receiver,#userName+unreadNotificationTotal}", allEntries = true)
     public Notification notify(final Notification notification) {
@@ -46,5 +50,12 @@ public class NotificationService {
         }
         logger.info("Loaded notification notification:{}", notification);
         return notification;
+    }
+
+    public void sendEmailAfterNotifying(MailEntity mailEntity) throws Exception {
+        Notification notification = mailEntity.newNotification();
+        logger.info("Sending email after notifying notification:{},mailEntity:{}", notification, mailEntity);
+        notify(notification);
+        mailService.sendMailByTemplate(mailEntity);
     }
 }

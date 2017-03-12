@@ -37,15 +37,15 @@ public class WorktileControllerTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
                 .body("name", equalTo(expectedWorktileName))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", endsWith("/someone/boards"))
-                .body("_links.self.href", endsWith("/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/projects/project-fooId/boards"))
+                .body("_links.self.href", endsWith("/someone/projects/project-fooId/boards/fooId"));
 
         assertEquals(expectedWorktileName, jdbcTemplate.queryForObject("select name from kb_board where author='someone'", String.class));
     }
@@ -58,14 +58,14 @@ public class WorktileControllerTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", endsWith("/someone/boards"))
-                .body("_links.self.href", endsWith("/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/projects/project-fooId/boards"))
+                .body("_links.self.href", endsWith("/someone/projects/project-fooId/boards/fooId"));
 
         assertEquals("Product Backlog", jdbcTemplate.queryForObject("select title from kb_stage where board_id='fooId'", String.class));
     }
@@ -78,14 +78,14 @@ public class WorktileControllerTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", endsWith("/someone/boards"))
-                .body("_links.self.href", endsWith("/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/projects/project-fooId/boards"))
+                .body("_links.self.href", endsWith("/someone/projects/project-fooId/boards/fooId"));
 
         assertEquals("任务名称", jdbcTemplate.queryForObject("select summary from kb_card where author='someone'", String.class));
     }
@@ -98,14 +98,14 @@ public class WorktileControllerTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(201)
                 .body("id", equalTo("fooId"))
                 .body("author", equalTo("someone"))
                 .body("creationTime", notNullValue())
-                .body("_links.all.href", endsWith("/someone/boards"))
-                .body("_links.self.href", endsWith("/someone/boards/fooId"));
+                .body("_links.all.href", endsWith("/someone/projects/project-fooId/boards"))
+                .body("_links.self.href", endsWith("/someone/projects/project-fooId/boards/fooId"));
 
         assertEquals("todo", jdbcTemplate.queryForObject("select summary from kb_acceptance_criterias where card_id='fooId' AND author='someone'", String.class));
         assertEquals("TRUE", jdbcTemplate.queryForObject("select finished from kb_acceptance_criterias where card_id='fooId' AND author='someone'", String.class));
@@ -119,7 +119,7 @@ public class WorktileControllerTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(WorktileCodes.FILE_IS_EMPTY.code()))
@@ -134,7 +134,7 @@ public class WorktileControllerTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(WorktileCodes.FILE_CONTENT_FORMAT_INVALID.code()))
@@ -149,7 +149,7 @@ public class WorktileControllerTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(WorktileCodes.FILE_TYPE_INVALID.code()))
@@ -164,7 +164,7 @@ public class WorktileControllerTest extends TestBase {
         given().header("userName", "someone")
                 .multiPart("worktileTasks", worktileTasks)
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(WorktileCodes.FILE_NAME_INVALID.code()))
@@ -176,7 +176,7 @@ public class WorktileControllerTest extends TestBase {
     public void throwExceptionIfNoFileWasUpload() {
         given().header("userName", "someone")
                 .when()
-                .post("/someone/worktileTasks")
+                .post("/someone/projects/project-fooId/worktileTasks")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(WorktileCodes.FILE_IS_UN_UPLOAD.code()))

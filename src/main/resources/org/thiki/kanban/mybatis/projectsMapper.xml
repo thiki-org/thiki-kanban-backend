@@ -20,9 +20,9 @@
         SELECT * FROM kb_project WHERE delete_status=0 AND author=#{userId}
     </select>
     <select id="findByUserName" parameterType="java.lang.String" resultType="org.thiki.kanban.projects.project.Project">
-        SELECT * FROM kb_project where id in (SELECT project_Id FROM kb_project_members WHERE
-        kb_project_members.member=#{userName}
-        AND kb_project_members.delete_status=0) and kb_project.delete_status=0
+        SELECT * FROM kb_project where id in (SELECT project_Id FROM kb_members WHERE
+        kb_members.user_name=#{userName}
+        AND kb_members.delete_status=0) and kb_project.delete_status=0
     </select>
 
     <select id="isTeamExist" parameterType="java.lang.String" resultType="java.lang.Boolean">
@@ -30,8 +30,8 @@
     </select>
 
     <select id="isNameConflict" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_project project JOIN kb_project_members members ON project.id=members.project_id WHERE
-        project.name=#{projectName} AND members.member=#{userName} AND project.delete_status=0 AND
+        SELECT count(*) FROM kb_project project JOIN kb_members members ON project.id=members.project_id WHERE
+        project.name=#{projectName} AND members.user_name=#{userName} AND project.delete_status=0 AND
         members.delete_status=0
     </select>
 </mapper>

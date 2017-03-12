@@ -18,7 +18,7 @@ public class Action {
             this.actionName = "read";
         }
         if (MethodType.POST.name().equals(actionName)) {
-            this.actionName = "create";
+            this.actionName = "saveCard";
         }
         if (MethodType.PUT.name().equals(actionName)) {
             this.actionName = "modify";

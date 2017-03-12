@@ -30,23 +30,23 @@ public class BoardsResource extends RestResource {
     private BoardResource boardResourceService;
 
     @Cacheable(value = "board", key = "#userName+'boards'")
-    public Object toResource(List<Board> boards, String userName) throws Exception {
+    public Object toResource(List<Board> boards, String projectId, String userName) throws Exception {
         logger.info("build boards resource.userName:{}", userName);
         BoardsResource boardsResource = new BoardsResource();
         boardsResource.domainObject = boards;
 
         List<Object> boardResources = new ArrayList<>();
         for (Board board : boards) {
-            Object boardResource = boardResourceService.toResource(board, userName);
+            Object boardResource = boardResourceService.toResource(board, projectId, userName);
             boardResources.add(boardResource);
         }
 
         boardsResource.buildDataObject("boards", boardResources);
-        Link selfLink = linkTo(methodOn(BoardsController.class).loadByUserName(userName)).withSelfRel();
+        Link selfLink = linkTo(methodOn(BoardsController.class).loadByProject(projectId, userName)).withSelfRel();
 
         boardsResource.add(tlink.from(selfLink));
 
-        Link worktileTasksLinks = linkTo(methodOn(WorktileController.class).importTasks(userName, null)).withRel("worktileTasks");
+        Link worktileTasksLinks = linkTo(methodOn(WorktileController.class).importTasks(userName, projectId, null)).withRel("worktileTasks");
         boardsResource.add(tlink.from(worktileTasksLinks));
         logger.info("boards resource building complete.userName:{}", userName);
         return boardsResource.getResource();

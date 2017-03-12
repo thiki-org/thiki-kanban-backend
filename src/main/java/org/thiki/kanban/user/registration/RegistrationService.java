@@ -29,7 +29,7 @@ public class RegistrationService {
     private RSAService rsaService;
 
     public User register(Registration registration) throws Exception {
-        boolean isNameExist = usersService.isNameExist(registration.getName());
+        boolean isNameExist = usersService.isNameExist(registration.getUserName());
         if (isNameExist) {
             throw new BusinessException(UsersCodes.USERNAME_IS_ALREADY_EXISTS);
         }
@@ -47,6 +47,6 @@ public class RegistrationService {
             registration.setPassword(password);
         }
         registrationPersistence.register(registration);
-        return usersService.findByName(registration.getName());
+        return usersService.findByName(registration.getUserName());
     }
 }

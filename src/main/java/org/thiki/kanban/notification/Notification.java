@@ -26,6 +26,7 @@ public class Notification implements Serializable {
     private String type;
     private String typeName;
     private String modificationTime;
+    private String title;
 
     public String getType() {
         return type;
@@ -118,5 +119,14 @@ public class Notification implements Serializable {
                 ", typeName='" + typeName + '\'' +
                 ", modificationTime='" + modificationTime + '\'' +
                 '}';
+    }
+
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

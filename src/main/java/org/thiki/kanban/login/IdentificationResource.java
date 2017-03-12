@@ -26,8 +26,6 @@ public class IdentificationResource extends RestResource {
     public Object toResource(Identification identification) throws Exception {
         IdentificationResource identificationResource = new IdentificationResource();
         identificationResource.domainObject = identification;
-        Link boardsLink = linkTo(methodOn(BoardsController.class).loadByUserName(identification.getUserName())).withRel("boards");
-        identificationResource.add(tlink.from(boardsLink).build());
 
         Link projectsLink = linkTo(methodOn(ProjectsController.class).findByUserName(identification.getUserName())).withRel("projects");
         identificationResource.add(tlink.from(projectsLink).build());

@@ -581,6 +581,16 @@
         </modifySql>
     </changeSet>
     <changeSet id="21" author="skytao">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <sqlCheck expectedResult="0">
+                    SELECT count(*)
+                    FROM INFORMATION_SCHEMA.COLUMNS
+                    WHERE table_name='kb_acceptance_criterias'
+                    AND column_name='sort_number' AND column_default=9999
+                </sqlCheck>
+            </and>
+        </preConditions>
         <addDefaultValue columnDataType="int"
                          columnName="sort_number"
                          defaultValue="9999"
@@ -662,6 +672,9 @@
     <changeSet id="29" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_procedure" columnName="wip_num"/>
+            <not>
+                <columnExists tableName="kb_procedure" columnName="wip_limit"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="wip_limit"
@@ -720,7 +733,12 @@
 
     <changeSet id="34" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
-            <tableExists tableName="kb_procedure"/>
+            <and>
+                <tableExists tableName="kb_procedure"/>
+            </and>
+            <not>
+                <tableExists tableName="kb_stage"/>
+            </not>
         </preConditions>
         <renameTable newTableName="kb_stage" oldTableName="kb_procedure"/>
     </changeSet>
@@ -769,6 +787,9 @@
     <changeSet id="39" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_activity" columnName="procedure_snapShot"/>
+            <not>
+                <columnExists tableName="kb_activity" columnName="stage_snapShot"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="stage_snapShot"
@@ -780,6 +801,9 @@
     <changeSet id="40" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_activity" columnName="prev_procedure_snapShot"/>
+            <not>
+                <columnExists tableName="kb_activity" columnName="prev_stage_snapShot"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="prev_stage_snapShot"
@@ -918,11 +942,90 @@
     <changeSet id="52" author="skytao" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <columnExists tableName="kb_project_member_invitation" columnName="team_id"/>
+            <not>
+                <columnExists tableName="kb_project_member_invitation" columnName="project_id"/>
+            </not>
         </preConditions>
         <renameColumn
                 newColumnName="project_id"
                 oldColumnName="team_id"
                 columnDataType="varchar(50)"
                 tableName="kb_project_member_invitation"/>
+    </changeSet>
+    <changeSet id="53" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="kb_user_registration" columnName="name"/>
+            <not>
+                <columnExists tableName="kb_user_registration" columnName="user_name"/>
+            </not>
+        </preConditions>
+        <renameColumn
+                newColumnName="user_name"
+                oldColumnName="name"
+                columnDataType="varchar(50)"
+                tableName="kb_user_registration"/>
+    </changeSet>
+    <changeSet id="54" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="kb_project_members"/>
+            <not>
+                <tableExists tableName="kb_members"/>
+            </not>
+        </preConditions>
+        <renameTable newTableName="kb_members" oldTableName="kb_project_members"/>
+    </changeSet>
+    <changeSet id="55" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="kb_members" columnName="member"/>
+            <not>
+                <columnExists tableName="kb_members" columnName="user_name"/>
+            </not>
+        </preConditions>
+        <renameColumn
+                newColumnName="user_name"
+                oldColumnName="member"
+                columnDataType="varchar(50)"
+                tableName="kb_members"/>
+    </changeSet>
+    <changeSet id="56" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_notification" columnName="title"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_notification">
+            <column name="title" type="varchar(200)">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet id="57" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_verification"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_verification">
+            <column name="id" type="VARCHAR(40)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="remark" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="acceptance_criteria_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_passed" type="TINYINT" defaultValue="0"/>
+            <column name="delete_status" type="TINYINT" defaultValue="0"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb"/>
+        </modifySql>
     </changeSet>
 </databaseChangeLog>

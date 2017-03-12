@@ -36,19 +36,24 @@ public class CardsService {
     @Resource
     private AcceptanceCriteriaService acceptanceCriteriaService;
 
-    @CacheEvict(value = "card", key = "contains('#stageId')", allEntries = true)
-    public Card create(String userName, String boardId, String stageId, Card card) {
-        logger.info("Creating new card:{},stage:{}", card, stageId);
-        card.setStageId(stageId);
-        String code = generateCode(boardId);
-        card.setCode(code);
-        if (stagesService.isReachedWipLimit(stageId)) {
+    @CacheEvict(value = "card", key = "contains('#card.stageId')", allEntries = true)
+    public Card saveCard(String userName, String boardId, Card card) {
+        logger.info("Creating new card:{}", card);
+        if (card.getStageId() == null) {
+            throw new BusinessException(CardsCodes.STAGE_IS_NOT_SPECIFIED);
+        }
+        Stage stage = stagesService.findById(card.getStageId());
+        if (!stage.todo()) {
+            throw new BusinessException(CardsCodes.STAGE_IS_NOT_TODO_STATUS);
+        }
+        if (stagesService.isReachedWipLimit(card.getStageId())) {
             throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
         }
+        String code = generateCode(boardId);
+        card.setCode(code);
         cardsPersistence.create(userName, card);
         Card savedCard = cardsPersistence.findById(card.getId());
         logger.info("Created card:{}", savedCard);
-        Stage stage = stagesService.findById(stageId);
         activityService.recordCardCreation(savedCard, stage, userName);
         return savedCard;
     }
@@ -68,9 +73,13 @@ public class CardsService {
     public Card modify(String cardId, Card card, String stageId, String boardId, String userName) {
         logger.info("modify card:{}", card);
         Card originCard = loadAndValidateCard(cardId);
+        Stage targetStage = stagesService.findById(card.getStageId());
         if (card.isMoveToOtherStage(originCard)) {
             if (stagesService.isReachedWipLimit(card.getStageId())) {
                 throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
+            }
+            if (targetStage.isInProcess() && originCard.getDeadline() == null) {
+                throw new BusinessException(CardsCodes.DEADLINE_IS_NOT_SET);
             }
         }
         if (card.moveToParent(originCard)) {
@@ -88,8 +97,7 @@ public class CardsService {
         cardsPersistence.modify(cardId, card);
         Card savedCard = cardsPersistence.findById(cardId);
         logger.info("Modified card:{}", savedCard);
-        Stage stage = stagesService.findById(stageId);
-        activityService.recordCardModification(savedCard, stage, null, originCard, userName);
+        activityService.recordCardModification(savedCard, targetStage, null, originCard, userName);
         return savedCard;
     }
 
@@ -156,5 +164,15 @@ public class CardsService {
     @Cacheable(value = "card", key = "'card-archived'+#cardId")
     public boolean isArchived(String cardId) {
         return cardsPersistence.isArchived(cardId);
+    }
+
+    @Cacheable(value = "card", key = "'card-done'+#cardId")
+    public boolean isDone(String cardId) {
+        return cardsPersistence.isDone(cardId);
+    }
+
+    @Cacheable(value = "card", key = "'card-archived-done'+#cardId")
+    public boolean isCardArchivedOrDone(String cardId) {
+        return isDone(cardId) || isArchived(cardId);
     }
 }
