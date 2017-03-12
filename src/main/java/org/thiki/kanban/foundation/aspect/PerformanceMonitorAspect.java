@@ -6,6 +6,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -15,11 +16,12 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Aspect
 @Component
+@ConditionalOnProperty("performanceMonitor.enabled")
 public class PerformanceMonitorAspect {
-    Logger logger = LoggerFactory.getLogger(PerformanceMonitorAspect.class);
     private static ConcurrentHashMap<String, MethodStats> methodStats = new ConcurrentHashMap<String, MethodStats>();
     private static long statLogFrequency = 10;
     private static long methodWarningThreshold = 1000;
+    Logger logger = LoggerFactory.getLogger(PerformanceMonitorAspect.class);
 
     @Pointcut("execution(*  org.thiki.kanban..*.*(..))")
     private void pointMethod() {
