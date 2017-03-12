@@ -1,6 +1,7 @@
 package org.thiki.kanban.verification;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -85,4 +86,8 @@ public class Verification {
         return JSON.toJSONString(this);
     }
 
+    @JsonIgnore
+    public boolean isPassed() {
+        return VerificationCodes.IS_PASSED.equals(this.isPassed);
+    }
 }

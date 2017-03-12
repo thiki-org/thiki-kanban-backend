@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.board.Board;
@@ -142,6 +143,10 @@ public class CardsService {
                     throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
                 }
                 if (currentStage.isInDoneStatus()) {
+                    boolean isHasAcceptanceCriterias = acceptanceCriteriaService.isHasAcceptanceCriterias(card.getId());
+                    if (!isHasAcceptanceCriterias) {
+                        throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_SET);
+                    }
                     boolean isAllAcceptanceCriteriasCompleted = acceptanceCriteriaService.isAllAcceptanceCriteriasCompleted(card.getId());
                     if (!isAllAcceptanceCriteriasCompleted) {
                         throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED);

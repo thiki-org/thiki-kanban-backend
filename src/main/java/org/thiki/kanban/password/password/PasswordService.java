@@ -94,7 +94,7 @@ public class PasswordService {
 
     private void sendVerificationCodeEmail(User registeredUser, String verificationCode) throws TemplateException, IOException, MessagingException {
         VerificationCodeEmailData verificationCodeEmailData = new VerificationCodeEmailData();
-        verificationCodeEmailData.setReceiver(registeredUser.getEmail());
+        verificationCodeEmailData.setReceiverEmailAddress(registeredUser.getEmail());
         verificationCodeEmailData.setUserName(registeredUser.getUserName());
         verificationCodeEmailData.setVerificationCode(verificationCode);
         mailService.sendMailByTemplate(verificationCodeEmailData, passwordRetrievalEmailTemplate);

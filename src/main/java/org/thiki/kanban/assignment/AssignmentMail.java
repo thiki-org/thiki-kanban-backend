@@ -19,7 +19,7 @@ public class AssignmentMail extends MailEntity {
         if (isCancelAssignment) {
             assignmentMail.setSubject("您不必再处理卡片:" + card.getCode());
         }
-        assignmentMail.setReceiver(receiver.getEmail());
+        assignmentMail.setReceiverEmailAddress(receiver.getEmail());
         assignmentMail.setReceiverUserName(assignment.getAssignee());
         assignmentMail.setSender(assignment.getAssigner());
         assignmentMail.setReceiverNickName(receiver.getProfile().getNickName());

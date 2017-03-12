@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
+import org.thiki.kanban.verification.VerificationController;
 
 import javax.annotation.Resource;
 
@@ -36,6 +37,9 @@ public class AcceptanceCriteriaResource extends RestResource {
 
             Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
             acceptanceCriteriaResource.add(tlink.from(cardLink).build(userName));
+
+            Link verificationsLink = linkTo(methodOn(VerificationController.class).loadVerificationsByAcceptanceCriterias(boardId, stageId, cardId, acceptanceCriteria.getId(), userName)).withRel("verifications");
+            acceptanceCriteriaResource.add(tlink.from(verificationsLink).build(userName));
         }
         logger.info("acceptanceCriterias resource build completed.board:{},stageId:{},cardId:{},userName:{}", boardId, stageId, cardId, userName);
         return acceptanceCriteriaResource.getResource();

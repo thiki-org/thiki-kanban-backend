@@ -39,6 +39,16 @@
         </layout>
     </appender>
 
+    <appender name="PerformanceMonitorFile" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/kanban-PerformanceMonitor.log</file>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+
+    </appender>
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/druid_info.log</file>
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -48,10 +58,13 @@
             <level>debug</level>
         </filter>
     </appender>
-
     <logger name="org.thiki" level="INFO">
         <appender-ref ref="STDOUT"/>
         <appender-ref ref="FILE"/>
+    </logger>
+    <logger name="org.thiki.kanban.foundation.aspect.PerformanceMonitorAspect" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="PerformanceMonitorFile"/>
     </logger>
     <jmxConfigurator/>
 </configuration>
