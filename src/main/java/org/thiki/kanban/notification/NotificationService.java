@@ -67,8 +67,9 @@ public class NotificationService {
         Notification notification = mailEntity.newNotification();
         logger.info("Sending email after notifying notification:{},mailEntity:{}", notification, mailEntity);
         for (String receiverUserName : receiverUserNames) {
-            notification.setReceiver(receiverUserName);
-            notify(notification);
+            Notification notificationNew = notification.copy();
+            notificationNew.setReceiver(receiverUserName);
+            notify(notificationNew);
             Profile receiver = usersService.loadProfileByUserName(receiverUserName);
             mailEntity.setReceiverEmailAddress(receiver.getEmail());
             mailEntity.setReceiverNickName(receiver.getNickName());

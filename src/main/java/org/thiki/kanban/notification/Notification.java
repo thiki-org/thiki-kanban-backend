@@ -1,5 +1,6 @@
 package org.thiki.kanban.notification;
 
+import com.alibaba.fastjson.JSON;
 import org.thiki.kanban.foundation.common.date.DateUtil;
 
 import java.io.Serializable;
@@ -57,7 +58,7 @@ public class Notification implements Serializable {
     }
 
     public String getSender() {
-        return sender;
+        return sender == null ? "" : sender;
     }
 
     public void setSender(String sender) {
@@ -106,19 +107,7 @@ public class Notification implements Serializable {
 
     @Override
     public String toString() {
-        return "Notification{" +
-                "id='" + id + '\'' +
-                ", receiver='" + receiver + '\'' +
-                ", sender='" + sender + '\'' +
-                ", content='" + content + '\'' +
-                ", link='" + link + '\'' +
-                ", isRead=" + isRead +
-                ", creationTime='" + creationTime + '\'' +
-                ", displayTime='" + displayTime + '\'' +
-                ", type='" + type + '\'' +
-                ", typeName='" + typeName + '\'' +
-                ", modificationTime='" + modificationTime + '\'' +
-                '}';
+        return JSON.toJSONString(this);
     }
 
 
@@ -128,5 +117,15 @@ public class Notification implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public Notification copy() {
+        Notification notification = new Notification();
+        notification.setContent(this.content);
+        notification.setReceiver(this.receiver);
+        notification.setSender(this.sender);
+        notification.setType(this.type);
+        notification.setTitle(this.title);
+        return notification;
     }
 }

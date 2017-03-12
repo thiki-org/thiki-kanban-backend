@@ -20,7 +20,7 @@
                                                     style="font-family: Helvetica; color: rgb(69, 69, 69); line-height: normal;">&nbsp;</span><br/>
                                             </p>
                                             <p style="margin-top: 20px; margin-bottom: 0px; font-size: 13px; line-height: normal; font-family:Helvetica; color: rgb(69, 69, 69); text-align: left;">
-                                                <span style="line-height: normal; font-family: Helvetica;">&nbsp; &nbsp; &nbsp; &nbsp;</span>很遗憾地通知您，验收标准：【%s】未通过核验，所属看板【%s】，卡片编号：【%s】。请知悉。
+                                                <span style="line-height: normal; font-family: Helvetica;">&nbsp; &nbsp; &nbsp; &nbsp;</span>很遗憾地通知您，验收标准：${acceptanceCriteria}未通过核验，所属看板：${boardName}，卡片编号：${cardCode}。请知悉。
                                             </p>
                                             <p style="margin-top: 40px; margin-bottom: 0px; font-size: 13px; line-height: normal; font-family:Helvetica; color: rgb(69, 69, 69); text-align: left;">
                                                 <span style="line-height: normal; font-family: Helvetica;">&nbsp; &nbsp; &nbsp; &nbsp;</span>如果这不是您的邮件请忽略，很抱歉打扰，请原谅。<span
