@@ -124,9 +124,10 @@ public class VerificationServiceTest {
         when(boardsService.findById(boardId)).thenReturn(new Board());
         when(cardsService.findById(cardId)).thenReturn(new Card());
         doNothing().when(notificationService).sendEmailAfterNotifying(any(), eq(VerificationCodes.VERIFICATION_FAILED_EMAIL_TEMPLATE), anyList());
-
+        doNothing().when(acceptanceCriteriaService).verify(eq(cardId), eq(acceptanceCriteriaId), any());
         verificationService.addVerification(verification, acceptanceCriteriaId, boardId, userName);
 
         verify(notificationService).sendEmailAfterNotifying(any(), eq(VerificationCodes.VERIFICATION_FAILED_EMAIL_TEMPLATE), anyList());
+        verify(acceptanceCriteriaService).verify(eq(cardId), eq(acceptanceCriteriaId), any());
     }
 }

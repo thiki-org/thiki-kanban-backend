@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.foundation.exception.BusinessException;
+import org.thiki.kanban.verification.Verification;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -93,5 +94,10 @@ public class AcceptanceCriteriaService {
     public boolean isHasAcceptanceCriterias(String cardId) {
         List<AcceptanceCriteria> acceptanceCriterias = loadAcceptanceCriteriasByCardId(cardId);
         return !acceptanceCriterias.isEmpty();
+    }
+
+    @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
+    public void verify(String cardId, String acceptanceCriteriaId, Verification verification) {
+        acceptanceCriteriaPersistence.verify(cardId, acceptanceCriteriaId, verification);
     }
 }

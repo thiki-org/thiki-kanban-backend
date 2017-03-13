@@ -1028,4 +1028,14 @@
             <append value=" engine innodb"/>
         </modifySql>
     </changeSet>
+    <changeSet id="58" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_acceptance_criterias" columnName="is_passed"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_acceptance_criterias">
+            <column name="is_passed" type="TINYINT" defaultValue="0"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
