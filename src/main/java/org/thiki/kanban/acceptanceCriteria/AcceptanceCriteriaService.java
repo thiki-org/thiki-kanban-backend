@@ -107,4 +107,12 @@ public class AcceptanceCriteriaService {
     public void verify(String cardId, String acceptanceCriteriaId, Verification verification) {
         acceptanceCriteriaPersistence.verify(cardId, acceptanceCriteriaId, verification);
     }
+
+    @Cacheable(value = "acceptanceCriteria", key = "'existUnverifiedAcceptanceCriteria'+#cardId")
+    public boolean existUnverifiedAcceptanceCriteria(String cardId) {
+        logger.info("Check whether specified card has unverified acceptanceCriterias.cardId:", cardId);
+        boolean isExistUnverifiedAcceptanceCriteria = acceptanceCriteriaPersistence.isExistUnverifiedAcceptanceCriteria(cardId);
+        logger.info("Check result: ", isExistUnverifiedAcceptanceCriteria);
+        return isExistUnverifiedAcceptanceCriteria;
+    }
 }

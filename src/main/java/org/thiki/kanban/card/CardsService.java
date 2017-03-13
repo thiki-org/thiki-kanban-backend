@@ -141,7 +141,7 @@ public class CardsService {
     }
 
     private void moveCardToOtherStage(Card originCard, Card card, String userName) {
-        Stage preStage = stagesService.findById(originCard.getStageId());
+        Stage originStage = stagesService.findById(originCard.getStageId());
         Stage targetStage = stagesService.findById(card.getStageId());
 
         if (stagesService.isReachedWipLimit(card.getStageId())) {
@@ -159,8 +159,12 @@ public class CardsService {
             if (!isAllAcceptanceCriteriasCompleted) {
                 throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED);
             }
+            boolean existUnverifiedAcceptanceCriteria = acceptanceCriteriaService.existUnverifiedAcceptanceCriteria(card.getId());
+            if (existUnverifiedAcceptanceCriteria) {
+                throw new BusinessException(CardsCodes.UNVERIFIED_ACCEPTANCE_CRITERIA_EXISTS);
+            }
         }
-        activityService.recordCardModification(card, targetStage, preStage, originCard, userName);
+        activityService.recordCardModification(card, targetStage, originStage, originCard, userName);
     }
 
     public List<Card> findByParentId(String cardId) {

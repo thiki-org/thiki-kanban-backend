@@ -28,4 +28,6 @@ public interface AcceptanceCriteriaPersistence {
     void verify(@Param("cardId") String cardId, @Param("acceptanceCriteriaId") String acceptanceCriteriaId, @Param("verification") Verification verification);
 
     boolean isHasAcceptanceCriterias(@Param("cardId") String cardId);
+
+    boolean isExistUnverifiedAcceptanceCriteria(@Param("cardId") String cardId);
 }
