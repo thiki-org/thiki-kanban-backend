@@ -1,5 +1,6 @@
 package org.thiki.kanban.acceptanceCriteria;
 
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -29,12 +30,21 @@ public class AcceptanceCriteriaServiceTest {
     private String userName = "someone";
     private String acceptanceCriteriaId = "acceptanceCriteria-fooId";
 
-    @Test
-    public void should_update_failed_when_card_is_done_or_archived() {
+    @Before
+    public void setUp() {
         expectedException.expect(BusinessException.class);
         expectedException.expectMessage(AcceptanceCriteriaCodes.CARD_WAS_ALREADY_DONE_OR_ARCHIVED.message());
 
         when(cardsService.isCardArchivedOrDone(cardId)).thenReturn(true);
+    }
+
+    @Test
+    public void should_update_failed_when_card_is_done_or_archived() {
         acceptanceCriteriaService.updateAcceptCriteria(cardId, acceptanceCriteriaId, new AcceptanceCriteria(), userName);
+    }
+
+    @Test
+    public void should_delete_failed_when_card_is_done_or_archived() {
+        acceptanceCriteriaService.removeAcceptanceCriteria(acceptanceCriteriaId, cardId, userName);
     }
 }

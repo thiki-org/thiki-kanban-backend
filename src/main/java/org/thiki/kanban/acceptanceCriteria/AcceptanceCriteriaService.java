@@ -75,6 +75,10 @@ public class AcceptanceCriteriaService {
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
     public Integer removeAcceptanceCriteria(String acceptanceCriteriaId, String cardId, String userName) {
         logger.info("Remove acceptanceCriteria.acceptanceCriteriaId:{},cardId:{}", acceptanceCriteriaId, cardId);
+        boolean isCardArchivedOrDone = cardsService.isCardArchivedOrDone(cardId);
+        if (isCardArchivedOrDone) {
+            throw new BusinessException(AcceptanceCriteriaCodes.CARD_WAS_ALREADY_DONE_OR_ARCHIVED);
+        }
         AcceptanceCriteria acceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
         if (acceptanceCriteria == null) {
             throw new BusinessException(AcceptanceCriteriaCodes.ACCEPTANCE_CRITERIA_IS_NOT_FOUND);
