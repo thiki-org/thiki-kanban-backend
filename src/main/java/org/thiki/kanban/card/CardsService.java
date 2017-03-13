@@ -6,7 +6,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteria;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.board.Board;
@@ -74,32 +73,30 @@ public class CardsService {
     public Card modify(String cardId, Card card, String stageId, String boardId, String userName) {
         logger.info("modify card:{}", card);
         Card originCard = loadAndValidateCard(cardId);
-        Stage targetStage = stagesService.findById(card.getStageId());
         if (card.isMoveToOtherStage(originCard)) {
-            if (stagesService.isReachedWipLimit(card.getStageId())) {
-                throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
-            }
-            if (targetStage.isInProcess() && originCard.getDeadline() == null) {
-                throw new BusinessException(CardsCodes.DEADLINE_IS_NOT_SET);
-            }
+            moveCardToOtherStage(originCard, card, userName);
         }
         if (card.moveToParent(originCard)) {
-            Optional<Card> parentCard = Optional.ofNullable(cardsPersistence.findById(card.getParentId()));
-            if (!parentCard.isPresent()) {
-                throw new BusinessException(CardsCodes.PARENT_CARD_IS_NOT_FOUND);
-            }
-            boolean isHasChildCard = cardsPersistence.hasChild(cardId);
-            if (isHasChildCard) {
-                throw new BusinessException(CardsCodes.HAS_CHILD_CARD);
-            }
+            moveToParentCard(cardId, card);
         }
         card.setCode(originCard.stillNoCode() ? generateCode(boardId) : originCard.getCode());
 
         cardsPersistence.modify(cardId, card);
         Card savedCard = cardsPersistence.findById(cardId);
         logger.info("Modified card:{}", savedCard);
-        activityService.recordCardModification(savedCard, targetStage, null, originCard, userName);
+        activityService.recordCardModification(savedCard, originCard, userName);
         return savedCard;
+    }
+
+    private void moveToParentCard(String cardId, Card card) {
+        Optional<Card> parentCard = Optional.ofNullable(cardsPersistence.findById(card.getParentId()));
+        if (!parentCard.isPresent()) {
+            throw new BusinessException(CardsCodes.PARENT_CARD_IS_NOT_FOUND);
+        }
+        boolean isHasChildCard = cardsPersistence.hasChild(cardId);
+        if (isHasChildCard) {
+            throw new BusinessException(CardsCodes.HAS_CHILD_CARD);
+        }
     }
 
     @CacheEvict(value = "card", key = "contains('#cardId')", allEntries = true)
@@ -135,28 +132,35 @@ public class CardsService {
     public List<Card> resortCards(List<Card> cards, String stageId, String boardId, String userName) {
         for (Card card : cards) {
             Card originCard = cardsPersistence.findById(card.getId());
-            Stage preStage = null, currentStage = null;
             if (card.isMoveToOtherStage(originCard)) {
-                preStage = stagesService.findById(originCard.getStageId());
-                currentStage = stagesService.findById(card.getStageId());
-                if (stagesService.isReachedWipLimit(currentStage.getId())) {
-                    throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
-                }
-                if (currentStage.isInDoneStatus()) {
-                    boolean isHasAcceptanceCriterias = acceptanceCriteriaService.isHasAcceptanceCriterias(card.getId());
-                    if (!isHasAcceptanceCriterias) {
-                        throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_SET);
-                    }
-                    boolean isAllAcceptanceCriteriasCompleted = acceptanceCriteriaService.isAllAcceptanceCriteriasCompleted(card.getId());
-                    if (!isAllAcceptanceCriteriasCompleted) {
-                        throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED);
-                    }
-                }
+                moveCardToOtherStage(originCard, card, userName);
             }
             cardsPersistence.resort(card);
-            activityService.recordCardModification(card, currentStage, preStage, originCard, userName);
         }
         return findByStageId(stageId);
+    }
+
+    private void moveCardToOtherStage(Card originCard, Card card, String userName) {
+        Stage preStage = stagesService.findById(originCard.getStageId());
+        Stage targetStage = stagesService.findById(card.getStageId());
+
+        if (stagesService.isReachedWipLimit(card.getStageId())) {
+            throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
+        }
+        if (targetStage.isInProcess() && originCard.getDeadline() == null) {
+            throw new BusinessException(CardsCodes.DEADLINE_IS_NOT_SET);
+        }
+        if (targetStage.isInDoneStatus()) {
+            boolean isHasAcceptanceCriterias = acceptanceCriteriaService.isHasAcceptanceCriterias(card.getId());
+            if (!isHasAcceptanceCriterias) {
+                throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_SET);
+            }
+            boolean isAllAcceptanceCriteriasCompleted = acceptanceCriteriaService.isAllAcceptanceCriteriasCompleted(card.getId());
+            if (!isAllAcceptanceCriteriasCompleted) {
+                throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED);
+            }
+        }
+        activityService.recordCardModification(card, targetStage, preStage, originCard, userName);
     }
 
     public List<Card> findByParentId(String cardId) {
