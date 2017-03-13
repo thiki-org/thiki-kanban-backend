@@ -29,5 +29,5 @@ public interface AcceptanceCriteriaPersistence {
 
     boolean isHasAcceptanceCriterias(@Param("cardId") String cardId);
 
-    boolean isExistUnverifiedAcceptanceCriteria(@Param("cardId") String cardId);
+    boolean isExistSpecifiedPassedStatusAcceptanceCriteria(@Param("cardId") String cardId, @Param("passedStatus") Integer passedStatus);
 }

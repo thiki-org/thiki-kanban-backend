@@ -6,6 +6,7 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaCodes;
 import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaService;
 import org.thiki.kanban.activity.ActivityService;
 import org.thiki.kanban.board.Board;
@@ -159,9 +160,13 @@ public class CardsService {
             if (!isAllAcceptanceCriteriasCompleted) {
                 throw new BusinessException(CardsCodes.ACCEPTANCE_CRITERIAS_IS_NOT_COMPLETED);
             }
-            boolean existUnverifiedAcceptanceCriteria = acceptanceCriteriaService.existUnverifiedAcceptanceCriteria(card.getId());
+            boolean existUnverifiedAcceptanceCriteria = acceptanceCriteriaService.isExistSpecifiedPassedStatusAcceptanceCriteria(card.getId(), AcceptanceCriteriaCodes.STATUS_UNVERIFIED);
             if (existUnverifiedAcceptanceCriteria) {
                 throw new BusinessException(CardsCodes.UNVERIFIED_ACCEPTANCE_CRITERIA_EXISTS);
+            }
+            boolean existUnPassedAcceptanceCriteria = acceptanceCriteriaService.isExistSpecifiedPassedStatusAcceptanceCriteria(card.getId(), AcceptanceCriteriaCodes.STATUS_UNPASSED);
+            if (existUnPassedAcceptanceCriteria) {
+                throw new BusinessException(CardsCodes.UNPASSED_ACCEPTANCE_CRITERIA_EXISTS);
             }
         }
         activityService.recordCardModification(card, targetStage, originStage, originCard, userName);

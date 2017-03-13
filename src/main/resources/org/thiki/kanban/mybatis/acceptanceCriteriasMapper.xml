@@ -54,8 +54,9 @@
         SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0
     </select>
 
-    <select id="isExistUnverifiedAcceptanceCriteria" parameterType="java.lang.String"
+    <select id="isExistSpecifiedPassedStatusAcceptanceCriteria" parameterType="java.lang.String"
             resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId}  AND is_passed=0 AND delete_status=0
+        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND is_passed=#{specifiedPassedStatus} AND
+        delete_status=0
     </select>
 </mapper>

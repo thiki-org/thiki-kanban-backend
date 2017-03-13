@@ -108,11 +108,11 @@ public class AcceptanceCriteriaService {
         acceptanceCriteriaPersistence.verify(cardId, acceptanceCriteriaId, verification);
     }
 
-    @Cacheable(value = "acceptanceCriteria", key = "'existUnverifiedAcceptanceCriteria'+#cardId")
-    public boolean existUnverifiedAcceptanceCriteria(String cardId) {
-        logger.info("Check whether specified card has unverified acceptanceCriterias.cardId:", cardId);
-        boolean isExistUnverifiedAcceptanceCriteria = acceptanceCriteriaPersistence.isExistUnverifiedAcceptanceCriteria(cardId);
-        logger.info("Check result: ", isExistUnverifiedAcceptanceCriteria);
-        return isExistUnverifiedAcceptanceCriteria;
+    @Cacheable(value = "acceptanceCriteria", key = "'isExistSpecifiedPassedStatusAcceptanceCriteria'+#cardId+#passedStatus")
+    public boolean isExistSpecifiedPassedStatusAcceptanceCriteria(String cardId, Integer passedStatus) {
+        logger.info("Check whether specified card has specified passed status acceptanceCriterias.cardId:", cardId);
+        boolean isExistSpecifiedPassedStatusAcceptanceCriteria = acceptanceCriteriaPersistence.isExistSpecifiedPassedStatusAcceptanceCriteria(cardId, passedStatus);
+        logger.info("Check result: ", isExistSpecifiedPassedStatusAcceptanceCriteria);
+        return isExistSpecifiedPassedStatusAcceptanceCriteria;
     }
 }
