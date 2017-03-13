@@ -87,13 +87,20 @@ public class AcceptanceCriteriaService {
         return resortedAcceptanceCriterias;
     }
 
+    @Cacheable(value = "acceptanceCriteria", key = "'isAllAcceptanceCriteriasCompleted'+#cardId")
     public boolean isAllAcceptanceCriteriasCompleted(String cardId) {
-        return !acceptanceCriteriaPersistence.isHasUnFinishedAcceptanceCriterias(cardId);
+        logger.info("Check whether all the acceptanceCriterias of the specified are completed.cardId:", cardId);
+        boolean isAllAcceptanceCriteriasCompleted = !acceptanceCriteriaPersistence.isHasUnFinishedAcceptanceCriterias(cardId);
+        logger.info("Check result: ", isAllAcceptanceCriteriasCompleted);
+        return isAllAcceptanceCriteriasCompleted;
     }
 
+    @Cacheable(value = "acceptanceCriteria", key = "'isHasAcceptanceCriterias'+#cardId")
     public boolean isHasAcceptanceCriterias(String cardId) {
-        List<AcceptanceCriteria> acceptanceCriterias = loadAcceptanceCriteriasByCardId(cardId);
-        return !acceptanceCriterias.isEmpty();
+        logger.info("Check whether specified card has acceptanceCriterias.cardId:", cardId);
+        boolean isHasAcceptanceCriterias = acceptanceCriteriaPersistence.isHasAcceptanceCriterias(cardId);
+        logger.info("Check result: ", isHasAcceptanceCriterias);
+        return isHasAcceptanceCriterias;
     }
 
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)

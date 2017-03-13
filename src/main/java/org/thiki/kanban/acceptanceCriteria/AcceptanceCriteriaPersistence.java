@@ -26,4 +26,6 @@ public interface AcceptanceCriteriaPersistence {
     boolean isHasUnFinishedAcceptanceCriterias(@Param("cardId") String cardId);
 
     void verify(@Param("cardId") String cardId, @Param("acceptanceCriteriaId") String acceptanceCriteriaId, @Param("verification") Verification verification);
+
+    boolean isHasAcceptanceCriterias(@Param("cardId") String cardId);
 }

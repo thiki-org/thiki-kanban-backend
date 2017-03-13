@@ -48,4 +48,9 @@
         is_passed=#{verification.isPassed}
         WHERE id=#{acceptanceCriteriaId} AND card_id=#{cardId} AND delete_status=0
     </update>
+
+    <select id="isHasAcceptanceCriterias" parameterType="java.lang.String"
+            resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0
+    </select>
 </mapper>

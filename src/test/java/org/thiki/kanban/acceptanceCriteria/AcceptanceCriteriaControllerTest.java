@@ -42,6 +42,7 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("summary", equalTo("AC-summary"))
                 .body("finished", equalTo(false))
                 .body("author", equalTo(userName))
+                .body("isPassed", equalTo(0))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
                 .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
                 .body("_links.verifications.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId/verifications"))
