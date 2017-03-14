@@ -52,7 +52,7 @@
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <file>./logs/druid_info.log</file>
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>
+            <Pattern>%d{HH:mm:ss.SSS} [%X{sessionId}] %-5level %logger{36} - %msg%n</Pattern>
         </layout>
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>debug</level>

@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 @ConditionalOnProperty("performanceMonitor.enabled")
 public class PerformanceMonitorAspect {
-    private static ConcurrentHashMap<String, MethodStats> methodStats = new ConcurrentHashMap<String, MethodStats>();
+    private static ConcurrentHashMap<String, MethodStatistics> methodStats = new ConcurrentHashMap<String, MethodStatistics>();
     private static long statLogFrequency = 10;
     private static long methodWarningThreshold = 1000;
     Logger logger = LoggerFactory.getLogger(PerformanceMonitorAspect.class);
@@ -39,38 +39,38 @@ public class PerformanceMonitorAspect {
     }
 
     private void updateStats(String methodName, long elapsedTime) {
-        MethodStats stats = methodStats.get(methodName);
-        if(stats == null) {
-            stats = new MethodStats(methodName);
-            methodStats.put(methodName,stats);
+        MethodStatistics methodStatistics = PerformanceMonitorAspect.methodStats.get(methodName);
+        if (methodStatistics == null) {
+            methodStatistics = new MethodStatistics(methodName);
+            PerformanceMonitorAspect.methodStats.put(methodName, methodStatistics);
         }
-        stats.count++;
-        stats.totalTime += elapsedTime;
-        if(elapsedTime > stats.maxTime) {
-            stats.maxTime = elapsedTime;
+        methodStatistics.executeTimes++;
+        methodStatistics.totalTime += elapsedTime;
+        if (elapsedTime > methodStatistics.maxTime) {
+            methodStatistics.maxTime = elapsedTime;
         }
 
         if(elapsedTime > methodWarningThreshold) {
-            logger.warn("method warning: " + methodName + "(), cnt = " + stats.count + ", lastTime = " + elapsedTime + ", maxTime = " + stats.maxTime);
+            logger.warn("method warning: " + methodName + "(), executeTimes = " + methodStatistics.executeTimes + ", lastTime = " + elapsedTime + ", maxTime = " + methodStatistics.maxTime);
         }
 
-        if(stats.count % statLogFrequency == 0) {
-            long avgTime = stats.totalTime / stats.count;
-            long runningAvg = (stats.totalTime-stats.lastTotalTime) / statLogFrequency;
-            logger.debug("method: " + methodName + "(), cnt = " + stats.count + ", lastTime = " + elapsedTime + ", avgTime = " + avgTime + ", runningAvg = " + runningAvg + ", maxTime = " + stats.maxTime);
+        if (methodStatistics.executeTimes % statLogFrequency == 0) {
+            long averageTime = methodStatistics.totalTime / methodStatistics.executeTimes;
+            long runningAvg = (methodStatistics.totalTime - methodStatistics.lastTotalTime) / statLogFrequency;
+            logger.debug("method: " + methodName + "(), executeTimes = " + methodStatistics.executeTimes + ", lastTime = " + elapsedTime + ", avgTime = " + averageTime + ", runningAvg = " + runningAvg + ", maxTime = " + methodStatistics.maxTime);
             //reset the last total time
-            stats.lastTotalTime = stats.totalTime;
+            methodStatistics.lastTotalTime = methodStatistics.totalTime;
         }
     }
 
-    class MethodStats {
+    class MethodStatistics {
         public String methodName;
-        public long count;
+        public long executeTimes;
         public long totalTime;
         public long lastTotalTime;
         public long maxTime;
 
-        public MethodStats(String methodName) {
+        public MethodStatistics(String methodName) {
             this.methodName = methodName;
         }
     }
