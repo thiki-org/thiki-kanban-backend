@@ -17,7 +17,7 @@
 
     <select id="loadCommentsByCardId" parameterType="java.lang.String"
             resultType="org.thiki.kanban.comment.Comment">
-        SELECT * FROM kb_comment WHERE card_id= #{cardId} AND delete_status=0 ORDER BY creation_time ASC
+        SELECT * FROM kb_comment WHERE card_id= #{cardId} AND delete_status=0
     </select>
 
     <delete id="deleteComment" parameterType="java.lang.String" flushCache="true">
