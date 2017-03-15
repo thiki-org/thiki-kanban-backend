@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class PerformanceMonitorAspect {
     private static ConcurrentHashMap<String, MethodStatistics> methodStats = new ConcurrentHashMap<String, MethodStatistics>();
     private static long statLogFrequency = 10;
-    private static long methodWarningThreshold = 1000;
+    private static long methodWarningThreshold = 2000;
     Logger logger = LoggerFactory.getLogger(PerformanceMonitorAspect.class);
 
     @Pointcut("execution(*  org.thiki.kanban..*.*(..))")
@@ -32,10 +32,9 @@ public class PerformanceMonitorAspect {
         long start = System.currentTimeMillis();
         try {
             return pjp.proceed();
+        } finally {
+            updateStats(pjp.getTarget().getClass().getName() + "." + pjp.getSignature().getName(), (System.currentTimeMillis() - start));
         }
-        finally{
-                updateStats(pjp.getTarget().getClass().getName() + "." + pjp.getSignature().getName(), (System.currentTimeMillis() - start));
-            }
     }
 
     private void updateStats(String methodName, long elapsedTime) {
@@ -50,14 +49,14 @@ public class PerformanceMonitorAspect {
             methodStatistics.maxTime = elapsedTime;
         }
 
-        if(elapsedTime > methodWarningThreshold) {
-            logger.warn("method warning: " + methodName + "(), executeTimes = " + methodStatistics.executeTimes + ", lastTime = " + elapsedTime + ", maxTime = " + methodStatistics.maxTime);
+        if (elapsedTime > methodWarningThreshold) {
+            logger.warn(methodName + "|" + methodStatistics.executeTimes + "|" + elapsedTime + "|" + methodStatistics.maxTime);
         }
 
         if (methodStatistics.executeTimes % statLogFrequency == 0) {
             long averageTime = methodStatistics.totalTime / methodStatistics.executeTimes;
             long runningAvg = (methodStatistics.totalTime - methodStatistics.lastTotalTime) / statLogFrequency;
-            logger.debug("method: " + methodName + "(), executeTimes = " + methodStatistics.executeTimes + ", lastTime = " + elapsedTime + ", avgTime = " + averageTime + ", runningAvg = " + runningAvg + ", maxTime = " + methodStatistics.maxTime);
+            logger.debug(methodName + "|" + methodStatistics.executeTimes + "|" + elapsedTime + "|" + averageTime + "|" + runningAvg + "|" + methodStatistics.maxTime);
             //reset the last total time
             methodStatistics.lastTotalTime = methodStatistics.totalTime;
         }
