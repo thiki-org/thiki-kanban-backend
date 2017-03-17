@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.board.BoardCodes;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
@@ -297,7 +298,7 @@ public class StagesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first stage.','tao','feeId',1,9)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/stages?viewType=" + StageCodes.VIEW_TYPE_SPRINT)
+                .get("/boards/feeId/stages?viewType=" + BoardCodes.VIEW_TYPE_SPRINT)
                 .then()
                 .statusCode(200)
                 .body("stages.size()", equalTo(2));
@@ -312,7 +313,7 @@ public class StagesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first stage.','tao','feeId',1,9)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/stages?viewType=" + StageCodes.VIEW_TYPE_FULL_VIEW)
+                .get("/boards/feeId/stages?viewType=" + BoardCodes.VIEW_TYPE_FULL_VIEW)
                 .then()
                 .statusCode(200)
                 .body("stages.size()", equalTo(3));
@@ -327,7 +328,7 @@ public class StagesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId4','this is the first stage.','tao','feeId',9,9)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/stages?viewType=" + StageCodes.VIEW_TYPE_ARCHIVE)
+                .get("/boards/feeId/stages?viewType=" + BoardCodes.VIEW_TYPE_ARCHIVE)
                 .then()
                 .statusCode(200)
                 .body("stages.size()", equalTo(2));
@@ -343,7 +344,7 @@ public class StagesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId4','this is the first stage.','tao','feeId',9,0)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/stages?viewType=" + StageCodes.VIEW_TYPE_ROAD_MAP)
+                .get("/boards/feeId/stages?viewType=" + BoardCodes.VIEW_TYPE_ROAD_MAP)
                 .then()
                 .statusCode(200)
                 .body("stages.size()", equalTo(3));

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.thiki.kanban.board.Board;
+import org.thiki.kanban.board.BoardCodes;
 import org.thiki.kanban.board.BoardResource;
 import org.thiki.kanban.board.BoardsService;
 import org.thiki.kanban.card.Card;
@@ -61,14 +62,14 @@ public class SnapshotService {
         List<Stage> stageList = stagesService.loadByBoardId(boardId, viewType);
         JSONObject stagesJSON = (JSONObject) stagesResource.toResource(stageList, boardId, viewType, userName);
         JSONArray stagesArray = (JSONArray) stagesJSON.get("stages");
-        JSONArray newStagesArray = loadStageCards(boardId, userName, stagesArray);
+        JSONArray newStagesArray = loadStageCards(boardId, userName, stagesArray, viewType);
         stagesJSON.put("stages", newStagesArray);
         boardJSON.put("stagesNode", stagesJSON);
         logger.info("board loading completed.");
         return boardJSON;
     }
 
-    private JSONArray loadStageCards(String boardId, String userName, JSONArray stagesArray) throws Exception {
+    private JSONArray loadStageCards(String boardId, String userName, JSONArray stagesArray, String viewType) throws Exception {
         logger.info("load cards tags.");
         JSONArray newStagesArray = new JSONArray();
         for (int i = 0; i < stagesArray.size(); i++) {
@@ -76,8 +77,7 @@ public class SnapshotService {
             String stageId = stageJSON.getString("id");
             List<Card> cardList = cardsService.findByStageId(stageId);
 
-
-            JSONObject cardsJSON = buildCards(cardList, boardId, stageId, userName);
+            JSONObject cardsJSON = buildCards(cardList, boardId, stageId, viewType, userName);
             stageJSON.put("cardsNode", cardsJSON);
             newStagesArray.add(stageJSON);
         }
@@ -85,15 +85,19 @@ public class SnapshotService {
         return newStagesArray;
     }
 
-    private JSONObject buildCards(List<Card> cardList, String boardId, String stageId, String userName) throws Exception {
+    private JSONObject buildCards(List<Card> cardList, String boardId, String stageId, String viewType, String userName) throws Exception {
         JSONObject cardsJSON = (JSONObject) cardsResource.toResource(cardList, boardId, stageId, userName);
         JSONArray cardsArray = (JSONArray) cardsJSON.get("cards");
-        JSONArray newCardsArray = loadOthersByCard(boardId, userName, stageId, cardsArray);
+        if (viewType != null && !BoardCodes.VIEW_TYPE_SPRINT.equals(viewType)) {
+            cardsJSON.put("cards", cardsArray);
+            return cardsJSON;
+        }
+        JSONArray newCardsArray = loadOthersByCard(boardId, userName, stageId, cardsArray, viewType);
         cardsJSON.put("cards", newCardsArray);
         return cardsJSON;
     }
 
-    private JSONArray loadOthersByCard(String boardId, String userName, String stageId, JSONArray cardsArray) throws Exception {
+    private JSONArray loadOthersByCard(String boardId, String userName, String stageId, JSONArray cardsArray, String viewType) throws Exception {
         JSONArray newCardsArray = new JSONArray();
         if (cardsArray == null || cardsArray.size() == 0) {
             return new JSONArray();
@@ -115,7 +119,7 @@ public class SnapshotService {
                     snapshotExecutor.loadComments(boardId, userName, stageId, cardJSON, cardId);
                     List<Card> childCards = cardsService.findByParentId(cardId);
                     if (childCards.size() > 0) {
-                        JSONObject childCardsJSON = buildCards(childCards, boardId, stageId, userName);
+                        JSONObject childCardsJSON = buildCards(childCards, boardId, stageId, userName, viewType);
                         cardJSON.put("child", childCardsJSON);
                     }
                     return cardJSON;
