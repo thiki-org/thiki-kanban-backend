@@ -1028,7 +1028,38 @@
             <append value=" engine innodb"/>
         </modifySql>
     </changeSet>
-    <changeSet id="58" author="cain" runOnChange="true">
+    <changeSet id="58" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_acceptance_criterias" columnName="is_passed"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_acceptance_criterias">
+            <column name="is_passed" type="TINYINT" defaultValue="0"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="59" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <columnExists tableName="kb_stage" columnName="limitation_on_entry"/>
+                </not>
+            </and>
+            <and>
+                <not>
+                    <columnExists tableName="kb_stage" columnName="definition_of_done"/>
+                </not>
+            </and>
+        </preConditions>
+        <addColumn tableName="kb_stage">
+            <column name="limitation_on_entry" type="varchar(200)"/>
+        </addColumn>
+        <addColumn tableName="kb_stage">
+            <column name="definition_of_done" type="varchar(200)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="60" author="cain" runOnChange="true">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="kb_risk"/>
