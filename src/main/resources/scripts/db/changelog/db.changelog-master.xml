@@ -1038,4 +1038,25 @@
             <column name="is_passed" type="TINYINT" defaultValue="0"/>
         </addColumn>
     </changeSet>
+
+    <changeSet id="59" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <columnExists tableName="kb_stage" columnName="limitation_on_entry"/>
+                </not>
+            </and>
+            <and>
+                <not>
+                    <columnExists tableName="kb_stage" columnName="definition_of_done"/>
+                </not>
+            </and>
+        </preConditions>
+        <addColumn tableName="kb_stage">
+            <column name="limitation_on_entry" type="varchar(200)"/>
+        </addColumn>
+        <addColumn tableName="kb_stage">
+            <column name="definition_of_done" type="varchar(200)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
