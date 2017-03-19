@@ -101,17 +101,17 @@ public class RiskControllerTest extends TestBase {
     @Test
     public void findRiskByRiskId(){
         jdbcTemplate.execute("insert into kb_risk (id, card_id, risk_reason, type, author, is_resolved) " +
-                "VALUES('fooId','card-fooId','risk-reason','0','someone','false')");
+                "VALUES('foo_Id','card-fooId','risk-reason','0','someone','false')");
         given().header("userName", userName)
                 .when()
-                .get("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/risks/fooId")
+                .get("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/risks/foo_Id")
                 .then()
                 .statusCode(200)
                 .body("author", equalTo(userName))
                 .body("riskReason", equalTo("risk-reason")) //风险理由
                 .body("type", equalTo(0))  //代表block类型的风险
                 .body("resolved", equalTo(false))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/risks/fooId"))
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/risks/foo_Id"))
                 .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"));
 
     }
