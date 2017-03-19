@@ -21,7 +21,7 @@ public class RiskController {
     @Autowired
     private RiskService riskService;
 
-    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/risk", method = RequestMethod.POST)
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/risks", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Risk risk, @RequestHeader String userName, @PathVariable String boardId,
                              @PathVariable String stageId, @PathVariable String cardId) throws Exception {
         Risk savedRisk = riskService.addRisk(userName, cardId, risk);
