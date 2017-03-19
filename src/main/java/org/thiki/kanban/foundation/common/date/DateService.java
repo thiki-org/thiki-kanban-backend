@@ -759,7 +759,7 @@ public class DateService {
     public int getIntervalHours(Date startTime, Date endTime) {
         DateTime startDateTime = new DateTime(startTime);
         DateTime endDateTime = new DateTime(endTime);
-        return Hours.hoursBetween(startDateTime.withTimeAtStartOfDay(), endDateTime).getHours();
+        return Hours.hoursBetween(startDateTime, endDateTime).getHours();
     }
 
     public String simpleDate() {
