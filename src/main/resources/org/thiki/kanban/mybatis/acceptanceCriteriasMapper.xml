@@ -29,7 +29,7 @@
 
     <select id="isHasUnFinishedAcceptanceCriterias" parameterType="java.lang.String"
             resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0 AND finished=0
+        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND finished=0 AND delete_status=0
     </select>
 
     <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">
