@@ -69,6 +69,25 @@ public class ActivityService {
         record(activity);
     }
 
+
+    public void recordCardModification(Card modifiedCard, Card originCard, String userName) {
+        Activity activity = new Activity();
+        activity.setPrevStageId(originCard.getStageId());
+        activity.setStageId(modifiedCard.getStageId());
+        activity.setCardId(modifiedCard.getId());
+        activity.setSummary(originCard.toString());
+        activity.setDetail(originCard.toString());
+        activity.setUserName(userName);
+        activity.setOperationTypeCode(ActivityType.CARD_MODIFYING.code());
+        activity.setOperationTypeName(ActivityType.CARD_MODIFYING.type());
+        if (modifiedCard.isMoveToOtherStage(originCard)) {
+            activity.setOperationTypeCode(ActivityType.CARD_MOVING.code());
+            activity.setOperationTypeName(ActivityType.CARD_MOVING.type());
+        }
+        record(activity);
+    }
+
+
     public void recordCardArchive(Card foundCard, String stageId, Stage prevStage, Stage currentStage, String userName) {
         Activity activity = new Activity();
         activity.setPrevStageId(foundCard.getStageId());

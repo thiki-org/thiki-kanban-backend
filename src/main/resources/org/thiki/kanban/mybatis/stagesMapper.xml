@@ -6,11 +6,11 @@
 
     <insert id="create" parameterType="org.thiki.kanban.stage.Stage">
         INSERT INTO
-        kb_stage(id,title,description,author,board_id,type,status,sort_number,wip_limit) VALUES
+        kb_stage(id,title,description,author,board_id,type,status,sort_number,wip_limit,limitation_on_entry,definition_of_done) VALUES
         (#{stage.id},#{stage.title},#{stage.description},
         #{userName},#{boardId},#{stage.type},#{stage.status},(SELECT
         max_sort_number from (SELECT CASE WHEN max(sort_number) IS NULL THEN 0 ELSE max(sort_number)+1 end as
-        max_sort_number FROM kb_stage WHERE board_id=#{boardId} ) as t ), #{stage.wipLimit}
+        max_sort_number FROM kb_stage WHERE board_id=#{boardId} ) as t ), #{stage.wipLimit},#{stage.limitationOnEntry},#{stage.definitionOfDone}
         )
     </insert>
 
@@ -33,6 +33,12 @@
         </if>
         <if test="stage.wipLimit!=null">
             wip_limit=#{stage.wipLimit},
+        </if>
+        <if test="stage.limitationOnEntry!=null">
+            limitation_on_entry=#{stage.limitationOnEntry},
+        </if>
+        <if test="stage.definitionOfDone!=null">
+            definition_of_done=#{stage.definitionOfDone},
         </if>
         delete_status=delete_status
 

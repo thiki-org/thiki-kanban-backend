@@ -61,6 +61,7 @@ public class VerificationService {
             logger.info("Verification is not passed,sending notifications and emails.");
             sendNotificationsAndEmail(boardId, acceptanceCriteria);
         }
+        acceptanceCriteriaService.verify(acceptanceCriteria.get().getCardId(), acceptanceCriteriaId, verification);
         return loadVerificationsByAcceptanceCriteria(acceptanceCriteriaId);
     }
 

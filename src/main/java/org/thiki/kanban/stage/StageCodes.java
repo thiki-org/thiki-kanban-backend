@@ -26,10 +26,6 @@ public enum StageCodes {
     public static final Integer STAGE_TYPE_IN_PLAN = 1;
     public static final Integer STAGE_TYPE_ARCHIVE = 9;
 
-    public static final String VIEW_TYPE_SPRINT = "sprintView";
-    public static final String VIEW_TYPE_FULL_VIEW = "fullView";
-    public static final String VIEW_TYPE_ROAD_MAP = "roadMapView";
-    public static final String VIEW_TYPE_ARCHIVE = "archiveView";
     private String code;
     private String message;
 

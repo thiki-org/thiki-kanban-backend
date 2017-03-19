@@ -6,9 +6,12 @@ import org.thiki.kanban.foundation.application.DomainOrder;
  * Created by xubt on 10/17/16.
  */
 public enum AcceptanceCriteriaCodes {
-    SUMMARY_IS_EMPTY("001", "验收标准的概述不能为空。"), ACCEPTANCE_CRITERIA_IS_NOT_FOUND("002", "验收标准不存在。");
+    SUMMARY_IS_EMPTY("001", "验收标准的概述不能为空。"), ACCEPTANCE_CRITERIA_IS_NOT_FOUND("002", "验收标准不存在。"), CARD_WAS_ALREADY_DONE_OR_ARCHIVED("003", "所属卡片已经完成或已归档，不允许再修改或删除验收标准。");
     public static final String summaryIsRequired = "验收标准的概述不能为空。";
     public static final String summaryIsInvalid = "卡片概述长度超限,请保持在200个字符以内。";
+    public static final Integer STATUS_UNVERIFIED = 0;
+    public static final Integer STATUS_UNPASSED = -1;
+    public static final Integer STATUS_PASSED = 1;
     private String code;
     private String message;
 

@@ -29,7 +29,11 @@ public class Stage {
     private Integer status;
     private String creationTime;
     private String modificationTime;
+
+
     private Integer wipLimit;
+    private String limitationOnEntry;
+    private String definitionOfDone;
 
     public Integer getType() {
         return type == null ? 0 : type;
@@ -116,6 +120,30 @@ public class Stage {
         this.status = status;
     }
 
+    public Integer getWipLimit() {
+        return wipLimit;
+    }
+
+    public void setWipLimit(Integer wipLimit) {
+        this.wipLimit = wipLimit;
+    }
+
+    public String getLimitationOnEntry() {
+        return limitationOnEntry;
+    }
+
+    public void setLimitationOnEntry(String limitationOnEntry) {
+        this.limitationOnEntry = limitationOnEntry;
+    }
+
+    public String getDefinitionOfDone() {
+        return definitionOfDone;
+    }
+
+    public void setDefinitionOfDone(String definitionOfDone) {
+        this.definitionOfDone = definitionOfDone;
+    }
+
     @JsonIgnore
     public boolean isInSprint() {
         return StageCodes.STAGE_TYPE_IN_PLAN.equals(this.type);
@@ -135,15 +163,6 @@ public class Stage {
     public boolean isArchived() {
         return StageCodes.STAGE_TYPE_ARCHIVE.equals(this.type);
     }
-
-    public Integer getWipLimit() {
-        return wipLimit;
-    }
-
-    public void setWipLimit(Integer wipLimit) {
-        this.wipLimit = wipLimit;
-    }
-
     @JsonIgnore
     public boolean isReachedWipLimit(Integer currentCardsNumbers) {
         if (this.wipLimit == null || currentCardsNumbers == null) {

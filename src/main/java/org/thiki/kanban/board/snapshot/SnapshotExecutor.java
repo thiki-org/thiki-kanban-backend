@@ -45,7 +45,7 @@ public class SnapshotExecutor {
 
     public synchronized void loadCardTags(String boardId, String userName, String stageId, JSONObject cardJSON, String cardId) throws Exception {
         logger.info("load card tags.");
-        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId, stageId);
+        List<CardTag> stickCardTags = cardTagsService.loadTags(cardId, boardId);
         JSONObject tagsJSON = (JSONObject) cardTagsResource.toResource(stickCardTags, boardId, stageId, cardId, userName);
         cardJSON.put("tagsNode", tagsJSON);
         logger.info("card tags loading completed.");

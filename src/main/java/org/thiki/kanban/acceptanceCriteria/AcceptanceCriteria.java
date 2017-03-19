@@ -20,6 +20,7 @@ public class AcceptanceCriteria {
     @Length(max = 200, message = AcceptanceCriteriaCodes.summaryIsInvalid)
     private String summary;
     private Boolean finished;
+    private Integer isPassed;
     private String author;
     private Integer sortNumber;
     private String creationTime;
@@ -83,6 +84,14 @@ public class AcceptanceCriteria {
 
     public void setSortNumber(Integer sortNumber) {
         this.sortNumber = sortNumber;
+    }
+
+    public Integer getIsPassed() {
+        return isPassed;
+    }
+
+    public void setIsPassed(Integer isPassed) {
+        this.isPassed = isPassed;
     }
 
     @Override
