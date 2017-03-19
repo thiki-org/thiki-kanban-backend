@@ -1,21 +1,27 @@
 package org.thiki.kanban.risk;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by cain on 2017/2/26.
  */
 public class Risk {
+    @NotNull(message = RiskCodes.RISK_REASON_IS_EMPTY_MESSAGE)
+    @NotEmpty(message = RiskCodes.RISK_REASON_IS_EMPTY_MESSAGE)
+    @Length(max = 200, message = RiskCodes.RISK_REASON_IS_INVALID)
+    private String riskReason;
+
     private String id;
     private String cardId;
-    private String startTime;
-    private String endTime;  //为空代表还在阻塞状态
-    private String riskReson;
-    private Boolean isBlock;
-
-//    private String stageId;
-    //    private String author;
+    private boolean isResolved;
+    private String author;
     private int type;
 
-
+    private String creationTime;
+    private String modificationTime;
 
 
     public int getType() {
@@ -42,35 +48,43 @@ public class Risk {
         this.cardId = cardId;
     }
 
-    public String getStartTime() {
-        return startTime;
+    public String getRiskReason() {
+        return riskReason;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setRiskReason(String riskReason) {
+        this.riskReason = riskReason;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public boolean isResolved() {
+        return this.isResolved;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setRiskResolved(boolean isResolved) {
+        this.isResolved = isResolved;
     }
 
-    public String getRiskReson() {
-        return riskReson;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setRiskReson(String riskReson) {
-        this.riskReson = riskReson;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public Boolean getBlock() {
-        return isBlock;
+    public String getCreationTime() {
+        return creationTime;
     }
 
-    public void setBlock(Boolean block) {
-        isBlock = block;
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
+    public String getModificationTime() {
+        return modificationTime;
+    }
+
+    public void setModificationTime(String modificationTime) {
+        this.modificationTime = modificationTime;
     }
 }

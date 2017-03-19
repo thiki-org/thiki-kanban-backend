@@ -46,7 +46,7 @@
     </update>
 
     <select id="findById" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card WHERE delete_status=0 AND id= #{cardId}
+        SELECT * FROM kb_card WHERE id= #{cardId} AND delete_status=0
     </select>
 
     <select id="findByStageId" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
@@ -63,15 +63,22 @@
     </select>
 
     <select id="hasChild" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_card WHERE delete_status=0 AND parent_id=#{cardId}
+        SELECT count(*) FROM kb_card WHERE parent_id=#{cardId} AND delete_status=0
     </select>
 
     <select id="loadUnArchivedCards" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card LEFT JOIN kb_stage ON kb_card.stage_id=kb_stage.id WHERE kb_stage.type !=9
+        SELECT * FROM kb_card LEFT JOIN kb_stage ON kb_card.stage_id=kb_stage.id WHERE kb_stage.type !=9 AND
+        kb_card.delete_status=0 AND kb_stage.delete_status=0
     </select>
     <select id="loadChildCards" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
-        SELECT * FROM kb_card WHERE delete_status=0 AND parent_id=#{cardId}
+        SELECT * FROM kb_card WHERE parent_id=#{cardId} AND delete_status=0
     </select>
     <select id="isArchived" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT  CASE WHEN type=9 THEN 'True' ELSE 'False' END from kb_stage WHERE id=(SELECT stage_id from kb_card WHERE kb_card.delete_status=0 AND id=#{cardId})    </select>
+        SELECT CASE WHEN type=9 THEN 'True' ELSE 'False' END from kb_stage WHERE id=(SELECT stage_id from kb_card WHERE
+        id=#{cardId} AND delete_status=0)
+    </select>
+    <select id="isDone" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        SELECT CASE WHEN status=9 THEN 'True' ELSE 'False' END from kb_stage WHERE id=(SELECT stage_id from kb_card
+        WHERE id=#{cardId} AND delete_status=0)
+    </select>
 </mapper>

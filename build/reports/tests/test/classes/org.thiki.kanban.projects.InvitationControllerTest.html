@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.820s</div>
+<div class="counter">1.057s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,77 +79,77 @@
 </thead>
 <tr>
 <td class="success">AcceptInvitation</td>
-<td>0.065s</td>
+<td>0.089s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">NotAllowedIfInviteeIsAlreadyAMemberOfTheTeam</td>
-<td>0.052s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">NotAllowedIfInviteeIsEmpty</td>
-<td>0.041s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">NotAllowedIfInviteeIsNotExist</td>
-<td>0.053s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">NotAllowedIfInviterIsNotAMemberOfTheTeam</td>
-<td>0.054s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">NotAllowedIfTeamIsNotExist</td>
-<td>0.047s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">addNotificationAfterSendingInvitation</td>
-<td>0.077s</td>
-<td class="success">passed</td>
-</tr>
-<tr>
-<td class="success">cancelPreviousInvitationBeforeSendingNewInvitation</td>
 <td>0.072s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
+<td class="success">NotAllowedIfInviteeIsEmpty</td>
+<td>0.044s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">NotAllowedIfInviteeIsNotExist</td>
+<td>0.059s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">NotAllowedIfInviterIsNotAMemberOfTheTeam</td>
+<td>0.069s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">NotAllowedIfTeamIsNotExist</td>
+<td>0.051s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">addNotificationAfterSendingInvitation</td>
+<td>0.102s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">cancelPreviousInvitationBeforeSendingNewInvitation</td>
+<td>0.098s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">inviteOthersWithEmailToJoinTeam</td>
-<td>0.080s</td>
+<td>0.104s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">inviteOthersWithUserNameToJoinTeam</td>
-<td>0.070s</td>
+<td>0.094s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">loadingInvitationDetailAfterAcceptingInvitation</td>
-<td>0.060s</td>
+<td>0.086s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">throwExceptionIfInvitationIsAlreadyAccepted</td>
-<td>0.032s</td>
+<td>0.040s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">throwExceptionIfInvitationIsNotExistWhenAcceptingInvitation</td>
-<td>0.045s</td>
+<td>0.061s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">throwExceptionIfInvitationIsNotExistWhenLoadingInvitation</td>
-<td>0.034s</td>
+<td>0.041s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">throwExceptionIfInviteeIsAlreadyAMember</td>
-<td>0.038s</td>
+<td>0.047s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -157,209 +157,209 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2017-03-03 21:40:52.758  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
-2017-03-03 21:40:52.762  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
-2017-03-03 21:40:52.762  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5ceed816, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@15aab6f6, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@70a823, org.springframework.test.context.support.DirtiesContextTestExecutionListener@3a9efb38, org.springframework.test.context.transaction.TransactionalTestExecutionListener@109aaa15, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5047a3f6, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@55f3286d, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@18f94ed0]
-21:40:52.782 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:05185d64-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:52.782  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:05185d64-0017-11e7-af8b-0014781bc25c
-21:40:52.783 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:52.783  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:52.783 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:52.783  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:52.794 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:52.794  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:52.796 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:051a8045-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:52.796  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:051a8045-0017-11e7-af8b-0014781bc25c
-21:40:52.796 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:52.796  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:52.797 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:52.797  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:52.799 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:52.799  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:52.821 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:051e50d6-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:52.821  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:051e50d6-0017-11e7-af8b-0014781bc25c
-21:40:52.822 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:52.822  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:52.822 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:52.822  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:52.833 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:52.833  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:52.835 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:052073b7-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:52.835  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:052073b7-0017-11e7-af8b-0014781bc25c
-21:40:52.835 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:52.835  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:52.836 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:52.836  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:52.839 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:52.839  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:52.872 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:05261908-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:52.872  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:05261908-0017-11e7-af8b-0014781bc25c
-21:40:52.872 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:52.872  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:52.872 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:52.872  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:52.896 [http-nio-9120-exec-8] INFO  o.t.k.n.NotificationService - Adding notification:Notification{id='null', receiver='invitee-user', sender='someone', content='someone邀请你加入project-name', link='http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId', isRead=false, creationTime='null', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='null'}
-2017-03-03 21:40:52.896  INFO 6131 --- [nio-9120-exec-8] o.t.k.notification.NotificationService   : Adding notification:Notification{id='null', receiver='invitee-user', sender='someone', content='someone邀请你加入project-name', link='http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId', isRead=false, creationTime='null', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='null'}
-21:40:52.912 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:52.912  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:52.951 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:053226f9-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:52.951  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:053226f9-0017-11e7-af8b-0014781bc25c
-21:40:52.952 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:52.952  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:52.952 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:52.952  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:52.955 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:52.955  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:52.956 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:0532ea4a-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:52.956  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:0532ea4a-0017-11e7-af8b-0014781bc25c
-21:40:52.957 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:52.957  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:52.957 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:52.957  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:52.959 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:52.959  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:52.990 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:05381a6b-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:52.990  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:05381a6b-0017-11e7-af8b-0014781bc25c
-21:40:52.990 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:52.990  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:52.991 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:52.991  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.009 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.009  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.011 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:053b4ebc-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.011  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:053b4ebc-0017-11e7-af8b-0014781bc25c
-21:40:53.011 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.011  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:53.012 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.012  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:53.015 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.015  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.038 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:053f6d6d-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.038  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:053f6d6d-0017-11e7-af8b-0014781bc25c
-21:40:53.039 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:53.039  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:53.039 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:53.039  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:53.042 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.042  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.043 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:054030be-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.043  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:054030be-0017-11e7-af8b-0014781bc25c
-21:40:53.044 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.044  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:53.044 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.044  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:53.045 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.045  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.073 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:05449d8f-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.073  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:05449d8f-0017-11e7-af8b-0014781bc25c
-21:40:53.073 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.073  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.073 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.073  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.093 [http-nio-9120-exec-10] INFO  o.t.k.n.NotificationService - Adding notification:Notification{id='null', receiver='invitee-user', sender='someone', content='someone邀请你加入project-name', link='http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId', isRead=false, creationTime='null', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='null'}
-2017-03-03 21:40:53.093  INFO 6131 --- [io-9120-exec-10] o.t.k.notification.NotificationService   : Adding notification:Notification{id='null', receiver='invitee-user', sender='someone', content='someone邀请你加入project-name', link='http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId', isRead=false, creationTime='null', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='null'}
-21:40:53.103 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.103  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.149 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:05505d60-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.149  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:05505d60-0017-11e7-af8b-0014781bc25c
-21:40:53.149 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:53.149  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:53.149 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:53.149  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:53.156 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.156  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.206 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:05590ff1-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.206  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:05590ff1-0017-11e7-af8b-0014781bc25c
-21:40:53.206 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-id/members/invitation/invitation-id
-2017-03-03 21:40:53.206  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-id/members/invitation/invitation-id
-21:40:53.206 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-id/members/invitation/invitation-id
-2017-03-03 21:40:53.206  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-id/members/invitation/invitation-id
-21:40:53.219 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.219  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.276 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:0563be52-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.276  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:0563be52-0017-11e7-af8b-0014781bc25c
-21:40:53.276 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.276  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.277 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.277  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.294 [http-nio-9120-exec-4] INFO  o.t.k.n.NotificationService - Adding notification:Notification{id='null', receiver='invitee-user', sender='someone', content='someone邀请你加入project-name', link='http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId', isRead=false, creationTime='null', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='null'}
-2017-03-03 21:40:53.294  INFO 6131 --- [nio-9120-exec-4] o.t.k.notification.NotificationService   : Adding notification:Notification{id='null', receiver='invitee-user', sender='someone', content='someone邀请你加入project-name', link='http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId', isRead=false, creationTime='null', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='null'}
-21:40:53.303 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.303  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.348 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:056ebad3-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.348  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:056ebad3-0017-11e7-af8b-0014781bc25c
-21:40:53.349 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.349  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.349 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.349  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.363 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.363  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.365 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - init session:05712bd4-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.365  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : init session:05712bd4-0017-11e7-af8b-0014781bc25c
-21:40:53.365 [http-nio-9120-exec-12] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.365  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:53.365 [http-nio-9120-exec-12] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.365  INFO 6131 --- [io-9120-exec-12] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:53.368 [http-nio-9120-exec-12] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.368  INFO 6131 --- [io-9120-exec-12] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.400 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:0576aa15-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.400  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:0576aa15-0017-11e7-af8b-0014781bc25c
-21:40:53.401 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:53.401  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:53.401 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-2017-03-03 21:40:53.401  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
-21:40:53.404 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.404  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.405 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:05776d66-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.405  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:05776d66-0017-11e7-af8b-0014781bc25c
-21:40:53.406 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.406  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:53.406 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.406  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:53.407 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.407  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.440 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:057cc497-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.440  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:057cc497-0017-11e7-af8b-0014781bc25c
-21:40:53.441 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.441  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.441 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.441  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.458 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.458  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.460 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:057fd1d8-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.460  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:057fd1d8-0017-11e7-af8b-0014781bc25c
-21:40:53.461 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.461  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:53.461 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.461  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:53.463 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.463  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.496 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:05855019-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.496  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:05855019-0017-11e7-af8b-0014781bc25c
-21:40:53.496 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.496  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.496 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.496  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.518 [http-nio-9120-exec-5] INFO  o.t.k.n.NotificationService - Adding notification:Notification{id='null', receiver='invitee-user', sender='someone', content='someone邀请你加入project-name', link='http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId', isRead=false, creationTime='null', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='null'}
-2017-03-03 21:40:53.518  INFO 6131 --- [nio-9120-exec-5] o.t.k.notification.NotificationService   : Adding notification:Notification{id='null', receiver='invitee-user', sender='someone', content='someone邀请你加入project-name', link='http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId', isRead=false, creationTime='null', displayTime='null', type='project-members-invitation', typeName='null', modificationTime='null'}
-21:40:53.527 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.527  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.572 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:0590e8da-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.572  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:0590e8da-0017-11e7-af8b-0014781bc25c
-21:40:53.573 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.573  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.573 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-2017-03-03 21:40:53.573  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
-21:40:53.581 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.581  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:53.583 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:0592968b-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:53.583  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:0592968b-0017-11e7-af8b-0014781bc25c
-21:40:53.584 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.584  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:53.584 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:53.584  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:53.588 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:53.588  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+<pre>2017-03-12 19:08:54.027  INFO 6873 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-12 19:08:54.031  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener]
+2017-03-12 19:08:54.031  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@23217950, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4d033a8b, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@4bb60d9d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6fc53786, org.springframework.test.context.transaction.TransactionalTestExecutionListener@470638d7, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@138595de, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@6824b8d6, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2e9bdb53, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@58ad9ed7, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@6739cb79, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@2a162d40, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5aa73a12]
+19:08:54.052 [http-nio-9120-exec-24] INFO  o.t.k.f.logback.SessionInterceptor - init session:47a0564e-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.052  INFO 6873 --- [io-9120-exec-24] o.t.k.f.logback.SessionInterceptor       : init session:47a0564e-0714-11e7-80b3-0014781bc25c
+19:08:54.052 [http-nio-9120-exec-24] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.052  INFO 6873 --- [io-9120-exec-24] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.053 [http-nio-9120-exec-24] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.053  INFO 6873 --- [io-9120-exec-24] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.064 [http-nio-9120-exec-24] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.064  INFO 6873 --- [io-9120-exec-24] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.066 [http-nio-9120-exec-24] INFO  o.t.k.f.logback.SessionInterceptor - init session:47a2792f-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.066  INFO 6873 --- [io-9120-exec-24] o.t.k.f.logback.SessionInterceptor       : init session:47a2792f-0714-11e7-80b3-0014781bc25c
+19:08:54.067 [http-nio-9120-exec-24] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.067  INFO 6873 --- [io-9120-exec-24] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:54.068 [http-nio-9120-exec-24] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.068  INFO 6873 --- [io-9120-exec-24] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:54.070 [http-nio-9120-exec-24] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.070  INFO 6873 --- [io-9120-exec-24] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.096 [http-nio-9120-exec-16] INFO  o.t.k.f.logback.SessionInterceptor - init session:47a70d10-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.096  INFO 6873 --- [io-9120-exec-16] o.t.k.f.logback.SessionInterceptor       : init session:47a70d10-0714-11e7-80b3-0014781bc25c
+19:08:54.096 [http-nio-9120-exec-16] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.096  INFO 6873 --- [io-9120-exec-16] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.097 [http-nio-9120-exec-16] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.097  INFO 6873 --- [io-9120-exec-16] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.114 [http-nio-9120-exec-16] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.114  INFO 6873 --- [io-9120-exec-16] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.116 [http-nio-9120-exec-16] INFO  o.t.k.f.logback.SessionInterceptor - init session:47aa1a51-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.116  INFO 6873 --- [io-9120-exec-16] o.t.k.f.logback.SessionInterceptor       : init session:47aa1a51-0714-11e7-80b3-0014781bc25c
+19:08:54.117 [http-nio-9120-exec-16] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.117  INFO 6873 --- [io-9120-exec-16] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:54.118 [http-nio-9120-exec-16] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.118  INFO 6873 --- [io-9120-exec-16] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:54.121 [http-nio-9120-exec-16] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.121  INFO 6873 --- [io-9120-exec-16] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.164 [http-nio-9120-exec-17] INFO  o.t.k.f.logback.SessionInterceptor - init session:47b16d52-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.164  INFO 6873 --- [io-9120-exec-17] o.t.k.f.logback.SessionInterceptor       : init session:47b16d52-0714-11e7-80b3-0014781bc25c
+19:08:54.165 [http-nio-9120-exec-17] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.165  INFO 6873 --- [io-9120-exec-17] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.165 [http-nio-9120-exec-17] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.165  INFO 6873 --- [io-9120-exec-17] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.186 [http-nio-9120-exec-17] INFO  o.t.k.n.NotificationService - Adding notification:{&quot;content&quot;:&quot;someone邀请你加入project-name&quot;,&quot;displayTime&quot;:&quot;&quot;,&quot;isRead&quot;:false,&quot;link&quot;:&quot;http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId&quot;,&quot;receiver&quot;:&quot;invitee-user&quot;,&quot;sender&quot;:&quot;someone&quot;,&quot;type&quot;:&quot;project-members-invitation&quot;,&quot;typeName&quot;:&quot;团队邀请&quot;}
+2017-03-12 19:08:54.186  INFO 6873 --- [io-9120-exec-17] o.t.k.notification.NotificationService   : Adding notification:{&quot;content&quot;:&quot;someone邀请你加入project-name&quot;,&quot;displayTime&quot;:&quot;&quot;,&quot;isRead&quot;:false,&quot;link&quot;:&quot;http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId&quot;,&quot;receiver&quot;:&quot;invitee-user&quot;,&quot;sender&quot;:&quot;someone&quot;,&quot;type&quot;:&quot;project-members-invitation&quot;,&quot;typeName&quot;:&quot;团队邀请&quot;}
+19:08:54.204 [http-nio-9120-exec-17] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.204  INFO 6873 --- [io-9120-exec-17] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.266 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:47c0fdb3-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.266  INFO 6873 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:47c0fdb3-0714-11e7-80b3-0014781bc25c
+19:08:54.267 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.267  INFO 6873 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.267 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.267  INFO 6873 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.269 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.269  INFO 6873 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.271 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:47c1c104-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.271  INFO 6873 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:47c1c104-0714-11e7-80b3-0014781bc25c
+19:08:54.271 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.271  INFO 6873 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:54.272 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.272  INFO 6873 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:54.273 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.273  INFO 6873 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.318 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:47c8ecf5-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.318  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:47c8ecf5-0714-11e7-80b3-0014781bc25c
+19:08:54.320 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.320  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.320 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.320  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.340 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.340  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.342 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:47cc9676-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.342  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:47cc9676-0714-11e7-80b3-0014781bc25c
+19:08:54.343 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.343  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:54.343 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.343  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:54.348 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.348  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.383 [http-nio-9120-exec-18] INFO  o.t.k.f.logback.SessionInterceptor - init session:47d2d807-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.383  INFO 6873 --- [io-9120-exec-18] o.t.k.f.logback.SessionInterceptor       : init session:47d2d807-0714-11e7-80b3-0014781bc25c
+19:08:54.383 [http-nio-9120-exec-18] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.383  INFO 6873 --- [io-9120-exec-18] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.383 [http-nio-9120-exec-18] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.383  INFO 6873 --- [io-9120-exec-18] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.386 [http-nio-9120-exec-18] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.386  INFO 6873 --- [io-9120-exec-18] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.387 [http-nio-9120-exec-18] INFO  o.t.k.f.logback.SessionInterceptor - init session:47d37448-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.387  INFO 6873 --- [io-9120-exec-18] o.t.k.f.logback.SessionInterceptor       : init session:47d37448-0714-11e7-80b3-0014781bc25c
+19:08:54.388 [http-nio-9120-exec-18] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.388  INFO 6873 --- [io-9120-exec-18] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:54.388 [http-nio-9120-exec-18] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.388  INFO 6873 --- [io-9120-exec-18] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:54.390 [http-nio-9120-exec-18] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.390  INFO 6873 --- [io-9120-exec-18] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.426 [http-nio-9120-exec-13] INFO  o.t.k.f.logback.SessionInterceptor - init session:47d967b9-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.426  INFO 6873 --- [io-9120-exec-13] o.t.k.f.logback.SessionInterceptor       : init session:47d967b9-0714-11e7-80b3-0014781bc25c
+19:08:54.426 [http-nio-9120-exec-13] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.426  INFO 6873 --- [io-9120-exec-13] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.426 [http-nio-9120-exec-13] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.426  INFO 6873 --- [io-9120-exec-13] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.447 [http-nio-9120-exec-13] INFO  o.t.k.n.NotificationService - Adding notification:{&quot;content&quot;:&quot;someone邀请你加入project-name&quot;,&quot;displayTime&quot;:&quot;&quot;,&quot;isRead&quot;:false,&quot;link&quot;:&quot;http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId&quot;,&quot;receiver&quot;:&quot;invitee-user&quot;,&quot;sender&quot;:&quot;someone&quot;,&quot;type&quot;:&quot;project-members-invitation&quot;,&quot;typeName&quot;:&quot;团队邀请&quot;}
+2017-03-12 19:08:54.447  INFO 6873 --- [io-9120-exec-13] o.t.k.notification.NotificationService   : Adding notification:{&quot;content&quot;:&quot;someone邀请你加入project-name&quot;,&quot;displayTime&quot;:&quot;&quot;,&quot;isRead&quot;:false,&quot;link&quot;:&quot;http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId&quot;,&quot;receiver&quot;:&quot;invitee-user&quot;,&quot;sender&quot;:&quot;someone&quot;,&quot;type&quot;:&quot;project-members-invitation&quot;,&quot;typeName&quot;:&quot;团队邀请&quot;}
+19:08:54.458 [http-nio-9120-exec-13] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.458  INFO 6873 --- [io-9120-exec-13] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.538 [http-nio-9120-exec-21] INFO  o.t.k.f.logback.SessionInterceptor - init session:47ea7eba-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.538  INFO 6873 --- [io-9120-exec-21] o.t.k.f.logback.SessionInterceptor       : init session:47ea7eba-0714-11e7-80b3-0014781bc25c
+19:08:54.539 [http-nio-9120-exec-21] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.539  INFO 6873 --- [io-9120-exec-21] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.539 [http-nio-9120-exec-21] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.539  INFO 6873 --- [io-9120-exec-21] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.546 [http-nio-9120-exec-21] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.546  INFO 6873 --- [io-9120-exec-21] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.621 [http-nio-9120-exec-19] INFO  o.t.k.f.logback.SessionInterceptor - init session:47f728eb-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.621  INFO 6873 --- [io-9120-exec-19] o.t.k.f.logback.SessionInterceptor       : init session:47f728eb-0714-11e7-80b3-0014781bc25c
+19:08:54.621 [http-nio-9120-exec-19] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-id/members/invitation/invitation-id
+2017-03-12 19:08:54.621  INFO 6873 --- [io-9120-exec-19] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-id/members/invitation/invitation-id
+19:08:54.621 [http-nio-9120-exec-19] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-id/members/invitation/invitation-id
+2017-03-12 19:08:54.621  INFO 6873 --- [io-9120-exec-19] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-id/members/invitation/invitation-id
+19:08:54.634 [http-nio-9120-exec-19] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.634  INFO 6873 --- [io-9120-exec-19] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.714 [http-nio-9120-exec-22] INFO  o.t.k.f.logback.SessionInterceptor - init session:480559bc-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.714  INFO 6873 --- [io-9120-exec-22] o.t.k.f.logback.SessionInterceptor       : init session:480559bc-0714-11e7-80b3-0014781bc25c
+19:08:54.715 [http-nio-9120-exec-22] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.715  INFO 6873 --- [io-9120-exec-22] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.716 [http-nio-9120-exec-22] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.716  INFO 6873 --- [io-9120-exec-22] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.741 [http-nio-9120-exec-22] INFO  o.t.k.n.NotificationService - Adding notification:{&quot;content&quot;:&quot;someone邀请你加入project-name&quot;,&quot;displayTime&quot;:&quot;&quot;,&quot;isRead&quot;:false,&quot;link&quot;:&quot;http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId&quot;,&quot;receiver&quot;:&quot;invitee-user&quot;,&quot;sender&quot;:&quot;someone&quot;,&quot;type&quot;:&quot;project-members-invitation&quot;,&quot;typeName&quot;:&quot;团队邀请&quot;}
+2017-03-12 19:08:54.741  INFO 6873 --- [io-9120-exec-22] o.t.k.notification.NotificationService   : Adding notification:{&quot;content&quot;:&quot;someone邀请你加入project-name&quot;,&quot;displayTime&quot;:&quot;&quot;,&quot;isRead&quot;:false,&quot;link&quot;:&quot;http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId&quot;,&quot;receiver&quot;:&quot;invitee-user&quot;,&quot;sender&quot;:&quot;someone&quot;,&quot;type&quot;:&quot;project-members-invitation&quot;,&quot;typeName&quot;:&quot;团队邀请&quot;}
+19:08:54.748 [http-nio-9120-exec-22] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.748  INFO 6873 --- [io-9120-exec-22] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.807 [http-nio-9120-exec-20] INFO  o.t.k.f.logback.SessionInterceptor - init session:48138a8d-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.807  INFO 6873 --- [io-9120-exec-20] o.t.k.f.logback.SessionInterceptor       : init session:48138a8d-0714-11e7-80b3-0014781bc25c
+19:08:54.808 [http-nio-9120-exec-20] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.808  INFO 6873 --- [io-9120-exec-20] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.808 [http-nio-9120-exec-20] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.808  INFO 6873 --- [io-9120-exec-20] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.826 [http-nio-9120-exec-20] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.826  INFO 6873 --- [io-9120-exec-20] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.828 [http-nio-9120-exec-20] INFO  o.t.k.f.logback.SessionInterceptor - init session:4816bede-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.828  INFO 6873 --- [io-9120-exec-20] o.t.k.f.logback.SessionInterceptor       : init session:4816bede-0714-11e7-80b3-0014781bc25c
+19:08:54.829 [http-nio-9120-exec-20] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.829  INFO 6873 --- [io-9120-exec-20] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:54.829 [http-nio-9120-exec-20] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.829  INFO 6873 --- [io-9120-exec-20] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:54.831 [http-nio-9120-exec-20] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.831  INFO 6873 --- [io-9120-exec-20] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.870 [http-nio-9120-exec-23] INFO  o.t.k.f.logback.SessionInterceptor - init session:481d277f-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.870  INFO 6873 --- [io-9120-exec-23] o.t.k.f.logback.SessionInterceptor       : init session:481d277f-0714-11e7-80b3-0014781bc25c
+19:08:54.871 [http-nio-9120-exec-23] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.871  INFO 6873 --- [io-9120-exec-23] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.871 [http-nio-9120-exec-23] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+2017-03-12 19:08:54.871  INFO 6873 --- [io-9120-exec-23] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation/invitation-id
+19:08:54.873 [http-nio-9120-exec-23] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.873  INFO 6873 --- [io-9120-exec-23] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.875 [http-nio-9120-exec-23] INFO  o.t.k.f.logback.SessionInterceptor - init session:481dead0-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.875  INFO 6873 --- [io-9120-exec-23] o.t.k.f.logback.SessionInterceptor       : init session:481dead0-0714-11e7-80b3-0014781bc25c
+19:08:54.876 [http-nio-9120-exec-23] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.876  INFO 6873 --- [io-9120-exec-23] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:54.876 [http-nio-9120-exec-23] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.876  INFO 6873 --- [io-9120-exec-23] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:54.878 [http-nio-9120-exec-23] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.878  INFO 6873 --- [io-9120-exec-23] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.916 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:48242c61-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.916  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:48242c61-0714-11e7-80b3-0014781bc25c
+19:08:54.916 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.916  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.916 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.916  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.942 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.942  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.944 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:48287222-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.944  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:48287222-0714-11e7-80b3-0014781bc25c
+19:08:54.944 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.944  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:54.945 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:54.945  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:54.947 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:54.947  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:54.986 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:482edac3-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:54.986  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:482edac3-0714-11e7-80b3-0014781bc25c
+19:08:54.986 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.986  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:54.986 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:54.986  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:55.011 [http-nio-9120-exec-10] INFO  o.t.k.n.NotificationService - Adding notification:{&quot;content&quot;:&quot;someone邀请你加入project-name&quot;,&quot;displayTime&quot;:&quot;&quot;,&quot;isRead&quot;:false,&quot;link&quot;:&quot;http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId&quot;,&quot;receiver&quot;:&quot;invitee-user&quot;,&quot;sender&quot;:&quot;someone&quot;,&quot;type&quot;:&quot;project-members-invitation&quot;,&quot;typeName&quot;:&quot;团队邀请&quot;}
+2017-03-12 19:08:55.011  INFO 6873 --- [io-9120-exec-10] o.t.k.notification.NotificationService   : Adding notification:{&quot;content&quot;:&quot;someone邀请你加入project-name&quot;,&quot;displayTime&quot;:&quot;&quot;,&quot;isRead&quot;:false,&quot;link&quot;:&quot;http://localhost:9120/kanban/projects/foo-project-Id/members/invitation/fooId&quot;,&quot;receiver&quot;:&quot;invitee-user&quot;,&quot;sender&quot;:&quot;someone&quot;,&quot;type&quot;:&quot;project-members-invitation&quot;,&quot;typeName&quot;:&quot;团队邀请&quot;}
+19:08:55.022 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:55.022  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:55.087 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:483e4414-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:55.087  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:483e4414-0714-11e7-80b3-0014781bc25c
+19:08:55.087 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:55.087  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/projects/foo-project-Id/members/invitation
+19:08:55.087 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+2017-03-12 19:08:55.087  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/projects/foo-project-Id/members/invitation
+19:08:55.096 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:55.096  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:55.098 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:483ff1c5-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:55.098  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:483ff1c5-0714-11e7-80b3-0014781bc25c
+19:08:55.098 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:55.098  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:55.098 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:55.098  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:55.102 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:55.102  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
 </pre>
 </span>
 </div>
@@ -371,7 +371,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 12, 2017 7:09:02 PM</p>
 </div>
 </div>
 </body>

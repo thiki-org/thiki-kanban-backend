@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.382s</div>
+<div class="counter">0.493s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,27 +79,27 @@
 </thead>
 <tr>
 <td class="success">create_shouldReturn201WhenCreateACSuccessfully</td>
-<td>0.114s</td>
+<td>0.117s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">deleteComment</td>
-<td>0.043s</td>
+<td>0.076s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">loadCommentById</td>
-<td>0.079s</td>
+<td>0.101s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">loadComments</td>
-<td>0.099s</td>
+<td>0.137s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">notAllowedIfSummaryIsEmpty</td>
-<td>0.047s</td>
+<td>0.062s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -107,63 +107,63 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2017-03-03 21:40:54.095  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
-2017-03-03 21:40:54.098  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
-2017-03-03 21:40:54.098  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4170769d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@77d31795, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@44a583f2, org.springframework.test.context.support.DirtiesContextTestExecutionListener@62f95acb, org.springframework.test.context.transaction.TransactionalTestExecutionListener@207f1c97, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@4f7fd8b2, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@272d68bc, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@f2a4190]
-21:40:54.113 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:05e375bc-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:54.113  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:05e375bc-0017-11e7-af8b-0014781bc25c
-21:40:54.113 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-2017-03-03 21:40:54.113  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-21:40:54.113 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-2017-03-03 21:40:54.113  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-21:40:54.136 [http-nio-9120-exec-5] INFO  o.t.kanban.comment.CommentService - Add comment.userName:someone,cardId:card-fooId,comment:{&quot;publishTime&quot;:&quot;&quot;,&quot;summary&quot;:&quot;comment-summary&quot;}
-2017-03-03 21:40:54.136  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.comment.CommentService  : Add comment.userName:someone,cardId:card-fooId,comment:{&quot;publishTime&quot;:&quot;&quot;,&quot;summary&quot;:&quot;comment-summary&quot;}
-21:40:54.146 [http-nio-9120-exec-5] INFO  o.t.kanban.comment.CommentService - Saved comment:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:54.144000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:54.144000&quot;,&quot;publishTime&quot;:&quot;刚刚&quot;,&quot;summary&quot;:&quot;comment-summary&quot;}
-2017-03-03 21:40:54.146  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.comment.CommentService  : Saved comment:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:54.144000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:54.144000&quot;,&quot;publishTime&quot;:&quot;刚刚&quot;,&quot;summary&quot;:&quot;comment-summary&quot;}
-21:40:54.147 [http-nio-9120-exec-5] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;{\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;publishTime\&quot;:\&quot;\&quot;,\&quot;summary\&quot;:\&quot;comment-summary\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;008&quot;,&quot;operationTypeName&quot;:&quot;创建评论&quot;,&quot;summary&quot;:&quot;{\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;publishTime\&quot;:\&quot;\&quot;,\&quot;summary\&quot;:\&quot;comment-summary\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
-2017-03-03 21:40:54.147  INFO 6131 --- [nio-9120-exec-5] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;{\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;publishTime\&quot;:\&quot;\&quot;,\&quot;summary\&quot;:\&quot;comment-summary\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;008&quot;,&quot;operationTypeName&quot;:&quot;创建评论&quot;,&quot;summary&quot;:&quot;{\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;publishTime\&quot;:\&quot;\&quot;,\&quot;summary\&quot;:\&quot;comment-summary\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
-21:40:54.159 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:54.159  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:54.229 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:05f528fe-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:54.229  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:05f528fe-0017-11e7-af8b-0014781bc25c
-21:40:54.230 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-2017-03-03 21:40:54.230  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-21:40:54.230 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-2017-03-03 21:40:54.230  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-21:40:54.239 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:54.239  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:54.242 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:05f724cf-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:54.242  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:05f724cf-0017-11e7-af8b-0014781bc25c
-21:40:54.242 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:54.242  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:54.243 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:54.243  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:54.245 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:54.245  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:54.277 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:05fc7c00-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:54.277  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:05fc7c00-0017-11e7-af8b-0014781bc25c
-21:40:54.278 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
-2017-03-03 21:40:54.278  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
-21:40:54.278 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
-2017-03-03 21:40:54.278  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
-21:40:54.290 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:54.290  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:54.359 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:0608d811-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:54.359  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:0608d811-0017-11e7-af8b-0014781bc25c
-21:40:54.359 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-2017-03-03 21:40:54.359  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-21:40:54.359 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-2017-03-03 21:40:54.359  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
-21:40:54.373 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:54.373  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:54.464 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:061904b2-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:54.464  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:061904b2-0017-11e7-af8b-0014781bc25c
-21:40:54.464 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
-2017-03-03 21:40:54.464  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
-21:40:54.464 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
-2017-03-03 21:40:54.464  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
-21:40:54.471 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:54.471  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+<pre>2017-03-12 19:08:55.754  INFO 6873 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-12 19:08:55.758  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener]
+2017-03-12 19:08:55.759  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5919f1af, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@7fb35890, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@a2770a1, org.springframework.test.context.support.DirtiesContextTestExecutionListener@59dde3a5, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4fdff5b8, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@2acd430b, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1b5e8c8b, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@2d28948e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@1d6ad6a6, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5d7f1b1b, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@322aeeeb, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5bcf90c4]
+19:08:55.778 [http-nio-9120-exec-16] INFO  o.t.k.f.logback.SessionInterceptor - init session:48a7b456-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:55.778  INFO 6873 --- [io-9120-exec-16] o.t.k.f.logback.SessionInterceptor       : init session:48a7b456-0714-11e7-80b3-0014781bc25c
+19:08:55.778 [http-nio-9120-exec-16] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+2017-03-12 19:08:55.778  INFO 6873 --- [io-9120-exec-16] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+19:08:55.778 [http-nio-9120-exec-16] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+2017-03-12 19:08:55.778  INFO 6873 --- [io-9120-exec-16] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+19:08:55.799 [http-nio-9120-exec-16] INFO  o.t.kanban.comment.CommentService - Add comment.userName:someone,cardId:card-fooId,comment:{&quot;publishTime&quot;:&quot;&quot;,&quot;summary&quot;:&quot;comment-summary&quot;}
+2017-03-12 19:08:55.799  INFO 6873 --- [io-9120-exec-16] org.thiki.kanban.comment.CommentService  : Add comment.userName:someone,cardId:card-fooId,comment:{&quot;publishTime&quot;:&quot;&quot;,&quot;summary&quot;:&quot;comment-summary&quot;}
+19:08:55.808 [http-nio-9120-exec-16] INFO  o.t.kanban.comment.CommentService - Saved comment:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:08:55.806000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:08:55.806000&quot;,&quot;publishTime&quot;:&quot;刚刚&quot;,&quot;summary&quot;:&quot;comment-summary&quot;}
+2017-03-12 19:08:55.808  INFO 6873 --- [io-9120-exec-16] org.thiki.kanban.comment.CommentService  : Saved comment:{&quot;author&quot;:&quot;someone&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:08:55.806000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:08:55.806000&quot;,&quot;publishTime&quot;:&quot;刚刚&quot;,&quot;summary&quot;:&quot;comment-summary&quot;}
+19:08:55.808 [http-nio-9120-exec-16] INFO  o.t.kanban.activity.ActivityService - Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;{\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;publishTime\&quot;:\&quot;\&quot;,\&quot;summary\&quot;:\&quot;comment-summary\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;008&quot;,&quot;operationTypeName&quot;:&quot;创建评论&quot;,&quot;summary&quot;:&quot;{\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;publishTime\&quot;:\&quot;\&quot;,\&quot;summary\&quot;:\&quot;comment-summary\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-12 19:08:55.808  INFO 6873 --- [io-9120-exec-16] o.thiki.kanban.activity.ActivityService  : Recording operation:{&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;detail&quot;:&quot;{\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;publishTime\&quot;:\&quot;\&quot;,\&quot;summary\&quot;:\&quot;comment-summary\&quot;}&quot;,&quot;operationTypeCode&quot;:&quot;008&quot;,&quot;operationTypeName&quot;:&quot;创建评论&quot;,&quot;summary&quot;:&quot;{\&quot;id\&quot;:\&quot;fooId\&quot;,\&quot;publishTime\&quot;:\&quot;\&quot;,\&quot;summary\&quot;:\&quot;comment-summary\&quot;}&quot;,&quot;userName&quot;:&quot;someone&quot;}
+19:08:55.819 [http-nio-9120-exec-16] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:55.819  INFO 6873 --- [io-9120-exec-16] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:55.896 [http-nio-9120-exec-17] INFO  o.t.k.f.logback.SessionInterceptor - init session:48b9b5b8-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:55.896  INFO 6873 --- [io-9120-exec-17] o.t.k.f.logback.SessionInterceptor       : init session:48b9b5b8-0714-11e7-80b3-0014781bc25c
+19:08:55.896 [http-nio-9120-exec-17] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+2017-03-12 19:08:55.896  INFO 6873 --- [io-9120-exec-17] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+19:08:55.897 [http-nio-9120-exec-17] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+2017-03-12 19:08:55.897  INFO 6873 --- [io-9120-exec-17] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+19:08:55.912 [http-nio-9120-exec-17] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:55.912  INFO 6873 --- [io-9120-exec-17] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:55.914 [http-nio-9120-exec-17] INFO  o.t.k.f.logback.SessionInterceptor - init session:48bc74d9-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:55.914  INFO 6873 --- [io-9120-exec-17] o.t.k.f.logback.SessionInterceptor       : init session:48bc74d9-0714-11e7-80b3-0014781bc25c
+19:08:55.915 [http-nio-9120-exec-17] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:55.915  INFO 6873 --- [io-9120-exec-17] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:55.915 [http-nio-9120-exec-17] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:55.915  INFO 6873 --- [io-9120-exec-17] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:55.917 [http-nio-9120-exec-17] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:55.917  INFO 6873 --- [io-9120-exec-17] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:55.959 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:48c352aa-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:55.959  INFO 6873 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:48c352aa-0714-11e7-80b3-0014781bc25c
+19:08:55.959 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
+2017-03-12 19:08:55.959  INFO 6873 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
+19:08:55.959 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
+2017-03-12 19:08:55.959  INFO 6873 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
+19:08:55.970 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:55.970  INFO 6873 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:56.061 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:48d2e30b-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:56.061  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:48d2e30b-0714-11e7-80b3-0014781bc25c
+19:08:56.061 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+2017-03-12 19:08:56.061  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+19:08:56.061 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+2017-03-12 19:08:56.061  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments
+19:08:56.077 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:56.077  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:56.213 [http-nio-9120-exec-18] INFO  o.t.k.f.logback.SessionInterceptor - init session:48ea148c-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:56.213  INFO 6873 --- [io-9120-exec-18] o.t.k.f.logback.SessionInterceptor       : init session:48ea148c-0714-11e7-80b3-0014781bc25c
+19:08:56.213 [http-nio-9120-exec-18] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
+2017-03-12 19:08:56.213  INFO 6873 --- [io-9120-exec-18] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
+19:08:56.214 [http-nio-9120-exec-18] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
+2017-03-12 19:08:56.214  INFO 6873 --- [io-9120-exec-18] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId
+19:08:56.223 [http-nio-9120-exec-18] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:56.223  INFO 6873 --- [io-9120-exec-18] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
 </pre>
 </span>
 </div>
@@ -175,7 +175,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 12, 2017 7:09:02 PM</p>
 </div>
 </div>
 </body>

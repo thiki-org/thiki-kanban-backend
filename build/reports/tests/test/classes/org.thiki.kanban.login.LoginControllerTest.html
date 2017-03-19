@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.546s</div>
+<div class="counter">0.487s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,22 +79,22 @@
 </thead>
 <tr>
 <td class="success">login_loginFailed</td>
-<td>0.073s</td>
+<td>0.094s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">login_loginFailedIfRegUserIsNotExists</td>
-<td>0.077s</td>
+<td>0.074s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">login_loginSuccessfully</td>
-<td>0.204s</td>
+<td>0.141s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">login_shouldLoginFailedIfUserNameOrPasswordIsIncorrect</td>
-<td>0.192s</td>
+<td>0.178s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -102,99 +102,99 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2017-03-03 21:40:44.637  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
-2017-03-03 21:40:44.643  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
-2017-03-03 21:40:44.644  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@49b6f353, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@3cdacfc0, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@5bf6bf05, org.springframework.test.context.support.DirtiesContextTestExecutionListener@6ebbbb23, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1069f1cc, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@7aa788ce, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@14470e08, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@2796cd00]
-21:40:44.735 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:004c7de4-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:44.735  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:004c7de4-0017-11e7-af8b-0014781bc25c
-21:40:44.736 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/login
-2017-03-03 21:40:44.736  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/login
-21:40:44.736 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/login
-2017-03-03 21:40:44.736  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/login
-21:40:44.750 [http-nio-9120-exec-7] INFO  o.thiki.kanban.login.LoginController - Login request arrived controller,identity:someone
-2017-03-03 21:40:44.750  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.login.LoginController   : Login request arrived controller,identity:someone
-21:40:44.768 [http-nio-9120-exec-7] INFO  org.thiki.kanban.login.LoginService - Login request arrived service,identity:someone
-2017-03-03 21:40:44.768  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.login.LoginService      : Login request arrived service,identity:someone
-21:40:44.780 [http-nio-9120-exec-7] INFO  org.thiki.kanban.login.LoginService - Load user:User{id='fooUserId', email='someone@gmail.com', name='someone'}
-2017-03-03 21:40:44.780  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.login.LoginService      : Load user:User{id='fooUserId', email='someone@gmail.com', name='someone'}
-21:40:44.780 [http-nio-9120-exec-7] INFO  org.thiki.kanban.login.LoginService - Dencrypt password.
-2017-03-03 21:40:44.780  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.login.LoginService      : Dencrypt password.
-21:40:44.786 [http-nio-9120-exec-7] INFO  org.thiki.kanban.login.LoginService - Encrypt password with md5.
-2017-03-03 21:40:44.786  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.login.LoginService      : Encrypt password with md5.
-21:40:44.800 [http-nio-9120-exec-7] INFO  org.thiki.kanban.login.LoginService - Matched result:null
-2017-03-03 21:40:44.800  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.login.LoginService      : Matched result:null
-21:40:44.802 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:44.802  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:44.806 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:00575355-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:44.806  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:00575355-0017-11e7-af8b-0014781bc25c
-21:40:44.806 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:44.806  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
-21:40:44.807 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:44.807  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:44.814 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:44.814  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:44.873 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:00618c86-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:44.873  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:00618c86-0017-11e7-af8b-0014781bc25c
-21:40:44.873 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/login
-2017-03-03 21:40:44.873  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/login
-21:40:44.874 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/login
-2017-03-03 21:40:44.874  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/login
-21:40:44.875 [http-nio-9120-exec-8] INFO  o.thiki.kanban.login.LoginController - Login request arrived controller,identity:someone
-2017-03-03 21:40:44.875  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.login.LoginController   : Login request arrived controller,identity:someone
-21:40:44.883 [http-nio-9120-exec-8] INFO  org.thiki.kanban.login.LoginService - Login request arrived service,identity:someone
-2017-03-03 21:40:44.883  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.login.LoginService      : Login request arrived service,identity:someone
-21:40:44.894 [http-nio-9120-exec-8] INFO  org.thiki.kanban.login.LoginService - Load user:User{id='fooUserId', email='someone@gmail.com', name='someone'}
-2017-03-03 21:40:44.894  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.login.LoginService      : Load user:User{id='fooUserId', email='someone@gmail.com', name='someone'}
-21:40:44.895 [http-nio-9120-exec-8] INFO  org.thiki.kanban.login.LoginService - Dencrypt password.
-2017-03-03 21:40:44.895  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.login.LoginService      : Dencrypt password.
-21:40:44.900 [http-nio-9120-exec-8] INFO  org.thiki.kanban.login.LoginService - Encrypt password with md5.
-2017-03-03 21:40:44.900  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.login.LoginService      : Encrypt password with md5.
-21:40:44.913 [http-nio-9120-exec-8] INFO  org.thiki.kanban.login.LoginService - Matched result:User{id='fooUserId', email='someone@gmail.com', name='someone'}
-2017-03-03 21:40:44.913  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.login.LoginService      : Matched result:User{id='fooUserId', email='someone@gmail.com', name='someone'}
-21:40:44.918 [http-nio-9120-exec-8] INFO  org.thiki.kanban.login.LoginService - Login successfully:Identification{token='4988ca54a84321490e03fd906b5d2425afba80914c282271fd83ad1438ec8b55976cf77197a77b08c750bfb5e6173790f9f95f4e07a4f273d6fad3645e8377ed8ea865770a8aa4ff05168a98dc2417a4254405fb1639871cfc63f0dd5871a4805dc3778c106d37010b2c20adedd0117a2a8e63632744fa4e33151d880eed022e', userName='someone'}
-2017-03-03 21:40:44.918  INFO 6131 --- [nio-9120-exec-8] org.thiki.kanban.login.LoginService      : Login successfully:Identification{token='4988ca54a84321490e03fd906b5d2425afba80914c282271fd83ad1438ec8b55976cf77197a77b08c750bfb5e6173790f9f95f4e07a4f273d6fad3645e8377ed8ea865770a8aa4ff05168a98dc2417a4254405fb1639871cfc63f0dd5871a4805dc3778c106d37010b2c20adedd0117a2a8e63632744fa4e33151d880eed022e', userName='someone'}
-21:40:44.955 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:44.955  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:45.069 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:007f74c7-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:45.069  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:007f74c7-0017-11e7-af8b-0014781bc25c
-21:40:45.070 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/login
-2017-03-03 21:40:45.070  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/login
-21:40:45.070 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/login
-2017-03-03 21:40:45.070  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/login
-21:40:45.071 [http-nio-9120-exec-9] INFO  o.thiki.kanban.login.LoginController - Login request arrived controller,identity:null
-2017-03-03 21:40:45.071  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.login.LoginController   : Login request arrived controller,identity:null
-21:40:45.098 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:45.098  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:45.102 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:00847dd8-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:45.102  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:00847dd8-0017-11e7-af8b-0014781bc25c
-21:40:45.102 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:45.102  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
-21:40:45.102 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:45.102  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:45.106 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:45.106  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:45.147 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:008b5ba9-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:45.147  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:008b5ba9-0017-11e7-af8b-0014781bc25c
-21:40:45.148 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/login
-2017-03-03 21:40:45.148  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/login
-21:40:45.148 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/login
-2017-03-03 21:40:45.148  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/login
-21:40:45.149 [http-nio-9120-exec-10] INFO  o.thiki.kanban.login.LoginController - Login request arrived controller,identity:foo
-2017-03-03 21:40:45.149  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.login.LoginController   : Login request arrived controller,identity:foo
-21:40:45.156 [http-nio-9120-exec-10] INFO  org.thiki.kanban.login.LoginService - Login request arrived service,identity:foo
-2017-03-03 21:40:45.156  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.login.LoginService      : Login request arrived service,identity:foo
-21:40:45.169 [http-nio-9120-exec-10] INFO  org.thiki.kanban.login.LoginService - Load user:null
-2017-03-03 21:40:45.169  INFO 6131 --- [io-9120-exec-10] org.thiki.kanban.login.LoginService      : Load user:null
-21:40:45.170 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:45.170  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:45.173 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:008f534a-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:45.173  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:008f534a-0017-11e7-af8b-0014781bc25c
-21:40:45.174 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:45.174  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
-21:40:45.174 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:45.174  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:45.178 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:45.178  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+<pre>2017-03-12 19:08:42.877  INFO 6873 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-12 19:08:42.883  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener]
+2017-03-12 19:08:42.884  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4e3ade3e, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@4b7d78a, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7d42524e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@797d4277, org.springframework.test.context.transaction.TransactionalTestExecutionListener@612ea848, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5b9f3860, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@3420c17f, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@27dd5376, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3325c32d, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@11dba111, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@23c2a16c, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6ec91081]
+19:08:42.962 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:410423a2-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:42.962  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:410423a2-0714-11e7-80b3-0014781bc25c
+19:08:42.962 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/login
+2017-03-12 19:08:42.962  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/login
+19:08:42.962 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/login
+2017-03-12 19:08:42.962  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/login
+19:08:42.977 [http-nio-9120-exec-9] INFO  o.thiki.kanban.login.LoginController - Login request arrived controller,identity:someone
+2017-03-12 19:08:42.977  INFO 6873 --- [nio-9120-exec-9] org.thiki.kanban.login.LoginController   : Login request arrived controller,identity:someone
+19:08:42.994 [http-nio-9120-exec-9] INFO  org.thiki.kanban.login.LoginService - Login request arrived service,identity:someone
+2017-03-12 19:08:42.994  INFO 6873 --- [nio-9120-exec-9] org.thiki.kanban.login.LoginService      : Login request arrived service,identity:someone
+19:08:43.006 [http-nio-9120-exec-9] INFO  org.thiki.kanban.login.LoginService - Load user:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;id&quot;:&quot;fooUserId&quot;,&quot;profile&quot;:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;nickName&quot;:&quot;someone&quot;},&quot;salt&quot;:&quot;fooId&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-12 19:08:43.006  INFO 6873 --- [nio-9120-exec-9] org.thiki.kanban.login.LoginService      : Load user:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;id&quot;:&quot;fooUserId&quot;,&quot;profile&quot;:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;nickName&quot;:&quot;someone&quot;},&quot;salt&quot;:&quot;fooId&quot;,&quot;userName&quot;:&quot;someone&quot;}
+19:08:43.006 [http-nio-9120-exec-9] INFO  org.thiki.kanban.login.LoginService - Dencrypt password.
+2017-03-12 19:08:43.006  INFO 6873 --- [nio-9120-exec-9] org.thiki.kanban.login.LoginService      : Dencrypt password.
+19:08:43.014 [http-nio-9120-exec-9] INFO  org.thiki.kanban.login.LoginService - Encrypt password with md5.
+2017-03-12 19:08:43.014  INFO 6873 --- [nio-9120-exec-9] org.thiki.kanban.login.LoginService      : Encrypt password with md5.
+19:08:43.027 [http-nio-9120-exec-9] INFO  org.thiki.kanban.login.LoginService - Matched result:null
+2017-03-12 19:08:43.027  INFO 6873 --- [nio-9120-exec-9] org.thiki.kanban.login.LoginService      : Matched result:null
+19:08:43.029 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:43.029  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:43.032 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:410ed203-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:43.032  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:410ed203-0714-11e7-80b3-0014781bc25c
+19:08:43.032 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:43.032  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
+19:08:43.033 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:43.033  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:43.038 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:43.038  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:43.093 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:411820d4-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:43.093  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:411820d4-0714-11e7-80b3-0014781bc25c
+19:08:43.093 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/login
+2017-03-12 19:08:43.093  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/login
+19:08:43.094 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/login
+2017-03-12 19:08:43.094  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/login
+19:08:43.094 [http-nio-9120-exec-10] INFO  o.thiki.kanban.login.LoginController - Login request arrived controller,identity:someone
+2017-03-12 19:08:43.094  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.login.LoginController   : Login request arrived controller,identity:someone
+19:08:43.100 [http-nio-9120-exec-10] INFO  org.thiki.kanban.login.LoginService - Login request arrived service,identity:someone
+2017-03-12 19:08:43.100  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.login.LoginService      : Login request arrived service,identity:someone
+19:08:43.109 [http-nio-9120-exec-10] INFO  org.thiki.kanban.login.LoginService - Load user:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;id&quot;:&quot;fooUserId&quot;,&quot;profile&quot;:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;nickName&quot;:&quot;someone&quot;},&quot;salt&quot;:&quot;fooId&quot;,&quot;userName&quot;:&quot;someone&quot;}
+2017-03-12 19:08:43.109  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.login.LoginService      : Load user:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;id&quot;:&quot;fooUserId&quot;,&quot;profile&quot;:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;nickName&quot;:&quot;someone&quot;},&quot;salt&quot;:&quot;fooId&quot;,&quot;userName&quot;:&quot;someone&quot;}
+19:08:43.109 [http-nio-9120-exec-10] INFO  org.thiki.kanban.login.LoginService - Dencrypt password.
+2017-03-12 19:08:43.109  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.login.LoginService      : Dencrypt password.
+19:08:43.113 [http-nio-9120-exec-10] INFO  org.thiki.kanban.login.LoginService - Encrypt password with md5.
+2017-03-12 19:08:43.113  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.login.LoginService      : Encrypt password with md5.
+19:08:43.122 [http-nio-9120-exec-10] INFO  org.thiki.kanban.login.LoginService - Matched result:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;id&quot;:&quot;fooUserId&quot;,&quot;profile&quot;:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;nickName&quot;:&quot;someone&quot;},&quot;userName&quot;:&quot;someone&quot;}
+2017-03-12 19:08:43.122  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.login.LoginService      : Matched result:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;id&quot;:&quot;fooUserId&quot;,&quot;profile&quot;:{&quot;email&quot;:&quot;someone@gmail.com&quot;,&quot;nickName&quot;:&quot;someone&quot;},&quot;userName&quot;:&quot;someone&quot;}
+19:08:43.126 [http-nio-9120-exec-10] INFO  org.thiki.kanban.login.LoginService - Login successfully:Identification{token='4988ca54a84321490e03fd906b5d2425afba80914c282271fd83ad1438ec8b55976cf77197a77b08c750bfb5e6173790f9f95f4e07a4f273d6fad3645e8377ed8ea865770a8aa4ff05168a98dc2417a4254405fb1639871cfc63f0dd5871a4805dc3778c106d37010b2c20adedd0117a2a8e63632744fa4e33151d880eed022e', userName='someone'}
+2017-03-12 19:08:43.126  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.login.LoginService      : Login successfully:Identification{token='4988ca54a84321490e03fd906b5d2425afba80914c282271fd83ad1438ec8b55976cf77197a77b08c750bfb5e6173790f9f95f4e07a4f273d6fad3645e8377ed8ea865770a8aa4ff05168a98dc2417a4254405fb1639871cfc63f0dd5871a4805dc3778c106d37010b2c20adedd0117a2a8e63632744fa4e33151d880eed022e', userName='someone'}
+19:08:43.145 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:43.145  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:43.240 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:412e8f05-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:43.240  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:412e8f05-0714-11e7-80b3-0014781bc25c
+19:08:43.240 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/login
+2017-03-12 19:08:43.240  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/login
+19:08:43.241 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/login
+2017-03-12 19:08:43.241  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/login
+19:08:43.242 [http-nio-9120-exec-1] INFO  o.thiki.kanban.login.LoginController - Login request arrived controller,identity:null
+2017-03-12 19:08:43.242  INFO 6873 --- [nio-9120-exec-1] org.thiki.kanban.login.LoginController   : Login request arrived controller,identity:null
+19:08:43.268 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:43.268  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:43.271 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:413349f6-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:43.271  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:413349f6-0714-11e7-80b3-0014781bc25c
+19:08:43.272 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:43.272  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
+19:08:43.272 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:43.272  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:43.276 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:43.276  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:43.330 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:413c2397-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:43.330  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:413c2397-0714-11e7-80b3-0014781bc25c
+19:08:43.331 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/login
+2017-03-12 19:08:43.331  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/login
+19:08:43.332 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/login
+2017-03-12 19:08:43.332  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/login
+19:08:43.333 [http-nio-9120-exec-3] INFO  o.thiki.kanban.login.LoginController - Login request arrived controller,identity:foo
+2017-03-12 19:08:43.333  INFO 6873 --- [nio-9120-exec-3] org.thiki.kanban.login.LoginController   : Login request arrived controller,identity:foo
+19:08:43.339 [http-nio-9120-exec-3] INFO  org.thiki.kanban.login.LoginService - Login request arrived service,identity:foo
+2017-03-12 19:08:43.339  INFO 6873 --- [nio-9120-exec-3] org.thiki.kanban.login.LoginService      : Login request arrived service,identity:foo
+19:08:43.349 [http-nio-9120-exec-3] INFO  org.thiki.kanban.login.LoginService - Load user:null
+2017-03-12 19:08:43.349  INFO 6873 --- [nio-9120-exec-3] org.thiki.kanban.login.LoginService      : Load user:null
+19:08:43.350 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:43.350  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:43.353 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:413fcd18-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:43.353  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:413fcd18-0714-11e7-80b3-0014781bc25c
+19:08:43.353 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:null,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:43.353  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:null,uri:/kanban/error/invalidParamsException
+19:08:43.353 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:43.353  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:43.359 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:43.359  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
 </pre>
 </span>
 </div>
@@ -206,7 +206,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 12, 2017 7:09:02 PM</p>
 </div>
 </div>
 </body>

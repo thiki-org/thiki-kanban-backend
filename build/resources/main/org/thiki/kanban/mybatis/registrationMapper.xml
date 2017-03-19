@@ -4,8 +4,8 @@
 
     <insert id="register" parameterType="org.thiki.kanban.user.registration.Registration">
         INSERT INTO
-        kb_user_registration(id, password,name,email,salt)
-        VALUES (#{id}, #{password},#{name}, #{email},#{salt})
+        kb_user_registration(id, password,user_name,email,salt)
+        VALUES (#{id}, #{password},#{userName}, #{email},#{salt})
     </insert>
 
 </mapper>

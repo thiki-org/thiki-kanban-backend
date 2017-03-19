@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.040s</div>
+<div class="counter">0.116s</div>
 <p>duration</p>
 </div>
 </td>
@@ -99,12 +99,12 @@
 </tr>
 <tr>
 <td class="success">loadDefaultAvatarIfNoAvatarWasFound</td>
-<td>0.006s</td>
+<td>0.009s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">overwriteAvatarIfItAlreadyExists</td>
-<td>0.029s</td>
+<td>0.102s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
@@ -117,30 +117,30 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>21:40:54.696 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
-2017-03-03 21:40:54.696  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
-21:40:54.724 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
-2017-03-03 21:40:54.724  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
-21:40:54.725 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:foo
-2017-03-03 21:40:54.725  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:foo
-21:40:54.725 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - no avatar was found,return default avatar.
-2017-03-03 21:40:54.725  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : no avatar was found,return default avatar.
-21:40:54.731 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
-2017-03-03 21:40:54.731  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
-21:40:54.732 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
-2017-03-03 21:40:54.732  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
-21:40:54.733 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
-2017-03-03 21:40:54.733  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
-21:40:54.734 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
-2017-03-03 21:40:54.734  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
-21:40:54.734 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:null
-2017-03-03 21:40:54.734  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:null
-21:40:54.735 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - no avatar was found,return default avatar.
-2017-03-03 21:40:54.735  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : no avatar was found,return default avatar.
-21:40:54.735 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
-2017-03-03 21:40:54.735  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
-21:40:54.736 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:someone.jpg
-2017-03-03 21:40:54.736  INFO 6131 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:someone.jpg
+<pre>19:08:56.582 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-12 19:08:56.582  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+19:08:56.658 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-12 19:08:56.658  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+19:08:56.685 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:foo
+2017-03-12 19:08:56.685  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:foo
+19:08:56.685 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - no avatar was found,return default avatar.
+2017-03-12 19:08:56.685  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : no avatar was found,return default avatar.
+19:08:56.694 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-12 19:08:56.694  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+19:08:56.695 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-12 19:08:56.695  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+19:08:56.696 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-12 19:08:56.696  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+19:08:56.696 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-12 19:08:56.696  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+19:08:56.697 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:null
+2017-03-12 19:08:56.697  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:null
+19:08:56.697 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - no avatar was found,return default avatar.
+2017-03-12 19:08:56.697  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : no avatar was found,return default avatar.
+19:08:56.698 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - store avatar,user:someone
+2017-03-12 19:08:56.698  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : store avatar,user:someone
+19:08:56.699 [Test worker] INFO  o.t.k.user.profile.AvatarStorage - load avatar,avatarName:someone.jpg
+2017-03-12 19:08:56.699  INFO 6873 --- [    Test worker] o.t.kanban.user.profile.AvatarStorage    : load avatar,avatarName:someone.jpg
 </pre>
 </span>
 </div>
@@ -152,7 +152,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 12, 2017 7:09:02 PM</p>
 </div>
 </div>
 </body>

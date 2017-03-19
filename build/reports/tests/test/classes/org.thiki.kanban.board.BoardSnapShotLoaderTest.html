@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.290s</div>
+<div class="counter">0.302s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,12 +79,12 @@
 </thead>
 <tr>
 <td class="success">should_return_all_the_board_data</td>
-<td>0.167s</td>
+<td>0.153s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">should_return_child_cards_in_the_data_structure</td>
-<td>0.123s</td>
+<td>0.149s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -92,11 +92,11 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>2017-03-03 21:40:57.757  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
-2017-03-03 21:40:57.759  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
-2017-03-03 21:40:57.760  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@7a825f87, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6df66e47, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@65a484f9, org.springframework.test.context.support.DirtiesContextTestExecutionListener@2f598b7, org.springframework.test.context.transaction.TransactionalTestExecutionListener@6a638109, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@34b94e54, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@757b9776, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@5be5994e]
+<pre>2017-03-12 19:09:00.563  INFO 6873 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-12 19:09:00.566  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener]
+2017-03-12 19:09:00.567  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@42308d6, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@63a2bcc2, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@7335ed1e, org.springframework.test.context.support.DirtiesContextTestExecutionListener@34abbbd8, org.springframework.test.context.transaction.TransactionalTestExecutionListener@28526023, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@5ee09d47, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@2e1d698, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6bfdd867, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@5095fe43, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@ac55bb3, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@69c1965, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@327c731]
 Request method:	GET
-Request path:	http://localhost:9120/kanban/someone/boards/boardId/snapshot
+Request path:	http://localhost:9120/kanban/someone/projects/project-fooId/boards/boardId/snapshot
 Proxy:			&lt;none&gt;
 Request params:	&lt;none&gt;
 Query params:	&lt;none&gt;
@@ -109,156 +109,156 @@ Headers:		identification=no
 				Accept=*/*
 Cookies:		&lt;none&gt;
 Body:			&lt;none&gt;
-21:40:57.781 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - init session:08132740-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:57.781  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : init session:08132740-0017-11e7-af8b-0014781bc25c
-21:40:57.781 [http-nio-9120-exec-11] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards/boardId/snapshot
-2017-03-03 21:40:57.781  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards/boardId/snapshot
-21:40:57.782 [http-nio-9120-exec-11] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards/boardId/snapshot
-2017-03-03 21:40:57.782  INFO 6131 --- [io-9120-exec-11] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards/boardId/snapshot
-21:40:57.792 [http-nio-9120-exec-11] INFO  o.t.k.board.snapshot.SnapshotService - load snapshot.
-2017-03-03 21:40:57.792  INFO 6131 --- [io-9120-exec-11] o.t.k.board.snapshot.SnapshotService     : load snapshot.
-21:40:57.792 [http-nio-9120-exec-11] INFO  o.t.k.board.snapshot.SnapshotService - load board tags.
-2017-03-03 21:40:57.792  INFO 6131 --- [io-9120-exec-11] o.t.k.board.snapshot.SnapshotService     : load board tags.
-21:40:57.794 [http-nio-9120-exec-11] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.766000', modificationTime='2017-03-03 21:40:57.766000'},userName:someone
-2017-03-03 21:40:57.794  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.766000', modificationTime='2017-03-03 21:40:57.766000'},userName:someone
-21:40:57.803 [http-nio-9120-exec-11] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.766000', modificationTime='2017-03-03 21:40:57.766000'},userName:someone
-2017-03-03 21:40:57.803  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.766000', modificationTime='2017-03-03 21:40:57.766000'},userName:someone
-21:40:57.804 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [boardId]
-2017-03-03 21:40:57.804  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [boardId]
-21:40:57.806 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;boardId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.767000&quot;,&quot;id&quot;:&quot;stage-fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.767000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;stage-name&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
-2017-03-03 21:40:57.806  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;boardId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.767000&quot;,&quot;id&quot;:&quot;stage-fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.767000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;stage-name&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
-21:40:57.806 [http-nio-9120-exec-11] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:boardId,viewType:null,userName:someone
-2017-03-03 21:40:57.806  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesResource    : build stages resource.board:boardId,viewType:null,userName:someone
-21:40:57.807 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:boardId,userName:someone
-2017-03-03 21:40:57.807  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : build stage resource.board:boardId,userName:someone
-21:40:57.809 [http-nio-9120-exec-11] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:boardId,userName:someone
-2017-03-03 21:40:57.809  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:boardId,userName:someone
-21:40:57.811 [http-nio-9120-exec-11] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:boardId,userName:someone
-2017-03-03 21:40:57.811  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:boardId,userName:someone
-21:40:57.812 [http-nio-9120-exec-11] INFO  o.t.k.board.snapshot.SnapshotService - load cards tags.
-2017-03-03 21:40:57.812  INFO 6131 --- [io-9120-exec-11] o.t.k.board.snapshot.SnapshotService     : load cards tags.
-21:40:57.813 [http-nio-9120-exec-11] INFO  o.t.k.a.AcceptanceCriteriaService - Loading cards by stageId:stage-fooId
-2017-03-03 21:40:57.813  INFO 6131 --- [io-9120-exec-11] o.t.k.a.AcceptanceCriteriaService        : Loading cards by stageId:stage-fooId
-21:40:57.815 [http-nio-9120-exec-11] INFO  o.t.k.a.AcceptanceCriteriaService - The cards belongs from the stage stage-fooId are [{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.767000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.767000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
-2017-03-03 21:40:57.815  INFO 6131 --- [io-9120-exec-11] o.t.k.a.AcceptanceCriteriaService        : The cards belongs from the stage stage-fooId are [{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.767000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.767000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
-21:40:57.815 [http-nio-9120-exec-11] INFO  org.thiki.kanban.card.CardResource - build cards resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.815  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.card.CardResource       : build cards resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.816 [http-nio-9120-exec-11] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.816  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.card.CardResource       : build card resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.820 [http-nio-9120-exec-11] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.820  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.822 [http-nio-9120-exec-11] INFO  org.thiki.kanban.card.CardResource - cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.822  INFO 6131 --- [io-9120-exec-11] org.thiki.kanban.card.CardResource       : cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.824 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load assignments.
-2017-03-03 21:40:57.824  INFO 6131 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : load assignments.
-21:40:57.825 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:card-fooId
-2017-03-03 21:40:57.825  INFO 6131 --- [pool-3-thread-1] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:card-fooId
-21:40:57.826 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [card-fooId] are [{&quot;assignee&quot;:&quot;assigneeId-foo&quot;,&quot;assigner&quot;:&quot;assignerId-foo&quot;,&quot;author&quot;:&quot;authorId-foo&quot;,&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;id&quot;:&quot;fooId&quot;}]
-2017-03-03 21:40:57.826  INFO 6131 --- [pool-3-thread-1] o.t.kanban.assignment.AssignmentService  : The assignments of the card [card-fooId] are [{&quot;assignee&quot;:&quot;assigneeId-foo&quot;,&quot;assigner&quot;:&quot;assignerId-foo&quot;,&quot;author&quot;:&quot;authorId-foo&quot;,&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;id&quot;:&quot;fooId&quot;}]
-21:40:57.826 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentsResource - build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.826  INFO 6131 --- [pool-3-thread-1] o.t.k.assignment.AssignmentsResource     : build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.826 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentResource - build assignment resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.826  INFO 6131 --- [pool-3-thread-1] o.t.k.assignment.AssignmentResource      : build assignment resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.829 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentResource - assignment resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.829  INFO 6131 --- [pool-3-thread-1] o.t.k.assignment.AssignmentResource      : assignment resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.831 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentsResource - assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.831  INFO 6131 --- [pool-3-thread-1] o.t.k.assignment.AssignmentsResource     : assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.832 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - assignments loading completed.
-2017-03-03 21:40:57.832  INFO 6131 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : assignments loading completed.
-21:40:57.832 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load acceptanceCriterias.
-2017-03-03 21:40:57.832  INFO 6131 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : load acceptanceCriterias.
-21:40:57.832 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading acceptanceCriterias by cardId.cardId:card-fooId
-2017-03-03 21:40:57.832  INFO 6131 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading acceptanceCriterias by cardId.cardId:card-fooId
-21:40:57.833 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loaded acceptanceCriterias:[]
-2017-03-03 21:40:57.833  INFO 6131 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loaded acceptanceCriterias:[]
-21:40:57.833 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.833  INFO 6131 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriasResource      : build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.835 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.835  INFO 6131 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriasResource      : acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.836 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - acceptanceCriterias loading completed.
-2017-03-03 21:40:57.836  INFO 6131 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : acceptanceCriterias loading completed.
-21:40:57.836 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load card tags.
-2017-03-03 21:40:57.836  INFO 6131 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : load card tags.
-21:40:57.836 [pool-3-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loading card tags.cardId:card-fooId,boardId:boardId,stageIdstage-fooId
-2017-03-03 21:40:57.836  INFO 6131 --- [pool-3-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loading card tags.cardId:card-fooId,boardId:boardId,stageIdstage-fooId
-21:40:57.837 [pool-3-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loaded card tags:[]
-2017-03-03 21:40:57.837  INFO 6131 --- [pool-3-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loaded card tags:[]
-21:40:57.837 [pool-3-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.837  INFO 6131 --- [pool-3-thread-1] o.t.kanban.cardTags.CardTagsResource     : build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.839 [pool-3-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.839  INFO 6131 --- [pool-3-thread-1] o.t.kanban.cardTags.CardTagsResource     : cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.839 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - card tags loading completed.
-2017-03-03 21:40:57.839  INFO 6131 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : card tags loading completed.
-21:40:57.839 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load comments.
-2017-03-03 21:40:57.839  INFO 6131 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : load comments.
-21:40:57.841 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - comments loading completed.
-2017-03-03 21:40:57.841  INFO 6131 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : comments loading completed.
-21:40:57.842 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading child cards.card-fooId
-2017-03-03 21:40:57.842  INFO 6131 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading child cards.card-fooId
-21:40:57.843 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Child cards loading completed.cards:[{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.769000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-child-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.769000&quot;,&quot;parentId&quot;:&quot;card-fooId&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
-2017-03-03 21:40:57.843  INFO 6131 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriaService        : Child cards loading completed.cards:[{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.769000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-child-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.769000&quot;,&quot;parentId&quot;:&quot;card-fooId&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
-21:40:57.843 [pool-3-thread-1] INFO  org.thiki.kanban.card.CardResource - build cards resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.843  INFO 6131 --- [pool-3-thread-1] org.thiki.kanban.card.CardResource       : build cards resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.843 [pool-3-thread-1] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.843  INFO 6131 --- [pool-3-thread-1] org.thiki.kanban.card.CardResource       : build card resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.848 [pool-3-thread-1] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.848  INFO 6131 --- [pool-3-thread-1] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.849 [pool-3-thread-1] INFO  org.thiki.kanban.card.CardResource - cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.849  INFO 6131 --- [pool-3-thread-1] org.thiki.kanban.card.CardResource       : cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.850 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load assignments.
-2017-03-03 21:40:57.850  INFO 6131 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : load assignments.
-21:40:57.850 [pool-4-thread-1] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:card-child-fooId
-2017-03-03 21:40:57.850  INFO 6131 --- [pool-4-thread-1] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:card-child-fooId
-21:40:57.851 [pool-4-thread-1] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [card-child-fooId] are []
-2017-03-03 21:40:57.851  INFO 6131 --- [pool-4-thread-1] o.t.kanban.assignment.AssignmentService  : The assignments of the card [card-child-fooId] are []
-21:40:57.851 [pool-4-thread-1] INFO  o.t.k.assignment.AssignmentsResource - build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
-2017-03-03 21:40:57.851  INFO 6131 --- [pool-4-thread-1] o.t.k.assignment.AssignmentsResource     : build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
-21:40:57.853 [pool-4-thread-1] INFO  o.t.k.assignment.AssignmentsResource - assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
-2017-03-03 21:40:57.853  INFO 6131 --- [pool-4-thread-1] o.t.k.assignment.AssignmentsResource     : assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
-21:40:57.853 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - assignments loading completed.
-2017-03-03 21:40:57.853  INFO 6131 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : assignments loading completed.
-21:40:57.853 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load acceptanceCriterias.
-2017-03-03 21:40:57.853  INFO 6131 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : load acceptanceCriterias.
-21:40:57.853 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading acceptanceCriterias by cardId.cardId:card-child-fooId
-2017-03-03 21:40:57.853  INFO 6131 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading acceptanceCriterias by cardId.cardId:card-child-fooId
-21:40:57.854 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loaded acceptanceCriterias:[]
-2017-03-03 21:40:57.854  INFO 6131 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loaded acceptanceCriterias:[]
-21:40:57.854 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
-2017-03-03 21:40:57.854  INFO 6131 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriasResource      : build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
-21:40:57.857 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
-2017-03-03 21:40:57.857  INFO 6131 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriasResource      : acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
-21:40:57.857 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - acceptanceCriterias loading completed.
-2017-03-03 21:40:57.857  INFO 6131 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : acceptanceCriterias loading completed.
-21:40:57.857 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load card tags.
-2017-03-03 21:40:57.857  INFO 6131 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : load card tags.
-21:40:57.858 [pool-4-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loading card tags.cardId:card-child-fooId,boardId:boardId,stageIdstage-fooId
-2017-03-03 21:40:57.858  INFO 6131 --- [pool-4-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loading card tags.cardId:card-child-fooId,boardId:boardId,stageIdstage-fooId
-21:40:57.859 [pool-4-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loaded card tags:[]
-2017-03-03 21:40:57.859  INFO 6131 --- [pool-4-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loaded card tags:[]
-21:40:57.859 [pool-4-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.859  INFO 6131 --- [pool-4-thread-1] o.t.kanban.cardTags.CardTagsResource     : build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.861 [pool-4-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.861  INFO 6131 --- [pool-4-thread-1] o.t.kanban.cardTags.CardTagsResource     : cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.861 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - card tags loading completed.
-2017-03-03 21:40:57.861  INFO 6131 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : card tags loading completed.
-21:40:57.861 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load comments.
-2017-03-03 21:40:57.861  INFO 6131 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : load comments.
-21:40:57.864 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - comments loading completed.
-2017-03-03 21:40:57.864  INFO 6131 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : comments loading completed.
-21:40:57.864 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading child cards.card-child-fooId
-2017-03-03 21:40:57.864  INFO 6131 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading child cards.card-child-fooId
-21:40:57.865 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Child cards loading completed.cards:[]
-2017-03-03 21:40:57.865  INFO 6131 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriaService        : Child cards loading completed.cards:[]
-21:40:57.865 [http-nio-9120-exec-11] INFO  o.t.k.board.snapshot.SnapshotService - card loading completed.
-2017-03-03 21:40:57.865  INFO 6131 --- [io-9120-exec-11] o.t.k.board.snapshot.SnapshotService     : card loading completed.
-21:40:57.865 [http-nio-9120-exec-11] INFO  o.t.k.board.snapshot.SnapshotService - board loading completed.
-2017-03-03 21:40:57.865  INFO 6131 --- [io-9120-exec-11] o.t.k.board.snapshot.SnapshotService     : board loading completed.
-21:40:57.865 [http-nio-9120-exec-11] INFO  o.t.k.board.snapshot.SnapshotService - snapshot loading completed.
-2017-03-03 21:40:57.865  INFO 6131 --- [io-9120-exec-11] o.t.k.board.snapshot.SnapshotService     : snapshot loading completed.
-21:40:57.868 [http-nio-9120-exec-11] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:57.868  INFO 6131 --- [io-9120-exec-11] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:09:00.596 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:4b86dfb9-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:09:00.596  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:4b86dfb9-0714-11e7-80b3-0014781bc25c
+19:09:00.596 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/projects/project-fooId/boards/boardId/snapshot
+2017-03-12 19:09:00.596  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/projects/project-fooId/boards/boardId/snapshot
+19:09:00.596 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/projects/project-fooId/boards/boardId/snapshot
+2017-03-12 19:09:00.596  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/projects/project-fooId/boards/boardId/snapshot
+19:09:00.607 [http-nio-9120-exec-6] INFO  o.t.k.board.snapshot.SnapshotService - load snapshot.
+2017-03-12 19:09:00.607  INFO 6873 --- [nio-9120-exec-6] o.t.k.board.snapshot.SnapshotService     : load snapshot.
+19:09:00.607 [http-nio-9120-exec-6] INFO  o.t.k.board.snapshot.SnapshotService - load board tags.
+2017-03-12 19:09:00.607  INFO 6873 --- [nio-9120-exec-6] o.t.k.board.snapshot.SnapshotService     : load board tags.
+19:09:00.609 [http-nio-9120-exec-6] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-12 19:09:00.578000', modificationTime='2017-03-12 19:09:00.578000'},userName:someone
+2017-03-12 19:09:00.609  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-12 19:09:00.578000', modificationTime='2017-03-12 19:09:00.578000'},userName:someone
+19:09:00.623 [http-nio-9120-exec-6] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-12 19:09:00.578000', modificationTime='2017-03-12 19:09:00.578000'},userName:someone
+2017-03-12 19:09:00.623  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-12 19:09:00.578000', modificationTime='2017-03-12 19:09:00.578000'},userName:someone
+19:09:00.623 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [boardId]
+2017-03-12 19:09:00.623  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [boardId]
+19:09:00.625 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;boardId&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.579000&quot;,&quot;id&quot;:&quot;stage-fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.579000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;stage-name&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+2017-03-12 19:09:00.625  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;boardId&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.579000&quot;,&quot;id&quot;:&quot;stage-fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.579000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;stage-name&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+19:09:00.626 [http-nio-9120-exec-6] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:boardId,viewType:null,userName:someone
+2017-03-12 19:09:00.626  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.stage.StagesResource    : build stages resource.board:boardId,viewType:null,userName:someone
+19:09:00.626 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:boardId,userName:someone
+2017-03-12 19:09:00.626  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.stage.StageResource     : build stage resource.board:boardId,userName:someone
+19:09:00.628 [http-nio-9120-exec-6] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:boardId,userName:someone
+2017-03-12 19:09:00.628  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:boardId,userName:someone
+19:09:00.629 [http-nio-9120-exec-6] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:boardId,userName:someone
+2017-03-12 19:09:00.629  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:boardId,userName:someone
+19:09:00.630 [http-nio-9120-exec-6] INFO  o.t.k.board.snapshot.SnapshotService - load cards tags.
+2017-03-12 19:09:00.630  INFO 6873 --- [nio-9120-exec-6] o.t.k.board.snapshot.SnapshotService     : load cards tags.
+19:09:00.630 [http-nio-9120-exec-6] INFO  o.t.k.a.AcceptanceCriteriaService - Loading cards by stageId:stage-fooId
+2017-03-12 19:09:00.630  INFO 6873 --- [nio-9120-exec-6] o.t.k.a.AcceptanceCriteriaService        : Loading cards by stageId:stage-fooId
+19:09:00.631 [http-nio-9120-exec-6] INFO  o.t.k.a.AcceptanceCriteriaService - The cards belongs from the stage stage-fooId are [{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.579000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.579000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
+2017-03-12 19:09:00.631  INFO 6873 --- [nio-9120-exec-6] o.t.k.a.AcceptanceCriteriaService        : The cards belongs from the stage stage-fooId are [{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.579000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.579000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
+19:09:00.632 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - build cards resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.632  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : build cards resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.632 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.632  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : build card resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.636 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.636  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.639 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.639  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.641 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load assignments.
+2017-03-12 19:09:00.641  INFO 6873 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : load assignments.
+19:09:00.641 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:card-fooId
+2017-03-12 19:09:00.641  INFO 6873 --- [pool-3-thread-1] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:card-fooId
+19:09:00.643 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [card-fooId] are [{&quot;assignee&quot;:&quot;assigneeId-foo&quot;,&quot;assigner&quot;:&quot;assignerId-foo&quot;,&quot;author&quot;:&quot;authorId-foo&quot;,&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.581000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.581000&quot;,&quot;selfAssignment&quot;:false}]
+2017-03-12 19:09:00.643  INFO 6873 --- [pool-3-thread-1] o.t.kanban.assignment.AssignmentService  : The assignments of the card [card-fooId] are [{&quot;assignee&quot;:&quot;assigneeId-foo&quot;,&quot;assigner&quot;:&quot;assignerId-foo&quot;,&quot;author&quot;:&quot;authorId-foo&quot;,&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.581000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.581000&quot;,&quot;selfAssignment&quot;:false}]
+19:09:00.643 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentsResource - build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.643  INFO 6873 --- [pool-3-thread-1] o.t.k.assignment.AssignmentsResource     : build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.643 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentResource - build assignment resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.643  INFO 6873 --- [pool-3-thread-1] o.t.k.assignment.AssignmentResource      : build assignment resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.645 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentResource - assignment resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.645  INFO 6873 --- [pool-3-thread-1] o.t.k.assignment.AssignmentResource      : assignment resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.647 [pool-3-thread-1] INFO  o.t.k.assignment.AssignmentsResource - assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.647  INFO 6873 --- [pool-3-thread-1] o.t.k.assignment.AssignmentsResource     : assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.647 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - assignments loading completed.
+2017-03-12 19:09:00.647  INFO 6873 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : assignments loading completed.
+19:09:00.647 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load acceptanceCriterias.
+2017-03-12 19:09:00.647  INFO 6873 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : load acceptanceCriterias.
+19:09:00.647 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading acceptanceCriterias by cardId.cardId:card-fooId
+2017-03-12 19:09:00.647  INFO 6873 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading acceptanceCriterias by cardId.cardId:card-fooId
+19:09:00.648 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loaded acceptanceCriterias:[]
+2017-03-12 19:09:00.648  INFO 6873 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loaded acceptanceCriterias:[]
+19:09:00.649 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.649  INFO 6873 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriasResource      : build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.651 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.651  INFO 6873 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriasResource      : acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.651 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - acceptanceCriterias loading completed.
+2017-03-12 19:09:00.651  INFO 6873 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : acceptanceCriterias loading completed.
+19:09:00.651 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load card tags.
+2017-03-12 19:09:00.651  INFO 6873 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : load card tags.
+19:09:00.652 [pool-3-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loading card tags.cardId:card-fooId,boardId:boardId,stageIdstage-fooId
+2017-03-12 19:09:00.652  INFO 6873 --- [pool-3-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loading card tags.cardId:card-fooId,boardId:boardId,stageIdstage-fooId
+19:09:00.653 [pool-3-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loaded card tags:[]
+2017-03-12 19:09:00.653  INFO 6873 --- [pool-3-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loaded card tags:[]
+19:09:00.653 [pool-3-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.653  INFO 6873 --- [pool-3-thread-1] o.t.kanban.cardTags.CardTagsResource     : build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.655 [pool-3-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.655  INFO 6873 --- [pool-3-thread-1] o.t.kanban.cardTags.CardTagsResource     : cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.655 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - card tags loading completed.
+2017-03-12 19:09:00.655  INFO 6873 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : card tags loading completed.
+19:09:00.655 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load comments.
+2017-03-12 19:09:00.655  INFO 6873 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : load comments.
+19:09:00.658 [pool-3-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - comments loading completed.
+2017-03-12 19:09:00.658  INFO 6873 --- [pool-3-thread-1] o.t.k.board.snapshot.SnapshotService     : comments loading completed.
+19:09:00.658 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading child cards.card-fooId
+2017-03-12 19:09:00.658  INFO 6873 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading child cards.card-fooId
+19:09:00.660 [pool-3-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Child cards loading completed.cards:[{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.581000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-child-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.581000&quot;,&quot;parentId&quot;:&quot;card-fooId&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
+2017-03-12 19:09:00.660  INFO 6873 --- [pool-3-thread-1] o.t.k.a.AcceptanceCriteriaService        : Child cards loading completed.cards:[{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.581000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-child-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.581000&quot;,&quot;parentId&quot;:&quot;card-fooId&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
+19:09:00.660 [pool-3-thread-1] INFO  org.thiki.kanban.card.CardResource - build cards resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.660  INFO 6873 --- [pool-3-thread-1] org.thiki.kanban.card.CardResource       : build cards resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.660 [pool-3-thread-1] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.660  INFO 6873 --- [pool-3-thread-1] org.thiki.kanban.card.CardResource       : build card resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.666 [pool-3-thread-1] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.666  INFO 6873 --- [pool-3-thread-1] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.669 [pool-3-thread-1] INFO  org.thiki.kanban.card.CardResource - cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.669  INFO 6873 --- [pool-3-thread-1] org.thiki.kanban.card.CardResource       : cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.671 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load assignments.
+2017-03-12 19:09:00.671  INFO 6873 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : load assignments.
+19:09:00.672 [pool-4-thread-1] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:card-child-fooId
+2017-03-12 19:09:00.672  INFO 6873 --- [pool-4-thread-1] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:card-child-fooId
+19:09:00.674 [pool-4-thread-1] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [card-child-fooId] are []
+2017-03-12 19:09:00.674  INFO 6873 --- [pool-4-thread-1] o.t.kanban.assignment.AssignmentService  : The assignments of the card [card-child-fooId] are []
+19:09:00.674 [pool-4-thread-1] INFO  o.t.k.assignment.AssignmentsResource - build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
+2017-03-12 19:09:00.674  INFO 6873 --- [pool-4-thread-1] o.t.k.assignment.AssignmentsResource     : build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
+19:09:00.677 [pool-4-thread-1] INFO  o.t.k.assignment.AssignmentsResource - assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
+2017-03-12 19:09:00.677  INFO 6873 --- [pool-4-thread-1] o.t.k.assignment.AssignmentsResource     : assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
+19:09:00.677 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - assignments loading completed.
+2017-03-12 19:09:00.677  INFO 6873 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : assignments loading completed.
+19:09:00.678 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load acceptanceCriterias.
+2017-03-12 19:09:00.678  INFO 6873 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : load acceptanceCriterias.
+19:09:00.678 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading acceptanceCriterias by cardId.cardId:card-child-fooId
+2017-03-12 19:09:00.678  INFO 6873 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading acceptanceCriterias by cardId.cardId:card-child-fooId
+19:09:00.684 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loaded acceptanceCriterias:[]
+2017-03-12 19:09:00.684  INFO 6873 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loaded acceptanceCriterias:[]
+19:09:00.684 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
+2017-03-12 19:09:00.684  INFO 6873 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriasResource      : build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
+19:09:00.687 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
+2017-03-12 19:09:00.687  INFO 6873 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriasResource      : acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-child-fooId,userName:someone
+19:09:00.688 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - acceptanceCriterias loading completed.
+2017-03-12 19:09:00.688  INFO 6873 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : acceptanceCriterias loading completed.
+19:09:00.688 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load card tags.
+2017-03-12 19:09:00.688  INFO 6873 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : load card tags.
+19:09:00.688 [pool-4-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loading card tags.cardId:card-child-fooId,boardId:boardId,stageIdstage-fooId
+2017-03-12 19:09:00.688  INFO 6873 --- [pool-4-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loading card tags.cardId:card-child-fooId,boardId:boardId,stageIdstage-fooId
+19:09:00.689 [pool-4-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loaded card tags:[]
+2017-03-12 19:09:00.689  INFO 6873 --- [pool-4-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loaded card tags:[]
+19:09:00.689 [pool-4-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.689  INFO 6873 --- [pool-4-thread-1] o.t.kanban.cardTags.CardTagsResource     : build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.691 [pool-4-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.691  INFO 6873 --- [pool-4-thread-1] o.t.kanban.cardTags.CardTagsResource     : cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.691 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - card tags loading completed.
+2017-03-12 19:09:00.691  INFO 6873 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : card tags loading completed.
+19:09:00.691 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load comments.
+2017-03-12 19:09:00.691  INFO 6873 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : load comments.
+19:09:00.695 [pool-4-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - comments loading completed.
+2017-03-12 19:09:00.695  INFO 6873 --- [pool-4-thread-1] o.t.k.board.snapshot.SnapshotService     : comments loading completed.
+19:09:00.695 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading child cards.card-child-fooId
+2017-03-12 19:09:00.695  INFO 6873 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading child cards.card-child-fooId
+19:09:00.696 [pool-4-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Child cards loading completed.cards:[]
+2017-03-12 19:09:00.696  INFO 6873 --- [pool-4-thread-1] o.t.k.a.AcceptanceCriteriaService        : Child cards loading completed.cards:[]
+19:09:00.696 [http-nio-9120-exec-6] INFO  o.t.k.board.snapshot.SnapshotService - card loading completed.
+2017-03-12 19:09:00.696  INFO 6873 --- [nio-9120-exec-6] o.t.k.board.snapshot.SnapshotService     : card loading completed.
+19:09:00.696 [http-nio-9120-exec-6] INFO  o.t.k.board.snapshot.SnapshotService - board loading completed.
+2017-03-12 19:09:00.696  INFO 6873 --- [nio-9120-exec-6] o.t.k.board.snapshot.SnapshotService     : board loading completed.
+19:09:00.696 [http-nio-9120-exec-6] INFO  o.t.k.board.snapshot.SnapshotService - snapshot loading completed.
+2017-03-12 19:09:00.696  INFO 6873 --- [nio-9120-exec-6] o.t.k.board.snapshot.SnapshotService     : snapshot loading completed.
+19:09:00.703 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:09:00.703  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
 Request method:	GET
-Request path:	http://localhost:9120/kanban/someone/boards/boardId/snapshot
+Request path:	http://localhost:9120/kanban/someone/projects/project-fooId/boards/boardId/snapshot
 Proxy:			&lt;none&gt;
 Request params:	&lt;none&gt;
 Query params:	&lt;none&gt;
@@ -271,102 +271,102 @@ Headers:		identification=no
 				Accept=*/*
 Cookies:		&lt;none&gt;
 Body:			&lt;none&gt;
-21:40:57.906 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:08263a11-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:57.906  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:08263a11-0017-11e7-af8b-0014781bc25c
-21:40:57.906 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/boards/boardId/snapshot
-2017-03-03 21:40:57.906  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/boards/boardId/snapshot
-21:40:57.906 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/boards/boardId/snapshot
-2017-03-03 21:40:57.906  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/boards/boardId/snapshot
-21:40:57.907 [http-nio-9120-exec-9] INFO  o.t.k.board.snapshot.SnapshotService - load snapshot.
-2017-03-03 21:40:57.907  INFO 6131 --- [nio-9120-exec-9] o.t.k.board.snapshot.SnapshotService     : load snapshot.
-21:40:57.907 [http-nio-9120-exec-9] INFO  o.t.k.board.snapshot.SnapshotService - load board tags.
-2017-03-03 21:40:57.907  INFO 6131 --- [nio-9120-exec-9] o.t.k.board.snapshot.SnapshotService     : load board tags.
-21:40:57.910 [http-nio-9120-exec-9] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.891000', modificationTime='2017-03-03 21:40:57.891000'},userName:someone
-2017-03-03 21:40:57.910  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.891000', modificationTime='2017-03-03 21:40:57.891000'},userName:someone
-21:40:57.924 [http-nio-9120-exec-9] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.891000', modificationTime='2017-03-03 21:40:57.891000'},userName:someone
-2017-03-03 21:40:57.924  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-03 21:40:57.891000', modificationTime='2017-03-03 21:40:57.891000'},userName:someone
-21:40:57.924 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [boardId]
-2017-03-03 21:40:57.924  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [boardId]
-21:40:57.926 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;boardId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.891000&quot;,&quot;id&quot;:&quot;stage-fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.891000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;stage-name&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
-2017-03-03 21:40:57.926  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;boardId&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.891000&quot;,&quot;id&quot;:&quot;stage-fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.891000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;stage-name&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
-21:40:57.927 [http-nio-9120-exec-9] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:boardId,viewType:null,userName:someone
-2017-03-03 21:40:57.927  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesResource    : build stages resource.board:boardId,viewType:null,userName:someone
-21:40:57.928 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:boardId,userName:someone
-2017-03-03 21:40:57.928  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : build stage resource.board:boardId,userName:someone
-21:40:57.931 [http-nio-9120-exec-9] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:boardId,userName:someone
-2017-03-03 21:40:57.931  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:boardId,userName:someone
-21:40:57.933 [http-nio-9120-exec-9] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:boardId,userName:someone
-2017-03-03 21:40:57.933  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:boardId,userName:someone
-21:40:57.933 [http-nio-9120-exec-9] INFO  o.t.k.board.snapshot.SnapshotService - load cards tags.
-2017-03-03 21:40:57.933  INFO 6131 --- [nio-9120-exec-9] o.t.k.board.snapshot.SnapshotService     : load cards tags.
-21:40:57.934 [http-nio-9120-exec-9] INFO  o.t.k.a.AcceptanceCriteriaService - Loading cards by stageId:stage-fooId
-2017-03-03 21:40:57.934  INFO 6131 --- [nio-9120-exec-9] o.t.k.a.AcceptanceCriteriaService        : Loading cards by stageId:stage-fooId
-21:40:57.935 [http-nio-9120-exec-9] INFO  o.t.k.a.AcceptanceCriteriaService - The cards belongs from the stage stage-fooId are [{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.891000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.891000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
-2017-03-03 21:40:57.935  INFO 6131 --- [nio-9120-exec-9] o.t.k.a.AcceptanceCriteriaService        : The cards belongs from the stage stage-fooId are [{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-03 21:40:57.891000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-03 21:40:57.891000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
-21:40:57.936 [http-nio-9120-exec-9] INFO  org.thiki.kanban.card.CardResource - build cards resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.936  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.card.CardResource       : build cards resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.936 [http-nio-9120-exec-9] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.936  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.card.CardResource       : build card resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.943 [http-nio-9120-exec-9] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.943  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.945 [http-nio-9120-exec-9] INFO  org.thiki.kanban.card.CardResource - cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.945  INFO 6131 --- [nio-9120-exec-9] org.thiki.kanban.card.CardResource       : cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.945 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load assignments.
-2017-03-03 21:40:57.945  INFO 6131 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : load assignments.
-21:40:57.946 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:card-fooId
-2017-03-03 21:40:57.946  INFO 6131 --- [pool-5-thread-1] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:card-fooId
-21:40:57.947 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [card-fooId] are [{&quot;assignee&quot;:&quot;assigneeId-foo&quot;,&quot;assigner&quot;:&quot;assignerId-foo&quot;,&quot;author&quot;:&quot;authorId-foo&quot;,&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;id&quot;:&quot;fooId&quot;}]
-2017-03-03 21:40:57.947  INFO 6131 --- [pool-5-thread-1] o.t.kanban.assignment.AssignmentService  : The assignments of the card [card-fooId] are [{&quot;assignee&quot;:&quot;assigneeId-foo&quot;,&quot;assigner&quot;:&quot;assignerId-foo&quot;,&quot;author&quot;:&quot;authorId-foo&quot;,&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;id&quot;:&quot;fooId&quot;}]
-21:40:57.948 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentsResource - build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.948  INFO 6131 --- [pool-5-thread-1] o.t.k.assignment.AssignmentsResource     : build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.948 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentResource - build assignment resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.948  INFO 6131 --- [pool-5-thread-1] o.t.k.assignment.AssignmentResource      : build assignment resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.952 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentResource - assignment resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.952  INFO 6131 --- [pool-5-thread-1] o.t.k.assignment.AssignmentResource      : assignment resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.955 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentsResource - assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.955  INFO 6131 --- [pool-5-thread-1] o.t.k.assignment.AssignmentsResource     : assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.956 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - assignments loading completed.
-2017-03-03 21:40:57.956  INFO 6131 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : assignments loading completed.
-21:40:57.956 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load acceptanceCriterias.
-2017-03-03 21:40:57.956  INFO 6131 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : load acceptanceCriterias.
-21:40:57.957 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading acceptanceCriterias by cardId.cardId:card-fooId
-2017-03-03 21:40:57.957  INFO 6131 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading acceptanceCriterias by cardId.cardId:card-fooId
-21:40:57.958 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loaded acceptanceCriterias:[]
-2017-03-03 21:40:57.958  INFO 6131 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loaded acceptanceCriterias:[]
-21:40:57.959 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.959  INFO 6131 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriasResource      : build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.962 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-2017-03-03 21:40:57.962  INFO 6131 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriasResource      : acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
-21:40:57.963 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - acceptanceCriterias loading completed.
-2017-03-03 21:40:57.963  INFO 6131 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : acceptanceCriterias loading completed.
-21:40:57.963 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load card tags.
-2017-03-03 21:40:57.963  INFO 6131 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : load card tags.
-21:40:57.963 [pool-5-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loading card tags.cardId:card-fooId,boardId:boardId,stageIdstage-fooId
-2017-03-03 21:40:57.963  INFO 6131 --- [pool-5-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loading card tags.cardId:card-fooId,boardId:boardId,stageIdstage-fooId
-21:40:57.965 [pool-5-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loaded card tags:[]
-2017-03-03 21:40:57.965  INFO 6131 --- [pool-5-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loaded card tags:[]
-21:40:57.965 [pool-5-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.965  INFO 6131 --- [pool-5-thread-1] o.t.kanban.cardTags.CardTagsResource     : build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.968 [pool-5-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-2017-03-03 21:40:57.968  INFO 6131 --- [pool-5-thread-1] o.t.kanban.cardTags.CardTagsResource     : cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
-21:40:57.969 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - card tags loading completed.
-2017-03-03 21:40:57.969  INFO 6131 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : card tags loading completed.
-21:40:57.969 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load comments.
-2017-03-03 21:40:57.969  INFO 6131 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : load comments.
-21:40:57.972 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - comments loading completed.
-2017-03-03 21:40:57.972  INFO 6131 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : comments loading completed.
-21:40:57.972 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading child cards.card-fooId
-2017-03-03 21:40:57.972  INFO 6131 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading child cards.card-fooId
-21:40:57.973 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Child cards loading completed.cards:[]
-2017-03-03 21:40:57.973  INFO 6131 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriaService        : Child cards loading completed.cards:[]
-21:40:57.973 [http-nio-9120-exec-9] INFO  o.t.k.board.snapshot.SnapshotService - card loading completed.
-2017-03-03 21:40:57.973  INFO 6131 --- [nio-9120-exec-9] o.t.k.board.snapshot.SnapshotService     : card loading completed.
-21:40:57.973 [http-nio-9120-exec-9] INFO  o.t.k.board.snapshot.SnapshotService - board loading completed.
-2017-03-03 21:40:57.973  INFO 6131 --- [nio-9120-exec-9] o.t.k.board.snapshot.SnapshotService     : board loading completed.
-21:40:57.974 [http-nio-9120-exec-9] INFO  o.t.k.board.snapshot.SnapshotService - snapshot loading completed.
-2017-03-03 21:40:57.974  INFO 6131 --- [nio-9120-exec-9] o.t.k.board.snapshot.SnapshotService     : snapshot loading completed.
-21:40:57.978 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:57.978  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:09:00.740 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:4b9cd8ba-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:09:00.740  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:4b9cd8ba-0714-11e7-80b3-0014781bc25c
+19:09:00.740 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/someone/projects/project-fooId/boards/boardId/snapshot
+2017-03-12 19:09:00.740  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/someone/projects/project-fooId/boards/boardId/snapshot
+19:09:00.740 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/someone/projects/project-fooId/boards/boardId/snapshot
+2017-03-12 19:09:00.740  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/someone/projects/project-fooId/boards/boardId/snapshot
+19:09:00.741 [http-nio-9120-exec-10] INFO  o.t.k.board.snapshot.SnapshotService - load snapshot.
+2017-03-12 19:09:00.741  INFO 6873 --- [io-9120-exec-10] o.t.k.board.snapshot.SnapshotService     : load snapshot.
+19:09:00.741 [http-nio-9120-exec-10] INFO  o.t.k.board.snapshot.SnapshotService - load board tags.
+2017-03-12 19:09:00.741  INFO 6873 --- [io-9120-exec-10] o.t.k.board.snapshot.SnapshotService     : load board tags.
+19:09:00.743 [http-nio-9120-exec-10] INFO  org.thiki.kanban.board.BoardResource - build board resource.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-12 19:09:00.728000', modificationTime='2017-03-12 19:09:00.728000'},userName:someone
+2017-03-12 19:09:00.743  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.board.BoardResource     : build board resource.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-12 19:09:00.728000', modificationTime='2017-03-12 19:09:00.728000'},userName:someone
+19:09:00.755 [http-nio-9120-exec-10] INFO  org.thiki.kanban.board.BoardResource - board resource building complete.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-12 19:09:00.728000', modificationTime='2017-03-12 19:09:00.728000'},userName:someone
+2017-03-12 19:09:00.755  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.board.BoardResource     : board resource building complete.board:Board{id='boardId', name='board-name', projectId='null', author='someone', owner='someone', creationTime='2017-03-12 19:09:00.728000', modificationTime='2017-03-12 19:09:00.728000'},userName:someone
+19:09:00.755 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - Loading the stages of the board [boardId]
+2017-03-12 19:09:00.755  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : Loading the stages of the board [boardId]
+19:09:00.756 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StagesService - The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;boardId&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.728000&quot;,&quot;id&quot;:&quot;stage-fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.728000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;stage-name&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+2017-03-12 19:09:00.756  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesService     : The stages of the board are [{&quot;archived&quot;:false,&quot;author&quot;:&quot;someone&quot;,&quot;boardId&quot;:&quot;boardId&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.728000&quot;,&quot;id&quot;:&quot;stage-fooId&quot;,&quot;inDoneStatus&quot;:false,&quot;inProcess&quot;:false,&quot;inSprint&quot;:true,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.728000&quot;,&quot;sortNumber&quot;:0,&quot;status&quot;:0,&quot;title&quot;:&quot;stage-name&quot;,&quot;type&quot;:1,&quot;wipLimit&quot;:-1}]
+19:09:00.757 [http-nio-9120-exec-10] INFO  o.thiki.kanban.stage.StagesResource - build stages resource.board:boardId,viewType:null,userName:someone
+2017-03-12 19:09:00.757  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesResource    : build stages resource.board:boardId,viewType:null,userName:someone
+19:09:00.757 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StageResource - build stage resource.board:boardId,userName:someone
+2017-03-12 19:09:00.757  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.stage.StageResource     : build stage resource.board:boardId,userName:someone
+19:09:00.759 [http-nio-9120-exec-10] INFO  org.thiki.kanban.stage.StageResource - stage resource building completed.board:boardId,userName:someone
+2017-03-12 19:09:00.759  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.stage.StageResource     : stage resource building completed.board:boardId,userName:someone
+19:09:00.760 [http-nio-9120-exec-10] INFO  o.thiki.kanban.stage.StagesResource - stages resource building completed.board:boardId,userName:someone
+2017-03-12 19:09:00.760  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.stage.StagesResource    : stages resource building completed.board:boardId,userName:someone
+19:09:00.760 [http-nio-9120-exec-10] INFO  o.t.k.board.snapshot.SnapshotService - load cards tags.
+2017-03-12 19:09:00.760  INFO 6873 --- [io-9120-exec-10] o.t.k.board.snapshot.SnapshotService     : load cards tags.
+19:09:00.761 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - Loading cards by stageId:stage-fooId
+2017-03-12 19:09:00.761  INFO 6873 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : Loading cards by stageId:stage-fooId
+19:09:00.763 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - The cards belongs from the stage stage-fooId are [{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.728000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.728000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
+2017-03-12 19:09:00.763  INFO 6873 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : The cards belongs from the stage stage-fooId are [{&quot;author&quot;:&quot;someone&quot;,&quot;content&quot;:&quot;play badminton&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.728000&quot;,&quot;elapsedDays&quot;:0.0,&quot;id&quot;:&quot;card-fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.728000&quot;,&quot;sortNumber&quot;:0,&quot;stageId&quot;:&quot;stage-fooId&quot;,&quot;summary&quot;:&quot;card-summary.&quot;}]
+19:09:00.763 [http-nio-9120-exec-10] INFO  org.thiki.kanban.card.CardResource - build cards resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.763  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.card.CardResource       : build cards resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.764 [http-nio-9120-exec-10] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.764  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.card.CardResource       : build card resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.770 [http-nio-9120-exec-10] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.770  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.777 [http-nio-9120-exec-10] INFO  org.thiki.kanban.card.CardResource - cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.777  INFO 6873 --- [io-9120-exec-10] org.thiki.kanban.card.CardResource       : cards resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.778 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load assignments.
+2017-03-12 19:09:00.778  INFO 6873 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : load assignments.
+19:09:00.778 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:card-fooId
+2017-03-12 19:09:00.778  INFO 6873 --- [pool-5-thread-1] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:card-fooId
+19:09:00.779 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [card-fooId] are [{&quot;assignee&quot;:&quot;assigneeId-foo&quot;,&quot;assigner&quot;:&quot;assignerId-foo&quot;,&quot;author&quot;:&quot;authorId-foo&quot;,&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.731000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.731000&quot;,&quot;selfAssignment&quot;:false}]
+2017-03-12 19:09:00.779  INFO 6873 --- [pool-5-thread-1] o.t.kanban.assignment.AssignmentService  : The assignments of the card [card-fooId] are [{&quot;assignee&quot;:&quot;assigneeId-foo&quot;,&quot;assigner&quot;:&quot;assignerId-foo&quot;,&quot;author&quot;:&quot;authorId-foo&quot;,&quot;cardId&quot;:&quot;card-fooId&quot;,&quot;creationTime&quot;:&quot;2017-03-12 19:09:00.731000&quot;,&quot;id&quot;:&quot;fooId&quot;,&quot;modificationTime&quot;:&quot;2017-03-12 19:09:00.731000&quot;,&quot;selfAssignment&quot;:false}]
+19:09:00.780 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentsResource - build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.780  INFO 6873 --- [pool-5-thread-1] o.t.k.assignment.AssignmentsResource     : build assignments resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.780 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentResource - build assignment resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.780  INFO 6873 --- [pool-5-thread-1] o.t.k.assignment.AssignmentResource      : build assignment resource.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.785 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentResource - assignment resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.785  INFO 6873 --- [pool-5-thread-1] o.t.k.assignment.AssignmentResource      : assignment resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.787 [pool-5-thread-1] INFO  o.t.k.assignment.AssignmentsResource - assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.787  INFO 6873 --- [pool-5-thread-1] o.t.k.assignment.AssignmentsResource     : assignments resource building completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.787 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - assignments loading completed.
+2017-03-12 19:09:00.787  INFO 6873 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : assignments loading completed.
+19:09:00.787 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load acceptanceCriterias.
+2017-03-12 19:09:00.787  INFO 6873 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : load acceptanceCriterias.
+19:09:00.787 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading acceptanceCriterias by cardId.cardId:card-fooId
+2017-03-12 19:09:00.787  INFO 6873 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading acceptanceCriterias by cardId.cardId:card-fooId
+19:09:00.788 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loaded acceptanceCriterias:[]
+2017-03-12 19:09:00.788  INFO 6873 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loaded acceptanceCriterias:[]
+19:09:00.789 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.789  INFO 6873 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriasResource      : build acceptanceCriterias resource.acceptanceCriterias:[],boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.794 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriasResource - acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+2017-03-12 19:09:00.794  INFO 6873 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriasResource      : acceptanceCriterias resource build completed.boardId:boardId,stageId:stage-fooId,cardId:card-fooId,userName:someone
+19:09:00.794 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - acceptanceCriterias loading completed.
+2017-03-12 19:09:00.794  INFO 6873 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : acceptanceCriterias loading completed.
+19:09:00.795 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load card tags.
+2017-03-12 19:09:00.795  INFO 6873 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : load card tags.
+19:09:00.795 [pool-5-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loading card tags.cardId:card-fooId,boardId:boardId,stageIdstage-fooId
+2017-03-12 19:09:00.795  INFO 6873 --- [pool-5-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loading card tags.cardId:card-fooId,boardId:boardId,stageIdstage-fooId
+19:09:00.796 [pool-5-thread-1] INFO  o.t.kanban.cardTags.CardTagsService - Loaded card tags:[]
+2017-03-12 19:09:00.796  INFO 6873 --- [pool-5-thread-1] o.thiki.kanban.cardTags.CardTagsService  : Loaded card tags:[]
+19:09:00.797 [pool-5-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.797  INFO 6873 --- [pool-5-thread-1] o.t.kanban.cardTags.CardTagsResource     : build cards tag resource.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.800 [pool-5-thread-1] INFO  o.t.kanban.cardTags.CardTagsResource - cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+2017-03-12 19:09:00.800  INFO 6873 --- [pool-5-thread-1] o.t.kanban.cardTags.CardTagsResource     : cards tag resource building completed.board:boardId,stageId:stage-fooId,userName:someone
+19:09:00.800 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - card tags loading completed.
+2017-03-12 19:09:00.800  INFO 6873 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : card tags loading completed.
+19:09:00.800 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - load comments.
+2017-03-12 19:09:00.800  INFO 6873 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : load comments.
+19:09:00.803 [pool-5-thread-1] INFO  o.t.k.board.snapshot.SnapshotService - comments loading completed.
+2017-03-12 19:09:00.803  INFO 6873 --- [pool-5-thread-1] o.t.k.board.snapshot.SnapshotService     : comments loading completed.
+19:09:00.803 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Loading child cards.card-fooId
+2017-03-12 19:09:00.803  INFO 6873 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriaService        : Loading child cards.card-fooId
+19:09:00.804 [pool-5-thread-1] INFO  o.t.k.a.AcceptanceCriteriaService - Child cards loading completed.cards:[]
+2017-03-12 19:09:00.804  INFO 6873 --- [pool-5-thread-1] o.t.k.a.AcceptanceCriteriaService        : Child cards loading completed.cards:[]
+19:09:00.804 [http-nio-9120-exec-10] INFO  o.t.k.board.snapshot.SnapshotService - card loading completed.
+2017-03-12 19:09:00.804  INFO 6873 --- [io-9120-exec-10] o.t.k.board.snapshot.SnapshotService     : card loading completed.
+19:09:00.804 [http-nio-9120-exec-10] INFO  o.t.k.board.snapshot.SnapshotService - board loading completed.
+2017-03-12 19:09:00.804  INFO 6873 --- [io-9120-exec-10] o.t.k.board.snapshot.SnapshotService     : board loading completed.
+19:09:00.804 [http-nio-9120-exec-10] INFO  o.t.k.board.snapshot.SnapshotService - snapshot loading completed.
+2017-03-12 19:09:00.804  INFO 6873 --- [io-9120-exec-10] o.t.k.board.snapshot.SnapshotService     : snapshot loading completed.
+19:09:00.806 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:09:00.806  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
 </pre>
 </span>
 </div>
@@ -378,7 +378,7 @@ Body:			&lt;none&gt;
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 12, 2017 7:09:02 PM</p>
 </div>
 </div>
 </body>

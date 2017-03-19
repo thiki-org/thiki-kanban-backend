@@ -22,6 +22,4 @@ README.html
 kanban.iml
 /src/main/resources/static/
 /src/main/resources/config/application-local.properties
-/build/
-/.gradle/
 /thiki-kanban.pid

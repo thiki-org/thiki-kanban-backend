@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">2</div>
+<div class="counter">3</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0.086s</div>
+<div class="counter">0.150s</div>
 <p>duration</p>
 </div>
 </td>
@@ -78,13 +78,18 @@
 </tr>
 </thead>
 <tr>
+<td class="success">should_not_send_email_and_notification_if_assign_to_oneself</td>
+<td>0.014s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
 <td class="success">should_remove_unSubmit_assignments</td>
-<td>0.004s</td>
+<td>0.005s</td>
 <td class="success">passed</td>
 </tr>
 <tr>
 <td class="success">should_return_all_the_assignments</td>
-<td>0.082s</td>
+<td>0.131s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -92,22 +97,42 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>21:40:48.537 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}],cardId:cardId-foo,userName:someone
-2017-03-03 21:40:48.537  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}],cardId:cardId-foo,userName:someone
-21:40:48.541 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
-2017-03-03 21:40:48.541  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
-21:40:48.542 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
-2017-03-03 21:40:48.542  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
-21:40:48.543 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
-2017-03-03 21:40:48.543  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
-21:40:48.545 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}],cardId:cardId-foo,userName:someone
-2017-03-03 21:40:48.545  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}],cardId:cardId-foo,userName:someone
-21:40:48.546 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
-2017-03-03 21:40:48.546  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
-21:40:48.546 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
-2017-03-03 21:40:48.546  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
-21:40:48.547 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
-2017-03-03 21:40:48.547  INFO 6131 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;}]
+<pre>19:08:47.470 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}],cardId:cardId-foo,userName:someone
+2017-03-12 19:08:47.470  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}],cardId:cardId-foo,userName:someone
+19:08:47.472 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
+2017-03-12 19:08:47.472  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
+19:08:47.472 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+2017-03-12 19:08:47.472  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+19:08:47.474 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
+2017-03-12 19:08:47.474  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
+19:08:47.474 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+2017-03-12 19:08:47.474  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+19:08:47.474 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+2017-03-12 19:08:47.474  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+19:08:47.478 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigning card.assignments:[{&quot;assignee&quot;:&quot;assigner-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:true}],cardId:cardId-foo,userName:someone
+2017-03-12 19:08:47.478  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigning card.assignments:[{&quot;assignee&quot;:&quot;assigner-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:true}],cardId:cardId-foo,userName:someone
+19:08:47.478 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
+2017-03-12 19:08:47.478  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
+19:08:47.479 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assigner-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:true}]
+2017-03-12 19:08:47.479  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assigner-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:true}]
+19:08:47.479 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
+2017-03-12 19:08:47.479  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
+19:08:47.479 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assigner-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:true}]
+2017-03-12 19:08:47.479  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assigner-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:true}]
+19:08:47.480 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assigner-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:true}]
+2017-03-12 19:08:47.480  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assigner-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:true}]
+19:08:47.492 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}],cardId:cardId-foo,userName:someone
+2017-03-12 19:08:47.492  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigning card.assignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}],cardId:cardId-foo,userName:someone
+19:08:47.493 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
+2017-03-12 19:08:47.493  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
+19:08:47.493 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+2017-03-12 19:08:47.493  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo1&quot;,&quot;assigner&quot;:&quot;assigner-foo1&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+19:08:47.494 [Test worker] INFO  o.t.k.assignment.AssignmentService - Loading assignments of the card:cardId-foo
+2017-03-12 19:08:47.494  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Loading assignments of the card:cardId-foo
+19:08:47.494 [Test worker] INFO  o.t.k.assignment.AssignmentService - The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+2017-03-12 19:08:47.494  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : The assignments of the card [cardId-foo] are [{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+19:08:47.494 [Test worker] INFO  o.t.k.assignment.AssignmentService - Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
+2017-03-12 19:08:47.494  INFO 6873 --- [    Test worker] o.t.kanban.assignment.AssignmentService  : Assigned card successfully.savedAssignments:[{&quot;assignee&quot;:&quot;assignee-foo2&quot;,&quot;assigner&quot;:&quot;assigner-foo2&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}, {&quot;assignee&quot;:&quot;assignee-foo3&quot;,&quot;assigner&quot;:&quot;assigner-foo3&quot;,&quot;author&quot;:&quot;someone&quot;,&quot;cardId&quot;:&quot;cardId-foo&quot;,&quot;selfAssignment&quot;:false}]
 </pre>
 </span>
 </div>
@@ -119,7 +144,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 3, 2017 9:40:59 PM</p>
+<a href="http://www.gradle.org">Gradle 3.3</a> at Mar 12, 2017 7:09:02 PM</p>
 </div>
 </div>
 </body>

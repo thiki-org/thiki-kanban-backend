@@ -1,261 +1,299 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.thiki.kanban.card.CardsControllerTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2017-03-03T13:40:50" hostname="wisdom-HP" time="1.271">
+<testsuite name="org.thiki.kanban.card.CardsControllerTest" tests="16" skipped="0" failures="0" errors="0" timestamp="2017-03-12T11:08:49" hostname="wisdom-HP" time="1.817">
   <properties/>
-  <testcase name="shouldOnlyCountCurrentMonthWhenUpdateCard" classname="org.thiki.kanban.card.CardsControllerTest" time="0.177"/>
-  <testcase name="update_shouldThrowResourceNotFoundExceptionWhenCardToUpdateIsNotExist" classname="org.thiki.kanban.card.CardsControllerTest" time="0.054"/>
-  <testcase name="create_shouldFailedIfSummaryIsTooLong" classname="org.thiki.kanban.card.CardsControllerTest" time="0.041"/>
-  <testcase name="shouldAutoGenerateCodeIfCodeWasNullWhenUpdateCard" classname="org.thiki.kanban.card.CardsControllerTest" time="0.135"/>
-  <testcase name="findById_shouldReturnCardSuccessfully" classname="org.thiki.kanban.card.CardsControllerTest" time="0.097"/>
-  <testcase name="shouldReturnCardsWhenFindCardsByStageIdSuccessfully" classname="org.thiki.kanban.card.CardsControllerTest" time="0.139"/>
-  <testcase name="update_shouldFailedWhenCardIsNotExist" classname="org.thiki.kanban.card.CardsControllerTest" time="0.046"/>
-  <testcase name="update_shouldReturn200WhenUpdateCardSuccessfully" classname="org.thiki.kanban.card.CardsControllerTest" time="0.102"/>
-  <testcase name="delete_shouldDeleteFailedWhenTheCardIsNotExist" classname="org.thiki.kanban.card.CardsControllerTest" time="0.041"/>
-  <testcase name="movingWasNotAllowedIfStageExceededTheWipLimit" classname="org.thiki.kanban.card.CardsControllerTest" time="0.057"/>
-  <testcase name="delete_shouldDeleteSuccessfullyWhenTheCardIsExist" classname="org.thiki.kanban.card.CardsControllerTest" time="0.029"/>
-  <testcase name="create_shouldReturn201WhenCreateCardSuccessfully" classname="org.thiki.kanban.card.CardsControllerTest" time="0.159"/>
-  <testcase name="create_shouldFailedIfSummaryIsNull" classname="org.thiki.kanban.card.CardsControllerTest" time="0.05"/>
-  <testcase name="update_shouldResortSuccessfullyWhenCardIsFromAntherStage" classname="org.thiki.kanban.card.CardsControllerTest" time="0.126"/>
-  <system-out><![CDATA[2017-03-03 21:40:50.389  INFO 6131 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
-2017-03-03 21:40:50.393  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener]
-2017-03-03 21:40:50.394  INFO 6131 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@131f23c7, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@486cbb7e, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@79c52e5d, org.springframework.test.context.support.DirtiesContextTestExecutionListener@41e5b906, org.springframework.test.context.transaction.TransactionalTestExecutionListener@2b8ebbe6, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@69452a2, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@56f323eb, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@3a329dba]
-21:40:50.420 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:03aff396-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:50.420  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:03aff396-0017-11e7-af8b-0014781bc25c
-21:40:50.421 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:50.421  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:50.421 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:50.421  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:50.447 [http-nio-9120-exec-1] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"sortNumber":3,"stageId":"1","summary":"newSummary"}
-2017-03-03 21:40:50.447  INFO 6131 --- [nio-9120-exec-1] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"sortNumber":3,"stageId":"1","summary":"newSummary"}
-21:40:50.471 [http-nio-9120-exec-1] INFO  o.t.k.a.AcceptanceCriteriaService - Modified card:{"code":"H170301","creationTime":"2017-03-03 21:40:50.407000","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-03 21:40:50.407000","sortNumber":3,"stageId":"1","summary":"newSummary"}
-2017-03-03 21:40:50.471  INFO 6131 --- [nio-9120-exec-1] o.t.k.a.AcceptanceCriteriaService        : Modified card:{"code":"H170301","creationTime":"2017-03-03 21:40:50.407000","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-03 21:40:50.407000","sortNumber":3,"stageId":"1","summary":"newSummary"}
-21:40:50.473 [http-nio-9120-exec-1] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:50.407000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:50.407000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:50.407000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:50.407000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
-2017-03-03 21:40:50.473  INFO 6131 --- [nio-9120-exec-1] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:50.407000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:50.407000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:50.407000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:50.407000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
-21:40:50.477 [http-nio-9120-exec-1] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:1,userName:someone
-2017-03-03 21:40:50.477  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:1,userName:someone
-21:40:50.497 [http-nio-9120-exec-1] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:1,userName:someone
-2017-03-03 21:40:50.497  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:1,userName:someone
-21:40:50.505 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:50.505  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:50.595 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:03caa788-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:50.595  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:03caa788-0017-11e7-af8b-0014781bc25c
-21:40:50.595 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:50.595  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:50.596 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:50.596  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:50.604 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"summary":"newSummary"}
-2017-03-03 21:40:50.604  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"summary":"newSummary"}
-21:40:50.607 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:50.607  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:50.610 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:03ccca69-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:50.610  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:03ccca69-0017-11e7-af8b-0014781bc25c
-21:40:50.610 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:50.610  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:50.611 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:50.611  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:50.613 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:50.613  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:50.647 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:03d296ca-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:50.647  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:03d296ca-0017-11e7-af8b-0014781bc25c
-21:40:50.647 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
-2017-03-03 21:40:50.647  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
-21:40:50.648 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
-2017-03-03 21:40:50.648  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
-21:40:50.658 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:50.658  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:50.660 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:03d4929b-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:50.660  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:03d4929b-0017-11e7-af8b-0014781bc25c
-21:40:50.660 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:50.660  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:50.661 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:50.661  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:50.663 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:50.663  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:50.699 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:03da860c-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:50.699  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:03da860c-0017-11e7-af8b-0014781bc25c
-21:40:50.699 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:50.699  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:50.699 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:50.699  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:50.709 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"sortNumber":3,"stageId":"1","summary":"newSummary"}
-2017-03-03 21:40:50.709  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"sortNumber":3,"stageId":"1","summary":"newSummary"}
-21:40:50.717 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - Modified card:{"code":"H170301","creationTime":"2017-03-03 21:40:50.686000","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-03 21:40:50.686000","sortNumber":3,"stageId":"1","summary":"newSummary"}
-2017-03-03 21:40:50.717  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : Modified card:{"code":"H170301","creationTime":"2017-03-03 21:40:50.686000","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-03 21:40:50.686000","sortNumber":3,"stageId":"1","summary":"newSummary"}
-21:40:50.719 [http-nio-9120-exec-4] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:50.686000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:50.686000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:50.686000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:50.686000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
-2017-03-03 21:40:50.719  INFO 6131 --- [nio-9120-exec-4] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:50.686000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:50.686000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:50.686000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:50.686000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
-21:40:50.724 [http-nio-9120-exec-4] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:1,userName:someone
-2017-03-03 21:40:50.724  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:1,userName:someone
-21:40:50.736 [http-nio-9120-exec-4] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:1,userName:someone
-2017-03-03 21:40:50.736  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:1,userName:someone
-21:40:50.740 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:50.740  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:50.829 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:03ee5c2e-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:50.829  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:03ee5c2e-0017-11e7-af8b-0014781bc25c
-21:40:50.830 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/1
-2017-03-03 21:40:50.830  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/1
-21:40:50.830 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/1
-2017-03-03 21:40:50.830  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/1
-21:40:50.833 [http-nio-9120-exec-5] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:1,userName:someone
-2017-03-03 21:40:50.833  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:1,userName:someone
-21:40:50.842 [http-nio-9120-exec-5] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:1,userName:someone
-2017-03-03 21:40:50.842  INFO 6131 --- [nio-9120-exec-5] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:1,userName:someone
-21:40:50.845 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:50.845  INFO 6131 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:50.926 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:03fd293f-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:50.926  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:03fd293f-0017-11e7-af8b-0014781bc25c
-21:40:50.927 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
-2017-03-03 21:40:50.927  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
-21:40:50.927 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
-2017-03-03 21:40:50.927  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
-21:40:50.929 [http-nio-9120-exec-6] INFO  o.thiki.kanban.card.CardsController - Loading cards by stageId [fooId]
-2017-03-03 21:40:50.929  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.card.CardsController    : Loading cards by stageId [fooId]
-21:40:50.929 [http-nio-9120-exec-6] INFO  o.t.k.a.AcceptanceCriteriaService - Loading cards by stageId:fooId
-2017-03-03 21:40:50.929  INFO 6131 --- [nio-9120-exec-6] o.t.k.a.AcceptanceCriteriaService        : Loading cards by stageId:fooId
-21:40:50.931 [http-nio-9120-exec-6] INFO  o.t.k.a.AcceptanceCriteriaService - The cards belongs from the stage fooId are [{"author":"someone","content":"play badminton","creationTime":"2017-03-03 21:40:50.915000","elapsedDays":0.0,"id":"card-fooId","modificationTime":"2017-03-03 21:40:50.915000","sortNumber":0,"stageId":"fooId","summary":"this is the card summary."}]
-2017-03-03 21:40:50.931  INFO 6131 --- [nio-9120-exec-6] o.t.k.a.AcceptanceCriteriaService        : The cards belongs from the stage fooId are [{"author":"someone","content":"play badminton","creationTime":"2017-03-03 21:40:50.915000","elapsedDays":0.0,"id":"card-fooId","modificationTime":"2017-03-03 21:40:50.915000","sortNumber":0,"stageId":"fooId","summary":"this is the card summary."}]
-21:40:50.931 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - build cards resource.board:boardId-foo,stageId:fooId,userName:someone
-2017-03-03 21:40:50.931  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : build cards resource.board:boardId-foo,stageId:fooId,userName:someone
-21:40:50.931 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:fooId,userName:someone
-2017-03-03 21:40:50.931  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:fooId,userName:someone
-21:40:50.939 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
-2017-03-03 21:40:50.939  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
-21:40:50.943 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - cards resource building completed.board:boardId-foo,stageId:fooId,userName:someone
-2017-03-03 21:40:50.943  INFO 6131 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : cards resource building completed.board:boardId-foo,stageId:fooId,userName:someone
-21:40:50.949 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:50.949  INFO 6131 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.067 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:0412ad10-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.067  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:0412ad10-0017-11e7-af8b-0014781bc25c
-21:40:51.068 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards/feeId
-2017-03-03 21:40:51.068  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards/feeId
-21:40:51.068 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards/feeId
-2017-03-03 21:40:51.068  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards/feeId
-21:40:51.073 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.073  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.075 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:0413e591-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.075  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:0413e591-0017-11e7-af8b-0014781bc25c
-21:40:51.076 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:51.076  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:51.076 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:51.076  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:51.078 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.078  INFO 6131 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.112 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:04198ae2-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.112  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:04198ae2-0017-11e7-af8b-0014781bc25c
-21:40:51.112 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:51.112  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:51.113 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:51.113  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:51.119 [http-nio-9120-exec-7] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"deadline":"2017-02-15","elapsedDays":0.0,"restDays":-15,"sortNumber":3,"stageId":"1","summary":"newSummary"}
-2017-03-03 21:40:51.119  INFO 6131 --- [nio-9120-exec-7] o.t.k.a.AcceptanceCriteriaService        : modify card:{"deadline":"2017-02-15","elapsedDays":0.0,"restDays":-15,"sortNumber":3,"stageId":"1","summary":"newSummary"}
-21:40:51.127 [http-nio-9120-exec-7] INFO  o.t.k.a.AcceptanceCriteriaService - Modified card:{"code":"H170301","creationTime":"2017-03-03 21:40:51.103000","deadline":"2017-02-15","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-03 21:40:51.103000","restDays":-15,"sortNumber":3,"stageId":"1","summary":"newSummary"}
-2017-03-03 21:40:51.127  INFO 6131 --- [nio-9120-exec-7] o.t.k.a.AcceptanceCriteriaService        : Modified card:{"code":"H170301","creationTime":"2017-03-03 21:40:51.103000","deadline":"2017-02-15","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-03 21:40:51.103000","restDays":-15,"sortNumber":3,"stageId":"1","summary":"newSummary"}
-21:40:51.130 [http-nio-9120-exec-7] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:51.103000\",\"deadline\":\"2017-02-13\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:51.103000\",\"restDays\":-17,\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:51.103000\",\"deadline\":\"2017-02-13\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:51.103000\",\"restDays\":-17,\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
-2017-03-03 21:40:51.130  INFO 6131 --- [nio-9120-exec-7] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:51.103000\",\"deadline\":\"2017-02-13\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:51.103000\",\"restDays\":-17,\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:51.103000\",\"deadline\":\"2017-02-13\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:51.103000\",\"restDays\":-17,\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
-21:40:51.133 [http-nio-9120-exec-7] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:1,userName:someone
-2017-03-03 21:40:51.133  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:1,userName:someone
-21:40:51.143 [http-nio-9120-exec-7] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:1,userName:someone
-2017-03-03 21:40:51.143  INFO 6131 --- [nio-9120-exec-7] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:1,userName:someone
-21:40:51.148 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.148  INFO 6131 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.216 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:04296964-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.216  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:04296964-0017-11e7-af8b-0014781bc25c
-21:40:51.216 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/feeId/cards/non-exists-cardId
-2017-03-03 21:40:51.216  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/feeId/cards/non-exists-cardId
-21:40:51.217 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/feeId/cards/non-exists-cardId
-2017-03-03 21:40:51.217  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/feeId/cards/non-exists-cardId
-21:40:51.220 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.220  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.222 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:042a53c5-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.222  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:042a53c5-0017-11e7-af8b-0014781bc25c
-21:40:51.222 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:51.222  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:51.222 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:51.222  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:51.224 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.224  INFO 6131 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.261 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:04304736-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.261  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:04304736-0017-11e7-af8b-0014781bc25c
-21:40:51.262 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:51.262  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:51.262 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-2017-03-03 21:40:51.262  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
-21:40:51.269 [http-nio-9120-exec-10] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"stageId":"stage-fooId","summary":"newSummary"}
-2017-03-03 21:40:51.269  INFO 6131 --- [io-9120-exec-10] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"stageId":"stage-fooId","summary":"newSummary"}
-21:40:51.274 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.274  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.276 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:04329127-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.276  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:04329127-0017-11e7-af8b-0014781bc25c
-21:40:51.277 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:51.277  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:51.278 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:51.278  INFO 6131 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:51.281 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.281  INFO 6131 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.317 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:0438d2b8-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.317  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:0438d2b8-0017-11e7-af8b-0014781bc25c
-21:40:51.317 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/feeId/cards/fooId
-2017-03-03 21:40:51.317  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/feeId/cards/fooId
-21:40:51.318 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/feeId/cards/fooId
-2017-03-03 21:40:51.318  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/feeId/cards/fooId
-21:40:51.321 [http-nio-9120-exec-1] INFO  o.t.k.a.AcceptanceCriteriaService - Deleting card.cardId:fooId
-2017-03-03 21:40:51.321  INFO 6131 --- [nio-9120-exec-1] o.t.k.a.AcceptanceCriteriaService        : Deleting card.cardId:fooId
-21:40:51.323 [http-nio-9120-exec-1] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:feeId,userName:someone
-2017-03-03 21:40:51.323  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:feeId,userName:someone
-21:40:51.325 [http-nio-9120-exec-1] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:feeId,userName:someone
-2017-03-03 21:40:51.325  INFO 6131 --- [nio-9120-exec-1] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:feeId,userName:someone
-21:40:51.328 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.328  INFO 6131 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.352 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:043e29e9-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.352  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:043e29e9-0017-11e7-af8b-0014781bc25c
-21:40:51.352 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
-2017-03-03 21:40:51.352  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
-21:40:51.352 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
-2017-03-03 21:40:51.352  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
-21:40:51.360 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Creating new card:{"deadline":"2017-03-08 21:40:51","elapsedDays":0.0,"restDays":5,"size":5,"sizeName":"XL","summary":"summary"},stage:fooId
-2017-03-03 21:40:51.360  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Creating new card:{"deadline":"2017-03-08 21:40:51","elapsedDays":0.0,"restDays":5,"size":5,"sizeName":"XL","summary":"summary"},stage:fooId
-21:40:51.369 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Created card:{"author":"someone","code":"H170301","creationTime":"2017-03-03 21:40:51.367000","deadline":"2017-03-08 21:40:51","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-03 21:40:51.367000","restDays":5,"size":5,"sizeName":"XL","sortNumber":0,"stageId":"fooId","summary":"summary"}
-2017-03-03 21:40:51.369  INFO 6131 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Created card:{"author":"someone","code":"H170301","creationTime":"2017-03-03 21:40:51.367000","deadline":"2017-03-08 21:40:51","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-03 21:40:51.367000","restDays":5,"size":5,"sizeName":"XL","sortNumber":0,"stageId":"fooId","summary":"summary"}
-21:40:51.372 [http-nio-9120-exec-2] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId","detail":"{\"author\":\"someone\",\"code\":\"H170301\",\"creationTime\":\"2017-03-03 21:40:51.367000\",\"deadline\":\"2017-03-08 21:40:51\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:51.367000\",\"restDays\":5,\"size\":5,\"sizeName\":\"XL\",\"sortNumber\":0,\"stageId\":\"fooId\",\"summary\":\"summary\"}","operationTypeCode":"001","operationTypeName":"卡片创建","stageId":"fooId","stageSnapShot":"{\"archived\":false,\"author\":\"someone\",\"boardId\":\"board-id-foo\",\"creationTime\":\"2017-03-03 21:40:51.338000\",\"id\":\"fooId\",\"inDoneStatus\":false,\"inProcess\":false,\"inSprint\":false,\"modificationTime\":\"2017-03-03 21:40:51.338000\",\"sortNumber\":0,\"status\":0,\"title\":\"this is the first stage.\",\"type\":0,\"wipLimit\":-1}","summary":"{\"author\":\"someone\",\"code\":\"H170301\",\"creationTime\":\"2017-03-03 21:40:51.367000\",\"deadline\":\"2017-03-08 21:40:51\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:51.367000\",\"restDays\":5,\"size\":5,\"sizeName\":\"XL\",\"sortNumber\":0,\"stageId\":\"fooId\",\"summary\":\"summary\"}","userName":"someone"}
-2017-03-03 21:40:51.372  INFO 6131 --- [nio-9120-exec-2] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId","detail":"{\"author\":\"someone\",\"code\":\"H170301\",\"creationTime\":\"2017-03-03 21:40:51.367000\",\"deadline\":\"2017-03-08 21:40:51\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:51.367000\",\"restDays\":5,\"size\":5,\"sizeName\":\"XL\",\"sortNumber\":0,\"stageId\":\"fooId\",\"summary\":\"summary\"}","operationTypeCode":"001","operationTypeName":"卡片创建","stageId":"fooId","stageSnapShot":"{\"archived\":false,\"author\":\"someone\",\"boardId\":\"board-id-foo\",\"creationTime\":\"2017-03-03 21:40:51.338000\",\"id\":\"fooId\",\"inDoneStatus\":false,\"inProcess\":false,\"inSprint\":false,\"modificationTime\":\"2017-03-03 21:40:51.338000\",\"sortNumber\":0,\"status\":0,\"title\":\"this is the first stage.\",\"type\":0,\"wipLimit\":-1}","summary":"{\"author\":\"someone\",\"code\":\"H170301\",\"creationTime\":\"2017-03-03 21:40:51.367000\",\"deadline\":\"2017-03-08 21:40:51\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-03 21:40:51.367000\",\"restDays\":5,\"size\":5,\"sizeName\":\"XL\",\"sortNumber\":0,\"stageId\":\"fooId\",\"summary\":\"summary\"}","userName":"someone"}
-21:40:51.377 [http-nio-9120-exec-2] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:fooId,userName:someone
-2017-03-03 21:40:51.377  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:fooId,userName:someone
-21:40:51.386 [http-nio-9120-exec-2] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
-2017-03-03 21:40:51.386  INFO 6131 --- [nio-9120-exec-2] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
-21:40:51.392 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.392  INFO 6131 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.512 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:045693eb-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.512  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:045693eb-0017-11e7-af8b-0014781bc25c
-21:40:51.513 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
-2017-03-03 21:40:51.513  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
-21:40:51.513 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
-2017-03-03 21:40:51.513  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
-21:40:51.529 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.529  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.531 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:04597a1c-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.531  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:04597a1c-0017-11e7-af8b-0014781bc25c
-21:40:51.532 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
-2017-03-03 21:40:51.532  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
-21:40:51.532 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
-2017-03-03 21:40:51.532  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
-21:40:51.534 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.534  INFO 6131 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
-21:40:51.565 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:045eaa3d-0017-11e7-af8b-0014781bc25c
-2017-03-03 21:40:51.565  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:045eaa3d-0017-11e7-af8b-0014781bc25c
-21:40:51.565 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards/fooId6
-2017-03-03 21:40:51.565  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards/fooId6
-21:40:51.565 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards/fooId6
-2017-03-03 21:40:51.565  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards/fooId6
-21:40:51.573 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"code":"code-foo","elapsedDays":0.0,"sortNumber":3,"stageId":"fooId","summary":"newSummary"}
-2017-03-03 21:40:51.573  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : modify card:{"code":"code-foo","elapsedDays":0.0,"sortNumber":3,"stageId":"fooId","summary":"newSummary"}
-21:40:51.587 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - Modified card:{"code":"H170301","creationTime":"2017-03-03 21:40:51.554000","elapsedDays":0.0,"id":"fooId6","modificationTime":"2017-03-03 21:40:51.554000","sortNumber":3,"stageId":"fooId","summary":"newSummary"}
-2017-03-03 21:40:51.587  INFO 6131 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : Modified card:{"code":"H170301","creationTime":"2017-03-03 21:40:51.554000","elapsedDays":0.0,"id":"fooId6","modificationTime":"2017-03-03 21:40:51.554000","sortNumber":3,"stageId":"fooId","summary":"newSummary"}
-21:40:51.589 [http-nio-9120-exec-4] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId6","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:51.554000\",\"elapsedDays\":0.0,\"id\":\"fooId6\",\"modificationTime\":\"2017-03-03 21:40:51.554000\",\"sortNumber\":3,\"stageId\":\"2\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"012","operationTypeName":"卡片挪动","prevStageId":"2","prevStageSnapShot":"","stageId":"fooId","stageSnapShot":"{\"archived\":false,\"author\":\"someone\",\"boardId\":\"board-id-foo\",\"creationTime\":\"2017-03-03 21:40:51.551000\",\"id\":\"fooId\",\"inDoneStatus\":false,\"inProcess\":false,\"inSprint\":false,\"modificationTime\":\"2017-03-03 21:40:51.551000\",\"sortNumber\":0,\"status\":0,\"title\":\"this is the first stage.\",\"type\":0,\"wipLimit\":-1}","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:51.554000\",\"elapsedDays\":0.0,\"id\":\"fooId6\",\"modificationTime\":\"2017-03-03 21:40:51.554000\",\"sortNumber\":3,\"stageId\":\"2\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
-2017-03-03 21:40:51.589  INFO 6131 --- [nio-9120-exec-4] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId6","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:51.554000\",\"elapsedDays\":0.0,\"id\":\"fooId6\",\"modificationTime\":\"2017-03-03 21:40:51.554000\",\"sortNumber\":3,\"stageId\":\"2\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"012","operationTypeName":"卡片挪动","prevStageId":"2","prevStageSnapShot":"","stageId":"fooId","stageSnapShot":"{\"archived\":false,\"author\":\"someone\",\"boardId\":\"board-id-foo\",\"creationTime\":\"2017-03-03 21:40:51.551000\",\"id\":\"fooId\",\"inDoneStatus\":false,\"inProcess\":false,\"inSprint\":false,\"modificationTime\":\"2017-03-03 21:40:51.551000\",\"sortNumber\":0,\"status\":0,\"title\":\"this is the first stage.\",\"type\":0,\"wipLimit\":-1}","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-03 21:40:51.554000\",\"elapsedDays\":0.0,\"id\":\"fooId6\",\"modificationTime\":\"2017-03-03 21:40:51.554000\",\"sortNumber\":3,\"stageId\":\"2\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
-21:40:51.594 [http-nio-9120-exec-4] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:fooId,userName:someone
-2017-03-03 21:40:51.594  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:fooId,userName:someone
-21:40:51.603 [http-nio-9120-exec-4] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
-2017-03-03 21:40:51.603  INFO 6131 --- [nio-9120-exec-4] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
-21:40:51.607 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
-2017-03-03 21:40:51.607  INFO 6131 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+  <testcase name="shouldOnlyCountCurrentMonthWhenUpdateCard" classname="org.thiki.kanban.card.CardsControllerTest" time="0.237"/>
+  <testcase name="should_failed_if_target_stage_is_in_process_and_card_deadline_is_not_set" classname="org.thiki.kanban.card.CardsControllerTest" time="0.059"/>
+  <testcase name="update_shouldThrowResourceNotFoundExceptionWhenCardToUpdateIsNotExist" classname="org.thiki.kanban.card.CardsControllerTest" time="0.047"/>
+  <testcase name="create_shouldFailedIfSummaryIsTooLong" classname="org.thiki.kanban.card.CardsControllerTest" time="0.046"/>
+  <testcase name="shouldAutoGenerateCodeIfCodeWasNullWhenUpdateCard" classname="org.thiki.kanban.card.CardsControllerTest" time="0.116"/>
+  <testcase name="findById_shouldReturnCardSuccessfully" classname="org.thiki.kanban.card.CardsControllerTest" time="0.102"/>
+  <testcase name="shouldReturnCardsWhenFindCardsByStageIdSuccessfully" classname="org.thiki.kanban.card.CardsControllerTest" time="0.172"/>
+  <testcase name="update_shouldFailedWhenCardIsNotExist" classname="org.thiki.kanban.card.CardsControllerTest" time="0.07"/>
+  <testcase name="update_shouldReturn200WhenUpdateCardSuccessfully" classname="org.thiki.kanban.card.CardsControllerTest" time="0.134"/>
+  <testcase name="delete_shouldDeleteFailedWhenTheCardIsNotExist" classname="org.thiki.kanban.card.CardsControllerTest" time="0.056"/>
+  <testcase name="should_failed_if_stage_is_not_todo_status" classname="org.thiki.kanban.card.CardsControllerTest" time="0.095"/>
+  <testcase name="movingWasNotAllowedIfStageExceededTheWipLimit" classname="org.thiki.kanban.card.CardsControllerTest" time="0.088"/>
+  <testcase name="delete_shouldDeleteSuccessfullyWhenTheCardIsExist" classname="org.thiki.kanban.card.CardsControllerTest" time="0.035"/>
+  <testcase name="create_shouldReturn201WhenCreateCardSuccessfully" classname="org.thiki.kanban.card.CardsControllerTest" time="0.203"/>
+  <testcase name="create_shouldFailedIfSummaryIsNull" classname="org.thiki.kanban.card.CardsControllerTest" time="0.057"/>
+  <testcase name="update_shouldResortSuccessfullyWhenCardIsFromAntherStage" classname="org.thiki.kanban.card.CardsControllerTest" time="0.257"/>
+  <system-out><![CDATA[2017-03-12 19:08:49.898  INFO 6873 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [org.thiki.kanban.TestBase]: no resource found for suffixes {-context.xml, Context.groovy}.
+2017-03-12 19:08:49.906  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener]
+2017-03-12 19:08:49.908  INFO 6873 --- [    Test worker] WebAppIntegrationTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2ad23d0d, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@ddc7807, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@36e52cad, org.springframework.test.context.support.DirtiesContextTestExecutionListener@71832b3d, org.springframework.test.context.transaction.TransactionalTestExecutionListener@4a824a55, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@24701f42, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@3b6fcf25, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@53ddd1b6, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@b55e97a, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@2ffb6d5d, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6aa89960, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@5745a5e2]
+19:08:49.931 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:452b868a-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:49.931  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:452b868a-0714-11e7-80b3-0014781bc25c
+19:08:49.932 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:49.932  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:49.932 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:49.932  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:49.957 [http-nio-9120-exec-1] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"sortNumber":3,"stageId":"1","summary":"newSummary"}
+2017-03-12 19:08:49.957  INFO 6873 --- [nio-9120-exec-1] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"sortNumber":3,"stageId":"1","summary":"newSummary"}
+19:08:49.982 [http-nio-9120-exec-1] INFO  o.t.k.a.AcceptanceCriteriaService - Modified card:{"code":"H170301","creationTime":"2017-03-12 19:08:49.919000","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-12 19:08:49.919000","sortNumber":3,"stageId":"1","summary":"newSummary"}
+2017-03-12 19:08:49.982  INFO 6873 --- [nio-9120-exec-1] o.t.k.a.AcceptanceCriteriaService        : Modified card:{"code":"H170301","creationTime":"2017-03-12 19:08:49.919000","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-12 19:08:49.919000","sortNumber":3,"stageId":"1","summary":"newSummary"}
+19:08:49.982 [http-nio-9120-exec-1] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:49.919000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:49.919000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:49.919000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:49.919000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
+2017-03-12 19:08:49.982  INFO 6873 --- [nio-9120-exec-1] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:49.919000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:49.919000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:49.919000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:49.919000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
+19:08:49.986 [http-nio-9120-exec-1] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:1,userName:someone
+2017-03-12 19:08:49.986  INFO 6873 --- [nio-9120-exec-1] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:1,userName:someone
+19:08:50.005 [http-nio-9120-exec-1] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:1,userName:someone
+2017-03-12 19:08:50.005  INFO 6873 --- [nio-9120-exec-1] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:1,userName:someone
+19:08:50.012 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.012  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.168 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:454fb05c-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.168  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:454fb05c-0714-11e7-80b3-0014781bc25c
+19:08:50.169 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stage-fooId/cards/fooId
+2017-03-12 19:08:50.169  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/stage-fooId/cards/fooId
+19:08:50.169 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/stage-fooId/cards/fooId
+2017-03-12 19:08:50.169  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/stage-fooId/cards/fooId
+19:08:50.177 [http-nio-9120-exec-3] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"stageId":"target-stage-fooId","summary":"newSummary"}
+2017-03-12 19:08:50.177  INFO 6873 --- [nio-9120-exec-3] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"stageId":"target-stage-fooId","summary":"newSummary"}
+19:08:50.185 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.185  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.188 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:4552bd9d-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.188  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:4552bd9d-0714-11e7-80b3-0014781bc25c
+19:08:50.189 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.189  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:50.190 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.190  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:50.192 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.192  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.226 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:455889fe-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.226  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:455889fe-0714-11e7-80b3-0014781bc25c
+19:08:50.226 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:50.226  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:50.226 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:50.226  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:50.233 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"summary":"newSummary"}
+2017-03-12 19:08:50.233  INFO 6873 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"summary":"newSummary"}
+19:08:50.235 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.235  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.237 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:455a37af-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.237  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:455a37af-0714-11e7-80b3-0014781bc25c
+19:08:50.237 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.237  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:50.237 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.237  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:50.241 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.241  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.274 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:455fdd00-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.274  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:455fdd00-0714-11e7-80b3-0014781bc25c
+19:08:50.275 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/cards
+2017-03-12 19:08:50.275  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/cards
+19:08:50.275 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/cards
+2017-03-12 19:08:50.275  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/cards
+19:08:50.284 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.284  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.286 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:4561b1c1-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.286  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:4561b1c1-0714-11e7-80b3-0014781bc25c
+19:08:50.287 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.287  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:50.288 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.288  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:50.294 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.294  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.323 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:45675712-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.323  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:45675712-0714-11e7-80b3-0014781bc25c
+19:08:50.323 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:50.323  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:50.324 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:50.324  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:50.331 [http-nio-9120-exec-6] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"sortNumber":3,"stageId":"1","summary":"newSummary"}
+2017-03-12 19:08:50.331  INFO 6873 --- [nio-9120-exec-6] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"sortNumber":3,"stageId":"1","summary":"newSummary"}
+19:08:50.340 [http-nio-9120-exec-6] INFO  o.t.k.a.AcceptanceCriteriaService - Modified card:{"code":"H170301","creationTime":"2017-03-12 19:08:50.313000","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-12 19:08:50.313000","sortNumber":3,"stageId":"1","summary":"newSummary"}
+2017-03-12 19:08:50.340  INFO 6873 --- [nio-9120-exec-6] o.t.k.a.AcceptanceCriteriaService        : Modified card:{"code":"H170301","creationTime":"2017-03-12 19:08:50.313000","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-12 19:08:50.313000","sortNumber":3,"stageId":"1","summary":"newSummary"}
+19:08:50.341 [http-nio-9120-exec-6] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:50.313000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:50.313000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:50.313000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:50.313000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
+2017-03-12 19:08:50.341  INFO 6873 --- [nio-9120-exec-6] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:50.313000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:50.313000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:50.313000\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:50.313000\",\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
+19:08:50.346 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:1,userName:someone
+2017-03-12 19:08:50.346  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:1,userName:someone
+19:08:50.354 [http-nio-9120-exec-6] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:1,userName:someone
+2017-03-12 19:08:50.354  INFO 6873 --- [nio-9120-exec-6] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:1,userName:someone
+19:08:50.360 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.360  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.445 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:4579f4b4-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.445  INFO 6873 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:4579f4b4-0714-11e7-80b3-0014781bc25c
+19:08:50.445 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/1
+2017-03-12 19:08:50.445  INFO 6873 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/1
+19:08:50.446 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/1
+2017-03-12 19:08:50.446  INFO 6873 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/1
+19:08:50.449 [http-nio-9120-exec-5] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:1,userName:someone
+2017-03-12 19:08:50.449  INFO 6873 --- [nio-9120-exec-5] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:1,userName:someone
+19:08:50.458 [http-nio-9120-exec-5] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:1,userName:someone
+2017-03-12 19:08:50.458  INFO 6873 --- [nio-9120-exec-5] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:1,userName:someone
+19:08:50.462 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.462  INFO 6873 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.546 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - init session:45895e05-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.546  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : init session:45895e05-0714-11e7-80b3-0014781bc25c
+19:08:50.546 [http-nio-9120-exec-7] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
+2017-03-12 19:08:50.546  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards
+19:08:50.547 [http-nio-9120-exec-7] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
+2017-03-12 19:08:50.547  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards
+19:08:50.548 [http-nio-9120-exec-7] INFO  o.thiki.kanban.card.CardsController - Loading cards by stageId [fooId]
+2017-03-12 19:08:50.548  INFO 6873 --- [nio-9120-exec-7] org.thiki.kanban.card.CardsController    : Loading cards by stageId [fooId]
+19:08:50.549 [http-nio-9120-exec-7] INFO  o.t.k.a.AcceptanceCriteriaService - Loading cards by stageId:fooId
+2017-03-12 19:08:50.549  INFO 6873 --- [nio-9120-exec-7] o.t.k.a.AcceptanceCriteriaService        : Loading cards by stageId:fooId
+19:08:50.551 [http-nio-9120-exec-7] INFO  o.t.k.a.AcceptanceCriteriaService - The cards belongs from the stage fooId are [{"author":"someone","content":"play badminton","creationTime":"2017-03-12 19:08:50.536000","elapsedDays":0.0,"id":"card-fooId","modificationTime":"2017-03-12 19:08:50.536000","sortNumber":0,"stageId":"fooId","summary":"this is the card summary."}]
+2017-03-12 19:08:50.551  INFO 6873 --- [nio-9120-exec-7] o.t.k.a.AcceptanceCriteriaService        : The cards belongs from the stage fooId are [{"author":"someone","content":"play badminton","creationTime":"2017-03-12 19:08:50.536000","elapsedDays":0.0,"id":"card-fooId","modificationTime":"2017-03-12 19:08:50.536000","sortNumber":0,"stageId":"fooId","summary":"this is the card summary."}]
+19:08:50.553 [http-nio-9120-exec-7] INFO  org.thiki.kanban.card.CardResource - build cards resource.board:boardId-foo,stageId:fooId,userName:someone
+2017-03-12 19:08:50.553  INFO 6873 --- [nio-9120-exec-7] org.thiki.kanban.card.CardResource       : build cards resource.board:boardId-foo,stageId:fooId,userName:someone
+19:08:50.553 [http-nio-9120-exec-7] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:fooId,userName:someone
+2017-03-12 19:08:50.553  INFO 6873 --- [nio-9120-exec-7] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:fooId,userName:someone
+19:08:50.563 [http-nio-9120-exec-7] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
+2017-03-12 19:08:50.563  INFO 6873 --- [nio-9120-exec-7] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
+19:08:50.566 [http-nio-9120-exec-7] INFO  org.thiki.kanban.card.CardResource - cards resource building completed.board:boardId-foo,stageId:fooId,userName:someone
+2017-03-12 19:08:50.566  INFO 6873 --- [nio-9120-exec-7] org.thiki.kanban.card.CardResource       : cards resource building completed.board:boardId-foo,stageId:fooId,userName:someone
+19:08:50.573 [http-nio-9120-exec-7] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.573  INFO 6873 --- [nio-9120-exec-7] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.726 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:45a4d546-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.726  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:45a4d546-0714-11e7-80b3-0014781bc25c
+19:08:50.726 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards/feeId
+2017-03-12 19:08:50.726  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards/feeId
+19:08:50.727 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards/feeId
+2017-03-12 19:08:50.727  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards/feeId
+19:08:50.734 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.734  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.736 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - init session:45a65be7-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.736  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : init session:45a65be7-0714-11e7-80b3-0014781bc25c
+19:08:50.737 [http-nio-9120-exec-8] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.737  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:50.741 [http-nio-9120-exec-8] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.741  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:50.749 [http-nio-9120-exec-8] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.749  INFO 6873 --- [nio-9120-exec-8] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.791 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - init session:45aec058-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.791  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : init session:45aec058-0714-11e7-80b3-0014781bc25c
+19:08:50.791 [http-nio-9120-exec-9] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:50.791  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:50.792 [http-nio-9120-exec-9] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:50.792  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:50.800 [http-nio-9120-exec-9] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"deadline":"2017-02-15","elapsedDays":0.0,"restDays":-24,"sortNumber":3,"stageId":"1","summary":"newSummary"}
+2017-03-12 19:08:50.800  INFO 6873 --- [nio-9120-exec-9] o.t.k.a.AcceptanceCriteriaService        : modify card:{"deadline":"2017-02-15","elapsedDays":0.0,"restDays":-24,"sortNumber":3,"stageId":"1","summary":"newSummary"}
+19:08:50.811 [http-nio-9120-exec-9] INFO  o.t.k.a.AcceptanceCriteriaService - Modified card:{"code":"H170301","creationTime":"2017-03-12 19:08:50.781000","deadline":"2017-02-15","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-12 19:08:50.781000","restDays":-24,"sortNumber":3,"stageId":"1","summary":"newSummary"}
+2017-03-12 19:08:50.811  INFO 6873 --- [nio-9120-exec-9] o.t.k.a.AcceptanceCriteriaService        : Modified card:{"code":"H170301","creationTime":"2017-03-12 19:08:50.781000","deadline":"2017-02-15","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-12 19:08:50.781000","restDays":-24,"sortNumber":3,"stageId":"1","summary":"newSummary"}
+19:08:50.812 [http-nio-9120-exec-9] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:50.781000\",\"deadline\":\"2017-02-13\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:50.781000\",\"restDays\":-26,\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:50.781000\",\"deadline\":\"2017-02-13\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:50.781000\",\"restDays\":-26,\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
+2017-03-12 19:08:50.812  INFO 6873 --- [nio-9120-exec-9] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:50.781000\",\"deadline\":\"2017-02-13\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:50.781000\",\"restDays\":-26,\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"002","operationTypeName":"卡片修改","prevStageId":"1","prevStageSnapShot":"","stageId":"1","stageSnapShot":"","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:50.781000\",\"deadline\":\"2017-02-13\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:50.781000\",\"restDays\":-26,\"sortNumber\":0,\"stageId\":\"1\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
+19:08:50.815 [http-nio-9120-exec-9] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:1,userName:someone
+2017-03-12 19:08:50.815  INFO 6873 --- [nio-9120-exec-9] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:1,userName:someone
+19:08:50.825 [http-nio-9120-exec-9] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:1,userName:someone
+2017-03-12 19:08:50.825  INFO 6873 --- [nio-9120-exec-9] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:1,userName:someone
+19:08:50.830 [http-nio-9120-exec-9] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.830  INFO 6873 --- [nio-9120-exec-9] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.930 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:45c3f60a-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.930  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:45c3f60a-0714-11e7-80b3-0014781bc25c
+19:08:50.930 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/feeId/cards/non-exists-cardId
+2017-03-12 19:08:50.930  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/feeId/cards/non-exists-cardId
+19:08:50.930 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/feeId/cards/non-exists-cardId
+2017-03-12 19:08:50.930  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/feeId/cards/non-exists-cardId
+19:08:50.934 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.934  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:50.936 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - init session:45c4e06b-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:50.936  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : init session:45c4e06b-0714-11e7-80b3-0014781bc25c
+19:08:50.937 [http-nio-9120-exec-10] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.937  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:50.937 [http-nio-9120-exec-10] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:50.937  INFO 6873 --- [io-9120-exec-10] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:50.940 [http-nio-9120-exec-10] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:50.940  INFO 6873 --- [io-9120-exec-10] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.020 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:45d18a9c-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.020  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:45d18a9c-0714-11e7-80b3-0014781bc25c
+19:08:51.020 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/cards
+2017-03-12 19:08:51.020  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/cards
+19:08:51.020 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/cards
+2017-03-12 19:08:51.020  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/cards
+19:08:51.034 [http-nio-9120-exec-1] INFO  o.t.k.a.AcceptanceCriteriaService - Creating new card:{"elapsedDays":0.0,"stageId":"stage-fooId","summary":"summary    "}
+2017-03-12 19:08:51.034  INFO 6873 --- [nio-9120-exec-1] o.t.k.a.AcceptanceCriteriaService        : Creating new card:{"elapsedDays":0.0,"stageId":"stage-fooId","summary":"summary    "}
+19:08:51.042 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.042  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.045 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - init session:45d5823d-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.045  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : init session:45d5823d-0714-11e7-80b3-0014781bc25c
+19:08:51.046 [http-nio-9120-exec-1] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:51.046  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:51.046 [http-nio-9120-exec-1] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:51.046  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:51.052 [http-nio-9120-exec-1] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.052  INFO 6873 --- [nio-9120-exec-1] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.105 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:45dea9fe-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.105  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:45dea9fe-0714-11e7-80b3-0014781bc25c
+19:08:51.105 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:51.105  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:51.105 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+2017-03-12 19:08:51.105  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/1/cards/fooId
+19:08:51.129 [http-nio-9120-exec-3] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"elapsedDays":0.0,"stageId":"stage-fooId","summary":"newSummary"}
+2017-03-12 19:08:51.129  INFO 6873 --- [nio-9120-exec-3] o.t.k.a.AcceptanceCriteriaService        : modify card:{"elapsedDays":0.0,"stageId":"stage-fooId","summary":"newSummary"}
+19:08:51.137 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.137  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.139 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - init session:45e3da1f-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.139  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : init session:45e3da1f-0714-11e7-80b3-0014781bc25c
+19:08:51.139 [http-nio-9120-exec-3] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:51.139  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:51.139 [http-nio-9120-exec-3] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:51.139  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:51.143 [http-nio-9120-exec-3] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.143  INFO 6873 --- [nio-9120-exec-3] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.188 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - init session:45eb5430-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.188  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : init session:45eb5430-0714-11e7-80b3-0014781bc25c
+19:08:51.188 [http-nio-9120-exec-4] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/feeId/cards/fooId
+2017-03-12 19:08:51.188  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/feeId/cards/fooId
+19:08:51.188 [http-nio-9120-exec-4] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/feeId/cards/fooId
+2017-03-12 19:08:51.188  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/feeId/cards/fooId
+19:08:51.191 [http-nio-9120-exec-4] INFO  o.t.k.a.AcceptanceCriteriaService - Deleting card.cardId:fooId
+2017-03-12 19:08:51.191  INFO 6873 --- [nio-9120-exec-4] o.t.k.a.AcceptanceCriteriaService        : Deleting card.cardId:fooId
+19:08:51.193 [http-nio-9120-exec-4] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:feeId,userName:someone
+2017-03-12 19:08:51.193  INFO 6873 --- [nio-9120-exec-4] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:feeId,userName:someone
+19:08:51.196 [http-nio-9120-exec-4] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:feeId,userName:someone
+2017-03-12 19:08:51.196  INFO 6873 --- [nio-9120-exec-4] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:feeId,userName:someone
+19:08:51.199 [http-nio-9120-exec-4] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.199  INFO 6873 --- [nio-9120-exec-4] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.226 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - init session:45f12091-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.226  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : init session:45f12091-0714-11e7-80b3-0014781bc25c
+19:08:51.227 [http-nio-9120-exec-2] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/cards
+2017-03-12 19:08:51.227  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/cards
+19:08:51.228 [http-nio-9120-exec-2] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/cards
+2017-03-12 19:08:51.228  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/cards
+19:08:51.237 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Creating new card:{"deadline":"2017-03-17 19:08:51","elapsedDays":0.0,"restDays":5,"size":5,"sizeName":"XL","stageId":"stage-fooId","summary":"summary"}
+2017-03-12 19:08:51.237  INFO 6873 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Creating new card:{"deadline":"2017-03-17 19:08:51","elapsedDays":0.0,"restDays":5,"size":5,"sizeName":"XL","stageId":"stage-fooId","summary":"summary"}
+19:08:51.249 [http-nio-9120-exec-2] INFO  o.t.k.a.AcceptanceCriteriaService - Created card:{"author":"someone","code":"H170301","creationTime":"2017-03-12 19:08:51.247000","deadline":"2017-03-17 19:08:51","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-12 19:08:51.247000","restDays":5,"size":5,"sizeName":"XL","sortNumber":0,"stageId":"stage-fooId","summary":"summary"}
+2017-03-12 19:08:51.249  INFO 6873 --- [nio-9120-exec-2] o.t.k.a.AcceptanceCriteriaService        : Created card:{"author":"someone","code":"H170301","creationTime":"2017-03-12 19:08:51.247000","deadline":"2017-03-17 19:08:51","elapsedDays":0.0,"id":"fooId","modificationTime":"2017-03-12 19:08:51.247000","restDays":5,"size":5,"sizeName":"XL","sortNumber":0,"stageId":"stage-fooId","summary":"summary"}
+19:08:51.251 [http-nio-9120-exec-2] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId","detail":"{\"author\":\"someone\",\"code\":\"H170301\",\"creationTime\":\"2017-03-12 19:08:51.247000\",\"deadline\":\"2017-03-17 19:08:51\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:51.247000\",\"restDays\":5,\"size\":5,\"sizeName\":\"XL\",\"sortNumber\":0,\"stageId\":\"stage-fooId\",\"summary\":\"summary\"}","operationTypeCode":"001","operationTypeName":"卡片创建","stageId":"stage-fooId","stageSnapShot":"{\"archived\":false,\"author\":\"someone\",\"boardId\":\"boardId-foo\",\"creationTime\":\"2017-03-12 19:08:51.210000\",\"id\":\"stage-fooId\",\"inDoneStatus\":false,\"inProcess\":false,\"inSprint\":false,\"modificationTime\":\"2017-03-12 19:08:51.210000\",\"sortNumber\":0,\"status\":0,\"title\":\"this is the first stage.\",\"type\":0,\"wipLimit\":1}","summary":"{\"author\":\"someone\",\"code\":\"H170301\",\"creationTime\":\"2017-03-12 19:08:51.247000\",\"deadline\":\"2017-03-17 19:08:51\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:51.247000\",\"restDays\":5,\"size\":5,\"sizeName\":\"XL\",\"sortNumber\":0,\"stageId\":\"stage-fooId\",\"summary\":\"summary\"}","userName":"someone"}
+2017-03-12 19:08:51.251  INFO 6873 --- [nio-9120-exec-2] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId","detail":"{\"author\":\"someone\",\"code\":\"H170301\",\"creationTime\":\"2017-03-12 19:08:51.247000\",\"deadline\":\"2017-03-17 19:08:51\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:51.247000\",\"restDays\":5,\"size\":5,\"sizeName\":\"XL\",\"sortNumber\":0,\"stageId\":\"stage-fooId\",\"summary\":\"summary\"}","operationTypeCode":"001","operationTypeName":"卡片创建","stageId":"stage-fooId","stageSnapShot":"{\"archived\":false,\"author\":\"someone\",\"boardId\":\"boardId-foo\",\"creationTime\":\"2017-03-12 19:08:51.210000\",\"id\":\"stage-fooId\",\"inDoneStatus\":false,\"inProcess\":false,\"inSprint\":false,\"modificationTime\":\"2017-03-12 19:08:51.210000\",\"sortNumber\":0,\"status\":0,\"title\":\"this is the first stage.\",\"type\":0,\"wipLimit\":1}","summary":"{\"author\":\"someone\",\"code\":\"H170301\",\"creationTime\":\"2017-03-12 19:08:51.247000\",\"deadline\":\"2017-03-17 19:08:51\",\"elapsedDays\":0.0,\"id\":\"fooId\",\"modificationTime\":\"2017-03-12 19:08:51.247000\",\"restDays\":5,\"size\":5,\"sizeName\":\"XL\",\"sortNumber\":0,\"stageId\":\"stage-fooId\",\"summary\":\"summary\"}","userName":"someone"}
+19:08:51.257 [http-nio-9120-exec-2] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:stage-fooId,userName:someone
+2017-03-12 19:08:51.257  INFO 6873 --- [nio-9120-exec-2] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:stage-fooId,userName:someone
+19:08:51.267 [http-nio-9120-exec-2] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:stage-fooId,userName:someone
+2017-03-12 19:08:51.267  INFO 6873 --- [nio-9120-exec-2] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:stage-fooId,userName:someone
+19:08:51.270 [http-nio-9120-exec-2] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.270  INFO 6873 --- [nio-9120-exec-2] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.426 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:460fa513-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.426  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:460fa513-0714-11e7-80b3-0014781bc25c
+19:08:51.426 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/cards
+2017-03-12 19:08:51.426  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/cards
+19:08:51.427 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/cards
+2017-03-12 19:08:51.427  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/cards
+19:08:51.442 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.442  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.444 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - init session:46126434-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.444  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : init session:46126434-0714-11e7-80b3-0014781bc25c
+19:08:51.445 [http-nio-9120-exec-6] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/error/invalidParamsException
+2017-03-12 19:08:51.445  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/error/invalidParamsException
+19:08:51.446 [http-nio-9120-exec-6] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/error/invalidParamsException
+2017-03-12 19:08:51.446  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/error/invalidParamsException
+19:08:51.449 [http-nio-9120-exec-6] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.449  INFO 6873 --- [nio-9120-exec-6] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
+19:08:51.494 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - init session:461a0555-0714-11e7-80b3-0014781bc25c
+2017-03-12 19:08:51.494  INFO 6873 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : init session:461a0555-0714-11e7-80b3-0014781bc25c
+19:08:51.495 [http-nio-9120-exec-5] INFO  o.t.k.f.s.i.f.SecurityInterceptor - identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards/fooId6
+2017-03-12 19:08:51.495  INFO 6873 --- [nio-9120-exec-5] o.t.k.f.s.i.filter.SecurityInterceptor   : identification start.userName:someone,uri:/kanban/boards/boardId-foo/stages/fooId/cards/fooId6
+19:08:51.495 [http-nio-9120-exec-5] INFO  o.t.k.f.s.a.AuthenticationInterceptor - authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards/fooId6
+2017-03-12 19:08:51.495  INFO 6873 --- [nio-9120-exec-5] o.t.k.f.s.a.AuthenticationInterceptor    : authentication start.currentURL:/kanban/boards/boardId-foo/stages/fooId/cards/fooId6
+19:08:51.504 [http-nio-9120-exec-5] INFO  o.t.k.a.AcceptanceCriteriaService - modify card:{"code":"code-foo","elapsedDays":0.0,"sortNumber":3,"stageId":"fooId","summary":"newSummary"}
+2017-03-12 19:08:51.504  INFO 6873 --- [nio-9120-exec-5] o.t.k.a.AcceptanceCriteriaService        : modify card:{"code":"code-foo","elapsedDays":0.0,"sortNumber":3,"stageId":"fooId","summary":"newSummary"}
+19:08:51.534 [http-nio-9120-exec-5] INFO  o.t.k.a.AcceptanceCriteriaService - Modified card:{"code":"H170301","creationTime":"2017-03-12 19:08:51.482000","elapsedDays":0.0,"id":"fooId6","modificationTime":"2017-03-12 19:08:51.482000","sortNumber":3,"stageId":"fooId","summary":"newSummary"}
+2017-03-12 19:08:51.534  INFO 6873 --- [nio-9120-exec-5] o.t.k.a.AcceptanceCriteriaService        : Modified card:{"code":"H170301","creationTime":"2017-03-12 19:08:51.482000","elapsedDays":0.0,"id":"fooId6","modificationTime":"2017-03-12 19:08:51.482000","sortNumber":3,"stageId":"fooId","summary":"newSummary"}
+19:08:51.538 [http-nio-9120-exec-5] INFO  o.t.kanban.activity.ActivityService - Recording operation:{"cardId":"fooId6","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:51.482000\",\"elapsedDays\":0.0,\"id\":\"fooId6\",\"modificationTime\":\"2017-03-12 19:08:51.482000\",\"sortNumber\":3,\"stageId\":\"2\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"012","operationTypeName":"卡片挪动","prevStageId":"2","prevStageSnapShot":"","stageId":"fooId","stageSnapShot":"{\"archived\":false,\"author\":\"someone\",\"boardId\":\"board-id-foo\",\"creationTime\":\"2017-03-12 19:08:51.479000\",\"id\":\"fooId\",\"inDoneStatus\":false,\"inProcess\":false,\"inSprint\":false,\"modificationTime\":\"2017-03-12 19:08:51.479000\",\"sortNumber\":0,\"status\":0,\"title\":\"this is the first stage.\",\"type\":0,\"wipLimit\":-1}","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:51.482000\",\"elapsedDays\":0.0,\"id\":\"fooId6\",\"modificationTime\":\"2017-03-12 19:08:51.482000\",\"sortNumber\":3,\"stageId\":\"2\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
+2017-03-12 19:08:51.538  INFO 6873 --- [nio-9120-exec-5] o.thiki.kanban.activity.ActivityService  : Recording operation:{"cardId":"fooId6","detail":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:51.482000\",\"elapsedDays\":0.0,\"id\":\"fooId6\",\"modificationTime\":\"2017-03-12 19:08:51.482000\",\"sortNumber\":3,\"stageId\":\"2\",\"summary\":\"this is the card summary.\"}","operationTypeCode":"012","operationTypeName":"卡片挪动","prevStageId":"2","prevStageSnapShot":"","stageId":"fooId","stageSnapShot":"{\"archived\":false,\"author\":\"someone\",\"boardId\":\"board-id-foo\",\"creationTime\":\"2017-03-12 19:08:51.479000\",\"id\":\"fooId\",\"inDoneStatus\":false,\"inProcess\":false,\"inSprint\":false,\"modificationTime\":\"2017-03-12 19:08:51.479000\",\"sortNumber\":0,\"status\":0,\"title\":\"this is the first stage.\",\"type\":0,\"wipLimit\":-1}","summary":"{\"author\":\"1\",\"content\":\"play badminton\",\"creationTime\":\"2017-03-12 19:08:51.482000\",\"elapsedDays\":0.0,\"id\":\"fooId6\",\"modificationTime\":\"2017-03-12 19:08:51.482000\",\"sortNumber\":3,\"stageId\":\"2\",\"summary\":\"this is the card summary.\"}","userName":"someone"}
+19:08:51.545 [http-nio-9120-exec-5] INFO  org.thiki.kanban.card.CardResource - build card resource.board:boardId-foo,stageId:fooId,userName:someone
+2017-03-12 19:08:51.545  INFO 6873 --- [nio-9120-exec-5] org.thiki.kanban.card.CardResource       : build card resource.board:boardId-foo,stageId:fooId,userName:someone
+19:08:51.559 [http-nio-9120-exec-5] INFO  org.thiki.kanban.card.CardResource - card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
+2017-03-12 19:08:51.559  INFO 6873 --- [nio-9120-exec-5] org.thiki.kanban.card.CardResource       : card resource building completed.board:boardId-foo,stageId:fooId,userName:someone
+19:08:51.577 [http-nio-9120-exec-5] INFO  o.t.k.f.logback.SessionInterceptor - remove sessionId.
+2017-03-12 19:08:51.577  INFO 6873 --- [nio-9120-exec-5] o.t.k.f.logback.SessionInterceptor       : remove sessionId.
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
