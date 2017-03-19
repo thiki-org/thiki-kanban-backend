@@ -1028,4 +1028,32 @@
             <append value=" engine innodb"/>
         </modifySql>
     </changeSet>
+    <changeSet id="58" author="cain" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_risk"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_risk">
+            <column name="id" type="VARCHAR(40)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="risk_reason" type="varchar(100)">
+            </column>
+            <column name="card_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="TINYINT" defaultValue="0"/>
+            <column name="author" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_resolved" type="Boolean" defaultValue="false"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb"/>
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>
