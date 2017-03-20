@@ -154,4 +154,12 @@ public class StagesService {
         Integer currentCardsNumbers = stagesPersistence.countCardsNumber(stageId);
         return stage.isReachedWipLimit(currentCardsNumbers);
     }
+
+    public boolean isDoneOrArchived(String stageId) {
+        Stage stage = findById(stageId);
+        if (stage == null) {
+            throw new BusinessException(StageCodes.STAGE_IS_NOT_EXIST);
+        }
+        return stage.isArchived() || stage.isInDoneStatus();
+    }
 }

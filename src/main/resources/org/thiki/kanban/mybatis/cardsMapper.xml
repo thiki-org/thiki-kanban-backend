@@ -73,12 +73,4 @@
     <select id="loadChildCards" parameterType="java.lang.String" resultType="org.thiki.kanban.card.Card">
         SELECT * FROM kb_card WHERE parent_id=#{cardId} AND delete_status=0
     </select>
-    <select id="isArchived" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT CASE WHEN type=9 THEN 'True' ELSE 'False' END from kb_stage WHERE id=(SELECT stage_id from kb_card WHERE
-        id=#{cardId} AND delete_status=0)
-    </select>
-    <select id="isDone" parameterType="java.lang.String" resultType="java.lang.Boolean">
-        SELECT CASE WHEN status=9 THEN 'True' ELSE 'False' END from kb_stage WHERE id=(SELECT stage_id from kb_card
-        WHERE id=#{cardId} AND delete_status=0)
-    </select>
 </mapper>

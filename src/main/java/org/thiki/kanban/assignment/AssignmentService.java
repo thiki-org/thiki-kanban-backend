@@ -47,8 +47,8 @@ public class AssignmentService {
         if (card == null) {
             throw new InvalidParamsException(CardsCodes.CARD_IS_NOT_EXISTS.code(), CardsCodes.CARD_IS_NOT_EXISTS.message());
         }
-        boolean isArchived = cardsService.isArchived(cardId);
-        if (isArchived) {
+        boolean isCardArchivedOrDone = cardsService.isCardArchivedOrDone(cardId);
+        if (isCardArchivedOrDone) {
             throw new BusinessException(AssignmentCodes.CARD_IS_ALREADY_ARCHIVED);
         }
         Board board = boardsService.findById(boardId);

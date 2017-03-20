@@ -27,8 +27,4 @@ public interface CardsPersistence {
     boolean hasChild(String cardId);
 
     List<Card> loadChildCards(String cardId);
-
-    boolean isArchived(String cardId);
-
-    boolean isDone(String cardId);
 }

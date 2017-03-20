@@ -73,6 +73,9 @@ public class CardsService {
     @CacheEvict(value = "card", key = "contains(#card.stageId)", allEntries = true)
     public Card modify(String cardId, Card card, String stageId, String boardId, String userName) {
         logger.info("modify card:{}", card);
+        if (isCardArchivedOrDone(cardId)) {
+            throw new BusinessException(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS);
+        }
         Card originCard = loadAndValidateCard(cardId);
         if (card.isMoveToOtherStage(originCard)) {
             moveCardToOtherStage(originCard, card, userName);
@@ -179,18 +182,9 @@ public class CardsService {
         return childCards;
     }
 
-    @Cacheable(value = "card", key = "'card-archived'+#cardId")
-    public boolean isArchived(String cardId) {
-        return cardsPersistence.isArchived(cardId);
-    }
-
-    @Cacheable(value = "card", key = "'card-done'+#cardId")
-    public boolean isDone(String cardId) {
-        return cardsPersistence.isDone(cardId);
-    }
-
     @Cacheable(value = "card", key = "'card-archived-done'+#cardId")
     public boolean isCardArchivedOrDone(String cardId) {
-        return isDone(cardId) || isArchived(cardId);
+        Card card = findById(cardId);
+        return stagesService.isDoneOrArchived(card.getStageId());
     }
 }

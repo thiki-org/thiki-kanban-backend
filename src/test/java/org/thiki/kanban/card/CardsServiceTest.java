@@ -86,4 +86,12 @@ public class CardsServiceTest {
 
         cardsService.modify(cardId, newCard, originStageId, boardId, userName);
     }
+
+    @Test
+    public void should_failed_if_card_is_archived_or_in_doneStatus() {
+        expectedException.expectMessage(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS.message());
+
+        when(stagesService.isDoneOrArchived(any())).thenReturn(true);
+        cardsService.modify(cardId, newCard, originStageId, boardId, userName);
+    }
 }
