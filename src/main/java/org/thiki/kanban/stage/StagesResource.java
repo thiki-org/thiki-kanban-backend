@@ -41,8 +41,8 @@ public class StagesResource extends RestResource {
         Link selfLink = linkTo(methodOn(StagesController.class).loadAll(boardId, viewType, userName)).withSelfRel();
         stagesResource.add(tlink.from(selfLink).build(userName));
 
-        Link sortNumbersLink = linkTo(methodOn(StagesController.class).resort(stageList, boardId, userName)).withRel("sortNumbers");
-        stagesResource.add(tlink.from(sortNumbersLink).build(userName));
+        Link movementLink = linkTo(methodOn(StagesController.class).resort(stageList, boardId, userName)).withRel("movement");
+        stagesResource.add(tlink.from(movementLink).build(userName));
         logger.info("stages resource building completed.board:{},userName:{}", boardId, userName);
         return stagesResource.getResource();
     }

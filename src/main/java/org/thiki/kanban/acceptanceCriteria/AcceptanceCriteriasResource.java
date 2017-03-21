@@ -42,8 +42,8 @@ public class AcceptanceCriteriasResource extends RestResource {
         Link selfLink = linkTo(methodOn(AcceptanceCriteriaController.class).loadAcceptanceCriteriasByCardId(boardId, stageId, cardId, userName)).withSelfRel();
         acceptanceCriteriasResource.add(tlink.from(selfLink).build(userName));
 
-        Link sortNumbersLink = linkTo(methodOn(AcceptanceCriteriaController.class).resortAcceptCriterias(null, boardId, stageId, cardId, userName)).withRel("sortNumbers");
-        acceptanceCriteriasResource.add(tlink.from(sortNumbersLink).build(userName));
+        Link movementLink = linkTo(methodOn(AcceptanceCriteriaController.class).resortAcceptCriterias(null, boardId, stageId, cardId, userName)).withRel("movement");
+        acceptanceCriteriasResource.add(tlink.from(movementLink).build(userName));
 
         Link cardLink = linkTo(methodOn(CardsController.class).findById(boardId, stageId, cardId, userName)).withRel("card");
         acceptanceCriteriasResource.add(tlink.from(cardLink).build(userName));

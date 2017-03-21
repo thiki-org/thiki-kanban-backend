@@ -166,6 +166,7 @@ public class StagesControllerTest extends TestBase {
                 .body("_links.all.href", endsWith("/boards/feeId/stages"))
                 .body("_links.self.href", endsWith("/boards/feeId/stages/fooId"));
     }
+
     @Scenario("更新stage时,修改完成规则")
     @Test
     public void shouldUpdateDefinitionOfDoneSuccessfully() {
@@ -253,14 +254,14 @@ public class StagesControllerTest extends TestBase {
                 .contentType(ContentType.JSON)
                 .body("[{\"id\":\"stage-fooId1\",\"sortNumber\":2},{\"id\":\"stage-fooId2\",\"sortNumber\":3}]")
                 .when()
-                .put("/boards/feeId/stages/sortNumbers")
+                .put("/boards/feeId/stages/movement")
                 .then()
                 .statusCode(200)
                 .body("stages[0].title", equalTo("stageTitle1"))
                 .body("stages[0].sortNumber", equalTo(2))
                 .body("stages[1].title", equalTo("stageTitle2"))
                 .body("stages[1].sortNumber", equalTo(3))
-                .body("_links.self.href", endsWith("/boards/feeId/stages/sortNumbers"));
+                .body("_links.self.href", endsWith("/boards/feeId/stages/movement"));
     }
 
     @Scenario("当删除一个stage时,如果待删除的stage存在,则删除成功")
@@ -304,7 +305,7 @@ public class StagesControllerTest extends TestBase {
                 .body("stages[0]._links.self.href", endsWith("/boards/feeId/stages/fooId"))
                 .body("stages[0]._links.cards.href", endsWith("/boards/feeId/cards"))
                 .body("_links.self.href", endsWith("/boards/feeId/stages"))
-                .body("_links.sortNumbers.href", endsWith("/boards/feeId/stages/sortNumbers"));
+                .body("_links.movement.href", endsWith("/boards/feeId/stages/movement"));
     }
 
     @Scenario("通过指定状态的stage-默认为迭代视图")

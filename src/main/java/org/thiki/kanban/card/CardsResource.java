@@ -38,8 +38,8 @@ public class CardsResource extends RestResource {
         Link selfLink = linkTo(methodOn(CardsController.class).findByStageId(boardId, stageId, userName)).withSelfRel();
         cardsResource.add(tLink.from(selfLink).build(userName));
 
-        Link sortNumbersLink = linkTo(methodOn(CardsController.class).resortCards(cardList, boardId, stageId, userName)).withRel("sortNumbers");
-        cardsResource.add(tLink.from(sortNumbersLink).build(userName));
+        Link movementLink = linkTo(methodOn(CardsController.class).moveCards(cardList, boardId, stageId, userName)).withRel("movement");
+        cardsResource.add(tLink.from(movementLink).build(userName));
         logger.info("cards resource building completed.board:{},stageId:{},userName:{}", boardId, stageId, userName);
         return cardsResource.getResource();
     }

@@ -28,7 +28,7 @@ public class CardsController {
 
     @RequestMapping(value = "/boards/{boardId}/cards", method = RequestMethod.POST)
     public HttpEntity create(@RequestBody Card card, @RequestHeader String userName, @PathVariable String boardId) throws Exception {
-        Card savedCard = cardsService.saveCard(userName, boardId, card);
+        Card savedCard = cardsService.createCard(userName, boardId, card);
         return Response.post(cardResource.toResource(savedCard, boardId, savedCard.getStageId(), userName));
     }
 
@@ -58,9 +58,9 @@ public class CardsController {
         return Response.build(cardResource.toResource(boardId, stageId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/sortNumbers", method = RequestMethod.PUT)
-    public HttpEntity resortCards(@RequestBody List<Card> cards, @PathVariable String boardId, @PathVariable String stageId, @RequestHeader String userName) throws Exception {
-        List<Card> sortedCards = cardsService.resortCards(cards, stageId, boardId, userName);
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/movement", method = RequestMethod.PUT)
+    public HttpEntity moveCards(@RequestBody List<Card> cards, @PathVariable String boardId, @PathVariable String stageId, @RequestHeader String userName) throws Exception {
+        List<Card> sortedCards = cardsService.moveCards(cards, stageId, boardId, userName);
 
         return Response.build(cardsResource.toResource(sortedCards, boardId, stageId, userName));
     }

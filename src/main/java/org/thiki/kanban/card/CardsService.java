@@ -38,7 +38,7 @@ public class CardsService {
     private AcceptanceCriteriaService acceptanceCriteriaService;
 
     @CacheEvict(value = "card", key = "contains('#card.stageId')", allEntries = true)
-    public Card saveCard(String userName, String boardId, Card card) {
+    public Card createCard(String userName, String boardId, Card card) {
         logger.info("Creating new card:{}", card);
         if (card.getStageId() == null) {
             throw new BusinessException(CardsCodes.STAGE_IS_NOT_SPECIFIED);
@@ -78,7 +78,7 @@ public class CardsService {
         }
         Card originCard = loadAndValidateCard(cardId);
         if (card.isMoveToOtherStage(originCard)) {
-            moveCardToOtherStage(originCard, card, userName);
+            validateWhetherMovingToOtherStageIsAllowed(originCard, card, userName);
         }
         if (card.moveToParent(originCard)) {
             moveToParentCard(cardId, card);
@@ -133,18 +133,18 @@ public class CardsService {
 
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
     @Caching(evict = {@CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true), @CacheEvict(value = "card", key = "contains(#stageId)", allEntries = true)})
-    public List<Card> resortCards(List<Card> cards, String stageId, String boardId, String userName) {
-        for (Card card : cards) {
-            Card originCard = cardsPersistence.findById(card.getId());
-            if (card.isMoveToOtherStage(originCard)) {
-                moveCardToOtherStage(originCard, card, userName);
+    public List<Card> moveCards(List<Card> cardsToMove, String stageId, String boardId, String userName) {
+        for (Card cardToMove : cardsToMove) {
+            Card originCard = cardsPersistence.findById(cardToMove.getId());
+            if (cardToMove.isMoveToOtherStage(originCard)) {
+                validateWhetherMovingToOtherStageIsAllowed(originCard, cardToMove, userName);
             }
-            cardsPersistence.resort(card);
+            cardsPersistence.move(cardToMove);
         }
         return findByStageId(stageId);
     }
 
-    private void moveCardToOtherStage(Card originCard, Card card, String userName) {
+    private void validateWhetherMovingToOtherStageIsAllowed(Card originCard, Card card, String userName) {
         Stage originStage = stagesService.findById(originCard.getStageId());
         Stage targetStage = stagesService.findById(card.getStageId());
 

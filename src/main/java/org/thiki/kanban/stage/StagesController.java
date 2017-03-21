@@ -54,7 +54,7 @@ public class StagesController {
         return Response.post(stageResource.toResource(savedStage, boardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/stages/sortNumbers", method = RequestMethod.PUT)
+    @RequestMapping(value = "/boards/{boardId}/stages/movement", method = RequestMethod.PUT)
     public HttpEntity resort(@RequestBody List<Stage> stages, @PathVariable String boardId, @RequestHeader String userName) throws Exception {
         List<Stage> stageList = stagesService.resortStages(stages, boardId);
         return Response.build(resortStagesResource.toResource(stageList, boardId, null, userName));

@@ -37,7 +37,7 @@
         WHERE id=#{cardId} AND delete_status=0
     </update>
 
-    <update id="resort" parameterType="org.thiki.kanban.card.Card" flushCache="true">
+    <update id="move" parameterType="org.thiki.kanban.card.Card" flushCache="true">
         UPDATE kb_card SET sort_number = #{sortNumber}
         <if test="stageId!=null">
             ,stage_id=#{stageId}

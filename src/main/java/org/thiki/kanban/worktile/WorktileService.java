@@ -105,7 +105,7 @@ public class WorktileService {
                     .filter(stage -> stage.getTitle().equals(task.getEntry().getName()))
                     .forEach(stage -> {
                         card.setStageId(stage.getId());
-                        Card savedCard = cardsService.saveCard(userName, boardId, card);
+                        Card savedCard = cardsService.createCard(userName, boardId, card);
                         savedCards.add(savedCard);
                     });
         }

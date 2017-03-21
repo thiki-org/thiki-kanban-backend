@@ -84,7 +84,7 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("acceptanceCriterias[0]._links.acceptanceCriterias.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
-                .body("_links.sortNumbers.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers"));
+                .body("_links.movement.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/movement"));
     }
 
     @Scenario("获取指定的验收标准>用户为卡片创建验收标准后,可以根据ID获取指定的验收标准")
@@ -160,7 +160,7 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers")
+                .put("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/movement")
                 .then()
                 .statusCode(200)
                 .body("acceptanceCriterias[0].summary", equalTo("AC-summary-1"))
@@ -169,6 +169,6 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("acceptanceCriterias[1].sortNumber", equalTo(2))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias"))
                 .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
-                .body("_links.sortNumbers.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/sortNumbers"));
+                .body("_links.movement.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/movement"));
     }
 }

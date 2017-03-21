@@ -18,7 +18,7 @@ public interface CardsPersistence {
 
     Integer deleteById(@Param("cardId") String cardId);
 
-    Integer resort(Card card);
+    Integer move(Card card);
 
     int totalCardsIncludingDeleted(@Param("boardId") String boardId, @Param("currentMonth") String currentMonth);
 

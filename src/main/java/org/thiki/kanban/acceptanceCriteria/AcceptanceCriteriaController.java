@@ -50,7 +50,7 @@ public class AcceptanceCriteriaController {
         return Response.build(acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, stageId, cardId, userName));
     }
 
-    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias/sortNumbers", method = RequestMethod.PUT)
+    @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}/acceptanceCriterias/movement", method = RequestMethod.PUT)
     public HttpEntity resortAcceptCriterias(@RequestBody List<AcceptanceCriteria> acceptanceCriterias, @PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
         List<AcceptanceCriteria> acceptanceCriteriaList = acceptanceCriteriaService.resortAcceptCriterias(cardId, acceptanceCriterias, userName);
         return Response.build(acceptanceCriteriasResource.toResource(acceptanceCriteriaList, boardId, stageId, cardId, userName));

@@ -147,7 +147,7 @@ public class CardsControllerTest extends TestBase {
                 .body("cards[0]._links.cardTags.href", endsWith("/boards/boardId-foo/stages/fooId/cards/card-fooId/tags"))
                 .body("cards[0]._links.tags.href", endsWith("/boards/boardId-foo/tags"))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/stages/fooId/cards"))
-                .body("_links.sortNumbers.href", endsWith("/boards/boardId-foo/stages/fooId/cards/sortNumbers"));
+                .body("_links.movement.href", endsWith("/boards/boardId-foo/stages/fooId/cards/movement"));
     }
 
     @Scenario("根据ID查找一个卡片时,如果卡片存在,则返回该卡片")
