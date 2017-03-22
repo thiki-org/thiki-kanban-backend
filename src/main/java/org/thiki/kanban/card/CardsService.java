@@ -81,7 +81,7 @@ public class CardsService {
             validateWhetherMovingToOtherStageIsAllowed(originCard, card, userName);
         }
         if (card.moveToParent(originCard)) {
-            moveToParentCard(cardId, card);
+            validateWhetherMovingToParentCardIsAllowed(cardId, card);
         }
         card.setCode(originCard.stillNoCode() ? generateCode(boardId) : originCard.getCode());
 
@@ -92,7 +92,7 @@ public class CardsService {
         return savedCard;
     }
 
-    private void moveToParentCard(String cardId, Card card) {
+    private void validateWhetherMovingToParentCardIsAllowed(String cardId, Card card) {
         Optional<Card> parentCard = Optional.ofNullable(cardsPersistence.findById(card.getParentId()));
         if (!parentCard.isPresent()) {
             throw new BusinessException(CardsCodes.PARENT_CARD_IS_NOT_FOUND);
@@ -147,7 +147,9 @@ public class CardsService {
     private void validateWhetherMovingToOtherStageIsAllowed(Card originCard, Card card, String userName) {
         Stage originStage = stagesService.findById(originCard.getStageId());
         Stage targetStage = stagesService.findById(card.getStageId());
-
+        if (targetStage.isArchived()) {
+            throw new BusinessException(CardsCodes.TARGET_STAGE_IS_ARCHIVED);
+        }
         if (stagesService.isReachedWipLimit(card.getStageId())) {
             throw new BusinessException(CardsCodes.STAGE_WIP_REACHED_LIMIT);
         }

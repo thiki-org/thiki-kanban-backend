@@ -46,6 +46,7 @@ public class CardsServiceTest {
     private String boardId = "board-fooId";
     private String userName = "someone";
     private Card originCard = new Card(), newCard = new Card();
+    private Stage originStage = new Stage(), targetStage = new Stage();
 
 
     @Before
@@ -55,7 +56,7 @@ public class CardsServiceTest {
         newCard.setId(cardId);
         originCard.setStageId(originStageId);
         newCard.setStageId(targetStageId);
-        Stage originStage = new Stage(), targetStage = new Stage();
+
         originStage.setId(originStageId);
         targetStage.setId(targetStageId);
         targetStage.setStatus(StageCodes.STAGE_STATUS_DONE);
@@ -92,6 +93,13 @@ public class CardsServiceTest {
         expectedException.expectMessage(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS.message());
 
         when(stagesService.isDoneOrArchived(any())).thenReturn(true);
+        cardsService.modify(cardId, newCard, originStageId, boardId, userName);
+    }
+
+    @Test
+    public void should_failed_if_target_stage_is_archived() {
+        expectedException.expectMessage(CardsCodes.TARGET_STAGE_IS_ARCHIVED.message());
+        targetStage.setType(StageCodes.STAGE_TYPE_ARCHIVE);
         cardsService.modify(cardId, newCard, originStageId, boardId, userName);
     }
 }
