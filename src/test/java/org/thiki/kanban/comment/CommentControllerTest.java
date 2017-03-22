@@ -26,7 +26,9 @@ public class CommentControllerTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author,stage_id) VALUES ('card-fooId','this is the first card.','someone','stage-id-foo')");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id) VALUES ('stage-fooId','this is the first stage.',1,'feeId')");
+
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author,stage_id) VALUES ('card-fooId','this is the first card.','someone','stage-fooId')");
     }
 
     @Scenario("撰写评论>用户创建完卡片后,可以创建为其撰写相应的评论")
@@ -36,14 +38,14 @@ public class CommentControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments")
+                .post("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments")
                 .then()
                 .statusCode(201)
                 .body("summary", equalTo("comment-summary"))
                 .body("author", equalTo(userName))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId"))
-                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
-                .body("_links.comments.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments/fooId"))
+                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId"))
+                .body("_links.comments.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments"));
     }
 
     @Scenario("创建评论>如果用户在创建评论时,未提供概述,则不允许创建")
@@ -53,7 +55,7 @@ public class CommentControllerTest extends TestBase {
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .post("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments")
+                .post("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments")
                 .then()
                 .statusCode(400)
                 .body("code", equalTo(400))
@@ -69,16 +71,16 @@ public class CommentControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments")
+                .get("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments")
                 .then()
                 .statusCode(200)
                 .body("comments[0].summary", equalTo("comment-summary"))
                 .body("comments[0].author", equalTo(userName))
-                .body("comments[0]._links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId"))
-                .body("comments[0]._links.comments.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments"))
+                .body("comments[0]._links.self.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments/fooId"))
+                .body("comments[0]._links.comments.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments"))
                 .body("comments[0]._links.avatar.href", endsWith("/users/someone/avatar"))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments"))
-                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments"))
+                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId"));
     }
 
     @Scenario("获取指定的评论>用户为卡片创建评论后,可以根据ID获取指定的评论")
@@ -90,14 +92,14 @@ public class CommentControllerTest extends TestBase {
 
         given().header("userName", userName)
                 .when()
-                .get("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId")
+                .get("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments/fooId")
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("comment-summary"))
                 .body("author", equalTo(userName))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId"))
-                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
-                .body("_links.comments.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments/fooId"))
+                .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId"))
+                .body("_links.comments.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments"));
     }
 
     @Scenario("删除指定的评论>用户为卡片创建评论后,可以删除指定的评论")
@@ -111,9 +113,9 @@ public class CommentControllerTest extends TestBase {
                 .contentType(ContentType.JSON)
                 .body("{\"summary\":\"new-comment-summary\",\"finished\":\"true\"}")
                 .when()
-                .delete("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments/fooId")
+                .delete("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments/fooId")
                 .then()
                 .statusCode(200)
-                .body("_links.comments.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/comments"));
+                .body("_links.comments.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/card-fooId/comments"));
     }
 }

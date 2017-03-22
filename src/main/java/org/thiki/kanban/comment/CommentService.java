@@ -5,7 +5,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.acceptanceCriteria.AcceptanceCriteriaCodes;
 import org.thiki.kanban.activity.ActivityService;
+import org.thiki.kanban.card.CardsService;
+import org.thiki.kanban.foundation.exception.BusinessException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,13 +22,18 @@ public class CommentService {
 
     @Resource
     private CommentPersistence commentPersistence;
-
     @Resource
     private ActivityService activityService;
+    @Resource
+    private CardsService cardsService;
 
     @CacheEvict(value = "comment", key = "contains('#cardId')", allEntries = true)
     public Comment addComment(String userName, String cardId, Comment comment) {
         logger.info("Add comment.userName:{},cardId:{},comment:{}", userName, cardId, comment);
+        boolean isCardArchivedOrDone = cardsService.isCardArchivedOrDone(cardId);
+        if (isCardArchivedOrDone) {
+            throw new BusinessException(AcceptanceCriteriaCodes.CARD_WAS_ALREADY_DONE_OR_ARCHIVED);
+        }
         commentPersistence.addComment(userName, cardId, comment);
         Comment savedComment = commentPersistence.findById(comment.getId());
         logger.info("Saved comment:{}", savedComment);
