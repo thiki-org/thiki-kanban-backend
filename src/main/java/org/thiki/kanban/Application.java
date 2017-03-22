@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.system.ApplicationPidFileWriter;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import de.codecentric.boot.admin.config.EnableAdminServer;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 /**
@@ -14,6 +15,7 @@ import de.codecentric.boot.admin.config.EnableAdminServer;
 @EnableAdminServer
 @SpringBootApplication
 @EnableScheduling
+@EnableTransactionManagement
 public class Application {
     public static void main(String[] args) throws Exception {
         SpringApplication springApplication = new SpringApplication(Application.class);
