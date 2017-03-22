@@ -6,10 +6,8 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.board.BoardCodes;
-import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.foundation.exception.BusinessException;
-import org.thiki.kanban.sprint.Sprint;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,7 +17,6 @@ import java.util.List;
  */
 @Service
 public class StagesService {
-    public static final String ARCHIVE_SUFFIX = "归档";
     public static Logger logger = LoggerFactory.getLogger(StagesService.class);
     @Resource
     private StagesPersistence stagesPersistence;
@@ -116,30 +113,6 @@ public class StagesService {
         List<Stage> resortedStages = loadByBoardId(boardId, BoardCodes.VIEW_TYPE_SPRINT);
         logger.info("Resorted stages:{}", resortedStages);
         return resortedStages;
-    }
-
-    @CacheEvict(value = "stage", key = "contains('#boardId')", allEntries = true)
-    public Stage archive(Sprint sprint, String boardId, String userName) {
-        logger.info("Archiving stage.boardId:{}", boardId);
-        Stage doneStage = findStageByStatus(boardId, StageCodes.STAGE_STATUS_DONE);
-        if (doneStage == null) {
-            throw new BusinessException(StageCodes.DONE_STAGE_IS_NOT_EXIST);
-        }
-        Stage archiveStage = new Stage();
-        archiveStage.setBoardId(boardId);
-        archiveStage.setTitle(sprint.getSprintName() + ARCHIVE_SUFFIX);
-        archiveStage.setType(StageCodes.STAGE_TYPE_ARCHIVE);
-        archiveStage.setStatus(StageCodes.STAGE_STATUS_DONE);
-        archiveStage.setAuthor(userName);
-        Stage archivedStage = create(userName, boardId, archiveStage);
-        logger.info("Transfer the cards of the origin stage to archived stage.");
-        List<Card> cards = cardsService.findByStageId(doneStage.getId());
-        for (Card card : cards) {
-            card.setStageId(archivedStage.getId());
-            cardsService.modify(card.getId(), card, doneStage.getId(), boardId, userName);
-        }
-        logger.info("Archived stage.stage:{}", archiveStage);
-        return archivedStage;
     }
 
     public Stage findStageByStatus(String boardId, Integer status) {

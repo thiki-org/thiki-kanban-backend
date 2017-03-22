@@ -172,7 +172,6 @@ public class SprintControllerTest extends TestBase {
     @Scenario("获取看板的当前迭代时，计算出相应的天数")
     @Test
     public void calculateRemainDaysWhenLoadingActiveSprint() {
-
         int wentDays = 2;
         int timeBox = 15;
         String currentTime = DateService.instance().getNow_EN();
@@ -229,6 +228,8 @@ public class SprintControllerTest extends TestBase {
                 .values("fooId", "sprint_name", "2017-02-04 12:11:44", "2017-02-05 12:11:44", "board-fooId", 1)
                 .exec();
 
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('card-fooId','this is the card summary.','play badminton','someone','stage_fooId')");
+
         given().header("userName", "someone")
                 .body("{\"startTime\":\"2017-02-03 12:11:44\",\"endTime\":\"2017-02-05 12:11:44\",\"sprintName\":\"sprintName-foo\",\"status\":\"2\"}")
                 .contentType(ContentType.JSON)
@@ -242,6 +243,7 @@ public class SprintControllerTest extends TestBase {
                 .body("_links.board.href", endsWith("/boards/board-fooId"))
                 .body("_links.self.href", endsWith("/boards/board-fooId/sprints/fooId"));
 
-        assertEquals("sprint_name归档", jdbcTemplate.queryForObject("select title FROM kb_stage WHERE status=9 AND type=9", String.class));
+        assertEquals("sprintName-foo归档", jdbcTemplate.queryForObject("select title FROM kb_stage WHERE status=9 AND type=9", String.class));
+        assertEquals(1, jdbcTemplate.queryForList("select count(*) FROM kb_card WHERE stage_id='stage_fooId'").size());
     }
 }

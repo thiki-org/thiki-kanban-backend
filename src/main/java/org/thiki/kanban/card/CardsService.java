@@ -139,7 +139,7 @@ public class CardsService {
             if (cardToMove.isMoveToOtherStage(originCard)) {
                 validateWhetherMovingToOtherStageIsAllowed(originCard, cardToMove, userName);
             }
-            cardsPersistence.move(cardToMove);
+            cardsPersistence.move(cardToMove.getId(), cardToMove.getStageId(), cardToMove.getSortNumber());
         }
         return findByStageId(stageId);
     }
@@ -188,5 +188,9 @@ public class CardsService {
     public boolean isCardArchivedOrDone(String cardId) {
         Card card = findById(cardId);
         return stagesService.isDoneOrArchived(card.getStageId());
+    }
+
+    public void archive(String cardId, String archivedCard, Integer sortNumber, String userName) {
+        cardsPersistence.move(cardId, archivedCard, sortNumber);
     }
 }

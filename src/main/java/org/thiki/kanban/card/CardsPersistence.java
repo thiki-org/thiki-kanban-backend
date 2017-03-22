@@ -18,8 +18,6 @@ public interface CardsPersistence {
 
     Integer deleteById(@Param("cardId") String cardId);
 
-    Integer move(Card card);
-
     int totalCardsIncludingDeleted(@Param("boardId") String boardId, @Param("currentMonth") String currentMonth);
 
     List<Card> loadUnArchivedCards();
@@ -27,4 +25,8 @@ public interface CardsPersistence {
     boolean hasChild(String cardId);
 
     List<Card> loadChildCards(String cardId);
+
+    Integer archive(String cardId, String archivedCard, String userName);
+
+    void move(@Param("cardId") String cardId, @Param("targetStageId") String targetStageId, @Param("sortNumber") Integer sortNumber);
 }
