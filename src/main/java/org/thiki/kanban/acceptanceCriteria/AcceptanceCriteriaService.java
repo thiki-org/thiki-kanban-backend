@@ -32,6 +32,10 @@ public class AcceptanceCriteriaService {
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
     public AcceptanceCriteria addAcceptCriteria(String userName, String cardId, AcceptanceCriteria acceptanceCriteria) {
         logger.info("User {} adds a acceptance criteria in card [{}],the acceptanceCriteria is:{}", userName, cardId, acceptanceCriteria);
+        boolean isCardArchivedOrDone = cardsService.isCardArchivedOrDone(cardId);
+        if (isCardArchivedOrDone) {
+            throw new BusinessException(AcceptanceCriteriaCodes.CARD_WAS_ALREADY_DONE_OR_ARCHIVED);
+        }
         acceptanceCriteriaPersistence.addAcceptCriteria(userName, cardId, acceptanceCriteria);
         AcceptanceCriteria savedAcceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteria.getId());
         logger.info("Saved acceptanceCriteria:{}", savedAcceptanceCriteria);

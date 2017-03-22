@@ -39,6 +39,12 @@ public class AcceptanceCriteriaServiceTest {
     }
 
     @Test
+    public void should_creating_failed_when_card_is_done_or_archived() {
+        AcceptanceCriteria acceptanceCriteria = new AcceptanceCriteria();
+        acceptanceCriteriaService.addAcceptCriteria(userName, cardId, acceptanceCriteria);
+    }
+
+    @Test
     public void should_update_failed_when_card_is_done_or_archived() {
         acceptanceCriteriaService.updateAcceptCriteria(cardId, acceptanceCriteriaId, new AcceptanceCriteria(), userName);
     }
