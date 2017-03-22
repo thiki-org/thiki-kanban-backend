@@ -55,10 +55,11 @@ public class AssignmentService {
         List<Assignment> originAssignments = findByCardId(cardId);
         for (Assignment assignment : assignments) {
             boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
-            if (!isAlreadyAssigned && !assignment.isSelfAssignment()) {
-                assignment.setCardId(cardId);
-                assignment.setAuthor(userName);
-                assignmentPersistence.create(assignment);
+            if (isAlreadyAssigned) continue;
+            assignment.setCardId(cardId);
+            assignment.setAuthor(userName);
+            assignmentPersistence.create(assignment);
+            if (!assignment.isSelfAssignment()) {
                 User sender = usersService.findByName(assignment.getAssigner());
                 User receiver = usersService.findByName(assignment.getAssignee());
                 AssignmentMail assignmentMail = AssignmentMail.newMail(assignment, sender, receiver, card, board, false);
