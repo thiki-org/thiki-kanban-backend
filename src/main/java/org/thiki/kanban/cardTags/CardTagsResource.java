@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.card.CardsController;
 import org.thiki.kanban.card.CardsResource;
 import org.thiki.kanban.foundation.common.RestResource;

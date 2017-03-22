@@ -8,8 +8,8 @@ import org.thiki.kanban.TestBase;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
-import org.thiki.kanban.projects.project.ProjectCodes;
 import org.thiki.kanban.projects.members.MembersCodes;
+import org.thiki.kanban.projects.project.ProjectCodes;
 
 import static com.jayway.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.equalTo;

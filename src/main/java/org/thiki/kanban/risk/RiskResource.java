@@ -1,6 +1,5 @@
 package org.thiki.kanban.risk;
 
-import org.omg.CORBA.OBJ_ADAPTER;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
@@ -9,8 +8,6 @@ import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;

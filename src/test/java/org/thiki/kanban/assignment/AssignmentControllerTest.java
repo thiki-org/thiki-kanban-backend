@@ -14,7 +14,6 @@ import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.StringEndsWith.endsWith;
-import static org.mockito.Mockito.when;
 
 /**
  * Created by xubt on 6/16/16.

@@ -7,10 +7,10 @@ import org.thiki.kanban.foundation.mail.MailService;
 import org.thiki.kanban.notification.Notification;
 import org.thiki.kanban.notification.NotificationService;
 import org.thiki.kanban.notification.NotificationType;
+import org.thiki.kanban.projects.members.MembersService;
 import org.thiki.kanban.projects.project.Project;
 import org.thiki.kanban.projects.project.ProjectCodes;
 import org.thiki.kanban.projects.project.ProjectsService;
-import org.thiki.kanban.projects.members.MembersService;
 import org.thiki.kanban.user.User;
 import org.thiki.kanban.user.UsersService;
 

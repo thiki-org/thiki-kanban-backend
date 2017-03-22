@@ -270,7 +270,6 @@
         </module>
 
 
-
         <!-- Checks to ensure that the javadoc tags exist (if required) !-->
         <!-- See http://checkstyle.sf.net/config_javadoc.html#JavadocMethod !-->
         <module name="JavadocMethod">

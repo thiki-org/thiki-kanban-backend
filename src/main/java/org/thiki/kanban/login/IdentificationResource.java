@@ -2,7 +2,6 @@ package org.thiki.kanban.login;
 
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
-import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
 import org.thiki.kanban.notification.NotificationController;

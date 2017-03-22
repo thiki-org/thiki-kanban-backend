@@ -11,6 +11,7 @@ public enum AssignmentCodes {
     public static final String CARD_CANCEL_ASSIGNMENT = "card-cancel-assignment-template.ftl";
     private String code;
     private String message;
+
     AssignmentCodes(String code, String message) {
         this.code = code;
         this.message = message;

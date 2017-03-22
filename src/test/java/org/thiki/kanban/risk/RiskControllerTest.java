@@ -99,7 +99,7 @@ public class RiskControllerTest extends TestBase {
 
     @Scenario("可以通过风险id查看风险")
     @Test
-    public void findRiskByRiskId(){
+    public void findRiskByRiskId() {
         jdbcTemplate.execute("insert into kb_risk (id, card_id, risk_reason, type, author, is_resolved) " +
                 "VALUES('foo_Id','card-fooId','risk-reason','0','someone','false')");
         given().header("userName", userName)

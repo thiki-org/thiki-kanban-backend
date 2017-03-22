@@ -163,6 +163,7 @@ public class Stage {
     public boolean isArchived() {
         return StageCodes.STAGE_TYPE_ARCHIVE.equals(this.type);
     }
+
     @JsonIgnore
     public boolean isReachedWipLimit(Integer currentCardsNumbers) {
         if (this.wipLimit == null || currentCardsNumbers == null) {

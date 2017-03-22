@@ -1,11 +1,10 @@
 package org.thiki.kanban;
 
+import de.codecentric.boot.admin.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.system.ApplicationPidFileWriter;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import de.codecentric.boot.admin.config.EnableAdminServer;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 

@@ -1,6 +1,5 @@
 package org.thiki.kanban.projects.members;
 
-import org.thiki.kanban.user.Profile;
 import org.thiki.kanban.user.User;
 
 /**

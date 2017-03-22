@@ -48,7 +48,7 @@ public class NotificationService {
     public Notification findNotificationById(String id) {
         logger.info("Loading notification id:{}", id);
         Notification notification = notificationPersistence.read(id);
-        if (notification!=null&&!notification.getIsRead()) {
+        if (notification != null && !notification.getIsRead()) {
             notification.setIsRead(true);
             notificationPersistence.setAlreadyRead(id);
         }

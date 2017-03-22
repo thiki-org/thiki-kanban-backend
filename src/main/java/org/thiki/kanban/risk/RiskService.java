@@ -1,6 +1,5 @@
 package org.thiki.kanban.risk;
 
-import com.sun.org.apache.bcel.internal.generic.VariableLengthInstruction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +15,9 @@ import java.util.List;
 @Service
 public class RiskService {
 
+    public static Logger logger = LoggerFactory.getLogger(RiskService.class);
     @Autowired
     RiskPersistence riskPersistence;
-
-    public static Logger logger = LoggerFactory.getLogger(RiskService.class);
 
     @CacheEvict(value = "risk", key = "contains('#cardId')", allEntries = true)
     public Risk addRisk(String userName, String cardId, Risk risk) {

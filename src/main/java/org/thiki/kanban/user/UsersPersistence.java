@@ -2,7 +2,6 @@ package org.thiki.kanban.user;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
-import org.thiki.kanban.user.registration.Registration;
 
 
 @Repository

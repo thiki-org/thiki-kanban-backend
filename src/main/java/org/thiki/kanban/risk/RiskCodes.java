@@ -11,7 +11,13 @@ public enum RiskCodes {
 
     public final static String RISK_REASON_IS_EMPTY_MESSAGE = "风险的原因不能为空";
     public static final String RISK_REASON_IS_INVALID = "风险的理由限制早在200个字符";
+    private String code;
+    private String message;
 
+    RiskCodes(String code, String message) {
+        this.code = code;
+        this.message = message;
+    }
 
     public String getCode() {
         return code;
@@ -28,14 +34,4 @@ public enum RiskCodes {
     public void setMessage(String message) {
         this.message = message;
     }
-
-
-    RiskCodes(String code, String message) {
-        this.code = code;
-        this.message = message;
-    }
-
-
-    private String code;
-    private String message;
 }

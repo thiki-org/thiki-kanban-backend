@@ -12,6 +12,7 @@
 
     <select id="loadVerificationsByAcceptanceCriteria" parameterType="java.lang.String"
             resultType="org.thiki.kanban.verification.Verification">
-        SELECT * FROM kb_verification WHERE acceptance_criteria_id= #{acceptanceCriteriaId} AND delete_status=0 ORDER BY creation_time DESC
+        SELECT * FROM kb_verification WHERE acceptance_criteria_id= #{acceptanceCriteriaId} AND delete_status=0 ORDER BY
+        creation_time DESC
     </select>
 </mapper>
