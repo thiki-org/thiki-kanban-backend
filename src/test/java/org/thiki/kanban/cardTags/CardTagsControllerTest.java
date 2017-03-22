@@ -31,6 +31,9 @@ public class CardTagsControllerTest extends TestBase {
     @Scenario("贴标签>用户创建卡片后,可以给卡片贴标签,以区分卡片的不同属性")
     @Test
     public void stickTags() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id) VALUES ('stage-fooId','this is the first stage.',1,'feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('card-fooId','this is the card summary.','play badminton',1,'stage-fooId')");
+
         dbPreparation.table("kb_tag")
                 .names("id,name,color,author,board_id")
                 .values("foo-tagId1", "tag-name", "tag-color", "someone", "boardId-foo").exec();

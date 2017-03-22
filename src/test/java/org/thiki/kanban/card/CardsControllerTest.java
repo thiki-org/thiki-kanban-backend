@@ -328,7 +328,8 @@ public class CardsControllerTest extends TestBase {
     @Scenario("当删除一个卡片时,如果卡片存在,则删除成功")
     @Test
     public void delete_shouldDeleteSuccessfullyWhenTheCardIsExist() {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id) VALUES ('stage-fooId','this is the first stage.',1,'feeId')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton',1,'stage-fooId')");
         given().header("userName", userName)
                 .when()
                 .delete("/boards/boardId-foo/stages/feeId/cards/fooId")

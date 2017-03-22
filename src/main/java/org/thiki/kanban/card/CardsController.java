@@ -41,7 +41,7 @@ public class CardsController {
 
     @RequestMapping(value = "/boards/{boardId}/stages/{stageId}/cards/{cardId}", method = RequestMethod.GET)
     public HttpEntity findById(@PathVariable String boardId, @PathVariable String stageId, @PathVariable String cardId, @RequestHeader String userName) throws Exception {
-        Card foundCard = cardsService.findById(cardId);
+        Card foundCard = cardsService.loadCard(cardId);
 
         return Response.build(cardResource.toResource(foundCard, boardId, stageId, userName));
     }

@@ -128,6 +128,16 @@ public class CardsService {
         return card;
     }
 
+    @Cacheable(value = "card", key = "'findCard'+#cardId")
+    public Card loadCard(String cardId) {
+        logger.info("Finding card by id:{}", cardId);
+        Card card = findById(cardId);
+        if (card == null) {
+            throw new BusinessException(CardsCodes.CARD_IS_NOT_EXISTS);
+        }
+        return card;
+    }
+
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
     @Caching(evict = {@CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true), @CacheEvict(value = "card", key = "contains(#stageId)", allEntries = true)})
     public List<Card> moveCards(List<Card> cardsToMove, String stageId, String boardId, String userName) {
