@@ -89,7 +89,7 @@ public class CardsServiceTest {
     }
 
     @Test
-    public void should_failed_if_card_is_archived_or_in_doneStatus() {
+    public void should_failed_if_card_is_archived_or_in_doneStatus_when_modifying_card() {
         expectedException.expectMessage(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS.message());
 
         when(stagesService.isDoneOrArchived(any())).thenReturn(true);
@@ -101,5 +101,15 @@ public class CardsServiceTest {
         expectedException.expectMessage(CardsCodes.TARGET_STAGE_IS_ARCHIVED.message());
         targetStage.setType(StageCodes.STAGE_TYPE_ARCHIVE);
         cardsService.modify(cardId, newCard, originStageId, boardId, userName);
+    }
+
+    @Test
+    public void should_failed_if_card_is_archived_or_in_doneStatus_when_deleting_card() {
+        expectedException.expectMessage(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS.message());
+
+        targetStage.setType(StageCodes.STAGE_TYPE_ARCHIVE);
+        when(stagesService.isDoneOrArchived(any())).thenReturn(true);
+
+        cardsService.deleteById(cardId);
     }
 }

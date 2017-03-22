@@ -76,7 +76,7 @@ public class CardsService {
         if (isCardArchivedOrDone(cardId)) {
             throw new BusinessException(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS);
         }
-        Card originCard = loadAndValidateCard(cardId);
+        Card originCard = findById(cardId);
         if (card.isMoveToOtherStage(originCard)) {
             validateWhetherMovingToOtherStageIsAllowed(originCard, card, userName);
         }
@@ -105,7 +105,9 @@ public class CardsService {
 
     @CacheEvict(value = "card", key = "contains('#cardId')", allEntries = true)
     public int deleteById(String cardId) {
-        loadAndValidateCard(cardId);
+        if (isCardArchivedOrDone(cardId)) {
+            throw new BusinessException(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS);
+        }
         logger.info("Deleting card.cardId:{}", cardId);
         return cardsPersistence.deleteById(cardId);
     }
@@ -120,15 +122,10 @@ public class CardsService {
 
     @Cacheable(value = "card", key = "'card'+#cardId")
     public Card findById(String cardId) {
-        return loadAndValidateCard(cardId);
-    }
-
-    private Card loadAndValidateCard(String cardId) {
-        Optional<Card> originCard = Optional.ofNullable(cardsPersistence.findById(cardId));
-        if (!originCard.isPresent()) {
-            throw new BusinessException(CardsCodes.CARD_IS_NOT_EXISTS);
-        }
-        return originCard.get();
+        logger.info("Loading card by id:{}", cardId);
+        Card card = cardsPersistence.findById(cardId);
+        logger.info("Found card:{}", card);
+        return card;
     }
 
     @CacheEvict(value = "card", key = "contains(#boardId)", allEntries = true)
@@ -187,6 +184,9 @@ public class CardsService {
     @Cacheable(value = "card", key = "'card-archived-done'+#cardId")
     public boolean isCardArchivedOrDone(String cardId) {
         Card card = findById(cardId);
+        if (card == null) {
+            throw new BusinessException(CardsCodes.CARD_IS_NOT_EXISTS);
+        }
         return stagesService.isDoneOrArchived(card.getStageId());
     }
 
