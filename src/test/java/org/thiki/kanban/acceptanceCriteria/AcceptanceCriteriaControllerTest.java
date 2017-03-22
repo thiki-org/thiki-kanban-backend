@@ -26,7 +26,8 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
     @Before
     public void setUp() throws Exception {
         super.setUp();
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author,stage_id) VALUES ('card-fooId','this is the first card.','someone','stage-id-foo')");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,board_id,author) VALUES ('stage-fooId','title','board_fooId','someone')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,author,stage_id) VALUES ('card-fooId','this is the first card.','someone','stage-fooId')");
     }
 
     @Scenario("创建验收标准>用户创建完卡片后,可以创建为其创建相应的验收标准")
@@ -42,6 +43,7 @@ public class AcceptanceCriteriaControllerTest extends TestBase {
                 .body("summary", equalTo("AC-summary"))
                 .body("finished", equalTo(false))
                 .body("author", equalTo(userName))
+                .body("isPassed", equalTo(0))
                 .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId"))
                 .body("_links.card.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId"))
                 .body("_links.verifications.href", endsWith("/boards/boardId-foo/stages/stages-fooId/cards/card-fooId/acceptanceCriterias/fooId/verifications"))

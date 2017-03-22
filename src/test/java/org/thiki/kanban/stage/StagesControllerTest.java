@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.thiki.kanban.TestBase;
+import org.thiki.kanban.board.BoardCodes;
 import org.thiki.kanban.foundation.annotations.Domain;
 import org.thiki.kanban.foundation.annotations.Scenario;
 import org.thiki.kanban.foundation.application.DomainOrder;
@@ -26,7 +27,7 @@ public class StagesControllerTest extends TestBase {
     @Test
     public void shouldReturn201WhenCreateStageSuccessfully() {
         given().header("userName", userName)
-                .body("{\"title\":\"this is the stage title.\",\"description\":\"description.\",\"wipLimit\":\"20\"}")
+                .body("{\"title\":\"this is the stage title.\",\"description\":\"description.\",\"wipLimit\":\"20\",\"limitationOnEntry\":\"准入哦.\",\"definitionOfDone\":\"完成了哦.\"}")
                 .contentType(ContentType.JSON)
                 .when()
                 .post("/boards/feeId/stages")
@@ -146,6 +147,37 @@ public class StagesControllerTest extends TestBase {
                 .then()
                 .statusCode(200)
                 .body("wipLimit", equalTo(20))
+                .body("_links.all.href", endsWith("/boards/feeId/stages"))
+                .body("_links.self.href", endsWith("/boards/feeId/stages/fooId"));
+    }
+
+    @Scenario("更新stage时,修改准入限制")
+    @Test
+    public void shouldUpdateLimitationOnEntrySuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id) VALUES ('fooId','this is the first stage.',1,'feeId')");
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"this is the first stage.\",\"limitationOnEntry\":\"我定义好准入规则了哦.\"}")
+                .when()
+                .put("/boards/feeId/stages/fooId")
+                .then()
+                .statusCode(200)
+                .body("limitationOnEntry", equalTo("我定义好准入规则了哦."))
+                .body("_links.all.href", endsWith("/boards/feeId/stages"))
+                .body("_links.self.href", endsWith("/boards/feeId/stages/fooId"));
+    }
+    @Scenario("更新stage时,修改完成规则")
+    @Test
+    public void shouldUpdateDefinitionOfDoneSuccessfully() {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id) VALUES ('fooId','this is the first stage.',1,'feeId')");
+        given().header("userName", userName)
+                .contentType(ContentType.JSON)
+                .body("{\"title\":\"this is the first stage.\",\"definitionOfDone\":\"I'm definition done rule.\"}")
+                .when()
+                .put("/boards/feeId/stages/fooId")
+                .then()
+                .statusCode(200)
+                .body("definitionOfDone", equalTo("I'm definition done rule."))
                 .body("_links.all.href", endsWith("/boards/feeId/stages"))
                 .body("_links.self.href", endsWith("/boards/feeId/stages/fooId"));
     }
@@ -297,7 +329,7 @@ public class StagesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first stage.','tao','feeId',1,9)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/stages?viewType=" + StageCodes.VIEW_TYPE_SPRINT)
+                .get("/boards/feeId/stages?viewType=" + BoardCodes.VIEW_TYPE_SPRINT)
                 .then()
                 .statusCode(200)
                 .body("stages.size()", equalTo(2));
@@ -312,7 +344,7 @@ public class StagesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId3','this is the first stage.','tao','feeId',1,9)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/stages?viewType=" + StageCodes.VIEW_TYPE_FULL_VIEW)
+                .get("/boards/feeId/stages?viewType=" + BoardCodes.VIEW_TYPE_FULL_VIEW)
                 .then()
                 .statusCode(200)
                 .body("stages.size()", equalTo(3));
@@ -327,7 +359,7 @@ public class StagesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId4','this is the first stage.','tao','feeId',9,9)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/stages?viewType=" + StageCodes.VIEW_TYPE_ARCHIVE)
+                .get("/boards/feeId/stages?viewType=" + BoardCodes.VIEW_TYPE_ARCHIVE)
                 .then()
                 .statusCode(200)
                 .body("stages.size()", equalTo(2));
@@ -343,7 +375,7 @@ public class StagesControllerTest extends TestBase {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('fooId4','this is the first stage.','tao','feeId',9,0)");
         given().header("userName", userName)
                 .when()
-                .get("/boards/feeId/stages?viewType=" + StageCodes.VIEW_TYPE_ROAD_MAP)
+                .get("/boards/feeId/stages?viewType=" + BoardCodes.VIEW_TYPE_ROAD_MAP)
                 .then()
                 .statusCode(200)
                 .body("stages.size()", equalTo(3));

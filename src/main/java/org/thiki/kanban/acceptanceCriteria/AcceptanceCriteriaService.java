@@ -6,7 +6,9 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.activity.ActivityService;
+import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.foundation.exception.BusinessException;
+import org.thiki.kanban.verification.Verification;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,6 +25,9 @@ public class AcceptanceCriteriaService {
 
     @Resource
     private ActivityService activityService;
+
+    @Resource
+    private CardsService cardsService;
 
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
     public AcceptanceCriteria addAcceptCriteria(String userName, String cardId, AcceptanceCriteria acceptanceCriteria) {
@@ -53,6 +58,10 @@ public class AcceptanceCriteriaService {
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
     public AcceptanceCriteria updateAcceptCriteria(String cardId, String acceptanceCriteriaId, AcceptanceCriteria acceptanceCriteria, String userName) {
         logger.info("Update acceptanceCriteria.acceptanceCriteriaId:{},acceptanceCriteria:{},cardId:{}", acceptanceCriteriaId, acceptanceCriteria, cardId);
+        boolean isCardArchivedOrDone = cardsService.isCardArchivedOrDone(cardId);
+        if (isCardArchivedOrDone) {
+            throw new BusinessException(AcceptanceCriteriaCodes.CARD_WAS_ALREADY_DONE_OR_ARCHIVED);
+        }
         acceptanceCriteriaPersistence.updateAcceptCriteria(acceptanceCriteriaId, acceptanceCriteria);
         AcceptanceCriteria updatedAcceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
         logger.info("Updated acceptanceCriteria:{}", updatedAcceptanceCriteria);
@@ -66,6 +75,10 @@ public class AcceptanceCriteriaService {
     @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
     public Integer removeAcceptanceCriteria(String acceptanceCriteriaId, String cardId, String userName) {
         logger.info("Remove acceptanceCriteria.acceptanceCriteriaId:{},cardId:{}", acceptanceCriteriaId, cardId);
+        boolean isCardArchivedOrDone = cardsService.isCardArchivedOrDone(cardId);
+        if (isCardArchivedOrDone) {
+            throw new BusinessException(AcceptanceCriteriaCodes.CARD_WAS_ALREADY_DONE_OR_ARCHIVED);
+        }
         AcceptanceCriteria acceptanceCriteria = acceptanceCriteriaPersistence.findById(acceptanceCriteriaId);
         if (acceptanceCriteria == null) {
             throw new BusinessException(AcceptanceCriteriaCodes.ACCEPTANCE_CRITERIA_IS_NOT_FOUND);
@@ -86,12 +99,32 @@ public class AcceptanceCriteriaService {
         return resortedAcceptanceCriterias;
     }
 
+    @Cacheable(value = "acceptanceCriteria", key = "'isAllAcceptanceCriteriasCompleted'+#cardId")
     public boolean isAllAcceptanceCriteriasCompleted(String cardId) {
-        return !acceptanceCriteriaPersistence.isHasUnFinishedAcceptanceCriterias(cardId);
+        logger.info("Check whether all the acceptanceCriterias of the specified are completed.cardId:", cardId);
+        boolean isAllAcceptanceCriteriasCompleted = !acceptanceCriteriaPersistence.isHasUnFinishedAcceptanceCriterias(cardId);
+        logger.info("Check result: ", isAllAcceptanceCriteriasCompleted);
+        return isAllAcceptanceCriteriasCompleted;
     }
 
+    @Cacheable(value = "acceptanceCriteria", key = "'isHasAcceptanceCriterias'+#cardId")
     public boolean isHasAcceptanceCriterias(String cardId) {
-        List<AcceptanceCriteria> acceptanceCriterias = loadAcceptanceCriteriasByCardId(cardId);
-        return !acceptanceCriterias.isEmpty();
+        logger.info("Check whether specified card has acceptanceCriterias.cardId:", cardId);
+        boolean isHasAcceptanceCriterias = acceptanceCriteriaPersistence.isHasAcceptanceCriterias(cardId);
+        logger.info("Check result: ", isHasAcceptanceCriterias);
+        return isHasAcceptanceCriterias;
+    }
+
+    @CacheEvict(value = "acceptanceCriteria", key = "contains('#cardId')", allEntries = true)
+    public void verify(String cardId, String acceptanceCriteriaId, Verification verification) {
+        acceptanceCriteriaPersistence.verify(cardId, acceptanceCriteriaId, verification);
+    }
+
+    @Cacheable(value = "acceptanceCriteria", key = "'isExistSpecifiedPassedStatusAcceptanceCriteria'+#cardId+#passedStatus")
+    public boolean isExistSpecifiedPassedStatusAcceptanceCriteria(String cardId, Integer passedStatus) {
+        logger.info("Check whether specified card has specified passed status acceptanceCriterias.cardId:", cardId);
+        boolean isExistSpecifiedPassedStatusAcceptanceCriteria = acceptanceCriteriaPersistence.isExistSpecifiedPassedStatusAcceptanceCriteria(cardId, passedStatus);
+        logger.info("Check result: ", isExistSpecifiedPassedStatusAcceptanceCriteria);
+        return isExistSpecifiedPassedStatusAcceptanceCriteria;
     }
 }

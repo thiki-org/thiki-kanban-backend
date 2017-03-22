@@ -47,18 +47,18 @@ public class AssignmentService {
         if (card == null) {
             throw new InvalidParamsException(CardsCodes.CARD_IS_NOT_EXISTS.code(), CardsCodes.CARD_IS_NOT_EXISTS.message());
         }
-        boolean isArchived = cardsService.isArchived(cardId);
-        if (isArchived) {
+        boolean isCardArchivedOrDone = cardsService.isCardArchivedOrDone(cardId);
+        if (isCardArchivedOrDone) {
             throw new BusinessException(AssignmentCodes.CARD_IS_ALREADY_ARCHIVED);
         }
         Board board = boardsService.findById(boardId);
         List<Assignment> originAssignments = findByCardId(cardId);
         for (Assignment assignment : assignments) {
             boolean isAlreadyAssigned = assignmentPersistence.isAlreadyAssigned(assignment.getAssignee(), cardId);
+            assignment.setCardId(cardId);
+            assignment.setAuthor(userName);
+            assignmentPersistence.create(assignment);
             if (!isAlreadyAssigned && !assignment.isSelfAssignment()) {
-                assignment.setCardId(cardId);
-                assignment.setAuthor(userName);
-                assignmentPersistence.create(assignment);
                 User sender = usersService.findByName(assignment.getAssigner());
                 User receiver = usersService.findByName(assignment.getAssignee());
                 AssignmentMail assignmentMail = AssignmentMail.newMail(assignment, sender, receiver, card, board, false);

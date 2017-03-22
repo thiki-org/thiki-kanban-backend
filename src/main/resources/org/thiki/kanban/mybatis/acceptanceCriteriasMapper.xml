@@ -29,7 +29,7 @@
 
     <select id="isHasUnFinishedAcceptanceCriterias" parameterType="java.lang.String"
             resultType="java.lang.Boolean">
-        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0 AND finished=0
+        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND finished=0 AND delete_status=0
     </select>
 
     <delete id="deleteAcceptanceCriteria" parameterType="java.lang.String" flushCache="true">
@@ -42,4 +42,20 @@
         sort_number=#{acceptanceCriteria.sortNumber}
         WHERE id=#{acceptanceCriteria.id} AND delete_status=0
     </update>
+    <update id="verify" parameterType="java.util.Map"
+            flushCache="true">
+        UPDATE kb_acceptance_criterias SET
+        is_passed=#{verification.isPassed}
+        WHERE id=#{acceptanceCriteriaId} AND card_id=#{cardId} AND delete_status=0
+    </update>
+
+    <select id="isHasAcceptanceCriterias" parameterType="java.lang.String"
+            resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND delete_status=0
+    </select>
+
+    <select id="isExistSpecifiedPassedStatusAcceptanceCriteria" resultType="java.lang.Boolean">
+        SELECT count(*) FROM kb_acceptance_criterias WHERE card_id= #{cardId} AND is_passed=#{passedStatus} AND
+        delete_status=0
+    </select>
 </mapper>

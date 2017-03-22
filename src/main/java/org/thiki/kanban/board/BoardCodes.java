@@ -11,6 +11,10 @@ public enum BoardCodes {
     FORBID_CURRENT_IS_NOT_A_MEMBER_OF_THE_PROJECT("003", "操作被阻止!你非当前看板所属团队成员,看板亦非你个人所有。");
     public static final String nameIsRequired = "看板名称不能为空。";
     public static final String nameIsInvalid = "看板名称过长,请保持在30个字以内。";
+    public static final String VIEW_TYPE_FULL_VIEW = "fullView";
+    public static final String VIEW_TYPE_SPRINT = "sprintView";
+    public static final String VIEW_TYPE_ROAD_MAP = "roadMapView";
+    public static final String VIEW_TYPE_ARCHIVE = "archiveView";
     private String code;
     private String message;
 

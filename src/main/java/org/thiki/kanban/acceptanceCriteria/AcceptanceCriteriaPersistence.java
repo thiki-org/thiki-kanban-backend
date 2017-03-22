@@ -2,6 +2,7 @@ package org.thiki.kanban.acceptanceCriteria;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+import org.thiki.kanban.verification.Verification;
 
 import java.util.List;
 
@@ -23,4 +24,10 @@ public interface AcceptanceCriteriaPersistence {
     Integer resort(@Param("acceptanceCriteria") AcceptanceCriteria acceptanceCriteria);
 
     boolean isHasUnFinishedAcceptanceCriterias(@Param("cardId") String cardId);
+
+    void verify(@Param("cardId") String cardId, @Param("acceptanceCriteriaId") String acceptanceCriteriaId, @Param("verification") Verification verification);
+
+    boolean isHasAcceptanceCriterias(@Param("cardId") String cardId);
+
+    boolean isExistSpecifiedPassedStatusAcceptanceCriteria(@Param("cardId") String cardId, @Param("passedStatus") Integer passedStatus);
 }

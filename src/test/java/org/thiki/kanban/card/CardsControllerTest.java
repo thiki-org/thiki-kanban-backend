@@ -183,21 +183,22 @@ public class CardsControllerTest extends TestBase {
     @Scenario("更新卡片成功")
     @Test
     public void update_shouldReturn200WhenUpdateCardSuccessfully() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,deadline,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton','2017-02-13',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId','this is the first stage.','someone','board-id-foo',2)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,deadline,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton','2017-02-13',1,'stage-fooId')");
         dbPreparation.table("kb_board").names("id,name,author,code_prefix").values("boardId-foo", "board-name", "someone", "H").exec();
-        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":1,\"deadline\":\"2017-02-15\"}")
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":\"stage-fooId\",\"deadline\":\"2017-02-15\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/boards/boardId-foo/stages/1/cards/fooId")
+                .put("/boards/boardId-foo/stages/stage-fooId/cards/fooId")
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("sortNumber", equalTo(3))
                 .body("deadline", equalTo("2017-02-15"))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/1/cards/fooId"))
-                .body("_links.cards.href", endsWith("/boards/boardId-foo/stages/1/cards"))
-                .body("_links.assignments.href", endsWith("/boards/boardId-foo/stages/1/cards/fooId/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId/assignments"));
         assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_card WHERE id='fooId'", String.class));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
@@ -205,21 +206,22 @@ public class CardsControllerTest extends TestBase {
     @Scenario("更新卡片时，如果卡片的编号为空，则自动生成编号")
     @Test
     public void shouldAutoGenerateCodeIfCodeWasNullWhenUpdateCard() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId','this is the first stage.','someone','board-id-foo',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton','someone','stage-fooId')");
         String expectedCode = generateExpectedCode();
-        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":1}")
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":\"stage-fooId\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
-                .put("/boards/boardId-foo/stages/1/cards/fooId")
+                .put("/boards/boardId-foo/stages/stage-fooId/cards/fooId")
                 .then()
                 .statusCode(200)
                 .body("summary", equalTo("newSummary"))
                 .body("code", equalTo(expectedCode))
                 .body("sortNumber", equalTo(3))
-                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/1/cards/fooId"))
-                .body("_links.cards.href", endsWith("/boards/boardId-foo/stages/1/cards"))
-                .body("_links.assignments.href", endsWith("/boards/boardId-foo/stages/1/cards/fooId/assignments"));
+                .body("_links.self.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId"))
+                .body("_links.cards.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards"))
+                .body("_links.assignments.href", endsWith("/boards/boardId-foo/stages/stage-fooId/cards/fooId/assignments"));
         assertEquals("newSummary", jdbcTemplate.queryForObject("SELECT summary FROM kb_card WHERE id='fooId'", String.class));
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_activity where card_id='fooId'").size());
     }
@@ -228,10 +230,12 @@ public class CardsControllerTest extends TestBase {
     @Scenario("更新卡片生成编号时，编号总数总本月开始算起")
     @Test
     public void shouldOnlyCountCurrentMonthWhenUpdateCard() throws Exception {
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,code) VALUES ('other-fooId','this is the card summary.','play badminton',1,1,'H170101')");
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton',1,1)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId','this is the first stage.','someone','board-id-foo',2)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId-other','this is the first stage.','someone','board-id-foo',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,code) VALUES ('other-fooId','this is the card summary.','play badminton',1,'stage-fooId','H170101')");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton',1,'stage-fooId-other')");
         String expectedCode = generateExpectedCode();
-        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":1}")
+        given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":\"stage-fooId\"}")
                 .header("userName", userName)
                 .contentType(ContentType.JSON)
                 .when()
@@ -250,10 +254,12 @@ public class CardsControllerTest extends TestBase {
 
     @Scenario("当一个卡片从某个stage移动到另一个stage时,不仅需要重新排序目标stage,也要对原始stage排序")
     @Test
-    public void update_shouldResortSuccessfullyWhenCardIsFromAntherStage() throws Exception {
+    public void update_shouldResortSuccessfullyWhenCardIsFromAnotherStage() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId','this is the first stage.','someone','board-id-foo',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId-other','this is the first stage.','someone','board-id-foo',1)");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,sort_number) VALUES ('fooId1','summary1','play badminton',1,'stage-fooId',0)");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,sort_number) VALUES ('fooId2','summary2','play badminton',1,'stage-fooId',1)");
-        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,sort_number) VALUES ('fooId6','this is the card summary.','play badminton',1,2,3)");
+        jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id,sort_number) VALUES ('fooId6','this is the card summary.','play badminton',1,'stage-fooId-other',3)");
         String expectedCode = generateExpectedCode();
 
         given().body("{\"summary\":\"newSummary\",\"sortNumber\":3,\"stageId\":\"fooId\",\"code\":\"code-foo\"}")
@@ -289,6 +295,7 @@ public class CardsControllerTest extends TestBase {
     @Test
     public void movingWasNotAllowedIfStageExceededTheWipLimit() throws Exception {
         jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId','this is the first stage.','someone','board-id-foo',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,wip_limit) VALUES ('stage-fooId-other','this is the first stage.','someone','board-id-foo',1)");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId','this is the card summary.','play badminton',1,'stage-fooId-other')");
         jdbcTemplate.execute("INSERT INTO  kb_card (id,summary,content,author,stage_id) VALUES ('fooId-other','this is the card summary.','play badminton',1,'stage-fooId')");
         given().body("{\"summary\":\"newSummary\",\"stageId\":\"stage-fooId\"}")

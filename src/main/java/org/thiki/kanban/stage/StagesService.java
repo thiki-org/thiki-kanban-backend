@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.thiki.kanban.board.BoardCodes;
 import org.thiki.kanban.card.Card;
 import org.thiki.kanban.card.CardsService;
 import org.thiki.kanban.foundation.exception.BusinessException;
@@ -112,7 +113,7 @@ public class StagesService {
         for (Stage stage : stages) {
             stagesPersistence.resort(stage);
         }
-        List<Stage> resortedStages = loadByBoardId(boardId, StageCodes.VIEW_TYPE_SPRINT);
+        List<Stage> resortedStages = loadByBoardId(boardId, BoardCodes.VIEW_TYPE_SPRINT);
         logger.info("Resorted stages:{}", resortedStages);
         return resortedStages;
     }
@@ -152,5 +153,13 @@ public class StagesService {
         }
         Integer currentCardsNumbers = stagesPersistence.countCardsNumber(stageId);
         return stage.isReachedWipLimit(currentCardsNumbers);
+    }
+
+    public boolean isDoneOrArchived(String stageId) {
+        Stage stage = findById(stageId);
+        if (stage == null) {
+            throw new BusinessException(StageCodes.STAGE_IS_NOT_EXIST);
+        }
+        return stage.isArchived() || stage.isInDoneStatus();
     }
 }

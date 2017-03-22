@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.risk.RiskPersistence">
+    <insert id="addRisk" parameterType="org.thiki.kanban.risk.Risk">
+        INSERT INTO
+        kb_risk(id, risk_reason,card_id,type,author,is_resolved)
+        VALUES
+        (#{risk.id},#{risk.riskReason},#{cardId},#{risk.type},#{userName},#{risk.isResolved})
+    </insert>
+
+    <select id="findRiskById" parameterType="java.lang.String" resultType="org.thiki.kanban.risk.Risk">
+
+        SELECT * FROM kb_risk WHERE id=#{id}
+
+    </select>
+
+    <select id="findCardRisks" parameterType="java.lang.String" resultType="org.thiki.kanban.risk.Risk">
+        SELECT * FROM kb_risk WHERE card_id = #{cardId} and is_resolved = false ORDER BY modification_time
+    </select>
+
+    <delete id="deleteRisk" parameterType="java.lang.String" flushCache="true">
+        UPDATE kb_risk SET is_resolved = true WHERE id = #{id}
+    </delete>
+
+</mapper>

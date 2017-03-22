@@ -1028,4 +1028,63 @@
             <append value=" engine innodb"/>
         </modifySql>
     </changeSet>
+    <changeSet id="58" author="skytao" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <columnExists tableName="kb_acceptance_criterias" columnName="is_passed"/>
+            </not>
+        </preConditions>
+        <addColumn tableName="kb_acceptance_criterias">
+            <column name="is_passed" type="TINYINT" defaultValue="0"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="59" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <and>
+                <not>
+                    <columnExists tableName="kb_stage" columnName="limitation_on_entry"/>
+                </not>
+            </and>
+            <and>
+                <not>
+                    <columnExists tableName="kb_stage" columnName="definition_of_done"/>
+                </not>
+            </and>
+        </preConditions>
+        <addColumn tableName="kb_stage">
+            <column name="limitation_on_entry" type="varchar(200)"/>
+        </addColumn>
+        <addColumn tableName="kb_stage">
+            <column name="definition_of_done" type="varchar(200)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet id="60" author="cain" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_risk"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_risk">
+            <column name="id" type="VARCHAR(40)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="risk_reason" type="varchar(100)">
+            </column>
+            <column name="card_id" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="TINYINT" defaultValue="0"/>
+            <column name="author" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_resolved" type="Boolean" defaultValue="false"/>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb"/>
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>

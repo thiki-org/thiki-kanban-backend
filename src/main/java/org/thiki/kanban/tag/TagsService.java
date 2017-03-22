@@ -38,7 +38,7 @@ public class TagsService {
     public Tag updateTag(String boardId, String tagId, Tag tag) {
         checkUnique(boardId, tag);
         tagPersistence.updateTag(tagId, tag);
-        return tagPersistence.findById(tagId);
+        return findById(tagId);
     }
 
     private void checkUnique(String boardId, Tag tag) {
@@ -68,5 +68,13 @@ public class TagsService {
             tag.setId(null);
             tagPersistence.addTag(boardId, tag);
         }
+    }
+
+    @Cacheable(value = "tag", key = "'service-tag'+#tagId")
+    public Tag findById(String tagId) {
+        logger.info("Find tag by id:{}", tagId);
+        Tag tag = tagPersistence.findById(tagId);
+        logger.info("Found tag:{}", tag);
+        return tag;
     }
 }
