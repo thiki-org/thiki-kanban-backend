@@ -101,6 +101,9 @@ public class CardsService {
         if (isHasChildCard) {
             throw new BusinessException(CardsCodes.HAS_CHILD_CARD);
         }
+        if (isCardArchivedOrDone(parentCard.get().getId())) {
+            throw new BusinessException(CardsCodes.PARENT_CARD_IS_ARCHIVED_OR_IN_DONE_STATUS);
+        }
     }
 
     @CacheEvict(value = "card", key = "contains('#cardId')", allEntries = true)

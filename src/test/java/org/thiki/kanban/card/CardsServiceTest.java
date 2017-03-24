@@ -47,6 +47,7 @@ public class CardsServiceTest {
     private String userName = "someone";
     private Card originCard = new Card(), newCard = new Card();
     private Stage originStage = new Stage(), targetStage = new Stage();
+    private String parentId = "parent-fooId";
 
 
     @Before
@@ -111,5 +112,17 @@ public class CardsServiceTest {
         when(stagesService.isDoneOrArchived(any())).thenReturn(true);
 
         cardsService.deleteById(cardId);
+    }
+
+    @Test
+    public void should_failed_if_parent_card_is_archived_or_in_doneStatus_when_moving_card() {
+        expectedException.expectMessage(CardsCodes.PARENT_CARD_IS_ARCHIVED_OR_IN_DONE_STATUS.message());
+        newCard.setParentId(parentId);
+        Card parentCard = new Card();
+        parentCard.setId(parentId);
+        when(cardsPersistence.findById(parentId)).thenReturn(parentCard);
+        when(stagesService.isDoneOrArchived(any())).thenReturn(false).thenReturn(true);
+
+        cardsService.modify(cardId, newCard, originStageId, boardId, userName);
     }
 }

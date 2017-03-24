@@ -19,7 +19,9 @@ public enum CardsCodes {
     ACCEPTANCE_CRITERIAS_IS_NOT_SET("010", "卡片尚未设置验收标准，不允许进入完成环节。"),
     UNVERIFIED_ACCEPTANCE_CRITERIA_EXISTS("011", "存在尚未验收的验收标准，不允许进入完成环节。"),
     UNPASSED_ACCEPTANCE_CRITERIA_EXISTS("012", "存在尚未通过验收的"),
-    CARD_IS_ARCHIVED_OR_IN_DONE_STATUS("013", "卡片已经完成或已经归档，不允许再进行相关操作。"), TARGET_STAGE_IS_ARCHIVED("014", "目标环节为归档环节。");
+    CARD_IS_ARCHIVED_OR_IN_DONE_STATUS("013", "卡片已经完成或已经归档，不允许再进行相关操作。"),
+    TARGET_STAGE_IS_ARCHIVED("014", "目标环节为归档环节。"),
+    PARENT_CARD_IS_ARCHIVED_OR_IN_DONE_STATUS("015", "父级卡片已经完成或已经归档，不允许挪动。");
     public static final String summaryIsRequired = "卡片概述不能为空。";
     public static final String summaryIsInvalid = "卡片概述长度超限,请保持在50个字符以内。";
     public static final String codeIsInvalid = "编号长度超长。";
