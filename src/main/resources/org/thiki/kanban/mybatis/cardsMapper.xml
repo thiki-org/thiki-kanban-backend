@@ -6,9 +6,9 @@
 
     <insert id="create" parameterType="org.thiki.kanban.card.Card">
         INSERT INTO
-        kb_card(id,summary, content,code,deadline,size, author, stage_id) VALUES
+        kb_card(id,summary, content,code,parent_id,deadline,size, author, stage_id) VALUES
         (#{card.id},#{card.summary},
-        #{card.content},#{card.code},#{card.deadline},#{card.size}, #{userName}, #{card.stageId})
+        #{card.content},#{card.code},#{card.parentId},#{card.deadline},#{card.size}, #{userName}, #{card.stageId})
     </insert>
 
     <update id="modify" parameterType="org.thiki.kanban.card.Card" flushCache="true">
