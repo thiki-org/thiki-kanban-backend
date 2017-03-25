@@ -549,7 +549,7 @@
             </not>
         </preConditions>
         <addColumn tableName="kb_procedure">
-            <column name="wip_num" type="int" defaultValue="-1"/>
+            <column name="wip_num" type="int" defaultValue="9999"/>
         </addColumn>
     </changeSet>
 
