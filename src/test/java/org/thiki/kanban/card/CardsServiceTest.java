@@ -16,10 +16,12 @@ import org.thiki.kanban.stage.Stage;
 import org.thiki.kanban.stage.StageCodes;
 import org.thiki.kanban.stage.StagesService;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by xubt on 13/03/2017.
@@ -52,7 +54,6 @@ public class CardsServiceTest {
 
     @Before
     public void setUp() {
-        expectedException.expect(BusinessException.class);
         originCard.setId(cardId);
         newCard.setId(cardId);
         originCard.setStageId(originStageId);
@@ -72,6 +73,7 @@ public class CardsServiceTest {
 
     @Test
     public void should_failed_if_unverified_acceptance_criteria_exist() {
+        expectedException.expect(BusinessException.class);
         expectedException.expectMessage(CardsCodes.UNVERIFIED_ACCEPTANCE_CRITERIA_EXISTS.message());
 
         when(acceptanceCriteriaService.isExistSpecifiedPassedStatusAcceptanceCriteria(eq(cardId), eq(AcceptanceCriteriaCodes.STATUS_UNVERIFIED))).thenReturn(true);
@@ -81,6 +83,7 @@ public class CardsServiceTest {
 
     @Test
     public void should_failed_if_unPassed_acceptance_criteria_exist() {
+        expectedException.expect(BusinessException.class);
         expectedException.expectMessage(CardsCodes.UNPASSED_ACCEPTANCE_CRITERIA_EXISTS.message());
 
         when(acceptanceCriteriaService.isExistSpecifiedPassedStatusAcceptanceCriteria(eq(cardId), eq(AcceptanceCriteriaCodes.STATUS_UNVERIFIED))).thenReturn(false);
@@ -91,6 +94,7 @@ public class CardsServiceTest {
 
     @Test
     public void should_failed_if_card_is_archived_or_in_doneStatus_when_modifying_card() {
+        expectedException.expect(BusinessException.class);
         expectedException.expectMessage(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS.message());
 
         when(stagesService.isDoneOrArchived(any())).thenReturn(true);
@@ -99,6 +103,7 @@ public class CardsServiceTest {
 
     @Test
     public void should_failed_if_target_stage_is_archived() {
+        expectedException.expect(BusinessException.class);
         expectedException.expectMessage(CardsCodes.TARGET_STAGE_IS_ARCHIVED.message());
         targetStage.setType(StageCodes.STAGE_TYPE_ARCHIVE);
         cardsService.modify(cardId, newCard, originStageId, boardId, userName);
@@ -106,6 +111,7 @@ public class CardsServiceTest {
 
     @Test
     public void should_failed_if_card_is_archived_or_in_doneStatus_when_deleting_card() {
+        expectedException.expect(BusinessException.class);
         expectedException.expectMessage(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS.message());
 
         targetStage.setType(StageCodes.STAGE_TYPE_ARCHIVE);
@@ -116,6 +122,7 @@ public class CardsServiceTest {
 
     @Test
     public void should_failed_if_parent_card_is_archived_or_in_doneStatus_when_moving_card() {
+        expectedException.expect(BusinessException.class);
         expectedException.expectMessage(CardsCodes.PARENT_CARD_IS_ARCHIVED_OR_IN_DONE_STATUS.message());
         newCard.setParentId(parentId);
         Card parentCard = new Card();
@@ -124,5 +131,25 @@ public class CardsServiceTest {
         when(stagesService.isDoneOrArchived(any())).thenReturn(false).thenReturn(true);
 
         cardsService.modify(cardId, newCard, originStageId, boardId, userName);
+    }
+
+    @Test
+    public void should_delete_child_cards_when_deleting_parent_card() {
+        Card parentCard = new Card();
+        parentCard.setId(cardId);
+
+        String childCardId = "child-card-fooId";
+        Card childCard = new Card();
+        childCard.setId(childCardId);
+
+        when(cardsPersistence.loadChildCards(eq(cardId))).thenReturn(Arrays.asList(childCard)).thenReturn(new ArrayList<>());
+        when(cardsPersistence.findById(cardId)).thenReturn(parentCard);
+        when(cardsPersistence.findById(childCardId)).thenReturn(childCard);
+        when(stagesService.isDoneOrArchived(any())).thenReturn(false).thenReturn(false);
+
+        cardsService.deleteById(cardId);
+
+        verify(cardsPersistence).deleteById(cardId);
+        verify(cardsPersistence).deleteById(childCardId);
     }
 }

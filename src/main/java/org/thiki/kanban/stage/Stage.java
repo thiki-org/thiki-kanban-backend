@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -29,8 +30,7 @@ public class Stage {
     private Integer status;
     private String creationTime;
     private String modificationTime;
-
-
+    @Min(1)
     private Integer wipLimit;
     private String limitationOnEntry;
     private String definitionOfDone;

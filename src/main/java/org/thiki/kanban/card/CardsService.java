@@ -111,6 +111,10 @@ public class CardsService {
         if (isCardArchivedOrDone(cardId)) {
             throw new BusinessException(CardsCodes.CARD_IS_ARCHIVED_OR_IN_DONE_STATUS);
         }
+        List<Card> childCards = findByParentId(cardId);
+        for (Card childCard : childCards) {
+            deleteById(childCard.getId());
+        }
         logger.info("Deleting card.cardId:{}", cardId);
         return cardsPersistence.deleteById(cardId);
     }
