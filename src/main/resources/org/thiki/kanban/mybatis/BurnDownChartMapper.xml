@@ -33,4 +33,8 @@
        and sprint_analyse_time=#{burnDownChart.sprintAnalyseTime}
 
     </update>
+
+    <select id="findBurnDownChartBySprintIdAndBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.statistics.burnDownChart.BurnDownChart">
+        SELECT * FROM kb_burn_down_chart ks WHERE  sprint_id=#{sprintId} and board_id=#{boardId}
+    </select>
 </mapper>

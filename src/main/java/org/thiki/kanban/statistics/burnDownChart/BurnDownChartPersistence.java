@@ -21,5 +21,5 @@ public interface BurnDownChartPersistence {
     List<Stage> findStageByBoardId(@Param("boardId") String boardId);
     int statisticsCardSizeByStageId(@Param("stageId") String stageId);
     int findBySprintIdAndSprintAnalyseTime(@Param("sprintId") String sprintId, @Param("sprintAnalyseTime") String sprintAnalyseTime);
-
+    List<BurnDownChart>  findBurnDownChartBySprintIdAndBoardId(@Param("boardId") String boardId,@Param("sprintId") String sprintId);
 }

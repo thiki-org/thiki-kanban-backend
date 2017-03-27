@@ -10,8 +10,11 @@ import org.thiki.kanban.statistics.burnDownChart.BurnDownChartService;
 
 import javax.annotation.Resource;
 
+import static com.jayway.restassured.RestAssured.given;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.core.StringEndsWith.endsWith;
 
 /**
  * Created by winie on 2017/3/23.
@@ -46,5 +49,16 @@ public class BurnDownChartServiceTest extends TestBase {
     public void should_succeed_if_analyse_By_All() {
         burnDownChartService.findAllSprint("20170327");
         assertTrue(jdbcTemplate.queryForList("SELECT * FROM kb_burn_down_chart where sprint_id='fooId'").size()>0);
+    }
+    @Test
+    public void findBySprintIdAndBoardId_shouldReturnBurnDownChartSuccessfully(){
+        burnDownChartService.analyse("fooId","boardId");
+        given().header("userName", userName)
+                .when()
+                .get("/statistics/projects/1/boards/boardId/sprint/fooId")
+                .then()
+                .statusCode(200)
+                .body("burnDownCharts[0].storyPoint", equalTo(3))
+                .body("_links.board.href", endsWith("/boards/boardId"));
     }
 }

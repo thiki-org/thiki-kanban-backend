@@ -2,6 +2,7 @@ package org.thiki.kanban.statistics.burnDownChart;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.foundation.common.date.DateService;
 import org.thiki.kanban.sprint.Sprint;
@@ -68,5 +69,16 @@ public class BurnDownChartService {
         return analyzeIsTure;
     }
 
+    @Scheduled(cron = "0 0 22 * * ?")
+    public void analyseAll() {
+        logger.info("Starting statistics Burn Down Chart.");
+        findAllSprint(null);
+        logger.info("Burn Down Chart statistics completed.");
+    }
+
+
+    public  List<BurnDownChart>  findBurnDownChartBySprintIdAndBoardId(String boardId,String sprintId){
+        return burnDownChartPersistence.findBurnDownChartBySprintIdAndBoardId(boardId,sprintId);
+    }
 
 }
