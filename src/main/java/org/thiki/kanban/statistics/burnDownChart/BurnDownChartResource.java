@@ -2,15 +2,11 @@ package org.thiki.kanban.statistics.burnDownChart;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.hateoas.Link;
 import org.springframework.stereotype.Service;
 import org.thiki.kanban.board.BoardsController;
 import org.thiki.kanban.foundation.common.RestResource;
 import org.thiki.kanban.foundation.hateoas.TLink;
-import org.thiki.kanban.page.Page;
-import org.thiki.kanban.page.PageResource;
-import org.thiki.kanban.page.PagesController;
 
 import javax.annotation.Resource;
 
@@ -22,7 +18,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
  */
 @Service
 public class BurnDownChartResource extends RestResource {
-    public static Logger logger = LoggerFactory.getLogger(PageResource.class);
+    public static Logger logger = LoggerFactory.getLogger(BurnDownChartResource.class);
     @Resource
     private TLink tlink;
 
