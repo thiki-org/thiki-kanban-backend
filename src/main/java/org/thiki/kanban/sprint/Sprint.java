@@ -30,6 +30,15 @@ public class Sprint {
     private int remainingDays;
     private int totalDays;
     private int wentDays;
+    private String boardId;
+
+    public String getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(String boardId) {
+        this.boardId = boardId;
+    }
 
     public String getStartTime() {
         return startTime;

@@ -27,4 +27,5 @@ public class DomainOrder {
     public static final int PAGE = 19;
     public static final int VERIFICATION = 20;
     public static final int RISK = 21;
+    public static final int BURNDOWNCHART = 22;
 }

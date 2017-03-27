@@ -1087,4 +1087,37 @@
             <append value=" engine innodb"/>
         </modifySql>
     </changeSet>
+    <changeSet id="61" author="winie" runOnChange="true">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="kb_burn_down_chart"/>
+            </not>
+        </preConditions>
+        <createTable tableName="kb_burn_down_chart" remarks="燃尽图">
+            <column name="id" type="VARCHAR(40)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="board_id" type="varchar(50)" remarks="所属看板">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sprint_id" type="varchar(50)" remarks="迭代">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sprint_analyse_time" type="int" remarks="迭代分析时间">
+                <constraints nullable="false"/>
+            </column>
+            <column name="story_point" type="int" remarks="故事点数,参考故事点数">
+                <constraints nullable="false"/>
+            </column>
+            <column name="story_done_point" type="int" remarks="完成故事点数">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creation_time" type="DATETIME" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="modification_time" type="DATETIME" defaultValueDate="${time.default}"/>
+        </createTable>
+        <modifySql dbms="mysql">
+            <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
+            <append value=" engine innodb"/>
+        </modifySql>
+    </changeSet>
 </databaseChangeLog>

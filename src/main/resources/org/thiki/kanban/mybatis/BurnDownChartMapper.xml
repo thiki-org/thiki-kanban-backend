@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.thiki.kanban.statistics.burnDownChart.BurnDownChartPersistence">
+    <insert id="create" parameterType="org.thiki.kanban.statistics.burnDownChart.BurnDownChart">
+         INSERT INTO kb_burn_down_chart(id,board_id,sprint_id,sprint_analyse_time,story_point,story_done_point)
+         VALUES (#{burnDownChart.id},#{burnDownChart.boardId},#{burnDownChart.sprintId},#{burnDownChart.sprintAnalyseTime}, #{burnDownChart.storyPoint}, #{burnDownChart.storyDonePoint})
+
+   </insert>
+    <select id="findAllSprint" parameterType="java.util.Date" resultType="org.thiki.kanban.sprint.Sprint">
+         SELECT * FROM kb_sprint ks WHERE ks.start_time &lt;=#{nowDate} AND ks.end_time &gt;= #{nowDate}
+    </select>
+    <select id="findSprintBySprintId" parameterType="java.lang.String" resultType="org.thiki.kanban.sprint.Sprint">
+        SELECT * FROM kb_sprint ks WHERE  id=#{sprintId}
+    </select>
+    <select id="statisticsCardSizeByStageId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT SUM(case when size is null then 0 else size end) FROM kb_card ks WHERE  stage_id=#{stageId}
+    </select>
+    <select id="findBySprintIdAndSprintAnalyseTime" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT count(1) FROM kb_burn_down_chart ks WHERE  sprint_id=#{sprintId} and sprint_analyse_time=#{sprintAnalyseTime}
+    </select>
+    <select id="findStageByBoardId" parameterType="java.lang.String" resultType="org.thiki.kanban.stage.Stage">
+        SELECT * FROM kb_stage ks WHERE board_id=#{boardId}
+    </select>
+    <update id="update" parameterType="org.thiki.kanban.statistics.burnDownChart.BurnDownChart">
+       update kb_burn_down_chart
+       set
+       story_point=#{burnDownChart.storyPoint},
+       story_done_point=#{burnDownChart.storyDonePoint}
+       where
+       sprint_id=#{burnDownChart.sprintId}
+       and sprint_analyse_time=#{burnDownChart.sprintAnalyseTime}
+
+    </update>
+</mapper>
