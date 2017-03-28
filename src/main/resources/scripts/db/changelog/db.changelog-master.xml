@@ -1117,7 +1117,7 @@
         </createTable>
         <modifySql dbms="mysql">
             <regExpReplace replace="'CURRENT_TIMESTAMP'" with="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"/>
-            <append value=" engine innodb"/>
+            <append value="engine innodb"/>
         </modifySql>
     </changeSet>
 </databaseChangeLog>
