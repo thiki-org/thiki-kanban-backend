@@ -119,7 +119,7 @@ public class SnapshotService {
                     snapshotExecutor.loadComments(boardId, userName, stageId, cardJSON, cardId);
                     List<Card> childCards = cardsService.findByParentId(cardId);
                     if (childCards.size() > 0) {
-                        JSONObject childCardsJSON = buildCards(childCards, boardId, stageId, userName, viewType);
+                        JSONObject childCardsJSON = buildCards(childCards, boardId, stageId, viewType, userName);
                         cardJSON.put("child", childCardsJSON);
                     }
                     return cardJSON;

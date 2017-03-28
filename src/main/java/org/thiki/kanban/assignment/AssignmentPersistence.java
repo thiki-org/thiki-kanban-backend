@@ -15,7 +15,7 @@ public interface AssignmentPersistence {
 
     Assignment findById(@Param("id") String id);
 
-    List<Assignment> findByCardId(String cardId);
+    List<Assignment> findByCardId(@Param("cardId") String cardId);
 
     int deleteById(String id);
 

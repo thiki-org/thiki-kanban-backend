@@ -22,6 +22,6 @@
     </select>
 
     <delete id="deleteById" parameterType="java.lang.String" flushCache="true">
-        UPDATE kb_card_assignment SET delete_status=1 WHERE id=#{id}
+        UPDATE kb_card_assignment SET delete_status=1 WHERE id=#{id} AND delete_status=0
     </delete>
 </mapper>
