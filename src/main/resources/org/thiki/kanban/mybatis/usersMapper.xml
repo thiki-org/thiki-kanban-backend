@@ -28,7 +28,7 @@
 
     <select id="findByIdentity" parameterType="java.lang.String"
             resultType="org.thiki.kanban.user.User">
-        SELECT id,email,user_name,salt FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or
+        SELECT id,email,user_name,salt,password FROM kb_user_registration WHERE delete_status=0 and (email=#{identity} or
         user_name=#{identity})
     </select>
 

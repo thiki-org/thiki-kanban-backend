@@ -167,6 +167,35 @@ public class PasswordControllerTest extends TestBase {
         assertEquals(1, jdbcTemplate.queryForList("SELECT * FROM kb_password_reset where user_name='tao' and is_reset=1").size());
     }
 
+    @Scenario("修改密码")
+    @Test
+    public void modifyPassword() throws Exception {
+        jdbcTemplate.execute("INSERT INTO  kb_user_registration (id,email,user_name,password) " +
+                "VALUES ('fooUserId','766191920@qq.com','tao1','5f4dcc3b5aa765d61d8327deb882cf99')");
+        jdbcTemplate.execute("INSERT INTO  kb_password_reset(id,user_name) " +
+                "VALUES ('fooUserId','tao1')");
+        String publicKey = rsaService.loadKey(publicKeyFilePath);
+        String password = "foo";
+        String rsaPassword = rsaService.encrypt(publicKey, password);
+        String expectedMd5Password = "acbd18db4cc2f85cedef654fccc4a4d8";
+        String rsaOldPassword = rsaService.encrypt(publicKey, "password");
+
+        VerificationCodeService verificationCodeService = mock(VerificationCodeService.class);
+        when(verificationCodeService.generate()).thenReturn("000000");
+        ReflectionTestUtils.setField(passwordService, "verificationCodeService", verificationCodeService);
+
+        JSONObject body = new JSONObject();
+        body.put("password", rsaPassword);
+        body.put("oldPassword", rsaOldPassword);
+        given().body(body)
+                .contentType(ContentType.JSON)
+                .when()
+                .put("/tao1/modifyPassword")
+                .then()
+                .statusCode(HttpStatus.CREATED.value())
+                .body("_links.login.href", endsWith("/login"));
+        assertEquals(expectedMd5Password, jdbcTemplate.queryForObject("SELECT password FROM kb_user_registration where user_name='tao1'", String.class));
+    }
     @Scenario("验证码超过五分钟后,验证失败")
     @Test
     public void verificationCodeTimeOut() throws Exception {

@@ -13,9 +13,10 @@ public class PasswordReset {
     @NotNull(message = "密码不能为空。")
     @Length(max = 200, message = "密码超出长度限制。")
     private String password;
+    private String oldPassword;
 
-    public String getPassword() throws Exception {
-        return this.password;
+    public String getPassword() {
+        return password;
     }
 
     public void setPassword(String password) {
@@ -24,5 +25,13 @@ public class PasswordReset {
 
     public String encryptPassword(String slat, String dencryptPassword) throws Exception {
         return MD5Service.encrypt(dencryptPassword + slat);
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 }

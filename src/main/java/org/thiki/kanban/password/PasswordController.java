@@ -42,7 +42,13 @@ public class PasswordController {
 
     @RequestMapping(value = "/{userName}/password", method = RequestMethod.PUT)
     public HttpEntity password(@RequestBody PasswordReset passwordReset, @PathVariable("userName") String userName) throws Exception {
-        passwordService.resetPassword(userName, passwordReset);
+        passwordService.resetPassword(userName, passwordReset,0);
+        return Response.post(passwordResource.toResource());
+    }
+
+    @RequestMapping(value = "/{userName}/modifyPassword", method = RequestMethod.PUT)
+    public HttpEntity modifyPassword(@RequestBody PasswordReset passwordReset, @PathVariable("userName") String userName) throws Exception {
+        passwordService.resetPassword(userName, passwordReset,1);
         return Response.post(passwordResource.toResource());
     }
 }

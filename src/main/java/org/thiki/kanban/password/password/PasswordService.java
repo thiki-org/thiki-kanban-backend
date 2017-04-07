@@ -17,6 +17,8 @@ import javax.annotation.Resource;
 import javax.mail.MessagingException;
 import java.io.IOException;
 
+import static org.thiki.kanban.foundation.mail.ConfigLoader.getPassword;
+
 /**
  * Created by xubt on 8/8/16.
  */
@@ -65,15 +67,18 @@ public class PasswordService {
         passwordPersistence.createPasswordResetApplication(passwordResetApplication);
     }
 
-    public void resetPassword(String userName, PasswordReset passwordReset) throws Exception {
+    public void resetPassword(String userName, PasswordReset passwordReset,Integer flag) throws Exception {
         boolean isPasswordResetApplicationExists = passwordPersistence.isPasswordResetApplicationExists(userName);
         if (!isPasswordResetApplicationExists) {
             throw new BusinessException(PasswordCodes.NO_PASSWORD_RESET_RECORD.code(), PasswordCodes.NO_PASSWORD_RESET_RECORD.message());
         }
         User registeredUser = usersService.findByIdentity(userName);
+        String oldDencryptPassword = rsaService.dencrypt(passwordReset.getOldPassword());
+        String encryptedOldPassword =passwordReset.encryptPassword(registeredUser.getSalt(), oldDencryptPassword);
+        if(flag==1&&  !registeredUser.getPassword().equals(encryptedOldPassword)){
+            throw new BusinessException(PasswordCodes.OLD_PASSWORD_NOT_EXISTS.code(), PasswordCodes.OLD_PASSWORD_NOT_EXISTS.message());
+        }
         String dencryptPassword = rsaService.dencrypt(passwordReset.getPassword());
-
-
         String encryptedPassword = passwordReset.encryptPassword(registeredUser.getSalt(), dencryptPassword);
 
         passwordPersistence.resetPassword(userName, encryptedPassword);
