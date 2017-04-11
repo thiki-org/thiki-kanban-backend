@@ -288,6 +288,23 @@ public class StagesControllerTest extends TestBase {
                 .body("message", equalTo(StageCodes.STAGE_IS_NOT_EXIST.message()));
     }
 
+    @Scenario("当删除一个stage时,如果stage在sprint中，返回客户端错误")
+    @Test
+    public void shouldThrowResourceNotFoundExceptionWhenStageIsSprint() throws Exception {
+
+        jdbcTemplate.execute("INSERT INTO  kb_board (id,name,author,sort_number) VALUES ('boardId1','this is the first stage.','someone',1)");
+        jdbcTemplate.execute("INSERT INTO  kb_stage (id,title,author,board_id,type,status) VALUES ('stageId1','this is the first stage.','someone','boardId1',1,9)");
+        jdbcTemplate.execute("INSERT INTO  kb_sprint (id,sprint_name,start_time,end_time,board_id,status,archive_id) VALUES ('fooId', 'sprint_name','2017-3-26 2:11:10', '2017-3-28 2:11:10', 'boardId1', 1,1)");
+
+        given().header("userName", userName)
+                .when()
+                .delete("/boards/boardId1/stages/stageId1")
+                .then()
+                .statusCode(400)
+                .body("code", equalTo(StageCodes.DONE_STAGE_IN_SPRINT.code()))
+                .body("message", equalTo(StageCodes.DONE_STAGE_IN_SPRINT.message()));
+    }
+
     @Scenario("通过boardId获取所有的stage")
     @Test
     public void shouldReturnAllEntriesSuccessfully() {

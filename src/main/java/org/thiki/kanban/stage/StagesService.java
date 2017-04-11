@@ -98,9 +98,18 @@ public class StagesService {
         return foundStage;
     }
 
+    private Boolean checkingIsSprint(Stage stage) {
+        if(stage.isInSprint() && stage.isInDoneStatus()){
+            throw new BusinessException(StageCodes.DONE_STAGE_IN_SPRINT);
+        }
+        return true;
+    }
+
     @CacheEvict(value = "stage", key = "contains('#stageId')", allEntries = true)
     public int deleteById(String stageId) {
-        checkingWhetherStageIsExists(stageId);
+        Stage foundStage = stagesPersistence.findById(stageId);
+//        checkingWhetherStageIsExists(stageId);
+        checkingIsSprint(foundStage);
         return stagesPersistence.deleteById(stageId);
     }
 

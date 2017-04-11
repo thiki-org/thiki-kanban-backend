@@ -16,7 +16,8 @@ public enum StageCodes {
     NO_DONE_STAGE_WAS_FOUND("008", "当前看板尚未设置完成列，不允许撤销归档。"),
     NEW_ARCHIVED_STAGE_WAS_FOUND("009", "已经存在较新的归档，不允许撤销归档。"),
     NO_ARCHIVED_STAGE_WAS_FOUND("010", "归档不存在，无法进行撤销归档操作。"),
-    DONE_STAGE_IS_NOT_EXIST("011", "完成环节不存在。");
+    DONE_STAGE_IS_NOT_EXIST("011", "完成环节不存在。"),
+    DONE_STAGE_IN_SPRINT("012", "在迭代完成环节中，不能删除。");
     public static final String titleIsRequired = "环节名称不能为空。";
     public static final String titleIsInvalid = "环节名称长度超限,请保持在30个字符以内。";
     public static final String descriptionIsInvalid = "环节描述长度超限,请保持在100个字符以内。";
