@@ -107,9 +107,8 @@ public class StagesService {
 
     @CacheEvict(value = "stage", key = "contains('#stageId')", allEntries = true)
     public int deleteById(String stageId) {
-        Stage foundStage = stagesPersistence.findById(stageId);
-//        checkingWhetherStageIsExists(stageId);
-        checkingIsSprint(foundStage);
+        Stage stage =checkingWhetherStageIsExists(stageId);
+        checkingIsSprint(stage);
         return stagesPersistence.deleteById(stageId);
     }
 
